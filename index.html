@@ -1,0 +1,2245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NVIDIA Developer Stack — Layered Journey Map</title>
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --ink: #0a0a0a;
+  --ink2: #3a3a3a;
+  --ink3: #6e6e6e;
+  --ink4: #a8a8a8;
+  --rule: #d6d6d6;
+  --rule2: #ececec;
+  --rule3: #f4f4f4;
+  --bg: #ffffff;
+  --warn-bg: #fff7e6;
+  --warn-bd: #f0c97a;
+  --warn-tx: #6f4500;
+
+  /* Per-layer pastel backgrounds — each layer has its own color identity */
+  --l-10: #fff4d6; /* warm cream — programs, portals, community */
+  --l-09: #ffe1e6; /* rose — applications & verticals */
+  --l-08: #d9ecff; /* sky blue — cloud inference APIs */
+  --l-07: #e8ddff; /* lavender — self-hosted inference */
+  --l-06: #d7f0db; /* mint — models */
+  --l-05: #ffe6c9; /* peach — training */
+  --l-04: #ffd9cb; /* coral — ML frameworks */
+  --l-03: #d4f1ec; /* teal — compute platform (CUDA) */
+  --l-02: #ece2cf; /* sand — system software */
+  --l-01: #dcdce4; /* stone — hardware */
+
+  --sans: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', 'Inter', Arial, sans-serif;
+  --mono: 'SF Mono', 'JetBrains Mono', 'Fira Code', Menlo, monospace;
+}
+
+html, body { height: 100%; }
+body {
+  font-family: var(--sans);
+  background: #efefef;
+  color: var(--ink);
+  font-size: 13px;
+  line-height: 1.4;
+  -webkit-font-smoothing: antialiased;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ───────────────── HEADER ───────────────── */
+.hdr {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  padding: 16px 28px;
+  border-bottom: 2px solid var(--ink);
+  flex-shrink: 0;
+  background: #fff;
+  z-index: 30;
+  position: sticky;
+  top: 0;
+}
+.hdr-brand {
+  font-weight: 900;
+  font-size: 15px;
+  letter-spacing: -0.01em;
+}
+.hdr-title {
+  font-size: 12.5px;
+  color: var(--ink2);
+  font-weight: 500;
+}
+.hdr-spacer { flex: 1; }
+.hdr-count {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--ink);
+}
+.hdr-count strong {
+  font-size: 18px;
+  font-weight: 900;
+  letter-spacing: -0.02em;
+}
+.hdr-hint {
+  font-size: 10.5px;
+  color: var(--ink3);
+  padding: 5px 10px;
+  border: 1px solid var(--rule);
+  font-family: var(--mono);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+/* ───────────────── MAIN LAYOUT ───────────────── */
+.main {
+  flex: 1;
+  display: flex;
+  overflow: hidden;
+  min-height: 0;
+}
+
+/* Left rail — sticky vertical layer navigator */
+.rail {
+  width: 72px;
+  flex-shrink: 0;
+  background: #fff;
+  border-right: 2px solid var(--ink);
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  padding: 14px 0 14px;
+  overflow-y: auto;
+  position: relative;
+}
+.rail-heading {
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink3);
+  text-align: center;
+  margin-bottom: 8px;
+}
+.rail-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 52px;
+  font-family: var(--mono);
+  font-size: 17px;
+  font-weight: 800;
+  color: var(--ink2);
+  text-decoration: none;
+  border-left: 3px solid transparent;
+  transition: background 120ms, color 120ms, border-color 120ms;
+  cursor: pointer;
+  user-select: none;
+}
+.rail-item:hover { filter: brightness(0.94); color: var(--ink); }
+/* Color-coded rail items — match each layer's pastel */
+.rail-item[data-jump="10"] { background: var(--l-10); }
+.rail-item[data-jump="09"] { background: var(--l-09); }
+.rail-item[data-jump="08"] { background: var(--l-08); }
+.rail-item[data-jump="07"] { background: var(--l-07); }
+.rail-item[data-jump="06"] { background: var(--l-06); }
+.rail-item[data-jump="05"] { background: var(--l-05); }
+.rail-item[data-jump="04"] { background: var(--l-04); }
+.rail-item[data-jump="03"] { background: var(--l-03); }
+.rail-item[data-jump="02"] { background: var(--l-02); }
+.rail-item[data-jump="01"] { background: var(--l-01); }
+.rail-item.active { filter: brightness(0.92); border-left-color: var(--ink); color: var(--ink); }
+
+/* Stack area */
+.stack-wrap {
+  flex: 1;
+  overflow-y: auto;
+  padding: 0;
+  background: #efefef;
+}
+.stack {
+  max-width: 1700px;
+  margin: 0 auto;
+  background: #fff;
+  border-left: 2px solid var(--ink);
+  border-right: 2px solid var(--ink);
+}
+
+/* ───────────────── LAYER SLAB ───────────────── */
+.layer {
+  border-bottom: 3px solid var(--ink);
+  position: relative;
+}
+.layer:last-child { border-bottom: none; }
+
+/* Per-layer backgrounds — creates literal "strata" feel */
+.layer[data-id="10"] { background: var(--l-10); border-bottom-width: 4px; }
+.layer[data-id="09"] { background: var(--l-09); }
+.layer[data-id="08"] { background: var(--l-08); }
+.layer[data-id="07"] { background: var(--l-07); }
+.layer[data-id="06"] { background: var(--l-06); }
+.layer[data-id="05"] { background: var(--l-05); }
+.layer[data-id="04"] { background: var(--l-04); }
+.layer[data-id="03"] { background: var(--l-03); }
+.layer[data-id="02"] { background: var(--l-02); }
+.layer[data-id="01"] { background: var(--l-01); }
+
+.layer-head {
+  position: relative;
+  display: flex;
+  align-items: stretch;
+  border-bottom: 1px solid rgba(0,0,0,0.18);
+  min-height: 116px;
+}
+
+.layer-num {
+  position: absolute;
+  top: 16px;
+  left: 22px;
+  width: 104px;
+  height: 84px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  z-index: 1;
+  border: 2.5px solid var(--ink);
+  background: rgba(255,255,255,0.7);
+  box-shadow: 2px 2px 0 0 var(--ink);
+  pointer-events: none;
+}
+.layer-num-label {
+  font-family: var(--mono);
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+  color: var(--ink2);
+  line-height: 1;
+}
+.layer-num-value {
+  font-family: var(--mono);
+  font-size: 42px;
+  font-weight: 900;
+  color: var(--ink);
+  letter-spacing: -0.04em;
+  line-height: 1;
+}
+
+.layer-meta {
+  flex: 1;
+  padding: 20px 26px 20px 150px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 4px;
+}
+.layer-name {
+  font-size: 18px;
+  font-weight: 900;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: var(--ink);
+  line-height: 1.1;
+}
+.layer-desc {
+  font-size: 12.5px;
+  color: var(--ink2);
+  line-height: 1.4;
+  max-width: 740px;
+}
+.layer-who {
+  font-size: 10.5px;
+  font-family: var(--mono);
+  color: var(--ink3);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-top: 2px;
+}
+
+.layer-count {
+  align-self: center;
+  padding: 18px 22px;
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--ink3);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  border-left: 1px solid rgba(0,0,0,0.10);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 2px;
+  min-width: 110px;
+}
+.layer-count strong {
+  font-size: 22px;
+  font-weight: 900;
+  color: var(--ink);
+  letter-spacing: -0.02em;
+}
+
+/* Layer body — grid of boxes */
+.layer-body {
+  padding: 18px 22px 22px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(196px, 1fr));
+  gap: 12px;
+}
+
+/* ───────────────── BOX ───────────────── */
+.box {
+  text-align: left;
+  background: #fff;
+  border: 1px solid var(--rule);
+  padding: 12px 13px 11px;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  position: relative;
+  transition: border-color 90ms, box-shadow 90ms, transform 90ms;
+  font: inherit;
+  color: inherit;
+  min-height: 158px;
+}
+.box:hover {
+  border-color: var(--ink);
+  box-shadow: 0 3px 14px rgba(0,0,0,0.12);
+  transform: translateY(-1px);
+  z-index: 1;
+}
+.box.soon { opacity: 0.55; }
+
+.box-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 4px;
+}
+.box-tag {
+  font-family: var(--mono);
+  font-size: 8.5px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 2px 5px 2.5px;
+  background: var(--ink);
+  color: #fff;
+  line-height: 1;
+}
+
+.box-status {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--ink);
+  flex-shrink: 0;
+}
+.box.soon .box-status {
+  background: transparent;
+  border: 1.5px solid var(--ink2);
+}
+
+.box-name {
+  font-size: 13.5px;
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--ink);
+}
+.box-sub {
+  font-size: 11px;
+  color: var(--ink2);
+  line-height: 1.35;
+}
+.box-use {
+  font-size: 11.5px;
+  color: var(--ink);
+  font-weight: 500;
+  line-height: 1.35;
+  margin-top: 6px;
+  padding: 6px 8px;
+  background: rgba(0,0,0,0.06);
+  border-left: 2px solid var(--ink);
+  flex: 1;
+}
+.box-url {
+  font-size: 9.5px;
+  color: var(--ink3);
+  font-family: var(--mono);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-top: 6px;
+  padding-top: 7px;
+  border-top: 1px solid var(--rule2);
+}
+
+/* ───────────────── JOURNEY MODAL ───────────────── */
+.modal-backdrop {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.5);
+  backdrop-filter: blur(3px);
+  z-index: 200;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 4vh 16px;
+  overflow-y: auto;
+}
+.modal-backdrop.open { display: flex; }
+.modal {
+  width: min(820px, 100%);
+  background: #fff;
+  border: 2px solid var(--ink);
+  display: flex;
+  flex-direction: column;
+  max-height: 92vh;
+  position: relative;
+}
+.modal-close {
+  position: absolute;
+  top: 14px; right: 14px;
+  width: 32px; height: 32px;
+  border: 1px solid var(--rule);
+  background: #fff;
+  cursor: pointer;
+  font-size: 14px;
+  color: var(--ink2);
+  z-index: 2;
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--sans);
+}
+.modal-close:hover { border-color: var(--ink); color: var(--ink); }
+.modal-body {
+  overflow-y: auto;
+  padding: 28px 32px 32px;
+}
+.m-eyebrow {
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink3);
+  margin-bottom: 6px;
+}
+.m-name {
+  font-size: 30px;
+  font-weight: 900;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+  margin-bottom: 4px;
+}
+.m-sub {
+  font-size: 13px;
+  color: var(--ink2);
+  margin-bottom: 14px;
+}
+.m-use {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--ink);
+  padding: 10px 14px;
+  background: rgba(0,0,0,0.06);
+  border-left: 3px solid var(--ink);
+  margin-bottom: 18px;
+  line-height: 1.4;
+}
+.m-tag-row { display: flex; gap: 6px; margin-bottom: 14px; flex-wrap: wrap; }
+.m-tag {
+  font-family: var(--mono);
+  font-size: 9.5px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 3px 7px;
+  background: var(--ink);
+  color: #fff;
+}
+.m-tag.alt { background: #fff; color: var(--ink); border: 1px solid var(--ink); }
+.m-url {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  font-family: var(--mono);
+  color: var(--ink);
+  text-decoration: none;
+  padding: 7px 12px;
+  border: 1px solid var(--rule);
+  background: #fafafa;
+  margin-bottom: 24px;
+  transition: border-color 90ms;
+}
+.m-url:hover { border-color: var(--ink); }
+.m-url::after { content: '↗'; font-family: var(--sans); margin-left: 2px; }
+.m-rule { height: 1px; background: var(--rule); margin: 24px 0 20px; }
+.m-section-label {
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink);
+  margin-bottom: 12px;
+  display: flex; align-items: center; gap: 10px;
+}
+.m-section-label::after {
+  content: ''; flex: 1; height: 1px; background: var(--rule);
+}
+.m-desc {
+  font-size: 13.5px;
+  line-height: 1.55;
+  color: var(--ink);
+  margin-bottom: 6px;
+}
+.m-who {
+  font-size: 12px;
+  color: var(--ink3);
+  font-style: italic;
+}
+.path-list { display: flex; flex-direction: column; gap: 8px; }
+.path-item {
+  display: flex; align-items: center; gap: 10px;
+  padding: 10px 12px;
+  border: 1px solid var(--rule);
+  background: #fff;
+  font-size: 12.5px;
+  cursor: pointer;
+  transition: border-color 90ms, background 90ms;
+}
+.path-item.ext { cursor: default; background: var(--rule3); }
+.path-item:not(.ext):hover { border-color: var(--ink); background: #fafafa; }
+.path-arrow { font-family: var(--mono); color: var(--ink3); font-size: 14px; }
+.path-layer-tag {
+  font-size: 9.5px; font-weight: 800; letter-spacing: 0.08em;
+  padding: 2px 6px; background: var(--ink); color: #fff;
+  font-family: var(--mono);
+}
+.path-layer-tag.ext-tag { background: #fff; color: var(--ink3); border: 1px solid var(--rule); }
+.path-name { font-weight: 700; color: var(--ink); }
+.path-detail { color: var(--ink3); flex: 1; font-size: 11.5px; }
+.steps { position: relative; margin-left: 4px; }
+.step {
+  display: flex; gap: 14px; padding: 4px 0; position: relative;
+}
+.step:not(:last-child) .step-num::after {
+  content: ''; position: absolute;
+  left: 50%; top: 26px; bottom: -10px;
+  width: 1px; background: var(--rule);
+  transform: translateX(-50%);
+}
+.step-num {
+  width: 24px; height: 24px; min-width: 24px;
+  border: 1px solid var(--ink); background: #fff; color: var(--ink);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 10.5px; font-weight: 700; font-family: var(--mono);
+  position: relative; border-radius: 50%;
+}
+.step.warn .step-num { background: var(--ink); color: #fff; }
+.step-text {
+  flex: 1; font-size: 12.5px; line-height: 1.5; color: var(--ink);
+  padding-top: 4px; padding-bottom: 14px;
+}
+.step.warn .step-text { color: var(--warn-tx); font-weight: 500; }
+.friction { display: flex; flex-direction: column; gap: 8px; }
+.friction-item {
+  padding: 10px 12px 10px 14px;
+  background: var(--warn-bg); border: 1px solid var(--warn-bd);
+  border-left-width: 3px;
+  font-size: 12.5px; line-height: 1.45; color: var(--warn-tx);
+}
+.friction-item::before { content: '⚠  '; font-weight: 800; }
+
+/* ─── New workflow-style modal stages ─── */
+.m-workflow-banner {
+  margin: 32px 0 4px;
+  padding: 10px 14px;
+  background: var(--ink);
+  color: #fff;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  text-align: center;
+}
+.m-stage {
+  margin-top: 22px;
+  padding: 18px;
+  border: 1.5px solid var(--rule);
+  background: #fff;
+}
+.m-stage-header {
+  display: flex; align-items: center; gap: 12px;
+  margin-bottom: 14px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--rule2);
+}
+.m-stage-num {
+  width: 30px; height: 30px; min-width: 30px;
+  background: var(--ink); color: #fff;
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 900; font-size: 13px;
+  font-family: var(--mono);
+  border-radius: 50%;
+}
+.m-stage-num.info { background: #fff; color: var(--ink); border: 2px solid var(--ink); font-style: italic; }
+.m-stage-num.warn { background: #b66800; color: #fff; }
+.m-stage-label {
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--ink);
+  flex: 1;
+}
+.m-stage-tag {
+  font-size: 10px;
+  color: var(--ink3);
+  font-family: var(--mono);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.m-flow-arrow {
+  text-align: center;
+  font-size: 22px;
+  color: var(--ink2);
+  margin: 0;
+  line-height: 1;
+  padding: 6px 0;
+  font-family: var(--mono);
+}
+.m-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 10px;
+}
+.m-card {
+  padding: 12px 14px;
+  border: 1.5px solid var(--rule);
+  background: #fafafa;
+  cursor: pointer;
+  display: flex; flex-direction: column; gap: 5px;
+  transition: border-color 90ms, background 90ms;
+}
+.m-card.ext { cursor: default; }
+.m-card:not(.ext):hover { border-color: var(--ink); background: #fff; }
+.m-card-name {
+  display: flex; align-items: center; gap: 8px;
+  font-size: 12.5px;
+  font-weight: 700;
+  color: var(--ink);
+}
+.m-card-detail {
+  font-size: 11px;
+  color: var(--ink3);
+  padding-left: 30px;
+}
+.m-steps-list {
+  display: flex; flex-direction: column; gap: 8px;
+  position: relative;
+}
+.m-step {
+  display: flex; gap: 14px;
+  padding: 12px 14px;
+  border: 1.5px solid var(--rule);
+  background: #fff;
+  align-items: flex-start;
+}
+.m-step.warn {
+  background: var(--warn-bg);
+  border-color: var(--warn-bd);
+  border-left-width: 3px;
+}
+.m-step-num {
+  width: 28px; height: 28px; min-width: 28px;
+  background: var(--ink); color: #fff;
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 900; font-family: var(--mono); font-size: 12px;
+  border-radius: 50%;
+}
+.m-step.warn .m-step-num { background: #b66800; }
+.m-step-text {
+  flex: 1; font-size: 13px; line-height: 1.5; color: var(--ink);
+  padding-top: 4px;
+}
+.m-step.warn .m-step-text { color: var(--warn-tx); font-weight: 500; }
+
+/* ───────────────── RESPONSIVE ───────────────── */
+@media (max-width: 760px) {
+  .hdr { padding: 12px 14px; gap: 12px; }
+  .hdr-title, .hdr-hint { display: none; }
+  .rail { width: 52px; }
+  .rail-item { font-size: 14px; height: 44px; }
+  .layer-num { width: 70px; height: 56px; top: 10px; left: 12px; gap: 2px; }
+  .layer-num-label { font-size: 8px; letter-spacing: 0.14em; }
+  .layer-num-value { font-size: 28px; }
+  .layer-meta { padding: 14px 16px 14px 94px; }
+  .layer-name { font-size: 14px; }
+  .layer-count { display: none; }
+  .layer-body { padding: 12px 14px 16px; gap: 10px; }
+  .modal-body { padding: 20px 18px 24px; }
+  .m-name { font-size: 24px; }
+}
+</style>
+</head>
+<body>
+
+<div class="hdr">
+  <div class="hdr-brand">NVIDIA</div>
+  <div class="hdr-title">Developer Stack · Layered Journey Map</div>
+  <div class="hdr-spacer"></div>
+  <div class="hdr-hint">Click any component to see the developer journey</div>
+  <div class="hdr-count"><strong>10</strong> layers</div>
+</div>
+
+<div class="main">
+  <nav class="rail" id="rail">
+    <div class="rail-heading">Stack</div>
+    <a class="rail-item top" data-jump="10">10</a>
+    <a class="rail-item" data-jump="09">09</a>
+    <a class="rail-item" data-jump="08">08</a>
+    <a class="rail-item" data-jump="07">07</a>
+    <a class="rail-item" data-jump="06">06</a>
+    <a class="rail-item" data-jump="05">05</a>
+    <a class="rail-item" data-jump="04">04</a>
+    <a class="rail-item" data-jump="03">03</a>
+    <a class="rail-item" data-jump="02">02</a>
+    <a class="rail-item" data-jump="01">01</a>
+  </nav>
+
+  <div class="stack-wrap" id="stackWrap">
+    <div class="stack" id="stack"></div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal-backdrop" id="modalBackdrop">
+  <div class="modal" role="dialog" aria-modal="true">
+    <button class="modal-close" id="modalClose" aria-label="Close">✕</button>
+    <div class="modal-body" id="modalBody"></div>
+  </div>
+</div>
+
+<script>
+// ═══════════════════════════════════════════════════════════════
+// DATA
+// ═══════════════════════════════════════════════════════════════
+const LAYER_ORDER = ['10','09','08','07','06','05','04','03','02','01'];
+
+const LAYERS = {
+  '09': {
+    name: 'Applications & Verticals',
+    desc: 'Domain platforms and end-user products built on top of the NVIDIA stack',
+    who: 'Product teams · domain engineers',
+    boxes: [
+      { name:'DRIVE', type:'VERTICAL', sub:'Autonomous Vehicles', use:'Build self-driving car software', url:'developer.nvidia.com/drive',
+        desc:'End-to-end autonomous vehicle development platform: sensor processing, perception, path planning, plus the DRIVE Orin/Thor SoC for deployment.',
+        who:'Automotive engineers and AV software teams',
+        arriveFrom:[{ext:'NVIDIA Automotive partnership / B2B contact'},{ext:'GTC Auto sessions / live demos'},{ref:['01','DRIVE Orin / Thor'],detail:'Spec evaluation'}],
+        steps:['Initial NDA + partnership agreement with NVIDIA Automotive','Select target SoC (DRIVE Orin or Thor) for production','Get DRIVE OS + DriveWorks SDK access','Build perception/planning stack on DRIVE Sim (Omniverse)','Test on DRIVE AGX developer kit','Production deployment to vehicle ECU'],
+        goTo:[{ref:['01','DRIVE Orin / Thor'],note:'Target hardware'},{ref:['09','Omniverse'],note:'Simulation (DRIVE Sim)'},{ref:['10','AI Enterprise'],note:'Production license'}],
+        friction:['Closed program — no self-service path; partnership required','NDA significantly limits open-source community development']
+      },
+      { name:'Isaac', type:'VERTICAL', sub:'Robotics & ROS', use:'Build and simulate robots', url:'developer.nvidia.com/isaac',
+        desc:'GPU-accelerated robotics: Isaac Sim (Omniverse-based simulator), Isaac ROS (ROS 2 packages), Isaac Lab (robot learning). Full sim-to-real pipeline.',
+        who:'Robotics engineers · ROS developers',
+        arriveFrom:[{ext:'ROS community / ros.org docs'},{ref:['01','Jetson'],detail:'Need edge robotics stack'},{ref:['09','Omniverse'],detail:'Simulation entry'}],
+        steps:['Install Isaac Sim (free, Omniverse Launcher)','Clone Isaac ROS packages from GitHub','Train policies in Isaac Lab (PyTorch + Isaac Gym)','Test in Isaac Sim with photorealistic rendering','Deploy to Jetson Orin module','Real-world validation'],
+        goTo:[{ref:['01','Jetson'],note:'Edge deployment'},{ref:['09','Omniverse'],note:'Underlying simulator'},{ref:['07','NIM'],note:'For vision/LLM in robots'}],
+        friction:['Isaac Sim needs high-end RTX GPU (RTX 4080+ recommended)','Sim-to-real gap still significant for contact-rich tasks']
+      },
+      { name:'Clara', type:'VERTICAL', sub:'Healthcare AI', use:'Build medical imaging / drug discovery AI', url:'developer.nvidia.com/clara',
+        desc:'Medical imaging, genomics, drug discovery. Clara Parabricks (GPU genome analysis), Clara Holoscan (medical device SDK), MONAI (open-source medical imaging).',
+        who:'Healthcare AI developers · bioinformaticians',
+        arriveFrom:[{ext:'MONAI open-source community'},{ext:'Bio-IT / genomics publications'},{ref:['05','BioNeMo'],detail:'Drug discovery overlap'}],
+        steps:['Start with MONAI open-source for medical imaging','Pull Parabricks container from NGC for genomics','For medical devices: license Clara Holoscan','Validate against FDA regulatory requirements','Deploy to IGX or DGX'],
+        goTo:[{ref:['05','BioNeMo'],note:'Sequence / molecular models'},{ref:['10','NGC'],note:'Container registry'},{ext:'MONAI on GitHub'}],
+        friction:['Regulatory burden (FDA, HIPAA) is the hard part — not the AI','Holoscan/IGX are licensed; inaccessible to individuals']
+      },
+      { name:'Omniverse', type:'PLATFORM', sub:'Physical AI & 3D Simulation', use:'Build 3D simulations and digital twins', url:'developer.nvidia.com/omniverse',
+        desc:'Real-time 3D collaboration and simulation built on OpenUSD. Powers DRIVE Sim, Isaac Sim, digital twins, and generative 3D AI.',
+        who:'3D artists · simulation engineers · digital twin teams',
+        arriveFrom:[{ext:'OpenUSD / Pixar USD community'},{ext:'GTC industrial track'},{ref:['09','Isaac'],detail:'Robotics simulation'}],
+        steps:['Install Omniverse Launcher (free for individuals)','Pick app: USD Composer, Isaac Sim, or Code','Import USD scenes (or convert FBX/glTF)','Connect data sources for digital twin (MQTT, OPC-UA)','For commercial use: Enterprise license required'],
+        goTo:[{ref:['09','Isaac'],note:'Robotics simulation'},{ref:['09','DRIVE'],note:'AV simulation'},{ref:['10','AI Enterprise'],note:'Commercial license'}],
+        friction:['Two licenses (free individual vs Enterprise commercial) — confusion is common','Needs RTX GPU; consumer ok for hobby, A6000+ for serious work']
+      },
+      { name:'Morpheus', type:'VERTICAL', sub:'Cybersecurity AI', use:'Detect cyber threats in real time', url:'developer.nvidia.com/morpheus',
+        desc:'Real-time threat detection via GPU-accelerated network traffic analysis. Integrates with RAPIDS and Triton.',
+        who:'Security engineers · SOC teams',
+        arriveFrom:[{ref:['04','RAPIDS'],detail:'GPU data science users'},{ext:'Black Hat / DEF CON talks'}],
+        steps:['Clone Morpheus from GitHub (free, Apache 2.0)','Pull container from NGC','Integrate with SIEM (Splunk, etc.)','Train detection models with RAPIDS','Deploy as Triton pipeline'],
+        goTo:[{ref:['04','RAPIDS'],note:'Data preprocessing'},{ref:['07','Triton'],note:'Inference serving'}],
+        friction:['Small community vs mainstream SOC tooling — sparse Stack Overflow']
+      },
+      { name:'NVIDIA Aerial', type:'VERTICAL', sub:'CUDA-accelerated 5G/6G RAN', use:'Build AI-native 5G/6G base station software', url:'developer.nvidia.com/aerial-cuda-accelerated-ran',
+        desc:'SDK suite for building 3GPP / O-RAN compliant 5G/6G gNB software on NVIDIA accelerated computing. ARC-Pro 6G trials in 2026. Nokia partnership.',
+        who:'Telco engineers · RAN developers',
+        arriveFrom:[{ext:'Telco / 5G ecosystem'},{ext:'NVIDIA + Nokia partnership'}],
+        steps:['Engage NVIDIA Aerial team','Develop on Aerial SDK','Test on ARC-Pro hardware','Integrate with telco RAN stack'],
+        goTo:[{ref:['01','Data Center GPUs'],note:'Underlying compute'},{ref:['01','BlueField DPUs'],note:'RAN offload'}],
+        friction:['Telco-specific knowledge required','Long deployment cycles']
+      },
+      { name:'AI Blueprints', type:'PLATFORM', sub:'Reference apps · RAG, Video Search, Agents', use:'Drop-in starting points for production AI apps', url:'github.com/NVIDIA-AI-Blueprints',
+        desc:'Catalog of production-ready reference architectures (RAG, Video Search & Summarization, Digital Humans, Agents) built from NIM microservices.',
+        who:'Enterprise AI engineers · solution architects',
+        arriveFrom:[{ref:['08','build.nvidia.com'],detail:'Linked from catalog'},{ext:'Build vs buy evaluations'}],
+        steps:['Browse build.nvidia.com for Blueprints','Pick template (RAG, agents, video)','Clone reference architecture','Customize for your use case'],
+        goTo:[{ref:['07','NIM'],note:'Underlying microservices'},{ref:['07','NeMo Microservices'],note:'Often used together'}],
+        friction:['Opinionated stacks','May need rework for unique needs']
+      },
+      { name:'Omniverse DSX Blueprint', type:'PLATFORM', sub:'AI factory digital twin · GTC 2026', use:'Simulate AI data centers before building them', url:'build.nvidia.com/nvidia/omniverse-dsx-blueprint-for-ai-factories',
+        desc:'Open blueprint for designing / operating gigawatt-scale AI factory digital twins. GA March 2026 with Vera Rubin DSX. Simulate power, cooling, networking before physical buildout.',
+        who:'AI factory architects · data center designers',
+        arriveFrom:[{ref:['01','DGX SuperPOD'],detail:'Designing AI factory'},{ref:['09','Omniverse'],detail:'Digital twin parent'}],
+        steps:['Access DSX Blueprint via Omniverse','Model factory (racks, cooling, network)','Run simulations','Iterate before purchase'],
+        goTo:[{ref:['01','DGX SuperPOD'],note:'Reference hardware'},{ref:['09','Omniverse'],note:'Underlying platform'}],
+        friction:['Requires significant Omniverse setup','Best for hyperscale planning']
+      },
+      { name:'IGX', type:'PLATFORM', sub:'Industrial / medical edge AI · functional safety', use:'Run safety-certified edge AI in medical / industrial', url:'nvidia.com/en-us/edge-computing/products/igx',
+        desc:'Industrial-grade edge AI platform with functional safety (ISO 26262 / IEC 61508). IGX Thor GA 2026. Distinct from Jetson — adds safety certification, 10-year lifecycle.',
+        who:'Medical device makers · industrial AI engineers',
+        arriveFrom:[{ref:['09','Holoscan'],detail:'Often deployed together'},{ref:['09','Clara'],detail:'Medical compute'}],
+        steps:['Procure IGX Thor hardware','Run Holoscan SDK on IGX','Build safety-certified AI app','Deploy in medical / industrial context'],
+        goTo:[{ref:['09','Holoscan'],note:'Software stack'},{ref:['01','Jetson'],note:'Lower-tier alternative'}],
+        friction:['Higher cost than Jetson','Certification process is long']
+      },
+      { name:'AI for Media', type:'PLATFORM', sub:'Real-time audio / video AI · was Maxine', use:'Build studio-quality video / livestream / broadcast AI', url:'developer.nvidia.com/topics/ai/generative-ai/ai-for-media',
+        desc:'Rebranded collection of SDKs / NIMs / Blueprints for studio-quality audio, video, AR effects. Lip sync, active speaker, speech translation. Maxine renamed in 2025.',
+        who:'Livestreaming · broadcast · post-production teams',
+        arriveFrom:[{ext:'Maxine legacy users'},{ext:'Broadcast / media industry'}],
+        steps:['Browse AI for Media SDKs','Pick: lip sync / speech translation / video effects','Integrate via NIM or SDK','Deploy in production pipeline'],
+        goTo:[{ref:['09','NVIDIA ACE'],note:'Avatar use cases'}],
+        friction:['Branding inconsistent (Maxine vs AI for Media)','Some Maxine SDKs deprecated']
+      },
+      { name:'Newton', type:'PLATFORM', sub:'OSS physics engine · NVIDIA + DeepMind + Disney', use:'GPU-accelerated robot simulation (sim-to-real)', url:'developer.nvidia.com/newton-physics',
+        desc:'Open-source GPU physics engine for robotics. NVIDIA + Google DeepMind + Disney, Linux Foundation. Newton 1.0 released March 17 2026. Up to 475x faster manipulation training.',
+        who:'Robotics researchers · sim-to-real teams',
+        arriveFrom:[{ref:['05','Isaac Lab'],detail:'Robot training stack'},{ref:['09','Isaac'],detail:'Robotics platform'}],
+        steps:['Install Newton (PyPI / GitHub)','Set up robot simulation scene','Train policy with Isaac Lab + Newton','Deploy to real robot'],
+        goTo:[{ref:['05','Isaac Lab'],note:'Training framework'},{ref:['06','Isaac GR00T N1'],note:'Foundation models'}],
+        friction:['New (March 2026) — community thin','Best for robotics; not general physics']
+      },
+      { name:'NVIDIA Studio', type:'PLATFORM', sub:'Creator platform · Studio Drivers, Broadcast, Remix', use:'Build creative tools / livestream / 3D / video pipelines', url:'nvidia.com/en-us/studio',
+        desc:'AI-powered creator platform: Studio Drivers (stability for creative apps), NVIDIA Broadcast (livestream effects), RTX Remix, validated RTX laptops.',
+        who:'Content creators · 3D artists · livestreamers',
+        arriveFrom:[{ext:'Creator communities (Adobe, Blender, OBS)'}],
+        steps:['Install Studio Drivers (vs Game Ready)','Use Broadcast for streaming effects','Try RTX Remix / Canvas / Omniverse'],
+        goTo:[{ref:['01','GeForce RTX'],note:'Required hardware'},{ref:['09','Omniverse'],note:'Higher-end 3D'}],
+        friction:['Studio driver branch differs from Game Ready']
+      },
+      { name:'NemoClaw', type:'PLATFORM', sub:'Agent runtime + privacy/security · Early preview', use:'Build local AI agents with privacy guardrails', url:'nvidia.com/en-us/ai/nemoclaw',
+        desc:'Open-source security and privacy layer on top of OpenClaw (NVIDIA\'s autonomous-agent platform). Bundles Nemotron open-weight models for local inference + the OpenShell runtime for policy-based guardrails. Announced GTC 2026 (March 17). Deploys to RTX, RTX PRO, DGX Station, DGX Spark — local-only, not cloud.',
+        who:'Developers building always-on local AI agents ("claws") · enterprise teams needing secure local agents',
+        arriveFrom:[{ext:'GTC 2026 keynote announcement'},{ext:'github.com/NVIDIA/NemoClaw'},{ref:['06','Nemotron 3 Nano'],detail:'Want to run Nemotron locally'},{ref:['01','GeForce RTX'],detail:'Have a capable RTX GPU'}],
+        steps:['Read nvidia.com/en-us/ai/nemoclaw','One-line install: curl -fsSL https://www.nvidia.com/nemoclaw.sh | bash','OpenShell runtime installs alongside','Nemotron open-weight models pulled locally for inference','Configure privacy / security policies','Build and run "claw" agents locally on RTX or DGX'],
+        goTo:[{ref:['06','Nemotron 3 Nano'],note:'Bundled local-inference model'},{ref:['01','GeForce RTX'],note:'Consumer deployment target'},{ref:['01','DGX Systems'],note:'DGX Spark / Station target'},{ext:'github.com/NVIDIA/NemoClaw'}],
+        friction:['Early preview — APIs and features may change','NAME COLLISION: "NemoClaw" is in the OpenClaw ecosystem — it is NOT part of NeMo Framework or NeMo Microservices despite the prefix','Local-only — not a cloud service; needs capable RTX/DGX hardware on the dev machine']
+      },
+      { name:'Riva', type:'PLATFORM', sub:'Conversational AI', use:'Build voice apps (ASR, TTS, NLU)', url:'developer.nvidia.com/riva',
+        desc:'Managed conversational AI stack: ASR, NLU, TTS. Wraps Parakeet/Canary in a production SDK. Self-hosted via NIM.',
+        who:'Voice app developers · contact center teams',
+        arriveFrom:[{ref:['06','Parakeet'],detail:'Need full ASR+TTS not just ASR'},{ref:['06','Canary'],detail:'Multilingual speech'}],
+        steps:['Browse Riva on developer.nvidia.com','Try sample apps with NGC container','For production: NVAIE license required','Deploy Riva server via NIM','Integrate with telephony / chat'],
+        goTo:[{ref:['06','Parakeet'],note:'Underlying ASR model'},{ref:['07','NIM'],note:'Container packaging'},{ref:['10','AI Enterprise'],note:'License'}],
+        friction:['Requires NVAIE for production (no free tier beyond eval)','Overkill for "just transcribe a file" cases']
+      },
+      { name:'Earth-2', type:'PLATFORM', sub:'Climate digital twin · GA', use:'Run high-resolution climate / weather simulations', url:'nvidia.com/en-us/high-performance-computing/earth-2',
+        desc:'Climate digital twin platform. cBottle generative climate model. GA in 2026. Targets HPC, weather agencies, climate scientists, insurance modelers.',
+        who:'HPC developers · climate scientists · insurance modelers',
+        arriveFrom:[{ext:'NOAA / climate research'},{ref:['05','Modulus'],detail:'Physics-ML foundation'}],
+        steps:['Access Earth-2 via cloud or DGX SuperPOD','Configure simulation parameters','Run cBottle model','Visualize via Omniverse'],
+        goTo:[{ref:['05','Modulus'],note:'Underlying physics-ML'},{ref:['09','Omniverse'],note:'Visualization'}],
+        friction:['Massive compute requirements','Domain expertise needed (atmospheric physics)']
+      },
+      { name:'Holoscan', type:'PLATFORM', sub:'Medical / industrial edge AI', use:'Stream sensor data through AI on edge devices', url:'developer.nvidia.com/holoscan-sdk',
+        desc:'SDK for real-time sensor streaming + AI inference on edge devices. Used in medical instruments and industrial inspection. Runs on Jetson, IGX, DGX.',
+        who:'Medical device developers · industrial AI engineers',
+        arriveFrom:[{ext:'Medical device regulation context'},{ref:['09','Clara'],detail:'Healthcare ecosystem'}],
+        steps:['Install Holoscan SDK','Define sensor pipeline (DICOM, GigE Vision, etc.)','Plug in AI models for real-time processing','Deploy to Jetson or IGX'],
+        goTo:[{ref:['01','Jetson'],note:'Edge target'},{ref:['09','Clara'],note:'Medical AI sibling'}],
+        friction:['FDA regulatory burden for medical use','Real-time constraints are strict']
+      },
+      { name:'Metropolis', type:'PLATFORM', sub:'Video AI · DeepStream SDK', use:'Build video analytics AI (cameras, retail, traffic)', url:'developer.nvidia.com/metropolis',
+        desc:'Platform for video analytics AI: smart transportation, retail analytics, industrial inspection. Built on DeepStream SDK. Runs on Jetson edge or cloud.',
+        who:'Computer vision engineers · smart infrastructure teams',
+        arriveFrom:[{ext:'Smart city / retail AI demand'},{ref:['05','TAO Toolkit'],detail:'Model training entry'}],
+        steps:['Install DeepStream SDK','Build pipeline with TAO-trained models','Deploy to Jetson or DGX','Hook into traffic / retail / industrial systems'],
+        goTo:[{ref:['01','Jetson'],note:'Edge deployment'},{ref:['05','TAO Toolkit'],note:'Model training'}],
+        friction:['Privacy / regulation considerations','Edge bandwidth constraints']
+      },
+      { name:'NVIDIA ACE', type:'PLATFORM', sub:'Avatar Cloud Engine · digital humans', use:'Build animated digital humans / interactive avatars', url:'developer.nvidia.com/ace',
+        desc:'Avatar Cloud Engine. Umbrella over Audio2Face, Riva ASR / TTS, Nemotron LLM. For games, customer service avatars, virtual assistants. Audio2Face open-sourced (MIT) late 2025.',
+        who:'Game developers · customer service · avatar startups',
+        arriveFrom:[{ref:['09','Riva'],detail:'Speech component'},{ext:'Game industry'}],
+        steps:['Browse developer.nvidia.com/ace','Pull Audio2Face open-source models','Integrate Riva for speech','Connect Nemotron for dialog','Render avatar with Unreal / Unity'],
+        goTo:[{ref:['09','Riva'],note:'Speech subsystem'},{ref:['06','Nemotron 3 Nano'],note:'Dialog LLM'}],
+        friction:['Stack complexity (multiple SDKs)','Animation fidelity vs latency tradeoff']
+      },
+    ]
+  },
+
+  '08': {
+    name: 'Cloud Inference APIs',
+    desc: 'Managed cloud endpoints — call NVIDIA models as a service, no infrastructure to manage',
+    who: 'Developers integrating AI via API calls',
+    boxes: [
+      { name:'build.nvidia.com', type:'API', sub:'NVIDIA-hosted Model API Catalog', use:'Try NVIDIA models for free in your browser', url:'build.nvidia.com',
+        desc:'Free-tier API access to NVIDIA-hosted models (Nemotron, Llama, Mistral, Parakeet). Browser playground for every model. 40 RPM free tier limit.',
+        who:'AI developers starting out · prototypers',
+        arriveFrom:[{ext:'Google search "NVIDIA API" / "Nemotron"'},{ref:['10','developer.nvidia.com'],detail:'Homepage link'},{ext:'GTC keynote demos'},{ext:'AWS Bedrock docs → "NVIDIA-hosted models"'}],
+        steps:['Land on build.nvidia.com, browse model catalog','Try a model in browser playground (no signup needed)','Sign up for NVIDIA account to get API access','Generate API key (linked to NGC org behind the scenes)','Call API from code — works for most LLMs','For some models: hit "Public API Endpoints" permission 401','Hit 40 RPM free tier limit within minutes of agentic use'],
+        goTo:[{ref:['06','Nemotron 3 Nano'],note:'Try long-context model'},{ref:['06','Parakeet'],note:'Speech use case'},{ref:['08','AWS Bedrock'],note:'Production path for LLMs'},{ref:['10','AI Enterprise'],note:'Self-host path'}],
+        friction:['Personal org "Public API Endpoints" permission often missing — silent 401, ~10-day support cycle to enable','40 RPM free tier breaks agentic workflows in minutes','Login is separate from ngc.nvidia.com (account admin) — confusing','No clear mid-tier between free (40 RPM) and NVAIE subscription']
+      },
+      { name:'AWS Bedrock', type:'API', sub:'Serverless · Nano GA Dec 2025 · Super Mar 2026', use:'Call Nemotron from your AWS app', url:'aws.amazon.com/bedrock',
+        desc:'Currently the lowest-friction path to Nemotron in production. Nemotron 3 Nano GA Dec 15 2025 in ~15 regions; Nemotron 3 Super added March 2026; AWS GovCloud since April 2026.',
+        who:'AWS developers wanting Nemotron without NVIDIA-account complexity',
+        arriveFrom:[{ref:['08','build.nvidia.com'],detail:'Hit free tier, look for prod'},{ext:'AWS Bedrock model catalog'}],
+        steps:['Open AWS Bedrock console','Enable Nemotron model access (one-click for most regions)','Use standard Bedrock SDK / Converse API','IAM-based auth — no API keys to manage','Pay-per-token billing on AWS invoice'],
+        goTo:[{ref:['06','Nemotron 3 Nano'],note:'30B MoE'},{ref:['06','Nemotron 3 Super'],note:'~100B/10B MoE'}],
+        friction:['No speech models (Parakeet/Canary) on Bedrock yet','Region availability still expanding']
+      },
+      { name:'Azure AI Foundry', type:'API', sub:'Coming soon · 2026', use:'Call Nemotron from Azure (coming 2026)', url:'ai.azure.com', soon:true,
+        desc:'Nemotron on Azure AI Foundry expected 2026. Currently behind AWS.',
+        who:'Azure-focused enterprise teams',
+        arriveFrom:[{ext:'Azure enterprise commitment'}],
+        steps:['Watch for GA announcement (2026)','In meantime: use AWS Bedrock or self-host NIM'],
+        goTo:[{ref:['08','AWS Bedrock'],note:'Available now'},{ref:['07','NIM'],note:'Self-host alternative'}],
+        friction:['Not available yet — competitor GA for months']
+      },
+      { name:'GCP Vertex AI', type:'API', sub:'Coming soon · 2026', use:'Call Nemotron from GCP (coming 2026)', url:'cloud.google.com/vertex-ai', soon:true,
+        desc:'Nemotron on Vertex AI is on roadmap for 2026.',
+        who:'GCP-focused enterprise teams',
+        arriveFrom:[{ext:'GCP enterprise commitment'}],
+        steps:['Watch for GA announcement','Use AWS Bedrock for production today'],
+        goTo:[{ref:['08','AWS Bedrock'],note:'Available now'}],
+        friction:['Not available yet']
+      },
+      { name:'Oracle OCI Gen AI', type:'API', sub:'Nemotron 3 Super · Nano Omni', use:'Call Nemotron from Oracle Cloud', url:'cloud.oracle.com/ai-services/generative-ai',
+        desc:'OCI Generative AI hosts Nemotron 3 Super (via Model Import) and Nano Omni (in OCI Enterprise AI).',
+        who:'Oracle-focused enterprise teams',
+        arriveFrom:[{ext:'Oracle enterprise commitment'}],
+        steps:['Set up OCI tenancy','Enable Generative AI service','Import Nemotron 3 Super or use Nano Omni','Call via OCI SDK'],
+        goTo:[{ref:['06','Nemotron 3 Super'],note:'Via Model Import'},{ref:['06','Nemotron 3 Nano'],note:'Nano Omni variant'}],
+        friction:['OCI tenancy + billing required']
+      },
+      { name:'Cloudflare Workers AI', type:'API', sub:'Edge inference · Nemotron 3 120B', use:'Run Nemotron at the edge', url:'developers.cloudflare.com/workers-ai/models/nemotron-3-120b-a12b',
+        desc:'Run Nemotron 3 120B (Super) on Cloudflare\'s global edge. GA Mar 11 2026. Pay-per-request via Workers ecosystem.',
+        who:'Cloudflare Workers developers · edge AI use cases',
+        arriveFrom:[{ext:'Cloudflare developer community'},{ext:'Workers ecosystem'}],
+        steps:['Set up Cloudflare account','Add Workers AI binding','Call @cf/nvidia/nemotron-3-120b-a12b','Pay per request'],
+        goTo:[{ref:['06','Nemotron 3 Super'],note:'The 120B variant'}],
+        friction:['Currently only Super 120B (no Nano)','Tied to Cloudflare account']
+      },
+      { name:'OpenRouter', type:'API', sub:'Model router · most complete Nemotron lineup', use:'Call any model from one API key', url:'openrouter.ai/nvidia',
+        desc:'Pay-per-token router with the most complete Nemotron catalog of any aggregator: Nano 30B ($0.05/$0.20 per M), Super 120B ($0.10/$0.50), Llama-Nemotron Ultra 253B, Nano Omni, Llama-Nemotron-70b, plus :free tier variants on most NVIDIA models.',
+        who:'Developers wanting one API key for many models',
+        arriveFrom:[{ext:'Google: "Nemotron API"'},{ref:['08','build.nvidia.com'],detail:'Hit free tier limit'},{ext:'Anthropic/OpenAI alternative search'}],
+        steps:['Sign up at openrouter.ai','Add credit (pay-as-you-go) or use :free slugs','Pick model: nvidia/nemotron-3-nano-30b-a3b, etc.','Call OpenAI-compatible /chat/completions endpoint','Free tier via :free suffix on most NVIDIA models'],
+        goTo:[{ref:['06','Nemotron 3 Nano'],note:'Most popular slug'},{ref:['06','Llama-Nemotron'],note:'Full variant lineup'},{ref:['06','Nemotron 3 Super'],note:'Mid-size flagship'}],
+        friction:['Routing layer adds latency vs direct provider','Provider differences (speed/price vary by route)']
+      },
+      { name:'Together AI', type:'API', sub:'Day-0 partner · Nemotron 3 Super', use:'Nemotron Super via popular OSS aggregator', url:'together.ai/models/nvidia-nemotron-3-super',
+        desc:'Major OSS LLM aggregator. Day-0 launch partner for Nemotron 3 Super (serverless + dedicated). One of the most popular open-model API providers.',
+        who:'Developers building LLM apps · OSS LLM communities',
+        arriveFrom:[{ext:'Together AI marketing'},{ext:'OSS LLM communities'}],
+        steps:['Sign up at together.ai','Get API key','Use OpenAI-compatible endpoint','Nemotron 3 Super serverless or dedicated'],
+        goTo:[{ref:['06','Nemotron 3 Super'],note:'Primary Nemotron offering'}],
+        friction:['Less complete Nemotron lineup than OpenRouter/DeepInfra']
+      },
+      { name:'Fireworks AI', type:'API', sub:'Fast inference · NIM integration', use:'High-throughput Nemotron inference', url:'fireworks.ai',
+        desc:'High-performance inference provider. Nemotron 3 Super, Llama-Nemotron reasoning models, and Nemotron Nano 2 VL — all day-0 via NVIDIA NIM integration.',
+        who:'Developers needing high-throughput inference',
+        arriveFrom:[{ext:'LLM speed benchmarks'},{ext:'NVIDIA NIM ecosystem'}],
+        steps:['Sign up at fireworks.ai','Get API key','Pick from Nemotron / Llama-Nemotron / Nano 2 VL','Call OpenAI-compatible endpoint'],
+        goTo:[{ref:['06','Nemotron 3 Super'],note:'Primary offering'},{ref:['07','NIM'],note:'Underlying tech'}],
+        friction:['Premium pricing for speed']
+      },
+      { name:'DeepInfra', type:'API', sub:'Full Nemotron family', use:'Cheap full-family Nemotron API', url:'deepinfra.com/nemotron',
+        desc:'Inference provider with the full Nemotron 3 family: Nano, Nano Omni Reasoning, Super 120B. Also routable via HuggingFace Inference Providers.',
+        who:'Developers wanting Nemotron variety at low cost',
+        arriveFrom:[{ref:['10','HuggingFace'],detail:'HF Inference Providers route here'},{ext:'Cost comparison vs OpenAI'}],
+        steps:['Sign up at deepinfra.com','Get API key','Pick Nemotron variant','Call OpenAI-compatible API'],
+        goTo:[{ref:['06','Nemotron 3 Nano'],note:'Most popular'},{ref:['06','Nemotron 3 Super'],note:'Larger flagship'}],
+        friction:['Smaller community vs Together / Fireworks']
+      },
+      { name:'Baseten', type:'API', sub:'Day-0 partner · Production-ready', use:'Deploy Nemotron with autoscaling', url:'baseten.co',
+        desc:'ML infrastructure platform. Day-0 launch partner for Nemotron 3 (Nano, Super, Nano Omni). Focus on production deployments with autoscaling.',
+        who:'Production ML teams · MLOps',
+        arriveFrom:[{ext:'NVIDIA launch announcements'},{ext:'YC startup ecosystem'}],
+        steps:['Sign up at baseten.co','Deploy a Nemotron model','Get dedicated endpoint with autoscaling','Pay for compute used'],
+        goTo:[{ref:['06','Nemotron 3 Nano'],note:'Pre-built'},{ref:['06','Nemotron 3 Super'],note:'Pre-built'}],
+        friction:['More expensive than aggregators for low volume']
+      },
+      { name:'Nebius Token Factory', type:'API', sub:'Nemotron 3 Super', use:'Call Nemotron Super (Inception credits)', url:'nebius.com',
+        desc:'Nebius AI inference platform hosting Nemotron 3 Super. Bundled with Inception startup credits ($150K).',
+        who:'AI startups · Nebius compute customers',
+        arriveFrom:[{ref:['10','Inception'],detail:'Inception credit recipient'},{ext:'Nebius marketing'}],
+        steps:['Apply Nebius credits (often via Inception)','Use Token Factory inference API','Call Nemotron 3 Super'],
+        goTo:[{ref:['06','Nemotron 3 Super'],note:'Primary offering'},{ref:['10','Inception'],note:'Credit source'}],
+        friction:['Smaller player vs major aggregators']
+      },
+      { name:'HF Inference Endpoints', type:'API', sub:'Deploy-your-own from HF weights', use:'Deploy any HF model as a managed API', url:'huggingface.co/inference-endpoints',
+        desc:'Managed inference for any HuggingFace model, including all Nemotron variants (weights are open on huggingface.co/nvidia). One-click deploy.',
+        who:'HF ecosystem developers',
+        arriveFrom:[{ref:['10','HuggingFace'],detail:'From the model hub'},{ext:'HF docs'}],
+        steps:['Find Nemotron variant on huggingface.co/nvidia','Click "Deploy → Inference Endpoint"','Pick instance size + region','Endpoint provisioned in minutes'],
+        goTo:[{ref:['10','HuggingFace'],note:'Model hub'},{ref:['06','Nemotron 3 Nano'],note:'Deploy these weights'}],
+        friction:['You pay for dedicated instance even when idle','Cold-start latency']
+      },
+      { name:'DGX Cloud', type:'CLOUD', sub:'Managed Training Infrastructure', use:'Rent NVIDIA-managed H100 clusters', url:'nvidia.com/en-us/data-center/dgx-cloud',
+        desc:'Managed cloud on DGX systems via CSP partners (AWS, Azure, GCP, Oracle). Pre-configured for large-scale training.',
+        who:'Large ML teams · enterprise training workloads',
+        arriveFrom:[{ref:['01','Data Center GPUs'],detail:'Need H100 capacity'},{ext:'CSP sales channels (AWS / Azure / GCP)'}],
+        steps:['Contact NVIDIA or CSP partner','Negotiate GPU reservation (monthly / annual)','Get DGX Cloud environment provisioned','Launch training via SLURM or Kubernetes','Connect to your data lake'],
+        goTo:[{ref:['01','Data Center GPUs'],note:'Underlying hardware'},{ref:['05','NeMo Framework'],note:'Common training stack'}],
+        friction:['Pricing not public; multi-month commit typically required','Capacity constrained — H100 reservations have wait times']
+      },
+      { name:'DGX Cloud Lepton', type:'CLOUD', sub:'Multi-cloud GPU marketplace', use:'Access GPUs across CoreWeave, Crusoe, Lambda, AWS, Azure', url:'nvidia.com/en-us/data-center/dgx-cloud-lepton',
+        desc:'Unified AI platform / GPU marketplace connecting devs to global multi-cloud GPU compute. From April 2025 Lepton acquisition. Dev Pods, Endpoints, Batch Jobs across providers.',
+        who:'AI developers needing flexible cloud GPU',
+        arriveFrom:[{ref:['08','DGX Cloud'],detail:'Looking for marketplace'},{ext:'Multi-cloud GPU shopping'}],
+        steps:['Sign up at dgxlepton.nvidia.com','Browse GPU providers + pricing','Launch Dev Pod / Endpoint / Batch Job','Unified billing'],
+        goTo:[{ref:['08','DGX Cloud'],note:'NVIDIA-managed option'},{ref:['08','build.nvidia.com'],note:'Model APIs'}],
+        friction:['Capacity varies by provider','Lepton was acquired then rebranded — naming churn']
+      },
+      { name:'Lambda Inference', type:'API', sub:'Serverless Nemotron · also rents GPUs', use:'Call Nemotron via Lambda Inference API', url:'lambda.ai/inference-models/nvidia/nvidia-nemotron-3-super-120b-a12b',
+        desc:'Lambda serverless inference API hosting Nemotron 3 Super 120B + Nano on Lambda Cloud. DGX Cloud Lepton partner. Distinct from Lambda GPU rental.',
+        who:'Lambda customers · GPU rental users wanting managed inference',
+        arriveFrom:[{ext:'Lambda GPU rental community'},{ref:['08','DGX Cloud Lepton'],detail:'Lepton partner'}],
+        steps:['Sign up at lambda.ai','Get API key','Call Nemotron via OpenAI-compatible API','Pay per token'],
+        goTo:[{ref:['06','Nemotron 3 Super'],note:'Primary offering'}],
+        friction:['Smaller catalog than OpenRouter','Lambda also rents bare GPUs — easy confusion']
+      },
+      { name:'Friendli AI', type:'API', sub:'Day-0 partner · Nemotron 3 family', use:'Call Nemotron via Friendli Dedicated Endpoints', url:'friendli.ai/models/nemotron',
+        desc:'Official launch partner for Nemotron 3 Nano / Super / Nano Omni Day-0. Dedicated Endpoints with custom kernels, speculative decoding, online quantization for 50%+ cost savings.',
+        who:'High-throughput inference · cost-optimized deploys',
+        arriveFrom:[{ext:'GTC 2026 launch'},{ext:'NVIDIA partner ecosystem'}],
+        steps:['Sign up at friendli.ai','Create Dedicated Endpoint','Pick Nemotron variant','Call API; pay for endpoint hours'],
+        goTo:[{ref:['06','Nemotron 3 Nano'],note:'Day-0 supported'},{ref:['06','Nemotron 3 Super'],note:'Day-0 supported'}],
+        friction:['Dedicated billing, not pay-per-token']
+      },
+      { name:'Crusoe Managed Inference', type:'API', sub:'Renewable-powered · day-0 Nemotron', use:'Call Nemotron via Crusoe (renewable energy)', url:'crusoe.ai/cloud/managed-inference',
+        desc:'NVIDIA Cloud Partner offering managed inference on renewable-powered AI factories. Nemotron 3 Nano Omni + full family, day-zero (April 28 2026). MemoryAlloy engine.',
+        who:'Teams wanting Nemotron + sustainability commitments',
+        arriveFrom:[{ext:'Sustainability mandates'},{ref:['08','DGX Cloud Lepton'],detail:'Lepton partner'}],
+        steps:['Sign up at crusoe.ai','Get inference API key','Call Nemotron via OpenAI-compatible endpoint','Powered by renewable AI factory'],
+        goTo:[{ref:['06','Nemotron 3 Nano'],note:'Full family hosted'}],
+        friction:['Smaller provider vs aggregators']
+      },
+      { name:'NVIDIA Brev', type:'API', sub:'One-click GPU + NIM Launchables', use:'Spin up GPU dev environment / NIM in one click', url:'developer.nvidia.com/brev',
+        desc:'Acquired July 2024. Developer launchpad for one-click GPU environments and NIM microservice deploys. Launchables = preconfigured stacks (Nemotron, NIM) that boot instantly.',
+        who:'Developers wanting fast GPU dev / demo setup',
+        arriveFrom:[{ref:['10','developer.nvidia.com'],detail:'Linked from main hub'},{ext:'GPU developer Twitter'}],
+        steps:['Sign in at brev.nvidia.com','Browse Launchables','Click one to spin up environment','Develop / deploy / kill'],
+        goTo:[{ref:['07','NIM'],note:'Underlying microservices'},{ref:['08','DGX Cloud Lepton'],note:'Lepton ecosystem'}],
+        friction:['Pricing varies by underlying provider','Launchable catalog still growing']
+      },
+      { name:'RunPod Serverless', type:'API', sub:'Sub-2s cold start · Nemotron variants', use:'Serverless Nemotron endpoint, pay per second', url:'runpod.io/models/nvidia-llama-3-1-nemotron-nano-4b-v1-1',
+        desc:'Serverless inference API. Llama 3.1 Nemotron Nano 4B native; Nemotron 70B and Ultra 235B deployable via vLLM. Sub-2s cold start.',
+        who:'Indie developers · cost-conscious teams',
+        arriveFrom:[{ext:'GPU rental community'},{ext:'RunPod marketing'}],
+        steps:['Sign up at runpod.io','Pick Nemotron model','Deploy serverless endpoint','Pay per second'],
+        goTo:[{ref:['06','Nemotron 3 Nano'],note:'Nano variant'},{ref:['07','vLLM'],note:'Custom deploy backend'}],
+        friction:['Cold starts still real even at sub-2s','Smaller community than Together / Fireworks']
+      },
+      { name:'Hyperbolic', type:'API', sub:'Serverless + Blackwell rental', use:'Cheap Nemotron Nano 12B VL inference', url:'app.hyperbolic.ai/models/nvidia-nemotron-nano-12b-v2-vl-bf16',
+        desc:'Serverless inference + on-demand Blackwell/Hopper GPUs. Hosts Nemotron Nano 12B v2 VL at $0.20/1M tokens.',
+        who:'Researchers · indie devs · vision-language use cases',
+        arriveFrom:[{ext:'OSS ML communities'},{ext:'Cost comparison searches'}],
+        steps:['Sign up at hyperbolic.ai','Pick Nemotron VL model','Call API','Pay per token'],
+        goTo:[{ref:['06','Nemotron Nano 2 VL'],note:'Primary VL hosting'}],
+        friction:['Smaller market presence']
+      },
+    ]
+  },
+
+  '07': {
+    name: 'Self-hosted Inference & Serving',
+    desc: 'Containerized inference stacks for self-hosted deployment — own the stack, control the data',
+    who: 'MLOps · backend developers · platform teams',
+    boxes: [
+      { name:'NIM', type:'CONTAINER', sub:'Inference Microservices', use:'Run a model as a container in one command', url:'developer.nvidia.com/nim',
+        desc:'Containerized model inference — pull a NIM, get an OpenAI-compatible API endpoint. Free community license for LLM NIMs. Speech NIMs (Riva ASR NIM) require NVAIE.',
+        who:'MLOps · backend developers self-hosting',
+        arriveFrom:[{ref:['08','build.nvidia.com'],detail:'Hit free tier limit'},{ref:['07','Triton'],detail:'Need higher-level packaging'},{ref:['10','AI Enterprise'],detail:'Licensed for production'}],
+        steps:['Identify which NIM container matches model + GPU','docker pull nvcr.io/nim/<model>','Verify GPU + driver + container toolkit on host','docker run with --gpus all and model API key env','NIM exposes OpenAI-compatible API on :8000','For LLM NIMs: dev/community license OK','For speech/specialized NIMs: NVAIE entitlement check fails without license'],
+        goTo:[{ref:['06','Nemotron 3 Nano'],note:'Most common LLM NIM'},{ref:['10','AI Enterprise'],note:'Speech NIM license'},{ref:['07','Triton'],note:'Underlying server'}],
+        friction:['License model inconsistent: LLM NIMs OK under community; speech NIMs require NVAIE','NIM doesn\'t bundle driver — host must be prepared','Container images are large (10–60 GB)']
+      },
+      { name:'Triton', type:'SERVER', sub:'Inference Server', use:'Self-host any model on your GPU', url:'developer.nvidia.com/triton-inference-server',
+        desc:'Open-source inference server supporting TensorRT, PyTorch, ONNX, TensorFlow, Python backends. Powers NIM under the hood.',
+        who:'MLOps engineers building custom inference stacks',
+        arriveFrom:[{ref:['04','TensorRT'],detail:'Need a server in front of TRT engines'},{ext:'KServe / Kubeflow communities'},{ref:['07','NIM'],detail:'Need more control than NIM'}],
+        steps:['Define model repository structure','Convert models to ONNX / TensorRT','Write config.pbtxt per model','Pull Triton container from NGC','Run with -v <repo>:/models','Test with gRPC or HTTP client','Tune dynamic batching for throughput'],
+        goTo:[{ref:['04','TensorRT-LLM'],note:'For LLMs'},{ref:['04','TensorRT'],note:'For optimized models'},{ref:['07','NIM'],note:'Triton + opinionated wrapper'}],
+        friction:['Config files are verbose — protobuf-style','Multi-framework backend matrix is complex']
+      },
+      { name:'TensorRT-LLM Serve', type:'SERVER', sub:'LLM inference server', use:'Serve LLMs with optimized kernels', url:'github.com/NVIDIA/TensorRT-LLM',
+        desc:'NVIDIA-optimized LLM serving stack (TRT-LLM + Triton). Powers NIM containers. OpenAI-compatible API, FP8 quantization.',
+        who:'Backend teams deploying LLMs at scale',
+        arriveFrom:[{ref:['07','NIM'],detail:'Want more transparency'},{ref:['04','TensorRT-LLM'],detail:'Library users wanting server'}],
+        steps:['Clone TensorRT-LLM repo','Build engine for target GPU (H100, etc.)','Launch trtllm-serve with built engine','OpenAI-compatible endpoint exposed'],
+        goTo:[{ref:['04','TensorRT-LLM'],note:'Library underneath'},{ref:['07','Triton'],note:'Triton-based server'}],
+        friction:['Engine build is GPU-architecture specific','Memory tuning (KV cache) takes iteration']
+      },
+      { name:'NeMo Microservices', type:'SERVICE', sub:'Production MLOps · Licensed', use:'Add guardrails / RAG / fine-tune to inference', url:'developer.nvidia.com/nemo-microservices',
+        desc:'Enterprise microservices for data curation, model customization (LoRA), evaluation, guardrails, and retrieval. Separate from NeMo Framework (open-source).',
+        who:'ML platform teams · enterprise AI engineers',
+        arriveFrom:[{ref:['05','NeMo Framework'],detail:'Confused by shared name'},{ref:['10','AI Enterprise'],detail:'Production MLOps need'}],
+        steps:['Realize NeMo Microservices ≠ NeMo Framework','License via AI Enterprise','Deploy microservices on Kubernetes','Use Customizer for LoRA fine-tuning','Add Guardrails / Retriever to inference path'],
+        goTo:[{ref:['05','NeMo Framework'],note:'Open-source counterpart'},{ref:['07','NIM'],note:'Customized model deployment'}],
+        friction:['Name collision with NeMo Framework — endless documentation confusion','K8s complexity layered on top of licensing']
+      },
+      { name:'vLLM', type:'SERVER', sub:'OSS LLM serving · de facto standard', use:'Self-host any LLM with OpenAI-compatible API', url:'github.com/vllm-project/vllm',
+        desc:'Open-source LLM serving with PagedAttention. De facto OSS default alongside NIM. Runs on NVIDIA, AMD, Intel, TPU, Trainium. Strong community.',
+        who:'OSS-first inference teams · cost-conscious deployments',
+        arriveFrom:[{ext:'OSS community'},{ref:['07','NIM'],detail:'OSS alternative'},{ext:'HuggingFace docs'}],
+        steps:['pip install vllm','Pick model (HuggingFace path)','python -m vllm.entrypoints.openai.api_server --model X','Call OpenAI-compatible API'],
+        goTo:[{ref:['06','Nemotron 3 Nano'],note:'Run Nemotron'},{ref:['07','SGLang'],note:'Faster alternative'}],
+        friction:['Manual GPU management vs NIM','Quantization is your responsibility']
+      },
+      { name:'SGLang', type:'SERVER', sub:'OSS · RadixAttention · structured outputs', use:'Fastest OSS LLM serving for agents / RAG', url:'github.com/sgl-project/sglang',
+        desc:'High-throughput OSS LLM server with RadixAttention + structured outputs. Beats vLLM 29% on shared-prefix workloads (chatbots, RAG, agents).',
+        who:'High-throughput inference teams · agent / RAG workloads',
+        arriveFrom:[{ref:['07','vLLM'],detail:'Looking for faster alt'},{ext:'OSS LLM benchmarks'}],
+        steps:['pip install sglang','Launch: python -m sglang.launch_server --model X','Call OpenAI-compatible API','Use structured outputs for JSON / regex'],
+        goTo:[{ref:['07','vLLM'],note:'Most-similar alternative'},{ref:['06','Nemotron 3 Super'],note:'Common deployment'}],
+        friction:['Newer than vLLM — fewer Stack Overflow answers']
+      },
+      { name:'Ollama', type:'SERVER', sub:'Local LLM runtime · desktop / server', use:'Run LLMs locally with one command', url:'ollama.com',
+        desc:'Single-binary local LLM runtime wrapping llama.cpp. ollama pull <model> and run instantly. OpenAI-compatible REST API.',
+        who:'Devs prototyping locally · indie devs · RTX users',
+        arriveFrom:[{ref:['01','GeForce RTX'],detail:'Local dev'},{ext:'Local LLM communities'}],
+        steps:['Install ollama','ollama pull <model>','ollama run <model>','Call localhost:11434 OpenAI-compatible API'],
+        goTo:[{ref:['07','llama.cpp'],note:'Underlying engine'}],
+        friction:['Limited to small models on consumer GPUs','Production typically uses NIM / vLLM']
+      },
+      { name:'llama.cpp', type:'SERVER', sub:'C++ inference engine · CUDA + CPU', use:'Run quantized LLMs anywhere (CPU, GPU, edge)', url:'github.com/ggml-org/llama.cpp',
+        desc:'C++ inference engine with CUDA backend. Foundation under Ollama and LM Studio. GGUF quantization format. Runs on CPU, GPU, Jetson, even Pi.',
+        who:'Devs needing low-level control · custom quantization · edge',
+        arriveFrom:[{ref:['07','Ollama'],detail:'Want lower level'},{ext:'GGUF community'}],
+        steps:['git clone ggml-org/llama.cpp','make / cmake build','./main -m model.gguf','Or run as server'],
+        goTo:[{ref:['07','Ollama'],note:'Friendlier wrapper'},{ref:['01','Jetson'],note:'Edge target'}],
+        friction:['C++ build complexity','Quantization quality varies']
+      },
+      { name:'KServe', type:'SERVER', sub:'CNCF · K8s model serving', use:'Self-host multi-framework models on K8s', url:'github.com/kserve/kserve',
+        desc:'CNCF standardized distributed generative AI inference platform. Multi-framework on K8s with autoscaling, canary, A/B. Vendor-neutral alternative to NIM Operator.',
+        who:'K8s-first ML platform teams',
+        arriveFrom:[{ext:'Kubeflow ecosystem'},{ref:['07','NIM Operator'],detail:'OSS alternative'}],
+        steps:['Install KServe on K8s','Define InferenceService CRD','Point at model','KServe autoscales'],
+        goTo:[{ref:['07','NIM Operator'],note:'NVIDIA-opinionated alt'},{ref:['07','Triton'],note:'Common backend'}],
+        friction:['K8s expertise required','Less NIM-integrated than NIM Operator']
+      },
+      { name:'Ray Serve', type:'SERVER', sub:'Anyscale OSS · distributed Python', use:'Compose multi-model Python pipelines at scale', url:'docs.ray.io/en/latest/serve',
+        desc:'Anyscale serving layer on Ray. Composable, scalable, multi-model Python pipelines. Runs laptop, K8s, any cloud, on-prem.',
+        who:'Python-first ML teams · multi-model pipelines',
+        arriveFrom:[{ext:'Ray / Anyscale community'},{ref:['07','NIM'],detail:'Want more compositional'}],
+        steps:['pip install ray[serve]','Define deployments as Python classes','ray serve start','Call via HTTP / gRPC'],
+        goTo:[{ref:['07','vLLM'],note:'Often combined'},{ref:['07','Triton'],note:'Backend alternative'}],
+        friction:['Python-only','Ray overhead for simple setups']
+      },
+      { name:'Dynamo', type:'SERVER', sub:'Distributed LLM inference · 1.0 GA 2026', use:'Distribute LLM inference across many GPUs / nodes', url:'nvidia.com/en-us/ai/dynamo',
+        desc:'NVIDIA Dynamo (1.0 GA at GTC 2026). Disaggregated prefill / decode, KV-cache routing, multi-GPU scaling. Successor architecture for high-scale serving. Used inside NIM under the hood.',
+        who:'High-scale inference teams · LLM serving operators',
+        arriveFrom:[{ref:['07','NIM'],detail:'Looking inside NIM'},{ref:['07','TensorRT-LLM Serve'],detail:'Want disaggregated serving'}],
+        steps:['Clone Dynamo from GitHub','Configure disaggregated prefill + decode','Deploy on K8s with NIM Operator','Route via KV-cache-aware load balancer'],
+        goTo:[{ref:['07','NIM'],note:'Often deployed together'},{ref:['07','NIM Operator'],note:'K8s deployment'}],
+        friction:['Complex setup vs single-node serving','Requires understanding of LLM internals']
+      },
+      { name:'NIM Operator', type:'CONTAINER', sub:'Kubernetes operator for NIM + Dynamo', use:'Deploy and manage NIM on Kubernetes', url:'docs.nvidia.com/nim-operator',
+        desc:'Kubernetes operator that automates NIM deployment, scaling, lifecycle. Also supports Dynamo and NeMo Microservices. Standard way to run NIM in production K8s.',
+        who:'MLOps · K8s admins',
+        arriveFrom:[{ref:['07','NIM'],detail:'Need K8s deployment'},{ext:'Kubernetes ecosystem'}],
+        steps:['Install NIM Operator via Helm','Define NIMService custom resources','Operator handles container lifecycle','Hook into ingress / metrics'],
+        goTo:[{ref:['07','NIM'],note:'What it manages'},{ref:['07','Dynamo'],note:'Also supported'}],
+        friction:['K8s complexity required','Networking config for multi-node']
+      },
+      { name:'Run:ai', type:'ORCHESTRATION', sub:'GPU orchestration · acquired 2024', use:'Schedule and share GPUs across teams (fractional)', url:'nvidia.com/en-us/software/run-ai',
+        desc:'Kubernetes-native GPU orchestration. NVIDIA acquired Run:ai in 2024. Supports GPU fractioning, fair-share scheduling, multi-tenant GPU clusters.',
+        who:'Enterprise ML platform teams · multi-tenant clusters',
+        arriveFrom:[{ext:'Enterprise ML platform needs'},{ref:['01','DGX SuperPOD'],detail:'Cluster workload scheduling'}],
+        steps:['Install Run:ai on K8s cluster','Set up projects and quotas','Users submit jobs via Run:ai CLI / UI','GPUs allocated, possibly fractioned'],
+        goTo:[{ref:['07','NIM Operator'],note:'Can deploy alongside'},{ref:['02','Mission Control'],note:'Often complements'}],
+        friction:['Licensed product (NVIDIA AI Enterprise)','K8s expertise required']
+      },
+    ]
+  },
+
+  '06': {
+    name: 'Models',
+    desc: 'Pre-trained model families — LLMs, speech, vision, multimodal, world models',
+    who: 'AI developers · researchers · data scientists',
+    boxes: [
+      { name:'Nemotron 3 Nano', type:'MODEL', sub:'30B / 3.2B active · MoE · 1M ctx', use:'Long-context (1M) reasoning LLM', url:'build.nvidia.com/nvidia/nemotron-nano-4b-instruct',
+        desc:'MoE: 30B total / 3.2B active. 1M token context window. Strong instruction-following with efficient inference.',
+        who:'Developers needing long-context or efficient inference',
+        arriveFrom:[{ref:['08','build.nvidia.com'],detail:'Most prominent on catalog'},{ref:['08','AWS Bedrock'],detail:'GA on Bedrock since Dec 2025'},{ext:'NVIDIA blog announcement'}],
+        steps:['Try in build.nvidia.com playground (1M context demo)','For prototyping: free-tier API (40 RPM)','For production: AWS Bedrock (recommended)','For self-host: pull Nemotron NIM (community license)','Tune system prompt for reasoning outputs'],
+        goTo:[{ref:['08','AWS Bedrock'],note:'Production'},{ref:['07','NIM'],note:'Self-host'},{ref:['05','NeMo Framework'],note:'Fine-tuning'}],
+        friction:['Free tier 40 RPM hits in agentic workflows','1M context inference cost scales accordingly']
+      },
+      { name:'Nemotron 3 Super', type:'MODEL', sub:'~100B / ~10B active · MoE', use:'Stronger reasoning / coding LLM', url:'build.nvidia.com/nvidia/nemotron-super-49b-v1',
+        desc:'MoE: ~100B total / ~10B active per token (NVIDIA Research figures). AWS markets the SKU as "Nemotron 3 Super 120B A12B". GA on AWS Bedrock since March 2026.',
+        who:'Teams needing stronger reasoning than Nano',
+        arriveFrom:[{ref:['06','Nemotron 3 Nano'],detail:'Outgrew Nano'},{ref:['08','AWS Bedrock'],detail:'GA on Bedrock Mar 2026'}],
+        steps:['Compare against Nano on your eval','Use Bedrock for production traffic','For self-host: NVAIE + multi-GPU H100'],
+        goTo:[{ref:['08','AWS Bedrock'],note:'Production'},{ref:['06','Nemotron 3 Ultra'],note:'Larger frontier sibling'}],
+        friction:['Self-host requires multi-GPU H100 — costly','SKU naming inconsistent between NVIDIA Research (100B/10B) and AWS marketing (120B/12B)']
+      },
+      { name:'Nemotron 3 Ultra', type:'MODEL', sub:'~500B / ~50B active · MoE · frontier', use:'Frontier reasoning at research scale', url:'research.nvidia.com/labs/nemotron/Nemotron-3',
+        desc:'Frontier reasoning model in the Nemotron 3 lineup. ~500B total / ~50B active parameters per NVIDIA Research. Targeting the largest reasoning workloads.',
+        who:'Frontier reasoning workloads · research teams',
+        arriveFrom:[{ref:['06','Nemotron 3 Super'],detail:'Need stronger model'},{ext:'NVIDIA Research blog'}],
+        steps:['Read research.nvidia.com/labs/nemotron','Try via build.nvidia.com when available','Self-host requires substantial H100/B200 capacity'],
+        goTo:[{ref:['07','NIM'],note:'Self-host path'},{ref:['08','DGX Cloud'],note:'Capacity needed'}],
+        friction:['Cost and capacity make this impractical for most teams','Bedrock availability TBD as of May 2026']
+      },
+      { name:'Llama-Nemotron', type:'MODEL', sub:'Nano 8B · Super 49B · Ultra 253B', use:'Llama models tuned by NVIDIA for reasoning', url:'build.nvidia.com/nvidia/llama-3_1-nemotron-70b-instruct',
+        desc:'Llama-based models fine-tuned by NVIDIA with DPO/RLHF for reasoning. Current lineup: Nano 8B, Super 49B, Ultra 253B. The older llama-3.1-nemotron-70b-instruct is a separate earlier model.',
+        who:'Developers wanting Llama-compatible models with NV optimizations',
+        arriveFrom:[{ext:'Llama community / Meta announcements'},{ref:['08','build.nvidia.com'],detail:'Listed in catalog'}],
+        steps:['Choose size (8B Nano / 49B Super / 253B Ultra)','Try in build.nvidia.com','Weights also on HuggingFace','For production: NIM or Bedrock'],
+        goTo:[{ext:'HuggingFace nvidia/Llama-3.1-Nemotron'},{ref:['07','NIM'],note:'Self-host'}],
+        friction:['Ultra 253B needs ~5xH100s minimum','Naming overlaps with older nemotron-70b lineage — easy to pick the wrong model']
+      },
+      { name:'Parakeet', type:'MODEL', sub:'ASR · Speech-to-text', use:'Transcribe audio to text (best ASR)', url:'build.nvidia.com/nvidia/parakeet-ctc-0_6b-asr',
+        desc:'State-of-the-art ASR. Parakeet-CTC, Parakeet-RNNT, Parakeet-TDT variants. Raw weights on HuggingFace (CC-BY-4.0, free with NeMo); only the packaged Riva ASR NIM requires NVAIE.',
+        who:'Developers building voice / speech apps',
+        arriveFrom:[{ext:'HuggingFace ASR leaderboard'},{ref:['05','NeMo Framework'],detail:'Speech section'},{ref:['08','build.nvidia.com'],detail:'Speech category'},{ext:'Google: "best open ASR"'}],
+        steps:['Find Parakeet on build.nvidia.com','Sign up for NVIDIA account (free, NGC org auto-created)','Try in browser playground — works instantly','Generate API key in NGC','Call API from code → 401 in personal org (Public API Endpoints permission missing)','Open NVIDIA support ticket','Wait ~10 days for permission enable','For production: either run weights free with NeMo, or license Riva ASR NIM (NVAIE)'],
+        goTo:[{ext:'HuggingFace nvidia/parakeet weights (free, CC-BY-4.0)'},{ref:['05','NeMo Framework'],note:'Run weights yourself (free)'},{ref:['07','NIM'],note:'Riva ASR NIM (needs NVAIE)'},{ref:['10','AI Enterprise'],note:'License for NIM packaging'},{ref:['09','Riva'],note:'Full speech stack wrapper'}],
+        friction:['"Public API Endpoints" permission missing in fresh personal orgs — silent 401, ~10-day support cycle','Riva ASR NIM (the packaged microservice) requires NVAIE — unlike LLM NIMs which have a community license. Raw weights stay free.','UI gives zero indication permission is missing — just looks like auth failure']
+      },
+      { name:'Canary', type:'MODEL', sub:'Multilingual Speech', use:'Transcribe and translate multilingual speech', url:'build.nvidia.com/nvidia/canary-1b',
+        desc:'Multilingual speech: ASR and translation. 1B params (canary-1b-v2). Weights open on HuggingFace; Riva ASR NIM packaging requires NVAIE.',
+        who:'Multilingual voice apps',
+        arriveFrom:[{ref:['06','Parakeet'],detail:'Need multilingual'},{ext:'Multilingual ASR benchmarks'}],
+        steps:['Try in browser playground','Same permission flow as Parakeet (often blocked)','Production: run weights free with NeMo, or license Riva ASR NIM'],
+        goTo:[{ext:'HuggingFace nvidia/canary-1b-v2 (free)'},{ref:['07','NIM'],note:'Riva ASR NIM (NVAIE)'},{ref:['06','Parakeet'],note:'English-only alt'}],
+        friction:['Same Public API Endpoints bug as Parakeet','Riva ASR NIM packaging requires NVAIE — but raw weights are free']
+      },
+      { name:'Cosmos', type:'MODEL', sub:'World Foundation Model', use:'Generate video for robotics / AV training', url:'developer.nvidia.com/cosmos',
+        desc:'Physical AI world model. Generates physically plausible video for robotics and AV training.',
+        who:'Robotics researchers · AV teams',
+        arriveFrom:[{ref:['09','Isaac'],detail:'Synthetic data'},{ref:['09','DRIVE'],detail:'AV scenarios'}],
+        steps:['Check developer.nvidia.com/cosmos for access','Currently early access for some variants','Use weights via NeMo Framework'],
+        goTo:[{ref:['05','NeMo Framework'],note:'Inference'},{ref:['09','Isaac'],note:'Consumer'}],
+        friction:['New release — community thin, examples sparse']
+      },
+      { name:'NV-Embed v2', type:'MODEL', sub:'#1 MTEB embedding model', use:'Best-in-class embeddings for RAG / search', url:'huggingface.co/nvidia/NV-Embed-v2',
+        desc:'Generalist text embedding model, ranked #1 on MTEB at 72.31. Available on HuggingFace + as NIM via build.nvidia.com/nvidia/nv-embedqa-e5-v5.',
+        who:'RAG developers · semantic search teams',
+        arriveFrom:[{ext:'MTEB benchmark searches'},{ref:['07','NeMo Microservices'],detail:'Retriever component'}],
+        steps:['Pick: HF model or NIM','For HF: load with sentence-transformers','For NIM: pull container, call /v1/embeddings','Index your corpus'],
+        goTo:[{ref:['07','NIM'],note:'Serve as NIM'},{ref:['07','NeMo Microservices'],note:'Retriever pipeline'}],
+        friction:['7B model needs GPU for fast inference','Smaller alternatives exist for low-latency needs']
+      },
+      { name:'Nemotron Nano 2 VL', type:'MODEL', sub:'12B hybrid Mamba VLM · OCRBench v2 winner', use:'Document and video understanding (OCR, VQA)', url:'build.nvidia.com/nvidia/nemotron-nano-12b-v2-vl',
+        desc:'Open 12B hybrid Mamba-Transformer VLM for document / video understanding. Tops OCRBench v2.',
+        who:'Document AI · video AI · multimodal devs',
+        arriveFrom:[{ext:'Document AI benchmarks'},{ref:['08','build.nvidia.com'],detail:'Free tier playground'}],
+        steps:['Try in build.nvidia.com playground','Get API key','Call /chat/completions with image / video','Available on OpenRouter / Fireworks / Nebius'],
+        goTo:[{ref:['08','OpenRouter'],note:'Multi-provider'},{ref:['08','Hyperbolic'],note:'Cheap hosting'}],
+        friction:['VLM inference more expensive than text-only','Some hosts only have text variants']
+      },
+      { name:'Nemotron-H', type:'MODEL', sub:'Hybrid Mamba-Transformer base · 8B/47B/56B', use:'Foundation for fine-tuning when inference cost matters', url:'research.nvidia.com/labs/adlr/nemotronh',
+        desc:'Hybrid Mamba-Transformer base model family. Up to 3x faster inference vs Llama-3.1 / Qwen-2.5. Foundation for Nemotron 3 family.',
+        who:'Researchers · teams fine-tuning custom base models',
+        arriveFrom:[{ref:['10','NVIDIA Research'],detail:'Published as research'},{ref:['06','Nemotron 3 Nano'],detail:'Built on Nemotron-H'}],
+        steps:['Download weights from HuggingFace (NVIDIA org)','Fine-tune with NeMo Framework','Deploy via NIM or vLLM'],
+        goTo:[{ref:['10','HuggingFace'],note:'Weights'},{ref:['05','NeMo Framework'],note:'Fine-tuning'}],
+        friction:['Hybrid arch needs specialized fine-tuning recipes','Less community support than pure Transformer']
+      },
+      { name:'Audio2Face-3D', type:'MODEL', sub:'Facial animation · MIT licensed', use:'Generate facial animation from audio (open-source)', url:'huggingface.co/nvidia/Audio2Face-3D-v3.0',
+        desc:'Open-source (MIT, Sept 2025) audio-to-facial-animation / lip-sync model. Powers ACE digital humans. Now in v3.0.',
+        who:'Game developers · avatar startups · ACE users',
+        arriveFrom:[{ref:['09','NVIDIA ACE'],detail:'Core ACE component'},{ext:'Game dev / avatar community'}],
+        steps:['Pull weights from HuggingFace','Run via PyTorch','Pair with TTS for full pipeline','Integrate with Unreal / Unity'],
+        goTo:[{ref:['09','NVIDIA ACE'],note:'Full digital human stack'},{ref:['09','Riva'],note:'Speech sibling'}],
+        friction:['Real-time inference needs RTX-class GPU','3D rigging integration is non-trivial']
+      },
+      { name:'GR00T-Dreams', type:'MODEL', sub:'Synthetic robot trajectories · Cosmos-based', use:'Generate robot training data from text + images', url:'github.com/nvidia/GR00T-dreams',
+        desc:'Blueprint that pairs with Isaac GR00T N1. Dreams generates synthetic trajectories from image + text via Cosmos. NVIDIA developed GR00T N1.5 using Dreams in just 36 hours.',
+        who:'Robotics researchers · humanoid teams',
+        arriveFrom:[{ref:['06','Isaac GR00T N1'],detail:'Pairs with this model'},{ref:['06','Cosmos'],detail:'Cosmos-based generation'}],
+        steps:['Clone GR00T-dreams from GitHub','Provide text + reference images','Generate synthetic trajectories','Train GR00T N1 on synth data'],
+        goTo:[{ref:['06','Isaac GR00T N1'],note:'Target model'},{ref:['05','Isaac Lab'],note:'Sim training'}],
+        friction:['Compute-intensive generation','Sim-to-real gap still applies']
+      },
+      { name:'Llama 3.x (NV-hosted)', type:'MODEL', sub:'Meta models · NV-optimized', use:'Use Llama models on NVIDIA infra', url:'build.nvidia.com/meta/llama-3_1-8b-instruct',
+        desc:'Meta\'s Llama 3.x (8B, 70B, 405B) hosted on NVIDIA infra with TRT-LLM optimization.',
+        who:'Open-weight LLM developers',
+        arriveFrom:[{ext:'Meta Llama releases'},{ref:['08','build.nvidia.com'],detail:'Multi-vendor catalog'}],
+        steps:['Available on build.nvidia.com free tier','Same flow as Nemotron','Alternative: HuggingFace weights direct'],
+        goTo:[{ext:'HuggingFace meta-llama'},{ref:['07','NIM'],note:'Self-host containers'}],
+        friction:['Meta license (700M MAU clause) applies']
+      },
+      { name:'Mistral / Mixtral', type:'MODEL', sub:'Third-party · NV-hosted', use:'Use Mistral models via NVIDIA endpoint', url:'build.nvidia.com/mistralai/mixtral-8x7b-instruct',
+        desc:'Mistral AI models hosted via build.nvidia.com.',
+        who:'Devs preferring Mistral models',
+        arriveFrom:[{ext:'Mistral community'},{ref:['08','build.nvidia.com'],detail:'Multi-vendor catalog'}],
+        steps:['Try in build.nvidia.com','Free tier 40 RPM applies'],
+        goTo:[{ext:'Mistral API direct'},{ref:['07','NIM'],note:'Self-host'}],
+        friction:['Going direct to Mistral may be simpler for production']
+      },
+      { name:'Isaac GR00T N1', type:'MODEL', sub:'Humanoid robotics foundation model · OSS', use:'Pre-trained model for humanoid robot policies', url:'developer.nvidia.com/isaac/gr00t',
+        desc:'Open humanoid robotics foundation model. Starting point for humanoid manipulation / locomotion tasks. Trained on simulated + real-world demonstrations.',
+        who:'Robotics researchers · humanoid teams (Figure, 1X, Sanctuary, etc.)',
+        arriveFrom:[{ref:['09','Isaac'],detail:'Robotics platform'},{ext:'GTC 2026 announcement'}],
+        steps:['Download from huggingface.co/nvidia','Fine-tune on your humanoid platform','Deploy to robot ECU'],
+        goTo:[{ref:['05','Isaac Lab'],note:'Fine-tune in sim'},{ref:['09','Isaac'],note:'Deployment pipeline'}],
+        friction:['Needs humanoid hardware','Sim-to-real gap']
+      },
+    ]
+  },
+
+  '05': {
+    name: 'AI Training & Fine-tuning',
+    desc: 'Tools for training and fine-tuning models on NVIDIA GPUs',
+    who: 'ML researchers · model training teams',
+    boxes: [
+      { name:'NeMo Framework', type:'FRAMEWORK', sub:'Speech · Audio · Multimodal LLM · OSS', use:'Train / fine-tune speech and multimodal LLMs', url:'github.com/NVIDIA-NeMo/NeMo',
+        desc:'Open-source framework. In 2026 the main NVIDIA-NeMo/NeMo repo pivoted toward speech, audio, and multimodal LLM work; general LLM pretraining/SFT has moved to other repos under the NeMo-org GitHub. Free; distinct from NeMo Microservices (enterprise).',
+        who:'ML researchers · speech/multimodal training teams',
+        arriveFrom:[{ext:'GitHub trending / papers with code'},{ref:['06','Parakeet'],detail:'Custom fine-tune speech'},{ref:['10','developer.nvidia.com'],detail:'AI training section'}],
+        steps:['git clone github.com/NVIDIA-NeMo/NeMo','Pull NeMo container from NGC (recommended)','For speech/audio/multimodal: use this repo','For pure LLM training: check NeMo-org for the right sub-repo','Configure for your GPUs (multi-node supported)','Export to .nemo file or HF format'],
+        goTo:[{ref:['04','PyTorch + CUDA'],note:'Underlying framework'},{ref:['05','Megatron-LM'],note:'For very large training'},{ref:['06','Parakeet'],note:'Speech models'},{ref:['07','NeMo Microservices'],note:'Production counterpart (NOT same product)'}],
+        friction:['Name collision with NeMo Microservices is #1 confusion','2026 repo pivot means older LLM training docs may point to outdated paths','Container heavy (40+ GB)']
+      },
+      { name:'NeMo Curator', type:'TOOL', sub:'Data Curation · Synthetic Data', use:'Dedupe and clean your training data', url:'github.com/NVIDIA/NeMo-Curator',
+        desc:'GPU-accelerated data curation: dedup, quality filtering, PII removal, synthetic data generation.',
+        who:'Data engineers preparing training data',
+        arriveFrom:[{ref:['05','NeMo Framework'],detail:'Need quality data'},{ref:['04','RAPIDS'],detail:'GPU data processing'}],
+        steps:['Install via pip or container','Configure pipeline (dedup → quality → PII)','Run on GPU cluster','Export curated dataset'],
+        goTo:[{ref:['05','NeMo Framework'],note:'Consume curated data'},{ref:['04','RAPIDS'],note:'Built on cuDF'}]
+      },
+      { name:'NeMo RL', type:'TOOL', sub:'RLHF / Alignment', use:'Run RLHF / DPO alignment training', url:'developer.nvidia.com/nemo-microservices',
+        desc:'DPO/PPO alignment within NeMo. Used to align Llama-Nemotron variants.',
+        who:'RLHF / alignment researchers',
+        arriveFrom:[{ref:['05','NeMo Framework'],detail:'Alignment stage'}],
+        steps:['Train base with NeMo Framework','Collect preference data','Run DPO/PPO with NeMo RL','Evaluate alignment metrics'],
+        goTo:[{ref:['06','Llama-Nemotron'],note:'Example output'}]
+      },
+      { name:'Megatron-LM', type:'FRAMEWORK', sub:'Large-scale Transformer Training', use:'Pretrain large transformers on a cluster', url:'github.com/NVIDIA/Megatron-LM',
+        desc:'NVIDIA\'s framework for distributed transformer training. Tensor/pipeline/sequence parallelism. Powers Nemotron training internally.',
+        who:'Large-scale training teams',
+        arriveFrom:[{ref:['05','NeMo Framework'],detail:'NeMo wraps Megatron'},{ext:'Hyperscaler training engineering'}],
+        steps:['git clone NVIDIA/Megatron-LM','Set up multi-node SLURM cluster','Configure 3D parallelism (TP × PP × DP)','Launch (1000s of GPUs typical)'],
+        goTo:[{ref:['05','NeMo Framework'],note:'Friendlier wrapper'},{ref:['01','Data Center GPUs'],note:'Need H100 fleet'}],
+        friction:['Not realistic for individuals — needs cluster','Configuration complexity is high']
+      },
+      { name:'Modulus', type:'FRAMEWORK', sub:'Physics-ML for Simulation', use:'Train physics-informed neural nets', url:'developer.nvidia.com/modulus',
+        desc:'Physics-informed neural network framework for scientific computing, CFD, weather modeling.',
+        who:'Scientific computing · CFD teams',
+        arriveFrom:[{ext:'Physics-informed ML papers'},{ext:'NVIDIA scientific blog'}],
+        steps:['pip install nvidia-modulus','Pick example (Navier-Stokes, weather)','Train on GPU'],
+        goTo:[{ref:['04','PyTorch + CUDA'],note:'Built on PyTorch'}]
+      },
+      { name:'Megatron-Core', type:'FRAMEWORK', sub:'Composable training library', use:'Building blocks under Megatron-LM and NeMo', url:'developer.nvidia.com/megatron-core',
+        desc:'Composable GPU-optimized training library underlying Megatron-LM and NeMo. Separate from Megatron-LM (research repo) — Megatron-Core is the library other tools build on.',
+        who:'Training framework developers · large-scale teams',
+        arriveFrom:[{ref:['05','NeMo Framework'],detail:'Underlying library'},{ref:['05','Megatron-LM'],detail:'Research counterpart'}],
+        steps:['pip install megatron-core','Use as library in custom training stack','Or rely on NeMo / Megatron-LM as user-facing layer'],
+        goTo:[{ref:['05','NeMo Framework'],note:'Friendlier wrapper'},{ref:['05','Megatron-LM'],note:'Research recipes'}],
+        friction:['Low-level — usually consumed via NeMo or Megatron-LM','Not a beginner tool']
+      },
+      { name:'NeMo Run', type:'TOOL', sub:'Workflow orchestration for ML experiments', use:'Run experiments across local / SLURM / K8s', url:'github.com/NVIDIA-NeMo/Run',
+        desc:'Python-based library to streamline configuration, execution, management of ML experiments. Control plane across local / SLURM / K8s.',
+        who:'ML researchers running many experiments',
+        arriveFrom:[{ref:['05','NeMo Framework'],detail:'Companion experiment runner'},{ext:'SLURM cluster workflows'}],
+        steps:['pip install nemo-run','Define experiment as Python config','Submit to local / SLURM / K8s','Track runs centrally'],
+        goTo:[{ref:['05','NeMo Framework'],note:'Often used together'}],
+        friction:['Newer tool — smaller community','NeMo-centric']
+      },
+      { name:'BioNeMo', type:'FRAMEWORK', sub:'Drug Discovery & Biology AI', use:'Train protein / molecule models', url:'nvidia.com/en-us/clara/bionemo',
+        desc:'Biological sequence modeling, protein structure, molecular generation. ESMFold, AlphaFold2 support.',
+        who:'Computational biologists · drug discovery',
+        arriveFrom:[{ref:['09','Clara'],detail:'Healthcare track'},{ext:'Biotech AI conferences'}],
+        steps:['Pull BioNeMo container from NGC','Run protein/molecule models','For production: BioNeMo Microservices (licensed)'],
+        goTo:[{ref:['09','Clara'],note:'Healthcare AI suite'}]
+      },
+      { name:'Isaac Lab', type:'FRAMEWORK', sub:'Robot learning framework · OSS', use:'Train robot policies with RL in simulation', url:'developer.nvidia.com/isaac/lab',
+        desc:'Open-source robot learning framework built on Isaac Sim. PyTorch + Isaac Gym. Used for training RL policies for manipulation, locomotion, humanoid tasks.',
+        who:'Robotics researchers · policy training teams',
+        arriveFrom:[{ref:['09','Isaac'],detail:'Sim environment'},{ext:'Robotics ML papers'}],
+        steps:['git clone NVIDIA-Omniverse/IsaacLab','Set up Isaac Sim','Pick task: manipulation, locomotion, or humanoid','Train with PPO / SAC','Deploy to real robot via Isaac ROS'],
+        goTo:[{ref:['09','Isaac'],note:'Simulation parent'},{ref:['06','Isaac GR00T N1'],note:'Train against foundation model'}],
+        friction:['Needs strong RTX GPU','Sim-to-real gap']
+      },
+      { name:'TAO Toolkit', type:'TOOL', sub:'Low-code transfer learning', use:'Fine-tune vision models without writing PyTorch', url:'developer.nvidia.com/tao-toolkit',
+        desc:'Train Adapt Optimize Toolkit. Low-code transfer learning for vision models (detection, segmentation). For CV teams who want recipes, not raw PyTorch.',
+        who:'Computer vision developers',
+        arriveFrom:[{ext:'CV team workflows'},{ref:['09','Metropolis'],detail:'Vision pipeline starting point'}],
+        steps:['Install TAO Toolkit (Docker)','Pick pre-trained model from NGC','Bring your data','Train with TAO recipes','Export to TensorRT for deployment'],
+        goTo:[{ref:['04','TensorRT'],note:'Optimization'},{ref:['09','Metropolis'],note:'Deployment'}],
+        friction:['Vision-focused (not for LLMs)','Less flexible than raw PyTorch']
+      },
+    ]
+  },
+
+  '04': {
+    name: 'ML Frameworks & Runtime',
+    desc: 'GPU-accelerated frameworks where models actually train and run',
+    who: 'ML engineers · data scientists · researchers',
+    boxes: [
+      { name:'TensorRT', type:'SDK', sub:'Inference Optimization SDK', use:'Make inference 2-5x faster (quantize)', url:'developer.nvidia.com/tensorrt',
+        desc:'NVIDIA\'s inference optimizer/runtime. Converts trained models to optimized engines with FP16/INT8/FP8.',
+        who:'MLOps engineers optimizing production inference',
+        arriveFrom:[{ref:['04','PyTorch + CUDA'],detail:'Need faster inference'},{ref:['07','Triton'],detail:'Triton uses TRT backend'}],
+        steps:['Train model in PyTorch/TF','Export to ONNX','Run trtexec or Python API to build engine','Quantize (FP16/INT8/FP8) if precision allows','Serve via Triton or embed in app'],
+        goTo:[{ref:['04','TensorRT-LLM'],note:'For LLMs'},{ref:['07','Triton'],note:'Serving'}],
+        friction:['Engine is GPU-architecture-specific (rebuild per target)','Quantization can change outputs — test carefully']
+      },
+      { name:'TensorRT-LLM', type:'LIBRARY', sub:'LLM Inference Optimization', use:'LLM-specific TensorRT (FP8, batching)', url:'github.com/NVIDIA/TensorRT-LLM',
+        desc:'Open-source library for LLM inference. FP8 quantization, continuous batching. Powers NIM containers.',
+        who:'MLOps building LLM serving stacks',
+        arriveFrom:[{ref:['04','TensorRT'],detail:'Want LLM-specific'},{ref:['07','NIM'],detail:'Understand internals'}],
+        steps:['Clone repo, install Python package','Build engine for your model + GPU','Serve via trtllm-serve or Triton','Tune KV cache and batch size'],
+        goTo:[{ref:['07','TensorRT-LLM Serve'],note:'Serving wrapper'},{ref:['07','NIM'],note:'Production packaging'}]
+      },
+      { name:'PyTorch + CUDA', type:'FRAMEWORK', sub:'Deep Learning Framework', use:'Write neural networks (the main framework)', url:'pytorch.org',
+        desc:'Primary ML framework. NVIDIA CUDA support is first-class; cuDNN powers most PyTorch GPU ops.',
+        who:'All ML developers · researchers',
+        arriveFrom:[{ext:'PyTorch docs / tutorials'},{ext:'HuggingFace examples'},{ref:['03','CUDA Toolkit'],detail:'Already installed CUDA'}],
+        steps:['pip install torch (CUDA wheel auto)','Verify: torch.cuda.is_available()','Move tensors with .to("cuda")','Multi-GPU: DDP or FSDP','For perf: torch.compile()'],
+        goTo:[{ref:['05','NeMo Framework'],note:'NV training stack'},{ref:['04','TensorRT'],note:'Production inference'}],
+        friction:['PyTorch wheel bundles its own CUDA — separate from system CUDA Toolkit (frequent confusion)']
+      },
+      { name:'JAX + CUDA', type:'FRAMEWORK', sub:'ML Research Framework', use:'Write research code with XLA compilation', url:'jax.readthedocs.io',
+        desc:'Google\'s ML framework. XLA compiler targets CUDA.',
+        who:'ML researchers · Google ecosystem',
+        arriveFrom:[{ext:'JAX community / DeepMind research'}],
+        steps:['pip install jax[cuda12]','jax.numpy + jit + pmap'],
+        goTo:[{ref:['03','CUDA Toolkit'],note:'Underlying compute'}]
+      },
+      { name:'cuDNN', type:'LIBRARY', sub:'Deep Neural Net Library', use:'GPU primitives PyTorch uses (auto-installed)', url:'developer.nvidia.com/cudnn',
+        desc:'GPU primitives for DL: conv, pooling, normalization. Used by PyTorch/TF transparently.',
+        who:'Framework developers (transparent to users)',
+        arriveFrom:[{ref:['04','PyTorch + CUDA'],detail:'Implicit dep'}],
+        steps:['Usually auto-installed via framework','Manual install for custom CUDA builds'],
+        goTo:[{ref:['03','CUDA Toolkit'],note:'Sister library'}]
+      },
+      { name:'NCCL', type:'LIBRARY', sub:'Multi-GPU Communication', use:'Sync gradients across GPUs', url:'developer.nvidia.com/nccl',
+        desc:'All-reduce, broadcast, scatter for multi-GPU/multi-node training.',
+        who:'Distributed training teams',
+        arriveFrom:[{ref:['04','PyTorch + CUDA'],detail:'DDP/FSDP backend'}],
+        steps:['Auto-used by PyTorch DDP','Tune NCCL env vars for topology'],
+        goTo:[{ref:['01','NVLink / NVSwitch'],note:'Underlying interconnect'}]
+      },
+      { name:'RAPIDS', type:'LIBRARY', sub:'GPU Data Science', use:'GPU-accelerated pandas / scikit-learn', url:'rapids.ai',
+        desc:'GPU-accelerated cuDF (pandas), cuML (scikit-learn), cuGraph. Zero code changes in most cases.',
+        who:'Data scientists doing EDA / preprocessing',
+        arriveFrom:[{ext:'PyData / pandas community'},{ext:'Kaggle competitions'}],
+        steps:['conda install -c rapidsai rapids','import cudf as pd  # or cudf.pandas accelerator','No code changes for most pandas/sklearn'],
+        goTo:[{ref:['09','Morpheus'],note:'Built on RAPIDS'},{ref:['05','NeMo Curator'],note:'Built on cuDF'}]
+      },
+      { name:'DALI', type:'LIBRARY', sub:'GPU data loading and augmentation', use:'Eliminate CPU bottleneck in training pipelines', url:'developer.nvidia.com/dali',
+        desc:'GPU-accelerated data loading and augmentation library for images / video / audio. Overlaps data prep with training to remove CPU bottleneck.',
+        who:'ML engineers training vision / audio models',
+        arriveFrom:[{ext:'Training perf debugging'},{ref:['04','PyTorch + CUDA'],detail:'Used as data pipeline'}],
+        steps:['pip install nvidia-dali','Define pipeline (decode + augment + tensor)','Plug into PyTorch / TF / JAX dataloader','GPU runs data prep in parallel'],
+        goTo:[{ref:['04','PyTorch + CUDA'],note:'Most common consumer'},{ref:['05','NeMo Curator'],note:'Sibling data tool'}],
+        friction:['Pipeline DSL different from torchvision / tf.data','Best ROI on heavy augmentation workloads']
+      },
+      { name:'NVIDIA Warp', type:'FRAMEWORK', sub:'Python GPU kernel JIT · physics, sim', use:'Write differentiable GPU kernels in Python', url:'developer.nvidia.com/warp-python',
+        desc:'Python framework that JIT-compiles kernels for GPU simulation / robotics / physics with PyTorch / JAX interop. v1.13 released May 2026. Foundation under Newton.',
+        who:'Robotics researchers · physics simulation · differentiable sim',
+        arriveFrom:[{ref:['09','Newton'],detail:'Newton is built on Warp'},{ext:'Differentiable physics research'}],
+        steps:['pip install warp-lang','Decorate Python functions with @wp.kernel','Run on GPU with autograd','Interop with PyTorch / JAX'],
+        goTo:[{ref:['09','Newton'],note:'Physics engine using Warp'},{ref:['04','PyTorch + CUDA'],note:'Interop'}],
+        friction:['Python kernel patterns different from CUDA','Best for sim / physics, not general DL']
+      },
+      { name:'NVIDIA Model Optimizer', type:'LIBRARY', sub:'Quantization, pruning, distillation, spec decoding', use:'Compress models before deployment', url:'github.com/NVIDIA/Model-Optimizer',
+        desc:'Unified library of SOTA model optimization techniques: quantization (NVFP4/FP8 PTQ+QAT), pruning, distillation, speculative decoding. Rebranded Dec 8 2025 (was TensorRT Model Optimizer).',
+        who:'MLOps engineers deploying to TRT-LLM, vLLM, SGLang, Dynamo',
+        arriveFrom:[{ref:['04','TensorRT'],detail:'Quantize before deploy'},{ref:['07','vLLM'],detail:'Deploy quantized models'}],
+        steps:['pip install nvidia-modelopt','Pick technique (FP8 PTQ, INT4 AWQ, etc.)','Calibrate on sample data','Export quantized checkpoint'],
+        goTo:[{ref:['04','TensorRT'],note:'Deploy with TRT'},{ref:['07','vLLM'],note:'Or vLLM'}],
+        friction:['Quantization can degrade quality — test carefully','Recipe-dependent results']
+      },
+      { name:'OpenAI Triton (kernel lang)', type:'LIBRARY', sub:'Python kernel DSL · not NV Triton server', use:'Write custom GPU kernels in Python (not CUDA C++)', url:'github.com/triton-lang/triton',
+        desc:'Python-like DSL for GPU kernels (default kernel layer in PyTorch 2.x — torch.compile lowers to Triton). Different product from NVIDIA Triton Server.',
+        who:'Kernel authors · researchers writing custom ops',
+        arriveFrom:[{ext:'PyTorch 2.x torch.compile'},{ext:'FlashAttention community'}],
+        steps:['pip install triton','Write @triton.jit kernels','Launch from Python','torch.compile uses Triton automatically'],
+        goTo:[{ref:['03','CUDA Toolkit'],note:'Lower-level alternative'},{ref:['04','PyTorch + CUDA'],note:'Default consumer'}],
+        friction:['Naming collision with NVIDIA Triton Server is severe','Best for custom fused ops, not full models']
+      },
+      { name:'CuPy', type:'LIBRARY', sub:'NumPy / SciPy on GPU', use:'Drop-in GPU acceleration for NumPy code', url:'cupy.dev',
+        desc:'NumPy / SciPy-compatible array library for CUDA. Underpins RAPIDS. Drop-in for most NumPy code with .asarray() and .asnumpy() transfers.',
+        who:'Scientific Python users · researchers',
+        arriveFrom:[{ext:'NumPy / SciPy users'},{ref:['04','RAPIDS'],detail:'CuPy is RAPIDS foundation'}],
+        steps:['pip install cupy-cuda12x','import cupy as cp','Most NumPy code works unchanged','Convert via cp.asarray / cp.asnumpy at boundaries'],
+        goTo:[{ref:['04','RAPIDS'],note:'Higher-level data science'},{ref:['03','CUDA Toolkit'],note:'Underlying'}],
+        friction:['Not every NumPy function supported','Memory transfers can dominate small workloads']
+      },
+    ]
+  },
+
+  '03': {
+    name: 'Compute Platform',
+    desc: 'The CUDA ecosystem — GPU programming primitives, math libraries, profilers',
+    who: 'CUDA developers · perf engineers · framework devs',
+    boxes: [
+      { name:'CUDA Toolkit', type:'SDK', sub:'nvcc · runtime · libraries', use:'Write GPU code in C++ (compilers, libs)', url:'developer.nvidia.com/cuda-toolkit',
+        desc:'Core GPU programming toolkit: nvcc compiler, runtime, math libraries, debugging, profiler.',
+        who:'CUDA C/C++ developers · perf engineers',
+        arriveFrom:[{ext:'Google: "GPU programming" / "CUDA install"'},{ref:['04','PyTorch + CUDA'],detail:'Building from source'},{ref:['10','developer.nvidia.com'],detail:'Downloads section'},{ref:['10','Developer Program'],detail:'New dev signup'}],
+        steps:['Check supported CUDA for OS + driver','Download from developer.nvidia.com/cuda-toolkit','Install (Linux: pkg manager; Windows: installer)','Manually add to PATH (often missed!)','Verify: nvcc --version','Build/run sample (deviceQuery)','Profile with Nsight Systems'],
+        goTo:[{ref:['02','GPU Driver'],note:'Must match version'},{ref:['03','cuBLAS / cuFFT / cuSPARSE'],note:'Math libs'},{ref:['04','PyTorch + CUDA'],note:'Most common consumer'},{ref:['03','Nsight Systems / Compute'],note:'Profiling'}],
+        friction:['PATH not auto-configured — common silent failure','Strict driver/CUDA matrix: CUDA 12.x needs driver ≥525','WSL2 trap: do NOT install driver inside WSL2 — only toolkit','Multi-version coexistence is messy']
+      },
+      { name:'cuBLAS / cuFFT / cuSPARSE', type:'LIBRARY', sub:'Math libraries', use:'GPU math primitives (matmul, FFT)', url:'developer.nvidia.com/cublas',
+        desc:'GPU math: dense BLAS, FFT, sparse. Core of all DL math.',
+        who:'Perf engineers · framework developers',
+        arriveFrom:[{ref:['03','CUDA Toolkit'],detail:'Bundled with toolkit'}],
+        steps:['Available after CUDA Toolkit install','Link via -lcublas -lcufft -lcusparse'],
+        goTo:[{ref:['04','cuDNN'],note:'DL-specific primitives'}]
+      },
+      { name:'Nsight Systems / Compute', type:'TOOL', sub:'GPU Profiler & Debugger', use:'Profile GPU code, find bottlenecks', url:'developer.nvidia.com/nsight-systems',
+        desc:'Nsight Systems (system profiler), Nsight Compute (kernel profiler), Nsight Graphics.',
+        who:'Perf engineers · kernel developers',
+        arriveFrom:[{ref:['03','CUDA Toolkit'],detail:'Bundled in toolkit'},{ext:'CUDA perf optimization blogs'}],
+        steps:['Install via CUDA Toolkit','Capture: nsys profile <command>','Open .nsys-rep in Nsight Systems GUI','Kernel detail: nv-nsight-cu-cli'],
+        goTo:[{ref:['03','CUDA Toolkit'],note:'Parent toolkit'}],
+        friction:['GUI is heavy desktop app — remote profiling has extra setup']
+      },
+      { name:'NVCC / PTX', type:'COMPILER', sub:'Compiler & IR', use:'Compile CUDA C++ to GPU binary', url:'docs.nvidia.com/cuda/nvcc',
+        desc:'nvcc compiles CUDA C++ → PTX → GPU binary. PTX is virtual ISA.',
+        who:'CUDA kernel devs · compiler researchers',
+        arriveFrom:[{ref:['03','CUDA Toolkit'],detail:'Compiler in toolkit'}],
+        steps:['nvcc compiles .cu files','Emit PTX with -ptx','JIT compile happens at runtime by driver'],
+        goTo:[{ref:['02','CUDA Driver API'],note:'PTX loaded via driver'}]
+      },
+      { name:'Thrust / CCCL', type:'LIBRARY', sub:'GPU Algorithms', use:'STL-like parallel algorithms for GPU', url:'github.com/NVIDIA/cccl',
+        desc:'C++ parallel algorithms (sort, scan, reduce). Now in CCCL.',
+        who:'C++ GPU developers',
+        arriveFrom:[{ref:['03','CUDA Toolkit'],detail:'Bundled in CUDA'}],
+        steps:['Header-only — #include <thrust/...>','Use STL-like API with thrust::device_vector'],
+        goTo:[{ref:['03','CUDA Toolkit'],note:'Parent'}]
+      },
+      { name:'CUDA-Q', type:'COMPILER', sub:'Quantum-classical hybrid', use:'Write hybrid quantum + GPU programs', url:'developer.nvidia.com/cuda-q',
+        desc:'Quantum-classical programming model. Write hybrid programs that run on GPUs and quantum processors. Part of NVIDIA quantum strategy.',
+        who:'Quantum researchers · hybrid algorithm developers',
+        arriveFrom:[{ext:'Quantum computing research'},{ext:'cuQuantum SDK'}],
+        steps:['Install CUDA-Q','Write kernels with quantum + classical sections','Run on GPU emulators or real QPU backends','Profile hybrid performance'],
+        goTo:[{ref:['03','CUDA Toolkit'],note:'GPU side'}],
+        friction:['Niche audience','Real QPUs still scarce']
+      },
+      { name:'NVIDIA HPC SDK', type:'COMPILER', sub:'Fortran / C++ compilers + HPC libs', use:'Build HPC apps with NVIDIA compilers', url:'developer.nvidia.com/hpc-sdk',
+        desc:'Compilers (nvfortran, nvc++) + OpenACC + HPC math libs (cuBLAS, cuSOLVER, cuFFT bundled). v26.3 March 2026. Distinct audience from CUDA Toolkit (HPC / Fortran).',
+        who:'HPC developers · weather / climate / scientific computing',
+        arriveFrom:[{ext:'HPC community'},{ext:'Fortran / OpenACC users'}],
+        steps:['Download HPC SDK','Use nvfortran / nvc++ compilers','Add OpenACC pragmas for GPU offload','Link HPC math libs'],
+        goTo:[{ref:['03','CUDA Toolkit'],note:'Lower-level alternative'},{ref:['05','Modulus'],note:'AI-HPC fusion'}],
+        friction:['Different from CUDA Toolkit (often confused)','Fortran-heavy world']
+      },
+      { name:'CUTLASS', type:'LIBRARY', sub:'CUDA matmul template library', use:'Write custom matmul / GEMM kernels', url:'github.com/NVIDIA/cutlass',
+        desc:'CUDA Templates and Python DSLs for high-performance linear algebra. Used heavily by kernel authors writing custom matmul / attention. Distinct from cuBLAS (templates vs closed-source lib).',
+        who:'CUDA kernel authors · performance engineers',
+        arriveFrom:[{ref:['03','CUDA Toolkit'],detail:'Advanced kernel work'},{ext:'FlashAttention-style research'}],
+        steps:['git clone NVIDIA/cutlass','Use C++ templates or Python DSL','Write custom GEMM variants','Integrate into framework'],
+        goTo:[{ref:['03','cuBLAS / cuFFT / cuSPARSE'],note:'Closed-source counterpart'},{ref:['04','OpenAI Triton (kernel lang)'],note:'Higher-level alternative'}],
+        friction:['Steep learning curve','C++ template metaprogramming']
+      },
+    ]
+  },
+
+  '02': {
+    name: 'System Software',
+    desc: 'Drivers, container runtime, and OS integration — what makes the GPU actually accessible',
+    who: 'Sysadmins · DevOps · infrastructure engineers',
+    boxes: [
+      { name:'GPU Driver', type:'DRIVER', sub:'Linux · Windows · WSL2', use:'Make your OS see and use the GPU', url:'nvidia.com/drivers',
+        desc:'The foundation. Everything above depends on a compatible driver. Must match CUDA toolkit range.',
+        who:'Anyone installing NVIDIA GPUs',
+        arriveFrom:[{ext:'Hardware purchase → "install drivers"'},{ref:['03','CUDA Toolkit'],detail:'CUDA install prompts'},{ext:'OS package manager'}],
+        steps:['Determine GPU + OS + CUDA target','Check compatibility matrix','Install: package manager (Linux) or installer (Win)','Reboot','Verify: nvidia-smi','Match CUDA Toolkit version'],
+        goTo:[{ref:['03','CUDA Toolkit'],note:'Layer above'},{ref:['02','Container Toolkit'],note:'For Docker/K8s'}],
+        friction:['Driver/CUDA matrix is strict — wrong combo silently fails','WSL2: install driver on Windows host only','Linux + Secure Boot: signing the kernel module is separate','Display vs compute drivers — two flows']
+      },
+      { name:'Container Toolkit', type:'RUNTIME', sub:'nvidia-docker · CDI', use:'Give Docker / K8s access to the GPU', url:'docs.nvidia.com/datacenter/cloud-native',
+        desc:'Enables GPU access inside Docker/Podman. CDI is the modern standard. Required for NIM.',
+        who:'DevOps · MLOps · GPU container users',
+        arriveFrom:[{ref:['07','NIM'],detail:'NIM needs this for GPU'},{ref:['02','GPU Driver'],detail:'Next step after driver'}],
+        steps:['Install nvidia-container-toolkit','Configure Docker runtime','Restart docker daemon','Test: docker run --gpus all nvidia/cuda nvidia-smi','For K8s: install NVIDIA device plugin'],
+        goTo:[{ref:['07','NIM'],note:'Primary downstream user'},{ref:['10','NGC'],note:'Container source'}],
+        friction:['Legacy nvidia-docker2 vs current nvidia-container-toolkit confusion','Runtime plugin vs CDI configuration differences','K8s device plugin quirks (slicing, MIG)']
+      },
+      { name:'DOCA', type:'SDK', sub:'BlueField DPU SDK', use:'Program BlueField DPUs', url:'docs.nvidia.com/doca',
+        desc:'BlueField DPU SDK. Network/storage/security offload programming.',
+        who:'Data center infra teams',
+        arriveFrom:[{ext:'BlueField DPU hardware purchase'}],
+        steps:['Get BlueField DPU hardware','Install DOCA SDK','Develop offload applications'],
+        goTo:[{ref:['01','NVLink / NVSwitch'],note:'Networking stack'}]
+      },
+      { name:'NVIDIA GPU Operator', type:'ORCHESTRATION', sub:'Kubernetes GPU stack automation', use:'Stand up GPU-ready K8s without manual install', url:'docs.nvidia.com/datacenter/cloud-native/gpu-operator',
+        desc:'Kubernetes operator that automates driver, container toolkit, device plugin, DCGM, GFD, MIG manager deployment. v26.3.1. Distinct from NIM Operator (which manages NIM microservices).',
+        who:'K8s admins · cloud-native ML platform teams',
+        arriveFrom:[{ref:['02','Container Toolkit'],detail:'Want K8s automation'},{ext:'CNCF / Kubeflow community'}],
+        steps:['helm install gpu-operator','Operator deploys driver + container toolkit + device plugin','Pods request GPU resources','Node-level lifecycle managed'],
+        goTo:[{ref:['07','NIM Operator'],note:'Layer above for NIM'},{ref:['07','Run:ai'],note:'Workload-level scheduling'}],
+        friction:['K8s expertise required','Operator config can be complex']
+      },
+      { name:'GPU Sharing (MIG / MPS / Time-Slicing)', type:'DRIVER', sub:'Partition or share a single GPU', use:'Run multiple workloads on one GPU', url:'docs.nvidia.com/datacenter/tesla/mig-user-guide',
+        desc:'MIG (hardware partition into up to 7 isolated instances on Hopper / Blackwell / Rubin) + MPS (process sharing) + Time-Slicing (temporal sharing via K8s device plugin).',
+        who:'Multi-tenant inference operators · K8s admins',
+        arriveFrom:[{ref:['02','NVIDIA GPU Operator'],detail:'MIG Manager configures via Operator'},{ext:'Multi-tenant inference needs'}],
+        steps:['MIG: nvidia-smi mig -i 0 -cgi <profile>','MPS: start nvidia-cuda-mps-control daemon','Time-slicing: configure device plugin','Pick mode based on isolation needs'],
+        goTo:[{ref:['02','NVIDIA GPU Operator'],note:'Often managed by Operator'}],
+        friction:['MIG only on certain GPUs (H100, B200, RTX PRO Max-Q)','Modes have very different isolation guarantees']
+      },
+      { name:'Open GPU Kernel Modules', type:'DRIVER', sub:'OSS kernel modules · default since R560', use:'Use OSS kernel modules (required for Grace, Blackwell)', url:'github.com/NVIDIA/open-gpu-kernel-modules',
+        desc:'Dual GPL/MIT kernel modules. Default since driver R560 in 2024. REQUIRED for Grace Hopper, Blackwell, Vera Rubin.',
+        who:'Linux sysadmins · DGX operators',
+        arriveFrom:[{ref:['02','GPU Driver'],detail:'New default'},{ref:['01','Grace CPU + Superchips'],detail:'Required for these'}],
+        steps:['Install via apt / dnf','Driver R560+ uses open modules by default','Verify with nvidia-smi'],
+        goTo:[{ref:['02','GPU Driver'],note:'Driver parent entry'}],
+        friction:['Some older GPUs not supported with open modules','Secure Boot signing varies by distro']
+      },
+      { name:'DGX OS / Base OS', type:'SOFTWARE', sub:'Curated Ubuntu for DGX / Spark / Station', use:'Use NVIDIA-validated Linux for AI hardware', url:'docs.nvidia.com/base-os',
+        desc:'DGX OS 7 is curated Ubuntu 24.04 for DGX systems. Base OS is the underlying package set, also available for RHEL / Rocky. Standard image for DGX, Spark, Station.',
+        who:'DGX / Spark / Station operators',
+        arriveFrom:[{ref:['01','DGX Systems'],detail:'Pre-installed on DGX'},{ref:['01','DGX Spark'],detail:'Pre-installed'}],
+        steps:['DGX/Spark ships with DGX OS pre-installed','For custom servers: install Base OS packages','Manage via standard apt'],
+        goTo:[{ref:['02','GPU Driver'],note:'Driver bundled'},{ref:['02','Container Toolkit'],note:'Bundled'}],
+        friction:['Tied to NVIDIA hardware','Ubuntu 24.04-specific']
+      },
+      { name:'CUDA Driver API', type:'API', sub:'Low-level GPU control', use:'Low-level GPU control (used by frameworks)', url:'docs.nvidia.com/cuda/cuda-driver-api',
+        desc:'Lower-level than CUDA Runtime API. Used by frameworks internally.',
+        who:'Framework devs · runtime implementors',
+        arriveFrom:[{ref:['03','CUDA Toolkit'],detail:'Alt to Runtime API'}],
+        steps:['Used internally by frameworks','App devs rarely call directly'],
+        goTo:[{ref:['03','CUDA Toolkit'],note:'Runtime API is friendlier'}]
+      },
+      { name:'DCGM / Fabric Mgr', type:'TOOL', sub:'GPU Mgmt · NVLink fabric', use:'Monitor GPU health in data centers', url:'developer.nvidia.com/dcgm',
+        desc:'DCGM = monitoring/health. Fabric Manager = NVLink/NVSwitch topology.',
+        who:'Data center operators · K8s admins',
+        arriveFrom:[{ext:'Cluster monitoring needs'}],
+        steps:['Install dcgm packages','For K8s: deploy dcgm-exporter for Prometheus','For DGX/HGX: Fabric Manager auto-installed'],
+        goTo:[{ref:['01','NVLink / NVSwitch'],note:'What Fabric Mgr controls'}]
+      },
+      { name:'Mission Control', type:'SOFTWARE', sub:'AI Factory cluster orchestration', use:'Provision and operate AI factory clusters', url:'nvidia.com/en-us/data-center/mission-control',
+        desc:'NVIDIA cluster software for AI factories. Provisioning, telemetry, resiliency, workload scheduling across DGX SuperPOD nodes. Bundled with SuperPOD reference architecture.',
+        who:'AI factory operators · cluster admins',
+        arriveFrom:[{ref:['01','DGX SuperPOD'],detail:'Bundled SW stack'},{ext:'Enterprise data center ops'}],
+        steps:['Deploy Mission Control on SuperPOD head nodes','Configure cluster topology','Set up workload scheduling','Monitor telemetry / failures'],
+        goTo:[{ref:['01','DGX SuperPOD'],note:'What it manages'},{ref:['07','Run:ai'],note:'Workload-level orchestration above'}],
+        friction:['Tied to NVIDIA hardware','Enterprise complexity']
+      },
+    ]
+  },
+
+  '01': {
+    name: 'Hardware / Silicon',
+    desc: 'GPU chips, compute systems, and interconnects — the physical foundation of everything above',
+    who: 'Hardware procurement · data center · embedded engineers',
+    boxes: [
+      { name:'Data Center GPUs', type:'HARDWARE', sub:'H100 · H200 · A100 · B200', use:'Train models on H100/H200/A100/B200', url:'nvidia.com/en-us/data-center/h100',
+        desc:'H100/H200 (Hopper), A100 (Ampere), B200 (Blackwell, 2025). NVLink for multi-GPU.',
+        who:'ML training teams · cloud GPU renters',
+        arriveFrom:[{ext:'Capacity planning / training requirements'},{ref:['08','DGX Cloud'],detail:'Cloud-rented capacity'},{ext:'CSP GPU instance types (p5, ND H100, A3)'}],
+        steps:['Decide: buy or rent','Pick generation (H100 mainstream, B200 newest)','Source via OEM (DGX) or CSP rental','Install drivers + CUDA','Configure NVLink topology if multi-GPU'],
+        goTo:[{ref:['02','GPU Driver'],note:'First software layer'},{ref:['01','NVLink / NVSwitch'],note:'Interconnect'}],
+        friction:['H100 supply still constrained — cloud reservations needed','Capital cost: $25k–$40k per H100']
+      },
+      { name:'GeForce RTX', type:'HARDWARE', sub:'Consumer & prosumer GPUs', use:'Run local inference on consumer GPUs', url:'nvidia.com/en-us/geforce/graphics-cards',
+        desc:'Consumer GPUs (RTX 4090, 5090). Up to 24/32 GB VRAM. Enough for local LLM inference, small fine-tunes.',
+        who:'Individual ML practitioners · hobbyists',
+        arriveFrom:[{ext:'Best Buy / Newegg / retailer'},{ext:'PC gaming community'},{ref:['04','PyTorch + CUDA'],detail:'Local dev environment'}],
+        steps:['Buy from retailer','Install in PC (PCIe, sufficient PSU)','Install GeForce driver','Use for local ML / inference'],
+        goTo:[{ref:['02','GPU Driver'],note:'GeForce driver'},{ref:['04','PyTorch + CUDA'],note:'Local ML'}],
+        friction:['NVLink unavailable on consumer cards (RTX 40+ dropped it)','No ECC memory — not for sustained production','CUDA EULA prohibits some data center uses on consumer cards']
+      },
+      { name:'Jetson', type:'HARDWARE', sub:'Edge AI · Robotics', use:'Run AI at the edge (robots, drones, cameras)', url:'developer.nvidia.com/embedded/jetson',
+        desc:'Edge AI modules: Orin (up to 275 TOPS), AGX, Nano. Used in robots, drones, cameras.',
+        who:'Embedded AI · robotics developers',
+        arriveFrom:[{ref:['09','Isaac'],detail:'Robotics target'},{ext:'Robotics / IoT communities'}],
+        steps:['Buy Jetson dev kit (Orin Nano $499+)','Flash JetPack SDK','Run CUDA workloads at edge','For prod: Jetson module + custom carrier'],
+        goTo:[{ref:['09','Isaac'],note:'Robotics SDK'},{ref:['02','GPU Driver'],note:'JetPack bundles all'}]
+      },
+      { name:'DRIVE Orin / Thor', type:'HARDWARE', sub:'Automotive SoC', use:'Run AI on car ECUs', url:'developer.nvidia.com/drive/orin',
+        desc:'Automotive-grade SoC. Orin (254 TOPS), Thor (next-gen). CPU+GPU+DLA.',
+        who:'Automotive engineers',
+        arriveFrom:[{ref:['09','DRIVE'],detail:'Platform target'}],
+        steps:['Partnership with NVIDIA Automotive','Get DRIVE AGX dev kit','Develop on DRIVE OS'],
+        goTo:[{ref:['09','DRIVE'],note:'Software platform'}]
+      },
+      { name:'NVLink / NVSwitch', type:'INTERCONNECT', sub:'GPU-to-GPU interconnect', use:'Connect GPUs at high bandwidth', url:'nvidia.com/en-us/data-center/nvlink',
+        desc:'High-bandwidth GPU-GPU link. NVLink 4: 900 GB/s bidir. NVSwitch for all-to-all in DGX.',
+        who:'Data center architects',
+        arriveFrom:[{ref:['01','Data Center GPUs'],detail:'Spec\'d with GPU'},{ref:['04','NCCL'],detail:'Software consumer'}],
+        steps:['Provision NVLink-connected nodes (DGX, HGX)','Fabric Manager handles topology','NCCL uses transparently'],
+        goTo:[{ref:['04','NCCL'],note:'Software stack'},{ref:['02','DCGM / Fabric Mgr'],note:'Management'}]
+      },
+      { name:'DGX Systems', type:'HARDWARE', sub:'Turnkey AI servers', use:'Buy turnkey 8-GPU AI servers', url:'nvidia.com/en-us/data-center/dgx-systems',
+        desc:'NVIDIA-built AI servers. DGX H100/H200 (8x GPU). DGX OS pre-installed.',
+        who:'Enterprise AI teams',
+        arriveFrom:[{ext:'Enterprise sales channel'}],
+        steps:['Contact NVIDIA / reseller','Order DGX system','Rack and connect','DGX OS pre-installed'],
+        goTo:[{ref:['10','AI Enterprise'],note:'Bundled software'}],
+        friction:['~$300K+ per DGX H100']
+      },
+      { name:'DGX SuperPOD', type:'AI FACTORY', sub:'Reference AI cluster · B200/B300/GB200/GB300', use:'Turnkey AI factory reference architecture', url:'nvidia.com/en-us/data-center/dgx-superpod',
+        desc:'Pre-validated NVIDIA reference architecture for AI factories: DGX nodes + InfiniBand fabric + storage + Mission Control software. SuperPOD variants for B200, B300, GB200 NVL72, GB300 NVL72.',
+        who:'Enterprise / sovereign AI / hyperscaler customers',
+        arriveFrom:[{ext:'NVIDIA enterprise sales'},{ref:['01','DGX Systems'],detail:'Need cluster-scale'}],
+        steps:['Engage NVIDIA enterprise sales + integrator','Choose SuperPOD variant (B200, B300, GB200 NVL72)','Procure DGX nodes + Quantum-X800 InfiniBand + storage','Mission Control software deployed','Run training workloads via NeMo / Megatron'],
+        goTo:[{ref:['02','Mission Control'],note:'Cluster software'},{ref:['01','Quantum-X800 InfiniBand'],note:'Internal fabric'},{ref:['05','Megatron-LM'],note:'Large-scale training'}],
+        friction:['Multi-million-dollar capex','Liquid cooling required','Months of lead time']
+      },
+      { name:'MGX', type:'AI FACTORY', sub:'Modular server reference platform', use:'OEM-buildable AI server reference design', url:'nvidia.com/en-us/data-center/products/mgx',
+        desc:'NVIDIA modular reference platform for OEMs (Supermicro, HPE, Dell, Lenovo) to build AI servers. Standard rack, DC busbar, liquid cooling.',
+        who:'OEM partners · data center architects',
+        arriveFrom:[{ext:'OEM ecosystem partner channels'}],
+        steps:['OEM partner builds against MGX spec','Customer buys validated MGX system','Deploy with NVIDIA software stack'],
+        goTo:[{ref:['01','DGX SuperPOD'],note:'MGX is the building block'}],
+        friction:['Usually invisible to end developers — you buy through an OEM']
+      },
+      { name:'DGX Spark', type:'HARDWARE', sub:'Personal AI · GB10 · 1 PFLOP FP4', use:'Run frontier AI on your desk (was Project DIGITS)', url:'nvidia.com/en-us/products/workstations/dgx-spark',
+        desc:'Personal AI workstation. GB10 Grace Blackwell Superchip, 1 PFLOP FP4, 128 GB unified memory. Renamed from Project DIGITS. Targets local LLM and agent development.',
+        who:'AI researchers · agent developers · NemoClaw users',
+        arriveFrom:[{ext:'CES 2025 launch as Project DIGITS'},{ref:['09','NemoClaw'],detail:'Local agent deployment target'}],
+        steps:['Order DGX Spark (~$3K retail)','NVIDIA AI software stack pre-installed','Develop locally before cloud deployment'],
+        goTo:[{ref:['09','NemoClaw'],note:'Build local agents'},{ref:['06','Nemotron 3 Nano'],note:'Run locally'},{ref:['04','PyTorch + CUDA'],note:'Local ML dev'}],
+        friction:['Capacity constrained (high demand)','Desk-sized but loud']
+      },
+      { name:'DGX Station', type:'HARDWARE', sub:'Workstation · GB300 · 784GB memory', use:'Desktop AI workstation with frontier-grade memory', url:'nvidia.com/en-us/products/workstations/dgx-station',
+        desc:'Desktop GB300 workstation, 784 GB coherent memory. Ships spring 2026. For researchers and small teams needing data-center-scale memory in a deskside form factor.',
+        who:'Research teams · AI labs · production prototyping',
+        arriveFrom:[{ext:'NVIDIA spring 2026 launch'},{ref:['01','DGX Spark'],detail:'Need more memory than Spark'}],
+        steps:['Pre-order through NVIDIA or OEM','Receive GB300 + Grace + 784GB memory','Install in office (proper power/cooling)','Run team workloads locally'],
+        goTo:[{ref:['01','DGX Systems'],note:'Bigger sibling'}],
+        friction:['Expensive (~$80K+ class)','Spring 2026 ship — backlog likely']
+      },
+      { name:'Grace CPU + Superchips', type:'CPU', sub:'Grace · GH200 · GB200 · GB300', use:'ARM server CPU paired with GPUs (Superchips)', url:'nvidia.com/en-us/data-center/grace-cpu',
+        desc:'NVIDIA 72-core Arm Neoverse V2 CPU. Standalone or paired with GPUs via NVLink-C2C: GH200 (Grace+Hopper), GB200/GB300 (Grace+Blackwell). Powers DGX Spark, Station, GB200 NVL72.',
+        who:'Data center architects · workloads needing CPU+GPU coherent memory',
+        arriveFrom:[{ref:['01','Data Center GPUs'],detail:'Want unified CPU+GPU memory'},{ext:'Hyperscaler procurement'}],
+        steps:['Choose form factor: Grace, GH200, GB200, or GB300','Procure via OEM or cloud','Software stack auto-recognizes Grace+GPU coherency','Use unified memory in CUDA code'],
+        goTo:[{ref:['01','DGX SuperPOD'],note:'GB200 NVL72 racks'},{ref:['01','DGX Station'],note:'Desktop GB300'},{ref:['01','DGX Spark'],note:'Personal workstation'}],
+        friction:['ARM not x86 — binary compat concerns','Coherent memory needs new CUDA patterns']
+      },
+      { name:'Quantum-X800 InfiniBand', type:'NETWORK', sub:'800 Gb/s fabric · Q3400 switch', use:'Connect AI cluster nodes at 800 Gb/s', url:'nvidia.com/en-us/networking/products/infiniband/quantum-x800',
+        desc:'NVIDIA InfiniBand for AI factories. Quantum-X800 Q3400 switch, 800 Gb/s per port. Used inside DGX SuperPOD and large training clusters. Preferred fabric for HPC and AI training.',
+        who:'Data center architects · AI cluster operators',
+        arriveFrom:[{ref:['01','DGX SuperPOD'],detail:'Default cluster fabric'},{ref:['04','NCCL'],detail:'Software consumer'}],
+        steps:['Procure as part of SuperPOD or separately','Plan topology (fat-tree, dragonfly)','Cable + configure switches','NCCL auto-detects InfiniBand and uses RDMA'],
+        goTo:[{ref:['04','NCCL'],note:'Software stack'},{ref:['01','BlueField DPUs'],note:'Endpoint NICs'}],
+        friction:['Vendor-specific (no Ethernet compat)','Expensive vs Ethernet']
+      },
+      { name:'Spectrum-X Ethernet', type:'NETWORK', sub:'AI-tuned Ethernet · SN5600', use:'Connect AI cluster nodes via Ethernet (AI-tuned)', url:'nvidia.com/en-us/networking/spectrum-x',
+        desc:'NVIDIA Ethernet fabric optimized for AI workloads. Spectrum-4 switches + ConnectX / BlueField NICs. Default in B300 SuperPOD configs. Used by AI clouds preferring Ethernet over InfiniBand.',
+        who:'AI clouds (CoreWeave, Crusoe) · enterprises preferring Ethernet',
+        arriveFrom:[{ref:['01','DGX SuperPOD'],detail:'Alternative to InfiniBand'},{ext:'AI cloud build-outs'}],
+        steps:['Procure Spectrum-4 switches','Pair with ConnectX or BlueField NICs','Configure RoCE (RDMA over Ethernet)','NCCL works similar to InfiniBand'],
+        goTo:[{ref:['04','NCCL'],note:'Software stack'},{ref:['01','BlueField DPUs'],note:'NIC endpoint'}],
+        friction:['Tuning needed for AI traffic patterns','Less mature than InfiniBand for HPC']
+      },
+      { name:'BlueField DPUs', type:'NETWORK', sub:'BlueField-3 · BlueField-4 (GTC 2026)', use:'Offload networking, storage, security to a smart NIC', url:'nvidia.com/en-us/networking/products/data-processing-unit',
+        desc:'Data Processing Units (DPUs) — programmable accelerators that handle network, storage, security tasks. BlueField-3 (current), BlueField-4 (announced GTC 2026). Used in AI clouds, sovereign AI, zero-trust infra.',
+        who:'Cloud infra · security / network engineers',
+        arriveFrom:[{ext:'Mellanox legacy product line'},{ref:['09','Morpheus'],detail:'AI security uses DPU'}],
+        steps:['Install BlueField cards in servers','Flash with DOCA software','Run offload workloads (firewall, storage, RDMA)'],
+        goTo:[{ref:['02','DOCA'],note:'SDK to program BlueField'}],
+        friction:['Programming model different (DOCA, not CUDA)','Best with NVIDIA networking stack end-to-end']
+      },
+      { name:'Vera Rubin VR200', type:'HARDWARE', sub:'Next-gen platform · GTC 2026', use:'Post-Blackwell GPU + Vera CPU platform', url:'nvidia.com/en-us/data-center/vera-rubin',
+        desc:'Vera Rubin platform announced GTC 2026. VR200 GPU + Vera CPU. Successor to Blackwell. Production ramp through 2026-2027.',
+        who:'Hyperscalers · frontier AI training teams',
+        arriveFrom:[{ext:'GTC 2026 keynote'},{ref:['01','Data Center GPUs'],detail:'Upgrade path from Blackwell'}],
+        steps:['Watch for product launches','Engage NVIDIA or OEM partner for early access','Plan capacity / power / cooling','Production deployment 2026-2027'],
+        goTo:[{ref:['01','DGX SuperPOD'],note:'VR200-based SuperPOD coming'}],
+        friction:['Not yet broadly available','Power and cooling requirements continue rising']
+      },
+      { name:'L40S / L40 / L4', type:'HARDWARE', sub:'Ada Lovelace inference GPUs', use:'Inference-optimized data center GPUs', url:'nvidia.com/en-us/data-center/l40s',
+        desc:'Ada Lovelace inference-optimized data center GPUs. L40S (48GB GDDR6, dual-use inference+training), L40 (48GB), L4 (24GB low-power). Distinct from H100/B200 (training-focused).',
+        who:'Inference / video AI / mid-range training teams',
+        arriveFrom:[{ext:'Inference cost optimization'},{ref:['01','Data Center GPUs'],detail:'Lower-tier alternative'}],
+        steps:['Procure via OEM or CSP (T4 successor)','Install in PCIe servers','Run inference workloads','L40S for higher-end, L4 for low-power edge inference'],
+        goTo:[{ref:['07','NIM'],note:'Common inference deploy target'},{ref:['09','Metropolis'],note:'Video AI workloads'}],
+        friction:['Less FP64 / training perf than H100','Memory bandwidth lower than HBM GPUs']
+      },
+      { name:'GB300 NVL72', type:'AI FACTORY', sub:'Rack-scale · 72 Blackwell Ultra + 36 Grace', use:'Test-time scaling for AI reasoning workloads', url:'nvidia.com/en-us/data-center/gb300-nvl72',
+        desc:'Rack-scale system with 72 Blackwell Ultra GPUs + 36 Grace CPUs, NVLink 5, liquid-cooled. Purpose-built for test-time scaling and reasoning inference.',
+        who:'Hyperscalers · frontier AI labs · reasoning inference at scale',
+        arriveFrom:[{ref:['01','Data Center GPUs'],detail:'Want frontier-scale'},{ref:['01','DGX SuperPOD'],detail:'Building block for SuperPOD'}],
+        steps:['Engage NVIDIA enterprise sales','Plan facility (power, liquid cooling, networking)','Procure GB300 NVL72 racks','Deploy Mission Control on top'],
+        goTo:[{ref:['01','DGX SuperPOD'],note:'Multi-rack scaling'},{ref:['02','Mission Control'],note:'Cluster SW'}],
+        friction:['Multi-million-dollar rack','Facility upgrades typically required']
+      },
+      { name:'HGX', type:'AI FACTORY', sub:'8-GPU baseboard · OEM building block', use:'Reference baseboard for OEM AI servers', url:'nvidia.com/en-us/data-center/hgx',
+        desc:'8-GPU baseboard, the building block OEMs use to build DGX-style servers. HGX B200 / B300 / Hopper variants. 14.4 TB/s GPU-to-GPU. Used by Supermicro, HPE, Dell, etc.',
+        who:'OEM partners · data center architects',
+        arriveFrom:[{ref:['01','MGX'],detail:'Modular sibling'},{ext:'OEM AI server design'}],
+        steps:['OEM builds HGX-based server','Customer buys validated HGX system','Deploy with NVIDIA software stack'],
+        goTo:[{ref:['01','DGX Systems'],note:'NVIDIA-branded sibling'},{ref:['01','MGX'],note:'Modular alternative'}],
+        friction:['Customer rarely sees HGX directly','OEM differentiation varies']
+      },
+      { name:'RTX PRO Blackwell', type:'HARDWARE', sub:'Workstation + Server · 96GB GDDR7', use:'Professional workstation + server GPUs (not GeForce)', url:'nvidia.com/en-us/data-center/rtx-pro-6000-blackwell-server-edition',
+        desc:'RTX PRO 6000 Blackwell — 96GB GDDR7. Workstation Edition for individual workstations; Server Edition for LLM inference / agentic AI / data analytics / simulation. Distinct from GeForce (consumer) and H100 (training).',
+        who:'Pro creators · ISVs · inference at the workstation tier',
+        arriveFrom:[{ext:'Pro workstation buying'},{ref:['01','GeForce RTX'],detail:'Need ECC / pro features'}],
+        steps:['Choose Workstation or Server edition','Procure via NVIDIA / OEM partner','Install in workstation or server','Run pro applications (Omniverse, NIM, etc.)'],
+        goTo:[{ref:['09','Omniverse'],note:'Common pro workload'},{ref:['07','NIM'],note:'Server inference'}],
+        friction:['~$8K-$12K class','Different OEM channel from GeForce']
+      },
+      { name:'ConnectX-7 / ConnectX-8 SuperNIC', type:'NETWORK', sub:'NICs · up to 800 Gb/s', use:'Endpoint NICs for AI cluster connectivity', url:'nvidia.com/en-us/networking/products/ethernet/supernic',
+        desc:'NICs at up to 800 Gb/s. Integrated with NVIDIA HGX B300 and GB300 NVL72 systems. Distinct from BlueField (NIC = data plane only; DPU = compute offload).',
+        who:'Data center architects · cluster builders',
+        arriveFrom:[{ref:['01','BlueField DPUs'],detail:'Sibling but different role'},{ref:['01','DGX SuperPOD'],detail:'Standard in SuperPOD'}],
+        steps:['Procure ConnectX-7 or -8 NICs','Install in servers','Configure RDMA via NCCL','Verify with ibstat / RDMA tools'],
+        goTo:[{ref:['04','NCCL'],note:'Software consumer'},{ref:['01','Quantum-X800 InfiniBand'],note:'Fabric option'}],
+        friction:['NIC vs DPU choice confuses non-experts','Generation matching matters for full speed']
+      },
+    ]
+  },
+
+  '10': {
+    name: 'Programs, Portals & Community',
+    desc: 'Entry surfaces that wrap the technical stack — developer portals, registries, licensing, programs, education, and community',
+    who: 'All developers · the entry surface',
+    boxes: [
+      { name:'developer.nvidia.com', type:'PORTAL', sub:'Main Developer Hub', use:'Find docs, SDKs, and drivers', url:'developer.nvidia.com',
+        desc:'The original developer hub — CUDA, SDK downloads, documentation index, Developer Program signup, blog. Predates the AI model era.',
+        who:'CUDA developers · SDK users · all registered devs',
+        arriveFrom:[{ext:'Google search "CUDA download"'},{ext:'NVIDIA blog posts'},{ref:['10','Developer Program'],detail:'Signup entry'}],
+        steps:['Land on developer.nvidia.com','Browse by category (Game, AI, HPC) or product','Register Developer Program (free) for early SDK access','Download SDKs / drivers','Get directed to docs.nvidia.com or build.nvidia.com'],
+        goTo:[{ref:['03','CUDA Toolkit'],note:'Most common download'},{ref:['08','build.nvidia.com'],note:'AI model APIs'},{ref:['10','docs.nvidia.com'],note:'Documentation'}],
+        friction:['Cross-links to build/docs/catalog.ngc/learn.nvidia.com cause context loss','Some pages haven\'t been updated in years']
+      },
+      { name:'docs.nvidia.com', type:'DOCS', sub:'Documentation Hub', use:'Read API and SDK reference', url:'docs.nvidia.com',
+        desc:'Central documentation for SDKs, frameworks, and platforms. Separate domain from developer.nvidia.com.',
+        who:'All developers',
+        arriveFrom:[{ref:['10','developer.nvidia.com'],detail:'Links from product pages'},{ext:'Google searches for API references'}],
+        steps:['Search for product (e.g., "CUDA Programming Guide")','Land on docs.nvidia.com/<product>','Note version selector — pick matching version','Navigate by sidebar TOC'],
+        goTo:[{ref:['03','CUDA Toolkit'],note:'Programming guide'},{ref:['04','TensorRT'],note:'Optimization docs'}],
+        friction:['Inconsistent — some products docs still on developer.nvidia.com','Cross-doc search is poor; Google site: query often better']
+      },
+      { name:'NGC', type:'REGISTRY', sub:'Container & Model Registry', use:'Pull containers and pre-trained models', url:'catalog.ngc.nvidia.com',
+        desc:'Registry for GPU-optimized containers, pre-trained models, Helm charts, SDKs. Public catalog (catalog.ngc.nvidia.com) and private org registry (ngc.nvidia.com).',
+        who:'MLOps · all developers pulling NVIDIA containers',
+        arriveFrom:[{ref:['07','NIM'],detail:'Pull NIM container'},{ref:['04','PyTorch + CUDA'],detail:'Pull official PyTorch container'},{ext:'Docker Hub redirects'}],
+        steps:['Browse catalog.ngc.nvidia.com (no signup for browsing)','Sign up to get API key for private containers','docker login nvcr.io','docker pull <container>','Some containers require AI Enterprise entitlement'],
+        goTo:[{ref:['07','NIM'],note:'NIM containers'},{ref:['08','build.nvidia.com'],note:'Browser-friendly subset'}],
+        friction:['Two surfaces — catalog.ngc vs ngc.nvidia.com — confusing','Some containers gate-checked silently; downloads fail at extraction']
+      },
+      { name:'AI Enterprise', type:'LICENSE', sub:'Production License · from ~$1,000/GPU/yr', use:'License to self-host NIMs in production', url:'nvidia.com/en-us/data-center/products/ai-enterprise',
+        desc:'Commercial license enabling self-hosted NIM deployment (LLM + speech NIMs), enterprise support, and gated container access. Current subscription pricing starts around $1,000/GPU/yr (per NVIDIA licensing docs).',
+        who:'Enterprise engineering teams',
+        arriveFrom:[{ref:['07','NIM'],detail:'Hit license check at runtime'},{ref:['06','Parakeet'],detail:'Speech NIM packaging requires NVAIE'},{ext:'NVIDIA sales / channel partner contact'}],
+        steps:['Contact NVIDIA sales or channel partner (Dell, Insight, etc.)','Negotiate per-GPU annual subscription (list ~$1K/GPU/yr; perpetual + support tiers exist)','Receive NGC org entitlement','Pull licensed NIM containers','Enterprise support engagement included'],
+        goTo:[{ref:['07','NIM'],note:'Unlocks production self-host'},{ref:['10','NGC'],note:'Licensed containers'},{ref:['08','DGX Cloud'],note:'Often bundled'}],
+        friction:['No self-service signup — must go through sales','Procurement cycle (legal, security review) can take months','Pricing variants (subscription vs perpetual + support) are not transparent on public pages']
+      },
+      { name:'Developer Program', type:'PROGRAM', sub:'Free · All layers', use:'Sign up for free SDK access', url:'developer.nvidia.com/developer-program',
+        desc:'Free registration giving access to early SDKs, beta programs, and technical resources. The front door for individual developers.',
+        who:'All individual developers',
+        arriveFrom:[{ref:['10','developer.nvidia.com'],detail:'Signup CTA'}],
+        steps:['Register at developer.nvidia.com/developer-program','Get NGC org auto-created','Access SDK downloads'],
+        goTo:[{ref:['10','developer.nvidia.com'],note:'Hub'},{ref:['10','NGC'],note:'Container access'}]
+      },
+      { name:'DLI · learn.nvidia.com', type:'EDUCATION', sub:'Courses · 12 certs', use:'Take CUDA / AI courses and certs', url:'learn.nvidia.com',
+        desc:'NVIDIA Deep Learning Institute. Free + paid courses, 12 professional certifications.',
+        who:'Self-paced learners',
+        arriveFrom:[{ref:['10','developer.nvidia.com'],detail:'Learning section'}],
+        steps:['Browse learn.nvidia.com catalog','Take free intro courses','Pay for paid certs'],
+        goTo:[{ref:['03','CUDA Toolkit'],note:'CUDA courses'}]
+      },
+      { name:'Inception', type:'PROGRAM', sub:'Startups · $150K + $100K credits', use:'Get $250K startup credits (no equity)', url:'nvidia.com/inception',
+        desc:'Free startup program. No equity. Credits from Nebius, AWS, Oracle, CoreWeave.',
+        who:'AI startup founders',
+        arriveFrom:[{ext:'YC / startup accelerators'},{ext:'GTC startup sessions'}],
+        steps:['Apply at nvidia.com/inception','Get approved (no equity)','Claim cloud credits','Get NVIDIA office hours'],
+        goTo:[{ref:['08','DGX Cloud'],note:'Bonus credits'},{ref:['10','GTC Conference'],note:'Priority access'}]
+      },
+      { name:'Developer Forums', type:'COMMUNITY', sub:'forums.developer.nvidia.com', use:'Ask for help with drivers / deployment', url:'forums.developer.nvidia.com',
+        desc:'Official forums. Better than GitHub issues for deployment/driver questions.',
+        who:'All developers',
+        arriveFrom:[{ext:'Google search "<problem> nvidia"'}],
+        steps:['Search existing thread','Post if not found','Tag with product category'],
+        goTo:[]
+      },
+      { name:'Discord', type:'COMMUNITY', sub:'~19K members', use:'Get real-time help from the community', url:'discord.gg/nvidia',
+        desc:'NVIDIA developer Discord. Real-time help by channel.',
+        who:'All developers',
+        arriveFrom:[{ext:'Twitter / Reddit links'}],
+        steps:['Join discord.gg/nvidia','Pick relevant channel','Ask question'],
+        goTo:[]
+      },
+      { name:'GitHub · NVIDIA', type:'COMMUNITY', sub:'200+ open-source repos', use:'Browse NVIDIA open-source repos', url:'github.com/NVIDIA',
+        desc:'NeMo, TensorRT-LLM, Triton, Megatron-LM, RAPIDS, and more.',
+        who:'OSS developers',
+        arriveFrom:[{ext:'Google / GitHub search'}],
+        steps:['Browse github.com/NVIDIA','Star/clone repos','File issues for bugs'],
+        goTo:[{ref:['05','NeMo Framework'],note:'NeMo'},{ref:['04','TensorRT-LLM'],note:'TRT-LLM'}]
+      },
+      { name:'HuggingFace', type:'COMMUNITY', sub:'Model Hub mirror', use:'Download Nemotron / Parakeet weights', url:'huggingface.co/nvidia',
+        desc:'NVIDIA\'s HF org hosts weights. Often the workaround for build.nvidia.com permission issues.',
+        who:'OSS ML developers',
+        arriveFrom:[{ext:'HuggingFace model search'},{ref:['06','Parakeet'],detail:'Workaround for permission bug'}],
+        steps:['Browse huggingface.co/nvidia','Download weights directly','Load with transformers / NeMo'],
+        goTo:[{ref:['05','NeMo Framework'],note:'Load NeMo models'}]
+      },
+      { name:'GTC Conference', type:'EVENT', sub:'Annual · free online', use:'Watch product announcements and sessions', url:'nvidia.com/gtc',
+        desc:'NVIDIA\'s developer conference. 1000+ technical sessions.',
+        who:'All developers',
+        arriveFrom:[{ext:'NVIDIA newsletters'}],
+        steps:['Register at nvidia.com/gtc (free online)','Browse session catalog','Attend live or watch recordings'],
+        goTo:[{ref:['10','developer.nvidia.com'],note:'Related resources'}]
+      },
+      { name:'NVIDIA Certification', type:'PROGRAM', sub:'NCA / NCP credentials · 7+ tracks', use:'Validate skills for AI infra / LLM / agentic AI roles', url:'nvidia.com/en-us/learn/certification',
+        desc:'NCA (Associate) and NCP (Professional) credentials: NCA-GENL, NCP-GENL, NCA-AIIO, NCP-AIO, NCP-AII, NCP-AIN, NCP-AAI (Agentic AI). New Physical AI cert at GTC 2026.',
+        who:'Developers needing credentials · employers screening',
+        arriveFrom:[{ref:['10','DLI · learn.nvidia.com'],detail:'Take courses then certify'},{ext:'Job market requirements'}],
+        steps:['Pick certification track','Optionally take DLI prep','Schedule exam (Pearson VUE)','Pass and get digital credential'],
+        goTo:[{ref:['10','DLI · learn.nvidia.com'],note:'Prep with courses'}],
+        friction:['Exam fees ($135-$400)','Many tracks — picking the right one is non-trivial']
+      },
+      { name:'NVIDIA LaunchPad', type:'PROGRAM', sub:'Free hands-on labs · real GPUs', use:'Try AI Enterprise stack on real hardware for free', url:'nvidia.com/en-us/launchpad',
+        desc:'Free browser-based hands-on labs with enterprise NVIDIA hardware + AI Enterprise stack. Up to $20K cloud-equivalent compute free.',
+        who:'Devs evaluating AI Enterprise · enterprise pre-sales',
+        arriveFrom:[{ext:'Evaluating AI Enterprise'},{ref:['10','AI Enterprise'],detail:'Try before buying'}],
+        steps:['Sign up at nvidia.com/launchpad','Pick a lab (Triton / NIM / TAO / NeMo)','Browser-based env with real GPUs','Complete walkthrough'],
+        goTo:[{ref:['07','NIM'],note:'Most popular lab'},{ref:['05','NeMo Framework'],note:'Training labs'}],
+        friction:['Time-limited sessions','Labs are pre-scripted, not full sandbox']
+      },
+      { name:'NVIDIA AI Workbench', type:'PORTAL', sub:'Local-to-cloud dev environment manager', use:'Reproducible GPU dev environments across machines', url:'nvidia.com/en-us/deep-learning-ai/solutions/data-science/workbench',
+        desc:'Free local-first dev environment manager. Packages projects across laptop / workstation / cloud GPUs. HuggingFace, GitHub, NGC integration.',
+        who:'AI developers · researchers moving between machines',
+        arriveFrom:[{ref:['10','NVIDIA Technical Blog'],detail:'Featured tutorials'},{ref:['01','GeForce RTX'],detail:'Local dev start'}],
+        steps:['Install AI Workbench locally','Create project (Python env + container)','Develop locally','Send same project to DGX Cloud or workstation','Reproducible across devices'],
+        goTo:[{ref:['08','DGX Cloud'],note:'Cloud GPU target'},{ref:['10','GitHub · NVIDIA'],note:'Example projects'}],
+        friction:['Smaller adoption than Docker / Conda','Best inside NVIDIA ecosystem']
+      },
+      { name:'NVIDIA Technical Blog', type:'COMMUNITY', sub:'developer.nvidia.com/blog', use:'Read tutorials, release notes, reference architectures', url:'developer.nvidia.com/blog',
+        desc:'Official engineering blog. CUDA tutorials, generative AI deep-dives, robotics walkthroughs, release notes by NVIDIA engineers.',
+        who:'All developers tracking NVIDIA tech',
+        arriveFrom:[{ext:'Google searches'},{ref:['10','developer.nvidia.com'],detail:'Linked from main hub'}],
+        steps:['Browse developer.nvidia.com/blog','Filter by category','Subscribe via RSS or newsletter'],
+        goTo:[{ref:['10','developer.nvidia.com'],note:'Main hub'},{ref:['10','NVIDIA On-Demand'],note:'Video deep-dives'}]
+      },
+      { name:'Nemotron Coalition', type:'PROGRAM', sub:'Open-frontier-model alliance · GTC 2026', use:'Track the alliance shaping open Nemotron 4', url:'nvidianews.nvidia.com/news/nvidia-launches-nemotron-coalition',
+        desc:'Open-frontier-model alliance launched at GTC 2026 with Black Forest Labs, Cursor, LangChain, Mistral AI, Perplexity, Reflection AI, Sarvam, Thinking Machines Lab. Output feeds Nemotron 4 family.',
+        who:'Developers tracking upstream open models',
+        arriveFrom:[{ext:'GTC 2026 announcement'},{ref:['06','Nemotron 3 Nano'],detail:'Following Nemotron evolution'}],
+        steps:['Follow announcements','Use Coalition-produced open models','Contribute via member orgs'],
+        goTo:[{ref:['06','Nemotron 3 Nano'],note:'Current Nemotron'},{ref:['10','HuggingFace'],note:'Where weights live'}]
+      },
+      { name:'NVIDIA On-Demand', type:'COMMUNITY', sub:'GTC video library', use:'Watch GTC sessions and technical deep-dives', url:'nvidia.com/en-us/on-demand',
+        desc:'Free video library of GTC keynotes, technical sessions, training, Connect-with-the-Experts recordings.',
+        who:'All developers',
+        arriveFrom:[{ref:['10','GTC Conference'],detail:'After GTC ends'},{ext:'Search for tech talks'}],
+        steps:['Visit nvidia.com/en-us/on-demand','Search by topic / speaker / year','Watch recorded sessions'],
+        goTo:[{ref:['10','GTC Conference'],note:'Live event'},{ref:['10','NVIDIA Technical Blog'],note:'Written follow-ups'}]
+      },
+      { name:'NVIDIA Research', type:'COMMUNITY', sub:'research.nvidia.com · 200+ researchers', use:'See pre-release techniques and reference impls', url:'research.nvidia.com',
+        desc:'NVIDIA Research org. Papers, open-source repos (Sionna, Kaolin, Imaginaire), AI Playground demos. Birthplace of Nemotron-H, Cosmos, GR00T.',
+        who:'ML researchers · advanced practitioners',
+        arriveFrom:[{ext:'Research paper citations'},{ext:'arXiv / NeurIPS / ICML'}],
+        steps:['Browse research.nvidia.com','Explore by area (LLM, robotics, graphics)','Pull reference implementations from GitHub'],
+        goTo:[{ref:['10','GitHub · NVIDIA'],note:'Repo home'},{ref:['10','HuggingFace'],note:'Model releases'}]
+      },
+    ]
+  }
+};
+
+// ═══════════════════════════════════════════════════════════════
+// POPULARITY ORDER — most-used / most-relevant first per layer
+// Names listed here are ranked; unlisted boxes fall to the end.
+// ═══════════════════════════════════════════════════════════════
+const BOX_ORDER = {
+  '10': ['developer.nvidia.com','GitHub · NVIDIA','HuggingFace','docs.nvidia.com','NGC','NVIDIA AI Workbench','Developer Program','NVIDIA Certification','NVIDIA LaunchPad','NVIDIA Technical Blog','NVIDIA On-Demand','Developer Forums','Discord','DLI · learn.nvidia.com','GTC Conference','NVIDIA Research','Nemotron Coalition','AI Enterprise','Inception'],
+  '09': ['Omniverse','Isaac','NemoClaw','AI Blueprints','Riva','NVIDIA ACE','AI for Media','Metropolis','Holoscan','IGX','Newton','NVIDIA Studio','Clara','Earth-2','Omniverse DSX Blueprint','NVIDIA Aerial','DRIVE','Morpheus'],
+  '08': ['build.nvidia.com','AWS Bedrock','OpenRouter','Together AI','Fireworks AI','DeepInfra','DGX Cloud Lepton','HF Inference Endpoints','Cloudflare Workers AI','Oracle OCI Gen AI','Baseten','Lambda Inference','Friendli AI','Crusoe Managed Inference','NVIDIA Brev','RunPod Serverless','Hyperbolic','Nebius Token Factory','Azure AI Foundry','GCP Vertex AI','DGX Cloud'],
+  '07': ['NIM','vLLM','Dynamo','Triton','SGLang','Ollama','NIM Operator','Run:ai','llama.cpp','KServe','Ray Serve','NeMo Microservices','TensorRT-LLM Serve'],
+  '06': ['Nemotron 3 Nano','Llama 3.x (NV-hosted)','Nemotron 3 Super','NV-Embed v2','Parakeet','Nemotron Nano 2 VL','Llama-Nemotron','Audio2Face-3D','Mistral / Mixtral','Canary','Nemotron-H','Nemotron 3 Ultra','Isaac GR00T N1','GR00T-Dreams','Cosmos'],
+  '05': ['NeMo Framework','NeMo Curator','Megatron-LM','Megatron-Core','NeMo Run','NeMo RL','TAO Toolkit','Isaac Lab','BioNeMo','Modulus'],
+  '04': ['PyTorch + CUDA','TensorRT','TensorRT-LLM','RAPIDS','DALI','NVIDIA Model Optimizer','OpenAI Triton (kernel lang)','NVIDIA Warp','CuPy','cuDNN','NCCL','JAX + CUDA'],
+  '03': ['CUDA Toolkit','Nsight Systems / Compute','cuBLAS / cuFFT / cuSPARSE','NVIDIA HPC SDK','CUTLASS','NVCC / PTX','Thrust / CCCL','CUDA-Q'],
+  '02': ['GPU Driver','Container Toolkit','NVIDIA GPU Operator','GPU Sharing (MIG / MPS / Time-Slicing)','Open GPU Kernel Modules','DGX OS / Base OS','Mission Control','DCGM / Fabric Mgr','CUDA Driver API','DOCA'],
+  '01': ['Data Center GPUs','L40S / L40 / L4','DGX SuperPOD','GB300 NVL72','HGX','DGX Systems','GeForce RTX','RTX PRO Blackwell','DGX Spark','DGX Station','Jetson','Grace CPU + Superchips','MGX','Quantum-X800 InfiniBand','Spectrum-X Ethernet','ConnectX-7 / ConnectX-8 SuperNIC','BlueField DPUs','NVLink / NVSwitch','Vera Rubin VR200','DRIVE Orin / Thor'],
+};
+
+Object.keys(BOX_ORDER).forEach(layerId => {
+  if (!LAYERS[layerId]) return;
+  const order = BOX_ORDER[layerId];
+  LAYERS[layerId].boxes.sort((a, b) => {
+    const ai = order.indexOf(a.name); const bi = order.indexOf(b.name);
+    if (ai === -1 && bi === -1) return 0;
+    if (ai === -1) return 1;
+    if (bi === -1) return -1;
+    return ai - bi;
+  });
+});
+
+// ═══════════════════════════════════════════════════════════════
+// RENDER
+// ═══════════════════════════════════════════════════════════════
+const stack = document.getElementById('stack');
+const stackWrap = document.getElementById('stackWrap');
+const rail = document.getElementById('rail');
+const modalBackdrop = document.getElementById('modalBackdrop');
+const modalBody = document.getElementById('modalBody');
+const modalClose = document.getElementById('modalClose');
+
+function render() {
+  stack.innerHTML = '';
+  LAYER_ORDER.forEach(layerId => {
+    const layer = LAYERS[layerId];
+    const sec = document.createElement('section');
+    sec.className = 'layer';
+    sec.dataset.id = layerId;
+    sec.id = 'l' + layerId;
+
+    const count = layer.boxes.length;
+    sec.innerHTML = `
+      <div class="layer-head">
+        <div class="layer-num"><span class="layer-num-label">LAYER</span><span class="layer-num-value">${layerId}</span></div>
+        <div class="layer-meta">
+          <div class="layer-name">${layer.name}</div>
+          <div class="layer-desc">${layer.desc}</div>
+          <div class="layer-who">For: ${layer.who}</div>
+        </div>
+        <div class="layer-count"><strong>${count}</strong>components</div>
+      </div>
+      <div class="layer-body" id="body-${layerId}"></div>
+    `;
+    stack.appendChild(sec);
+
+    const body = sec.querySelector('.layer-body');
+    layer.boxes.forEach((b, idx) => {
+      const el = document.createElement('button');
+      el.className = 'box' + (b.soon ? ' soon' : '');
+      el.dataset.layer = layerId;
+      el.dataset.idx = idx;
+      el.dataset.name = b.name;
+      el.type = 'button';
+      el.innerHTML = `
+        <div class="box-top">
+          <span class="box-tag">${b.type || ''}</span>
+          <span class="box-status"></span>
+        </div>
+        <div class="box-name">${b.name}</div>
+        <div class="box-sub">${b.sub}</div>
+        ${b.use ? `<div class="box-use">${b.use}</div>` : ''}
+        <div class="box-url">${b.url.replace(/^https?:\/\//,'')}</div>
+      `;
+      el.addEventListener('click', () => openModal(layerId, idx));
+      body.appendChild(el);
+    });
+  });
+}
+
+function navigateToBox(layerId, name) {
+  const layer = LAYERS[layerId];
+  if (!layer) return;
+  const idx = layer.boxes.findIndex(b => b.name === name);
+  if (idx < 0) return;
+  const sec = document.getElementById('l' + layerId);
+  if (sec) sec.scrollIntoView({behavior:'smooth', block:'start'});
+  setTimeout(() => openModal(layerId, idx), 200);
+}
+
+function renderCardArrive(item) {
+  if (item.ext) {
+    return `<div class="m-card ext">
+      <div class="m-card-name">
+        <span class="path-layer-tag ext-tag">EXT</span>
+        <span>${item.ext}</span>
+      </div>
+    </div>`;
+  }
+  const [layer, name] = item.ref;
+  return `<div class="m-card" data-nav-layer="${layer}" data-nav-name="${name}">
+    <div class="m-card-name">
+      <span class="path-layer-tag">L${layer}</span>
+      <span>${name}</span>
+    </div>
+    ${item.detail ? `<div class="m-card-detail">${item.detail}</div>` : ''}
+  </div>`;
+}
+
+function renderCardGo(item) {
+  if (item.ext) {
+    return `<div class="m-card ext">
+      <div class="m-card-name">
+        <span class="path-layer-tag ext-tag">EXT</span>
+        <span>${item.ext}</span>
+      </div>
+    </div>`;
+  }
+  const [layer, name] = item.ref;
+  return `<div class="m-card" data-nav-layer="${layer}" data-nav-name="${name}">
+    <div class="m-card-name">
+      <span class="path-layer-tag">L${layer}</span>
+      <span>${name}</span>
+    </div>
+    ${item.note ? `<div class="m-card-detail">${item.note}</div>` : ''}
+  </div>`;
+}
+
+function openModal(layerId, idx) {
+  const layer = LAYERS[layerId];
+  const box = layer.boxes[idx];
+  const cleanUrl = box.url.replace(/^https?:\/\//,'');
+
+  let html = `
+    <div class="m-eyebrow">Layer ${layerId} · ${layer.name}${box.soon ? ' · COMING SOON' : ''}</div>
+    <div class="m-name">${box.name}</div>
+    <div class="m-sub">${box.sub}</div>
+    ${box.use ? `<div class="m-use">${box.use}</div>` : ''}
+    <div class="m-tag-row">
+      ${box.type ? `<span class="m-tag">${box.type}</span>` : ''}
+      <span class="m-tag alt">${box.soon ? '○ Coming Soon' : '● GA'}</span>
+    </div>
+    <a class="m-url" href="https://${cleanUrl}" target="_blank" rel="noopener">${cleanUrl}</a>
+  `;
+
+  // STAGE: What it is
+  if (box.desc) {
+    html += `
+      <div class="m-stage">
+        <div class="m-stage-header">
+          <div class="m-stage-num info">i</div>
+          <div class="m-stage-label">What it is</div>
+        </div>
+        <div class="m-desc">${box.desc}</div>
+        ${box.who ? `<div class="m-who">For: ${box.who}</div>` : ''}
+      </div>
+    `;
+  }
+
+  const hasArrive = box.arriveFrom && box.arriveFrom.length;
+  const hasSteps = box.steps && box.steps.length;
+  const hasGo = box.goTo && box.goTo.length;
+  const hasFlow = hasArrive || hasSteps || hasGo;
+
+  if (hasFlow) {
+    html += `<div class="m-workflow-banner">The Journey</div>`;
+  }
+
+  if (hasArrive) {
+    html += `
+      <div class="m-stage">
+        <div class="m-stage-header">
+          <div class="m-stage-num">1</div>
+          <div class="m-stage-label">How you get here</div>
+          <div class="m-stage-tag">${box.arriveFrom.length} entry ${box.arriveFrom.length === 1 ? 'point' : 'points'}</div>
+        </div>
+        <div class="m-cards">${box.arriveFrom.map(renderCardArrive).join('')}</div>
+      </div>
+    `;
+    if (hasSteps || hasGo) html += `<div class="m-flow-arrow">▼</div>`;
+  }
+
+  if (hasSteps) {
+    html += `
+      <div class="m-stage">
+        <div class="m-stage-header">
+          <div class="m-stage-num">2</div>
+          <div class="m-stage-label">What you actually do</div>
+          <div class="m-stage-tag">${box.steps.length} steps</div>
+        </div>
+        <div class="m-steps-list">
+          ${box.steps.map((s, i) => {
+            const isWarn = /⚠|fail|error|wait|miss|stuck|block|401|permission/i.test(s);
+            return `<div class="m-step${isWarn ? ' warn' : ''}">
+              <div class="m-step-num">${i+1}</div>
+              <div class="m-step-text">${s}</div>
+            </div>`;
+          }).join('')}
+        </div>
+      </div>
+    `;
+    if (hasGo) html += `<div class="m-flow-arrow">▼</div>`;
+  }
+
+  if (hasGo) {
+    html += `
+      <div class="m-stage">
+        <div class="m-stage-header">
+          <div class="m-stage-num">3</div>
+          <div class="m-stage-label">Where you go next</div>
+          <div class="m-stage-tag">${box.goTo.length} ${box.goTo.length === 1 ? 'destination' : 'destinations'}</div>
+        </div>
+        <div class="m-cards">${box.goTo.map(renderCardGo).join('')}</div>
+      </div>
+    `;
+  }
+
+  if (box.friction && box.friction.length) {
+    html += `
+      <div class="m-stage">
+        <div class="m-stage-header">
+          <div class="m-stage-num warn">!</div>
+          <div class="m-stage-label">Gotchas</div>
+        </div>
+        <div class="friction">${box.friction.map(f => `<div class="friction-item">${f}</div>`).join('')}</div>
+      </div>
+    `;
+  }
+
+  modalBody.innerHTML = html;
+  modalBackdrop.classList.add('open');
+  modalBody.scrollTop = 0;
+
+  modalBody.querySelectorAll('[data-nav-layer]').forEach(item => {
+    item.addEventListener('click', () => {
+      const navLayer = item.dataset.navLayer;
+      const navName = item.dataset.navName;
+      closeModal();
+      setTimeout(() => navigateToBox(navLayer, navName), 80);
+    });
+  });
+}
+
+function closeModal() {
+  modalBackdrop.classList.remove('open');
+}
+
+modalClose.addEventListener('click', closeModal);
+modalBackdrop.addEventListener('click', (e) => {
+  if (e.target === modalBackdrop) closeModal();
+});
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape' && modalBackdrop.classList.contains('open')) closeModal();
+});
+
+// Rail navigation
+rail.addEventListener('click', (e) => {
+  const item = e.target.closest('[data-jump]');
+  if (!item) return;
+  const layerId = item.dataset.jump;
+  const sec = document.getElementById('l' + layerId);
+  if (sec) sec.scrollIntoView({behavior:'smooth', block:'start'});
+});
+
+// Highlight active layer in rail as user scrolls
+const railItems = Array.from(rail.querySelectorAll('[data-jump]'));
+function updateActiveRail() {
+  const wrapTop = stackWrap.getBoundingClientRect().top;
+  let active = railItems[0];
+  for (const item of railItems) {
+    const sec = document.getElementById('l' + item.dataset.jump);
+    if (!sec) continue;
+    const r = sec.getBoundingClientRect();
+    if (r.top - wrapTop <= 80) active = item;
+  }
+  railItems.forEach(i => i.classList.toggle('active', i === active));
+}
+stackWrap.addEventListener('scroll', updateActiveRail);
+
+render();
+updateActiveRail();
+</script>
+</body>
+</html>
