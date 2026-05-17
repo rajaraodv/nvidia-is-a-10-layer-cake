@@ -17,7 +17,7 @@ Click any component to see its developer journey: how developers arrive, the ste
 | 04 | ML Frameworks & Runtime | PyTorch+CUDA, TensorRT, RAPIDS, DALI, Warp, … |
 | 03 | Compute Platform (CUDA) | CUDA Toolkit, cuBLAS, Nsight, CUTLASS, HPC SDK, … |
 | 02 | System Software | Drivers, Container Toolkit, GPU Operator, MIG/MPS, DOCA, … |
-| 01 | Hardware / Silicon | H100/H200/B200, Grace, DGX SuperPOD, MGX, Quantum-X800, … |
+| 01 | GPUs / Silicon | H100/H200/B200, Grace, DGX SuperPOD, MGX, Quantum-X800, … |
 
 ## Local preview
 
