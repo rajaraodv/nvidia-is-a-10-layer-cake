@@ -18,6 +18,9 @@
   --bg: #ffffff;
   --green: #76b900;
   --green-dim: #5a8e00;
+  --red: #c83232;
+  --gold: #c8a04a;
+  --gold-bg: #fbf6ea;
   --sans: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', 'Inter', Arial, sans-serif;
   --mono: 'SF Mono', 'JetBrains Mono', 'Fira Code', Menlo, monospace;
 }
@@ -38,7 +41,7 @@ body {
   padding: 56px 32px 80px;
 }
 
-/* ───────────── HEADER ───────────── */
+/* HEADER */
 .posting-meta {
   font-family: var(--mono);
   font-size: 10.5px;
@@ -62,7 +65,6 @@ h1.role-title {
   line-height: 1.1;
   letter-spacing: -0.02em;
   margin-bottom: 14px;
-  color: var(--ink);
 }
 
 .posting-info {
@@ -74,10 +76,7 @@ h1.role-title {
   background: #fafafa;
   margin-bottom: 36px;
 }
-.posting-info-cell {
-  font-size: 13.5px;
-  line-height: 1.5;
-}
+.posting-info-cell { font-size: 13.5px; line-height: 1.5; }
 .posting-info-cell b {
   display: block;
   font-size: 10.5px;
@@ -88,117 +87,148 @@ h1.role-title {
   margin-bottom: 4px;
 }
 
-/* ───────────── SECTIONS ───────────── */
-section {
-  margin-bottom: 36px;
-}
+/* SECTIONS */
+section { margin-bottom: 34px; }
 section h2 {
   font-size: 19px;
   font-weight: 800;
   letter-spacing: -0.01em;
-  margin-bottom: 12px;
-  color: var(--ink);
+  margin-bottom: 14px;
   padding-bottom: 8px;
   border-bottom: 2px solid var(--ink);
-}
-section h3 {
-  font-size: 14.5px;
-  font-weight: 800;
-  letter-spacing: -0.005em;
-  margin-top: 18px;
-  margin-bottom: 8px;
-  color: var(--ink);
 }
 section p {
   font-size: 15.5px;
   line-height: 1.65;
-  color: var(--ink);
   margin-bottom: 12px;
 }
 section p:last-child { margin-bottom: 0; }
 
-ul, ol {
-  padding-left: 0;
-  list-style: none;
-  margin-bottom: 12px;
+/* MISSION CALLOUT */
+.mission {
+  background: linear-gradient(180deg, #f3f9e6 0%, #fff 100%);
+  border-left: 4px solid var(--green);
+  padding: 18px 22px;
+  font-size: 17px;
+  line-height: 1.5;
+  font-weight: 500;
 }
-ul li, ol li {
-  font-size: 15px;
-  line-height: 1.6;
-  color: var(--ink);
-  padding: 4px 0 4px 22px;
-  position: relative;
+.mission b { font-weight: 800; }
+
+/* STAT GRID */
+.stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
 }
-ul li::before {
-  content: '•';
-  position: absolute;
-  left: 6px;
-  top: 4px;
-  color: var(--green-dim);
-  font-weight: 800;
-  font-size: 16px;
+.stat {
+  border: 1px solid var(--rule);
+  padding: 14px 16px;
+  background: #fff;
 }
-ol { counter-reset: olc; }
-ol li::before {
-  counter-increment: olc;
-  content: counter(olc) ".";
-  position: absolute;
-  left: 0;
-  top: 4px;
+.stat-num {
   font-family: var(--mono);
-  font-weight: 800;
-  color: var(--green-dim);
-  font-size: 13px;
+  font-size: 22px;
+  font-weight: 900;
   letter-spacing: -0.02em;
+  color: var(--ink);
+  margin-bottom: 2px;
 }
-li b { font-weight: 800; }
-li em { font-style: italic; color: var(--ink2); }
-
-.section-lede {
-  font-size: 15.5px;
+.stat-num.bad { color: var(--red); }
+.stat-num.good { color: var(--green-dim); }
+.stat-text {
+  font-size: 13px;
   color: var(--ink2);
-  margin-bottom: 14px;
-  font-style: italic;
+  line-height: 1.45;
 }
+.stat-text b { font-weight: 800; }
 
-/* ───────────── KPI TABLE ───────────── */
-.kpi-table {
-  width: 100%;
-  border-collapse: collapse;
+/* COMPARISON ROW */
+.compare {
   border: 1px solid var(--rule);
   background: #fff;
-  margin-top: 10px;
 }
-.kpi-table th {
-  text-align: left;
-  padding: 9px 14px;
-  background: var(--ink);
+.compare-row {
+  display: grid;
+  grid-template-columns: 160px 1fr 1fr;
+  align-items: center;
+  padding: 11px 14px;
+  border-bottom: 1px solid var(--rule);
+  font-size: 13.5px;
+  gap: 14px;
+  line-height: 1.4;
+}
+.compare-row:last-child { border-bottom: none; }
+.compare-row:nth-child(odd) { background: #fafafa; }
+.compare-row.head {
+  background: var(--ink) !important;
   color: #fff;
   font-family: var(--mono);
   font-size: 10.5px;
   font-weight: 800;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
 }
-.kpi-table td {
-  padding: 11px 14px;
-  border-top: 1px solid var(--rule);
-  vertical-align: top;
-  line-height: 1.5;
-  font-size: 14px;
-}
-.kpi-table tr:nth-child(even) td { background: #fafafa; }
-.kpi-table .area {
-  font-weight: 800;
-  width: 130px;
-  color: var(--green-dim);
-  font-family: var(--mono);
-  font-size: 11px;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-}
+.compare-row .label { font-weight: 700; font-size: 13px; }
+.compare-row .them { color: var(--green-dim); font-weight: 600; }
+.compare-row .we { color: var(--red); font-weight: 600; }
 
-/* ───────────── FOOTER ───────────── */
+/* QUESTIONS */
+.questions {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+}
+.q {
+  border-left: 3px solid var(--ink);
+  background: #fafafa;
+  padding: 14px 18px;
+}
+.q-num {
+  font-family: var(--mono);
+  font-size: 10.5px;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  color: var(--ink3);
+  margin-bottom: 4px;
+}
+.q-title {
+  font-size: 16px;
+  font-weight: 800;
+  letter-spacing: -0.005em;
+  margin-bottom: 4px;
+}
+.q-detail {
+  font-size: 13.5px;
+  color: var(--ink2);
+  line-height: 1.5;
+}
+.q-detail em { font-style: italic; color: var(--ink3); }
+
+/* SUCCESS BOX */
+.success {
+  border: 2px dashed var(--ink);
+  padding: 18px 22px;
+  background: #fff;
+}
+.success-head {
+  font-family: var(--mono);
+  font-size: 10.5px;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--green-dim);
+  margin-bottom: 8px;
+}
+.success p {
+  font-size: 15px;
+  line-height: 1.6;
+  margin-bottom: 8px;
+}
+.success p:last-child { margin-bottom: 0; }
+.success b { font-weight: 800; }
+
+/* FOOTER */
 footer {
   margin-top: 48px;
   padding-top: 22px;
@@ -217,8 +247,9 @@ footer a { color: var(--ink2); text-decoration: none; border-bottom: 1px solid v
 @media (max-width: 600px) {
   .wrap { padding: 36px 18px 50px; }
   h1.role-title { font-size: 24px; }
-  .kpi-table { font-size: 12.5px; }
-  .kpi-table .area { width: auto; }
+  .stats { grid-template-columns: 1fr; }
+  .compare-row { grid-template-columns: 1fr; gap: 4px; }
+  .compare-row.head { display: none; }
 }
 </style>
 </head>
@@ -240,92 +271,173 @@ footer a { color: var(--ink2); text-decoration: none; border-bottom: 1px solid v
   <div class="posting-info">
     <div class="posting-info-cell"><b>Reports to</b>SVP / CMO, Enterprise Marketing</div>
     <div class="posting-info-cell"><b>Function</b>Marketing</div>
-    <div class="posting-info-cell"><b>Scope</b>Nemotron · NIM · Generative AI developer platform</div>
+    <div class="posting-info-cell"><b>Scope</b>Nemotron · NIM · Gen-AI dev platform</div>
     <div class="posting-info-cell"><b>Level</b>Vice President</div>
   </div>
 
-  <!-- ───────────── ABOUT ───────────── -->
+  <!-- MISSION -->
   <section>
-    <h2>About the role</h2>
-    <p>NVIDIA is the world's leading AI infrastructure company, and Nemotron is our open-frontier model family — the wedge that drives developer adoption of the broader NVIDIA stack. We are hiring a Vice President of Developer Marketing to own the end-to-end developer marketing strategy for Nemotron and our generative AI platform, from awareness through adoption.</p>
-    <p>This is a strategic role with hands-on execution. You will design the winning developer marketing system, orchestrate it across Product, Research, DevRel, Partners, and Sales, and ship it personally where speed matters. Success is measured in developer mindshare moved — leaderboard position, real adoption, and the chip demand that follows.</p>
+    <h2>The outcome we want</h2>
+    <div class="mission">
+      Make <b>Nemotron the #1 open-source model developers reach for.</b> Drive the developer adoption that pulls NVIDIA's broader stack — compute, networking, NIM, NVAIE — into every AI build.
+    </div>
   </section>
 
-  <!-- ───────────── CHALLENGE ───────────── -->
+  <!-- WHERE WE ARE -->
   <section>
-    <h2>The challenge</h2>
-    <p class="section-lede">What this role exists to solve.</p>
-    <ul>
-      <li><b>Nemotron is technically top-tier but commercially invisible.</b> Top of Artificial Analysis's efficiency-adjusted intelligence index, yet outside the top 20 on OpenRouter by developer-billed token volume.</li>
-      <li><b>Developer mindshare is owned by competitors.</b> Anthropic owns the agent protocol stack and IDE defaults. Qwen owns Hugging Face. DeepSeek owns reasoning-at-low-cost. We don't own a category.</li>
-      <li><b>Activation is broken.</b> 19+ developer-facing portals, multiple logins, fragmented onboarding. The first-impression developer leaves before getting to a working API call.</li>
-      <li><b>Launches under-deliver.</b> Spec-sheet rollouts where a category-defining moment is required. Same-day partners are mid-market dev tools where competitors get Notion / Stripe / Adobe.</li>
-      <li><b>NVIDIA's chip business depends on this.</b> Every Nemotron adoption is a leading indicator of GPU demand. Losing the open-model layer means losing the wedge.</li>
-    </ul>
+    <h2>Where we are today</h2>
+    <p>Nemotron is technically excellent. Commercially, it's invisible.</p>
+
+    <div class="stats">
+      <div class="stat">
+        <div class="stat-num good">#1</div>
+        <div class="stat-text">Nemotron 3 Super on the <b>Artificial Analysis efficiency-adjusted intelligence index</b>. The model is real.</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num bad">Not top 20</div>
+        <div class="stat-text">on <b>OpenRouter token volume</b> — the most honest developer-billed usage signal. Chinese-origin models are 51% of OpenRouter traffic. Anthropic 15%. Nemotron rounds to zero.</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num bad">~1B vs ~?M</div>
+        <div class="stat-text"><b>Qwen has crossed 1 billion HuggingFace downloads.</b> NVIDIA is in the trailing pack of model families whose combined monthly downloads are less than Qwen's alone.</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num bad">CodeRabbit, Factory, Greptile</div>
+        <div class="stat-text">were the Nemotron 3 Super launch partners. <b>Mid-market dev tools.</b> OpenAI launches with Notion, Stripe, Adobe, JetBrains, Shopify.</div>
+      </div>
+    </div>
   </section>
 
-  <!-- ───────────── STRATEGIES ───────────── -->
+  <!-- WHAT WE'RE MISSING -->
   <section>
-    <h2>Strategies you'll own</h2>
-    <p class="section-lede">The plays this role designs and drives.</p>
-    <ol>
-      <li><b>Positioning &amp; counter-positioning.</b> Land the one-line answer to "why Nemotron, not Claude / Qwen / DeepSeek?" — anchored in outcomes developers care about, not architecture.</li>
-      <li><b>Awareness engine.</b> Production-quality launches, creator and influencer reach, AI-engine share-of-voice, tier-1 press relationships.</li>
-      <li><b>Activation system.</b> Consolidate the entry surface. One developer console, one onboarding, time-to-first-call under five minutes.</li>
-      <li><b>Adoption flywheel.</b> Self-serve → individual paid → team → NVAIE enterprise. PLG-to-enterprise motion that turns dev adoption into qualified pipeline.</li>
-      <li><b>Distribution moats.</b> Default model in IDE / agent tools (Cursor, Windsurf, Zed). MCP-native posture. Coalition partner co-marketing.</li>
-      <li><b>Community &amp; ecosystem.</b> Indie builder grants, hackathons, conference presence beyond GTC, an open contributor program.</li>
-    </ol>
+    <h2>What's missing today</h2>
+    <p>What competitors do at launch and ongoing that we don't:</p>
+    <div class="compare">
+      <div class="compare-row head">
+        <div>Launch surface</div>
+        <div>OpenAI / Anthropic</div>
+        <div>Nemotron today</div>
+      </div>
+      <div class="compare-row">
+        <div class="label">Production quality</div>
+        <div class="them">Apple-keynote-grade launch film</div>
+        <div class="we">Blog post + benchmark slides</div>
+      </div>
+      <div class="compare-row">
+        <div class="label">Hero "wow" demo</div>
+        <div class="them">3 narrative demos that define the story</div>
+        <div class="we">Architecture explanation</div>
+      </div>
+      <div class="compare-row">
+        <div class="label">Same-day partners</div>
+        <div class="them">Notion · Stripe · Adobe · Shopify · JetBrains</div>
+        <div class="we">CodeRabbit · Factory · Greptile</div>
+      </div>
+      <div class="compare-row">
+        <div class="label">Creator network</div>
+        <div class="them">Pre-briefed reactions at hour zero</div>
+        <div class="we">Silence from Berman / AI Explained / Latent Space</div>
+      </div>
+      <div class="compare-row">
+        <div class="label">Tier-1 press</div>
+        <div class="them">Bloomberg · NYT · TechCrunch · CNBC</div>
+        <div class="we">Wired · SiliconANGLE · The New Stack</div>
+      </div>
+      <div class="compare-row">
+        <div class="label">Audience reach</div>
+        <div class="them">B2B (enterprise) + B2D (individual devs)</div>
+        <div class="we">Enterprise-leaning. Individual developer surface underweighted.</div>
+      </div>
+      <div class="compare-row">
+        <div class="label">Use-case identity</div>
+        <div class="them">"Best at reasoning" · "Best at coding" · "Best at agents"</div>
+        <div class="we">No equivalent one-line claim. Me-too.</div>
+      </div>
+    </div>
   </section>
 
-  <!-- ───────────── TACTICS ───────────── -->
+  <!-- STRATEGIC QUESTIONS -->
   <section>
-    <h2>Tactics you'll execute</h2>
-    <p class="section-lede">The concrete output of the role — quarter to quarter.</p>
-    <ul>
-      <li><b>Apple-keynote-grade launch videos</b> for every Nemotron release. Hero demos that define the narrative, not benchmark slides.</li>
-      <li><b>Pre-briefed creator and influencer network.</b> Embargoed access for Latent Space, AI Explained, Berman, Two Minute Papers, AssemblyAI. Tier-1 press pre-briefs (Bloomberg, NYT, TechCrunch, Forbes).</li>
-      <li><b>Named partner pre-builds shipped same-day</b> as every flagship launch — through the Nemotron Coalition (Cursor, LangChain, Mistral, Perplexity, etc.).</li>
-      <li><b>Founder / researcher voice on X.</b> Five-to-eight named NVIDIA AI leads with active developer-Twitter presence, posting benchmark drops, training tricks, "weights live" threads.</li>
-      <li><b>Standalone framework-agnostic Nemotron Cookbook</b> — runnable Jupyter notebooks, no NVIDIA-stack assumption, equivalent to Anthropic and OpenAI's cookbooks.</li>
-      <li><b>Default-routing deals</b> with Cursor, Windsurf, Zed, and Claude Code for Nemotron as the default open model.</li>
-      <li><b>20+ first-party MCP servers</b> across the Nemotron / NIM / Triton / Run:ai / AI Workbench / Brev stack.</li>
-      <li><b>"Built with Nemotron" grant and bounty program</b> — indie dev grants, OSS maintainer bounties, conference and creator sponsorships.</li>
-      <li><b>Quarterly hackathons + non-NVIDIA conference presence</b> at AI Engineer Summit, KubeCon, PyData, Latent Space, ICLR.</li>
-      <li><b>Programmatic SEO + Answer Engine Optimization</b> at scale across high-intent developer queries.</li>
-      <li><b>Developer pricing tiers</b> — partner with Product / Pricing to introduce Individual and Team plans between free and NVAIE.</li>
-      <li><b>Always-on growth experiments</b> across the funnel — onboarding, pricing, conversion, retention.</li>
-    </ul>
+    <h2>What this role exists to figure out</h2>
+    <p>Strategic questions the VP works through with Product, Research, DevRel, Sales, and Coalition partners. Tactics and KPIs follow from the answers.</p>
+
+    <div class="questions">
+
+      <div class="q">
+        <div class="q-num">Q · 01</div>
+        <div class="q-title">What's our positioning?</div>
+        <div class="q-detail">
+          What's the one-line answer to "why Nemotron, not Claude / Qwen / DeepSeek?"
+          <em>Candidate angles to test: "the leading US-based open-source model" · "the best open model for agentic reasoning at frontier throughput" · "the open model that runs everywhere NVIDIA hardware does" · "the multimodal open default." Which one wins?</em>
+        </div>
+      </div>
+
+      <div class="q">
+        <div class="q-num">Q · 02</div>
+        <div class="q-title">Who is the ICP — B2B, B2D, or both?</div>
+        <div class="q-detail">
+          B2B enterprise (Fortune 500 building internal agents), B2B mid-market (Series A–C SaaS companies), or B2D (individual developers, indie builders, OSS maintainers)? Different audiences require different channels, content, pricing, and metrics.
+          <em>Hypothesis: both — but B2D first builds the gravity B2B then converts.</em>
+        </div>
+      </div>
+
+      <div class="q">
+        <div class="q-num">Q · 03</div>
+        <div class="q-title">What's the use-case we win?</div>
+        <div class="q-detail">
+          DeepSeek owns reasoning-at-low-cost. Anthropic owns coding-agents. Qwen owns multilingual. Where can Nemotron be undeniably best?
+          <em>Candidates: agentic reasoning at frontier throughput · multimodal (Nemotron Nano 2 VL) · sovereign / on-prem deployment · coding agents with the Cursor partnership · long-context (1M+ tokens). We pick one to dominate, then expand.</em>
+        </div>
+      </div>
+
+      <div class="q">
+        <div class="q-num">Q · 04</div>
+        <div class="q-title">How do we fix launches?</div>
+        <div class="q-detail">
+          Every Nemotron release should be a category-defining moment. What does the production-quality launch playbook look like — hero video, partner pre-builds, embargoed creator access, tier-1 press, founder/researcher voice on X? Who owns each piece?
+        </div>
+      </div>
+
+      <div class="q">
+        <div class="q-num">Q · 05</div>
+        <div class="q-title">How do we collapse the entry surface?</div>
+        <div class="q-detail">
+          19+ developer portals. Fragmented logins. The first-impression developer often leaves before getting to a working API call. What's the single front door, the single console, and the path from landing to first call in under 5 minutes?
+        </div>
+      </div>
+
+      <div class="q">
+        <div class="q-num">Q · 06</div>
+        <div class="q-title">What's the adoption motion?</div>
+        <div class="q-detail">
+          Free tier hits 40 RPM. Next step today is NVAIE at $1K+/GPU/yr. Nothing in between. Do we add Individual + Team paid tiers? PLG-to-NVAIE qualified-pipeline motion? Where does that fit in the bigger strategy?
+        </div>
+      </div>
+
+      <div class="q">
+        <div class="q-num">Q · 07</div>
+        <div class="q-title">Where does NVIDIA show up in dev culture?</div>
+        <div class="q-detail">
+          Today NVIDIA owns GTC. Anthropic / OpenAI / Mistral show up everywhere else — AI Engineer Summit, KubeCon, Cursor events, Latent Space podcast. What's the conference / hackathon / creator strategy beyond GTC?
+        </div>
+      </div>
+
+    </div>
   </section>
 
-  <!-- ───────────── KPIs ───────────── -->
+  <!-- SUCCESS -->
   <section>
-    <h2>How success is measured</h2>
-    <p class="section-lede">Headline plus operating funnel. Reviewed weekly with the CMO org, quarterly with executive staff.</p>
-    <p><b>Headline goal:</b> Nemotron in the <strong>top 3 of open-model rankings</strong> across HuggingFace downloads, OpenRouter token-volume share, and AI-engine share-of-voice within 12 months. Top 1 within 24.</p>
-    <table class="kpi-table">
-      <thead>
-        <tr><th>Area</th><th>KPI</th></tr>
-      </thead>
-      <tbody>
-        <tr><td class="area">Awareness</td><td>Nemotron monthly HuggingFace downloads (vs Qwen / DeepSeek / Llama / Mistral)</td></tr>
-        <tr><td class="area">Awareness</td><td>OpenRouter token-volume share &amp; ranking</td></tr>
-        <tr><td class="area">Awareness</td><td>AI-engine share-of-voice (ChatGPT / Perplexity / Claude / Gemini citations of Nemotron / NIM / Parakeet)</td></tr>
-        <tr><td class="area">Awareness</td><td>Launch reach — tier-1 press placements, creator videos, HN front-page mentions, X impressions</td></tr>
-        <tr><td class="area">Activation</td><td>Developer signups across all entry portals (build.nvidia.com + NGC + Developer Program)</td></tr>
-        <tr><td class="area">Activation</td><td>API key activation rate — signup → key generated within 7 days</td></tr>
-        <tr><td class="area">Activation</td><td>First successful API call rate &amp; median time-to-first-call</td></tr>
-        <tr><td class="area">Adoption</td><td>30-day active developers — at least one API call in trailing 30 days</td></tr>
-        <tr><td class="area">Adoption</td><td>PLG → Individual / Team tier conversion rate (after launch)</td></tr>
-        <tr><td class="area">Adoption</td><td>PLG → NVAIE qualified pipeline — self-serve devs handed to enterprise inside-sales</td></tr>
-        <tr><td class="area">Distribution</td><td>IDE / agent-tool default share — Cursor, Windsurf, Zed, Claude Code</td></tr>
-        <tr><td class="area">Ecosystem</td><td>Built-with-Nemotron projects shipped per quarter (HN, r/LocalLLaMA, dev.to, GitHub)</td></tr>
-      </tbody>
-    </table>
+    <h2>What success looks like</h2>
+    <div class="success">
+      <div class="success-head">To be defined with stakeholders — these are the headlines</div>
+      <p><b>12 months</b> — Nemotron in the top 3 open models by OpenRouter token volume, HuggingFace monthly downloads, and AI-engine share-of-voice. One clear positioning claim landed in market.</p>
+      <p><b>24 months</b> — #1 open model on at least one of those three. A defined niche where Nemotron is the answer. Self-serve developer pipeline feeding NVAIE.</p>
+      <p>Specific KPIs (signups, activation rate, retention, conversion to paid, qualified pipeline) flow from the answers to Q01–Q07 above. Locked in the first 60 days alongside the strategy.</p>
+    </div>
   </section>
 
   <footer>
-    <div>NVIDIA · Confidential strategy document</div>
+    <div>NVIDIA · Confidential</div>
     <div>Last updated · May 18, 2026</div>
   </footer>
 
