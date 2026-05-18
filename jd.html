@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="robots" content="noindex, nofollow">
-<title>Job Description — VP, Developer Marketing, Generative AI Models · NVIDIA</title>
+<title>Job Description · VP, Developer Marketing, AI Models · NVIDIA</title>
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -115,29 +115,33 @@ section p:last-child { margin-bottom: 0; }
 }
 .mission b { font-weight: 800; }
 
-/* ROLE LIST — bullets + sub-bullets */
+/* ROLE LIST — numbered + sub-bullets */
 .role-list {
   list-style: none;
   padding: 0;
   margin-bottom: 8px;
+  counter-reset: role-counter;
 }
 .role-list > li {
   font-size: 16.5px;
   font-weight: 800;
   line-height: 1.5;
   color: var(--ink);
-  padding: 14px 0 4px 26px;
+  padding: 14px 0 4px 34px;
   position: relative;
   letter-spacing: -0.005em;
+  counter-increment: role-counter;
 }
 .role-list > li::before {
-  content: '';
+  content: counter(role-counter) ".";
   position: absolute;
-  left: 6px;
-  top: 22px;
-  width: 10px;
-  height: 10px;
-  background: var(--green);
+  left: 0;
+  top: 14px;
+  font-family: var(--mono);
+  font-weight: 900;
+  font-size: 18px;
+  color: var(--green-dim);
+  letter-spacing: -0.03em;
 }
 .role-list > li > ul {
   list-style: none;
@@ -428,7 +432,7 @@ footer a { color: var(--ink2); text-decoration: none; border-bottom: 1px solid v
     <a href="private-raja">← Strategy deck</a>
   </div>
 
-  <h1 class="role-title">VP, Developer Marketing — Generative AI Models</h1>
+  <h1 class="role-title">VP, Developer Marketing, AI Models</h1>
 
   <div class="posting-info">
     <div class="posting-info-cell"><b>Reports to</b>CMO</div>
@@ -439,7 +443,7 @@ footer a { color: var(--ink2); text-decoration: none; border-bottom: 1px solid v
   <section>
     <h2>The outcome we want</h2>
     <div class="mission">
-      <b>One job.</b> Make Nemotron — NVIDIA's family of open AI models — <b>the #1 open-source models in the world</b>, measured by developer adoption. Everything else (NIM, NVAIE, compute pull-through, ecosystem) follows from that.
+      <b>One job.</b> Make Nemotron, NVIDIA's family of open AI models, <b>the #1 open-source models in the world</b>, measured by developer adoption.
     </div>
   </section>
 
@@ -559,11 +563,11 @@ footer a { color: var(--ink2); text-decoration: none; border-bottom: 1px solid v
   <!-- SUCCESS -->
   <section>
     <h2>What success looks like</h2>
-    <ul class="role-list">
-      <li><b>12 months</b> — Nemotron in the <b>top 3 open-source models</b> by OpenRouter token volume, HuggingFace monthly downloads, and AI-engine share-of-voice. One clear positioning claim landed in market.</li>
-      <li><b>24 months</b> — <b>#1 open-source model</b> on at least one of those three. A defined niche where Nemotron is the undeniable answer. Self-serve developer pipeline feeding NVAIE.</li>
+    <ul>
+      <li><b>12 months.</b> Nemotron in the <b>top 3 open-source models</b> by OpenRouter token volume, HuggingFace monthly downloads, and AI-engine share-of-voice. One clear positioning claim landed in market.</li>
+      <li><b>24 months.</b> <b>#1 open-source model</b> on at least one of those three. A defined niche where Nemotron is the undeniable answer. Self-serve developer pipeline feeding NVAIE.</li>
     </ul>
-    <p style="font-size: 14px; color: var(--ink3); font-style: italic; margin-top: 12px;">Specific KPIs — signups, activation, retention, conversion, qualified pipeline — locked in the first 60 days alongside the strategy.</p>
+    <p style="font-size: 14px; color: var(--ink3); font-style: italic; margin-top: 12px;">Specific KPIs (signups, activation, retention, conversion, qualified pipeline) locked in the first 60 days alongside the strategy.</p>
   </section>
 
   <footer>
