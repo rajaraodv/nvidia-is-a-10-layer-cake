@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>What NVIDIA does today — Developer marketing audit · May 2026</title>
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --ink: #0a0a0a;
+  --ink2: #3a3a3a;
+  --ink3: #6e6e6e;
+  --ink4: #a8a8a8;
+  --rule: #d6d6d6;
+  --rule2: #ececec;
+  --rule3: #f4f4f4;
+  --bg: #ffffff;
+  --green: #76b900;
+  --green-dim: #5a8e00;
+  --green-bg: #f3f9e6;
+  --green-bd: #c7e187;
+  --red: #c83232;
+  --red-bg: #fff0f0;
+  --red-bd: #f1b3b3;
+  --warn-bg: #fff5e0;
+  --warn-bd: #f0c97a;
+  --warn-tx: #6f4500;
+  --sans: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', 'Inter', Arial, sans-serif;
+  --mono: 'SF Mono', 'JetBrains Mono', 'Fira Code', Menlo, monospace;
+}
+
+html, body { height: 100%; }
+body {
+  font-family: var(--sans);
+  background: var(--bg);
+  color: var(--ink);
+  font-size: 15px;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ───────────── HEADER ───────────── */
+.doc-head {
+  border-bottom: 3px solid var(--ink);
+  padding: 36px 32px 28px;
+  background: #fff;
+}
+.doc-head-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+.doc-eyebrow {
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--green-dim);
+  margin-bottom: 14px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+.doc-eyebrow .pipe { color: var(--ink4); }
+.doc-eyebrow a { color: var(--ink2); text-decoration: none; border-bottom: 1px solid var(--ink3); }
+.doc-eyebrow a:hover { color: var(--green-dim); border-bottom-color: var(--green-dim); }
+.doc-title {
+  font-size: clamp(30px, 4vw, 46px);
+  font-weight: 900;
+  line-height: 1.05;
+  letter-spacing: -0.025em;
+  margin-bottom: 8px;
+}
+.doc-sub {
+  font-size: 16px;
+  color: var(--ink3);
+  max-width: 760px;
+}
+
+/* ───────────── LAYOUT ───────────── */
+.doc {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 32px 64px;
+}
+section.s {
+  padding: 40px 0 30px;
+  border-bottom: 1px solid var(--rule);
+}
+section.s:last-of-type { border-bottom: none; }
+.s-num {
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  color: var(--green-dim);
+  margin-bottom: 6px;
+}
+.s-title {
+  font-size: 26px;
+  font-weight: 900;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+  margin-bottom: 8px;
+}
+.s-sub {
+  font-size: 15px;
+  color: var(--ink3);
+  margin-bottom: 22px;
+  max-width: 760px;
+}
+
+/* ───────────── TLDR ───────────── */
+.tldr {
+  background: linear-gradient(180deg, var(--green-bg) 0%, #fff 100%);
+  border: 2px solid var(--green);
+  padding: 22px 26px;
+}
+.tldr-label {
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--green-dim);
+  margin-bottom: 8px;
+}
+.tldr-text {
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1.45;
+  letter-spacing: -0.01em;
+}
+
+/* ───────────── SCORECARD ROWS ───────────── */
+.audit {
+  border: 1.5px solid var(--ink);
+  background: #fff;
+}
+.audit-row {
+  display: grid;
+  grid-template-columns: 200px 1fr 100px;
+  gap: 18px;
+  padding: 14px 18px;
+  align-items: center;
+  border-bottom: 1px solid var(--rule);
+}
+.audit-row:last-child { border-bottom: none; }
+.audit-row.head {
+  background: var(--ink);
+  color: #fff;
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+.audit-row.head .audit-score { text-align: right; }
+.audit-name { font-weight: 700; font-size: 14.5px; letter-spacing: -0.01em; }
+.audit-name span {
+  display: block;
+  font-size: 11.5px;
+  color: var(--ink3);
+  font-weight: 400;
+  font-family: var(--mono);
+  margin-top: 2px;
+  letter-spacing: 0.02em;
+}
+.audit-desc { font-size: 13.5px; color: var(--ink); line-height: 1.5; }
+.audit-desc a { color: var(--green-dim); text-decoration: none; border-bottom: 1px dotted var(--green-dim); }
+.audit-score {
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 5px 10px;
+  text-align: center;
+  white-space: nowrap;
+}
+.audit-score.strong { background: var(--green-bg); color: var(--green-dim); border: 1px solid var(--green-bd); }
+.audit-score.mid    { background: var(--warn-bg); color: var(--warn-tx); border: 1px solid var(--warn-bd); }
+.audit-score.weak   { background: var(--red-bg); color: var(--red); border: 1px solid var(--red-bd); }
+.audit-score.miss   { background: var(--ink); color: #fff; }
+
+/* ───────────── PARTNER CARDS ───────────── */
+.partners-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 12px;
+}
+.partner-card {
+  border: 1.5px solid var(--rule);
+  background: #fff;
+  padding: 16px 18px;
+}
+.partner-card h4 {
+  font-size: 15px;
+  font-weight: 800;
+  margin-bottom: 4px;
+  letter-spacing: -0.01em;
+}
+.partner-card p {
+  font-size: 13px;
+  color: var(--ink2);
+  line-height: 1.5;
+}
+.partner-card .tag {
+  display: inline-block;
+  font-family: var(--mono);
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  background: var(--ink);
+  color: #fff;
+  padding: 2px 6px;
+  margin-bottom: 8px;
+}
+
+/* ───────────── GAP CALLOUTS ───────────── */
+.gaps {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+}
+.gap-card {
+  display: grid;
+  grid-template-columns: 60px 1fr;
+  border: 2px solid var(--red);
+  background: var(--red-bg);
+}
+.gap-num {
+  background: var(--red);
+  color: #fff;
+  font-family: var(--mono);
+  font-size: 24px;
+  font-weight: 900;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.gap-body {
+  padding: 16px 20px 18px;
+  background: #fff;
+}
+.gap-title {
+  font-size: 17px;
+  font-weight: 800;
+  margin-bottom: 6px;
+  letter-spacing: -0.01em;
+}
+.gap-body p {
+  font-size: 13.5px;
+  line-height: 1.55;
+  margin-bottom: 6px;
+}
+.gap-tag {
+  font-family: var(--mono);
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--red);
+}
+
+/* ───────────── FOOTER ───────────── */
+footer {
+  text-align: center;
+  padding: 40px 32px;
+  background: var(--ink);
+  color: #fff;
+}
+footer .who { font-family: var(--mono); font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--ink4); margin-bottom: 8px; }
+footer .name { font-size: 20px; font-weight: 800; margin-bottom: 6px; }
+footer .role { font-size: 13px; color: var(--ink4); margin-bottom: 16px; }
+footer .links a { color: var(--green); text-decoration: none; margin: 0 10px; font-size: 12.5px; font-family: var(--mono); letter-spacing: 0.04em; }
+
+/* ───────────── INLINE ───────────── */
+.kbd { font-family: var(--mono); font-size: 0.9em; padding: 1px 6px; background: rgba(0,0,0,0.06); border: 1px solid var(--rule); border-radius: 3px; }
+
+/* ───────────── RESPONSIVE ───────────── */
+@media (max-width: 720px) {
+  .doc, .doc-head { padding-left: 18px; padding-right: 18px; }
+  .doc-title { font-size: 26px; }
+  .audit-row { grid-template-columns: 1fr; gap: 6px; padding: 14px; }
+  .audit-row.head { display: none; }
+  .audit-score { display: inline-block; margin-top: 4px; }
+  .gap-card { grid-template-columns: 1fr; }
+  .gap-num { padding: 10px 0; }
+}
+</style>
+</head>
+<body>
+
+<header class="doc-head">
+  <div class="doc-head-inner">
+    <div class="doc-eyebrow">
+      What NVIDIA Does Today · Dev Marketing Audit
+      <span class="pipe">·</span>
+      <a href="index.html">10-Layer Cake</a>
+      <span class="pipe">·</span>
+      <a href="competitive.html">Where Nemotron stands</a>
+      <span class="pipe">·</span>
+      <a href="competitors.html">Competitor playbooks</a>
+      <span class="pipe">·</span>
+      <a href="plays.html">Plays</a>
+      <span class="pipe">·</span>
+      <a href="plan.html">Role</a>
+      <span class="pipe">·</span>
+      May 18, 2026
+    </div>
+    <h1 class="doc-title">NVIDIA is doing a lot. <br>It's just not the work that wins developers.</h1>
+    <p class="doc-sub">A clear-eyed audit of every developer marketing surface NVIDIA is operating today. Strengths called out. Gaps named. Honest baseline before we plan what to change.</p>
+  </div>
+</header>
+
+<div class="doc">
+
+  <!-- TLDR -->
+  <section class="s">
+    <div class="s-num">§ 0 · The shape of it</div>
+    <div class="tldr">
+      <div class="tldr-label">In one breath</div>
+      <div class="tldr-text">
+        Owned content is strong. Programs are mature. Distribution to clouds is excellent.
+        What's missing is the developer-native marketing surface — cookbook, Cursor/IDE defaults, founder voice on X,
+        MCP-native ecosystem, indie builder grants. The plumbing is in place; the developer flywheel is not.
+      </div>
+    </div>
+  </section>
+
+  <!-- 1. OWNED CONTENT -->
+  <section class="s">
+    <div class="s-num">§ 1 · Owned content channels</div>
+    <h2 class="s-title">Plenty of volume. Mostly tuned for engineers who already chose NVIDIA.</h2>
+    <p class="s-sub">Cadence is high. Quality is high. The frame is "how to do X if you're already in the NVIDIA stack" — which loses the dev who's deciding whether to come in.</p>
+
+    <div class="audit">
+      <div class="audit-row head"><div>Surface</div><div>State today</div><div class="audit-score">Score</div></div>
+
+      <div class="audit-row">
+        <div class="audit-name">NVIDIA Technical Blog<span>developer.nvidia.com/blog</span></div>
+        <div class="audit-desc">~5–8 posts/week. Nemotron + NIM get 2–3 dedicated weekly posts (e.g., "Nemotron 3 Nano Omni Powers Multimodal Agent Reasoning"). Uniformly high engineering quality.</div>
+        <div class="audit-score strong">Strong</div>
+      </div>
+
+      <div class="audit-row">
+        <div class="audit-name">GitHub presence<span>github.com/NVIDIA-NeMo</span></div>
+        <div class="audit-desc">Mainline <span class="kbd">NVIDIA-NeMo/NeMo</span> is the training framework. A new repo <span class="kbd">NVIDIA-NeMo/Nemotron</span> was spun out as a developer-facing recipe / cookbook home. Active maintenance. <em>Recipes lean heavy on NIM/CUDA/TensorRT-LLM — most aren't framework-agnostic.</em></div>
+        <div class="audit-score mid">Active but coupled</div>
+      </div>
+
+      <div class="audit-row">
+        <div class="audit-name">Hugging Face<span>huggingface.co/nvidia</span></div>
+        <div class="audit-desc">Full Nemotron 3 family curated (Nano 4B, Nano 30B-A3B, Super 120B-A12B, in BF16 and NVFP4). HF discoverability is good. Downloads remain far behind Qwen and DeepSeek.</div>
+        <div class="audit-score mid">Present, underperforming</div>
+      </div>
+
+      <div class="audit-row">
+        <div class="audit-name">YouTube Developer<span>@NVIDIADeveloper</span></div>
+        <div class="audit-desc">Walkthroughs, livestreams, GTC session uploads. Strong volume around launches; less so between.</div>
+        <div class="audit-score mid">Steady</div>
+      </div>
+
+      <div class="audit-row">
+        <div class="audit-name">On-Demand video library<span>nvidia.com/en-us/on-demand</span></div>
+        <div class="audit-desc">Free archive of GTC sessions + Connect-with-the-Experts. Searchability is uneven; great content discovery is one click away from poor.</div>
+        <div class="audit-score mid">Good asset, weak discovery</div>
+      </div>
+
+      <div class="audit-row">
+        <div class="audit-name">Standalone Nemotron Cookbook<span>(would-be) github.com/NVIDIA/nemotron-cookbook</span></div>
+        <div class="audit-desc">Doesn't exist as a standalone, framework-agnostic, copy-pasteable recipe site. The current cookbook lives inside <span class="kbd">NVIDIA-NeMo/Nemotron</span> and assumes NVIDIA stack. <strong>Anthropic and OpenAI both have publicly admired standalone cookbooks; NVIDIA does not.</strong></div>
+        <div class="audit-score miss">Missing</div>
+      </div>
+
+      <div class="audit-row">
+        <div class="audit-name">Developer newsletter</div>
+        <div class="audit-desc">Periodic emails exist; cadence and segmentation are unclear. No tracked engagement metric surfaced publicly.</div>
+        <div class="audit-score weak">Underweighted</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2. PROGRAMS -->
+  <section class="s">
+    <div class="s-num">§ 2 · Programs &amp; education</div>
+    <h2 class="s-title">Best-in-class enterprise programs. Underweighted on indie builders.</h2>
+
+    <div class="audit">
+      <div class="audit-row head"><div>Program</div><div>State today</div><div class="audit-score">Score</div></div>
+
+      <div class="audit-row">
+        <div class="audit-name">Inception<span>nvidia.com/en-us/startups</span></div>
+        <div class="audit-desc">~19,000+ member startup network. Hardware discounts, DLI credits, $25K–$100K AWS Activate, Capital Connect investor intros, co-branded marketing. <strong>One of NVIDIA's strongest assets.</strong></div>
+        <div class="audit-score strong">Strong</div>
+      </div>
+
+      <div class="audit-row">
+        <div class="audit-name">Deep Learning Institute (DLI)<span>nvidia.com/en-us/training</span></div>
+        <div class="audit-desc">Self-paced 2-hour and 8-hour courses, instructor-led workshops, certifications. 2026 cert portfolio added Physical AI, OpenUSD, AI Infra exams.</div>
+        <div class="audit-score strong">Strong</div>
+      </div>
+
+      <div class="audit-row">
+        <div class="audit-name">LaunchPad<span>nvidia.com/en-us/launchpad</span></div>
+        <div class="audit-desc">Free browser-based labs on real NVIDIA hardware. Up to ~$20K worth of equivalent compute free per user. Excellent for AI Enterprise eval.</div>
+        <div class="audit-score strong">Strong</div>
+      </div>
+
+      <div class="audit-row">
+        <div class="audit-name">AI Workbench + Brev<span>developer.nvidia.com/brev</span></div>
+        <div class="audit-desc">One-click laptop-to-cloud "Launchables" on build.nvidia.com. Good infrastructure; brand and awareness still weak.</div>
+        <div class="audit-score mid">Present</div>
+      </div>
+
+      <div class="audit-row">
+        <div class="audit-name">Nemotron Coalition<span>announced GTC 2026</span></div>
+        <div class="audit-desc">8 labs as of launch: Black Forest Labs, Cursor, LangChain, Mistral AI, Perplexity, Reflection AI, Sarvam, Thinking Machines Lab. First co-developed base model: Mistral × NVIDIA. Coalition members get DGX Cloud access. <strong>Massive strategic asset; under-leveraged for marketing.</strong></div>
+        <div class="audit-score strong">Strong (under-used)</div>
+      </div>
+
+      <div class="audit-row">
+        <div class="audit-name">"Built with Nemotron" grants / bounties</div>
+        <div class="audit-desc">No equivalent of Anthropic's $100M Partner Network for indie devs and OSS maintainers building on Nemotron (LangChain integrations, llama.cpp ports, vLLM kernels, Cursor extensions). <strong>The exact program that would seed the "How I built X" content NVIDIA needs.</strong></div>
+        <div class="audit-score miss">Missing</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. DISTRIBUTION -->
+  <section class="s">
+    <div class="s-num">§ 3 · Distribution &amp; co-marketing</div>
+    <h2 class="s-title">The cloud-and-partner motion is excellent.</h2>
+    <p class="s-sub">If your problem is "I want to call Nemotron from my AWS app," NVIDIA solved it. If your problem is "I want my new IDE / agent platform / coding tool to default to Nemotron," the work hasn't been done.</p>
+
+    <div class="partners-grid">
+      <div class="partner-card">
+        <div class="tag">CLOUD</div>
+        <h4>Amazon Bedrock</h4>
+        <p>Nemotron 3 Nano GA Dec 15 2025 (15 regions). Nemotron 3 Super added March 23, 2026. GovCloud since April 2026. Strong.</p>
+      </div>
+      <div class="partner-card">
+        <div class="tag">CLOUD</div>
+        <h4>GCP Vertex AI / Azure AI Foundry</h4>
+        <p>Coming. Behind AWS. Closing the gap is mostly a calendar issue, not a marketing one.</p>
+      </div>
+      <div class="partner-card">
+        <div class="tag">CLOUD</div>
+        <h4>Oracle OCI Gen AI / Cloudflare Workers AI</h4>
+        <p>Oracle has Super + Nano Omni. Cloudflare has Super 120B as <span class="kbd">@cf/nvidia/nemotron-3-120b-a12b</span> since Mar 11, 2026.</p>
+      </div>
+      <div class="partner-card">
+        <div class="tag">AGGREGATOR</div>
+        <h4>OpenRouter</h4>
+        <p>Most complete Nemotron catalog in any aggregator. Free-tier listings (Nano 30B free at 256K context, Super free). Distribution exists; default-routing share doesn't.</p>
+      </div>
+      <div class="partner-card">
+        <div class="tag">AGGREGATOR</div>
+        <h4>Together / Fireworks / DeepInfra / Baseten</h4>
+        <p>Day-0 launch partners. Multiple providers for resilience. Good news; nothing breakout.</p>
+      </div>
+      <div class="partner-card">
+        <div class="tag">COALITION</div>
+        <h4>Cursor</h4>
+        <p>Coalition member contributing coding benchmarks. <strong>Nemotron is NOT in Cursor's default model dropdown.</strong> Single biggest unconverted lever.</p>
+      </div>
+      <div class="partner-card">
+        <div class="tag">COALITION</div>
+        <h4>LangChain</h4>
+        <p>Coalition member, agentic / long-horizon evals. Integration depth-of-default unclear. No marquee "powered by Nemotron" template campaign.</p>
+      </div>
+      <div class="partner-card">
+        <div class="tag">COALITION</div>
+        <h4>Perplexity / Mistral / Sarvam / BFL / Reflection / TML</h4>
+        <p>Coalition members. Each contributes specialized expertise. None has been visibly converted into a "Nemotron is the default model for X" headline.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. EVENTS -->
+  <section class="s">
+    <div class="s-num">§ 4 · Events &amp; conferences</div>
+    <h2 class="s-title">GTC is dominant. Everywhere else, we're a research sponsor at best.</h2>
+
+    <div class="audit">
+      <div class="audit-row head"><div>Event</div><div>State today</div><div class="audit-score">Score</div></div>
+      <div class="audit-row">
+        <div class="audit-name">GTC (San Jose · DC · China · Japan)</div>
+        <div class="audit-desc">25K+ on-site in San Jose March 2026. Centerpiece of the calendar. Keynote, Coalition launch, all major Nemotron releases land here.</div>
+        <div class="audit-score strong">Dominant</div>
+      </div>
+      <div class="audit-row">
+        <div class="audit-name">NeurIPS · ICML · ICLR</div>
+        <div class="audit-desc">Research sponsor + booth. Reasonable presence. Tuned for academics, not for builders.</div>
+        <div class="audit-score mid">Adequate</div>
+      </div>
+      <div class="audit-row">
+        <div class="audit-name">AI Engineer Summit (SF) · AI DevWorld · Latent Space events</div>
+        <div class="audit-desc">The conferences where "I am an AI developer in 2026" identity is formed. NVIDIA is barely visible as a sponsor or speaker. Anthropic, OpenAI, Mistral all show up loudly.</div>
+        <div class="audit-score weak">Underweighted</div>
+      </div>
+      <div class="audit-row">
+        <div class="audit-name">KubeCon · PyData · OSS Summit</div>
+        <div class="audit-desc">Critical for the infrastructure-developer persona. NVIDIA has sporadic talks but not a sustained presence as the "open-model platform" sponsor.</div>
+        <div class="audit-score weak">Underweighted</div>
+      </div>
+      <div class="audit-row">
+        <div class="audit-name">Cursor / LangChain / Anysphere community events</div>
+        <div class="audit-desc">Coalition members run their own developer events. NVIDIA could co-headline these. Currently doesn't show up loudly.</div>
+        <div class="audit-score miss">Absent</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. SOCIAL & COMMUNITY -->
+  <section class="s">
+    <div class="s-num">§ 5 · Social &amp; community</div>
+    <h2 class="s-title">Corporate voice on the channels developers actually use.</h2>
+
+    <div class="audit">
+      <div class="audit-row head"><div>Channel</div><div>State today</div><div class="audit-score">Score</div></div>
+      <div class="audit-row">
+        <div class="audit-name">X / Twitter<span>@NVIDIA · @NVIDIAAIDev</span></div>
+        <div class="audit-desc">Posts but lacks the founder-voice / benchmark-meme / "weights are live" energy that drives developer virality. Compare to DeepSeek researchers, Dario / Jared / Mike, Mensch.</div>
+        <div class="audit-score weak">Corporate-coded</div>
+      </div>
+      <div class="audit-row">
+        <div class="audit-name">LinkedIn</div>
+        <div class="audit-desc">Strong for enterprise / executive audience. Less effective for individual builders.</div>
+        <div class="audit-score mid">Enterprise-tuned</div>
+      </div>
+      <div class="audit-row">
+        <div class="audit-name">Discord<span>discord.gg/nvidia</span></div>
+        <div class="audit-desc">~19K members. Nemotron-specific channels added in 2025. Moderate activity. Less buzz than Anthropic / OpenAI Discords.</div>
+        <div class="audit-score mid">Healthy, not hot</div>
+      </div>
+      <div class="audit-row">
+        <div class="audit-name">Developer Forums<span>forums.developer.nvidia.com</span></div>
+        <div class="audit-desc">Long-running. Authoritative for driver/hardware questions. Less the home of AI builder conversation in 2026.</div>
+        <div class="audit-score mid">Aging well</div>
+      </div>
+      <div class="audit-row">
+        <div class="audit-name">"Built with Nemotron" content from external devs<span>HN · r/LocalLLaMA · dev.to</span></div>
+        <div class="audit-desc">One known r/LocalLLaMA post — "Nemotron Nano 9B classified 3.5M US patents" — 65 upvotes in 2 hours (March 2026). Otherwise: very little organic developer storytelling. This is the surface that proves a model is real, and it's empty.</div>
+        <div class="audit-score weak">Empty surface</div>
+      </div>
+      <div class="audit-row">
+        <div class="audit-name">Named NVIDIA researchers on X<span>Bryan Catanzaro · Mostofa Patwary · etc.</span></div>
+        <div class="audit-desc">No coordinated researcher-voice posting cadence. DeepSeek, Anthropic, Mistral all use named individuals to land model announcements; NVIDIA mostly doesn't.</div>
+        <div class="audit-score miss">Missing</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6. WHAT'S MISSING -->
+  <section class="s">
+    <div class="s-num">§ 6 · What's missing — the 5 gaps</div>
+    <h2 class="s-title">The work that explains why developers haven't shown up.</h2>
+    <p class="s-sub">These aren't quality complaints; they're <em>missing surfaces</em>. Each one is a category competitors have built and NVIDIA hasn't.</p>
+
+    <div class="gaps">
+
+      <div class="gap-card">
+        <div class="gap-num">01</div>
+        <div class="gap-body">
+          <div class="gap-tag">Missing surface</div>
+          <div class="gap-title">A standalone, framework-agnostic Nemotron Cookbook</div>
+          <p>Anthropic's <span class="kbd">claude-cookbooks</span> and OpenAI's <span class="kbd">openai-cookbook</span> are both standalone, runnable, NVIDIA-free, framework-agnostic. NVIDIA's recipes live inside <span class="kbd">NVIDIA-NeMo/Nemotron</span> and assume the full NVIDIA stack. <strong>An indie developer with a MacBook can't follow them.</strong></p>
+        </div>
+      </div>
+
+      <div class="gap-card">
+        <div class="gap-num">02</div>
+        <div class="gap-body">
+          <div class="gap-tag">Missing distribution</div>
+          <div class="gap-title">Nemotron isn't a default model in any IDE / agent tool</div>
+          <p>Cursor is a Coalition member contributing coding benchmarks — but Nemotron isn't in Cursor's default model dropdown. Same for Windsurf, Zed, Claude Code. <strong>This is where 2026 developer mindshare lives, and we're not on the shelf.</strong></p>
+        </div>
+      </div>
+
+      <div class="gap-card">
+        <div class="gap-num">03</div>
+        <div class="gap-body">
+          <div class="gap-tag">Missing voice</div>
+          <div class="gap-title">No founder / researcher X voice driving launches</div>
+          <p>Dario, Mike Krieger, Mensch, DeepSeek researchers — all post benchmark drops, "weights are live" threads, training tricks. <strong>NVIDIA's corporate handles don't drive that energy.</strong> The researchers exist; they're not on the front line of launches.</p>
+        </div>
+      </div>
+
+      <div class="gap-card">
+        <div class="gap-num">04</div>
+        <div class="gap-body">
+          <div class="gap-tag">Missing protocol</div>
+          <div class="gap-title">No MCP-native posture</div>
+          <p>Anthropic invented MCP. OpenAI extended it via the ChatGPT Apps SDK. Cursor, Windsurf, Zed, VS Code are MCP-compatible. <strong>NVIDIA has no first-party MCP servers for the Nemotron / NIM / Triton / Run:ai / Workbench / Brev stack.</strong> Any 2026 model that isn't MCP-native feels legacy.</p>
+        </div>
+      </div>
+
+      <div class="gap-card">
+        <div class="gap-num">05</div>
+        <div class="gap-body">
+          <div class="gap-tag">Missing incentive</div>
+          <div class="gap-title">No "Built with Nemotron" grant / bounty program</div>
+          <p>Anthropic's $100M Claude Partner Network exists. Nothing equivalent at NVIDIA for indie devs and OSS maintainers. <strong>Inception covers startups; nothing covers the LangChain integration maintainer, the llama.cpp porter, the Cursor extension dev, the r/LocalLLaMA hobbyist.</strong> Those are the people who write the missing "How I built X" content.</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 7. PUTTING IT TOGETHER -->
+  <section class="s">
+    <div class="s-num">§ 7 · The shape of the gap</div>
+    <h2 class="s-title">What this looks like, summarized.</h2>
+    <div style="font-size: 16px; line-height: 1.65; max-width: 760px;">
+      <p style="margin-bottom: 14px;">NVIDIA is running a <strong>great enterprise developer marketing program</strong> — Inception, DLI, LaunchPad, partner clouds, GTC, technical blog at scale. If you are an enterprise architect choosing your AI platform, the surfaces all show up.</p>
+      <p style="margin-bottom: 14px;">What's missing is the <strong>indie-builder / agent-tool / OSS-maintainer flywheel</strong> — the cookbook, the IDE default, the founder voice, the MCP servers, the bounty program. Those are the surfaces that move open-model mindshare in 2026, and we're absent on all five.</p>
+      <p>The next page (<a href="competitors.html" style="color: var(--green-dim); border-bottom: 1px dotted var(--green-dim); text-decoration: none;">competitors.html</a>) shows exactly how Anthropic, DeepSeek, Qwen, OpenAI, and Mistral are running those plays. The page after (<a href="plays.html" style="color: var(--green-dim); border-bottom: 1px dotted var(--green-dim); text-decoration: none;">plays.html</a>) names the five we should run.</p>
+    </div>
+  </section>
+
+</div>
+
+<footer>
+  <div class="who">Author</div>
+  <div class="name">Raja Rao DV</div>
+  <div class="role">VP of Marketing · Kumo (acquired by NVIDIA) · 15+ years dev + infra marketing</div>
+  <div class="links">
+    <a href="index.html">← 10-Layer Cake</a>
+    <a href="competitive.html">Where Nemotron stands</a>
+    <a href="competitors.html">Competitor playbooks →</a>
+    <a href="plays.html">Plays</a>
+    <a href="plan.html">Role</a>
+  </div>
+</footer>
+
+</body>
+</html>

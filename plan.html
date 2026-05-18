@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Role — VP of Developer Marketing, Generative AI Models · NVIDIA</title>
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --ink: #0a0a0a;
+  --ink2: #3a3a3a;
+  --ink3: #6e6e6e;
+  --ink4: #a8a8a8;
+  --rule: #d6d6d6;
+  --rule2: #ececec;
+  --rule3: #f4f4f4;
+  --bg: #ffffff;
+  --green: #76b900;
+  --green-dim: #5a8e00;
+  --green-bg: #f3f9e6;
+  --green-bd: #c7e187;
+  --gold: #c8a04a;
+  --gold-bg: #fbf6ea;
+  --gold-bd: #e0c97f;
+  --red: #c83232;
+  --red-bg: #fff0f0;
+  --red-bd: #f1b3b3;
+  --warn-bg: #fff5e0;
+  --warn-bd: #f0c97a;
+  --warn-tx: #6f4500;
+  --sans: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', 'Inter', Arial, sans-serif;
+  --mono: 'SF Mono', 'JetBrains Mono', 'Fira Code', Menlo, monospace;
+}
+
+html, body { height: 100%; }
+body {
+  font-family: var(--sans);
+  background: var(--bg);
+  color: var(--ink);
+  font-size: 15px;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ───────────── HEADER ───────────── */
+.doc-head {
+  border-bottom: 3px solid var(--ink);
+  padding: 36px 32px 28px;
+  background: #fff;
+}
+.doc-head-inner { max-width: 1100px; margin: 0 auto; }
+.doc-eyebrow {
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--green-dim);
+  margin-bottom: 14px;
+  display: flex; align-items: center; gap: 14px; flex-wrap: wrap;
+}
+.doc-eyebrow .pipe { color: var(--ink4); }
+.doc-eyebrow a { color: var(--ink2); text-decoration: none; border-bottom: 1px solid var(--ink3); }
+.doc-eyebrow a:hover { color: var(--green-dim); border-bottom-color: var(--green-dim); }
+
+.role-tag {
+  display: inline-block;
+  background: var(--ink);
+  color: #fff;
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  padding: 5px 12px;
+  margin-bottom: 16px;
+}
+.doc-title {
+  font-size: clamp(32px, 4.4vw, 48px);
+  font-weight: 900;
+  line-height: 1.02;
+  letter-spacing: -0.025em;
+  margin-bottom: 10px;
+}
+.doc-title em { color: var(--green-dim); font-style: normal; }
+.doc-sub {
+  font-size: 17px;
+  color: var(--ink3);
+  margin-bottom: 22px;
+  max-width: 780px;
+  line-height: 1.5;
+}
+.alt-titles {
+  font-family: var(--mono);
+  font-size: 11.5px;
+  color: var(--ink3);
+  letter-spacing: 0.06em;
+  margin-bottom: 22px;
+}
+.alt-titles strong { color: var(--ink2); font-weight: 700; }
+.doc-meta {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+  gap: 16px;
+  padding: 18px 22px;
+  background: var(--rule3);
+  border-left: 3px solid var(--ink);
+}
+.doc-meta-cell { font-size: 13.5px; }
+.doc-meta-cell b {
+  display: block;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink3);
+  margin-bottom: 3px;
+}
+
+.doc { max-width: 1100px; margin: 0 auto; padding: 0 32px 64px; }
+section.s {
+  padding: 40px 0 28px;
+  border-bottom: 1px solid var(--rule);
+}
+section.s:last-of-type { border-bottom: none; }
+.s-num {
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  color: var(--green-dim);
+  margin-bottom: 6px;
+}
+.s-title {
+  font-size: 26px;
+  font-weight: 900;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+  margin-bottom: 8px;
+}
+.s-sub {
+  font-size: 15px;
+  color: var(--ink3);
+  margin-bottom: 22px;
+  max-width: 760px;
+}
+
+/* ───────────── MISSION ───────────── */
+.mission {
+  background: linear-gradient(180deg, var(--green-bg) 0%, #fff 100%);
+  border: 2px solid var(--green);
+  padding: 24px 28px;
+}
+.mission-label {
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--green-dim);
+  margin-bottom: 8px;
+}
+.mission-text {
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 1.4;
+  letter-spacing: -0.01em;
+}
+
+/* ───────────── PROBLEM CALLOUT ───────────── */
+.problem {
+  background: linear-gradient(180deg, var(--red-bg) 0%, #fff 100%);
+  border-left: 4px solid var(--red);
+  padding: 18px 22px;
+  margin-bottom: 20px;
+}
+.problem-label {
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--red);
+  margin-bottom: 6px;
+}
+.problem-text {
+  font-size: 16px;
+  line-height: 1.5;
+  font-weight: 500;
+}
+.problem-text b { font-weight: 800; }
+
+/* ───────────── PILLARS ───────────── */
+.pillars {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+}
+.pillar {
+  border: 2px solid var(--ink);
+  padding: 22px 22px 22px;
+  background: #fff;
+  position: relative;
+}
+.pillar-num {
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  color: var(--green-dim);
+}
+.pillar-title {
+  font-size: 21px;
+  font-weight: 900;
+  letter-spacing: -0.015em;
+  margin: 6px 0 8px;
+  line-height: 1.2;
+}
+.pillar-desc {
+  font-size: 13.5px;
+  color: var(--ink2);
+  line-height: 1.5;
+}
+
+/* ───────────── OWN BLOCK ───────────── */
+.own-block {
+  margin-bottom: 28px;
+}
+.own-pillar {
+  display: flex;
+  align-items: baseline;
+  gap: 14px;
+  margin-bottom: 12px;
+  padding-bottom: 8px;
+  border-bottom: 2px solid var(--ink);
+}
+.own-pillar-num {
+  font-family: var(--mono);
+  font-weight: 900;
+  font-size: 22px;
+  letter-spacing: -0.02em;
+  color: var(--green-dim);
+}
+.own-pillar-name {
+  font-size: 19px;
+  font-weight: 900;
+  letter-spacing: -0.015em;
+}
+.own-pillar-tag {
+  margin-left: auto;
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink3);
+}
+.own-list {
+  list-style: none;
+  padding: 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+  border: 1px solid var(--rule);
+}
+.own-item {
+  padding: 14px 16px;
+  border-bottom: 1px solid var(--rule);
+  border-right: 1px solid var(--rule);
+  font-size: 14px;
+  line-height: 1.5;
+}
+.own-item:nth-child(2n) { border-right: none; }
+.own-item:nth-last-child(-n+2) { border-bottom: none; }
+.own-item:nth-last-child(1):nth-child(2n) { border-right: none; }
+.own-item:nth-last-child(2):nth-child(2n+1) { border-bottom: none; }
+.own-item b { font-weight: 800; }
+.own-item .tag {
+  display: inline-block;
+  font-family: var(--mono);
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  padding: 2px 6px;
+  margin-right: 8px;
+  vertical-align: middle;
+  position: relative;
+  top: -1px;
+  background: var(--ink);
+  color: #fff;
+}
+
+/* ───────────── COMPARE TABLE (launch) ───────────── */
+.compare {
+  width: 100%;
+  border: 1.5px solid var(--ink);
+  border-collapse: collapse;
+  background: #fff;
+  font-size: 14px;
+}
+.compare th {
+  background: var(--ink);
+  color: #fff;
+  text-align: left;
+  padding: 10px 14px;
+  font-size: 11.5px;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-family: var(--mono);
+}
+.compare td {
+  padding: 11px 14px;
+  border-top: 1px solid var(--rule);
+  vertical-align: top;
+  line-height: 1.45;
+}
+.compare tr:nth-child(even) td { background: var(--rule3); }
+.compare .we { color: var(--red); font-weight: 600; }
+.compare .them { color: var(--green-dim); font-weight: 600; }
+.compare .row-label { font-weight: 800; font-size: 13.5px; width: 220px; }
+
+/* ───────────── METRICS ───────────── */
+.metrics {
+  border: 1.5px solid var(--ink);
+  background: #fff;
+}
+.metric {
+  display: grid;
+  grid-template-columns: 24px 1fr auto;
+  align-items: center;
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--rule);
+  gap: 14px;
+}
+.metric:last-child { border-bottom: none; }
+.metric-dot { width: 8px; height: 8px; background: var(--green); border-radius: 50%; }
+.metric-name { font-size: 14.5px; font-weight: 700; }
+.metric-name span {
+  display: block;
+  font-size: 12px;
+  font-weight: 400;
+  color: var(--ink3);
+  font-family: var(--mono);
+  margin-top: 2px;
+  letter-spacing: 0.02em;
+}
+.metric-tag {
+  font-family: var(--mono);
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 4px 8px;
+  background: var(--gold-bg);
+  color: var(--warn-tx);
+  border: 1px solid var(--gold-bd);
+}
+
+/* ───────────── ABOUT (compact) ───────────── */
+.about-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+.about-cell {
+  padding: 16px 20px;
+  background: var(--rule3);
+  border-left: 3px solid var(--green);
+}
+.about-cell b {
+  display: block;
+  font-size: 14px;
+  font-weight: 800;
+  margin-bottom: 4px;
+  letter-spacing: -0.01em;
+}
+.about-cell span {
+  font-size: 13px;
+  color: var(--ink2);
+  line-height: 1.5;
+}
+
+/* ───────────── FOOTER ───────────── */
+footer {
+  text-align: center;
+  padding: 40px 32px;
+  background: var(--ink);
+  color: #fff;
+}
+footer .who { font-family: var(--mono); font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--ink4); margin-bottom: 8px; }
+footer .name { font-size: 20px; font-weight: 800; margin-bottom: 6px; }
+footer .role { font-size: 13px; color: var(--ink4); margin-bottom: 16px; }
+footer .links a { color: var(--green); text-decoration: none; margin: 0 10px; font-size: 12.5px; font-family: var(--mono); letter-spacing: 0.04em; }
+
+.kbd { font-family: var(--mono); font-size: 0.9em; padding: 1px 6px; background: rgba(0,0,0,0.06); border: 1px solid var(--rule); border-radius: 3px; }
+
+@media (max-width: 720px) {
+  .doc, .doc-head { padding-left: 18px; padding-right: 18px; }
+  .doc-title { font-size: 28px; }
+  .pillars { grid-template-columns: 1fr; }
+  .own-list { grid-template-columns: 1fr; }
+  .own-item { border-right: none; }
+  .own-item:nth-last-child(-n+2) { border-bottom: 1px solid var(--rule); }
+  .own-item:last-child { border-bottom: none; }
+  .about-grid { grid-template-columns: 1fr; }
+  .compare { font-size: 12.5px; }
+  .compare th, .compare td { padding: 8px 10px; }
+  .compare .row-label { width: auto; }
+}
+</style>
+</head>
+<body>
+
+<!-- ───────────── HEADER ───────────── -->
+<header class="doc-head">
+  <div class="doc-head-inner">
+    <div class="doc-eyebrow">
+      Role Spec
+      <span class="pipe">·</span>
+      <a href="index.html">10-Layer Cake</a>
+      <span class="pipe">·</span>
+      <a href="competitive.html">Where Nemotron stands</a>
+      <span class="pipe">·</span>
+      <a href="nvidia-now.html">What NVIDIA does today</a>
+      <span class="pipe">·</span>
+      <a href="competitors.html">Competitor playbooks</a>
+      <span class="pipe">·</span>
+      <a href="plays.html">Plays</a>
+      <span class="pipe">·</span>
+      May 18, 2026
+    </div>
+    <span class="role-tag">Proposed VP-level role</span>
+    <h1 class="doc-title">VP of Developer Marketing, <br><em>Generative AI Models</em></h1>
+    <p class="doc-sub">A strategic role to win the developer surface of the LLM/generative model wars: position Nemotron against the field, design every launch as a category-defining moment, build the creator/partner reach to land it, and hands-on-execute the supply chain that ships it.</p>
+    <div class="alt-titles">
+      <strong>Alternative titles:</strong> VP, Developer Marketing — LLM &amp; Generative AI · VP, Developer Growth Marketing — Nemotron · VP, Developer Marketing — AI Platform
+    </div>
+    <div class="doc-meta">
+      <div class="doc-meta-cell"><b>Reports to</b>Alison · CMO org</div>
+      <div class="doc-meta-cell"><b>Level</b>VP — strategy + hands-on execution</div>
+      <div class="doc-meta-cell"><b>Scope</b>Nemotron · NIM · build.nvidia.com · gen-AI dev surface</div>
+      <div class="doc-meta-cell"><b>One goal</b>Make Nemotron the #1 open model that developers actually adopt.</div>
+    </div>
+  </div>
+</header>
+
+<div class="doc">
+
+  <!-- ───────────── 1. MISSION ───────────── -->
+  <section class="s">
+    <div class="s-num">§ 1 · Mission</div>
+    <div class="mission">
+      <div class="mission-label">The one thing this role exists to do</div>
+      <div class="mission-text">
+        Win the developer surface of the generative-AI wars for NVIDIA. Make Nemotron and the surrounding generative-AI stack
+        the model developers reach for first — not because we say so, but because every launch, demo, story, and integration is so good it's hard to argue with.
+      </div>
+    </div>
+  </section>
+
+  <!-- ───────────── 2. WHAT THE ROLE IS ───────────── -->
+  <section class="s">
+    <div class="s-num">§ 2 · What the role is (and isn't)</div>
+    <h2 class="s-title">A VP who strategizes — and ships.</h2>
+    <p class="s-sub">A strategist who designs the winning developer marketing system. A high-agency operator who can also execute it — using agents, cross-functional supply chain, and a small dedicated team. Equal parts thinker and builder.</p>
+
+    <div class="pillars">
+      <div class="pillar">
+        <div class="pillar-num">PILLAR I</div>
+        <div class="pillar-title">Strategy</div>
+        <div class="pillar-desc">Understand the entire developer journey end-to-end. Diagnose positioning &amp; counter-positioning vs Anthropic, OpenAI, DeepSeek, Qwen, Mistral. Design the winning play with metrics that prove it's working.</div>
+      </div>
+      <div class="pillar">
+        <div class="pillar-num">PILLAR II</div>
+        <div class="pillar-title">Execution Supply Chain</div>
+        <div class="pillar-desc">Orchestrate Product, Research, DevRel, Engineering, PR, AR, Partners, Sales, and external creators into one machine. Marketing as supply chain — multiple teams, deadlines, dependencies, one outcome.</div>
+      </div>
+      <div class="pillar">
+        <div class="pillar-num">PILLAR III</div>
+        <div class="pillar-title">Hands-on Build</div>
+        <div class="pillar-desc">Don't wait for the system to ship a campaign — build it myself when needed. AI-first marketer, leverage agents for analytics, content, ABM, AEO. Founder energy at VP scope.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ───────────── 3. THE LAUNCH PROBLEM (the central insight) ───────────── -->
+  <section class="s">
+    <div class="s-num">§ 3 · The central insight</div>
+    <h2 class="s-title">We don't have a model problem. We have a launch &amp; positioning problem.</h2>
+
+    <div class="problem">
+      <div class="problem-label">The pattern</div>
+      <div class="problem-text">
+        <b>Nemotron 3 Super</b> is technically <b>#1</b> on Artificial Analysis's efficiency-adjusted intelligence index — yet didn't break out beyond NVIDIA's existing dev/enterprise audience. The launch surfaces simply don't match the model's substance. OpenAI launches a <b>story</b> with the model embedded. NVIDIA launched a <b>spec sheet</b> with distribution attached.
+      </div>
+    </div>
+
+    <p class="s-sub">Side-by-side, what each company brought to its last frontier launch:</p>
+
+    <table class="compare">
+      <thead>
+        <tr><th class="row-label">Launch surface</th><th>OpenAI (GPT-5 · gpt-image-2)</th><th>Nemotron 3 Super (Mar 2026)</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="row-label">Launch moment</td>
+          <td class="them">Single one-hour livestream, Altman + team, simultaneous rollout to Free/Plus/Pro.</td>
+          <td class="we">Staggered: HF/OpenRouter Mar 11, AWS Bedrock Mar 18-23, no single big moment.</td>
+        </tr>
+        <tr>
+          <td class="row-label">Hero demo / "wow"</td>
+          <td class="them">3 narrative demos — research-to-write, end-to-end trip planning, shopping compare-buy.</td>
+          <td class="we">No hero demo. Benchmark slides + architecture explanation (LatentMoE, NVFP4).</td>
+        </tr>
+        <tr>
+          <td class="row-label">Production quality</td>
+          <td class="them">Apple-keynote-grade livestream. TechRadar/CNBC live-blogged.</td>
+          <td class="we">Dev blog + slides at GTC. No standalone cinematic launch film.</td>
+        </tr>
+        <tr>
+          <td class="row-label">Same-day partners</td>
+          <td class="them">Notion, Box, Shopify, Harvey, Zoom, Databricks, Stripe, Vercel, JetBrains, Cognition…</td>
+          <td class="we">CodeRabbit, Factory, Greptile — mid-market dev tools, not category names.</td>
+        </tr>
+        <tr>
+          <td class="row-label">Creator / influencer access</td>
+          <td class="them">Pre-briefed creators with embargoed access. Altman personal countdown. Reactions at hour zero.</td>
+          <td class="we">No embargoed YouTubers / podcasters. No reaction surge from Berman / AI Explained / Latent Space.</td>
+        </tr>
+        <tr>
+          <td class="row-label">Press tier</td>
+          <td class="them">TechCrunch + CNBC + Bloomberg + NYT + WSJ same-day. Tier-1.</td>
+          <td class="we">Wired, SiliconANGLE, The New Stack. No Bloomberg / NYT / AP / Forbes dedicated story.</td>
+        </tr>
+        <tr>
+          <td class="row-label">48-hour ubiquity</td>
+          <td class="them">In every IDE plugin, partner post, "I tried it" thread, YouTube reaction within 2 days.</td>
+          <td class="we">Stayed inside NVIDIA's existing dev audience + open-weights enthusiasts.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p style="margin-top: 22px; font-size: 16px; line-height: 1.6; color: var(--ink2); max-width: 760px;">
+      Layered on top: even when developers <em>do</em> evaluate Nemotron, the answer to <b>"why pick Nemotron over Claude / DeepSeek / Qwen?"</b> isn't clearly articulated. "Open source" is table stakes — every meaningful competitor is open. <b>Without counter-positioning and a compelling outcome story, we're a me-too.</b> Outcome — what developers can build with us they can't with anyone else — is the missing narrative.
+    </p>
+  </section>
+
+  <!-- ───────────── 4. WHAT THIS VP OWNS ───────────── -->
+  <section class="s">
+    <div class="s-num">§ 4 · What this VP owns</div>
+    <h2 class="s-title">Four pillars. End-to-end ownership.</h2>
+    <p class="s-sub">Strategy at the top. Production-quality execution underneath. Supply-chain orchestration in the middle. Hands-on building when it's faster than waiting.</p>
+
+    <!-- A: STRATEGY -->
+    <div class="own-block">
+      <div class="own-pillar">
+        <div class="own-pillar-num">A.</div>
+        <div class="own-pillar-name">Strategy — set the winning play</div>
+        <div class="own-pillar-tag">Diagnose · Position · Plan</div>
+      </div>
+      <ul class="own-list">
+        <li class="own-item"><span class="tag">JOURNEY</span><b>Own the entire developer journey end-to-end.</b> From "I've never heard of Nemotron" to "I'm shipping production on it" — map every step, instrument every dropoff, ship fixes against the leakiest stages.</li>
+        <li class="own-item"><span class="tag">POSITION</span><b>Positioning &amp; counter-positioning.</b> Why Nemotron, not Claude / DeepSeek / Qwen / Mistral? Land the one-line answer in market. <em>Open is table stakes; outcome is the moat.</em></li>
+        <li class="own-item"><span class="tag">HACKS</span><b>Growth hacks for awareness AND adoption.</b> AEO, programmatic SEO at scale, viral demos, ABM. Awareness ≠ adoption — both lanes need different tactics, both need shipping.</li>
+        <li class="own-item"><span class="tag">PLAN</span><b>The 6-12 month strategic plan.</b> Quarterly OKRs. Cross-functional alignment. Communicated to Alison, exec staff, and the broader marketing org.</li>
+      </ul>
+    </div>
+
+    <!-- B: PRODUCTION QUALITY LAUNCHES -->
+    <div class="own-block">
+      <div class="own-pillar">
+        <div class="own-pillar-num">B.</div>
+        <div class="own-pillar-name">Production-quality launches — turn every release into a moment</div>
+        <div class="own-pillar-tag">Hooks · Videos · Demos · Reach</div>
+      </div>
+      <ul class="own-list">
+        <li class="own-item"><span class="tag">HOOK</span><b>Partner with Product to define the hook for every release.</b> Not benchmark slides — the one-line claim plus the one-screenshot proof that journalists, creators, and developers will repeat.</li>
+        <li class="own-item"><span class="tag">VIDEO</span><b>Highest production quality launch videos.</b> Apple-keynote-grade. The launch IS the film; the press cycle, partner integrations, and creator reactions hang off it.</li>
+        <li class="own-item"><span class="tag">DEMO</span><b>Hero demos and compelling apps that stand out from the crowd.</b> Built in-house when needed. Tied to outcomes a developer can't get with any other model. The "wow" moment that becomes the meme.</li>
+        <li class="own-item"><span class="tag">INFLU</span><b>Creator &amp; influencer program.</b> Pre-briefed embargoes for Latent Space, AI Explained, Berman, Two Minute Papers, AssemblyAI, Mr. Beast for consumer reach. Land the reaction at hour zero.</li>
+        <li class="own-item"><span class="tag">PR</span><b>Tier-1 press pre-briefs.</b> Bloomberg, NYT, AP, TechCrunch, Forbes, WIRED. Worked the way major product companies work them.</li>
+        <li class="own-item"><span class="tag">PARTNERS</span><b>Same-day named partner pre-builds.</b> The OpenAI playbook — every flagship launch ships with Notion/Stripe/Adobe/Shopify-tier names already integrated. NVIDIA can do this through the Coalition; today we don't.</li>
+      </ul>
+    </div>
+
+    <!-- C: SUPPLY CHAIN EXECUTION -->
+    <div class="own-block">
+      <div class="own-pillar">
+        <div class="own-pillar-num">C.</div>
+        <div class="own-pillar-name">The supply chain — orchestrate every team</div>
+        <div class="own-pillar-tag">Cross-functional · Coordinated · Always-on</div>
+      </div>
+      <ul class="own-list">
+        <li class="own-item"><span class="tag">PROD</span><b>Product partnership.</b> NIM, Nemotron, build.nvidia.com, NGC PMs. Co-design hooks. Influence model release timing for narrative impact.</li>
+        <li class="own-item"><span class="tag">RESEARCH</span><b>NVIDIA Research + ML team.</b> Pull Bryan Catanzaro, Mostofa Patwary, and other Nemotron leads onto the launch front line. Their voices on X matter more than corporate handles ever will.</li>
+        <li class="own-item"><span class="tag">DEVREL</span><b>Developer Advocates &amp; community team.</b> Coordinate field activation. Their relationships become the conduits for every campaign, hackathon, and Coalition co-event.</li>
+        <li class="own-item"><span class="tag">EVENTS</span><b>Conferences and hackathons.</b> Run NVIDIA's own (GTC slot for gen-AI dev, "Nemotron Day") and show up loudly at AI Engineer Summit, KubeCon, PyData, Latent Space, ICLR/NeurIPS. Hackathons quarterly — with prize structures that produce shareable content.</li>
+        <li class="own-item"><span class="tag">COALITION</span><b>Coalition partner co-marketing.</b> Cursor, LangChain, Mistral, Perplexity, Sarvam, BFL, Reflection, TML. Convert membership into shipped, co-branded developer wins. Quarterly partner-launch cadence.</li>
+        <li class="own-item"><span class="tag">SALES</span><b>PLG → Enterprise (NVAIE) handoff.</b> Connect self-serve dev adoption to enterprise inside-sales pipeline. The Redis playbook, applied at NVIDIA scale.</li>
+      </ul>
+    </div>
+
+    <!-- D: HANDS-ON BUILD -->
+    <div class="own-block">
+      <div class="own-pillar">
+        <div class="own-pillar-num">D.</div>
+        <div class="own-pillar-name">Hands-on — build what's missing</div>
+        <div class="own-pillar-tag">Founder energy at VP scope</div>
+      </div>
+      <ul class="own-list">
+        <li class="own-item"><span class="tag">AGENTS</span><b>AI-first operating model.</b> Internal agents for funnel analytics, ABM, content, AEO research, partner ops, Gong analysis. Force-multiply a small team using NVIDIA's own gen-AI stack.</li>
+        <li class="own-item"><span class="tag">CONTENT</span><b>Ship content myself when speed matters.</b> Cookbook recipes, sample apps, hero videos, growth pages. Don't wait for an agency. The 10-Layer Cake and the AI animated keynote — built in 48 hours each. That's the operating tempo.</li>
+        <li class="own-item"><span class="tag">DEMOS</span><b>Build the "wow" demo personally when the team's at capacity.</b> A compelling Nemotron demo built and shipped fast beats a perfect demo built slow. Hands-on prototype, then hand off for polish.</li>
+        <li class="own-item"><span class="tag">EXPERIMENTS</span><b>Always-on growth experiments.</b> A/B test the funnel. Pricing tests. Onboarding flows. AEO scrapes. Programmatic SEO sweeps. Output, not vanity — same approach that lifted Kumo SoV 2% → 9.5% in 30 days.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ───────────── 5. STRATEGY I'D RUN ───────────── -->
+  <section class="s">
+    <div class="s-num">§ 5 · The strategy I'd run (high level)</div>
+    <h2 class="s-title">Five plays. Three quarters. Move the leaderboard.</h2>
+    <p class="s-sub">Strategy first; tactics in <a href="plays.html" style="color: var(--green-dim); border-bottom: 1px dotted var(--green-dim); text-decoration: none;">plays.html</a>. The five-play sequence: a framework-agnostic Nemotron Cookbook, IDE-default placement starting with Cursor, founder/researcher X voice, MCP-native posture with 20+ first-party MCP servers, and a $50M "Built with Nemotron" indie-builder program. By GTC DC: Cookbook, Cursor deal, researcher voice live. By GTC 2027: full sequence in market, leaderboard moves.</p>
+  </section>
+
+  <!-- ───────────── 6. METRICS ───────────── -->
+  <section class="s">
+    <div class="s-num">§ 6 · Metrics — how success is measured</div>
+    <h2 class="s-title">One headline. Eight running metrics.</h2>
+    <p class="s-sub">
+      Headline: <b>Nemotron's rank in the open-model field — by HuggingFace downloads, OpenRouter token-volume share, IDE/agent default share — moved decisively up.</b> Under it, the operating funnel.
+    </p>
+    <div class="metrics">
+      <div class="metric"><div class="metric-dot"></div><div class="metric-name">Nemotron HuggingFace monthly downloads<span>relative to Qwen / DeepSeek / Llama / Mistral</span></div><div class="metric-tag">Awareness</div></div>
+      <div class="metric"><div class="metric-dot"></div><div class="metric-name">OpenRouter token-volume share<span>Nemotron's % of daily tokens, ranking</span></div><div class="metric-tag">Awareness</div></div>
+      <div class="metric"><div class="metric-dot"></div><div class="metric-name">AI-engine share-of-voice<span>Nemotron citations in ChatGPT / Perplexity / Claude / Gemini</span></div><div class="metric-tag">Awareness</div></div>
+      <div class="metric"><div class="metric-dot"></div><div class="metric-name">Launch reach<span>tier-1 press placements · creator videos · HN front-page · X engagement</span></div><div class="metric-tag">Awareness</div></div>
+      <div class="metric"><div class="metric-dot"></div><div class="metric-name">Developer signups across all portals<span>build.nvidia.com + NGC + Dev Program, joined</span></div><div class="metric-tag">Activation</div></div>
+      <div class="metric"><div class="metric-dot"></div><div class="metric-name">First successful API call rate<span>signup → working call, with elapsed time</span></div><div class="metric-tag">Activation</div></div>
+      <div class="metric"><div class="metric-dot"></div><div class="metric-name">30-day active developers<span>≥1 API call in trailing 30 days</span></div><div class="metric-tag">Adoption</div></div>
+      <div class="metric"><div class="metric-dot"></div><div class="metric-name">PLG → NVAIE qualified pipeline<span>self-serve devs handed to enterprise inside-sales</span></div><div class="metric-tag">Adoption</div></div>
+    </div>
+  </section>
+
+  <!-- ───────────── 7. WHY ME ───────────── -->
+  <section class="s">
+    <div class="s-num">§ 7 · Why this is the role I'd run well</div>
+    <h2 class="s-title">Strategy + execution + hands-on — the rare combination Alison already saw.</h2>
+    <div class="about-grid">
+      <div class="about-cell"><b>Strategy I've run at VP scope</b><span>VP of Marketing at Kumo (current). VP of Growth at Redis. Built two AI GTM startups as founder. CMO Award at Redis among 46 peers. Strategy at this level is the day job.</span></div>
+      <div class="about-cell"><b>Developer marketing is home</b><span>8.5 years as Developer Advocate at Salesforce + VMware. CS Master's. I've marketed graph transformers, ML systems, and developer tools because I can read the code.</span></div>
+      <div class="about-cell"><b>PLG → Enterprise — already shipped</b><span>Built the first PLG-to-Enterprise motion at Redis. 4× zero-touch growth, 3× free-to-premium conversion. NVIDIA's free → NVAIE gap is the same problem, bigger numbers.</span></div>
+      <div class="about-cell"><b>AEO &amp; growth — running it now</b><span>Kumo 2% → 9.5% AI-engine share-of-voice in 30 days. 800+ programmatic SEO pages. Cold Gartner → 15 analyst meetings. Plug-and-play to Nemotron.</span></div>
+      <div class="about-cell"><b>AI-first marketer</b><span>Built internal agents at Kumo for Gong, ABM, GTM coordination. Use more tokens than most engineers in my company. I am the developer persona we're marketing to.</span></div>
+      <div class="about-cell"><b>Marketing as supply chain</b><span>Coordinated execution across PR / AR / Product / Eng / Sales / DevRel. The Layer 10 work is supply-chain work.</span></div>
+      <div class="about-cell"><b>Hands-on at VP scope</b><span>This 6-page artifact, the 10-Layer Cake site, the AI-animated keynote — built in days, not quarters. VPs at most companies don't ship the work themselves. I do.</span></div>
+      <div class="about-cell"><b>Already known to the team</b><span>Kumo acquired by NVIDIA. Alison knows my profile. She named the keywords already: developer marketing, growth marketing, hands-on. This role spec is built around those three.</span></div>
+    </div>
+  </section>
+
+</div>
+
+<footer>
+  <div class="who">Author</div>
+  <div class="name">Raja Rao DV</div>
+  <div class="role">VP of Marketing · Kumo (acquired by NVIDIA) · 15+ years dev + infra marketing</div>
+  <div class="links">
+    <a href="index.html">← 10-Layer Cake</a>
+    <a href="competitive.html">Where Nemotron stands</a>
+    <a href="nvidia-now.html">What NVIDIA does today</a>
+    <a href="competitors.html">Competitor playbooks</a>
+    <a href="plays.html">Plays</a>
+    <a href="https://linkedin.com/in/rajaraodv" target="_blank">LinkedIn</a>
+  </div>
+</footer>
+
+</body>
+</html>

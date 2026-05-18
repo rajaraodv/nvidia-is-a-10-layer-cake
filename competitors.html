@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>How the other side plays — Dev marketing playbooks · May 2026</title>
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --ink: #0a0a0a;
+  --ink2: #3a3a3a;
+  --ink3: #6e6e6e;
+  --ink4: #a8a8a8;
+  --rule: #d6d6d6;
+  --rule2: #ececec;
+  --rule3: #f4f4f4;
+  --bg: #ffffff;
+  --green: #76b900;
+  --green-dim: #5a8e00;
+  --green-bg: #f3f9e6;
+  --green-bd: #c7e187;
+  --sans: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', 'Inter', Arial, sans-serif;
+  --mono: 'SF Mono', 'JetBrains Mono', 'Fira Code', Menlo, monospace;
+
+  /* Per-competitor brand-flavored accents (recognizable but subdued) */
+  --anth: #cc785c;          /* Anthropic warm terra-cotta */
+  --anth-bg: #fdf3ed;
+  --anth-bd: #e9c4af;
+  --ds: #0066cc;            /* DeepSeek blue */
+  --ds-bg: #e6f1fb;
+  --ds-bd: #a3c8e9;
+  --qwen: #6e3ff5;          /* Qwen / Alibaba purple-ish */
+  --qwen-bg: #f0eaff;
+  --qwen-bd: #c5b1f0;
+  --oai: #1a7f5c;           /* OpenAI green-teal */
+  --oai-bg: #e8f5ee;
+  --oai-bd: #a1d4ba;
+  --mist: #ff7000;          /* Mistral orange */
+  --mist-bg: #fff1e6;
+  --mist-bd: #f5c79a;
+}
+
+html, body { height: 100%; }
+body {
+  font-family: var(--sans);
+  background: var(--bg);
+  color: var(--ink);
+  font-size: 15px;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ───────────── HEADER ───────────── */
+.doc-head {
+  border-bottom: 3px solid var(--ink);
+  padding: 36px 32px 28px;
+  background: #fff;
+}
+.doc-head-inner { max-width: 1100px; margin: 0 auto; }
+.doc-eyebrow {
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--green-dim);
+  margin-bottom: 14px;
+  display: flex; align-items: center; gap: 14px; flex-wrap: wrap;
+}
+.doc-eyebrow .pipe { color: var(--ink4); }
+.doc-eyebrow a { color: var(--ink2); text-decoration: none; border-bottom: 1px solid var(--ink3); }
+.doc-eyebrow a:hover { color: var(--green-dim); border-bottom-color: var(--green-dim); }
+.doc-title {
+  font-size: clamp(30px, 4vw, 46px);
+  font-weight: 900;
+  line-height: 1.05;
+  letter-spacing: -0.025em;
+  margin-bottom: 8px;
+}
+.doc-sub { font-size: 16px; color: var(--ink3); max-width: 760px; }
+
+/* ───────────── LAYOUT ───────────── */
+.doc {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 32px 64px;
+}
+section.s {
+  padding: 36px 0 30px;
+  border-bottom: 1px solid var(--rule);
+}
+section.s:last-of-type { border-bottom: none; }
+.s-num {
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  color: var(--green-dim);
+  margin-bottom: 6px;
+}
+.s-title {
+  font-size: 24px;
+  font-weight: 900;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+  margin-bottom: 8px;
+}
+.s-sub { font-size: 15px; color: var(--ink3); margin-bottom: 22px; max-width: 760px; }
+
+/* ───────────── INTRO TABLE ───────────── */
+.intro-table {
+  width: 100%;
+  border: 1.5px solid var(--ink);
+  border-collapse: collapse;
+  background: #fff;
+  font-size: 14px;
+}
+.intro-table th {
+  background: var(--ink);
+  color: #fff;
+  text-align: left;
+  padding: 10px 14px;
+  font-size: 11.5px;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-family: var(--mono);
+}
+.intro-table td {
+  padding: 11px 14px;
+  border-top: 1px solid var(--rule);
+  vertical-align: top;
+  line-height: 1.45;
+}
+.intro-table tr:nth-child(even) td { background: var(--rule3); }
+.intro-table .name { font-weight: 800; font-size: 15px; letter-spacing: -0.01em; }
+.intro-table .name span { display:block; font-size: 11.5px; color: var(--ink3); font-family: var(--mono); margin-top: 2px; letter-spacing: 0.02em; font-weight: 400; }
+
+/* ───────────── COMPETITOR PROFILES ───────────── */
+.profile {
+  border: 2px solid var(--ink);
+  background: #fff;
+  margin-bottom: 22px;
+  overflow: hidden;
+}
+.profile-head {
+  padding: 18px 24px;
+  display: flex;
+  align-items: baseline;
+  gap: 14px;
+  flex-wrap: wrap;
+  border-bottom: 1.5px solid var(--ink);
+}
+.profile.anth .profile-head { background: var(--anth-bg); border-bottom-color: var(--anth); }
+.profile.ds   .profile-head { background: var(--ds-bg);   border-bottom-color: var(--ds); }
+.profile.qwen .profile-head { background: var(--qwen-bg); border-bottom-color: var(--qwen); }
+.profile.oai  .profile-head { background: var(--oai-bg);  border-bottom-color: var(--oai); }
+.profile.mist .profile-head { background: var(--mist-bg); border-bottom-color: var(--mist); }
+.profile-name {
+  font-size: 24px;
+  font-weight: 900;
+  letter-spacing: -0.02em;
+}
+.profile-tag {
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  padding: 4px 9px;
+  background: var(--ink);
+  color: #fff;
+}
+.profile-tagline {
+  margin-left: auto;
+  font-size: 14px;
+  color: var(--ink2);
+  font-style: italic;
+}
+.profile-body {
+  padding: 22px 24px 26px;
+}
+.profile-plays {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-bottom: 18px;
+}
+.play-cell {
+  padding: 12px 14px;
+  background: var(--rule3);
+  border-left: 3px solid var(--ink);
+}
+.profile.anth .play-cell { border-left-color: var(--anth); }
+.profile.ds   .play-cell { border-left-color: var(--ds); }
+.profile.qwen .play-cell { border-left-color: var(--qwen); }
+.profile.oai  .play-cell { border-left-color: var(--oai); }
+.profile.mist .play-cell { border-left-color: var(--mist); }
+.play-cell-label {
+  font-family: var(--mono);
+  font-size: 9.5px;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink3);
+  margin-bottom: 4px;
+}
+.play-cell-text {
+  font-size: 13.5px;
+  line-height: 1.5;
+  color: var(--ink);
+}
+.play-cell-text b { font-weight: 800; }
+.play-cell-text a { color: var(--green-dim); text-decoration: none; border-bottom: 1px dotted var(--green-dim); }
+
+.signature {
+  margin-top: 16px;
+  padding: 12px 16px;
+  background: var(--ink);
+  color: #fff;
+  font-size: 13.5px;
+  line-height: 1.5;
+}
+.signature b { color: var(--green); font-weight: 800; }
+.signature .label {
+  display: block;
+  font-family: var(--mono);
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ink4);
+  margin-bottom: 6px;
+}
+
+/* ───────────── WHAT WORKS GRID ───────────── */
+.works {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 10px;
+}
+.work-row {
+  display: grid;
+  grid-template-columns: 40px 1fr;
+  gap: 14px;
+  padding: 14px 16px;
+  background: var(--green-bg);
+  border-left: 4px solid var(--green);
+}
+.work-num {
+  font-family: var(--mono);
+  font-weight: 900;
+  font-size: 18px;
+  color: var(--green-dim);
+  letter-spacing: -0.02em;
+}
+.work-body { font-size: 14.5px; line-height: 1.55; }
+.work-body b { font-weight: 800; }
+
+/* ───────────── FOOTER ───────────── */
+footer {
+  text-align: center;
+  padding: 40px 32px;
+  background: var(--ink);
+  color: #fff;
+}
+footer .who { font-family: var(--mono); font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--ink4); margin-bottom: 8px; }
+footer .name { font-size: 20px; font-weight: 800; margin-bottom: 6px; }
+footer .role { font-size: 13px; color: var(--ink4); margin-bottom: 16px; }
+footer .links a { color: var(--green); text-decoration: none; margin: 0 10px; font-size: 12.5px; font-family: var(--mono); letter-spacing: 0.04em; }
+
+.kbd { font-family: var(--mono); font-size: 0.9em; padding: 1px 6px; background: rgba(0,0,0,0.06); border: 1px solid var(--rule); border-radius: 3px; }
+
+@media (max-width: 720px) {
+  .doc, .doc-head { padding-left: 18px; padding-right: 18px; }
+  .doc-title { font-size: 26px; }
+  .intro-table { font-size: 12.5px; }
+  .intro-table th, .intro-table td { padding: 8px 10px; }
+  .profile-plays { grid-template-columns: 1fr; }
+  .profile-tagline { margin-left: 0; width: 100%; }
+}
+</style>
+</head>
+<body>
+
+<header class="doc-head">
+  <div class="doc-head-inner">
+    <div class="doc-eyebrow">
+      Competitor Playbooks
+      <span class="pipe">·</span>
+      <a href="index.html">10-Layer Cake</a>
+      <span class="pipe">·</span>
+      <a href="competitive.html">Where Nemotron stands</a>
+      <span class="pipe">·</span>
+      <a href="nvidia-now.html">What NVIDIA does today</a>
+      <span class="pipe">·</span>
+      <a href="plays.html">Plays</a>
+      <span class="pipe">·</span>
+      <a href="plan.html">Role</a>
+      <span class="pipe">·</span>
+      May 18, 2026
+    </div>
+    <h1 class="doc-title">How the other side plays.</h1>
+    <p class="doc-sub">Five developer-marketing playbooks, side by side: Anthropic, DeepSeek, Qwen/Alibaba, OpenAI, and Mistral. What each is known for. What's working. What we should learn from each.</p>
+  </div>
+</header>
+
+<div class="doc">
+
+  <!-- ───────────── 1. AT A GLANCE ───────────── -->
+  <section class="s">
+    <div class="s-num">§ 1 · At a glance</div>
+    <h2 class="s-title">Five playbooks. Five very different bets.</h2>
+    <p class="s-sub">Each competitor has built a moat in a different surface area. Together they map out the developer-marketing terrain in 2026.</p>
+
+    <table class="intro-table">
+      <thead><tr><th>Player</th><th>The bet</th><th>The signature move</th></tr></thead>
+      <tbody>
+        <tr>
+          <td class="name">Anthropic<span>Claude</span></td>
+          <td>Be the developer-favorite frontier model + own the agent protocol stack.</td>
+          <td>MCP + Cookbook + $100M Partner Network + IDE-default-everywhere.</td>
+        </tr>
+        <tr>
+          <td class="name">DeepSeek<span>V4 family</span></td>
+          <td>Stealth-drop the weights, let benchmarks and price do the marketing.</td>
+          <td>~7× price gap at parity + OpenRouter ubiquity + Twitter virality.</td>
+        </tr>
+        <tr>
+          <td class="name">Qwen / Alibaba<span>Qwen 3.5/3.6</span></td>
+          <td>Make Hugging Face the homepage. Own non-English + fine-tune ecosystem.</td>
+          <td>~1B HF downloads · 201 languages · Apache 2.0 framing.</td>
+        </tr>
+        <tr>
+          <td class="name">OpenAI<span>ChatGPT + API</span></td>
+          <td>Use consumer brand + API to compound mindshare.</td>
+          <td>4M devs · 6B tokens/min · ChatGPT Apps SDK + DevDay rhythm.</td>
+        </tr>
+        <tr>
+          <td class="name">Mistral<span>Le Chat + open weights</span></td>
+          <td>European sovereign-AI + frontier open-weight model events.</td>
+          <td>HF weight drops as PR events + La Plateforme + EU positioning.</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- ───────────── 2. ANTHROPIC ───────────── -->
+  <section class="s">
+    <div class="s-num">§ 2 · Anthropic</div>
+    <div class="profile anth">
+      <div class="profile-head">
+        <span class="profile-tag">Anthropic</span>
+        <span class="profile-name">Own the agent protocol stack</span>
+        <span class="profile-tagline">"The model developers trust + the protocol everyone builds on."</span>
+      </div>
+      <div class="profile-body">
+        <div class="profile-plays">
+          <div class="play-cell">
+            <div class="play-cell-label">Protocol moat</div>
+            <div class="play-cell-text"><b>MCP (Model Context Protocol)</b> — Anthropic invented it. OpenAI extended it via ChatGPT Apps SDK. Cursor, Windsurf, Zed, VS Code, Claude Code are all MCP-compatible. <b>The standard for tool-calling and agent integrations in 2026.</b></div>
+          </div>
+          <div class="play-cell">
+            <div class="play-cell-label">Cookbook standard</div>
+            <div class="play-cell-text"><b>claude-cookbooks</b> on GitHub — Jupyter notebooks, every recipe runnable, mirrored at platform.claude.com/cookbook. Cited by developers as best-in-class.</div>
+          </div>
+          <div class="play-cell">
+            <div class="play-cell-label">$100M Partner Network</div>
+            <div class="play-cell-text">Launched March 12, 2026. <b>Direct training, sales enablement, co-marketing dollars to partners.</b> Accenture (30K trained), Deloitte (470K seats), PwC, KPMG, Cognizant, Infosys, Slalom, Tribe AI, Turing.</div>
+          </div>
+          <div class="play-cell">
+            <div class="play-cell-label">IDE / agent-tool defaults</div>
+            <div class="play-cell-text">Claude is the default model in Cursor, powers Windsurf's Cascade, integrates with Zed. <b>Most builders see Claude before they see any other model.</b></div>
+          </div>
+          <div class="play-cell">
+            <div class="play-cell-label">Connector ecosystem</div>
+            <div class="play-cell-text"><b>9 creative-tool connectors (April 2026):</b> Blender, Adobe, Autodesk, Ableton, Splice. Thomson Reuters CoCounsel MCP integration (May 2026). The "Claude works inside your tool" surface is enormous.</div>
+          </div>
+          <div class="play-cell">
+            <div class="play-cell-label">Founder voice on X</div>
+            <div class="play-cell-text">Dario Amodei, Jared Kaplan, Mike Krieger. Technical, terse, benchmark-forward. <b>Anthropic doesn't sound like a corporation; it sounds like the people who built the thing.</b></div>
+          </div>
+        </div>
+        <div class="signature">
+          <span class="label">Signature for us to steal</span>
+          MCP-native posture + a standalone Cookbook + IDE-default deals are the holy trinity. Without those three, no amount of cloud-partner distribution closes the developer mindshare gap.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ───────────── 3. DEEPSEEK ───────────── -->
+  <section class="s">
+    <div class="s-num">§ 3 · DeepSeek</div>
+    <div class="profile ds">
+      <div class="profile-head">
+        <span class="profile-tag">DeepSeek</span>
+        <span class="profile-name">The model is the marketing</span>
+        <span class="profile-tagline">"Zero traditional spend. Maximum virality."</span>
+      </div>
+      <div class="profile-body">
+        <div class="profile-plays">
+          <div class="play-cell">
+            <div class="play-cell-label">Stealth launches</div>
+            <div class="play-cell-text"><b>V4 Pro + V4 Flash launched April 24, 2026 under MIT.</b> No press tour. No analyst briefings. Weights drop on HF/GitHub on a Friday afternoon. Twitter does the rest.</div>
+          </div>
+          <div class="play-cell">
+            <div class="play-cell-label">Price as marketing</div>
+            <div class="play-cell-text"><b>V4 Pro: $0.435/M input · $0.87/M output</b> with 80.6% SWE-bench Verified (within 0.2 of Claude Opus 4.6 at $25/M output). <b>7× price gap at parity coding performance.</b> That's the launch campaign.</div>
+          </div>
+          <div class="play-cell">
+            <div class="play-cell-label">OpenRouter ubiquity</div>
+            <div class="play-cell-text">23 DeepSeek models on OpenRouter. V4 Flash is free across <b>13 providers</b>. The "default fallback" model when devs hit any rate limit.</div>
+          </div>
+          <div class="play-cell">
+            <div class="play-cell-label">Researcher-voice tweets</div>
+            <div class="play-cell-text">Named DeepSeek researchers post benchmark screenshots within hours of release. "Sputnik moment" effect — global press follows the developer Twitter conversation.</div>
+          </div>
+          <div class="play-cell">
+            <div class="play-cell-label">HF reproduction velocity</div>
+            <div class="play-cell-text"><b>Open-R1 hit 10K GitHub stars in 3 days</b> after the open-source reproduction effort began. HF community treats every DeepSeek release as an event.</div>
+          </div>
+          <div class="play-cell">
+            <div class="play-cell-label">MIT license framing</div>
+            <div class="play-cell-text">Not a legal argument — a <b>signal</b>. "We're not going to play games with you" — picked up by every dev-Twitter explainer thread.</div>
+          </div>
+        </div>
+        <div class="signature">
+          <span class="label">Signature for us to steal</span>
+          You don't market open models — you ship distribution. Pricing, presence on 10+ providers, and benchmark-screenshot virality cost <b>almost nothing</b> compared to traditional marketing and move 10× the needle.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ───────────── 4. QWEN ───────────── -->
+  <section class="s">
+    <div class="s-num">§ 4 · Qwen / Alibaba</div>
+    <div class="profile qwen">
+      <div class="profile-head">
+        <span class="profile-tag">Qwen</span>
+        <span class="profile-name">Hugging Face is the homepage</span>
+        <span class="profile-tagline">"Be the global open-source default, especially outside English."</span>
+      </div>
+      <div class="profile-body">
+        <div class="profile-plays">
+          <div class="play-cell">
+            <div class="play-cell-label">Distribution dominance</div>
+            <div class="play-cell-text"><b>~1 billion HF downloads</b> by April 2026 — over 50% of all open-source model downloads worldwide. Overtook Llama in Oct 2025.</div>
+          </div>
+          <div class="play-cell">
+            <div class="play-cell-label">Language coverage as moat</div>
+            <div class="play-cell-text"><b>Qwen 3.6 supports 201 languages and dialects</b> — Javanese, Cebuano, Waray. Owns markets US labs ignore. Indonesian, Indian, SEA, MENA developer communities default to Qwen.</div>
+          </div>
+          <div class="play-cell">
+            <div class="play-cell-label">Apache 2.0 as positioning</div>
+            <div class="play-cell-text">Not framed as legal language — as <b>zero-friction signal</b>. "Build whatever you want." Comparable to DeepSeek's MIT.</div>
+          </div>
+          <div class="play-cell">
+            <div class="play-cell-label">Enterprise adoption claim</div>
+            <div class="play-cell-text"><b>90,000+ enterprise adopters cited.</b> Airbnb CEO publicly credits Qwen reliance. That kind of testimonial is the marketing.</div>
+          </div>
+          <div class="play-cell">
+            <div class="play-cell-label">Aliyun bundling</div>
+            <div class="play-cell-text">Bundled into Alibaba Cloud international regions for enterprise pull. Cloud distribution is paired with open weights — both rails active.</div>
+          </div>
+          <div class="play-cell">
+            <div class="play-cell-label">English-side ramp</div>
+            <div class="play-cell-text">Twitter/X English presence ramped sharply through 2025-26. Model-launch threads + HF-link drops in the same pattern as DeepSeek.</div>
+          </div>
+        </div>
+        <div class="signature">
+          <span class="label">Signature for us to steal</span>
+          <b>HuggingFace is the homepage, not docs.nvidia.com.</b> The path from "I heard about a new model" to "I'm running it" must be one click on HF — not a journey across 19 NVIDIA portals.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ───────────── 5. OPENAI ───────────── -->
+  <section class="s">
+    <div class="s-num">§ 5 · OpenAI</div>
+    <div class="profile oai">
+      <div class="profile-head">
+        <span class="profile-tag">OpenAI</span>
+        <span class="profile-name">Compound consumer brand into developer mindshare</span>
+        <span class="profile-tagline">"The flywheel only OpenAI has."</span>
+      </div>
+      <div class="profile-body">
+        <div class="profile-plays">
+          <div class="play-cell">
+            <div class="play-cell-label">Developer count</div>
+            <div class="play-cell-text"><b>4M developers · API usage 6B+ tokens/minute</b> (DevDay 2025 disclosures, doubled YoY). The world's largest paid-developer base.</div>
+          </div>
+          <div class="play-cell">
+            <div class="play-cell-label">The Cookbook standard</div>
+            <div class="play-cell-text"><b>openai-cookbook</b> is the format every other lab copies. Notebook-first, scenario-organized, runnable.</div>
+          </div>
+          <div class="play-cell">
+            <div class="play-cell-label">ChatGPT Apps SDK</div>
+            <div class="play-cell-text">Built on top of MCP. <b>Launch partners include Booking.com, Coursera, Spotify, Adobe Photoshop, GitHub, Replit, Gmail, Drive, Teams, Mailchimp, Stripe.</b> Notion and Linear as connectors. Slack as first enterprise platform.</div>
+          </div>
+          <div class="play-cell">
+            <div class="play-cell-label">Co-developed protocols</div>
+            <div class="play-cell-text"><b>Stripe Agentic Commerce Protocol</b> — co-developed and shipped with OpenAI. Salesforce Oct 2025 strategic expansion. OpenAI shows up co-authoring the standards developers use.</div>
+          </div>
+          <div class="play-cell">
+            <div class="play-cell-label">DevDay rhythm</div>
+            <div class="play-cell-text">Annual marquee. <b>DevDay 2026 set for Sept 29, SF.</b> Every announcement compounds into the next 6 months of dev coverage.</div>
+          </div>
+          <div class="play-cell">
+            <div class="play-cell-label">API ↔ ChatGPT flywheel</div>
+            <div class="play-cell-text">Unmatched. Every ChatGPT consumer use case becomes a developer template. Every developer integration deepens consumer engagement. <b>Vertical compounding NVIDIA can't directly replicate — but can borrow the rhythm.</b></div>
+          </div>
+        </div>
+        <div class="signature">
+          <span class="label">Signature for us to steal</span>
+          A <b>DevDay-class annual rhythm</b>, an industry-leading Cookbook, and <b>co-developed protocols with anchor partners</b> (the Stripe Agentic Commerce Protocol equivalent — but for NVIDIA + Coalition).
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ───────────── 6. MISTRAL ───────────── -->
+  <section class="s">
+    <div class="s-num">§ 6 · Mistral</div>
+    <div class="profile mist">
+      <div class="profile-head">
+        <span class="profile-tag">Mistral</span>
+        <span class="profile-name">Open-weight drops as marketing events</span>
+        <span class="profile-tagline">"Sovereign AI + frontier open weights — same lab, dual rails."</span>
+      </div>
+      <div class="profile-body">
+        <div class="profile-plays">
+          <div class="play-cell">
+            <div class="play-cell-label">Open-weight as launch event</div>
+            <div class="play-cell-text"><b>Mistral 3 family (14B / 8B / 3B), Apache 2.0, Dec 2025.</b> Medium 3.5 (128B dense) on HF April 2026. <b>Voxtral TTS open-weight speech, March 2026.</b> Every release is a press cycle.</div>
+          </div>
+          <div class="play-cell">
+            <div class="play-cell-label">La Plateforme</div>
+            <div class="play-cell-text">Closed-API counterpart. EU-data-resident by default. Developer surface for enterprise.</div>
+          </div>
+          <div class="play-cell">
+            <div class="play-cell-label">Le Chat</div>
+            <div class="play-cell-text">Consumer interface w/ agent mode + persistent memory. The user-side wedge most open-weight labs lack.</div>
+          </div>
+          <div class="play-cell">
+            <div class="play-cell-label">Sovereign-AI positioning</div>
+            <div class="play-cell-text">EU AI Act tailwind. <b>"European frontier AI you can self-host"</b> — moat against US-only labs. Governments and EU enterprises pay attention.</div>
+          </div>
+          <div class="play-cell">
+            <div class="play-cell-label">Valuation as signal</div>
+            <div class="play-cell-text"><b>€11.7B valuation, ASML-led Series C.</b> Mensch told Davos 2026 Mistral is on track for $1B+ revenue in 2026. Valuation milestones are pre-packaged marketing.</div>
+          </div>
+          <div class="play-cell">
+            <div class="play-cell-label">Nemotron Coalition member</div>
+            <div class="play-cell-text">First co-developed base model in the Coalition is <b>Mistral × NVIDIA</b>. Distribution overlap with us. Their open-weight cadence can be paired with Nemotron releases for joint launches.</div>
+          </div>
+        </div>
+        <div class="signature">
+          <span class="label">Signature for us to steal</span>
+          Treat every Nemotron release the way Mistral treats Mistral 3 — <b>weights as marketing event</b>, not a side note in a product blog. And <b>lean on Mistral × NVIDIA</b> joint launches as a high-credibility, OSS-validating story arc.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ───────────── 7. WHAT WORKS ───────────── -->
+  <section class="s">
+    <div class="s-num">§ 7 · What works for open models in 2026 (synthesized)</div>
+    <h2 class="s-title">Seven tactics that explain why some open models win and others don't.</h2>
+    <p class="s-sub">Synthesized from the five playbooks above. Each is concrete, observable, and copyable.</p>
+
+    <div class="works">
+      <div class="work-row">
+        <div class="work-num">01</div>
+        <div class="work-body"><b>HuggingFace + GitHub as primary distribution.</b> Qwen and DeepSeek treat HF as the homepage, not the company site. Every developer-acquisition path starts on HF.</div>
+      </div>
+      <div class="work-row">
+        <div class="work-num">02</div>
+        <div class="work-body"><b>OpenRouter ubiquity.</b> Be free-tier on multiple providers. DeepSeek V4 Flash on 13 providers means it's the "default fallback" whenever any other model hits a rate limit.</div>
+      </div>
+      <div class="work-row">
+        <div class="work-num">03</div>
+        <div class="work-body"><b>Be the default model in Cursor / Windsurf / Claude Code.</b> Anthropic owns this surface. Owning even one IDE default is worth tens of millions of impressions per month.</div>
+      </div>
+      <div class="work-row">
+        <div class="work-num">04</div>
+        <div class="work-body"><b>Founder / researcher voice on X.</b> Named individuals dropping benchmark screenshots and "weights are live" tweets — DeepSeek, Anthropic, Mistral. Corporate handles don't generate this energy.</div>
+      </div>
+      <div class="work-row">
+        <div class="work-num">05</div>
+        <div class="work-body"><b>Cookbook as primary doc product.</b> Runnable Jupyter notebooks (Anthropic, OpenAI) — not API ref pages. Framework-agnostic and copy-pasteable.</div>
+      </div>
+      <div class="work-row">
+        <div class="work-num">06</div>
+        <div class="work-body"><b>Pricing / free-tier as the loudest channel.</b> DeepSeek's 7× price gap was the campaign. No paid amplification needed.</div>
+      </div>
+      <div class="work-row">
+        <div class="work-num">07</div>
+        <div class="work-body"><b>MCP-native posture day one.</b> Anthropic invented it. OpenAI extended it. Any 2026 model that isn't MCP-first feels legacy.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ───────────── 8. ROLLED UP ───────────── -->
+  <section class="s">
+    <div class="s-num">§ 8 · So where does this leave us?</div>
+    <h2 class="s-title">NVIDIA is competing on the wrong axis.</h2>
+    <div style="font-size: 16px; line-height: 1.65; max-width: 760px;">
+      <p style="margin-bottom: 14px;">Nemotron's distribution to <em>clouds</em> is excellent. Its distribution to <em>developer surfaces</em> — IDE defaults, MCP-native tooling, framework-agnostic cookbook, OpenRouter routing share, indie builder grants — is barely started.</p>
+      <p style="margin-bottom: 14px;">The five competitors above all moved on the dev surfaces first, the cloud distribution second. NVIDIA has done the opposite. The result is the leaderboard you see in <a href="competitive.html" style="color: var(--green-dim); border-bottom: 1px dotted var(--green-dim); text-decoration: none;">competitive.html</a>: technically competitive, commercially invisible.</p>
+      <p>The next page (<a href="plays.html" style="color: var(--green-dim); border-bottom: 1px dotted var(--green-dim); text-decoration: none;">plays.html</a>) takes the seven tactics above and names the five concrete moves we should run, with the competitor proof, what to build, owner, and timeline for each.</p>
+    </div>
+  </section>
+
+</div>
+
+<footer>
+  <div class="who">Author</div>
+  <div class="name">Raja Rao DV</div>
+  <div class="role">VP of Marketing · Kumo (acquired by NVIDIA) · 15+ years dev + infra marketing</div>
+  <div class="links">
+    <a href="index.html">← 10-Layer Cake</a>
+    <a href="competitive.html">Where Nemotron stands</a>
+    <a href="nvidia-now.html">What NVIDIA does today</a>
+    <a href="plays.html">Plays →</a>
+    <a href="plan.html">Role</a>
+  </div>
+</footer>
+
+</body>
+</html>

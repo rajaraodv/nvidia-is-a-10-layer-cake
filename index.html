@@ -380,15 +380,40 @@ body {
   line-height: 1.4;
 }
 .box-use {
-  font-size: 17px;
-  color: var(--ink);
-  font-weight: 500;
-  line-height: 1.4;
-  margin-top: 11px;
-  padding: 12px 14px;
-  background: rgba(0,0,0,0.06);
-  border-left: 3px solid var(--ink);
+  margin-top: 12px;
+  padding: 11px 14px 12px;
+  background: linear-gradient(180deg, rgba(255,243,202,0.55) 0%, rgba(255,231,165,0.30) 100%);
+  border-left: 4px solid var(--ink);
   flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.box-use-label {
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink2);
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.box-use-label::before {
+  content: '→';
+  font-family: var(--mono);
+  color: var(--ink);
+  font-weight: 900;
+  font-size: 13px;
+  line-height: 1;
+}
+.box-use-text {
+  font-size: 16.5px;
+  color: var(--ink);
+  font-weight: 600;
+  line-height: 1.4;
+  letter-spacing: -0.005em;
 }
 .box-url {
   font-size: 13px;
@@ -914,23 +939,122 @@ body {
   .cake-flame { width: 16px; height: 22px; }
 }
 
+/* Cake popup on small phones */
+@media (max-width: 480px) {
+  .cake-card { padding: 24px 16px 20px; }
+  .cake-title { font-size: 22px; }
+  .cake-sub { font-size: 12px; margin-bottom: 16px; }
+  .cake-layer { height: 26px; font-size: 11px; padding: 0 10px; gap: 8px; }
+  .cake-layer[data-l="10"] { width: 220px; }
+  .cake-layer[data-l="09"] { width: 232px; }
+  .cake-layer[data-l="08"] { width: 244px; }
+  .cake-layer[data-l="07"] { width: 256px; }
+  .cake-layer[data-l="06"] { width: 268px; }
+  .cake-layer[data-l="05"] { width: 280px; }
+  .cake-layer[data-l="04"] { width: 292px; }
+  .cake-layer[data-l="03"] { width: 304px; }
+  .cake-layer[data-l="02"] { width: 316px; }
+  .cake-layer[data-l="01"] { width: 328px; }
+  .cake-frosting-top { width: 220px; height: 12px; }
+  .cake-frosting-top::before { left: 32px; }
+  .cake-frosting-top::after { right: 32px; }
+  .cake-plate { width: 372px; height: 16px; }
+  .cake-name { font-size: 10.5px; }
+  .cake-num { font-size: 12px; width: 20px; }
+  .cake-candle { height: 30px; width: 8px; }
+  .cake-flame { width: 14px; height: 18px; }
+  .cake-cta { padding: 12px 22px; font-size: 14px; }
+  .cake-hint { font-size: 10px; }
+}
+
 /* ───────────────── RESPONSIVE ───────────────── */
-@media (max-width: 760px) {
-  .hdr { padding: 12px 14px; gap: 12px; }
-  .hdr-title, .hdr-hint { display: none; }
-  .rail { width: 104px; }
-  .rail-item { height: 56px; padding: 4px 6px; }
-  .rail-num { font-size: 15px; }
-  .rail-name { font-size: 9px; }
-  .layer-num { width: 70px; height: 56px; top: 10px; left: 12px; gap: 2px; }
-  .layer-num-label { font-size: 8px; letter-spacing: 0.14em; }
-  .layer-num-value { font-size: 28px; }
-  .layer-meta { padding: 14px 16px 14px 94px; }
-  .layer-name { font-size: 14px; }
+/* ─── Tablet (≤960px) ─── */
+@media (max-width: 960px) {
+  .hdr { padding: 14px 18px; gap: 14px; }
+  .hdr-hint { display: none; }
+  .rail { width: 124px; }
+  .rail-num { font-size: 16px; }
+  .rail-name { font-size: 9.5px; }
+  .layer-body { padding: 22px 22px 26px; gap: 16px; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); }
+  .box { min-height: 256px; padding: 18px 18px 16px; }
+  .box-name { font-size: 19px; }
+  .box-sub { font-size: 14.5px; }
+  .box-use-text { font-size: 15px; }
+  .box-url { font-size: 11.5px; }
+}
+
+/* ─── Phone (≤640px) ─── */
+@media (max-width: 640px) {
+  body { font-size: 13px; }
+  .hdr { padding: 10px 14px; gap: 10px; flex-wrap: nowrap; }
+  .hdr-brand { font-size: 13px; }
+  .hdr-title { display: none; }
+  .hdr-count { font-size: 10px; }
+  .hdr-count strong { font-size: 14px; }
+
+  /* Collapse rail to a thin numbers-only column */
+  .rail { width: 56px; padding: 10px 0; }
+  .rail-heading { font-size: 8px; letter-spacing: 0.1em; margin-bottom: 6px; }
+  .rail-item { height: 48px; padding: 4px 2px; gap: 1px; }
+  .rail-num { font-size: 14px; }
+  .rail-name { display: none; }  /* hide labels, just numbers */
+
+  /* Layer headers: stack vertically */
+  .layer-head { flex-wrap: wrap; min-height: auto; padding-bottom: 8px; }
+  .layer-num { position: static; width: 58px; height: 48px; margin: 12px 0 0 14px; }
+  .layer-num-label { font-size: 7.5px; letter-spacing: 0.14em; }
+  .layer-num-value { font-size: 24px; }
+  .layer-meta { padding: 12px 14px 6px 14px; gap: 3px; }
+  .layer-name { font-size: 13px; }
+  .layer-desc { font-size: 11.5px; }
+  .layer-who { font-size: 9.5px; }
   .layer-count { display: none; }
-  .layer-body { padding: 12px 14px 16px; gap: 10px; }
-  .modal-body { padding: 20px 18px 24px; }
-  .m-name { font-size: 24px; }
+
+  /* Boxes: single column, slightly smaller */
+  .layer-body {
+    padding: 14px 14px 20px;
+    gap: 12px;
+    grid-template-columns: 1fr;
+  }
+  .box { min-height: auto; padding: 14px 14px 12px; }
+  .box-tag { font-size: 10px; padding: 3px 8px; }
+  .box-name { font-size: 17px; }
+  .box-sub { font-size: 13px; }
+  .box-use { margin-top: 10px; padding: 10px 12px; }
+  .box-use-label { font-size: 9px; }
+  .box-use-text { font-size: 14px; }
+  .box-url { font-size: 10.5px; padding-top: 8px; }
+
+  /* Journey modal */
+  .modal-backdrop { padding: 0; align-items: stretch; }
+  .modal { max-height: 100vh; border: none; border-radius: 0; }
+  .modal-body { padding: 18px 16px 24px; }
+  .m-eyebrow { font-size: 9.5px; }
+  .m-name { font-size: 22px; }
+  .m-sub { font-size: 12px; }
+  .m-use { font-size: 13px; padding: 9px 12px; margin-bottom: 14px; }
+  .m-url { font-size: 11px; padding: 6px 10px; }
+  .m-workflow-banner { margin: 22px 0 4px; font-size: 10px; padding: 9px 12px; }
+  .m-stage { padding: 14px; margin-top: 16px; }
+  .m-stage-label { font-size: 11.5px; }
+  .m-stage-num { width: 26px; height: 26px; min-width: 26px; font-size: 11px; }
+  .m-cards { grid-template-columns: 1fr; gap: 8px; }
+  .m-card { padding: 10px 12px; font-size: 12px; }
+  .m-step { padding: 10px 12px; gap: 10px; }
+  .m-step-num { width: 24px; height: 24px; min-width: 24px; font-size: 11px; }
+  .m-step-text { font-size: 12.5px; }
+  .friction-item { font-size: 12px; padding: 8px 10px 8px 12px; }
+}
+
+/* ─── Small phone (≤380px) ─── */
+@media (max-width: 380px) {
+  .rail { width: 46px; }
+  .rail-num { font-size: 13px; }
+  .rail-item { height: 44px; }
+  .hdr-brand { font-size: 12px; }
+  .hdr-count { display: none; }
+  .box-name { font-size: 16px; }
+  .box-use-text { font-size: 13.5px; }
 }
 </style>
 </head>
@@ -1849,7 +1973,7 @@ const LAYERS = {
         goTo:[{ref:['07','NIM'],note:'Primary downstream user'},{ref:['10','NGC'],note:'Container source'}],
         friction:['Legacy nvidia-docker2 vs current nvidia-container-toolkit confusion','Runtime plugin vs CDI configuration differences','K8s device plugin quirks (slicing, MIG)']
       },
-      { name:'DOCA', type:'SDK', sub:'BlueField DPU SDK', use:'Program BlueField DPUs', url:'docs.nvidia.com/doca',
+      { name:'DOCA', type:'SDK', sub:'BlueField DPU SDK', use:'Program BlueField DPUs', url:'developer.nvidia.com/networking/doca',
         desc:'BlueField DPU SDK. Network/storage/security offload programming.',
         who:'Data center infra teams',
         arriveFrom:[{ext:'BlueField DPU hardware purchase'}],
@@ -2232,16 +2356,18 @@ const LAYERS = {
 // Names listed here are ranked; unlisted boxes fall to the end.
 // ═══════════════════════════════════════════════════════════════
 const BOX_ORDER = {
-  '10': ['developer.nvidia.com','GitHub · NVIDIA','HuggingFace','docs.nvidia.com','NGC','NVIDIA AI Workbench','Developer Program','NVIDIA Certification','NVIDIA LaunchPad','NVIDIA Technical Blog','NVIDIA On-Demand','Developer Forums','Discord','DLI · learn.nvidia.com','GTC Conference','NVIDIA Research','Nemotron Coalition','AI Enterprise','Inception'],
-  '09': ['Omniverse','Isaac','NemoClaw','AI Blueprints','Riva','NVIDIA ACE','AI for Media','Metropolis','Holoscan','IGX','Newton','NVIDIA Studio','Clara','Earth-2','Omniverse DSX Blueprint','NVIDIA Aerial','DRIVE','Morpheus'],
-  '08': ['build.nvidia.com','AWS Bedrock','OpenRouter','Together AI','Fireworks AI','DeepInfra','DGX Cloud Lepton','HF Inference Endpoints','Cloudflare Workers AI','Oracle OCI Gen AI','Baseten','Lambda Inference','Friendli AI','Crusoe Managed Inference','NVIDIA Brev','RunPod Serverless','Hyperbolic','Nebius Token Factory','Azure AI Foundry','GCP Vertex AI','DGX Cloud'],
-  '07': ['NIM','vLLM','Dynamo','Triton','SGLang','Ollama','NIM Operator','Run:ai','llama.cpp','KServe','Ray Serve','NeMo Microservices','TensorRT-LLM Serve'],
-  '06': ['Nemotron 3 Nano','Llama 3.x (NV-hosted)','Nemotron 3 Super','NV-Embed v2','Parakeet','Nemotron Nano 2 VL','Llama-Nemotron','Audio2Face-3D','Mistral / Mixtral','Canary','Nemotron-H','Nemotron 3 Ultra','Isaac GR00T N1','GR00T-Dreams','Cosmos'],
-  '05': ['NeMo Framework','NeMo Curator','Megatron-LM','Megatron-Core','NeMo Run','NeMo RL','TAO Toolkit','Isaac Lab','BioNeMo','Modulus'],
-  '04': ['PyTorch + CUDA','TensorRT','TensorRT-LLM','RAPIDS','DALI','NVIDIA Model Optimizer','OpenAI Triton (kernel lang)','NVIDIA Warp','CuPy','cuDNN','NCCL','JAX + CUDA'],
-  '03': ['CUDA Toolkit','Nsight Systems / Compute','cuBLAS / cuFFT / cuSPARSE','NVIDIA HPC SDK','CUTLASS','NVCC / PTX','Thrust / CCCL','CUDA-Q'],
-  '02': ['GPU Driver','Container Toolkit','NVIDIA GPU Operator','GPU Sharing (MIG / MPS / Time-Slicing)','Open GPU Kernel Modules','DGX OS / Base OS','Mission Control','DCGM / Fabric Mgr','CUDA Driver API','DOCA'],
-  '01': ['Data Center GPUs','L40S / L40 / L4','DGX SuperPOD','GB300 NVL72','HGX','DGX Systems','GeForce RTX','RTX PRO Blackwell','DGX Spark','DGX Station','Jetson','Grace CPU + Superchips','MGX','Quantum-X800 InfiniBand','Spectrum-X Ethernet','ConnectX-7 / ConnectX-8 SuperNIC','BlueField DPUs','NVLink / NVSwitch','Vera Rubin VR200','DRIVE Orin / Thor'],
+  // Popular / recognizable items first, then newest. So devs see what they
+  // already know up front, then discover the new stuff.
+  '10': ['developer.nvidia.com','GitHub · NVIDIA','HuggingFace','docs.nvidia.com','NGC','Developer Program','GTC Conference','DLI · learn.nvidia.com','Discord','Developer Forums','AI Enterprise','Inception','Nemotron Coalition','NVIDIA AI Workbench','NVIDIA Certification','NVIDIA LaunchPad','NVIDIA On-Demand','NVIDIA Technical Blog','NVIDIA Research'],
+  '09': ['Omniverse','Isaac','Riva','DRIVE','Clara','AI Blueprints','NemoClaw','NVIDIA ACE','Earth-2','Newton','NVIDIA Aerial','Metropolis','Holoscan','IGX','AI for Media','Omniverse DSX Blueprint','NVIDIA Studio','Morpheus'],
+  '08': ['build.nvidia.com','AWS Bedrock','OpenRouter','Together AI','Fireworks AI','HF Inference Endpoints','DeepInfra','DGX Cloud','DGX Cloud Lepton','NVIDIA Brev','Cloudflare Workers AI','Lambda Inference','Oracle OCI Gen AI','Friendli AI','Crusoe Managed Inference','Baseten','Hyperbolic','RunPod Serverless','Nebius Token Factory','Azure AI Foundry','GCP Vertex AI'],
+  '07': ['NIM','vLLM','Triton','Ollama','Dynamo','SGLang','llama.cpp','KServe','Ray Serve','NIM Operator','Run:ai','NeMo Microservices','TensorRT-LLM Serve'],
+  '06': ['Llama 3.x (NV-hosted)','Nemotron 3 Nano','Parakeet','Llama-Nemotron','NV-Embed v2','Nemotron 3 Super','Mistral / Mixtral','Canary','Cosmos','Nemotron 3 Ultra','Nemotron Nano 2 VL','Isaac GR00T N1','Nemotron-H','Audio2Face-3D','GR00T-Dreams'],
+  '05': ['NeMo Framework','Megatron-LM','NeMo Curator','TAO Toolkit','NeMo RL','BioNeMo','Modulus','Megatron-Core','Isaac Lab','NeMo Run'],
+  '04': ['PyTorch + CUDA','TensorRT','RAPIDS','cuDNN','NCCL','JAX + CUDA','TensorRT-LLM','OpenAI Triton (kernel lang)','DALI','NVIDIA Model Optimizer','CuPy','NVIDIA Warp'],
+  '03': ['CUDA Toolkit','cuBLAS / cuFFT / cuSPARSE','Nsight Systems / Compute','NVCC / PTX','Thrust / CCCL','NVIDIA HPC SDK','CUTLASS','CUDA-Q'],
+  '02': ['GPU Driver','Container Toolkit','DCGM / Fabric Mgr','CUDA Driver API','DOCA','NVIDIA GPU Operator','GPU Sharing (MIG / MPS / Time-Slicing)','Open GPU Kernel Modules','DGX OS / Base OS','Mission Control'],
+  '01': ['Data Center GPUs','GeForce RTX','Jetson','DGX Systems','NVLink / NVSwitch','DRIVE Orin / Thor','L40S / L40 / L4','RTX PRO Blackwell','DGX SuperPOD','HGX','MGX','Quantum-X800 InfiniBand','Spectrum-X Ethernet','BlueField DPUs','ConnectX-7 / ConnectX-8 SuperNIC','Grace CPU + Superchips','DGX Spark','DGX Station','GB300 NVL72','Vera Rubin VR200'],
 };
 
 Object.keys(BOX_ORDER).forEach(layerId => {
@@ -2305,7 +2431,7 @@ function render() {
         </div>
         <div class="box-name">${b.name}</div>
         <div class="box-sub">${b.sub}</div>
-        ${b.use ? `<div class="box-use">${b.use}</div>` : ''}
+        ${b.use ? `<div class="box-use"><div class="box-use-label">Use it to</div><div class="box-use-text">${b.use}</div></div>` : ''}
         <div class="box-url">${b.url.replace(/^https?:\/\//,'')}</div>
       `;
       el.addEventListener('click', () => openModal(layerId, idx));
@@ -2526,7 +2652,7 @@ function dismissCake() {
 }
 cakeClose.addEventListener('click', dismissCake);
 cakeCta.addEventListener('click', dismissCake);
-cakeModal.addEventListener('click', (e) => { if (e.target === cakeModal) dismissCake(); });
+cakeModal.addEventListener('click', dismissCake);
 document.addEventListener('keydown', (e) => {
   if (e.key === 'Escape' && !cakeModal.hasAttribute('hidden')) dismissCake();
 });

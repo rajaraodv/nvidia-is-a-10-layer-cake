@@ -1,0 +1,769 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Competitive Landscape — Nemotron vs the open-model field · May 2026</title>
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --ink: #0a0a0a;
+  --ink2: #3a3a3a;
+  --ink3: #6e6e6e;
+  --ink4: #a8a8a8;
+  --rule: #d6d6d6;
+  --rule2: #ececec;
+  --rule3: #f4f4f4;
+  --bg: #ffffff;
+  --green: #76b900;
+  --green-dim: #5a8e00;
+  --green-bg: #f3f9e6;
+  --green-bd: #c7e187;
+  --red: #c83232;
+  --red-bg: #fff0f0;
+  --red-bd: #f1b3b3;
+  --warn-bg: #fff5e0;
+  --warn-bd: #f0c97a;
+  --warn-tx: #6f4500;
+  --sans: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', 'Inter', Arial, sans-serif;
+  --mono: 'SF Mono', 'JetBrains Mono', 'Fira Code', Menlo, monospace;
+}
+
+html, body { height: 100%; }
+body {
+  font-family: var(--sans);
+  background: var(--bg);
+  color: var(--ink);
+  font-size: 15px;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ───────────── HEADER ───────────── */
+.doc-head {
+  border-bottom: 3px solid var(--ink);
+  padding: 36px 32px 28px;
+  background: #fff;
+}
+.doc-head-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+.doc-eyebrow {
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--green-dim);
+  margin-bottom: 14px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+.doc-eyebrow .pipe { color: var(--ink4); }
+.doc-eyebrow a { color: var(--ink2); text-decoration: none; border-bottom: 1px solid var(--ink3); }
+.doc-eyebrow a:hover { color: var(--green-dim); border-bottom-color: var(--green-dim); }
+.doc-title {
+  font-size: clamp(30px, 4vw, 46px);
+  font-weight: 900;
+  line-height: 1.05;
+  letter-spacing: -0.025em;
+  margin-bottom: 8px;
+}
+.doc-sub {
+  font-size: 16px;
+  color: var(--ink3);
+  margin-bottom: 0;
+  max-width: 760px;
+}
+
+/* ───────────── LAYOUT ───────────── */
+.doc {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 32px 64px;
+}
+section.s {
+  padding: 40px 0 30px;
+  border-bottom: 1px solid var(--rule);
+}
+section.s:last-of-type { border-bottom: none; }
+.s-num {
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  color: var(--green-dim);
+  margin-bottom: 6px;
+}
+.s-title {
+  font-size: 26px;
+  font-weight: 900;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+  margin-bottom: 8px;
+}
+.s-sub {
+  font-size: 15px;
+  color: var(--ink3);
+  margin-bottom: 22px;
+  max-width: 760px;
+}
+
+/* ───────────── TL;DR CALLOUT ───────────── */
+.tldr {
+  background: linear-gradient(180deg, #fff0f0 0%, #fff 100%);
+  border: 2px solid var(--red);
+  padding: 22px 26px;
+}
+.tldr-label {
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--red);
+  margin-bottom: 8px;
+}
+.tldr-text {
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1.4;
+  letter-spacing: -0.01em;
+}
+
+/* ───────────── DATA TABLES ───────────── */
+.table {
+  width: 100%;
+  border: 1.5px solid var(--ink);
+  background: #fff;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+.table th {
+  background: var(--ink);
+  color: #fff;
+  text-align: left;
+  padding: 10px 14px;
+  font-size: 11.5px;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-family: var(--mono);
+}
+.table td {
+  padding: 11px 14px;
+  border-top: 1px solid var(--rule);
+  vertical-align: top;
+  line-height: 1.45;
+}
+.table tr:nth-child(even) td { background: var(--rule3); }
+.table .rank {
+  font-family: var(--mono);
+  font-weight: 900;
+  font-size: 16px;
+  color: var(--ink);
+  width: 50px;
+}
+.table .num {
+  font-family: var(--mono);
+  font-size: 13px;
+  color: var(--ink2);
+  white-space: nowrap;
+}
+.table .nv td { background: var(--green-bg) !important; }
+.table .nv .rank { color: var(--green-dim); }
+
+/* ───────────── COMPACT TABLE (gap) ───────────── */
+.gap {
+  border: 1.5px solid var(--ink);
+}
+.gap-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  align-items: center;
+  padding: 14px 18px;
+  border-bottom: 1px solid var(--rule);
+  font-size: 14px;
+  gap: 16px;
+}
+.gap-row:last-child { border-bottom: none; }
+.gap-row:nth-child(even) { background: var(--rule3); }
+.gap-row.head {
+  background: var(--ink) !important;
+  color: #fff;
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 9px 18px;
+}
+.gap-row b { font-weight: 800; }
+.gap-row .lead { color: var(--green-dim); font-weight: 700; }
+.gap-row .lag { color: var(--red); font-weight: 700; }
+
+/* ───────────── ROOT CAUSE CARDS ───────────── */
+.causes {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 14px;
+}
+.cause {
+  display: grid;
+  grid-template-columns: 60px 1fr;
+  border: 1.5px solid var(--ink);
+  background: #fff;
+  overflow: hidden;
+}
+.cause-num {
+  background: var(--red);
+  color: #fff;
+  font-family: var(--mono);
+  font-size: 24px;
+  font-weight: 900;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  letter-spacing: -0.02em;
+}
+.cause-body { padding: 18px 22px 20px; }
+.cause-title {
+  font-size: 18px;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  margin-bottom: 6px;
+}
+.cause-meta {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--ink3);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+.cause-body p {
+  font-size: 14px;
+  line-height: 1.55;
+  margin-bottom: 8px;
+}
+.cause-cite {
+  margin-top: 12px;
+  padding: 8px 12px;
+  background: var(--rule3);
+  border-left: 3px solid var(--ink);
+  font-family: var(--mono);
+  font-size: 11.5px;
+  color: var(--ink2);
+  line-height: 1.4;
+}
+
+/* ───────────── MOVES ───────────── */
+.moves {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 14px;
+}
+.move {
+  border: 2px solid var(--ink);
+  background: #fff;
+  padding: 22px 26px 22px;
+  box-shadow: 5px 5px 0 0 var(--ink);
+}
+.move-num {
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  color: var(--green-dim);
+}
+.move-title {
+  font-size: 21px;
+  font-weight: 900;
+  letter-spacing: -0.015em;
+  margin: 4px 0 10px;
+}
+.move-body { font-size: 14.5px; line-height: 1.55; color: var(--ink); }
+.move-body strong { font-weight: 800; }
+.move-meta {
+  margin-top: 14px;
+  padding-top: 12px;
+  border-top: 1px solid var(--rule);
+  font-family: var(--mono);
+  font-size: 11.5px;
+  color: var(--ink3);
+  letter-spacing: 0.04em;
+}
+
+/* ───────────── JENSEN QUOTE ───────────── */
+.quote {
+  margin: 26px 0;
+  padding: 22px 28px;
+  background: var(--ink);
+  color: #fff;
+  position: relative;
+}
+.quote-q {
+  font-size: 19px;
+  font-weight: 700;
+  line-height: 1.4;
+  letter-spacing: -0.01em;
+  margin-bottom: 8px;
+}
+.quote-q em { color: var(--green); font-style: normal; font-weight: 800; }
+.quote-by {
+  font-family: var(--mono);
+  font-size: 11.5px;
+  color: var(--ink4);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+/* ───────────── ROLE TIE ───────────── */
+.tie-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+.tie {
+  padding: 16px 20px;
+  border: 1.5px solid var(--rule);
+  background: #fff;
+}
+.tie-cause {
+  font-family: var(--mono);
+  font-size: 10.5px;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--red);
+  margin-bottom: 5px;
+}
+.tie-fix {
+  font-size: 15px;
+  font-weight: 700;
+  margin-bottom: 6px;
+  letter-spacing: -0.01em;
+}
+.tie-who {
+  font-size: 12.5px;
+  color: var(--ink3);
+  line-height: 1.4;
+}
+
+/* ───────────── FOOTER ───────────── */
+footer {
+  text-align: center;
+  padding: 40px 32px;
+  background: var(--ink);
+  color: #fff;
+}
+footer .who {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ink4);
+  margin-bottom: 8px;
+}
+footer .name { font-size: 20px; font-weight: 800; margin-bottom: 6px; letter-spacing: -0.01em; }
+footer .role { font-size: 13px; color: var(--ink4); margin-bottom: 16px; }
+footer .links a {
+  color: var(--green);
+  text-decoration: none;
+  margin: 0 10px;
+  font-size: 12.5px;
+  font-family: var(--mono);
+  letter-spacing: 0.04em;
+}
+
+/* ───────────── INLINE ───────────── */
+.kbd {
+  font-family: var(--mono);
+  font-size: 0.9em;
+  padding: 1px 6px;
+  background: rgba(0,0,0,0.06);
+  border: 1px solid var(--rule);
+  border-radius: 3px;
+}
+a.src { color: var(--green-dim); text-decoration: none; border-bottom: 1px dotted var(--green-dim); }
+
+/* ───────────── RESPONSIVE ───────────── */
+@media (max-width: 720px) {
+  .doc, .doc-head { padding-left: 18px; padding-right: 18px; }
+  .doc-title { font-size: 26px; }
+  .table { font-size: 12.5px; }
+  .table th, .table td { padding: 8px 10px; }
+  .gap-row { grid-template-columns: 1fr; gap: 4px; }
+  .cause { grid-template-columns: 1fr; }
+  .cause-num { padding: 10px 0; }
+  .tie-grid { grid-template-columns: 1fr; }
+  .move { padding: 18px 20px; }
+}
+</style>
+</head>
+<body>
+
+<!-- ───────────── HEADER ───────────── -->
+<header class="doc-head">
+  <div class="doc-head-inner">
+    <div class="doc-eyebrow">
+      Where Nemotron Stands
+      <span class="pipe">·</span>
+      <a href="index.html">10-Layer Cake</a>
+      <span class="pipe">·</span>
+      <a href="nvidia-now.html">What NVIDIA does today</a>
+      <span class="pipe">·</span>
+      <a href="competitors.html">Competitor playbooks</a>
+      <span class="pipe">·</span>
+      <a href="plays.html">Plays</a>
+      <span class="pipe">·</span>
+      <a href="plan.html">Role</a>
+      <span class="pipe">·</span>
+      May 18, 2026
+    </div>
+    <h1 class="doc-title">Nemotron is technically competitive. <br>Commercially, it's invisible.</h1>
+    <p class="doc-sub">Where Nemotron stands today vs the rest of the open-model field — and the four root causes for why developers aren't adopting it. This is the basis for the role.</p>
+  </div>
+</header>
+
+<div class="doc">
+
+  <!-- ───────────── TL;DR ───────────── -->
+  <section class="s">
+    <div class="s-num">§ 0 · TL;DR</div>
+    <div class="tldr">
+      <div class="tldr-label">The headline finding</div>
+      <div class="tldr-text">
+        Nemotron 3 Super tops Artificial Analysis's efficiency-adjusted intelligence index — yet doesn't appear in the OpenRouter top-20 by token volume, and Hugging Face's official Jan 2026 report places NVIDIA in the trailing pack of model families whose <em>combined</em> monthly downloads are less than Qwen's alone. The model is great. The adoption isn't.
+      </div>
+    </div>
+  </section>
+
+  <!-- ───────────── 1. WHERE NEMOTRON RANKS ───────────── -->
+  <section class="s">
+    <div class="s-num">§ 1 · Where Nemotron actually ranks (May 2026)</div>
+    <h2 class="s-title">Five leaderboards. Five different stories.</h2>
+    <p class="s-sub">Same model, very different positions depending on whether the leaderboard rewards benchmark performance or actual developer use.</p>
+
+    <table class="table">
+      <thead>
+        <tr><th>Leaderboard</th><th>Top of list</th><th>Nemotron position</th><th>Signal</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><b>Chatbot Arena (LMArena)</b><br><span class="num">Elo · human pref</span></td>
+          <td>Claude Opus 4.6, GPT-5.2, Gemini 3.1 Pro, Grok 4.20</td>
+          <td>Not in top 20</td>
+          <td>Mostly closed frontier dominates. Open models compete in lower tier.</td>
+        </tr>
+        <tr class="nv">
+          <td><b>Artificial Analysis</b><br><span class="num">Intelligence Index</span></td>
+          <td>DeepSeek V4, Qwen 3, Nemotron 3 Super</td>
+          <td><b>#1 efficiency-adjusted</b> (score 36 vs 15 avg, 220.9 tok/s vs 73.4)</td>
+          <td>Nemotron's strongest result. Real but specialist signal.</td>
+        </tr>
+        <tr>
+          <td><b>OpenRouter token volume</b><br><span class="num">developer-billed usage</span></td>
+          <td>Hermes Agent (224B/day), OpenClaw (186B/day), Kimi K2.6 weekly leader (1.88T)</td>
+          <td>Not in top 20</td>
+          <td>The single most important real-usage signal. Nemotron is rounding error.</td>
+        </tr>
+        <tr>
+          <td><b>HuggingFace downloads</b><br><span class="num">monthly</span></td>
+          <td>Qwen — 700M+ cumulative; single month exceeds the combined next 8 families</td>
+          <td>NVIDIA in trailing pack with 7 others</td>
+          <td>The mindshare leaderboard. Qwen is the open default; we are not.</td>
+        </tr>
+        <tr>
+          <td><b>Raw capability benchmarks</b><br><span class="num">SWE-Bench, GPQA, AIME</span></td>
+          <td>DeepSeek V4 Pro (80.6 SWE-V / 90.1 GPQA), Qwen 3 235B (77.2 GPQA / 85.7 AIME)</td>
+          <td>Near frontier but not top</td>
+          <td>Performance is competitive — but not best-in-class enough to overcome other gaps.</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- ───────────── 2. THE OPEN-MODEL FIELD ───────────── -->
+  <section class="s">
+    <div class="s-num">§ 2 · The open-model field, ranked by developer mindshare</div>
+    <h2 class="s-title">Where Nemotron actually sits.</h2>
+    <p class="s-sub">Combining HF downloads, OpenRouter usage, benchmark performance, and ecosystem gravity. Closed frontier (Claude, GPT, Gemini) excluded — this is open-vs-open.</p>
+
+    <table class="table">
+      <thead>
+        <tr><th class="rank">#</th><th>Family</th><th>License</th><th>Why it leads</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="rank">1</td>
+          <td><b>Qwen 3.5 / 3.6</b><br><span class="num">Alibaba</span></td>
+          <td>Apache 2.0</td>
+          <td>700M+ HF downloads, 90,000+ enterprise adopters. The default open model.</td>
+        </tr>
+        <tr>
+          <td class="rank">2</td>
+          <td><b>DeepSeek V4 Pro / Flash</b><br><span class="num">DeepSeek</span></td>
+          <td>MIT</td>
+          <td>Frontier reasoning at ~1/50th GPT-5.4 cost. Owns the reasoning niche.</td>
+        </tr>
+        <tr>
+          <td class="rank">3</td>
+          <td><b>Llama 4 Scout / Maverick</b><br><span class="num">Meta</span></td>
+          <td>Llama Community</td>
+          <td>Strongest brand recognition. 10M-token context on Scout.</td>
+        </tr>
+        <tr>
+          <td class="rank">4</td>
+          <td><b>Kimi K2.6 / GLM-5.1</b><br><span class="num">Moonshot / Zhipu</span></td>
+          <td>Open (varies)</td>
+          <td>OpenRouter token-volume leaders. Coding / agentic specialists.</td>
+        </tr>
+        <tr>
+          <td class="rank">5</td>
+          <td><b>Mistral Medium 3.5 / Gemma 4</b><br><span class="num">Mistral / Google</span></td>
+          <td>Apache 2.0 / Gemma TC</td>
+          <td>European + on-device niches. Strong fine-tune ecosystem.</td>
+        </tr>
+        <tr class="nv">
+          <td class="rank">6</td>
+          <td><b>Nemotron 3 Super / Nano</b><br><span class="num">NVIDIA</span></td>
+          <td>NVIDIA Open Model License</td>
+          <td>Strong on AA's efficiency index. Weak on every real adoption signal.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p style="margin-top: 18px; font-size: 13.5px; color: var(--ink3); font-style: italic;">
+      Note: Chinese-origin models combined are <b>~51.2% of all OpenRouter traffic</b> in 2026. Anthropic 15.4%. This isn't a "China problem" — it's a "we're not playing the open-model game with both hands" problem.
+    </p>
+  </section>
+
+  <!-- ───────────── 3. WHY DEVS AREN'T ADOPTING ───────────── -->
+  <section class="s">
+    <div class="s-num">§ 3 · The four root causes</div>
+    <h2 class="s-title">Awareness is the symptom. These are the disease.</h2>
+    <p class="s-sub">Synthesized from developer forum posts (r/LocalLLaMA, HN, OpenRouter discussions), the open llama.cpp issue tracker, license analysis, and the model release pattern.</p>
+
+    <div class="causes">
+
+      <div class="cause">
+        <div class="cause-num">01</div>
+        <div class="cause-body">
+          <div class="cause-title">License friction — not actually open</div>
+          <div class="cause-meta">NVIDIA Open Model License vs Apache 2.0 / MIT</div>
+          <p>Nemotron ships under the <b>NVIDIA Open Model License</b>, not Apache 2.0 (Qwen) or MIT (DeepSeek). Legal analysis flags ambiguous future revision rights, Delaware governing law, and Santa Clara exclusive jurisdiction — real burdens for non-US enterprise adopters. Qwen's 90,000+ enterprise adopters chose Apache 2.0 explicitly.</p>
+          <div class="cause-cite">"The uncertainty that license conditions may be revised in the future is a risk that cannot be ignored… reports describing Nemotron as 'open source' are misleading." — Shuji Sado, license analysis, Dec 2025</div>
+        </div>
+      </div>
+
+      <div class="cause">
+        <div class="cause-num">02</div>
+        <div class="cause-body">
+          <div class="cause-title">Mamba-hybrid architecture breaks tooling</div>
+          <div class="cause-meta">llama.cpp · MLX · vLLM · SGLang · Ollama support gaps</div>
+          <p>Nemotron-H and the new Nemotron 3 family are <b>Mamba-Transformer hybrids</b>. As of May 2026, llama.cpp issue #18064 — "Feature Request: Nemotron-3-Nano-30B-A3B" — is still open. The most popular community inference engine doesn't support our flagship model family. That means Ollama, LM Studio, and every llama.cpp-derived tool effectively don't either.</p>
+          <div class="cause-cite">"The hybrid architecture forces the ecosystem to evolve — frameworks, inference engines, and optimization tools will all need to support state-space operations as first-class citizens." — analyst, March 2026</div>
+        </div>
+      </div>
+
+      <div class="cause">
+        <div class="cause-num">03</div>
+        <div class="cause-body">
+          <div class="cause-title">Naming is a maze</div>
+          <div class="cause-meta">Nemotron-3 (dense) vs Nemotron 3 (hybrid) vs Llama-Nemotron vs Nemotron-H vs Nemotron Nano 2 …</div>
+          <p>The Wikipedia entry for Nemotron alone lists: Nemotron-3 8B (dense, 2023), Nemotron-4 15B, Nemotron-4 340B, Llama-Nemotron Nano/Super/Ultra (Llama 3.1 derivatives), Nemotron-H (hybrid), Nemotron Nano 2 — <em>and now Nemotron 3 Nano/Super/Ultra (the new hybrid family, sharing the "Nemotron 3" name with the old dense model).</em> DeepSeek wins on this dimension with three SKUs (V4-Pro / V4-Flash / R3).</p>
+          <div class="cause-cite">A developer searching "best open reasoning model" can't disambiguate which Nemotron is which. Sales conversations stall on "which Nemotron do you mean?"</div>
+        </div>
+      </div>
+
+      <div class="cause">
+        <div class="cause-num">04</div>
+        <div class="cause-body">
+          <div class="cause-title">No use-case identity</div>
+          <div class="cause-meta">What is Nemotron for?</div>
+          <p>DeepSeek owns "frontier reasoning at low cost." Kimi K2.6 owns "coding-agent." Llama owns "the safe enterprise open default." Qwen owns "the multilingual, fine-tunable, Apache-2.0 default." <b>Nemotron has no equivalent one-line claim.</b> "Efficient intelligence on NVIDIA hardware" is true but not motivating — developers care about <em>what they can build</em>, not what runs faster on which chip.</p>
+          <div class="cause-cite">There's grassroots interest where the use-case is clear: r/LocalLLaMA post — "Nemotron Nano 9B classified 3.5M US patents on an RTX 5090" — got 65 upvotes in 2 hours. The model works; the story doesn't carry.</div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ───────────── 4. THE GAP, QUANTIFIED ───────────── -->
+  <section class="s">
+    <div class="s-num">§ 4 · The adoption gap, quantified</div>
+    <h2 class="s-title">Leader vs us, side by side.</h2>
+    <p class="s-sub">How far behind are we? Far enough that closing it has to be a strategy, not a campaign.</p>
+
+    <div class="gap">
+      <div class="gap-row head">
+        <div>Metric</div>
+        <div>Leader</div>
+        <div>NVIDIA / Nemotron</div>
+      </div>
+      <div class="gap-row">
+        <div><b>HuggingFace cumulative downloads</b></div>
+        <div class="lead">Qwen — 700M+</div>
+        <div class="lag">Trailing pack (NVIDIA + 7 families &lt; Qwen monthly)</div>
+      </div>
+      <div class="gap-row">
+        <div><b>OpenRouter daily tokens</b></div>
+        <div class="lead">Hermes Agent — 224B/day</div>
+        <div class="lag">Not in top 20</div>
+      </div>
+      <div class="gap-row">
+        <div><b>OpenRouter market share</b></div>
+        <div class="lead">Chinese models — 51.2%<br>Anthropic — 15.4%</div>
+        <div class="lag">Rounding error</div>
+      </div>
+      <div class="gap-row">
+        <div><b>AA Intelligence Index (efficiency-adjusted)</b></div>
+        <div class="lead">Nemotron 3 Super — score 36</div>
+        <div class="lead">#1 — and the brightest signal we have</div>
+      </div>
+      <div class="gap-row">
+        <div><b>Enterprise adopters cited</b></div>
+        <div class="lead">Qwen — 90,000+</div>
+        <div class="lag">No comparable disclosed number</div>
+      </div>
+      <div class="gap-row">
+        <div><b>build.nvidia.com MAU</b></div>
+        <div></div>
+        <div class="lag">Not publicly disclosed at GTC 2026</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ───────────── 5. NVIDIA'S STRATEGIC FRAMING ───────────── -->
+  <section class="s">
+    <div class="s-num">§ 5 · Why this matters more than the leaderboard</div>
+    <h2 class="s-title">It's a chip-company problem. Stated as such.</h2>
+    <p class="s-sub">Jensen and Wall Street are already framing Nemotron as the wedge to drive chip demand. The marketing problem is the moat problem.</p>
+
+    <div class="quote">
+      <div class="quote-q">Jensen Huang doesn't need a new chip. <em>He needs a new moat.</em></div>
+      <div class="quote-by">— CNBC column, March 19, 2026 (post-GTC)</div>
+    </div>
+
+    <div class="quote">
+      <div class="quote-q">The open-model goal is to be <em>near the frontier</em> rather than absolutely best — Nemotron is fine-tunable infrastructure, a shared open foundation for domain-specific and sovereign AI.</div>
+      <div class="quote-by">— Paraphrased from Jensen, GTC 2026 (Nemotron Coalition launch)</div>
+    </div>
+
+    <p style="font-size: 15px; color: var(--ink2); line-height: 1.6; margin-top: 22px;">
+      At GTC 2026, NVIDIA projected <b>$1 trillion in chip orders through 2027</b> (up from $500B at GTC DC) and announced the <b>Nemotron Coalition</b> — Cursor, LangChain, Mistral, Perplexity, Sarvam, Black Forest Labs — to co-develop Nemotron 4 as "a shared open foundation for domain-specific and sovereign AI." The strategy is named. <b>Every Nemotron adoption is a leading indicator for NVIDIA chip pull-through.</b> Losing the open-model layer means losing the wedge.
+    </p>
+  </section>
+
+  <!-- ───────────── 6. FIVE MOVES TO #1 ───────────── -->
+  <section class="s">
+    <div class="s-num">§ 6 · Five moves to get from #6 to #1</div>
+    <h2 class="s-title">What the role would execute against.</h2>
+    <p class="s-sub">Each move targets one root cause. Each is measurable. Each can ship within a quarter if it has the right ownership.</p>
+
+    <div class="moves">
+
+      <div class="move">
+        <div class="move-num">MOVE 01</div>
+        <div class="move-title">Re-license to Apache 2.0 (or match DeepSeek's MIT)</div>
+        <div class="move-body">
+          The single highest-leverage move. The NVIDIA Open Model License is the most-cited adoption blocker in legal-review analyses. Qwen's 90,000-enterprise adoption is <em>because of</em> Apache 2.0. DeepSeek ships MIT. The current license signals "permissive-ish, but governed by California courts" — enterprise poison. <strong>This isn't a marketing decision; it's the marketing decision that unlocks everything else.</strong>
+        </div>
+        <div class="move-meta">Targets root cause 01 · Cross-functional: Legal, Exec, Strategy</div>
+      </div>
+
+      <div class="move">
+        <div class="move-num">MOVE 02</div>
+        <div class="move-title">Land tooling support before the next launch</div>
+        <div class="move-body">
+          Open llama.cpp Mamba-hybrid support is a prerequisite, not a follow-up. Same for MLX (Apple Silicon), Ollama, vLLM, SGLang, HF Transformers. <strong>No Nemotron 4 release ships until these are merged.</strong> Coordinated by NVIDIA — funded if necessary — with the maintainers. The current state (llama.cpp issue #18064 still open in May 2026) is the smoking gun for why adoption flatlines.
+        </div>
+        <div class="move-meta">Targets root cause 02 · Cross-functional: Engineering, DevRel, OSS Foundation Eng</div>
+      </div>
+
+      <div class="move">
+        <div class="move-num">MOVE 03</div>
+        <div class="move-title">Collapse the naming</div>
+        <div class="move-body">
+          One brand: <b>Nemotron</b>. Three sizes: <b>Nano / Super / Ultra</b>. One license. Sunset "Llama-Nemotron," "Nemotron-H," "Nemotron Nano 2," "Nemotron-3 (dense, 2023)." DeepSeek's clarity (V4-Pro / V4-Flash / R3) and Qwen's family naming are textbook. Ship a redirect strategy, refresh every property in 30 days, deprecate the rest.
+        </div>
+        <div class="move-meta">Targets root cause 03 · Cross-functional: Product Marketing, Web, Docs</div>
+      </div>
+
+      <div class="move">
+        <div class="move-num">MOVE 04</div>
+        <div class="move-title">Pick a use-case to dominate. Loss-lead it.</div>
+        <div class="move-body">
+          Match the AA throughput signal (220 tok/s, ~3× peers) with a positioning play: <b>"Nemotron — agentic reasoning at frontier throughput, free at launch."</b> 90-day no-rate-limit promo on build.nvidia.com. Cursor, LangChain, Perplexity already in the Coalition — get default-routing in their products. <strong>Token volume share IS the marketing. You don't market open models; you ship distribution.</strong>
+        </div>
+        <div class="move-meta">Targets root cause 04 · Cross-functional: Product, Pricing, Coalition partners, DevRel</div>
+      </div>
+
+      <div class="move">
+        <div class="move-num">MOVE 05</div>
+        <div class="move-title">DevRel the OpenRouter funnel</div>
+        <div class="move-body">
+          Nemotron 3 Super is on OpenRouter's free tier today (<span class="kbd">openrouter.ai/nvidia/nemotron-3-super-120b-a12b:free</span>) — and invisible in the rankings. Fund a co-marketing push with OpenRouter to drive default-routing for "best open reasoning model." Make build.nvidia.com a one-click experience that mirrors what developers expect from OpenRouter (model card → playground → API key → first call in 60 seconds).
+        </div>
+        <div class="move-meta">Targets all root causes via distribution · Cross-functional: BD, OpenRouter / Coalition partners</div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ───────────── 7. WHAT THIS MEANS FOR THE ROLE ───────────── -->
+  <section class="s">
+    <div class="s-num">§ 7 · What this means for the role</div>
+    <h2 class="s-title">The role is named by the diagnosis.</h2>
+    <p class="s-sub">If awareness, activation, and adoption are the three goals, and these are the four root causes, here's the map from cause → fix → who owns it. The "who owns it" answer is mostly: the role I'm proposing.</p>
+
+    <div class="tie-grid">
+      <div class="tie">
+        <div class="tie-cause">CAUSE 01 · License friction</div>
+        <div class="tie-fix">Drive the Apache 2.0 / MIT relicense decision</div>
+        <div class="tie-who">I frame the case, build the evidence pack, drive the cross-org alignment with Legal, Strategy, and Exec. Marketing owns the case for change.</div>
+      </div>
+      <div class="tie">
+        <div class="tie-cause">CAUSE 02 · Tooling gaps</div>
+        <div class="tie-fix">Coordinate OSS-first launches</div>
+        <div class="tie-who">Partner with DevRel and Engineering to make tooling support a <em>release gate</em>, not a follow-up. Marketing demands the bar.</div>
+      </div>
+      <div class="tie">
+        <div class="tie-cause">CAUSE 03 · Naming maze</div>
+        <div class="tie-fix">Collapse the brand. Redirect everything.</div>
+        <div class="tie-who">This is Marketing's core competency. I'd own it end-to-end — naming decision, redirect strategy, web/docs/console refresh.</div>
+      </div>
+      <div class="tie">
+        <div class="tie-cause">CAUSE 04 · No use-case identity</div>
+        <div class="tie-fix">Pick a use-case. Position. Loss-lead distribution.</div>
+        <div class="tie-who">Product Marketing strategy + distribution deals with the Coalition + OpenRouter. Run the play I've run before, at NVIDIA scale.</div>
+      </div>
+    </div>
+
+    <p style="margin-top: 28px; font-size: 15px; color: var(--ink2); line-height: 1.6;">
+      The role isn't <em>"do developer marketing."</em> The role is <em>"close the gap between Nemotron's technical position (#1 in efficient intelligence) and its commercial position (#6, invisible) — using awareness, activation, and adoption as the operating model, and the four root causes above as the work."</em>
+    </p>
+  </section>
+
+</div>
+
+<!-- ───────────── FOOTER ───────────── -->
+<footer>
+  <div class="who">Author</div>
+  <div class="name">Raja Rao DV</div>
+  <div class="role">VP of Marketing · Kumo (acquired by NVIDIA) · 15+ years dev + infra marketing</div>
+  <div class="links">
+    <a href="index.html">← 10-Layer Cake</a>
+    <a href="plan.html">← Role spec</a>
+    <a href="https://linkedin.com/in/rajaraodv" target="_blank">LinkedIn</a>
+    <a href="mailto:rajaraodv100@gmail.com">Email</a>
+  </div>
+</footer>
+
+</body>
+</html>

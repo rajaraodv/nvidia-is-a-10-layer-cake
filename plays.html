@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Growth plays — Five moves to win the open-model layer · May 2026</title>
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --ink: #0a0a0a;
+  --ink2: #3a3a3a;
+  --ink3: #6e6e6e;
+  --ink4: #a8a8a8;
+  --rule: #d6d6d6;
+  --rule2: #ececec;
+  --rule3: #f4f4f4;
+  --bg: #ffffff;
+  --green: #76b900;
+  --green-dim: #5a8e00;
+  --green-bg: #f3f9e6;
+  --green-bd: #c7e187;
+  --warn-bg: #fff5e0;
+  --warn-bd: #f0c97a;
+  --warn-tx: #6f4500;
+  --sans: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', 'Inter', Arial, sans-serif;
+  --mono: 'SF Mono', 'JetBrains Mono', 'Fira Code', Menlo, monospace;
+}
+
+html, body { height: 100%; }
+body {
+  font-family: var(--sans);
+  background: var(--bg);
+  color: var(--ink);
+  font-size: 15px;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ───────────── HEADER ───────────── */
+.doc-head {
+  border-bottom: 3px solid var(--ink);
+  padding: 36px 32px 28px;
+  background: #fff;
+}
+.doc-head-inner { max-width: 1100px; margin: 0 auto; }
+.doc-eyebrow {
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--green-dim);
+  margin-bottom: 14px;
+  display: flex; align-items: center; gap: 14px; flex-wrap: wrap;
+}
+.doc-eyebrow .pipe { color: var(--ink4); }
+.doc-eyebrow a { color: var(--ink2); text-decoration: none; border-bottom: 1px solid var(--ink3); }
+.doc-eyebrow a:hover { color: var(--green-dim); border-bottom-color: var(--green-dim); }
+.doc-title {
+  font-size: clamp(30px, 4vw, 46px);
+  font-weight: 900;
+  line-height: 1.05;
+  letter-spacing: -0.025em;
+  margin-bottom: 8px;
+}
+.doc-sub { font-size: 16px; color: var(--ink3); max-width: 760px; }
+
+.doc { max-width: 1100px; margin: 0 auto; padding: 0 32px 64px; }
+section.s {
+  padding: 40px 0 30px;
+  border-bottom: 1px solid var(--rule);
+}
+section.s:last-of-type { border-bottom: none; }
+.s-num {
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  color: var(--green-dim);
+  margin-bottom: 6px;
+}
+.s-title {
+  font-size: 26px;
+  font-weight: 900;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+  margin-bottom: 8px;
+}
+.s-sub { font-size: 15px; color: var(--ink3); margin-bottom: 22px; max-width: 760px; }
+
+/* ───────────── PRIORITY TABLE ───────────── */
+.priority {
+  width: 100%;
+  border: 1.5px solid var(--ink);
+  border-collapse: collapse;
+  background: #fff;
+  font-size: 14px;
+}
+.priority th {
+  background: var(--ink);
+  color: #fff;
+  text-align: left;
+  padding: 10px 14px;
+  font-size: 11.5px;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-family: var(--mono);
+}
+.priority td {
+  padding: 11px 14px;
+  border-top: 1px solid var(--rule);
+  vertical-align: top;
+  line-height: 1.45;
+}
+.priority tr:nth-child(even) td { background: var(--rule3); }
+.priority .num {
+  font-family: var(--mono);
+  font-weight: 900;
+  font-size: 18px;
+  color: var(--green-dim);
+  width: 40px;
+}
+.priority .play { font-weight: 800; font-size: 14.5px; }
+.priority .effort {
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 4px 7px;
+  white-space: nowrap;
+  display: inline-block;
+}
+.priority .effort.q { background: var(--green-bg); color: var(--green-dim); border: 1px solid var(--green-bd); }
+.priority .effort.h { background: var(--warn-bg); color: var(--warn-tx); border: 1px solid var(--warn-bd); }
+
+/* ───────────── PLAY CARDS ───────────── */
+.play {
+  border: 2px solid var(--ink);
+  background: #fff;
+  margin-bottom: 22px;
+  box-shadow: 6px 6px 0 0 var(--ink);
+}
+.play-head {
+  padding: 18px 24px 16px;
+  border-bottom: 1.5px solid var(--ink);
+  background: linear-gradient(180deg, var(--green-bg) 0%, #fff 100%);
+}
+.play-rank {
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  color: var(--green-dim);
+  margin-bottom: 4px;
+}
+.play-title {
+  font-size: 24px;
+  font-weight: 900;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+  margin-bottom: 6px;
+}
+.play-tagline {
+  font-size: 14px;
+  color: var(--ink2);
+  font-style: italic;
+}
+.play-body { padding: 22px 24px 22px; }
+
+.play-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  margin-bottom: 16px;
+}
+.play-cell {
+  padding: 14px 16px;
+  background: var(--rule3);
+  border-left: 3px solid var(--ink);
+}
+.play-cell-label {
+  font-family: var(--mono);
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink3);
+  margin-bottom: 4px;
+}
+.play-cell-text {
+  font-size: 13.5px;
+  line-height: 1.5;
+}
+.play-cell-text b { font-weight: 800; }
+.play-cell-text a { color: var(--green-dim); text-decoration: none; border-bottom: 1px dotted var(--green-dim); }
+
+.play-build {
+  margin-top: 14px;
+  padding: 14px 18px;
+  background: var(--ink);
+  color: #fff;
+  font-size: 13.5px;
+  line-height: 1.55;
+}
+.play-build .label {
+  display: block;
+  font-family: var(--mono);
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--green);
+  margin-bottom: 8px;
+}
+.play-build ul { list-style: none; padding: 0; }
+.play-build li {
+  padding: 4px 0 4px 16px;
+  position: relative;
+}
+.play-build li::before {
+  content: '▸';
+  position: absolute; left: 0;
+  color: var(--green);
+  font-weight: 800;
+}
+
+.play-meta {
+  margin-top: 14px;
+  padding-top: 12px;
+  border-top: 1px solid var(--rule);
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 12px;
+  font-size: 12.5px;
+}
+.play-meta div { line-height: 1.4; }
+.play-meta b {
+  display: block;
+  font-family: var(--mono);
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink3);
+  margin-bottom: 3px;
+}
+
+/* ───────────── BONUS PLAYS ───────────── */
+.bonus {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+.bonus-card {
+  border: 1.5px solid var(--rule);
+  background: #fff;
+  padding: 16px 18px;
+}
+.bonus-card h4 {
+  font-size: 15px;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  margin-bottom: 6px;
+}
+.bonus-card p {
+  font-size: 13px;
+  color: var(--ink2);
+  line-height: 1.5;
+}
+.bonus-card .from {
+  display: block;
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--green-dim);
+  margin-top: 8px;
+  margin-bottom: 4px;
+  font-weight: 800;
+}
+
+/* ───────────── FOOTER ───────────── */
+footer {
+  text-align: center;
+  padding: 40px 32px;
+  background: var(--ink);
+  color: #fff;
+}
+footer .who { font-family: var(--mono); font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--ink4); margin-bottom: 8px; }
+footer .name { font-size: 20px; font-weight: 800; margin-bottom: 6px; }
+footer .role { font-size: 13px; color: var(--ink4); margin-bottom: 16px; }
+footer .links a { color: var(--green); text-decoration: none; margin: 0 10px; font-size: 12.5px; font-family: var(--mono); letter-spacing: 0.04em; }
+
+.kbd { font-family: var(--mono); font-size: 0.9em; padding: 1px 6px; background: rgba(0,0,0,0.06); border: 1px solid var(--rule); border-radius: 3px; }
+
+@media (max-width: 720px) {
+  .doc, .doc-head { padding-left: 18px; padding-right: 18px; }
+  .doc-title { font-size: 26px; }
+  .play { box-shadow: 4px 4px 0 0 var(--ink); }
+  .play-grid { grid-template-columns: 1fr; }
+  .bonus { grid-template-columns: 1fr; }
+  .priority { font-size: 12.5px; }
+  .priority th, .priority td { padding: 8px 10px; }
+}
+</style>
+</head>
+<body>
+
+<header class="doc-head">
+  <div class="doc-head-inner">
+    <div class="doc-eyebrow">
+      Growth Plays
+      <span class="pipe">·</span>
+      <a href="index.html">10-Layer Cake</a>
+      <span class="pipe">·</span>
+      <a href="competitive.html">Where Nemotron stands</a>
+      <span class="pipe">·</span>
+      <a href="nvidia-now.html">What NVIDIA does today</a>
+      <span class="pipe">·</span>
+      <a href="competitors.html">Competitor playbooks</a>
+      <span class="pipe">·</span>
+      <a href="plan.html">Role</a>
+      <span class="pipe">·</span>
+      May 18, 2026
+    </div>
+    <h1 class="doc-title">Five plays. Three quarters. Move the leaderboard.</h1>
+    <p class="doc-sub">Each play targets one of the five missing surfaces from the NVIDIA audit, with competitor proof, what to build, partners required, and an honest timeline. These are the moves I'd run if hired into the role.</p>
+  </div>
+</header>
+
+<div class="doc">
+
+  <!-- ───────────── PRIORITY TABLE ───────────── -->
+  <section class="s">
+    <div class="s-num">§ 0 · The plays at a glance</div>
+    <h2 class="s-title">Five sequenced moves.</h2>
+    <p class="s-sub">Ordered by impact-per-effort. The first three are quarter-scale and could ship before September DevDay. The last two are half-year bets that compound everything before them.</p>
+
+    <table class="priority">
+      <thead>
+        <tr>
+          <th class="num">#</th>
+          <th>Play</th>
+          <th>Targets</th>
+          <th>Effort</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="num">01</td>
+          <td class="play">Ship the Nemotron Cookbook</td>
+          <td>Cookbook gap · framework-agnostic builder onboarding</td>
+          <td><span class="effort q">Quarter</span></td>
+        </tr>
+        <tr>
+          <td class="num">02</td>
+          <td class="play">Buy default IDE placement (start with Cursor)</td>
+          <td>IDE/agent-tool default · distribution moat</td>
+          <td><span class="effort q">Quarter</span></td>
+        </tr>
+        <tr>
+          <td class="num">03</td>
+          <td class="play">Activate the founder/researcher X voice</td>
+          <td>Founder voice · launch virality</td>
+          <td><span class="effort q">Quarter</span></td>
+        </tr>
+        <tr>
+          <td class="num">04</td>
+          <td class="play">Ship 20+ first-party MCP servers + go MCP-native</td>
+          <td>Protocol moat · agent-era discoverability</td>
+          <td><span class="effort h">Half</span></td>
+        </tr>
+        <tr>
+          <td class="num">05</td>
+          <td class="play">Launch the $50M "Built with Nemotron" program</td>
+          <td>Indie builder flywheel · UGC pipeline</td>
+          <td><span class="effort h">Half</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- ───────────── PLAY 1 ───────────── -->
+  <section class="s">
+    <div class="s-num">§ 1 · Play 01</div>
+    <div class="play">
+      <div class="play-head">
+        <div class="play-rank">PLAY 01 · QUARTER</div>
+        <div class="play-title">Ship the Nemotron Cookbook</div>
+        <div class="play-tagline">A standalone, framework-agnostic, copy-pasteable recipe site that an indie dev with a MacBook can follow.</div>
+      </div>
+      <div class="play-body">
+
+        <div class="play-grid">
+          <div class="play-cell">
+            <div class="play-cell-label">Why it works</div>
+            <div class="play-cell-text"><b>claude-cookbooks</b> and <b>openai-cookbook</b> are the most-cited developer assets either company has. Notebook-first, scenario-organized, runnable in one click on Colab or locally. They became the unofficial "how to use this model" canon.</div>
+          </div>
+          <div class="play-cell">
+            <div class="play-cell-label">The gap today</div>
+            <div class="play-cell-text">NVIDIA's recipes live inside <span class="kbd">NVIDIA-NeMo/Nemotron</span> and assume the full NVIDIA stack — NIM, CUDA, TensorRT-LLM. <b>An indie dev with a Mac can't follow them.</b> 80% of the surface is unreachable.</div>
+          </div>
+          <div class="play-cell">
+            <div class="play-cell-label">Competitor proof</div>
+            <div class="play-cell-text">Anthropic's <a href="https://github.com/anthropics/claude-cookbooks">claude-cookbooks</a> is cited as best-in-class. OpenAI's <a href="https://developers.openai.com/cookbook">openai-cookbook</a> is the format every other lab copies.</div>
+          </div>
+          <div class="play-cell">
+            <div class="play-cell-label">What "winning" looks like</div>
+            <div class="play-cell-text"><b>github.com/NVIDIA/nemotron-cookbook</b> with 5K+ stars by GTC DC 2026. Cited in Latent Space / AI Engineer. Indie devs link to it on Twitter when they ship something with Nemotron.</div>
+          </div>
+        </div>
+
+        <div class="play-build">
+          <span class="label">What we'd build</span>
+          <ul>
+            <li>New standalone GitHub org: <span class="kbd">github.com/NVIDIA/nemotron-cookbook</span></li>
+            <li>20–30 runnable notebooks: agent loops, RAG, structured outputs, fine-tuning, multimodal, voice — <b>80% framework-agnostic</b>, 20% NVIDIA-stack-optimized recipes</li>
+            <li>One-click Colab and Brev launchers per notebook</li>
+            <li>Same content syndicated to <span class="kbd">build.nvidia.com/cookbook</span> as the canonical home</li>
+            <li>Quarterly "Cookbook spotlight" — featured community recipes from external devs</li>
+          </ul>
+        </div>
+
+        <div class="play-meta">
+          <div><b>Owner</b>This role · DevRel · Product</div>
+          <div><b>Partners</b>Cursor, LangChain, OpenRouter for recipe contributions</div>
+          <div><b>Time to ship</b>~10 weeks for v1 (20 recipes)</div>
+          <div><b>Lead metric</b>GitHub stars · weekly clones · external blog citations</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ───────────── PLAY 2 ───────────── -->
+  <section class="s">
+    <div class="s-num">§ 2 · Play 02</div>
+    <div class="play">
+      <div class="play-head">
+        <div class="play-rank">PLAY 02 · QUARTER</div>
+        <div class="play-title">Buy default IDE placement — start with Cursor</div>
+        <div class="play-tagline">Cursor is already a Coalition member contributing benchmarks. Convert that into "Nemotron is the default model new Cursor users see."</div>
+      </div>
+      <div class="play-body">
+
+        <div class="play-grid">
+          <div class="play-cell">
+            <div class="play-cell-label">Why it works</div>
+            <div class="play-cell-text">IDE / agent-tool defaults are the <b>single highest-leverage developer distribution channel of 2026</b>. Owning even one Cursor / Windsurf / Zed / Claude Code default reaches tens of millions of monthly developer impressions.</div>
+          </div>
+          <div class="play-cell">
+            <div class="play-cell-label">The gap today</div>
+            <div class="play-cell-text">Cursor is in the <b>Nemotron Coalition</b> and contributes coding benchmarks. <b>Yet Nemotron is not in Cursor's default model dropdown.</b> Anthropic is. The Coalition asset is unconverted.</div>
+          </div>
+          <div class="play-cell">
+            <div class="play-cell-label">Competitor proof</div>
+            <div class="play-cell-text">Claude is the default in Cursor + powers Windsurf's Cascade + integrates with Zed. <b>It's how Anthropic built developer mindshare without owning a consumer product.</b></div>
+          </div>
+          <div class="play-cell">
+            <div class="play-cell-label">What "winning" looks like</div>
+            <div class="play-cell-text">Nemotron is <b>Cursor's free-tier default for new users in three target use cases</b> (e.g., agent loops, structured outputs, fast coding). Wired up before GTC DC. <b>Then Windsurf, then Claude Code, then Zed.</b></div>
+          </div>
+        </div>
+
+        <div class="play-build">
+          <span class="label">What we'd build</span>
+          <ul>
+            <li>Co-marketing deal with Cursor — explicit free-tier default routing for new users on Nemotron 3 Super</li>
+            <li>Joint launch: "Cursor + Nemotron — fast, open, frontier coding free for every new dev"</li>
+            <li>Cursor-tuned recipes in the Cookbook (Play 01)</li>
+            <li>Telemetry deal: track activation, retention, and code completion metrics for the cohort</li>
+            <li>Roadmap: Windsurf (Q+1), Claude Code partnership exploration, Zed (open-source play)</li>
+          </ul>
+        </div>
+
+        <div class="play-meta">
+          <div><b>Owner</b>This role · BD · Strategic Partnerships</div>
+          <div><b>Partners</b>Cursor · then Windsurf · then Zed</div>
+          <div><b>Time to ship</b>~12 weeks for the Cursor deal</div>
+          <div><b>Lead metric</b>Daily active Nemotron requests from IDE-source · IDE-cohort retention</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ───────────── PLAY 3 ───────────── -->
+  <section class="s">
+    <div class="s-num">§ 3 · Play 03</div>
+    <div class="play">
+      <div class="play-head">
+        <div class="play-rank">PLAY 03 · QUARTER</div>
+        <div class="play-title">Activate the founder / researcher X voice</div>
+        <div class="play-tagline">Stop launching Nemotron from corporate handles. Land it from Bryan, Mostofa, Kalpit and the people who actually built it.</div>
+      </div>
+      <div class="play-body">
+
+        <div class="play-grid">
+          <div class="play-cell">
+            <div class="play-cell-label">Why it works</div>
+            <div class="play-cell-text">Developer Twitter rewards <b>named, technical, founder-voice</b>. Dario, Mike Krieger, Mensch, DeepSeek researchers all drop benchmarks themselves. Corporate handles get retweets; researcher accounts get virality, dev-press follow-on, and trust.</div>
+          </div>
+          <div class="play-cell">
+            <div class="play-cell-label">The gap today</div>
+            <div class="play-cell-text">@NVIDIA and @NVIDIAAIDev are corporate-coded — slow cadence, no benchmark drops, no "weights are live" energy. <b>The Nemotron researchers exist on X but aren't on the launch front line.</b></div>
+          </div>
+          <div class="play-cell">
+            <div class="play-cell-label">Competitor proof</div>
+            <div class="play-cell-text">DeepSeek's whole 2025-26 trajectory was researcher tweets going viral. Anthropic launched Claude Opus 4.6 with a Dario thread. Mistral 3 was a Mensch + ASML thread.</div>
+          </div>
+          <div class="play-cell">
+            <div class="play-cell-label">What "winning" looks like</div>
+            <div class="play-cell-text">A roster of <b>5–8 named NVIDIA AI researchers</b> with active developer-Twitter presence. Every Nemotron release gets at least 3 founder/researcher threads with benchmark screenshots within hours. <b>Trending in developer circles for the model — not for the GPU.</b></div>
+          </div>
+        </div>
+
+        <div class="play-build">
+          <span class="label">What we'd build</span>
+          <ul>
+            <li>Recruit 5-8 named NVIDIA AI leads as "Nemotron faces" — incentivized to post benchmark drops, training tricks, "weights live" threads</li>
+            <li>Internal X studio: prep benchmark screenshots, recipe shorts, response templates so researchers can post quickly without losing voice</li>
+            <li>Weekly "release rhythm" — one researcher post per business day from Nemotron leads, escalating during launches</li>
+            <li>Founder-thread template playbook for every Nemotron release (3 threads, 3 angles, 3 voices)</li>
+            <li>Tie-in to the Cookbook (Play 01) — researcher posts link to runnable notebooks</li>
+          </ul>
+        </div>
+
+        <div class="play-meta">
+          <div><b>Owner</b>This role · DevRel · Corporate Comms</div>
+          <div><b>Partners</b>Named researchers · social team</div>
+          <div><b>Time to ship</b>~8 weeks to first launch in new rhythm</div>
+          <div><b>Lead metric</b>Researcher-thread impressions · "Nemotron" Twitter mentions · followers on AI-lead accounts</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ───────────── PLAY 4 ───────────── -->
+  <section class="s">
+    <div class="s-num">§ 4 · Play 04</div>
+    <div class="play">
+      <div class="play-head">
+        <div class="play-rank">PLAY 04 · HALF</div>
+        <div class="play-title">Go MCP-native. Ship 20+ first-party MCP servers.</div>
+        <div class="play-tagline">If MCP is the lingua franca of the agent era, NVIDIA's absence from it is unforced.</div>
+      </div>
+      <div class="play-body">
+
+        <div class="play-grid">
+          <div class="play-cell">
+            <div class="play-cell-label">Why it works</div>
+            <div class="play-cell-text"><b>MCP is the standard for tool-calling and agent integrations in 2026.</b> Cursor, Windsurf, Zed, VS Code, Claude Code, ChatGPT Apps SDK — all MCP-compatible. Every model not MCP-native feels legacy.</div>
+          </div>
+          <div class="play-cell">
+            <div class="play-cell-label">The gap today</div>
+            <div class="play-cell-text">NVIDIA has <b>no first-party MCP servers</b> for the Nemotron / NIM / Triton / Run:ai / AI Workbench / Brev stack. An agent developer reaching for "the MCP server for $X NVIDIA product" finds nothing.</div>
+          </div>
+          <div class="play-cell">
+            <div class="play-cell-label">Competitor proof</div>
+            <div class="play-cell-text">Anthropic invented MCP. OpenAI extended it via ChatGPT Apps SDK. Thomson Reuters CoCounsel ships an MCP server. <b>9 creative-tool connectors</b> (Blender, Adobe, Autodesk, Ableton, Splice) ship MCP integration with Claude.</div>
+          </div>
+          <div class="play-cell">
+            <div class="play-cell-label">What "winning" looks like</div>
+            <div class="play-cell-text"><b>20+ first-party MCP servers</b> on the official MCP registry by end of Q3 — Nemotron, NIM deploy, NGC pull, Triton serve, Run:ai schedule, Workbench env, Brev launchable, DGX Cloud, build.nvidia.com playground, plus model-specific (Parakeet voice, GR00T sim, Cosmos generate, etc.).</div>
+          </div>
+        </div>
+
+        <div class="play-build">
+          <span class="label">What we'd build</span>
+          <ul>
+            <li>MCP server reference architecture for the NVIDIA stack — versioned, on the official registry</li>
+            <li>20+ first-party servers across products (priority: model invocation, NIM lifecycle, NGC pull, Triton serve, Run:ai schedule, Brev launchable)</li>
+            <li>Sample agent built on those MCP servers — included in the Cookbook (Play 01)</li>
+            <li>Sponsored MCP server contributions for top OSS tools (a Cursor MCP server using Nemotron · a LangChain MCP integration · a llama.cpp port)</li>
+            <li>Joint launch with Anthropic: "Claude + Nemotron Coalition MCP servers ship together"</li>
+          </ul>
+        </div>
+
+        <div class="play-meta">
+          <div><b>Owner</b>This role · Engineering · DevRel</div>
+          <div><b>Partners</b>Anthropic (MCP registry) · Cursor · LangChain</div>
+          <div><b>Time to ship</b>~6 months for 20 servers + sample agent</div>
+          <div><b>Lead metric</b>MCP servers shipped · installs on MCP registry · agent integrations citing NVIDIA servers</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ───────────── PLAY 5 ───────────── -->
+  <section class="s">
+    <div class="s-num">§ 5 · Play 05</div>
+    <div class="play">
+      <div class="play-head">
+        <div class="play-rank">PLAY 05 · HALF</div>
+        <div class="play-title">Launch the $50M "Built with Nemotron" program</div>
+        <div class="play-tagline">Inception covers startups. Nothing covers the indie devs and OSS maintainers writing the missing "How I built X with Nemotron" stories.</div>
+      </div>
+      <div class="play-body">
+
+        <div class="play-grid">
+          <div class="play-cell">
+            <div class="play-cell-label">Why it works</div>
+            <div class="play-cell-text">"How I built X" content on Hacker News, r/LocalLLaMA, dev.to, Substack — <b>that's the surface that proves a model is real.</b> It's also the cheapest paid-distribution channel in dev marketing.</div>
+          </div>
+          <div class="play-cell">
+            <div class="play-cell-label">The gap today</div>
+            <div class="play-cell-text">No equivalent of Anthropic's $100M Partner Network for indie devs and OSS maintainers building on Nemotron. <b>The LangChain integration writer, the llama.cpp porter, the Cursor extension dev, the r/LocalLLaMA hobbyist — nobody is paid to ship Nemotron content.</b></div>
+          </div>
+          <div class="play-cell">
+            <div class="play-cell-label">Competitor proof</div>
+            <div class="play-cell-text">Anthropic's <a href="https://www.anthropic.com/news/claude-partner-network">$100M Claude Partner Network</a> (March 2026) — direct dollars, training, sales enablement. Accenture trained 30K. Deloitte 470K seats. <b>The dollars create the partners; the partners create the proof.</b></div>
+          </div>
+          <div class="play-cell">
+            <div class="play-cell-label">What "winning" looks like</div>
+            <div class="play-cell-text"><b>500 "Built with Nemotron" projects shipped within 12 months.</b> 50 with HN front-page write-ups. 5 case studies of the year from indie devs. Nemotron mentioned in the same breath as Llama and Qwen on r/LocalLLaMA.</div>
+          </div>
+        </div>
+
+        <div class="play-build">
+          <span class="label">What we'd build</span>
+          <ul>
+            <li>$50M committed across 24 months — $30M direct grants to indie devs, $10M to OSS maintainers (LangChain integration, llama.cpp port, vLLM kernels, Cursor extensions), $10M Latent Space / AI Engineer / KubeCon sponsorships + speaker support</li>
+            <li>Grant tiers: $5K micro-grants (rapid, 50+ per quarter), $25K project grants, $100K studio grants for ambitious builds</li>
+            <li>Co-promotion: every grantee gets a Cookbook recipe (Play 01) + a researcher boost on Twitter (Play 03)</li>
+            <li>"Built with Nemotron" landing page — gallery, sortable by use case</li>
+            <li>Annual "Builders Day" — physical event in SF + virtual, all NVIDIA grantees pitch their projects</li>
+          </ul>
+        </div>
+
+        <div class="play-meta">
+          <div><b>Owner</b>This role · Inception · Marketing budget</div>
+          <div><b>Partners</b>Inception · Cursor · LangChain · OpenRouter · OSS maintainers</div>
+          <div><b>Time to ship</b>~4 months to v1 (program structure + first 30 grants)</div>
+          <div><b>Lead metric</b>Projects shipped · HN front-page mentions · r/LocalLLaMA Nemotron posts · external blog citations</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ───────────── BONUS PLAYS ───────────── -->
+  <section class="s">
+    <div class="s-num">§ 6 · Adjacent plays worth queuing</div>
+    <h2 class="s-title">Smaller bets that compound the top five.</h2>
+    <p class="s-sub">Not headline plays on their own, but each one strengthens the five above by 10–25%. Easy candidates for the second half of the year.</p>
+
+    <div class="bonus">
+
+      <div class="bonus-card">
+        <h4>Aggressive OpenRouter free-tier campaign</h4>
+        <p>Nemotron is on OpenRouter free already but invisible. Co-marketing budget with OpenRouter + paid <em>default routing</em> for "best open reasoning model" surface.</p>
+        <span class="from">From DeepSeek's playbook</span>
+      </div>
+
+      <div class="bonus-card">
+        <h4>Annual "Nemotron Day" — NVIDIA's DevDay equivalent</h4>
+        <p>Fall 2026 event positioned for developers (not architects). Use the OpenAI DevDay rhythm — coordinated announcements, partner integrations, agentic protocol news.</p>
+        <span class="from">From OpenAI's playbook</span>
+      </div>
+
+      <div class="bonus-card">
+        <h4>Loss-lead a use-case identity</h4>
+        <p>Pick one: <em>agentic reasoning at frontier throughput</em>, or <em>multilingual sovereign AI</em>. Loss-lead the use case for 90 days. Develop the one-line Nemotron is known for.</p>
+        <span class="from">From DeepSeek + Qwen</span>
+      </div>
+
+      <div class="bonus-card">
+        <h4>Open-weight release as marketing event</h4>
+        <p>Treat every Nemotron release the way Mistral treats Mistral 3 / Voxtral — weights as press cycle, not blog footnote. Coordinate Coalition partner shipments same-day.</p>
+        <span class="from">From Mistral's playbook</span>
+      </div>
+
+      <div class="bonus-card">
+        <h4>Co-developed protocols with anchor partners</h4>
+        <p>OpenAI did "Stripe Agentic Commerce Protocol." NVIDIA could co-develop a <b>Nemotron Coalition agent protocol</b> with Cursor + LangChain + Mistral. Standard-bearer status as marketing.</p>
+        <span class="from">From OpenAI's playbook</span>
+      </div>
+
+      <div class="bonus-card">
+        <h4>Show up at AI Engineer Summit + Latent Space</h4>
+        <p>Sponsor + send 5-10 NVIDIA engineers as speakers at <em>non-NVIDIA</em> dev conferences. AI Engineer Summit, KubeCon, PyData, Latent Space podcast. Stop being a research sponsor only.</p>
+        <span class="from">From every competitor's playbook</span>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ───────────── WRAP ───────────── -->
+  <section class="s">
+    <div class="s-num">§ 7 · Putting the five plays in sequence</div>
+    <h2 class="s-title">If we ran this, the year looks like:</h2>
+    <div style="font-size: 15.5px; line-height: 1.65; max-width: 760px;">
+      <p style="margin-bottom: 14px;"><b>By GTC DC (Q3 2026):</b> Cookbook v1 shipped (~25 recipes). Cursor default-routing deal live with public co-launch. Founder / researcher voice running daily on X. Two MCP servers in registry to show the work has started. First 30 "Built with Nemotron" grants out the door.</p>
+      <p style="margin-bottom: 14px;"><b>By GTC March 2027:</b> Cookbook at 75+ recipes, 5K+ stars. Default in two IDEs. Researcher-led launches as the new normal. 20+ MCP servers shipped. "Built with Nemotron" program at 200 projects, with 5 HN front-page write-ups in the books. <b>Nemotron is now mentioned in the same sentence as Llama, Qwen, and DeepSeek in dev-Twitter conversations.</b></p>
+      <p>The leaderboard from <a href="competitive.html" style="color: var(--green-dim); border-bottom: 1px dotted var(--green-dim); text-decoration: none;">competitive.html</a> moves. Not because the model got better — because the marketing surfaces did. That's what closes the gap. That's what the role is for.</p>
+    </div>
+  </section>
+
+</div>
+
+<footer>
+  <div class="who">Author</div>
+  <div class="name">Raja Rao DV</div>
+  <div class="role">VP of Marketing · Kumo (acquired by NVIDIA) · 15+ years dev + infra marketing</div>
+  <div class="links">
+    <a href="index.html">← 10-Layer Cake</a>
+    <a href="competitive.html">Where Nemotron stands</a>
+    <a href="nvidia-now.html">What NVIDIA does today</a>
+    <a href="competitors.html">Competitor playbooks</a>
+    <a href="plan.html">Role →</a>
+  </div>
+</footer>
+
+</body>
+</html>
