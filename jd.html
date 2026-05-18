@@ -115,6 +115,70 @@ section p:last-child { margin-bottom: 0; }
 }
 .mission b { font-weight: 800; }
 
+/* ROLE LIST — bullets + sub-bullets */
+.role-list {
+  list-style: none;
+  padding: 0;
+  margin-bottom: 8px;
+}
+.role-list > li {
+  font-size: 16.5px;
+  font-weight: 800;
+  line-height: 1.5;
+  color: var(--ink);
+  padding: 14px 0 4px 26px;
+  position: relative;
+  letter-spacing: -0.005em;
+}
+.role-list > li::before {
+  content: '';
+  position: absolute;
+  left: 6px;
+  top: 22px;
+  width: 10px;
+  height: 10px;
+  background: var(--green);
+}
+.role-list > li > ul {
+  list-style: none;
+  padding: 0;
+  margin: 8px 0 6px;
+}
+.role-list > li > ul > li {
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--ink2);
+  line-height: 1.55;
+  padding: 4px 0 4px 22px;
+  position: relative;
+}
+.role-list > li > ul > li::before {
+  content: '›';
+  position: absolute;
+  left: 6px;
+  top: 4px;
+  color: var(--green-dim);
+  font-weight: 800;
+  font-family: var(--mono);
+  font-size: 14px;
+}
+.role-list > li > ul > li b {
+  font-weight: 800;
+  color: var(--ink);
+}
+
+/* OUTCOME CALLOUT */
+.outcome-callout {
+  margin-top: 22px;
+  padding: 16px 20px;
+  background: linear-gradient(180deg, #f3f9e6 0%, #fff 100%);
+  border-left: 4px solid var(--green);
+  font-size: 15px;
+  line-height: 1.55;
+  color: var(--ink);
+}
+.outcome-callout b { font-weight: 800; }
+
 /* SUB H3 */
 .sub-h3 {
   font-size: 13.5px;
@@ -452,69 +516,54 @@ footer a { color: var(--ink2); text-decoration: none; border-bottom: 1px solid v
     </div>
   </section>
 
-  <!-- THE THREE THINGS -->
+  <!-- WHAT THIS ROLE DOES -->
   <section>
-    <h2>What this role exists to figure out — and solve</h2>
-    <p>Three things. Everything else (tactics, KPIs, headcount, budget) flows from these. Worked through with the CMO, Product, Research, DevRel, Sales, and Coalition partners — and driven end-to-end by this VP.</p>
+    <h2>What this role does</h2>
+    <p>The marketing goal is one thing: <b>make Nemotron the #1 open-source AI model in the world, measured by developer adoption.</b> To get there, three things have to happen. This VP owns all three — figured out with stakeholders, driven end-to-end.</p>
 
-    <div class="questions">
+    <ul class="role-list">
+      <li>
+        <b>Crack the go-to-market.</b> Start with the customer outcome — everything else falls out.
+        <ul>
+          <li><b>Customer outcome</b> — the one-line reason a developer chooses Nemotron over Claude / Qwen / DeepSeek. What can they build with us that they can't anywhere else?</li>
+          <li><b>ICP</b> — B2D individual developers, B2B mid-market SaaS, B2B enterprise. Pick the sequence and the channels for each.</li>
+          <li><b>Positioning</b> — "leading US-based open-source model" · "best at agentic reasoning" · "multimodal open default" · "open model US enterprise trusts." Pick one. Own it.</li>
+          <li><b>Competitive landscape</b> — where we lose today, where we can win. Customers always compare; have the answer ready.</li>
+        </ul>
+      </li>
+      <li>
+        <b>Run marketing as a supply chain.</b> Make Nemotron stupid-easy to adopt and impossible to ignore.
+        <ul>
+          <li><b>Engineering + ML + Product</b> — collapse the 19-portal maze. Get a developer from landing → first API call in under five minutes.</li>
+          <li><b>Developer Advocacy + DevRel</b> — compelling videos, hero demos, "how I built X with Nemotron" content. Turn "Nemotron is good" into "I tried it and it's incredible."</li>
+          <li><b>Marketing org (PR, AR, brand, social, growth)</b> — production-quality launches every release. Hero video, creator network, tier-1 press, founder/researcher voice on X.</li>
+          <li><b>Hackathons + conferences + creators</b> — show up beyond GTC. AI Engineer Summit, KubeCon, Cursor events, Latent Space podcast. Run our own at a higher bar.</li>
+        </ul>
+      </li>
+      <li>
+        <b>Turn partners into a global force multiplier.</b> Coalition, clouds, and ISVs as marketing channels — not duplicated work.
+        <ul>
+          <li><b>Coalition co-marketing</b> — Cursor, LangChain, Mistral, Perplexity, Black Forest Labs, Sarvam, Reflection, Thinking Machines. Joint launches and named partner pre-builds same-day as every release.</li>
+          <li><b>Customer quotes + adoption stories</b> — mine every partner deployment. Package, publish, repeat.</li>
+          <li><b>Co-marketing programs</b> — make it stupid-easy for partners to take our assets and market on our behalf, globally.</li>
+          <li><b>Partner marketing org partnership</b> — work alongside NVIDIA's existing partner marketing team. Force multiplier, not redundant effort.</li>
+        </ul>
+      </li>
+    </ul>
 
-      <div class="q">
-        <div class="q-num">01 · GO-TO-MARKET</div>
-        <div class="q-title">Figure out the customer outcome and the go-to-market.</div>
-        <div class="q-detail">
-          Start with what matters most: <b>why should a developer choose Nemotron?</b> From the customer outcome, everything else falls out.
-          <ul class="q-bullets">
-            <li><b>Customer outcome.</b> What can a developer build with Nemotron that they can't anywhere else? The one-line reason they care. This is the work that matters most.</li>
-            <li><b>ICP.</b> B2D (individual developers, OSS maintainers), B2B mid-market (Series A–C SaaS), B2B enterprise (Fortune 500). Different channels, content, pricing for each. Pick the sequence.</li>
-            <li><b>Positioning.</b> Against Claude / Qwen / DeepSeek / OpenAI / Mistral. Candidates: <em>"the leading US-based open-source model" · "best at agentic reasoning at frontier throughput" · "the multimodal open default" · "the open model US enterprise trusts."</em> Pick one. Own it.</li>
-            <li><b>Gaps + competitive landscape.</b> Where we lose today, where we can win. Customers always compare; have the answer ready.</li>
-          </ul>
-        </div>
-      </div>
-
-      <div class="q">
-        <div class="q-num">02 · MARKETING AS SUPPLY CHAIN</div>
-        <div class="q-title">Make Nemotron stupid-easy to adopt — and impossible to ignore.</div>
-        <div class="q-detail">
-          Own the work. Orchestrate the teams. Marketing as supply chain — every campaign threads through multiple groups with deadlines, dependencies, one outcome.
-          <ul class="q-bullets">
-            <li><b>Engineering, ML, Product.</b> Make it simple to get started. Collapse the 19-portal maze. Get a developer from landing → first API call in under five minutes.</li>
-            <li><b>Developer Advocacy + DevRel.</b> Compelling videos, hero demos, "how I built X with Nemotron" content. The work that turns <em>"Nemotron is good"</em> into <em>"I tried it and it's incredible."</em></li>
-            <li><b>Marketing org (PR, AR, brand, social, growth).</b> Production-quality launches every release. Hero video, embargoed creator network, tier-1 press, founder/researcher voice on X.</li>
-            <li><b>Hackathons + conferences + creator programs.</b> Show up beyond GTC — AI Engineer Summit, KubeCon, Cursor events, Latent Space podcast. Run our own at a higher bar.</li>
-          </ul>
-        </div>
-      </div>
-
-      <div class="q">
-        <div class="q-num">03 · PARTNERS</div>
-        <div class="q-title">Turn partners into a global force multiplier.</div>
-        <div class="q-detail">
-          Make every Nemotron Coalition member, cloud partner, and ISV a marketing channel for Nemotron — without us doing the work twice.
-          <ul class="q-bullets">
-            <li><b>Coalition co-marketing.</b> Cursor, LangChain, Mistral, Perplexity, Black Forest Labs, Sarvam, Reflection AI, Thinking Machines. Joint launches, default-routing deals, named partner pre-builds same-day as every release.</li>
-            <li><b>Customer quotes + adoption stories.</b> Every partner deployment is a credible case study. Mine them, package them, publish them at scale.</li>
-            <li><b>Co-marketing programs.</b> Make it stupid-easy for partners to take our assets and market on our behalf — globally. Toolkits, briefs, co-funded campaigns, asset libraries.</li>
-            <li><b>Partner marketing org partnership.</b> Work alongside NVIDIA's existing partner marketing team on the gen-AI surface. Force multiplier, not duplicated effort.</li>
-          </ul>
-        </div>
-      </div>
-
+    <div class="outcome-callout">
+      <b>All three serve one thing — the customer outcome.</b> If a developer builds something with Nemotron they couldn't build elsewhere and tells everyone about it, that's our marketing outcome too.
     </div>
-
-    <p style="margin-top: 18px; font-size: 15px; color: var(--ink2); padding: 14px 18px; background: #f3f9e6; border-left: 3px solid var(--green);"><b>All three serve one thing:</b> the customer outcome. If a developer builds something with Nemotron they couldn't build elsewhere — and tells everyone about it — that's our marketing outcome too.</p>
   </section>
 
   <!-- SUCCESS -->
   <section>
     <h2>What success looks like</h2>
-    <div class="success">
-      <div class="success-head">To be defined with stakeholders — these are the headlines</div>
-      <p><b>12 months</b> — Nemotron in the top 3 open models by OpenRouter token volume, HuggingFace monthly downloads, and AI-engine share-of-voice. One clear positioning claim landed in market.</p>
-      <p><b>24 months</b> — #1 open model on at least one of those three. A defined niche where Nemotron is the answer. Self-serve developer pipeline feeding NVAIE.</p>
-      <p>Specific KPIs (signups, activation rate, retention, conversion to paid, qualified pipeline) flow from the answers to Q01–Q07 above. Locked in the first 60 days alongside the strategy.</p>
-    </div>
+    <ul class="role-list">
+      <li><b>12 months</b> — Nemotron in the <b>top 3 open-source models</b> by OpenRouter token volume, HuggingFace monthly downloads, and AI-engine share-of-voice. One clear positioning claim landed in market.</li>
+      <li><b>24 months</b> — <b>#1 open-source model</b> on at least one of those three. A defined niche where Nemotron is the undeniable answer. Self-serve developer pipeline feeding NVAIE.</li>
+    </ul>
+    <p style="font-size: 14px; color: var(--ink3); font-style: italic; margin-top: 12px;">Specific KPIs — signups, activation, retention, conversion, qualified pipeline — locked in the first 60 days alongside the strategy.</p>
   </section>
 
   <footer>
