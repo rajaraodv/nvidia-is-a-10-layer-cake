@@ -199,11 +199,34 @@ section p:last-child { margin-bottom: 0; }
   margin-bottom: 4px;
 }
 .q-detail {
-  font-size: 13.5px;
+  font-size: 14px;
   color: var(--ink2);
-  line-height: 1.5;
+  line-height: 1.55;
 }
 .q-detail em { font-style: italic; color: var(--ink3); }
+.q-bullets {
+  list-style: none;
+  padding: 0;
+  margin: 10px 0 0;
+}
+.q-bullets li {
+  font-size: 13.5px;
+  color: var(--ink);
+  line-height: 1.55;
+  padding: 4px 0 4px 18px;
+  position: relative;
+}
+.q-bullets li::before {
+  content: '›';
+  position: absolute;
+  left: 4px;
+  top: 4px;
+  color: var(--green-dim);
+  font-weight: 800;
+  font-family: var(--mono);
+  font-size: 14px;
+}
+.q-bullets li b { font-weight: 800; color: var(--ink); }
 
 /* SUCCESS BOX */
 .success {
@@ -354,73 +377,58 @@ footer a { color: var(--ink2); text-decoration: none; border-bottom: 1px solid v
     </div>
   </section>
 
-  <!-- STRATEGIC QUESTIONS -->
+  <!-- THE THREE THINGS -->
   <section>
     <h2>What this role exists to figure out — and solve</h2>
-    <p>Strategic questions this VP owns end-to-end. <b>Work with key stakeholders — Product, Research, DevRel, Sales, and Coalition partners — to answer them, then drive the execution that solves them.</b> Tactics and KPIs flow from the answers.</p>
+    <p>Three things. Everything else (tactics, KPIs, headcount, budget) flows from these. Worked through with the CMO, Product, Research, DevRel, Sales, and Coalition partners — and driven end-to-end by this VP.</p>
 
     <div class="questions">
 
       <div class="q">
-        <div class="q-num">Q · 01</div>
-        <div class="q-title">What's our positioning?</div>
+        <div class="q-num">01 · GO-TO-MARKET</div>
+        <div class="q-title">Figure out the customer outcome and the go-to-market.</div>
         <div class="q-detail">
-          What's the one-line answer to "why Nemotron, not Claude / Qwen / DeepSeek?"
-          <em>Candidate angles to test: "the leading US-based open-source model" · "the best open model for agentic reasoning at frontier throughput" · "the open model that runs everywhere NVIDIA hardware does" · "the multimodal open default." Which one wins?</em>
+          Start with what matters most: <b>why should a developer choose Nemotron?</b> From the customer outcome, everything else falls out.
+          <ul class="q-bullets">
+            <li><b>Customer outcome.</b> What can a developer build with Nemotron that they can't anywhere else? The one-line reason they care. This is the work that matters most.</li>
+            <li><b>ICP.</b> B2D (individual developers, OSS maintainers), B2B mid-market (Series A–C SaaS), B2B enterprise (Fortune 500). Different channels, content, pricing for each. Pick the sequence.</li>
+            <li><b>Positioning.</b> Against Claude / Qwen / DeepSeek / OpenAI / Mistral. Candidates: <em>"the leading US-based open-source model" · "best at agentic reasoning at frontier throughput" · "the multimodal open default" · "the open model US enterprise trusts."</em> Pick one. Own it.</li>
+            <li><b>Gaps + competitive landscape.</b> Where we lose today, where we can win. Customers always compare; have the answer ready.</li>
+          </ul>
         </div>
       </div>
 
       <div class="q">
-        <div class="q-num">Q · 02</div>
-        <div class="q-title">Who is the ICP — B2B, B2D, or both?</div>
+        <div class="q-num">02 · MARKETING AS SUPPLY CHAIN</div>
+        <div class="q-title">Make Nemotron stupid-easy to adopt — and impossible to ignore.</div>
         <div class="q-detail">
-          B2B enterprise (Fortune 500 building internal agents), B2B mid-market (Series A–C SaaS companies), or B2D (individual developers, indie builders, OSS maintainers)? Different audiences require different channels, content, pricing, and metrics.
-          <em>Hypothesis: both — but B2D first builds the gravity B2B then converts.</em>
+          Own the work. Orchestrate the teams. Marketing as supply chain — every campaign threads through multiple groups with deadlines, dependencies, one outcome.
+          <ul class="q-bullets">
+            <li><b>Engineering, ML, Product.</b> Make it simple to get started. Collapse the 19-portal maze. Get a developer from landing → first API call in under five minutes.</li>
+            <li><b>Developer Advocacy + DevRel.</b> Compelling videos, hero demos, "how I built X with Nemotron" content. The work that turns <em>"Nemotron is good"</em> into <em>"I tried it and it's incredible."</em></li>
+            <li><b>Marketing org (PR, AR, brand, social, growth).</b> Production-quality launches every release. Hero video, embargoed creator network, tier-1 press, founder/researcher voice on X.</li>
+            <li><b>Hackathons + conferences + creator programs.</b> Show up beyond GTC — AI Engineer Summit, KubeCon, Cursor events, Latent Space podcast. Run our own at a higher bar.</li>
+          </ul>
         </div>
       </div>
 
       <div class="q">
-        <div class="q-num">Q · 03</div>
-        <div class="q-title">What's the use-case we win?</div>
+        <div class="q-num">03 · PARTNERS</div>
+        <div class="q-title">Turn partners into a global force multiplier.</div>
         <div class="q-detail">
-          DeepSeek owns reasoning-at-low-cost. Anthropic owns coding-agents. Qwen owns multilingual. Where can Nemotron be undeniably best?
-          <em>Candidates: agentic reasoning at frontier throughput · multimodal (Nemotron Nano 2 VL) · sovereign / on-prem deployment · coding agents with the Cursor partnership · long-context (1M+ tokens). We pick one to dominate, then expand.</em>
-        </div>
-      </div>
-
-      <div class="q">
-        <div class="q-num">Q · 04</div>
-        <div class="q-title">How do we fix launches?</div>
-        <div class="q-detail">
-          Every Nemotron release should be a category-defining moment. What does the production-quality launch playbook look like — hero video, partner pre-builds, embargoed creator access, tier-1 press, founder/researcher voice on X? Who owns each piece?
-        </div>
-      </div>
-
-      <div class="q">
-        <div class="q-num">Q · 05</div>
-        <div class="q-title">How do we collapse the entry surface?</div>
-        <div class="q-detail">
-          19+ developer portals. Fragmented logins. The first-impression developer often leaves before getting to a working API call. What's the single front door, the single console, and the path from landing to first call in under 5 minutes?
-        </div>
-      </div>
-
-      <div class="q">
-        <div class="q-num">Q · 06</div>
-        <div class="q-title">What's the adoption motion?</div>
-        <div class="q-detail">
-          Free tier hits 40 RPM. Next step today is NVAIE at $1K+/GPU/yr. Nothing in between. Do we add Individual + Team paid tiers? PLG-to-NVAIE qualified-pipeline motion? Where does that fit in the bigger strategy?
-        </div>
-      </div>
-
-      <div class="q">
-        <div class="q-num">Q · 07</div>
-        <div class="q-title">Where does NVIDIA show up in dev culture?</div>
-        <div class="q-detail">
-          Today NVIDIA owns GTC. Anthropic / OpenAI / Mistral show up everywhere else — AI Engineer Summit, KubeCon, Cursor events, Latent Space podcast. What's the conference / hackathon / creator strategy beyond GTC?
+          Make every Nemotron Coalition member, cloud partner, and ISV a marketing channel for Nemotron — without us doing the work twice.
+          <ul class="q-bullets">
+            <li><b>Coalition co-marketing.</b> Cursor, LangChain, Mistral, Perplexity, Black Forest Labs, Sarvam, Reflection AI, Thinking Machines. Joint launches, default-routing deals, named partner pre-builds same-day as every release.</li>
+            <li><b>Customer quotes + adoption stories.</b> Every partner deployment is a credible case study. Mine them, package them, publish them at scale.</li>
+            <li><b>Co-marketing programs.</b> Make it stupid-easy for partners to take our assets and market on our behalf — globally. Toolkits, briefs, co-funded campaigns, asset libraries.</li>
+            <li><b>Partner marketing org partnership.</b> Work alongside NVIDIA's existing partner marketing team on the gen-AI surface. Force multiplier, not duplicated effort.</li>
+          </ul>
         </div>
       </div>
 
     </div>
+
+    <p style="margin-top: 18px; font-size: 15px; color: var(--ink2); padding: 14px 18px; background: #f3f9e6; border-left: 3px solid var(--green);"><b>All three serve one thing:</b> the customer outcome. If a developer builds something with Nemotron they couldn't build elsewhere — and tells everyone about it — that's our marketing outcome too.</p>
   </section>
 
   <!-- SUCCESS -->
