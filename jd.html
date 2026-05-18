@@ -115,6 +115,81 @@ section p:last-child { margin-bottom: 0; }
 }
 .mission b { font-weight: 800; }
 
+/* SUB H3 */
+.sub-h3 {
+  font-size: 13.5px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--green-dim);
+  margin-top: 26px;
+  margin-bottom: 10px;
+}
+.r-note-foot {
+  margin-top: 12px;
+  font-size: 13.5px;
+  color: var(--ink2);
+  line-height: 1.5;
+  padding: 10px 14px;
+  background: #fafafa;
+  border-left: 3px solid var(--ink);
+}
+.r-note-foot b { font-weight: 800; color: var(--ink); }
+
+/* RANKED LIST */
+.ranks {
+  border: 1px solid var(--rule);
+  background: #fff;
+}
+.rank-row {
+  display: grid;
+  grid-template-columns: 44px 220px 1fr;
+  align-items: center;
+  padding: 11px 14px;
+  border-bottom: 1px solid var(--rule);
+  gap: 14px;
+  font-size: 13.5px;
+  line-height: 1.45;
+}
+.rank-row:last-child { border-bottom: none; }
+.rank-row:nth-child(even) { background: #fafafa; }
+.rank-row.us {
+  background: #f3f9e6 !important;
+  border-left: 4px solid var(--green);
+}
+.rank-row.us .r-num { color: var(--green-dim); }
+.rank-row.us .r-name { color: var(--green-dim); }
+.r-num {
+  font-family: var(--mono);
+  font-size: 18px;
+  font-weight: 900;
+  letter-spacing: -0.03em;
+  color: var(--ink);
+}
+.r-name {
+  font-weight: 800;
+  font-size: 14.5px;
+}
+.r-name span {
+  display: block;
+  font-size: 11px;
+  font-weight: 400;
+  color: var(--ink3);
+  font-family: var(--mono);
+  margin-top: 1px;
+  letter-spacing: 0.02em;
+}
+.r-note {
+  font-size: 13px;
+  color: var(--ink2);
+  line-height: 1.45;
+}
+@media (max-width: 600px) {
+  .rank-row { grid-template-columns: 36px 1fr; gap: 10px; }
+  .r-note { grid-column: 1 / -1; padding-left: 46px; }
+  .rank-row.us .r-note { padding-left: 42px; }
+}
+
 /* STAT GRID */
 .stats {
   display: grid;
@@ -304,39 +379,39 @@ footer a { color: var(--ink2); text-decoration: none; border-bottom: 1px solid v
     </div>
   </section>
 
-  <!-- WHERE WE ARE -->
+  <!-- WHERE WE STAND -->
   <section>
-    <h2>Where we are today</h2>
-    <p>Nemotron is technically excellent. Commercially, it's invisible.</p>
+    <h2>Where we stand today</h2>
+    <p>Three views: where Nemotron ranks vs open models, vs closed/proprietary models, and on launch quality. Nemotron is technically excellent — commercially, it's invisible.</p>
 
-    <div class="stats">
-      <div class="stat">
-        <div class="stat-num good">#1</div>
-        <div class="stat-text">Nemotron 3 Super on the <b>Artificial Analysis efficiency-adjusted intelligence index</b>. The model is real.</div>
-      </div>
-      <div class="stat">
-        <div class="stat-num bad">Not top 20</div>
-        <div class="stat-text">on <b>OpenRouter token volume</b> — the most honest developer-billed usage signal. Chinese-origin models are 51% of OpenRouter traffic. Anthropic 15%. Nemotron rounds to zero.</div>
-      </div>
-      <div class="stat">
-        <div class="stat-num bad">~1B vs ~?M</div>
-        <div class="stat-text"><b>Qwen has crossed 1 billion HuggingFace downloads.</b> NVIDIA is in the trailing pack of model families whose combined monthly downloads are less than Qwen's alone.</div>
-      </div>
-      <div class="stat">
-        <div class="stat-num bad">CodeRabbit, Factory, Greptile</div>
-        <div class="stat-text">were the Nemotron 3 Super launch partners. <b>Mid-market dev tools.</b> OpenAI launches with Notion, Stripe, Adobe, JetBrains, Shopify.</div>
-      </div>
+    <!-- VS OPEN -->
+    <h3 class="sub-h3">Vs open-source models — by developer mindshare</h3>
+    <div class="ranks">
+      <div class="rank-row"><div class="r-num">1</div><div class="r-name">Qwen 3.5 / 3.6 <span>· Alibaba</span></div><div class="r-note">1B+ HF downloads · 50%+ of all open-source · 90K+ enterprise adopters</div></div>
+      <div class="rank-row"><div class="r-num">2</div><div class="r-name">DeepSeek V4 <span>· DeepSeek</span></div><div class="r-note">Frontier reasoning at MIT license · 7× cheaper than Claude at parity</div></div>
+      <div class="rank-row"><div class="r-num">3</div><div class="r-name">Llama 4 <span>· Meta</span></div><div class="r-note">Strongest open brand · 10M-token context on Scout</div></div>
+      <div class="rank-row"><div class="r-num">4</div><div class="r-name">Kimi K2.6 / GLM-5.1 <span>· Moonshot / Zhipu</span></div><div class="r-note">OpenRouter token-volume leaders · coding-agent specialists</div></div>
+      <div class="rank-row"><div class="r-num">5</div><div class="r-name">Mistral / Gemma <span>· Mistral / Google</span></div><div class="r-note">European frontier · Apache 2.0 · sovereign-AI positioning</div></div>
+      <div class="rank-row us"><div class="r-num">6</div><div class="r-name">Nemotron 3 <span>· NVIDIA — us</span></div><div class="r-note">#1 on efficiency-adjusted intelligence · but not in OpenRouter top 20</div></div>
     </div>
-  </section>
 
-  <!-- WHAT WE'RE MISSING -->
-  <section>
-    <h2>What's missing today</h2>
-    <p>What competitors do at launch and ongoing that we don't:</p>
+    <!-- VS CLOSED -->
+    <h3 class="sub-h3">Vs closed / proprietary models — by capability and reach</h3>
+    <div class="ranks">
+      <div class="rank-row"><div class="r-num">1</div><div class="r-name">Claude Opus 4.6 <span>· Anthropic</span></div><div class="r-note">Chatbot Arena leader (Elo 1504) · default in Cursor, Windsurf, Claude Code</div></div>
+      <div class="rank-row"><div class="r-num">2</div><div class="r-name">GPT-5.2 <span>· OpenAI</span></div><div class="r-note">ChatGPT consumer flywheel · 4M paid developers · 6B+ tokens/min</div></div>
+      <div class="rank-row"><div class="r-num">3</div><div class="r-name">Gemini 3.1 Pro <span>· Google</span></div><div class="r-note">Google Cloud + Search distribution · Workspace integration</div></div>
+      <div class="rank-row"><div class="r-num">4</div><div class="r-name">Grok 4.20 <span>· xAI</span></div><div class="r-note">X / Tesla / Optimus distribution · enterprise plays building</div></div>
+      <div class="rank-row us"><div class="r-num">—</div><div class="r-name">Nemotron 3 <span>· NVIDIA — us</span></div><div class="r-note">Not in this lane. NVIDIA's bet is the open lane — where developers actually live.</div></div>
+    </div>
+    <p class="r-note-foot">The strategy is clear: <b>compete in the open lane and win it.</b> Today we're #6 in that lane. The next section is why.</p>
+
+    <!-- LAUNCH QUALITY -->
+    <h3 class="sub-h3">Vs everyone — what they do at launch that we don't</h3>
     <div class="compare">
       <div class="compare-row head">
         <div>Launch surface</div>
-        <div>OpenAI / Anthropic</div>
+        <div>OpenAI / Anthropic / Qwen / DeepSeek</div>
         <div>Nemotron today</div>
       </div>
       <div class="compare-row">
@@ -367,12 +442,12 @@ footer a { color: var(--ink2); text-decoration: none; border-bottom: 1px solid v
       <div class="compare-row">
         <div class="label">Audience reach</div>
         <div class="them">B2B (enterprise) + B2D (individual devs)</div>
-        <div class="we">Enterprise-leaning. Individual developer surface underweighted.</div>
+        <div class="we">Enterprise-leaning · individual-dev surface underweighted</div>
       </div>
       <div class="compare-row">
         <div class="label">Use-case identity</div>
-        <div class="them">"Best at reasoning" · "Best at coding" · "Best at agents"</div>
-        <div class="we">No equivalent one-line claim. Me-too.</div>
+        <div class="them">"Best at reasoning" · "Best at coding" · "Best at agents" · "Best at multilingual"</div>
+        <div class="we">No one-line claim. Me-too.</div>
       </div>
     </div>
   </section>
