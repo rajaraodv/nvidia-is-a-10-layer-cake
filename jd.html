@@ -137,14 +137,18 @@ section p:last-child { margin-bottom: 0; }
   border-left: 6px solid var(--green);
   position: relative;
 }
-.mission-tag {
-  font-family: var(--mono);
-  font-size: 11.5px;
-  font-weight: 800;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
+.mission-header {
+  font-size: 20px;
+  font-weight: 900;
+  color: #fff;
+  letter-spacing: -0.01em;
+  margin-bottom: 18px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid rgba(255,255,255,0.18);
+}
+.mission-statement .focus {
   color: var(--green);
-  margin-bottom: 20px;
+  font-weight: 900;
 }
 .mission-statement {
   font-size: clamp(22px, 3vw, 30px);
@@ -515,8 +519,8 @@ footer a { color: var(--ink2); text-decoration: none; border-bottom: 1px solid v
   <!-- MISSION -->
   <section class="mission-section">
     <div class="mission-hero">
-      <div class="mission-tag">The outcome we want · Single focus</div>
-      <div class="mission-statement">Make NVIDIA models such as Nemotron <span class="hl">the #1 open-source model in the world</span>, measured by developer adoption.</div>
+      <div class="mission-header">Outcome for this role</div>
+      <div class="mission-statement"><span class="focus">Single focus.</span> Make NVIDIA models such as Nemotron <span class="hl">the #1 open-source model in the world</span>, measured by developer adoption.</div>
     </div>
   </section>
 
