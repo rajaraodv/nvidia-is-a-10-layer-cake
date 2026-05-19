@@ -128,16 +128,41 @@ section p {
 }
 section p:last-child { margin-bottom: 0; }
 
-/* MISSION CALLOUT */
-.mission {
-  background: linear-gradient(180deg, #f3f9e6 0%, #fff 100%);
-  border-left: 4px solid var(--green);
-  padding: 18px 22px;
-  font-size: 17px;
-  line-height: 1.5;
-  font-weight: 500;
+/* MISSION HERO */
+.mission-section { padding-top: 24px; }
+.mission-hero {
+  background: var(--ink);
+  color: #fff;
+  padding: 36px 38px 38px;
+  border-left: 6px solid var(--green);
+  position: relative;
 }
-.mission b { font-weight: 800; }
+.mission-tag {
+  font-family: var(--mono);
+  font-size: 11.5px;
+  font-weight: 800;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--green);
+  margin-bottom: 20px;
+}
+.mission-statement {
+  font-size: clamp(22px, 3vw, 30px);
+  font-weight: 800;
+  line-height: 1.3;
+  letter-spacing: -0.015em;
+  color: #fff;
+}
+.mission-statement .hl {
+  color: var(--green);
+  font-weight: 900;
+  white-space: nowrap;
+}
+@media (max-width: 720px) {
+  .mission-hero { padding: 24px 22px 26px; border-left-width: 5px; }
+  .mission-statement { font-size: 19px; }
+  .mission-statement .hl { white-space: normal; }
+}
 
 /* ROLE LIST — numbered + sub-bullets */
 .role-list {
@@ -488,10 +513,10 @@ footer a { color: var(--ink2); text-decoration: none; border-bottom: 1px solid v
   </div>
 
   <!-- MISSION -->
-  <section>
-    <h2>The outcome we want</h2>
-    <div class="mission">
-      <b>One job.</b> NVIDIA makes open AI models such as Nemotron. Make Nemotron <b>the #1 open-source model in the world</b>, measured by developer adoption.
+  <section class="mission-section">
+    <div class="mission-hero">
+      <div class="mission-tag">The outcome we want · Single focus</div>
+      <div class="mission-statement">Make NVIDIA models such as Nemotron <span class="hl">the #1 open-source model in the world</span>, measured by developer adoption.</div>
     </div>
   </section>
 
