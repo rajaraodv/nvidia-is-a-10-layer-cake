@@ -239,6 +239,28 @@ section p:last-child { margin-bottom: 0; }
 }
 .outcome-callout b { font-weight: 800; }
 
+/* INLINE TAGS — subtle, on sub-bullets */
+.tag {
+  display: inline-block;
+  font-family: var(--mono);
+  font-size: 9.5px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 2px 7px 2.5px;
+  margin-left: 6px;
+  border-radius: 2px;
+  white-space: nowrap;
+  line-height: 1;
+  position: relative;
+  top: -1px;
+}
+.tag-dev-mktg { background: #eaf1fb; color: #2f4f8f; }
+.tag-growth   { background: #eef7d6; color: #5a8e00; }
+.tag-devrel   { background: #fdebcf; color: #a8520a; }
+.tag-partner  { background: #efe6f7; color: #6b3a8c; }
+.tag-brand    { background: #ececec; color: #3a3a3a; }
+
 /* OPPORTUNITY CALLOUT (gold — for the wedge nobody has won) */
 .opp-callout {
   margin-top: 22px;
@@ -672,29 +694,29 @@ footer a { color: var(--ink2); text-decoration: none; border-bottom: 1px solid v
       <li>
         <b>Understand and start fixing the developer funnel.</b> Foundation work: map where Nemotron loses developers today, then ship the fixes against the leakiest stages. Diagnosis and action together.
         <ul>
-          <li><b>Awareness</b>. Most developers don't know Nemotron exists. Diagnose where they look for "the best open model" today, then start landing Nemotron in those channels: AI engines, search, dev podcasts, OSS communities.</li>
-          <li><b>Trial &amp; activation</b>. From landing to first API call, the path is broken (19+ portals, fragmented logins, the "Public API Endpoints" permission bug). Map it, quantify the dropoffs, work with Product and Engineering to fix the worst leaks first.</li>
-          <li><b>Product &amp; ICP fit</b>. Does the model deliver for the developer who is our ICP? Lock the ICP (B2D individual developers, B2B mid-market SaaS, B2B enterprise, pick the sequence), lock the use cases we genuinely win (coding, reasoning, multimodal, agents, voice, long-context), kill the ones we don't.</li>
-          <li><b>Positioning &amp; advantage</b>. Pick the one-line claim ("leading US-based open-source model" · "best at agentic reasoning" · "multimodal open default" · "open model US enterprise trusts") and start landing it everywhere: site copy, launches, sales decks, partner co-marketing.</li>
+          <li><b>Awareness</b> <span class="tag tag-growth">Growth Marketing</span>. Most developers don't know Nemotron exists. Diagnose where they look for "the best open model" today, then start landing Nemotron in those channels: AI engines, search, dev podcasts, OSS communities.</li>
+          <li><b>Trial &amp; activation</b> <span class="tag tag-dev-mktg">Developer Marketing</span>. From landing to first API call, the path is broken (19+ portals, fragmented logins, the "Public API Endpoints" permission bug). Map it, quantify the dropoffs, work with Product and Engineering to fix the worst leaks first.</li>
+          <li><b>Product &amp; ICP fit</b> <span class="tag tag-dev-mktg">Developer Marketing</span>. Does the model deliver for the developer who is our ICP? Lock the ICP (B2D individual developers, B2B mid-market SaaS, B2B enterprise, pick the sequence), lock the use cases we genuinely win (coding, reasoning, multimodal, agents, voice, long-context), kill the ones we don't.</li>
+          <li><b>Positioning &amp; advantage</b> <span class="tag tag-brand">Brand</span> <span class="tag tag-growth">Growth Marketing</span>. Pick the one-line claim ("leading US-based open-source model" · "best at agentic reasoning" · "multimodal open default" · "open model US enterprise trusts") and start landing it everywhere: site copy, launches, sales decks, partner co-marketing.</li>
         </ul>
       </li>
       <li>
         <b>Run marketing as a supply chain.</b> Work with product, engineering, and other internal and external teams around the outcome.
         <ul>
-          <li><b>Engineering + ML + Product</b>. Collapse the 19-portal maze. Get a developer from landing → first API call in under five minutes.</li>
-          <li><b>Developer Advocacy + DevRel</b>. Compelling videos, hero demos, "how I built X with Nemotron" content. Turn "Nemotron is good" into "I tried it and it's incredible."</li>
-          <li><b>Flagship open-source reference agents</b>. Sales, support, RevOps, real-world agents built on NemoClaw + Nemotron. Fully working, forkable, the working demos competitors haven't shipped. Make Nemotron the model behind every flagship open agent.</li>
-          <li><b>Marketing org (PR, AR, brand, social, growth)</b>. Production-quality launches every release. Hero video, creator network, tier-1 press, founder/researcher voice on X.</li>
-          <li><b>Hackathons + conferences + creators</b>. Show up beyond GTC. AI Engineer Summit, KubeCon, Cursor events, Latent Space podcast. Run our own at a higher bar.</li>
+          <li><b>Engineering + ML + Product</b> <span class="tag tag-dev-mktg">Developer Marketing</span>. Collapse the 19-portal maze. Get a developer from landing → first API call in under five minutes.</li>
+          <li><b>Developer Advocacy + DevRel</b> <span class="tag tag-devrel">DevRel + Hands-on</span>. Compelling videos, hero demos, "how I built X with Nemotron" content. Turn "Nemotron is good" into "I tried it and it's incredible."</li>
+          <li><b>Flagship open-source reference agents</b> <span class="tag tag-devrel">DevRel + Hands-on</span>. Sales, support, RevOps, real-world agents built on NemoClaw + Nemotron. Fully working, forkable, the working demos competitors haven't shipped. Make Nemotron the model behind every flagship open agent.</li>
+          <li><b>Marketing org (PR, AR, brand, social, growth)</b> <span class="tag tag-brand">Brand</span>. Production-quality launches every release. Hero video, creator network, tier-1 press, founder/researcher voice on X.</li>
+          <li><b>Hackathons + conferences + creators</b> <span class="tag tag-growth">Growth Marketing</span>. Show up beyond GTC. AI Engineer Summit, KubeCon, Cursor events, Latent Space podcast. Run our own at a higher bar.</li>
         </ul>
       </li>
       <li>
         <b>Turn partners into a global force multiplier.</b> Coalition, clouds, and ISVs as marketing channels, not duplicated work.
         <ul>
-          <li><b>Coalition co-marketing</b>. Cursor, LangChain, Mistral, Perplexity, Black Forest Labs, Sarvam, Reflection, Thinking Machines. Joint launches and named partner pre-builds same-day as every release.</li>
-          <li><b>Customer quotes + adoption stories</b>. Mine every partner deployment. Package, publish, repeat.</li>
-          <li><b>Co-marketing programs</b>. Make it stupid-easy for partners to take our assets and market on our behalf, globally.</li>
-          <li><b>Partner marketing org partnership</b>. Work alongside NVIDIA's existing partner marketing team. Force multiplier, not redundant effort.</li>
+          <li><b>Coalition co-marketing</b> <span class="tag tag-partner">Partner</span>. Cursor, LangChain, Mistral, Perplexity, Black Forest Labs, Sarvam, Reflection, Thinking Machines. Joint launches and named partner pre-builds same-day as every release.</li>
+          <li><b>Customer quotes + adoption stories</b> <span class="tag tag-partner">Partner</span>. Mine every partner deployment. Package, publish, repeat.</li>
+          <li><b>Co-marketing programs</b> <span class="tag tag-partner">Partner</span>. Make it stupid-easy for partners to take our assets and market on our behalf, globally.</li>
+          <li><b>Partner marketing org partnership</b> <span class="tag tag-partner">Partner</span>. Work alongside NVIDIA's existing partner marketing team. Force multiplier, not redundant effort.</li>
         </ul>
       </li>
     </ul>
