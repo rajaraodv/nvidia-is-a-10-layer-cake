@@ -183,6 +183,27 @@ section p:last-child { margin-bottom: 0; }
 }
 .outcome-callout b { font-weight: 800; }
 
+/* OPPORTUNITY CALLOUT (gold — for the wedge nobody has won) */
+.opp-callout {
+  margin-top: 22px;
+  padding: 16px 20px;
+  background: linear-gradient(180deg, #fbf6ea 0%, #fff 100%);
+  border-left: 4px solid var(--gold);
+  font-size: 15px;
+  line-height: 1.55;
+  color: var(--ink);
+}
+.opp-label {
+  font-family: var(--mono);
+  font-size: 10.5px;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #8a6a1c;
+  margin-bottom: 6px;
+}
+.opp-text b { font-weight: 800; }
+
 /* SUB H3 */
 .sub-h3 {
   font-size: 13.5px;
@@ -518,6 +539,11 @@ footer a { color: var(--ink2); text-decoration: none; border-bottom: 1px solid v
         <div class="we">No one-line claim. Me-too.</div>
       </div>
     </div>
+
+    <div class="opp-callout">
+      <div class="opp-label">The category nobody has won yet — our wedge</div>
+      <div class="opp-text">None of them (OpenAI, Anthropic, DeepSeek, Qwen, Mistral) have shipped <b>fully-working, open-source reference agents</b> — real sales, support, RevOps, and real-world agents that developers can fork and ship. NVIDIA has <b>NemoClaw</b> (the local agent runtime) and <b>Nemotron</b>. Build the demos competitors haven't built. Open-source them. Make Nemotron the model behind every flagship open agent.</div>
+    </div>
   </section>
 
   <!-- WHAT THIS ROLE DOES -->
@@ -540,6 +566,7 @@ footer a { color: var(--ink2); text-decoration: none; border-bottom: 1px solid v
         <ul>
           <li><b>Engineering + ML + Product</b> — collapse the 19-portal maze. Get a developer from landing → first API call in under five minutes.</li>
           <li><b>Developer Advocacy + DevRel</b> — compelling videos, hero demos, "how I built X with Nemotron" content. Turn "Nemotron is good" into "I tried it and it's incredible."</li>
+          <li><b>Flagship open-source reference agents</b> — sales, support, RevOps, real-world agents built on NemoClaw + Nemotron. Fully working, forkable, the working demos competitors haven't shipped. Make Nemotron the model behind every flagship open agent.</li>
           <li><b>Marketing org (PR, AR, brand, social, growth)</b> — production-quality launches every release. Hero video, creator network, tier-1 press, founder/researcher voice on X.</li>
           <li><b>Hackathons + conferences + creators</b> — show up beyond GTC. AI Engineer Summit, KubeCon, Cursor events, Latent Space podcast. Run our own at a higher bar.</li>
         </ul>
