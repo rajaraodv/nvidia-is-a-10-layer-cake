@@ -471,6 +471,69 @@ section p:last-child { margin-bottom: 0; }
 .success p:last-child { margin-bottom: 0; }
 .success b { font-weight: 800; }
 
+/* SUCCESS HEADLINE CARD */
+.success-headline-card {
+  background: var(--ink);
+  color: #fff;
+  padding: 22px 26px 24px;
+  border-left: 6px solid var(--green);
+  margin-bottom: 8px;
+}
+.success-headline-tag {
+  font-family: var(--mono);
+  font-size: 10.5px;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--green);
+  margin-bottom: 8px;
+}
+.success-headline-text {
+  font-size: 19px;
+  font-weight: 700;
+  line-height: 1.45;
+  color: #fff;
+  letter-spacing: -0.005em;
+}
+.success-headline-text b { color: var(--green); font-weight: 900; }
+
+/* SUCCESS LISTS */
+.success-list {
+  list-style: none;
+  padding: 0;
+  margin: 4px 0 0;
+}
+.success-list li {
+  font-size: 14.5px;
+  line-height: 1.55;
+  color: var(--ink);
+  padding: 8px 0 8px 26px;
+  position: relative;
+  border-bottom: 1px solid var(--rule2);
+}
+.success-list li:last-child { border-bottom: none; }
+.success-list li::before {
+  content: '✓';
+  position: absolute;
+  left: 2px;
+  top: 8px;
+  color: var(--green-dim);
+  font-weight: 900;
+  font-size: 14px;
+}
+.success-list li b { font-weight: 800; color: var(--ink); }
+
+.success-note-foot {
+  margin-top: 14px;
+  font-size: 13px;
+  color: var(--ink3);
+  font-style: italic;
+  line-height: 1.55;
+  padding: 10px 14px;
+  background: #fafafa;
+  border-left: 3px solid var(--rule);
+}
+
 /* FOOTER */
 footer {
   margin-top: 48px;
@@ -644,16 +707,33 @@ footer a { color: var(--ink2); text-decoration: none; border-bottom: 1px solid v
   <!-- SUCCESS -->
   <section>
     <h2>What success looks like</h2>
-    <ul>
-      <li><b>12 months.</b> Nemotron in the <b>top 3 open-source models</b> by OpenRouter token volume, HuggingFace monthly downloads, and AI-engine share-of-voice. One clear positioning claim landed in market.</li>
-      <li><b>24 months.</b> <b>#1 open-source model</b> on at least one of those three. A defined niche where Nemotron is the undeniable answer. Self-serve developer pipeline feeding NVAIE.</li>
+
+    <div class="success-headline-card">
+      <div class="success-headline-tag">Headline outcome</div>
+      <div class="success-headline-text"><b>Massive developer adoption.</b> By every developer-facing metric that matters, Nemotron is the model devs reach for first.</div>
+    </div>
+
+    <h3 class="sub-h3">The headline number</h3>
+    <ul class="success-list">
+      <li><b>12 months.</b> Nemotron in the <b>top 3 open-source models</b> by OpenRouter token volume, HuggingFace monthly downloads, and AI-engine share-of-voice.</li>
+      <li><b>24 months.</b> <b>#1 open-source model</b> on at least one of those three. Aim for all three. Self-serve developer pipeline feeding NVAIE.</li>
     </ul>
-    <p style="font-size: 14px; color: var(--ink3); font-style: italic; margin-top: 12px;">Specific KPIs (signups, activation, retention, conversion, qualified pipeline) locked in the first 60 days alongside the strategy.</p>
+
+    <h3 class="sub-h3">The standard everywhere (the customer outcome)</h3>
+    <ul class="success-list">
+      <li><b>Time to first API call under 2 minutes</b> for any Nemotron model. Frictionless path from landing page to working code, no matter which entry point a developer arrives through.</li>
+      <li><b>High-quality, simplified everything.</b> Every entry point, console, doc, video, and content piece is production-quality. No 19-portal maze. No hand-wavy guidance. Navigation a first-time developer can follow without a map.</li>
+      <li><b>Only real, usable demos. No hand-waving.</b> Every demo is a serious template developers can fork, run, and ship in production. No "look how cool this is" theatre. No toy notebooks dressed up as demos.</li>
+      <li><b>A flagship demo + template for every key use case.</b> Coding, reasoning, RAG, agents, multimodal, voice, NemoClaw-powered apps, AI factory deployments. Whatever a developer wants to build, there's a working starting point that combines Nemotron with the right NVIDIA stack pieces.</li>
+      <li><b>Everything anchored to the customer outcome.</b> 99% of campaigns, content, demos, and decisions pass the same test: did this help a real developer build something they couldn't build elsewhere?</li>
+    </ul>
+
+    <div class="success-note-foot">Specific operating KPIs (signups, activation, retention, conversion, qualified pipeline) locked in the first 60 days alongside the strategy. Every KPI rolls up to one of the headline numbers above.</div>
   </section>
 
   <footer>
     <div>NVIDIA · Confidential</div>
-    <div>Last updated · May 18, 2026</div>
+    <div>Last updated · May 19, 2026</div>
   </footer>
 
 </div>
