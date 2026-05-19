@@ -66,17 +66,29 @@ h1.role-title {
   letter-spacing: -0.02em;
   margin-bottom: 6px;
 }
-.alt-title {
-  font-size: 15px;
-  color: var(--ink3);
-  font-style: italic;
-  margin-bottom: 16px;
-  letter-spacing: -0.005em;
+.alt-titles {
+  margin-bottom: 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
 }
-.alt-title b {
+.alt-item {
+  font-size: 19px;
   font-weight: 700;
   color: var(--ink2);
-  font-style: normal;
+  letter-spacing: -0.015em;
+  line-height: 1.3;
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+}
+.alt-num {
+  font-family: var(--mono);
+  font-weight: 900;
+  color: var(--green-dim);
+  font-size: 16px;
+  flex-shrink: 0;
+  letter-spacing: -0.02em;
 }
 
 .posting-info {
@@ -466,11 +478,13 @@ footer a { color: var(--ink2); text-decoration: none; border-bottom: 1px solid v
   </div>
 
   <h1 class="role-title">VP, Developer Marketing, AI Models</h1>
-  <div class="alt-title">or: <b>VP, Developer Experience, AI Models</b></div>
+  <div class="alt-titles">
+    <div class="alt-item"><span class="alt-num">2.</span> VP, Developer Experience, AI Models</div>
+    <div class="alt-item"><span class="alt-num">3.</span> VP, Developer Growth, AI Models</div>
+  </div>
 
   <div class="posting-info">
     <div class="posting-info-cell"><b>Reports to</b>CMO</div>
-    <div class="posting-info-cell"><b>Owns</b>Nemotron · NIM · Gen-AI dev platform</div>
   </div>
 
   <!-- MISSION -->
