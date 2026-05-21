@@ -631,6 +631,282 @@ section p:last-child { margin-bottom: 0; }
 }
 .footnote b { color: var(--ink); font-weight: 800; }
 
+/* COST EFFICIENCY BOARD */
+.cost-board {
+  border: 2px solid var(--ink);
+  background: #fff;
+  padding: 28px 32px;
+  margin-bottom: 36px;
+}
+.cost-board-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 16px;
+  padding-bottom: 16px;
+  margin-bottom: 22px;
+  border-bottom: 2px solid var(--ink);
+  flex-wrap: wrap;
+}
+.cost-board-title {
+  font-size: 22px;
+  font-weight: 900;
+  letter-spacing: -0.015em;
+}
+.cost-board-tag {
+  font-family: var(--mono);
+  font-size: 10.5px;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--green-dim);
+}
+.cost-board-intro {
+  font-size: 14.5px;
+  line-height: 1.55;
+  color: var(--ink2);
+  margin-bottom: 22px;
+}
+.cost-board-intro b { color: var(--ink); font-weight: 800; }
+
+.cost-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin-bottom: 26px;
+}
+.cost-stat {
+  border: 1px solid var(--rule);
+  background: #fafafa;
+  padding: 18px 20px 20px;
+}
+.cost-stat.featured {
+  background: var(--ink);
+  border-color: var(--ink);
+  color: #fff;
+}
+.cost-stat-label {
+  font-family: var(--mono);
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink3);
+  margin-bottom: 12px;
+}
+.cost-stat.featured .cost-stat-label { color: rgba(255,255,255,0.7); }
+.cost-stat-num {
+  font-family: var(--mono);
+  font-size: 38px;
+  font-weight: 900;
+  letter-spacing: -0.04em;
+  color: var(--green-dim);
+  line-height: 1;
+  margin-bottom: 8px;
+}
+.cost-stat.featured .cost-stat-num { color: var(--green); }
+.cost-stat-unit {
+  font-family: var(--mono);
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--ink3);
+  letter-spacing: -0.01em;
+  margin-bottom: 10px;
+}
+.cost-stat.featured .cost-stat-unit { color: rgba(255,255,255,0.75); }
+.cost-stat-text {
+  font-size: 12.5px;
+  color: var(--ink2);
+  line-height: 1.45;
+}
+.cost-stat.featured .cost-stat-text { color: rgba(255,255,255,0.85); }
+@media (max-width: 720px) { .cost-stats { grid-template-columns: 1fr; } }
+
+.cost-section-label {
+  font-family: var(--mono);
+  font-size: 10.5px;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--green-dim);
+  margin-top: 8px;
+  margin-bottom: 10px;
+}
+
+.cost-table {
+  border: 1px solid var(--rule);
+  background: #fff;
+  margin-bottom: 22px;
+}
+.cost-row {
+  display: grid;
+  grid-template-columns: 1.6fr 0.9fr 0.55fr 0.65fr 0.65fr 1.5fr;
+  align-items: center;
+  padding: 11px 14px;
+  border-bottom: 1px solid var(--rule);
+  gap: 12px;
+  font-size: 12.5px;
+  line-height: 1.4;
+}
+.cost-row:last-child { border-bottom: none; }
+.cost-row:nth-child(even):not(.head):not(.us) { background: #fafafa; }
+.cost-row.head {
+  background: var(--ink) !important;
+  color: #fff;
+  font-family: var(--mono);
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+.cost-row.us {
+  background: var(--green-bg) !important;
+  border-left: 4px solid var(--green);
+}
+.c-model { font-weight: 800; font-size: 13.5px; color: var(--ink); }
+.cost-row.us .c-model { color: var(--green-dim); }
+.c-params { font-family: var(--mono); font-weight: 700; color: var(--ink2); font-size: 12px; }
+.c-type {
+  font-family: var(--mono);
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--green-dim);
+}
+.c-type.closed { color: var(--ink3); }
+.c-cost {
+  font-family: var(--mono);
+  font-size: 13px;
+  font-weight: 800;
+  color: var(--ink);
+  text-align: right;
+}
+.cost-row.us .c-cost { color: var(--green-dim); }
+.c-notes { font-size: 11.5px; color: var(--ink3); line-height: 1.4; }
+@media (max-width: 800px) {
+  .cost-row { grid-template-columns: 1fr; gap: 4px; padding: 12px 14px; }
+  .cost-row.head { display: none; }
+  .c-cost { text-align: left; }
+}
+
+/* COST-ANCHORED BENCHMARK TABLE */
+.cost-bench {
+  border: 1px solid var(--rule);
+  background: #fff;
+  margin-bottom: 22px;
+}
+.cost-bench-row {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr 0.6fr 1.3fr 0.6fr 1.1fr;
+  align-items: center;
+  padding: 11px 14px;
+  border-bottom: 1px solid var(--rule);
+  gap: 12px;
+  font-size: 12.5px;
+  line-height: 1.4;
+}
+.cost-bench-row:last-child { border-bottom: none; }
+.cost-bench-row:nth-child(even):not(.head) { background: #fafafa; }
+.cost-bench-row.head {
+  background: var(--ink) !important;
+  color: #fff;
+  font-family: var(--mono);
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+.cb-bench { font-weight: 800; font-size: 13px; }
+.cb-us, .cb-comp {
+  font-size: 12.5px;
+  font-weight: 700;
+}
+.cb-us b, .cb-comp b { font-weight: 900; }
+.cb-cost {
+  font-family: var(--mono);
+  font-size: 12px;
+  font-weight: 800;
+  color: var(--ink2);
+  text-align: right;
+}
+.cb-gap {
+  font-family: var(--mono);
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+}
+.cb-gap.win { color: var(--green-dim); }
+.cb-gap.tie { color: var(--ink2); }
+.cb-gap.lose { color: var(--amber-text); }
+@media (max-width: 800px) {
+  .cost-bench-row { grid-template-columns: 1fr; gap: 4px; }
+  .cost-bench-row.head { display: none; }
+  .cb-cost { text-align: left; }
+}
+
+/* WORKLOAD CALLOUT */
+.workload {
+  background: linear-gradient(180deg, #f3f9e6 0%, #fff 100%);
+  border-left: 6px solid var(--green);
+  padding: 22px 26px;
+  margin-bottom: 18px;
+}
+.workload-label {
+  font-family: var(--mono);
+  font-size: 10.5px;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--green-dim);
+  margin-bottom: 8px;
+}
+.workload-title {
+  font-size: 17px;
+  font-weight: 900;
+  line-height: 1.35;
+  margin-bottom: 14px;
+  letter-spacing: -0.01em;
+}
+.workload ul {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 14px;
+}
+.workload ul li {
+  font-size: 13.5px;
+  padding: 7px 0 7px 22px;
+  position: relative;
+  color: var(--ink);
+  line-height: 1.5;
+  border-bottom: 1px solid var(--rule2);
+}
+.workload ul li:last-child { border-bottom: none; }
+.workload ul li::before {
+  content: '›';
+  position: absolute;
+  left: 4px;
+  top: 7px;
+  color: var(--green-dim);
+  font-weight: 800;
+  font-family: var(--mono);
+}
+.workload ul li b { font-weight: 800; }
+.workload ul li code {
+  font-family: var(--mono);
+  font-size: 12px;
+  font-weight: 800;
+  color: var(--green-dim);
+}
+.workload .workload-kicker {
+  font-size: 14.5px;
+  font-weight: 700;
+  color: var(--ink);
+  margin: 0;
+  padding-top: 4px;
+}
+.workload .workload-kicker b { font-weight: 900; color: var(--green-dim); }
+
 /* METHODOLOGY BLOCK */
 .method {
   border: 1px solid var(--rule);
@@ -812,6 +1088,185 @@ footer a { color: var(--ink2); text-decoration: none; border-bottom: 1px solid v
       </div>
     </div>
   </div>
+
+  <!-- COST EFFICIENCY BOARD -->
+  <section class="cost-board" id="cost-board" style="margin-bottom: 36px;">
+    <div class="cost-board-head">
+      <div class="cost-board-title">The cost-efficiency board</div>
+      <div class="cost-board-tag">Inference cost · per 1M tokens · production scale</div>
+    </div>
+    <p class="cost-board-intro">The accuracy thesis above is half the picture. The other half: <b>3 billion active parameters</b>. Nemotron Omni uses a 30B-total / 3B-active mixture-of-experts architecture — you pay the inference cost of a tiny model and get accuracy that competes with frontier dense models that are <b>50-100× larger</b>. Below: what that means in dollars per million tokens, vs. every relevant API.</p>
+
+    <!-- Three stat cards -->
+    <div class="cost-stats">
+      <div class="cost-stat">
+        <div class="cost-stat-label">Architecture</div>
+        <div class="cost-stat-num">3B</div>
+        <div class="cost-stat-unit">active params per token</div>
+        <div class="cost-stat-text">From a 30B total / 3B active MoE. Frontier dense models: estimated 200-500B+ (GPT-4o, Opus 4.7).</div>
+      </div>
+      <div class="cost-stat">
+        <div class="cost-stat-label">Self-host cost</div>
+        <div class="cost-stat-num">~$0.20</div>
+        <div class="cost-stat-unit">per 1M output tokens</div>
+        <div class="cost-stat-text">Single H100, batched, open weights. Yours forever — no per-token API tax, no data sharing.</div>
+      </div>
+      <div class="cost-stat featured">
+        <div class="cost-stat-label">vs frontier APIs</div>
+        <div class="cost-stat-num">30-260×</div>
+        <div class="cost-stat-unit">cheaper at production scale</div>
+        <div class="cost-stat-text">Output cost: GPT-4o $10/M, Gemini 3 Pro $10/M, Opus 4.7 $75/M. Nemotron ~$0.20/M.</div>
+      </div>
+    </div>
+
+    <!-- API pricing table -->
+    <div class="cost-section-label">API pricing — Nemotron vs the field (per 1M tokens)</div>
+    <div class="cost-table">
+      <div class="cost-row head">
+        <div>Model</div>
+        <div>Total / active params</div>
+        <div>Type</div>
+        <div>Input</div>
+        <div>Output</div>
+        <div>Notes</div>
+      </div>
+      <div class="cost-row us">
+        <div class="c-model">Nemotron 3 Nano Omni</div>
+        <div class="c-params">30B / 3B (MoE)</div>
+        <div class="c-type">Open</div>
+        <div class="c-cost">~$0.10</div>
+        <div class="c-cost">~$0.20</div>
+        <div class="c-notes">Self-host est., one H100 at 5K tok/s batched</div>
+      </div>
+      <div class="cost-row">
+        <div class="c-model">Qwen3-Omni-30B-A3B</div>
+        <div class="c-params">30B / 3B (MoE)</div>
+        <div class="c-type">Open</div>
+        <div class="c-cost">~$0.10</div>
+        <div class="c-cost">~$0.20</div>
+        <div class="c-notes">Same architecture · same self-host economics</div>
+      </div>
+      <div class="cost-row">
+        <div class="c-model">Gemini 2.5 Flash</div>
+        <div class="c-params">undisclosed</div>
+        <div class="c-type closed">API</div>
+        <div class="c-cost">$0.075</div>
+        <div class="c-cost">$0.30</div>
+        <div class="c-notes">Cheapest frontier API · comparable cost, lower accuracy</div>
+      </div>
+      <div class="cost-row">
+        <div class="c-model">DeepSeek V4</div>
+        <div class="c-params">~600B / ~37B (MoE)</div>
+        <div class="c-type closed">API</div>
+        <div class="c-cost">$0.27</div>
+        <div class="c-cost">$1.10</div>
+        <div class="c-notes">Weights also open · API is among the cheapest</div>
+      </div>
+      <div class="cost-row">
+        <div class="c-model">Gemini 3 Pro Preview</div>
+        <div class="c-params">undisclosed</div>
+        <div class="c-type closed">API</div>
+        <div class="c-cost">$1.25</div>
+        <div class="c-cost">$10</div>
+        <div class="c-notes">50× more expensive than Nemotron output</div>
+      </div>
+      <div class="cost-row">
+        <div class="c-model">GPT-4o</div>
+        <div class="c-params">undisclosed (~200B est.)</div>
+        <div class="c-type closed">API</div>
+        <div class="c-cost">$2.50</div>
+        <div class="c-cost">$10</div>
+        <div class="c-notes">50× more expensive than Nemotron output</div>
+      </div>
+      <div class="cost-row">
+        <div class="c-model">Claude Opus 4.7</div>
+        <div class="c-params">undisclosed (~300B est.)</div>
+        <div class="c-type closed">API</div>
+        <div class="c-cost">$15</div>
+        <div class="c-cost">$75</div>
+        <div class="c-notes">375× more expensive · different model class (reasoning)</div>
+      </div>
+    </div>
+
+    <!-- Cost-anchored benchmark comparison -->
+    <div class="cost-section-label">Cost-anchored benchmark comparisons</div>
+    <div class="cost-bench">
+      <div class="cost-bench-row head">
+        <div>Benchmark</div>
+        <div>Nemotron</div>
+        <div>$/1M out</div>
+        <div>Nearest frontier</div>
+        <div>$/1M out</div>
+        <div>Cost-quality gap</div>
+      </div>
+      <div class="cost-bench-row">
+        <div class="cb-bench">VoiceBench</div>
+        <div class="cb-us"><b>89.4 #1</b></div>
+        <div class="cb-cost">~$0.20</div>
+        <div class="cb-comp">Whisper + GPT-4o · 87.8</div>
+        <div class="cb-cost">~$10</div>
+        <div class="cb-gap win">50× cheaper · +1.6 pts</div>
+      </div>
+      <div class="cost-bench-row">
+        <div class="cb-bench">Daily-Omni</div>
+        <div class="cb-us"><b>74.5 #1</b></div>
+        <div class="cb-cost">~$0.20</div>
+        <div class="cb-comp">Gemini 2.5 Flash · 73.1</div>
+        <div class="cb-cost">$0.30</div>
+        <div class="cb-gap tie">~tied cost · +1.4 pts</div>
+      </div>
+      <div class="cost-bench-row">
+        <div class="cb-bench">OCRBench v2</div>
+        <div class="cb-us"><b>65.8 #2</b></div>
+        <div class="cb-cost">~$0.20</div>
+        <div class="cb-comp">Gemini 3 Pro Preview · 63.4</div>
+        <div class="cb-cost">$10</div>
+        <div class="cb-gap win">50× cheaper · +2.4 pts</div>
+      </div>
+      <div class="cost-bench-row">
+        <div class="cb-bench">OCRBench v2 Extraction</div>
+        <div class="cb-us"><b>93.3 #1 SOTA</b></div>
+        <div class="cb-cost">~$0.20</div>
+        <div class="cb-comp">Gemini 3 Pro · 70.5</div>
+        <div class="cb-cost">$10</div>
+        <div class="cb-gap win">50× cheaper · +22.8 pts</div>
+      </div>
+      <div class="cost-bench-row">
+        <div class="cb-bench">MMLongBench-Doc</div>
+        <div class="cb-us">claimed best</div>
+        <div class="cb-cost">~$0.20</div>
+        <div class="cb-comp">GPT-4o · ~44 F1</div>
+        <div class="cb-cost">~$10</div>
+        <div class="cb-gap win">50× cheaper · claim unverified</div>
+      </div>
+      <div class="cost-bench-row">
+        <div class="cb-bench">WorldSense</div>
+        <div class="cb-us">55.4 #7</div>
+        <div class="cb-cost">~$0.20</div>
+        <div class="cb-comp">Gemini 3.1 Pro · 65.5</div>
+        <div class="cb-cost">~$10</div>
+        <div class="cb-gap lose">50× cheaper · -10.1 pts</div>
+      </div>
+    </div>
+
+    <!-- Worked example -->
+    <div class="workload">
+      <div class="workload-label">Worked example · what a call center actually costs</div>
+      <div class="workload-title">1 million customer-support voice queries (100 input + 50 output tokens average)</div>
+      <ul>
+        <li><b>Nemotron Omni · self-host:</b> <code>~$20</code> ($10 input + $10 output, batched on one H100)</li>
+        <li><b>Gemini 2.5 Flash · API:</b> <code>~$23</code> ($7.50 input + $15 output) — comparable cost, but closed and lower accuracy on VoiceBench</li>
+        <li><b>Gemini 3 Pro Preview · API:</b> <code>~$625</code> ($125 input + $500 output)</li>
+        <li><b>GPT-4o · API:</b> <code>~$750</code> ($250 input + $500 output)</li>
+        <li><b>Claude Opus 4.7 · API:</b> <code>~$5,250</code> ($1,500 input + $3,750 output)</li>
+      </ul>
+      <p class="workload-kicker">At sustained 1 query/second — call-center scale, ~2.6M queries/month — that's <b>~$50/mo (Nemotron) vs ~$13,650/mo (Opus 4.7)</b>. Same accuracy class on VoiceBench. <b>260× less spend, +1.6 points of accuracy, weights you own.</b></p>
+    </div>
+
+    <div class="footnote">
+      <b>Data confidence:</b> API prices reflect publicly listed rates as of May 2026 — verify directly with each provider before quoting. Nemotron self-host estimate assumes Lambda Labs H100 at ~$3/hr running a batched 3B-active MoE at ~5K tokens/sec sustained. Real throughput varies with context length, batch size, and quantization (FP16 vs FP8 vs INT4). Parameter counts for closed frontier models are public estimates and may be wrong by 2-3×.
+    </div>
+  </section>
 
   <!-- MODEL CARD -->
   <div class="model-card">
