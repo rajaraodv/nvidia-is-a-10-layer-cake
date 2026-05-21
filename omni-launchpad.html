@@ -728,6 +728,38 @@ section p:last-child { margin-bottom: 0; }
   font-style: italic;
   line-height: 1.5;
 }
+.lb-section-head {
+  font-family: var(--mono);
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.55);
+  padding: 22px 0 12px;
+  margin-top: 6px;
+  border-bottom: 1px solid rgba(255,255,255,0.10);
+}
+.lb-section-head:first-of-type { margin-top: 0; padding-top: 10px; }
+.lb-row.landscape {
+  grid-template-columns: 60px 1fr 1.5fr 150px;
+}
+.lb-marker {
+  font-size: 17px;
+  font-weight: 400;
+  color: rgba(255,255,255,0.45);
+  font-family: var(--mono);
+}
+.lb-row.landscape.us .lb-marker { color: var(--green); }
+.lb-role {
+  font-size: 13px;
+  color: rgba(255,255,255,0.58);
+  font-style: italic;
+  line-height: 1.4;
+}
+@media (max-width: 700px) {
+  .lb-row.landscape { grid-template-columns: 36px 1fr 1fr 100px; }
+  .lb-role { font-size: 11px; }
+}
 @media (max-width: 700px) {
   .lb-board { padding: 22px 18px 18px; }
   .lb-cols, .lb-row { grid-template-columns: 36px 1fr 70px 100px; }
@@ -1223,68 +1255,114 @@ footer a { color: var(--ink2); text-decoration: none; border-bottom: 1px solid v
       </div>
     </div>
 
-    <!-- Featured ranked leaderboard -->
+    <!-- Voice AI landscape -->
     <div class="lb-board">
       <div class="lb-head">
-        <div class="lb-title">VoiceBench · ranked by accuracy with inference cost</div>
-        <div class="lb-sub">May 2026</div>
+        <div class="lb-title">The voice AI landscape · where Nemotron Omni fits</div>
+        <div class="lb-sub">May 2026 · 3 layers</div>
       </div>
-      <div class="lb-cols">
-        <div class="lb-col"></div>
-        <div class="lb-col">Model</div>
-        <div class="lb-col r">Score</div>
-        <div class="lb-col r">Avg cost / 1M out</div>
+
+      <!-- Layer 1: ASR -->
+      <div class="lb-section-head">Layer 1 · ASR / Speech-to-Text (no LLM reasoning)</div>
+      <div class="lb-row landscape">
+        <div class="lb-marker">—</div>
+        <div><span class="lb-model">Deepgram Nova-3</span></div>
+        <div class="lb-role">enterprise ASR leader · streaming · 30+ languages</div>
+        <div class="lb-cost">~$0.26 / hr audio</div>
       </div>
-      <div class="lb-row us">
-        <div class="lb-rank">1</div>
+      <div class="lb-row landscape">
+        <div class="lb-marker">—</div>
+        <div><span class="lb-model">OpenAI Whisper API</span></div>
+        <div class="lb-role">open-weight model, hosted by OpenAI</div>
+        <div class="lb-cost">~$0.36 / hr audio</div>
+      </div>
+      <div class="lb-row landscape">
+        <div class="lb-marker">—</div>
+        <div><span class="lb-model">AssemblyAI Universal-2</span></div>
+        <div class="lb-role">low-latency streaming + diarization</div>
+        <div class="lb-cost">~$0.37 / hr audio</div>
+      </div>
+      <div class="lb-row landscape">
+        <div class="lb-marker">—</div>
+        <div><span class="lb-model">Speechmatics</span></div>
+        <div class="lb-role">enterprise on-prem ASR · accents/dialects</div>
+        <div class="lb-cost">~$0.30 / hr audio</div>
+      </div>
+
+      <!-- Layer 1+2: Voice-LLM (VoiceBench) -->
+      <div class="lb-section-head">Layer 1+2 · Voice-LLM (speech → reasoned response) · VoiceBench ranks</div>
+      <div class="lb-row landscape us">
+        <div class="lb-marker">1</div>
         <div><span class="lb-model">Nemotron 3 Nano Omni</span></div>
-        <div class="lb-score">89.4%</div>
-        <div class="lb-cost">~$0.20</div>
+        <div class="lb-role">VoiceBench 89.4 · open · 30B-A3B MoE · NVIDIA</div>
+        <div class="lb-cost">~$0.20 / 1M out</div>
       </div>
-      <div class="lb-row">
-        <div class="lb-rank">2</div>
+      <div class="lb-row landscape">
+        <div class="lb-marker">2</div>
         <div><span class="lb-model">Ultravox-GLM-4P7</span></div>
-        <div class="lb-score">88.9%</div>
-        <div class="lb-cost">~$0.20</div>
+        <div class="lb-role">VoiceBench 88.9 · open · Fixie.ai</div>
+        <div class="lb-cost">~$0.20 / 1M out</div>
       </div>
-      <div class="lb-row">
-        <div class="lb-rank">3</div>
+      <div class="lb-row landscape">
+        <div class="lb-marker">3</div>
         <div><span class="lb-model">Ultravox-GLM-4P7 (thinking)</span></div>
-        <div class="lb-score">88.8%</div>
-        <div class="lb-cost">~$0.20</div>
+        <div class="lb-role">VoiceBench 88.8 · open · reasoning variant</div>
+        <div class="lb-cost">~$0.20 / 1M out</div>
       </div>
-      <div class="lb-row">
-        <div class="lb-rank">4</div>
-        <div><span class="lb-model">Whisper + GPT-4o</span></div>
-        <div class="lb-score">87.8%</div>
-        <div class="lb-cost">~$10.50</div>
+      <div class="lb-row landscape">
+        <div class="lb-marker">4</div>
+        <div><span class="lb-model">Whisper + GPT-4o cascade</span></div>
+        <div class="lb-role">VoiceBench 87.8 · ASR + LLM pipeline · closed</div>
+        <div class="lb-cost">~$10.50 / 1M out</div>
       </div>
-      <div class="lb-row">
-        <div class="lb-rank">5</div>
+      <div class="lb-row landscape">
+        <div class="lb-marker">5</div>
         <div><span class="lb-model">Ultravox-GLM-4P6</span></div>
-        <div class="lb-score">87.1%</div>
-        <div class="lb-cost">~$0.20</div>
+        <div class="lb-role">VoiceBench 87.1 · open · prior generation</div>
+        <div class="lb-cost">~$0.20 / 1M out</div>
       </div>
-      <div class="lb-row">
-        <div class="lb-rank">6</div>
-        <div><span class="lb-model">GPT-4o Audio Preview</span></div>
-        <div class="lb-score">~83%</div>
-        <div class="lb-cost">~$20.00</div>
+      <div class="lb-row landscape">
+        <div class="lb-marker">—</div>
+        <div><span class="lb-model">OpenAI GPT-4o Audio Realtime</span></div>
+        <div class="lb-role">closed · not on VoiceBench · premium realtime API</div>
+        <div class="lb-cost">~$40-80 / 1M audio</div>
       </div>
-      <div class="lb-row">
-        <div class="lb-rank">7</div>
-        <div><span class="lb-model">Gemini 2.0 Flash Live</span></div>
-        <div class="lb-score">~80%</div>
-        <div class="lb-cost">~$0.30</div>
+      <div class="lb-row landscape">
+        <div class="lb-marker">—</div>
+        <div><span class="lb-model">Google Gemini 2.0 Flash Live</span></div>
+        <div class="lb-role">closed · low-latency streaming voice agent</div>
+        <div class="lb-cost">~$3-12 / 1M audio</div>
       </div>
-      <div class="lb-row">
-        <div class="lb-rank">8</div>
-        <div><span class="lb-model">Qwen2-Audio-Instruct</span></div>
-        <div class="lb-score">~78%</div>
-        <div class="lb-cost">~$0.20</div>
+
+      <!-- Layer 3: TTS -->
+      <div class="lb-section-head">Layer 3 · TTS / Text-to-Speech (no reasoning, voice output)</div>
+      <div class="lb-row landscape">
+        <div class="lb-marker">—</div>
+        <div><span class="lb-model">ElevenLabs v3</span></div>
+        <div class="lb-role">quality / voice-cloning leader · expressive</div>
+        <div class="lb-cost">~$0.18 / 1K chars</div>
       </div>
+      <div class="lb-row landscape">
+        <div class="lb-marker">—</div>
+        <div><span class="lb-model">Cartesia Sonic</span></div>
+        <div class="lb-role">low-latency streaming TTS · realtime agents</div>
+        <div class="lb-cost">~$0.025 / 1K chars</div>
+      </div>
+      <div class="lb-row landscape">
+        <div class="lb-marker">—</div>
+        <div><span class="lb-model">OpenAI TTS-HD</span></div>
+        <div class="lb-role">simple, fast, OpenAI-native pipeline</div>
+        <div class="lb-cost">~$0.030 / 1K chars</div>
+      </div>
+      <div class="lb-row landscape">
+        <div class="lb-marker">—</div>
+        <div><span class="lb-model">Deepgram Aura-2</span></div>
+        <div class="lb-role">cheap realtime TTS · pairs with Nova-3 ASR</div>
+        <div class="lb-cost">~$0.030 / 1K chars</div>
+      </div>
+
       <div class="lb-footnote">
-        Ranks 1-5 from live VoiceBench leaderboard (verified). Ranks 6-8 directional from public reporting — verify before quoting externally. Cost = per 1M output tokens. Self-host (~$0.20) = one H100 batched, FP16, open weights. Whisper + GPT-4o cascade ≈ Whisper ASR ~$0.50/M + GPT-4o $10/M output. GPT-4o Audio is the realtime API tier (premium pricing).
+        Cost units differ by layer — ASR per hour of audio processed, Voice-LLM per 1M tokens generated, TTS per 1K characters spoken. Not directly comparable across layers. A complete voice agent typically chains all three (Deepgram → LLM → ElevenLabs). <b style="color: rgba(255,255,255,0.85);">Nemotron Omni collapses Layers 1+2 into one model</b> — you still pair it with a TTS provider (Cartesia/ElevenLabs) for spoken output. Prices approximate as of May 2026; verify with each provider before quoting externally.
       </div>
     </div>
 
