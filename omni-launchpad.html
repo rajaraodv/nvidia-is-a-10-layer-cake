@@ -812,6 +812,68 @@ section p:last-child { margin-bottom: 0; }
   color: rgba(255,255,255,0.42);
   padding: 4px 0 8px;
 }
+
+/* USE CASES TABLE (top of dark board) */
+.lb-usecases {
+  padding: 22px 0 8px;
+  margin-bottom: 8px;
+  border-bottom: 1px solid rgba(255,255,255,0.10);
+}
+.lb-usecases-title {
+  font-family: var(--mono);
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #fff;
+  margin-bottom: 6px;
+}
+.lb-usecases-sub {
+  font-size: 13.5px;
+  color: rgba(255,255,255,0.7);
+  margin-bottom: 18px;
+  line-height: 1.55;
+}
+.lb-usecases-sub b { color: rgba(255,255,255,0.95); font-weight: 800; }
+.uc-row {
+  display: grid;
+  grid-template-columns: 1.4fr 0.9fr 1.6fr;
+  align-items: center;
+  padding: 13px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  font-size: 13.5px;
+  gap: 16px;
+}
+.uc-row:last-child { border-bottom: none; }
+.uc-row.uc-head {
+  font-family: var(--mono);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.42);
+  padding: 8px 0 10px;
+  border-bottom: 1px solid rgba(255,255,255,0.10);
+}
+.uc-name { font-weight: 700; color: #fff; }
+.uc-layers {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: rgba(255,255,255,0.65);
+  letter-spacing: 0.04em;
+}
+.uc-stack { color: rgba(255,255,255,0.85); font-size: 13px; line-height: 1.5; }
+.uc-stack .nem {
+  color: var(--ink);
+  background: var(--green);
+  font-weight: 700;
+  padding: 2px 8px 3px;
+  border-radius: 2px;
+}
+@media (max-width: 720px) {
+  .uc-row { grid-template-columns: 1fr; gap: 4px; padding: 12px 0; }
+  .uc-row.uc-head { display: none; }
+}
 .lb-row.landscape {
   grid-template-columns: 60px 1fr 1.5fr 150px;
 }
@@ -1334,7 +1396,61 @@ footer a { color: var(--ink2); text-decoration: none; border-bottom: 1px solid v
         <div class="lb-sub">May 2026 · 3 layers</div>
       </div>
       <div class="lb-pipeline-intro">
-        A voice agent typically chains three layers: <b>ASR</b> (transcribe what the user said) → <b>LLM</b> (reason about it) → <b>TTS</b> (speak the response). Each layer has different providers, different use cases, and different pricing models. <span class="hl">Nemotron Omni collapses ASR + LLM into one model.</span> Below: what each layer is for, where Nemotron fits, and who the major providers are.
+        A voice agent typically chains three layers: <b>ASR</b> (transcribe what the user said) → <b>LLM</b> (reason about it) → <b>TTS</b> (speak the response). Each layer has different providers, different use cases, and different pricing models. <span class="hl">Nemotron Omni covers Layers 1+2 in one model — and can pinch-hit on Layer 1 alone.</span> Below: the common use cases first, then provider details by layer.
+      </div>
+
+      <!-- ─────────────────────────────────────── -->
+      <!-- USE CASES TABLE                          -->
+      <!-- ─────────────────────────────────────── -->
+      <div class="lb-usecases">
+        <div class="lb-usecases-title">Common voice agent use cases · what touches which layers</div>
+        <div class="lb-usecases-sub">Every voice product is a stack of 1-3 layers. <b>Nemotron Omni often covers 2 of 3</b> — you only add a TTS provider when the product needs spoken output. For transcription-only use cases, Nemotron in batch mode is cheaper than the dedicated ASR providers below.</div>
+
+        <div class="uc-row uc-head">
+          <div>Use case</div>
+          <div>Layers needed</div>
+          <div>Stack with Nemotron Omni</div>
+        </div>
+        <div class="uc-row">
+          <div class="uc-name">Customer support voice agent</div>
+          <div class="uc-layers">ASR + LLM + TTS</div>
+          <div class="uc-stack"><span class="nem">Nemotron Omni</span> + Cartesia or ElevenLabs</div>
+        </div>
+        <div class="uc-row">
+          <div class="uc-name">Medical scribe · SOAP notes</div>
+          <div class="uc-layers">ASR + LLM</div>
+          <div class="uc-stack"><span class="nem">Nemotron Omni</span> alone — structured text is the deliverable</div>
+        </div>
+        <div class="uc-row">
+          <div class="uc-name">Voice copilot in software</div>
+          <div class="uc-layers">ASR + LLM</div>
+          <div class="uc-stack"><span class="nem">Nemotron Omni</span> alone — UI actions, no spoken reply needed</div>
+        </div>
+        <div class="uc-row">
+          <div class="uc-name">Meeting / call transcription</div>
+          <div class="uc-layers">ASR only</div>
+          <div class="uc-stack"><span class="nem">Nemotron Omni</span> (batch, ~3× cheaper) or Deepgram (streaming)</div>
+        </div>
+        <div class="uc-row">
+          <div class="uc-name">Subtitle generation for video</div>
+          <div class="uc-layers">ASR only</div>
+          <div class="uc-stack"><span class="nem">Nemotron Omni</span> (batch) or Whisper</div>
+        </div>
+        <div class="uc-row">
+          <div class="uc-name">IVR phone system with branded voice</div>
+          <div class="uc-layers">ASR + LLM + TTS</div>
+          <div class="uc-stack"><span class="nem">Nemotron Omni</span> + Cartesia (low-latency required)</div>
+        </div>
+        <div class="uc-row">
+          <div class="uc-name">Audiobook narration</div>
+          <div class="uc-layers">LLM + TTS</div>
+          <div class="uc-stack"><span class="nem">Nemotron Omni</span> for the narration script + ElevenLabs</div>
+        </div>
+        <div class="uc-row">
+          <div class="uc-name">Tutoring agent</div>
+          <div class="uc-layers">ASR + LLM + TTS</div>
+          <div class="uc-stack"><span class="nem">Nemotron Omni</span> + ElevenLabs (expressive delivery)</div>
+        </div>
       </div>
 
       <!-- ─────────────────────────────────────── -->
@@ -1345,10 +1461,16 @@ footer a { color: var(--ink2); text-decoration: none; border-bottom: 1px solid v
         <div class="lb-layer-what">Pure transcription. Audio in, text out. No reasoning, no response — just the words on a page.</div>
         <div class="lb-layer-uses-label">Used for</div>
         <div class="lb-layer-uses">Meeting transcription (Otter, Fireflies, Granola) · call recording → searchable archive · subtitles &amp; closed captions for video · podcast → blog post pipelines · voice notes in productivity apps · court reporting and medical dictation transcripts.</div>
-        <div class="lb-nemotron-role off">
-          <b>Why Nemotron Omni isn't here:</b> overkill. If all you need is text-from-audio with no reasoning, a dedicated ASR provider is faster, cheaper, and built for streaming. Nemotron does ASR internally as part of its voice-LLM pipeline — but transcription-only is not what it was built for.
+        <div class="lb-nemotron-role">
+          <b>Where Nemotron Omni fits:</b> it can do batch transcription as part of its multimodal capabilities. Not built for low-latency streaming (Deepgram and AssemblyAI are stronger there) — but for batch jobs like podcast subtitles, post-call analysis, court transcripts, and archive search, Nemotron is open-weight and roughly <b>3× cheaper per hour of audio</b> than the dedicated ASR providers in this list. If your use case is streaming live captions, still use Deepgram.
         </div>
         <div class="lb-providers-label">— Providers —</div>
+      </div>
+      <div class="lb-row landscape us">
+        <div class="lb-marker">★</div>
+        <div><span class="lb-model">Nemotron 3 Nano Omni (batch)</span></div>
+        <div class="lb-role">multimodal LLM in batch transcription mode · open weights</div>
+        <div class="lb-cost">~$0.10 / hr audio*</div>
       </div>
       <div class="lb-row landscape">
         <div class="lb-marker">—</div>
@@ -1439,8 +1561,8 @@ footer a { color: var(--ink2); text-decoration: none; border-bottom: 1px solid v
         <div class="lb-layer-what">Converts written text into natural-sounding spoken audio. Voice cloning, expressive delivery, accents, multiple languages.</div>
         <div class="lb-layer-uses-label">Used for</div>
         <div class="lb-layer-uses">Audiobook generation (ElevenLabs's signature use case) · voice-agent response output (after the LLM decides what to say) · accessibility (screen readers, narrated articles) · IVR &amp; phone systems with a branded voice · localization &amp; dubbing (translated voice-overs in 30+ languages) · voice cloning for content creators.</div>
-        <div class="lb-nemotron-role off">
-          <b>Why Nemotron Omni isn't here:</b> Nemotron Omni handles audio <i>input</i> (recognition + understanding). For natural-sounding voice <i>output</i>, you still pair it with a dedicated TTS provider downstream. A typical voice-agent stack: <b>Nemotron Omni (ASR+LLM) → Cartesia or ElevenLabs (TTS)</b>.
+        <div class="lb-nemotron-role">
+          <b>Where Nemotron Omni fits:</b> Nemotron Omni's strength is audio <i>input</i> + text output. For voice <i>output</i> today, pair it with Cartesia (low-latency) or ElevenLabs (quality). The broader NVIDIA voice family also includes separate TTS models (Magpie-TTS, Riva) for teams that want to keep the entire stack inside the NVIDIA ecosystem. A typical production stack: <b>Nemotron Omni (ASR + LLM) → Cartesia or ElevenLabs (TTS)</b>.
         </div>
         <div class="lb-providers-label">— Providers —</div>
       </div>
@@ -1473,7 +1595,7 @@ footer a { color: var(--ink2); text-decoration: none; border-bottom: 1px solid v
       <!-- Footnote                                -->
       <!-- ─────────────────────────────────────── -->
       <div class="lb-footnote">
-        Cost units differ by layer — ASR per hour of audio processed, Voice-LLM per 1M tokens generated, TTS per 1K characters spoken. Not directly comparable across layers. A complete voice agent typically chains all three (Deepgram → LLM → ElevenLabs). <b style="color: rgba(255,255,255,0.85);">Nemotron Omni collapses Layers 1+2 into one model</b> — you still pair it with a TTS provider (Cartesia/ElevenLabs) for spoken output. Prices approximate as of May 2026; verify with each provider before quoting externally.
+        Cost units differ by layer — ASR per hour of audio processed, Voice-LLM per 1M output tokens, TTS per 1K characters spoken. Not directly comparable across layers. A complete voice agent typically chains all three (Deepgram → LLM → ElevenLabs). <b style="color: rgba(255,255,255,0.85);">Nemotron Omni collapses Layers 1+2 into one model</b> and can also pinch-hit on Layer 1 in batch mode. <span style="color: rgba(255,255,255,0.55);">* Nemotron batch-ASR cost (~$0.10/hr audio) is a self-host estimate assuming ~180K audio input tokens per hour at ~$0.10/M input + minimal output tokens. Streaming throughput is lower than purpose-built ASR providers. Verify in your deployment.</span> Prices approximate as of May 2026; verify with each provider before quoting externally.
       </div>
     </div>
 
