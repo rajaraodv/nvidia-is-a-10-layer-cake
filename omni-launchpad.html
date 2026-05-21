@@ -631,6 +631,125 @@ section p:last-child { margin-bottom: 0; }
 }
 .footnote b { color: var(--ink); font-weight: 800; }
 
+/* METHODOLOGY BLOCK */
+.method {
+  border: 1px solid var(--rule);
+  background: #fafafa;
+  padding: 18px 22px;
+  margin-bottom: 24px;
+  font-size: 13.5px;
+  line-height: 1.55;
+}
+.method-label {
+  font-family: var(--mono);
+  font-size: 10.5px;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--green-dim);
+  margin-bottom: 8px;
+}
+.method-anchors {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 14px;
+  margin-top: 12px;
+}
+.method-anchor {
+  border-left: 3px solid var(--ink2);
+  padding: 6px 0 6px 12px;
+}
+.method-anchor.med { border-left-color: var(--gold); }
+.method-anchor.cluster { border-left-color: var(--green); }
+.method-anchor.sota { border-left-color: var(--ink); }
+.method-anchor-name {
+  font-family: var(--mono);
+  font-size: 10.5px;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink2);
+  margin-bottom: 4px;
+}
+.method-anchor-desc {
+  font-size: 12.5px;
+  color: var(--ink2);
+  line-height: 1.4;
+}
+
+/* GAP LIST (where we don't compete) */
+.gap-list {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 8px;
+  margin-bottom: 18px;
+}
+.gap {
+  padding: 13px 16px;
+  border-left: 3px solid var(--green);
+  background: var(--green-bg);
+}
+.gap.muted {
+  border-left-color: var(--ink3);
+  background: #f4f4f4;
+}
+.gap.amber {
+  border-left-color: var(--amber);
+  background: var(--amber-bg);
+}
+.gap-name {
+  font-family: var(--mono);
+  font-size: 11.5px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  color: var(--green-dim);
+  margin-bottom: 4px;
+}
+.gap.muted .gap-name { color: var(--ink2); }
+.gap.amber .gap-name { color: var(--amber-text); }
+.gap-desc {
+  font-size: 13px;
+  color: var(--ink);
+  line-height: 1.5;
+}
+.gap-desc b { font-weight: 800; }
+
+/* USECASE LIST */
+.usecase-list {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 14px;
+}
+.usecase {
+  border: 1px solid var(--rule);
+  background: #fff;
+  padding: 20px 22px;
+}
+.usecase-tag {
+  font-family: var(--mono);
+  font-size: 10.5px;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--green-dim);
+  margin-bottom: 6px;
+}
+.usecase-title {
+  font-size: 17.5px;
+  font-weight: 900;
+  letter-spacing: -0.015em;
+  line-height: 1.3;
+  margin-bottom: 12px;
+}
+.usecase-body p {
+  font-size: 13.5px;
+  line-height: 1.55;
+  margin-bottom: 8px;
+  color: var(--ink2);
+}
+.usecase-body p:last-child { margin-bottom: 0; }
+.usecase-body b { color: var(--ink); font-weight: 800; }
+
 /* FOOTER */
 footer {
   margin-top: 56px;
@@ -709,10 +828,40 @@ footer a { color: var(--ink2); text-decoration: none; border-bottom: 1px solid v
     </div>
   </div>
 
+  <!-- METHODOLOGY -->
+  <section>
+    <h2>How we read the scores</h2>
+    <p>"Is 65 a good score?" depends on what the rest of the leaderboard looks like. Instead of inventing thresholds, every score below is anchored to four observable points from the actual leaderboard data.</p>
+
+    <div class="method">
+      <div class="method-label">The four anchors</div>
+      <div>Every benchmark has the same four reference points. Where Nemotron sits relative to them tells you what its score means.</div>
+      <div class="method-anchors">
+        <div class="method-anchor">
+          <div class="method-anchor-name">Random floor</div>
+          <div class="method-anchor-desc">The score you get from guessing. For 4-way multiple choice that's 25%. Anything below this is broken.</div>
+        </div>
+        <div class="method-anchor med">
+          <div class="method-anchor-name">Field median</div>
+          <div class="method-anchor-desc">The middle of the leaderboard. Below it, half the field is better than you. <b>The de facto "usable" floor.</b></div>
+        </div>
+        <div class="method-anchor cluster">
+          <div class="method-anchor-name">Top cluster</div>
+          <div class="method-anchor-desc">The top 5 entries grouped together. Inside this band, models are effectively interchangeable. <b>The de facto "production" line.</b></div>
+        </div>
+        <div class="method-anchor sota">
+          <div class="method-anchor-name">SOTA</div>
+          <div class="method-anchor-desc">#1 on the leaderboard. The current ceiling. Often Nemotron — but not always.</div>
+        </div>
+      </div>
+      <p style="margin-top: 14px; font-size: 12.5px; color: var(--ink3); font-style: italic;">Field medians are approximated from the visible leaderboard distribution (~30-40 models per benchmark). Top-cluster boundary is the score of the 5th-ranked model on each leaderboard.</p>
+    </div>
+  </section>
+
   <!-- AT-A-GLANCE -->
   <section>
     <h2>The five benchmarks at a glance</h2>
-    <p>Each benchmark tests a different multimodal capability. The "production bar" reflects what a small startup needs to ship a v1 (startup tier) versus what a hyperscaler-grade product needs (prod tier). Source: live leaderboards as of May 2026.</p>
+    <p>Each row shows Nemotron's score, where it ranks, and where the field median + top-cluster lines sit on that benchmark. Source: live leaderboards as of May 2026.</p>
 
     <div class="glance">
       <div class="glance-head glance-row">
@@ -720,7 +869,7 @@ footer a { color: var(--ink2); text-decoration: none; border-bottom: 1px solid v
         <div>What it tests</div>
         <div>Nemotron</div>
         <div>Rank</div>
-        <div>Prod bar</div>
+        <div>Anchors</div>
         <div>Verdict</div>
       </div>
       <div class="glance-row">
@@ -728,43 +877,43 @@ footer a { color: var(--ink2); text-decoration: none; border-bottom: 1px solid v
         <div class="g-tests">OCR + document understanding across 8 sub-tasks (extract, parse, recognize, spot, calculate, reason).</div>
         <div class="g-score">65.8</div>
         <div class="g-rank win">#2 / 30+</div>
-        <div class="g-bar">startup <b>55+</b><br>prod <b>65+</b></div>
-        <div class="g-verdict good">Production-ready</div>
+        <div class="g-bar">med ~50<br>top <b>62+</b><br>SOTA 68.1</div>
+        <div class="g-verdict good">Inside top cluster</div>
       </div>
       <div class="glance-row">
         <div class="g-bench">VoiceBench<span>voice-input assistants</span></div>
         <div class="g-tests">Speech-in LLM assistants across instruction following, knowledge QA, reasoning, safety. 9 sub-tasks, 40+ models.</div>
         <div class="g-score">89.4</div>
         <div class="g-rank win">#1 / 40</div>
-        <div class="g-bar">startup <b>75+</b><br>prod <b>85+</b></div>
-        <div class="g-verdict good">Production-ready</div>
+        <div class="g-bar">med ~65<br>top <b>87+</b><br>SOTA <b>89.4</b></div>
+        <div class="g-verdict good">SOTA — Nemotron sets the ceiling</div>
       </div>
       <div class="glance-row">
         <div class="g-bench">Daily-Omni<span>audio-visual reasoning</span></div>
         <div class="g-tests">Temporal alignment between video and audio on 30-60s everyday clips. Event ordering, cause-effect, A/V correlation.</div>
         <div class="g-score">74.5</div>
         <div class="g-rank win">#1</div>
-        <div class="g-bar">startup <b>65+</b><br>prod <b>73+</b></div>
-        <div class="g-verdict good">Production-ready</div>
+        <div class="g-bar">floor 25 (random)<br>top <b>67+</b><br>SOTA <b>74.5</b></div>
+        <div class="g-verdict good">SOTA — Nemotron sets the ceiling</div>
       </div>
       <div class="glance-row">
         <div class="g-bench">WorldSense<span>tri-modal video</span></div>
         <div class="g-tests">Visual + audio + text video understanding across 8 domains. 1,662 videos, 26 task types.</div>
         <div class="g-score">55.4</div>
         <div class="g-rank ok">#7 / 30+</div>
-        <div class="g-bar">startup <b>50+</b><br>prod <b>65+</b></div>
-        <div class="g-verdict ok">Startup-ready, frontier still wins</div>
+        <div class="g-bar">med ~45<br>top <b>58+</b><br>SOTA 67.3</div>
+        <div class="g-verdict ok">Above median, below top cluster</div>
       </div>
       <div class="glance-row">
         <div class="g-bench">MMLongBench-Doc<span>long-doc reasoning</span></div>
         <div class="g-tests">Multi-page PDF understanding (~47 pages avg). Cross-page evidence, charts, tables, hallucination resistance.</div>
         <div class="g-score">claimed best</div>
         <div class="g-rank ok">unverified</div>
-        <div class="g-bar">startup <b>25+ F1</b><br>prod <b>40+ F1</b></div>
-        <div class="g-verdict ok">Nobody fully ready, ship with HITL</div>
+        <div class="g-bar">med ~25 F1<br>top <b>40+ F1</b><br>SOTA ~45 F1</div>
+        <div class="g-verdict ok">SOTA itself is below "usable" — ship with HITL</div>
       </div>
     </div>
-    <p class="glance-note">Verdicts use NVIDIA-green for "production-ready at scale," amber for "usable but with caveats," red for "research-frontier." HITL = human-in-the-loop review.</p>
+    <p class="glance-note">"Inside top cluster" = indistinguishable from SOTA in practice. "SOTA" = #1 on the leaderboard. HITL = human-in-the-loop review.</p>
   </section>
 
   <!-- DEEP DIVES -->
@@ -811,13 +960,13 @@ footer a { color: var(--ink2); text-decoration: none; border-bottom: 1px solid v
 
         <div class="bars">
           <div class="bar-block">
-            <div class="bar-label">Nemotron · 89.4 / 100</div>
+            <div class="bar-label">Nemotron · 89.4 / 100 — at SOTA</div>
             <div class="bar-track">
               <div class="bar-fill good" style="width: 89.4%;"></div>
-              <div class="bar-startup" style="left: 75%;"></div>
-              <div class="bar-prod" style="left: 85%;"></div>
+              <div class="bar-startup" style="left: 65%;"></div>
+              <div class="bar-prod" style="left: 87%;"></div>
             </div>
-            <div class="bar-meta"><span>startup bar 75</span><b>prod bar 85</b></div>
+            <div class="bar-meta"><span>field median ~65</span><b>top cluster 87+</b></div>
           </div>
         </div>
       </div>
@@ -881,13 +1030,13 @@ footer a { color: var(--ink2); text-decoration: none; border-bottom: 1px solid v
 
         <div class="bars">
           <div class="bar-block">
-            <div class="bar-label">Nemotron · 74.5 / 100</div>
+            <div class="bar-label">Nemotron · 74.5 / 100 — at SOTA</div>
             <div class="bar-track">
               <div class="bar-fill good" style="width: 74.5%;"></div>
-              <div class="bar-startup" style="left: 65%;"></div>
-              <div class="bar-prod" style="left: 73%;"></div>
+              <div class="bar-startup" style="left: 25%;"></div>
+              <div class="bar-prod" style="left: 67%;"></div>
             </div>
-            <div class="bar-meta"><span>startup bar 65</span><b>prod bar 73</b></div>
+            <div class="bar-meta"><span>random floor 25 · top cluster 67+</span><b>SOTA 74.5</b></div>
           </div>
         </div>
       </div>
@@ -951,18 +1100,18 @@ footer a { color: var(--ink2); text-decoration: none; border-bottom: 1px solid v
 
         <div class="bars">
           <div class="bar-block">
-            <div class="bar-label">Nemotron · 65.8 / 100</div>
+            <div class="bar-label">Nemotron · 65.8 / 100 — inside top cluster</div>
             <div class="bar-track">
               <div class="bar-fill good" style="width: 65.8%;"></div>
-              <div class="bar-startup" style="left: 55%;"></div>
-              <div class="bar-prod" style="left: 65%;"></div>
+              <div class="bar-startup" style="left: 50%;"></div>
+              <div class="bar-prod" style="left: 62%;"></div>
             </div>
-            <div class="bar-meta"><span>startup bar 55</span><b>prod bar 65</b></div>
+            <div class="bar-meta"><span>field median ~50 · top cluster 62+</span><b>SOTA 68.1 (KDL)</b></div>
           </div>
           <div class="bar-block">
-            <div class="bar-label">Extraction sub-score · 93.3 (Nemotron #1)</div>
+            <div class="bar-label">Extraction sub-score · 93.3 — Nemotron #1, SOTA</div>
             <div class="bar-track"><div class="bar-fill good" style="width: 93.3%;"></div></div>
-            <div class="bar-meta"><span>SOTA for invoice/receipt/form fields</span><b>shipped</b></div>
+            <div class="bar-meta"><span>best score in the entire OCRBench v2 leaderboard</span><b>shipped</b></div>
           </div>
         </div>
       </div>
@@ -1026,13 +1175,13 @@ footer a { color: var(--ink2); text-decoration: none; border-bottom: 1px solid v
 
         <div class="bars">
           <div class="bar-block">
-            <div class="bar-label">Nemotron · 55.4 / 100</div>
+            <div class="bar-label">Nemotron · 55.4 / 100 — above median, below top cluster</div>
             <div class="bar-track">
               <div class="bar-fill ok" style="width: 55.4%;"></div>
-              <div class="bar-startup" style="left: 50%;"></div>
-              <div class="bar-prod" style="left: 65%;"></div>
+              <div class="bar-startup" style="left: 45%;"></div>
+              <div class="bar-prod" style="left: 58%;"></div>
             </div>
-            <div class="bar-meta"><span>startup bar 50</span><b>prod bar 65</b></div>
+            <div class="bar-meta"><span>field median ~45 · top cluster 58+</span><b>SOTA 67.3 (Doubao)</b></div>
           </div>
         </div>
       </div>
@@ -1091,13 +1240,13 @@ footer a { color: var(--ink2); text-decoration: none; border-bottom: 1px solid v
 
         <div class="bars">
           <div class="bar-block">
-            <div class="bar-label">Field SOTA · ~44 F1 (GPT-4o)</div>
+            <div class="bar-label">Field SOTA · ~44 F1 (GPT-4o) — even SOTA is below "usable"</div>
             <div class="bar-track">
               <div class="bar-fill ok" style="width: 44%;"></div>
               <div class="bar-startup" style="left: 25%;"></div>
               <div class="bar-prod" style="left: 40%;"></div>
             </div>
-            <div class="bar-meta"><span>startup bar 25</span><b>prod bar 40</b></div>
+            <div class="bar-meta"><span>field median ~25 F1 · top cluster 40+ F1</span><b>SOTA ~45 F1</b></div>
           </div>
         </div>
       </div>
@@ -1175,6 +1324,142 @@ footer a { color: var(--ink2); text-decoration: none; border-bottom: 1px solid v
           <li><b>End-to-end speech-LLMs at small scale</b> — SLAM-Omni / Mini-Omni collapse on SD-QA.</li>
         </ul>
       </div>
+    </div>
+  </section>
+
+  <!-- WHERE WE DON'T COMPETE -->
+  <section>
+    <h2>Where we don't compete (and why it matters)</h2>
+    <p>The five benchmarks above are the ones NVIDIA picked for the launch — surfaces where Nemotron wins or places. But there's a longer list of multimodal and reasoning benchmarks where Claude Opus 4.7, GPT-4o, Gemini 3 Pro, and DeepSeek V4 all report scores, and Nemotron 3 Nano Omni doesn't appear at all. Some of those absences are strategic blind spots NVIDIA should close. Others belong to a different model class and can be ignored.</p>
+
+    <h3 class="sub-h3">Gaps to close — multimodal staples we should publish on</h3>
+    <div class="gap-list">
+      <div class="gap">
+        <div class="gap-name">MMMU</div>
+        <div class="gap-desc">Massive Multi-discipline Multimodal Understanding. College-level questions across 30 subjects with figures, charts, and diagrams. <b>Every serious VLM publishes here.</b> Frontier scores cluster 65-78. Not appearing on MMMU is the single biggest credibility gap.</div>
+      </div>
+      <div class="gap">
+        <div class="gap-name">MathVista</div>
+        <div class="gap-desc">Visual mathematical reasoning over geometry, function plots, and scientific figures. Frontier 65-78. Owning STEM developer mindshare requires a competitive score here.</div>
+      </div>
+      <div class="gap">
+        <div class="gap-name">MMBench &middot; AI2D &middot; ChartQA &middot; DocVQA</div>
+        <div class="gap-desc">The classic multimodal staples: general VL, science diagrams, chart understanding, document VQA. <b>ChartQA scores particularly matter</b> for enterprise developer adoption (BI dashboards, finance docs, analyst reports).</div>
+      </div>
+      <div class="gap">
+        <div class="gap-name">VideoMME</div>
+        <div class="gap-desc">The standard general-video benchmark. Daily-Omni and WorldSense are A/V-specific; VideoMME is video-first. Frontier 65-78. Any pure-video use case will be evaluated against this leaderboard.</div>
+      </div>
+      <div class="gap">
+        <div class="gap-name">Chatbot Arena Vision</div>
+        <div class="gap-desc">Human-preference Elo leaderboard for VLMs. <b>The only place where "do users actually prefer this model" gets measured.</b> NVIDIA invisible here = NVIDIA invisible in the "what should I pick" conversation developers are having today.</div>
+      </div>
+      <div class="gap">
+        <div class="gap-name">Artificial Analysis Intelligence Index</div>
+        <div class="gap-desc">Aggregator score everyone in the AI press cites. Not being on it means NVIDIA models don't show up in the canonical "compare these LLMs" tables that journalists, analysts, and procurement teams reference.</div>
+      </div>
+    </div>
+
+    <h3 class="sub-h3">Gaps to investigate — audio benchmarks beyond VoiceBench</h3>
+    <div class="gap-list">
+      <div class="gap amber">
+        <div class="gap-name">MMAU</div>
+        <div class="gap-desc">Massive Multitask Audio Understanding. Tests audio comprehension beyond voice (music, environmental sounds, speech in noise). Given Nemotron Omni's full audio modality, we should publish here.</div>
+      </div>
+      <div class="gap amber">
+        <div class="gap-name">AIR-Bench</div>
+        <div class="gap-desc">Audio Instruction Reasoning. Complements VoiceBench (which is voice-input only) with general audio reasoning. Another natural surface for the Omni architecture.</div>
+      </div>
+    </div>
+
+    <h3 class="sub-h3">Gaps to ignore — different model class, not our lane</h3>
+    <div class="gap-list">
+      <div class="gap muted">
+        <div class="gap-name">SWE-bench Verified &middot; TAU-bench &middot; LiveCodeBench</div>
+        <div class="gap-desc">Coding-agent benchmarks. Opus 4.7 dominates (70+ on SWE-bench Verified). Nemotron Omni is a multimodal model, not a coding agent. Different category, different model class. <b>But this is where the "AI coder" mindshare lives</b> — long-term, NVIDIA needs a coding-agent answer (separate model, separate benchmark surface).</div>
+      </div>
+      <div class="gap muted">
+        <div class="gap-name">GPQA Diamond &middot; AIME 2025 &middot; ARC-AGI 2 &middot; MATH-500</div>
+        <div class="gap-desc">Pure-reasoning benchmarks. Opus 4.7, DeepSeek R2, GPT-5 territory. Reasoning-tuned models, not multimodal models. Different lane — these are also a different model class from Omni.</div>
+      </div>
+      <div class="gap muted">
+        <div class="gap-name">OSWorld &middot; WebArena</div>
+        <div class="gap-desc">Computer-use and web-agent benchmarks. Anthropic and Google territory. Different model class entirely.</div>
+      </div>
+    </div>
+
+    <div class="footnote">
+      <b>The honest read:</b> Nemotron Omni is benchmarked on the surfaces it wins on. That's smart launch strategy, not deception — every model does this. The gaps to close are the multimodal staples (MMMU, MathVista, VideoMME, ChartQA) where the field is standardized and we'd benefit from being in the conversation, even at mid-pack. The gaps to ignore are the agentic/reasoning benchmarks that belong to a different model class. Frontier scores in this section are directional from public knowledge — verify on the live leaderboards before quoting externally.
+    </div>
+  </section>
+
+  <!-- CONCRETE USE CASES -->
+  <section>
+    <h2>Concrete use cases · where Nemotron Omni actually wins</h2>
+    <p>Real examples, not categories. For each: what a small-to-mid company is doing today, what Nemotron Omni replaces, the rough economics, and the specific benchmark sub-score that proves the model can handle it.</p>
+
+    <div class="usecase-list">
+
+      <div class="usecase">
+        <div class="usecase-tag">Voice · Customer support agent</div>
+        <div class="usecase-title">50-person SaaS replaces their Five9 voice IVR with self-hosted Nemotron</div>
+        <div class="usecase-body">
+          <p><b>Today:</b> Five9 voice IVR handles tier-1 calls (password resets, billing questions, basic troubleshooting). ASR is decent, but the response layer is canned (FAQ matching, not reasoning). ~$40K/year in licensing plus per-minute fees. Customers complain about getting stuck in loops.</p>
+          <p><b>With Nemotron Omni:</b> Speech-in, structured response out, with safety refusal for off-topic requests. Self-hosted on one Lambda Labs H100 = ~$2,500/month amortized. Latency ~600ms (single forward pass) vs. cascaded ASR+LLM at ~1,500ms. Owns its own weights — no data leaves the company.</p>
+          <p><b>Why this is real:</b> VoiceBench overall <b>89.4 (#1, SOTA)</b> with sub-scores SD-QA <b>71.4</b> (spoken-dialog QA), IFEval <b>88.7</b> (instruction following), AdvBench <b>100</b> (safety refusal). The exact skill set a support agent needs.</p>
+        </div>
+      </div>
+
+      <div class="usecase">
+        <div class="usecase-tag">Voice · Medical scribe</div>
+        <div class="usecase-title">Primary-care clinic transcribes patient visits with a HIPAA-clean voice agent</div>
+        <div class="usecase-body">
+          <p><b>Today:</b> Doctors dictate to a third-party medical-scribe service at $7-12 per transcript. 25-second average response back, structured into SOAP notes. HIPAA business associate agreements with every vendor. Patient data flows to three external companies.</p>
+          <p><b>With Nemotron Omni:</b> Doctor speaks; the model transcribes and structures the note in real time on a clinic-owned server. Safety refusal on hallucinated diagnoses (per FDA guidance for clinical decision support). HIPAA-clean by construction — no patient data ever leaves the clinic's network.</p>
+          <p><b>Why this is real:</b> VoiceBench MMSU (Massive Multitask Spoken Understanding) <b>82.3</b> + IFEval <b>88.7</b>. The model reliably follows structured-output instructions from voice input. The compliance story is the deciding factor — open weights are the only path to a fully on-prem voice-LLM.</p>
+        </div>
+      </div>
+
+      <div class="usecase">
+        <div class="usecase-tag">Documents · Invoice processing at scale</div>
+        <div class="usecase-title">200-person company replaces their BPO invoice-processing contract</div>
+        <div class="usecase-body">
+          <p><b>Today:</b> 5,000 supplier invoices per month routed to an Indian BPO for field extraction (vendor name, PO number, line items, amounts, due dates, tax). $0.50/invoice = $30K/year. 24-48 hour turnaround. Errors require manual rework.</p>
+          <p><b>With Nemotron Omni:</b> Invoice PDF → Nemotron → structured JSON, end-to-end in one model. Self-hosted H100, batched at 100+ invoices/hour. ~$400/month amortized. Sub-second per invoice. Real-time AP dashboard becomes possible.</p>
+          <p><b>Why this is real:</b> OCRBench v2 Extraction sub-score <b>93.3 — the single best score on the entire OCRBench v2 leaderboard, across any sub-task.</b> Nemotron is literally the best model in the world at pulling structured fields out of documents. Not "competitive." Best.</p>
+        </div>
+      </div>
+
+      <div class="usecase">
+        <div class="usecase-tag">Documents · Contract field extraction</div>
+        <div class="usecase-title">Legal-tech startup ingests 100-page contracts without an Anthropic API bill</div>
+        <div class="usecase-body">
+          <p><b>Today:</b> PDF → AWS Textract OCR → Anthropic API for clause extraction. Two-stage pipeline; Anthropic costs scale with contract length (8K-token average context). At 500 contracts/month, ~$3-4K in API spend. The Textract step adds another $0.05/page.</p>
+          <p><b>With Nemotron Omni:</b> PDF → Nemotron Omni (one model, end-to-end). Extracts parties, dates, indemnification clauses, governing law, termination terms. Open weights = compliance audit trail (no third-party data processor in the chain — a real concern for legal-tech buyers).</p>
+          <p><b>Why this is real:</b> OCRBench v2 Extraction <b>93.3</b> + Understanding 90.4 (industry-wide). Multi-page reasoning is weaker (see MMLongBench caveat above), so this works well on single-document clause extraction but should not be trusted with cross-contract portfolio analysis without human review.</p>
+        </div>
+      </div>
+
+      <div class="usecase">
+        <div class="usecase-tag">A/V · Meeting recap with screen-share context</div>
+        <div class="usecase-title">Zoom-clone generates meeting recaps that include "and then Sarah pulled up the slide"</div>
+        <div class="usecase-body">
+          <p><b>Today:</b> Otter.ai / Fireflies / Gong generate recaps from audio only. They miss screen-share events entirely. "She mentioned Q3 numbers" with no link to the chart that was on screen at that moment.</p>
+          <p><b>With Nemotron Omni:</b> Audio + video tracks fed in together. Recap includes "the customer asked about pricing at 14:30, and the enterprise-tier slide was on screen at that moment." Reps can replay the exact 30-second segment that matched a buyer question. Sales coaching becomes scalable.</p>
+          <p><b>Why this is real:</b> Daily-Omni overall <b>74.5 (#1, SOTA)</b> with Comparison sub-task <b>83.2</b> ("which event happened first?") and Context Understanding strong. Designed for exactly this audio-visual event-correlation pattern.</p>
+        </div>
+      </div>
+
+      <div class="usecase">
+        <div class="usecase-tag">A/V · Lecture-to-study-guide</div>
+        <div class="usecase-title">University LMS auto-generates timestamped study guides from recorded lectures</div>
+        <div class="usecase-body">
+          <p><b>Today:</b> Students slog through 90-minute recorded lectures. Some LMS platforms auto-generate transcripts but no structure — no chapter boundaries, no slide mapping, no "key concept" highlighting. Watch-completion rates are below 30%.</p>
+          <p><b>With Nemotron Omni:</b> Lecture A/V → structured study guide. Chapter boundaries (audio topic shift + slide change). Key statements highlighted. "Watch this 45-second segment for the proof of theorem X" navigation. Quiz questions auto-generated from spoken content tied to slide content.</p>
+          <p><b>Why this is real:</b> Daily-Omni Event Sequence and Context Understanding sub-skills cover this directly. The model can identify when the topic shifts (audio + visual signals together) and tie spoken statements to slide content at specific timestamps.</p>
+        </div>
+      </div>
+
     </div>
   </section>
 
