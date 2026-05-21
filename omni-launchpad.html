@@ -740,6 +740,78 @@ section p:last-child { margin-bottom: 0; }
   border-bottom: 1px solid rgba(255,255,255,0.10);
 }
 .lb-section-head:first-of-type { margin-top: 0; padding-top: 10px; }
+
+/* LAYER INTRO BLOCKS (use cases + role) */
+.lb-pipeline-intro {
+  font-size: 14px;
+  color: rgba(255,255,255,0.85);
+  line-height: 1.6;
+  padding: 16px 0 0;
+  margin-bottom: 8px;
+}
+.lb-pipeline-intro b { color: #fff; font-weight: 800; }
+.lb-pipeline-intro .hl { color: var(--green); font-weight: 700; }
+
+.lb-layer-intro {
+  padding: 28px 0 16px;
+  margin-top: 6px;
+  border-top: 1px solid rgba(255,255,255,0.10);
+}
+.lb-layer-intro:first-of-type { border-top: none; padding-top: 22px; margin-top: 0; }
+.lb-layer-name {
+  font-family: var(--mono);
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #fff;
+  margin-bottom: 8px;
+}
+.lb-layer-what {
+  font-size: 14px;
+  color: rgba(255,255,255,0.82);
+  margin-bottom: 16px;
+  line-height: 1.55;
+}
+.lb-layer-uses-label {
+  font-family: var(--mono);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.42);
+  margin-bottom: 8px;
+}
+.lb-layer-uses {
+  font-size: 13.5px;
+  color: rgba(255,255,255,0.88);
+  line-height: 1.65;
+  margin-bottom: 16px;
+}
+.lb-nemotron-role {
+  padding: 12px 16px;
+  background: rgba(118, 185, 0, 0.10);
+  border-left: 3px solid var(--green);
+  font-size: 13px;
+  color: rgba(255,255,255,0.92);
+  line-height: 1.55;
+  margin-bottom: 14px;
+}
+.lb-nemotron-role b { color: var(--green); font-weight: 800; }
+.lb-nemotron-role.off {
+  background: rgba(255,255,255,0.04);
+  border-left-color: rgba(255,255,255,0.30);
+}
+.lb-nemotron-role.off b { color: rgba(255,255,255,0.85); }
+.lb-providers-label {
+  font-family: var(--mono);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.42);
+  padding: 4px 0 8px;
+}
 .lb-row.landscape {
   grid-template-columns: 60px 1fr 1.5fr 150px;
 }
@@ -1261,9 +1333,23 @@ footer a { color: var(--ink2); text-decoration: none; border-bottom: 1px solid v
         <div class="lb-title">The voice AI landscape · where Nemotron Omni fits</div>
         <div class="lb-sub">May 2026 · 3 layers</div>
       </div>
+      <div class="lb-pipeline-intro">
+        A voice agent typically chains three layers: <b>ASR</b> (transcribe what the user said) → <b>LLM</b> (reason about it) → <b>TTS</b> (speak the response). Each layer has different providers, different use cases, and different pricing models. <span class="hl">Nemotron Omni collapses ASR + LLM into one model.</span> Below: what each layer is for, where Nemotron fits, and who the major providers are.
+      </div>
 
-      <!-- Layer 1: ASR -->
-      <div class="lb-section-head">Layer 1 · ASR / Speech-to-Text (no LLM reasoning)</div>
+      <!-- ─────────────────────────────────────── -->
+      <!-- Layer 1: ASR                            -->
+      <!-- ─────────────────────────────────────── -->
+      <div class="lb-layer-intro">
+        <div class="lb-layer-name">Layer 1 · ASR / Speech-to-Text</div>
+        <div class="lb-layer-what">Pure transcription. Audio in, text out. No reasoning, no response — just the words on a page.</div>
+        <div class="lb-layer-uses-label">Used for</div>
+        <div class="lb-layer-uses">Meeting transcription (Otter, Fireflies, Granola) · call recording → searchable archive · subtitles &amp; closed captions for video · podcast → blog post pipelines · voice notes in productivity apps · court reporting and medical dictation transcripts.</div>
+        <div class="lb-nemotron-role off">
+          <b>Why Nemotron Omni isn't here:</b> overkill. If all you need is text-from-audio with no reasoning, a dedicated ASR provider is faster, cheaper, and built for streaming. Nemotron does ASR internally as part of its voice-LLM pipeline — but transcription-only is not what it was built for.
+        </div>
+        <div class="lb-providers-label">— Providers —</div>
+      </div>
       <div class="lb-row landscape">
         <div class="lb-marker">—</div>
         <div><span class="lb-model">Deepgram Nova-3</span></div>
@@ -1279,18 +1365,29 @@ footer a { color: var(--ink2); text-decoration: none; border-bottom: 1px solid v
       <div class="lb-row landscape">
         <div class="lb-marker">—</div>
         <div><span class="lb-model">AssemblyAI Universal-2</span></div>
-        <div class="lb-role">low-latency streaming + diarization</div>
+        <div class="lb-role">low-latency streaming + speaker diarization</div>
         <div class="lb-cost">~$0.37 / hr audio</div>
       </div>
       <div class="lb-row landscape">
         <div class="lb-marker">—</div>
         <div><span class="lb-model">Speechmatics</span></div>
-        <div class="lb-role">enterprise on-prem ASR · accents/dialects</div>
+        <div class="lb-role">enterprise on-prem ASR · accents/dialects coverage</div>
         <div class="lb-cost">~$0.30 / hr audio</div>
       </div>
 
-      <!-- Layer 1+2: Voice-LLM (VoiceBench) -->
-      <div class="lb-section-head">Layer 1+2 · Voice-LLM (speech → reasoned response) · VoiceBench ranks</div>
+      <!-- ─────────────────────────────────────── -->
+      <!-- Layer 1+2: Voice-LLM (VoiceBench)        -->
+      <!-- ─────────────────────────────────────── -->
+      <div class="lb-layer-intro">
+        <div class="lb-layer-name">Layer 1+2 · Voice-LLM (Speech → Reasoned Response)</div>
+        <div class="lb-layer-what">Hears, understands, reasons, responds. Takes spoken input, runs it through an LLM, produces a structured or conversational response in one model.</div>
+        <div class="lb-layer-uses-label">Used for</div>
+        <div class="lb-layer-uses">Customer support voice agents (tier-1 call resolution) · voice copilots inside software ("delete the last paragraph") · in-car assistants ("find me a charging station with a coffee shop") · medical scribes (transcribe + structure into SOAP notes) · voice-controlled productivity ("schedule a meeting with Alison") · tutoring agents that explain concepts back to students.</div>
+        <div class="lb-nemotron-role">
+          <b>Why Nemotron Omni IS here:</b> this is exactly its design. #1 on VoiceBench at 89.4. Speech in, reasoned response out, with safety refusal (AdvBench 100), instruction following (IFEval 88.7), and spoken-dialog QA (SD-QA 71.4). Open weights, 3B active params.
+        </div>
+        <div class="lb-providers-label">— Providers · VoiceBench ranks —</div>
+      </div>
       <div class="lb-row landscape us">
         <div class="lb-marker">1</div>
         <div><span class="lb-model">Nemotron 3 Nano Omni</span></div>
@@ -1334,18 +1431,29 @@ footer a { color: var(--ink2); text-decoration: none; border-bottom: 1px solid v
         <div class="lb-cost">~$3-12 / 1M audio</div>
       </div>
 
-      <!-- Layer 3: TTS -->
-      <div class="lb-section-head">Layer 3 · TTS / Text-to-Speech (no reasoning, voice output)</div>
+      <!-- ─────────────────────────────────────── -->
+      <!-- Layer 3: TTS                            -->
+      <!-- ─────────────────────────────────────── -->
+      <div class="lb-layer-intro">
+        <div class="lb-layer-name">Layer 3 · TTS / Text-to-Speech</div>
+        <div class="lb-layer-what">Converts written text into natural-sounding spoken audio. Voice cloning, expressive delivery, accents, multiple languages.</div>
+        <div class="lb-layer-uses-label">Used for</div>
+        <div class="lb-layer-uses">Audiobook generation (ElevenLabs's signature use case) · voice-agent response output (after the LLM decides what to say) · accessibility (screen readers, narrated articles) · IVR &amp; phone systems with a branded voice · localization &amp; dubbing (translated voice-overs in 30+ languages) · voice cloning for content creators.</div>
+        <div class="lb-nemotron-role off">
+          <b>Why Nemotron Omni isn't here:</b> Nemotron Omni handles audio <i>input</i> (recognition + understanding). For natural-sounding voice <i>output</i>, you still pair it with a dedicated TTS provider downstream. A typical voice-agent stack: <b>Nemotron Omni (ASR+LLM) → Cartesia or ElevenLabs (TTS)</b>.
+        </div>
+        <div class="lb-providers-label">— Providers —</div>
+      </div>
       <div class="lb-row landscape">
         <div class="lb-marker">—</div>
         <div><span class="lb-model">ElevenLabs v3</span></div>
-        <div class="lb-role">quality / voice-cloning leader · expressive</div>
+        <div class="lb-role">quality / voice-cloning leader · expressive delivery</div>
         <div class="lb-cost">~$0.18 / 1K chars</div>
       </div>
       <div class="lb-row landscape">
         <div class="lb-marker">—</div>
         <div><span class="lb-model">Cartesia Sonic</span></div>
-        <div class="lb-role">low-latency streaming TTS · realtime agents</div>
+        <div class="lb-role">low-latency streaming TTS · realtime voice agents</div>
         <div class="lb-cost">~$0.025 / 1K chars</div>
       </div>
       <div class="lb-row landscape">
@@ -1357,10 +1465,13 @@ footer a { color: var(--ink2); text-decoration: none; border-bottom: 1px solid v
       <div class="lb-row landscape">
         <div class="lb-marker">—</div>
         <div><span class="lb-model">Deepgram Aura-2</span></div>
-        <div class="lb-role">cheap realtime TTS · pairs with Nova-3 ASR</div>
+        <div class="lb-role">cheap realtime TTS · pairs natively with Nova-3 ASR</div>
         <div class="lb-cost">~$0.030 / 1K chars</div>
       </div>
 
+      <!-- ─────────────────────────────────────── -->
+      <!-- Footnote                                -->
+      <!-- ─────────────────────────────────────── -->
       <div class="lb-footnote">
         Cost units differ by layer — ASR per hour of audio processed, Voice-LLM per 1M tokens generated, TTS per 1K characters spoken. Not directly comparable across layers. A complete voice agent typically chains all three (Deepgram → LLM → ElevenLabs). <b style="color: rgba(255,255,255,0.85);">Nemotron Omni collapses Layers 1+2 into one model</b> — you still pair it with a TTS provider (Cartesia/ElevenLabs) for spoken output. Prices approximate as of May 2026; verify with each provider before quoting externally.
       </div>
