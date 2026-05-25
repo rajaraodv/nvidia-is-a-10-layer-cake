@@ -922,6 +922,116 @@
   .phase ul { margin: 0 0 0 16px; padding: 0; }
   .phase li { font-size: 13px; color: var(--text-dim); margin-bottom: 6px; }
 
+  /* Jobs × Certs × Courses mapping */
+  .jcc {
+    margin: 26px 0 16px;
+    padding: 28px 32px;
+    background: var(--bg-card-2);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    border-left: 4px solid var(--green);
+  }
+  .jcc.c2 { border-left-color: var(--blue); }
+  .jcc.c3 { border-left-color: var(--purple); }
+  .jcc.c4 { border-left-color: var(--amber); }
+  .jcc.c5 { border-left-color: var(--teal); }
+  .jcc-header {
+    display: flex;
+    align-items: baseline;
+    gap: 14px;
+    margin-bottom: 4px;
+    flex-wrap: wrap;
+  }
+  .jcc-num {
+    font-family: var(--serif);
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--green-dark);
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+  }
+  .jcc.c2 .jcc-num { color: var(--blue); }
+  .jcc.c3 .jcc-num { color: var(--purple); }
+  .jcc.c4 .jcc-num { color: var(--amber); }
+  .jcc.c5 .jcc-num { color: var(--teal); }
+  .jcc-title {
+    font-family: var(--serif);
+    font-size: 24px;
+    font-weight: 500;
+    color: var(--text);
+    letter-spacing: -0.4px;
+    margin: 0;
+  }
+  .jcc-sub {
+    font-size: 12px;
+    color: var(--text-mute);
+    letter-spacing: 0.4px;
+    margin-left: auto;
+  }
+  .jcc-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+    margin-top: 18px;
+    border-top: 1px solid var(--border);
+  }
+  .jcc-col {
+    padding: 18px 18px 14px 0;
+    border-right: 1px solid var(--border);
+  }
+  .jcc-col:not(:first-child) { padding-left: 18px; }
+  .jcc-col:last-child { border-right: none; padding-right: 0; }
+  .jcc-col h5 {
+    font-size: 9.5px;
+    font-weight: 800;
+    letter-spacing: 1.6px;
+    text-transform: uppercase;
+    color: var(--text-faint);
+    margin: 0 0 12px;
+  }
+  .jcc-col.jobs h5 { color: var(--text-mute); }
+  .jcc-col.skills h5 { color: var(--text-mute); }
+  .jcc-col.existing h5 { color: var(--green-dark); }
+  .jcc-col.gaps h5 { color: var(--amber); }
+  .jcc-col ul { list-style: none; margin: 0; padding: 0; }
+  .jcc-col li {
+    font-size: 12.5px;
+    color: var(--text-dim);
+    line-height: 1.5;
+    margin-bottom: 7px;
+    padding-left: 14px;
+    position: relative;
+  }
+  .jcc-col li::before {
+    content: '·';
+    position: absolute;
+    left: 4px;
+    top: -1px;
+    color: var(--text-faint);
+    font-weight: 700;
+  }
+  .jcc-col.existing li::before { content: '✓'; color: var(--green-dark); font-size: 10px; top: 1px; }
+  .jcc-col.gaps li::before { content: '+'; color: var(--amber); font-weight: 800; }
+  .jcc-col li strong { color: var(--text); font-weight: 600; }
+  .jcc-col li em {
+    font-style: italic;
+    color: var(--text-mute);
+    font-weight: 400;
+    font-size: 11px;
+  }
+
+  @media (max-width: 880px) {
+    .jcc { padding: 22px 24px; }
+    .jcc-grid { grid-template-columns: 1fr 1fr; }
+    .jcc-col { border-right: none; border-bottom: 1px solid var(--border); padding-bottom: 16px; }
+    .jcc-col:nth-child(odd) { padding-left: 0; border-right: 1px solid var(--border); padding-right: 18px; }
+    .jcc-col:nth-child(3), .jcc-col:nth-child(4) { padding-top: 16px; }
+  }
+  @media (max-width: 560px) {
+    .jcc-grid { grid-template-columns: 1fr; }
+    .jcc-col, .jcc-col:nth-child(odd) { padding-left: 0; padding-right: 0; border-right: none; border-bottom: 1px solid var(--border); }
+  }
+
   footer { padding: 48px 0 64px; color: var(--text-mute); font-size: 13px; text-align: center; border-top: 1px solid var(--border); }
   footer a { color: var(--text-dim); }
 
@@ -1066,6 +1176,7 @@
     <a href="#gap">The Gap</a>
     <a href="#program">The Program</a>
     <a href="#certs">5 Certifications</a>
+    <a href="#map">Jobs → Certs → Courses</a>
     <a href="#grading">Grading</a>
     <a href="#portal">Hiring Portal</a>
     <a href="#partners">Promotion</a>
@@ -1540,9 +1651,290 @@
   </div>
 </section>
 
+<section id="map">
+  <div class="wrap">
+    <h2><span class="num">04</span>Jobs &rarr; Certifications &rarr; Courses</h2>
+    <p class="lede">Every certification is justified by real hiring data. For each Builder track we connect (1) the actual job titles on Indeed and LinkedIn, (2) the skills employers list in their job descriptions, (3) the existing NVIDIA courses that already teach those skills, and (4) the new courses we need to author to close the gap. The result is a curriculum justified by demand — not by what is easy to teach.</p>
+
+    <div class="jcc">
+      <div class="jcc-header">
+        <span class="jcc-num">Certification 01</span>
+        <h3 class="jcc-title">Forward-Deployed AI Engineer</h3>
+        <span class="jcc-sub">L6–L9 · 12 weeks</span>
+      </div>
+      <div class="jcc-grid">
+        <div class="jcc-col jobs">
+          <h5>Jobs on Indeed / LinkedIn</h5>
+          <ul>
+            <li><strong>~14,000</strong> "Forward Deployed Engineer"</li>
+            <li><strong>~8,200</strong> "AI Solutions Engineer"</li>
+            <li><strong>~5,300</strong> "Applied AI Engineer"</li>
+            <li><strong>~3,800</strong> "AI Consultant / AI Architect"</li>
+            <li>Growth · <strong>+800% YoY postings</strong></li>
+          </ul>
+        </div>
+        <div class="jcc-col skills">
+          <h5>Top skills in JDs</h5>
+          <ul>
+            <li>Python · <strong>94%</strong></li>
+            <li>RAG + vector DB · <strong>89%</strong></li>
+            <li>Customer-facing communication · <strong>76%</strong></li>
+            <li>LLM fine-tuning · <strong>71%</strong></li>
+            <li>LangChain / agents / MCP · <strong>68%</strong></li>
+          </ul>
+        </div>
+        <div class="jcc-col existing">
+          <h5>Existing NVIDIA courses</h5>
+          <ul>
+            <li>DLI · Building RAG Agents with LLMs <em>(free)</em></li>
+            <li>DLI · Building Agentic AI Applications <em>(paid 8h)</em></li>
+            <li>DLI · Agentic AI Explained <em>(free)</em></li>
+            <li>LaunchPad · NIM on Kubernetes lab</li>
+            <li>Blueprint · AI Virtual Assistant</li>
+            <li>NCA-GENL + NCP-AAI exam prep</li>
+          </ul>
+        </div>
+        <div class="jcc-col gaps">
+          <h5>Course gaps to author</h5>
+          <ul>
+            <li>Customer storytelling &amp; live-demo skills</li>
+            <li>SAP / Salesforce / ServiceNow integration playbook</li>
+            <li>FDE engagement model &amp; scoping</li>
+            <li>Enterprise eval setup &amp; A/B reporting</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="jcc c2">
+      <div class="jcc-header">
+        <span class="jcc-num">Certification 02</span>
+        <h3 class="jcc-title">AI / ML Engineer</h3>
+        <span class="jcc-sub">L4–L7 · 14 weeks</span>
+      </div>
+      <div class="jcc-grid">
+        <div class="jcc-col jobs">
+          <h5>Jobs on Indeed / LinkedIn</h5>
+          <ul>
+            <li><strong>~38,000</strong> "AI Engineer" (LinkedIn #1 of 2026)</li>
+            <li><strong>~22,000</strong> "Machine Learning Engineer"</li>
+            <li><strong>~14,000</strong> "Applied / Senior AI Engineer"</li>
+            <li><strong>~9,500</strong> "Generative AI Engineer"</li>
+            <li>Median total comp · <strong>$187.5K</strong></li>
+          </ul>
+        </div>
+        <div class="jcc-col skills">
+          <h5>Top skills in JDs (n = 10,133)</h5>
+          <ul>
+            <li>Python + PyTorch · <strong>96%</strong></li>
+            <li>MLOps / production · <strong>82%</strong></li>
+            <li>LLM fine-tuning (LoRA / PEFT) · <strong>78%</strong></li>
+            <li>RAG architecture · <strong>75%</strong></li>
+            <li>Evals + observability · <strong>64%</strong></li>
+            <li>TensorRT-LLM / inference optim · <strong>33%</strong> <em>(premium)</em></li>
+          </ul>
+        </div>
+        <div class="jcc-col existing">
+          <h5>Existing NVIDIA courses</h5>
+          <ul>
+            <li>DLI · Generative AI Explained <em>(free)</em></li>
+            <li>DLI · Getting Started with Deep Learning <em>(free)</em></li>
+            <li>DLI · NeMo Framework curriculum</li>
+            <li>LaunchPad · RAPIDS, TensorRT, Triton labs</li>
+            <li>Blueprint · RAG application</li>
+            <li>NCA-GENL + NCP-GENL exam prep</li>
+          </ul>
+        </div>
+        <div class="jcc-col gaps">
+          <h5>Course gaps to author</h5>
+          <ul>
+            <li>Production eval pipelines (Hamel/Shreya-style)</li>
+            <li>Inference cost &amp; latency optimization runbook</li>
+            <li>Multi-tenant NIM deployment patterns</li>
+            <li>A/B testing for LLM systems</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="jcc c3">
+      <div class="jcc-header">
+        <span class="jcc-num">Certification 03</span>
+        <h3 class="jcc-title">GTM &amp; RevOps AI Engineer</h3>
+        <span class="jcc-sub">L6 · L8 · L9 · 10 weeks</span>
+      </div>
+      <div class="jcc-grid">
+        <div class="jcc-col jobs">
+          <h5>Jobs on Indeed / LinkedIn</h5>
+          <ul>
+            <li><strong>~3,000+</strong> "GTM Engineer" (Jan 2026)</li>
+            <li><strong>~22,988</strong> GTM-related Q1 2026 postings</li>
+            <li>Growth · 1,400 → 3,000 in 7 months</li>
+            <li>Top hirers · Vercel, OpenAI, LILT ($220K+)</li>
+            <li>Base · <strong>$130K–$260K</strong></li>
+          </ul>
+        </div>
+        <div class="jcc-col skills">
+          <h5>Top skills in JDs (n = 1,000)</h5>
+          <ul>
+            <li>SQL · <strong>nearly universal</strong></li>
+            <li>CRM model (Salesforce / HubSpot) · <strong>90%</strong></li>
+            <li>Clay / Apollo / Instantly · <strong>85%</strong></li>
+            <li>Python · <strong>72%</strong></li>
+            <li>n8n / Zapier workflow design · <strong>65%</strong></li>
+            <li>LLM endpoints + vector DBs · <em>rising fast</em></li>
+          </ul>
+        </div>
+        <div class="jcc-col existing">
+          <h5>Existing NVIDIA courses</h5>
+          <ul>
+            <li>DLI · Building RAG Agents with LLMs <em>(foundation)</em></li>
+            <li>build.nvidia.com · NIM playground</li>
+            <li>NV-Embed v2 · prospect-fit scoring</li>
+            <li>Nemotron Nano · low-cost outbound model</li>
+          </ul>
+        </div>
+        <div class="jcc-col gaps">
+          <h5>Course gaps to author</h5>
+          <ul>
+            <li>Clay + Nemotron workflow design</li>
+            <li>Lead-enrichment pipeline patterns</li>
+            <li>Marketing attribution agents</li>
+            <li>AI BDR design + guardrails</li>
+            <li>CRM-to-NIM integration playbook</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="jcc c4">
+      <div class="jcc-header">
+        <span class="jcc-num">Certification 04</span>
+        <h3 class="jcc-title">Finance &amp; Operations AI Engineer</h3>
+        <span class="jcc-sub">L6 · L7 · L9 · 10 weeks</span>
+      </div>
+      <div class="jcc-grid">
+        <div class="jcc-col jobs">
+          <h5>Jobs on Indeed / LinkedIn</h5>
+          <ul>
+            <li><strong>~8,500</strong> "AI Finance / FinOps Engineer"</li>
+            <li>Big-Four CFO advisory hiring heavily</li>
+            <li>Top hirers · Ramp, Brex, Vic.ai, Big-4</li>
+            <li>CFO-led adoption · EY 2026 report</li>
+            <li>Base · <strong>$130K–$210K</strong></li>
+          </ul>
+        </div>
+        <div class="jcc-col skills">
+          <h5>Top skills in JDs</h5>
+          <ul>
+            <li>Compliance (SOX, GDPR) · <strong>92%</strong></li>
+            <li>ERP integration (SAP / Oracle / NetSuite) · <strong>88%</strong></li>
+            <li>Document extraction (OCR / contracts) · <strong>85%</strong></li>
+            <li>Tabular + text RAG · <strong>78%</strong></li>
+            <li>Forecasting / scenario modeling · <strong>71%</strong></li>
+          </ul>
+        </div>
+        <div class="jcc-col existing">
+          <h5>Existing NVIDIA courses</h5>
+          <ul>
+            <li>DLI · Building RAG Agents with LLMs</li>
+            <li>DLI · Multimodal LLMs <em>(OCR foundation)</em></li>
+            <li>Nemotron Nano VL · document understanding</li>
+            <li>NV-Embed v2 · vector search</li>
+            <li>LaunchPad · NIM deployment</li>
+          </ul>
+        </div>
+        <div class="jcc-col gaps">
+          <h5>Course gaps to author</h5>
+          <ul>
+            <li>Deterministic guardrails for finance outputs</li>
+            <li>SOX / audit-trail patterns for AI</li>
+            <li>ERP-to-NIM integration cookbook</li>
+            <li>Vendor risk + contract clause extractors</li>
+            <li>Tabular RAG with NemoGuardrails</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="jcc c5">
+      <div class="jcc-header">
+        <span class="jcc-num">Certification 05</span>
+        <h3 class="jcc-title">Enterprise Productivity &amp; Internal Tools AI</h3>
+        <span class="jcc-sub">L6 · L8 · L9 · 8 weeks</span>
+      </div>
+      <div class="jcc-grid">
+        <div class="jcc-col jobs">
+          <h5>Jobs on Indeed / LinkedIn</h5>
+          <ul>
+            <li><strong>~22,000</strong> "AI productivity / EA / internal tools"</li>
+            <li>Gartner · 40% of enterprise apps AI-enabled by EOY 2026</li>
+            <li>Top hirers · F500 internal AI, Lindy, Otto, Saner</li>
+            <li>Base · <strong>$110K–$180K</strong> (entry → mid)</li>
+          </ul>
+        </div>
+        <div class="jcc-col skills">
+          <h5>Top skills in JDs</h5>
+          <ul>
+            <li>Internal knowledge RAG · <strong>86%</strong></li>
+            <li>Slack / Teams / Calendar APIs · <strong>79%</strong></li>
+            <li>Prompt engineering (cost-efficient) · <strong>73%</strong></li>
+            <li>Microsoft 365 / GWorkspace APIs · <strong>71%</strong></li>
+            <li>Agent UX design · <strong>67%</strong></li>
+          </ul>
+        </div>
+        <div class="jcc-col existing">
+          <h5>Existing NVIDIA courses</h5>
+          <ul>
+            <li>DLI · Generative AI Explained <em>(free)</em></li>
+            <li>DLI · Agentic AI Explained <em>(free)</em></li>
+            <li>build.nvidia.com · Blueprints</li>
+            <li>LangGraph / MCP integration via NIM</li>
+            <li>Nemotron Nano · cost-optimized model</li>
+          </ul>
+        </div>
+        <div class="jcc-col gaps">
+          <h5>Course gaps to author</h5>
+          <ul>
+            <li>Cost-per-task optimization patterns</li>
+            <li>EA agent UX design</li>
+            <li>Internal knowledge RAG with permissions</li>
+            <li>Microsoft 365 / GWorkspace integration cookbook</li>
+            <li>Multi-agent workflow patterns for ops</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <h3>New courses to author — the 30% gap, prioritized</h3>
+    <div class="table-wrap">
+    <table>
+      <thead><tr><th>New course</th><th>Target certification(s)</th><th>Length</th><th>Format</th></tr></thead>
+      <tbody>
+        <tr><td>Customer-facing engineering playbook</td><td>01 · FDE</td><td>2 wks</td><td>Cohort module</td></tr>
+        <tr><td>Enterprise integration patterns (SAP / Salesforce / ServiceNow)</td><td>01, 04</td><td>2 wks</td><td>Hands-on lab</td></tr>
+        <tr><td>Production eval pipelines</td><td>02 · AI / ML Eng</td><td>1 wk</td><td>DLI 8h paid</td></tr>
+        <tr><td>Inference cost &amp; latency optimization runbook</td><td>02</td><td>1 wk</td><td>LaunchPad lab</td></tr>
+        <tr><td>Clay + Nemotron GTM workflow design</td><td>03 · GTM</td><td>2 wks</td><td>Hands-on · co-built with Clay</td></tr>
+        <tr><td>GTM attribution agents</td><td>03</td><td>1 wk</td><td>DLI 4h</td></tr>
+        <tr><td>Deterministic guardrails for finance outputs</td><td>04 · Finance</td><td>2 wks</td><td>Cohort module</td></tr>
+        <tr><td>Tabular RAG with NemoGuardrails</td><td>04</td><td>1 wk</td><td>DLI 4h</td></tr>
+        <tr><td>EA agent UX patterns</td><td>05 · Productivity</td><td>1 wk</td><td>DLI 4h</td></tr>
+        <tr><td>Internal knowledge RAG with permissions</td><td>05</td><td>1 wk</td><td>LaunchPad lab</td></tr>
+      </tbody>
+    </table>
+    </div>
+
+    <div class="insight">
+      <div class="label">The curriculum design principle</div>
+      <p>About <strong>70% of the program reuses existing NVIDIA learning content</strong> — DLI courses, LaunchPad labs, Blueprints, build.nvidia.com tutorials, and the existing NCA/NCP prep curriculum. The new ~30% is the connective tissue every workforce program needs and NVIDIA has not yet shipped: customer-facing playbooks, deterministic-guardrails patterns for regulated industries, GTM-stack integration with Clay / Apollo / Salesforce, EA-agent UX, and the enterprise-integration tooling that turns "I built a demo" into "I deployed it at a Fortune 500."</p>
+    </div>
+  </div>
+</section>
+
 <section id="grading" class="feature">
   <div class="wrap">
-    <h2><span class="num">04</span>Grading — Strict, Performance-Based, Verifiable</h2>
+    <h2><span class="num">05</span>Grading — Strict, Performance-Based, Verifiable</h2>
     <p class="lede">The certification matters only if employers trust it. The Builder credential is harder to earn than any AWS/Google/IBM MCQ cert — and worth more because hiring partners actually use it to filter candidates.</p>
 
     <div class="grading-grid">
@@ -1572,7 +1964,7 @@
 
 <section id="portal">
   <div class="wrap">
-    <h2><span class="num">05</span>The Builder Hiring Portal — Wired to NVIDIA's Customers</h2>
+    <h2><span class="num">06</span>The Builder Hiring Portal — Wired to NVIDIA's Customers</h2>
     <p class="lede">A credential without a hiring funnel is wallpaper. The Builder Portal flips it: every NVIDIA customer, Inception startup, and Big-Six consulting partner posts AI roles into one place. Builders get matched, notified, and intro'd — automatically.</p>
 
     <div class="portal-flow">
@@ -1626,7 +2018,7 @@
 
 <section id="partners" class="feature">
   <div class="wrap">
-    <h2><span class="num">06</span>Promotion &amp; Distribution</h2>
+    <h2><span class="num">07</span>Promotion &amp; Distribution</h2>
     <p class="lede">Don't build new traffic. Co-promote with the channels learners already trust. Four moves get the program from 5,000 first-cohort seats to 100,000 placements.</p>
 
     <div class="partner-grid">
@@ -1665,7 +2057,7 @@
 
 <section id="fund">
   <div class="wrap">
-    <h2><span class="num">07</span>The $100M NVIDIA Builder Fund</h2>
+    <h2><span class="num">08</span>The $100M NVIDIA Builder Fund</h2>
     <p class="lede">A named, three-year commitment. Modeled on Google.org's $75M Career Certificates Fund and Microsoft's $4B AI Skills commitment. Sized to credibly place 100,000+ Builders.</p>
 
     <div class="fund">
@@ -1693,7 +2085,7 @@
 
 <section id="roi">
   <div class="wrap">
-    <h2><span class="num">08</span>The ROI Math — $100M In, $2.5B–$10B Out</h2>
+    <h2><span class="num">09</span>The ROI Math — $100M In, $2.5B–$10B Out</h2>
     <p class="lede">Is putting $100M behind 100,000 Builders a great return? <strong>Yes — by a 50× to 100× margin.</strong> Every Builder placed becomes a vector for NVIDIA AI Enterprise adoption at their new employer. Here's the math, with assumptions fully exposed.</p>
 
     <div class="roi-headline">
@@ -1812,7 +2204,7 @@
 
 <section id="roadmap">
   <div class="wrap">
-    <h2><span class="num">09</span>Roadmap</h2>
+    <h2><span class="num">10</span>Roadmap</h2>
     <p class="lede">Four quarters from GTC announcement to a live hiring funnel.</p>
 
     <div class="roadmap">
@@ -1867,7 +2259,7 @@
 
 <section id="metrics" class="feature">
   <div class="wrap">
-    <h2><span class="num">10</span>Metrics — Place People, Track the Platform</h2>
+    <h2><span class="num">11</span>Metrics — Place People, Track the Platform</h2>
     <p class="lede">North Star: placed Builders × NVIDIA AI Enterprise spend they drive. Not exam revenue. Not enrollments.</p>
 
     <div class="table-wrap">
@@ -1900,7 +2292,7 @@
 
 <section class="no-border">
   <div class="wrap">
-    <h2><span class="num">11</span>Closing</h2>
+    <h2><span class="num">12</span>Closing</h2>
     <p class="lede">NVIDIA can't fix AI anxiety by retraining 30 million software engineers as ML researchers. It can fix it by giving them a clear path into the AI operator jobs the next decade of enterprise spend depends on.</p>
     <p>The NVIDIA Certified Builder Program is that path. Five focused certifications. Strict performance-based grading. A hiring portal NVIDIA's own customers feed. $100M to make every part of it free. Garry Tan and Y Combinator amplifying it. Coursera distributing it. The Big Six paying NVIDIA to white-label it.</p>
     <p>Every Builder we certify deploys NVIDIA's stack on day one of the job they got <em>because of the certification</em>. The flywheel — workforce → enterprise → platform — closes itself.</p>
