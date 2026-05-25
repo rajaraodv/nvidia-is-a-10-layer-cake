@@ -6,88 +6,240 @@
 <title>NVIDIA Certified Builder Program · The Workforce Bridge</title>
 <style>
   :root {
+    /* Type */
+    --serif: 'Iowan Old Style', 'Sitka Text', 'Charter', Georgia, Cambria, 'Times New Roman', serif;
+    --sans: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Inter', 'Helvetica Neue', Arial, sans-serif;
+    --mono: ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, monospace;
+
+    /* Color — restrained editorial palette */
     --bg: #ffffff;
-    --bg-elev: #f7f8f7;
-    --bg-card: #fafbfa;
+    --bg-elev: #faf9f6;
+    --bg-card: #ffffff;
     --bg-card-2: #ffffff;
-    --border: #e5e7e5;
-    --border-strong: #d0d3d0;
+    --border: #e6e4df;
+    --border-strong: #d4d2cc;
     --green: #76b900;
-    --green-dark: #5a8c00;
-    --green-soft: #eaf5d4;
-    --green-glow: rgba(118, 185, 0, 0.08);
-    --text: #111111;
-    --text-dim: #4a4a4a;
-    --text-mute: #888888;
-    --red: #d64545;
-    --red-soft: #fdecec;
-    --amber: #d99a00;
-    --amber-soft: #fef5e0;
-    --blue: #2e7fc7;
-    --blue-soft: #e6f0fa;
-    --purple: #8e4ec6;
-    --purple-soft: #f3e8fa;
-    --teal: #1aa298;
-    --teal-soft: #e0f5f3;
+    --green-dark: #4f7a00;
+    --green-deep: #344e00;
+    --green-soft: #f1f6e2;
+    --green-glow: rgba(118, 185, 0, 0.05);
+    --text: #0e0e0e;
+    --text-dim: #383838;
+    --text-mute: #777777;
+    --text-faint: #a4a299;
+    --red: #b34141;
+    --red-soft: #f7eaea;
+    --amber: #a07000;
+    --amber-soft: #f6efdb;
+    --blue: #1e5fa3;
+    --blue-soft: #e8f0f9;
+    --purple: #7a3eb0;
+    --purple-soft: #f1e6f7;
+    --teal: #00857a;
+    --teal-soft: #ddf0ee;
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
   html { scroll-behavior: smooth; }
-  body { background: var(--bg); color: var(--text); font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Inter", sans-serif; line-height: 1.6; font-size: 16px; -webkit-font-smoothing: antialiased; }
-  code { font-family: "SF Mono", Monaco, Menlo, monospace; font-size: 0.88em; background: var(--bg-elev); padding: 1px 6px; border-radius: 3px; color: var(--green-dark); border: 1px solid var(--border); }
+  body { background: var(--bg); color: var(--text); font-family: var(--sans); line-height: 1.6; font-size: 16px; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+  code { font-family: var(--mono); font-size: 0.88em; background: var(--bg-elev); padding: 1px 6px; border-radius: 3px; color: var(--green-dark); border: 1px solid var(--border); }
   .wrap { max-width: 1160px; margin: 0 auto; padding: 0 28px; }
 
+  /* HERO — editorial brief */
   .hero {
-    padding: 88px 0 70px;
+    padding: 56px 0 64px;
     border-bottom: 1px solid var(--border);
-    background:
-      radial-gradient(ellipse at top left, rgba(118,185,0,0.07), transparent 60%),
-      radial-gradient(ellipse at bottom right, rgba(46,127,199,0.04), transparent 60%),
-      var(--bg);
+    background: var(--bg);
   }
-  .brand { color: var(--text-mute); font-size: 12px; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 22px; font-weight: 600; }
-  .brand strong { color: var(--green-dark); }
-  h1 { font-size: 64px; line-height: 1.0; font-weight: 700; letter-spacing: -2.5px; margin-bottom: 22px; color: var(--text); }
-  h1 .accent { color: var(--green); }
-  .deck { font-size: 20px; color: var(--text-dim); max-width: 800px; margin-bottom: 30px; line-height: 1.5; }
+  .masthead {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 56px;
+    font-size: 11px;
+    letter-spacing: 1.8px;
+    color: var(--text-mute);
+    font-weight: 600;
+    text-transform: uppercase;
+    flex-wrap: wrap;
+  }
+  .masthead-dot {
+    display: inline-block;
+    width: 7px;
+    height: 7px;
+    background: var(--green);
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+  .masthead-sep { color: var(--text-faint); margin: 0 2px; }
+  .masthead-date { margin-left: auto; color: var(--text-mute); }
+
+  .hero-kicker {
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 400;
+    font-size: 20px;
+    color: var(--text-mute);
+    margin-bottom: 18px;
+    letter-spacing: -0.2px;
+  }
+
+  .hero h1 {
+    font-family: var(--serif);
+    font-size: 60px;
+    line-height: 1.04;
+    font-weight: 500;
+    letter-spacing: -1.8px;
+    color: var(--text);
+    margin: 0 0 36px;
+    max-width: 920px;
+  }
+  .hero h1 .accent {
+    color: var(--green-dark);
+    font-weight: 600;
+    font-style: italic;
+  }
+
+  .hero-standfirst {
+    font-family: var(--serif);
+    font-size: 20px;
+    line-height: 1.6;
+    font-weight: 400;
+    color: var(--text-dim);
+    max-width: 760px;
+    margin: 0 0 52px;
+  }
+  .hero-standfirst strong { color: var(--text); font-weight: 600; }
+
+  .hero-figures {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 36px;
+  }
+  .fig { padding: 26px 26px 26px 0; border-right: 1px solid var(--border); }
+  .fig:not(:first-child) { padding-left: 26px; }
+  .fig:last-child { border-right: none; padding-right: 0; }
+  .fig-num {
+    display: block;
+    font-family: var(--serif);
+    font-size: 34px;
+    font-weight: 500;
+    color: var(--text);
+    line-height: 1;
+    margin-bottom: 10px;
+    letter-spacing: -0.6px;
+    font-variant-numeric: tabular-nums;
+  }
+  .fig-label {
+    display: block;
+    font-size: 12px;
+    color: var(--text-mute);
+    letter-spacing: 0.1px;
+    line-height: 1.45;
+  }
+
+  .colophon {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 40px;
+    font-size: 12px;
+  }
+  .colophon-item { display: flex; flex-direction: column; gap: 5px; }
+  .colophon-label {
+    font-size: 10px;
+    letter-spacing: 1.8px;
+    text-transform: uppercase;
+    color: var(--text-faint);
+    font-weight: 700;
+  }
+  .colophon-value { color: var(--text-dim); font-size: 13px; }
+
+  /* The green badge — used for the closing slogan, de-saturated */
   .ticker {
-    background: var(--green); border-radius: 10px;
-    padding: 12px 22px; color: white; font-size: 16px; font-weight: 700; letter-spacing: 0.3px;
-    display: inline-block; margin-bottom: 32px;
+    background: var(--green-soft);
+    border: 1px solid var(--green);
+    border-radius: 6px;
+    padding: 14px 22px;
+    color: var(--green-deep);
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: 0.2px;
+    display: inline-block;
+    margin-bottom: 32px;
   }
-  .ticker em { color: #f0ffd0; font-style: normal; font-weight: 600; }
-  .meta { display: flex; gap: 24px; font-size: 13px; color: var(--text-mute); flex-wrap: wrap; }
-  .meta span strong { color: var(--text); font-weight: 600; }
+  .ticker em { color: var(--text); font-style: normal; font-weight: 600; }
 
   .nav { position: sticky; top: 0; background: rgba(255,255,255,0.94); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); z-index: 10; padding: 14px 0; }
   .nav-inner { display: flex; gap: 18px; flex-wrap: wrap; font-size: 13px; }
   .nav a { color: var(--text-dim); text-decoration: none; transition: color .15s; border: none; font-weight: 500; }
   .nav a:hover { color: var(--green); }
 
-  section { padding: 76px 0; border-bottom: 1px solid var(--border); }
+  section { padding: 80px 0; border-bottom: 1px solid var(--border); }
   section.no-border { border-bottom: none; }
   section.feature { background: var(--bg-elev); }
-  h2 { font-size: 38px; font-weight: 700; letter-spacing: -0.5px; margin-bottom: 14px; line-height: 1.2; color: var(--text); }
-  h2 .num { color: var(--green); font-weight: 600; margin-right: 14px; font-variant-numeric: tabular-nums; }
-  h3 { font-size: 22px; font-weight: 600; margin: 32px 0 12px; letter-spacing: -0.3px; color: var(--text); }
-  h4 { font-size: 16px; font-weight: 600; margin: 20px 0 8px; color: var(--green-dark); text-transform: uppercase; letter-spacing: 1px; }
+  h2 {
+    font-family: var(--serif);
+    font-size: 38px;
+    font-weight: 500;
+    letter-spacing: -0.6px;
+    margin-bottom: 18px;
+    line-height: 1.15;
+    color: var(--text);
+  }
+  h2 .num {
+    color: var(--green-dark);
+    font-weight: 500;
+    margin-right: 20px;
+    font-variant-numeric: tabular-nums lining-nums;
+    font-feature-settings: "lnum";
+  }
+  h3 { font-size: 20px; font-weight: 600; margin: 36px 0 12px; letter-spacing: -0.2px; color: var(--text); }
+  h4 { font-size: 12px; font-weight: 700; margin: 20px 0 8px; color: var(--green-dark); text-transform: uppercase; letter-spacing: 1.5px; }
   p { margin-bottom: 14px; color: var(--text-dim); }
-  p.lede { font-size: 18px; color: var(--text-dim); margin-bottom: 28px; max-width: 800px; }
+  p.lede {
+    font-family: var(--serif);
+    font-size: 19px;
+    color: var(--text-dim);
+    margin-bottom: 32px;
+    max-width: 760px;
+    line-height: 1.55;
+    font-weight: 400;
+  }
   ul, ol { margin: 12px 0 20px 24px; }
   li { margin-bottom: 8px; color: var(--text-dim); }
   strong { color: var(--text); font-weight: 600; }
-  em { color: var(--green-dark); font-style: normal; font-weight: 600; }
-  a { color: var(--green-dark); text-decoration: none; border-bottom: 1px solid rgba(118,185,0,0.25); }
-  a:hover { color: var(--green); border-bottom-color: var(--green); }
+  em { color: var(--green-dark); font-style: italic; font-weight: 500; }
+  a { color: var(--green-dark); text-decoration: none; border-bottom: 1px solid rgba(118,185,0,0.3); }
+  a:hover { color: var(--green-deep); border-bottom-color: var(--green-deep); }
 
+  /* Insight — editorial pull quote */
   .insight {
-    background: var(--green-soft);
-    border-left: 3px solid var(--green);
-    padding: 20px 24px;
-    margin: 24px 0;
-    border-radius: 0 8px 8px 0;
+    background: transparent;
+    border-left: 2px solid var(--green-dark);
+    padding: 4px 28px;
+    margin: 36px 0;
+    border-radius: 0;
   }
-  .insight .label { color: var(--green-dark); font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 8px; }
-  .insight p { margin-bottom: 0; color: var(--text); }
+  .insight .label {
+    color: var(--green-dark);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+    display: block;
+  }
+  .insight p {
+    margin-bottom: 0;
+    color: var(--text);
+    font-family: var(--serif);
+    font-size: 18px;
+    line-height: 1.6;
+    font-weight: 400;
+  }
+  .insight p strong { font-weight: 600; }
 
   .pill { display: inline-block; padding: 3px 10px; border-radius: 12px; font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; border: 1px solid; white-space: nowrap; }
   .pill.green { color: var(--green-dark); border-color: var(--green); background: var(--green-soft); }
@@ -114,28 +266,72 @@
   .venn-wrap svg { width: 100%; height: auto; max-width: 920px; }
 
   /* STATS */
-  .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 14px; margin: 24px 0; }
-  .stat { background: var(--bg-card); border: 1px solid var(--border); padding: 20px; border-radius: 8px; }
-  .stat .figure { font-size: 32px; font-weight: 700; color: var(--green-dark); line-height: 1; margin-bottom: 6px; letter-spacing: -1px; font-variant-numeric: tabular-nums; }
-  .stat .figure .unit { font-size: 16px; color: var(--text-mute); margin-left: 4px; }
-  .stat .desc { font-size: 13px; color: var(--text-dim); line-height: 1.4; }
+  /* Stats — editorial data row */
+  .stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 0;
+    margin: 32px 0 36px;
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+  .stat {
+    background: transparent;
+    border: none;
+    border-right: 1px solid var(--border);
+    padding: 22px 24px 22px 0;
+    border-radius: 0;
+  }
+  .stat:not(:first-child) { padding-left: 24px; }
+  .stat:last-child { border-right: none; padding-right: 0; }
+  .stat .figure {
+    font-family: var(--serif);
+    font-size: 30px;
+    font-weight: 500;
+    color: var(--text);
+    line-height: 1;
+    margin-bottom: 8px;
+    letter-spacing: -0.5px;
+    font-variant-numeric: tabular-nums;
+  }
+  .stat .figure .unit { font-size: 16px; color: var(--text-mute); margin-left: 2px; font-weight: 400; }
+  .stat .desc { font-size: 12px; color: var(--text-mute); line-height: 1.45; }
 
   /* PROGRAM HEADLINE BLOCK */
   .program-card {
-    background: linear-gradient(135deg, var(--green-soft), rgba(46,127,199,0.05));
-    border: 1px solid var(--green);
-    border-radius: 16px;
-    padding: 36px 40px; margin: 28px 0;
+    background: var(--bg-elev);
+    border: 1px solid var(--border);
+    border-top: 2px solid var(--green-dark);
+    border-radius: 4px;
+    padding: 38px 42px;
+    margin: 32px 0;
   }
-  .program-card .ribbon { color: var(--green-dark); font-size: 12px; font-weight: 800; letter-spacing: 2.5px; text-transform: uppercase; margin-bottom: 8px; }
-  .program-card .title { font-size: 34px; font-weight: 700; color: var(--text); letter-spacing: -0.7px; margin-bottom: 10px; line-height: 1.1; }
-  .program-card .sub { font-size: 16px; color: var(--text-dim); margin-bottom: 24px; }
+  .program-card .ribbon { color: var(--green-dark); font-size: 10px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 10px; }
+  .program-card .title {
+    font-family: var(--serif);
+    font-size: 30px;
+    font-weight: 500;
+    color: var(--text);
+    letter-spacing: -0.6px;
+    margin-bottom: 14px;
+    line-height: 1.15;
+  }
+  .program-card .sub { font-size: 16px; color: var(--text-dim); margin-bottom: 28px; line-height: 1.55; max-width: 760px; }
   .program-card-grid {
-    display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 14px;
-    border-top: 1px dashed var(--border-strong); padding-top: 22px;
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 22px;
+    border-top: 1px solid var(--border); padding-top: 26px;
   }
-  .pcg-item .pcg-fig { font-size: 26px; font-weight: 800; color: var(--green-dark); line-height: 1; margin-bottom: 4px; letter-spacing: -0.5px; font-variant-numeric: tabular-nums; }
-  .pcg-item .pcg-label { font-size: 12px; color: var(--text-dim); letter-spacing: 0.5px; }
+  .pcg-item .pcg-fig {
+    font-family: var(--serif);
+    font-size: 26px;
+    font-weight: 500;
+    color: var(--text);
+    line-height: 1;
+    margin-bottom: 6px;
+    letter-spacing: -0.4px;
+    font-variant-numeric: tabular-nums;
+  }
+  .pcg-item .pcg-label { font-size: 11px; color: var(--text-mute); letter-spacing: 0.3px; line-height: 1.4; }
 
   /* CERTIFICATE CARDS — framed certificate styling */
   .cert {
@@ -221,9 +417,9 @@
   .cert.c5 .cert-seal::before { border-color: rgba(26,162,152,0.6); }
   .cert-seal .seal-num {
     font-size: 26px;
-    font-weight: 800;
+    font-weight: 600;
     color: var(--green-dark);
-    font-family: Georgia, "Times New Roman", serif;
+    font-family: var(--serif);
     line-height: 1;
     margin-bottom: 4px;
     position: relative; z-index: 1;
@@ -291,11 +487,11 @@
   .cert-title {
     text-align: center;
     font-size: 34px;
-    font-weight: 700;
+    font-weight: 500;
     color: var(--text);
     letter-spacing: -0.6px;
     margin: 0 0 22px;
-    font-family: Georgia, "Times New Roman", serif;
+    font-family: var(--serif);
     line-height: 1.1;
   }
 
@@ -424,46 +620,71 @@
   .grade p { font-size: 13px; color: var(--text-dim); margin: 0; }
 
   /* FUND */
-  .fund { background: linear-gradient(135deg, var(--green-soft), rgba(46,127,199,0.04)); border: 1px solid var(--green); border-radius: 14px; padding: 32px 36px; margin: 28px 0; }
-  .fund-headline { font-size: 32px; font-weight: 700; color: var(--green-dark); letter-spacing: -0.5px; margin-bottom: 8px; line-height: 1.1; }
-  .fund-sub { color: var(--text); font-size: 16px; margin-bottom: 22px; }
+  .fund {
+    background: var(--green-soft);
+    border: 1px solid var(--green);
+    border-top: 2px solid var(--green-dark);
+    border-radius: 4px;
+    padding: 36px 40px;
+    margin: 32px 0;
+  }
+  .fund-headline {
+    font-family: var(--serif);
+    font-size: 30px;
+    font-weight: 500;
+    color: var(--green-deep);
+    letter-spacing: -0.5px;
+    margin-bottom: 10px;
+    line-height: 1.15;
+  }
+  .fund-sub { color: var(--text); font-size: 16px; margin-bottom: 24px; line-height: 1.55; max-width: 760px; }
   .fund-uses { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 14px; }
   .fund-use { background: var(--bg-card-2); border: 1px solid var(--border); border-radius: 8px; padding: 16px; }
   .fund-use h5 { color: var(--green-dark); font-size: 12px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; margin: 0 0 6px; }
   .fund-use p { font-size: 13px; color: var(--text-dim); margin: 0; }
 
-  /* ROI HEADLINE */
+  /* ROI HEADLINE — editorial data callout */
   .roi-headline {
     display: grid;
-    grid-template-columns: 1fr 50px 1fr 50px 1fr;
+    grid-template-columns: 1fr 48px 1fr 48px 1fr;
     gap: 0;
     align-items: stretch;
-    margin: 28px 0 40px;
+    margin: 32px 0 44px;
   }
   .roi-block {
-    background: var(--bg-card-2);
+    background: transparent;
     border: 1px solid var(--border);
-    border-radius: 12px;
-    padding: 28px 22px;
+    border-radius: 4px;
+    padding: 32px 26px 28px;
     text-align: center;
   }
-  .roi-block.in { border-top: 4px solid var(--red); }
-  .roi-block.out { border-top: 4px solid var(--blue); }
-  .roi-block.ratio { border-top: 4px solid var(--green); background: var(--green-soft); }
-  .roi-label { font-size: 12px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--text-mute); font-weight: 700; margin-bottom: 12px; }
-  .roi-block.ratio .roi-label { color: var(--green-dark); }
-  .roi-figure { font-size: 44px; font-weight: 800; line-height: 1; letter-spacing: -1.5px; font-variant-numeric: tabular-nums; margin-bottom: 10px; }
+  .roi-block.in { border-top: 2px solid var(--red); }
+  .roi-block.out { border-top: 2px solid var(--blue); }
+  .roi-block.ratio { border-top: 2px solid var(--green-dark); background: var(--green-soft); border-color: var(--green); }
+  .roi-label { font-size: 10px; letter-spacing: 1.8px; text-transform: uppercase; color: var(--text-mute); font-weight: 700; margin-bottom: 16px; }
+  .roi-block.ratio .roi-label { color: var(--green-deep); }
+  .roi-figure {
+    font-family: var(--serif);
+    font-size: 44px;
+    font-weight: 500;
+    line-height: 1;
+    letter-spacing: -1.2px;
+    font-variant-numeric: tabular-nums;
+    margin-bottom: 12px;
+    color: var(--text);
+  }
   .roi-block.in .roi-figure { color: var(--red); }
   .roi-block.out .roi-figure { color: var(--blue); }
-  .roi-block.ratio .roi-figure { color: var(--green-dark); }
-  .roi-sub { font-size: 13px; color: var(--text-dim); }
+  .roi-block.ratio .roi-figure { color: var(--green-deep); }
+  .roi-sub { font-size: 12px; color: var(--text-mute); line-height: 1.45; }
   .roi-arrow {
     display: flex; align-items: center; justify-content: center;
-    font-size: 30px; font-weight: 800; color: var(--text-mute);
+    font-size: 22px; font-weight: 400; color: var(--text-faint);
+    font-family: var(--serif);
   }
   @media (max-width: 720px) {
     .roi-headline { grid-template-columns: 1fr; gap: 12px; }
-    .roi-arrow { transform: rotate(90deg); padding: 4px 0; font-size: 24px; }
+    .roi-arrow { transform: rotate(90deg); padding: 4px 0; font-size: 18px; }
   }
 
   /* ROADMAP */
@@ -492,16 +713,56 @@
 
 <div class="hero">
   <div class="wrap">
-    <div class="brand">NVIDIA · Workforce &amp; Adoption Strategy · v5 · <strong>BUILDER</strong></div>
-    <h1>The <span class="accent">NVIDIA Certified<br>Builder Program</span></h1>
-    <p class="deck">
-      A workforce program that bridges the two largest gaps in the AI economy: an oversupply of scared engineers whose entry-level skills AI can do, and an undersupply of practitioners who can actually deploy AI inside enterprises. <strong>$100M</strong> behind training and placing <strong>100,000 Builders</strong> — five focused certifications, a hiring portal wired to NVIDIA's customers, and Y Combinator–scale promotion.
+    <div class="masthead">
+      <span class="masthead-dot"></span>
+      <span>NVIDIA</span>
+      <span class="masthead-sep">/</span>
+      <span>Workforce &amp; Adoption</span>
+      <span class="masthead-sep">/</span>
+      <span>Strategic Brief</span>
+      <span class="masthead-date">May 2026</span>
+    </div>
+
+    <div class="hero-kicker">A strategic proposal</div>
+
+    <h1>The NVIDIA <span class="accent">Certified Builder</span> Program.</h1>
+
+    <p class="hero-standfirst">
+      A workforce program designed to bridge the two largest gaps in the AI economy: an oversupply of engineers whose entry-level work AI can now perform, and an undersupply of practitioners who can deploy AI inside enterprises. We propose committing <strong>$100M to train and place 100,000 Builders</strong> — through five focused certifications, a hiring portal wired directly to NVIDIA's customers, and Y Combinator–scale promotion.
     </p>
-    <div class="ticker">$100M Fund · <em>100,000 Builders</em> · 5 Certifications · Free</div>
-    <div class="meta">
-      <span><strong>Prepared:</strong> May 2026</span>
-      <span><strong>Anchor:</strong> NVIDIA 10-Layer Stack</span>
-      <span><strong>North Star:</strong> NVIDIA AI Enterprise adoption via placed workforce</span>
+
+    <div class="hero-figures">
+      <div class="fig">
+        <span class="fig-num">$100M</span>
+        <span class="fig-label">Workforce Fund · 3-year commitment</span>
+      </div>
+      <div class="fig">
+        <span class="fig-num">100,000</span>
+        <span class="fig-label">Builders placed by 2029</span>
+      </div>
+      <div class="fig">
+        <span class="fig-num">5</span>
+        <span class="fig-label">Focused certifications</span>
+      </div>
+      <div class="fig">
+        <span class="fig-num">50×–100×</span>
+        <span class="fig-label">Estimated return on investment</span>
+      </div>
+    </div>
+
+    <div class="colophon">
+      <div class="colophon-item">
+        <span class="colophon-label">Anchor</span>
+        <span class="colophon-value">NVIDIA 10-Layer Stack</span>
+      </div>
+      <div class="colophon-item">
+        <span class="colophon-label">North Star</span>
+        <span class="colophon-value">NVIDIA AI Enterprise adoption via placed workforce</span>
+      </div>
+      <div class="colophon-item">
+        <span class="colophon-label">For review by</span>
+        <span class="colophon-value">NVIDIA Workforce &amp; Adoption Strategy</span>
+      </div>
     </div>
   </div>
 </div>
