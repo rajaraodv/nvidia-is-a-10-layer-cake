@@ -1,0 +1,1364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NVIDIA Certified Builder Program · The Workforce Bridge</title>
+<style>
+  :root {
+    --bg: #ffffff;
+    --bg-elev: #f7f8f7;
+    --bg-card: #fafbfa;
+    --bg-card-2: #ffffff;
+    --border: #e5e7e5;
+    --border-strong: #d0d3d0;
+    --green: #76b900;
+    --green-dark: #5a8c00;
+    --green-soft: #eaf5d4;
+    --green-glow: rgba(118, 185, 0, 0.08);
+    --text: #111111;
+    --text-dim: #4a4a4a;
+    --text-mute: #888888;
+    --red: #d64545;
+    --red-soft: #fdecec;
+    --amber: #d99a00;
+    --amber-soft: #fef5e0;
+    --blue: #2e7fc7;
+    --blue-soft: #e6f0fa;
+    --purple: #8e4ec6;
+    --purple-soft: #f3e8fa;
+    --teal: #1aa298;
+    --teal-soft: #e0f5f3;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { background: var(--bg); color: var(--text); font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Inter", sans-serif; line-height: 1.6; font-size: 16px; -webkit-font-smoothing: antialiased; }
+  code { font-family: "SF Mono", Monaco, Menlo, monospace; font-size: 0.88em; background: var(--bg-elev); padding: 1px 6px; border-radius: 3px; color: var(--green-dark); border: 1px solid var(--border); }
+  .wrap { max-width: 1160px; margin: 0 auto; padding: 0 28px; }
+
+  .hero {
+    padding: 88px 0 70px;
+    border-bottom: 1px solid var(--border);
+    background:
+      radial-gradient(ellipse at top left, rgba(118,185,0,0.07), transparent 60%),
+      radial-gradient(ellipse at bottom right, rgba(46,127,199,0.04), transparent 60%),
+      var(--bg);
+  }
+  .brand { color: var(--text-mute); font-size: 12px; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 22px; font-weight: 600; }
+  .brand strong { color: var(--green-dark); }
+  h1 { font-size: 64px; line-height: 1.0; font-weight: 700; letter-spacing: -2.5px; margin-bottom: 22px; color: var(--text); }
+  h1 .accent { color: var(--green); }
+  .deck { font-size: 20px; color: var(--text-dim); max-width: 800px; margin-bottom: 30px; line-height: 1.5; }
+  .ticker {
+    background: var(--green); border-radius: 10px;
+    padding: 12px 22px; color: white; font-size: 16px; font-weight: 700; letter-spacing: 0.3px;
+    display: inline-block; margin-bottom: 32px;
+  }
+  .ticker em { color: #f0ffd0; font-style: normal; font-weight: 600; }
+  .meta { display: flex; gap: 24px; font-size: 13px; color: var(--text-mute); flex-wrap: wrap; }
+  .meta span strong { color: var(--text); font-weight: 600; }
+
+  .nav { position: sticky; top: 0; background: rgba(255,255,255,0.94); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); z-index: 10; padding: 14px 0; }
+  .nav-inner { display: flex; gap: 18px; flex-wrap: wrap; font-size: 13px; }
+  .nav a { color: var(--text-dim); text-decoration: none; transition: color .15s; border: none; font-weight: 500; }
+  .nav a:hover { color: var(--green); }
+
+  section { padding: 76px 0; border-bottom: 1px solid var(--border); }
+  section.no-border { border-bottom: none; }
+  section.feature { background: var(--bg-elev); }
+  h2 { font-size: 38px; font-weight: 700; letter-spacing: -0.5px; margin-bottom: 14px; line-height: 1.2; color: var(--text); }
+  h2 .num { color: var(--green); font-weight: 600; margin-right: 14px; font-variant-numeric: tabular-nums; }
+  h3 { font-size: 22px; font-weight: 600; margin: 32px 0 12px; letter-spacing: -0.3px; color: var(--text); }
+  h4 { font-size: 16px; font-weight: 600; margin: 20px 0 8px; color: var(--green-dark); text-transform: uppercase; letter-spacing: 1px; }
+  p { margin-bottom: 14px; color: var(--text-dim); }
+  p.lede { font-size: 18px; color: var(--text-dim); margin-bottom: 28px; max-width: 800px; }
+  ul, ol { margin: 12px 0 20px 24px; }
+  li { margin-bottom: 8px; color: var(--text-dim); }
+  strong { color: var(--text); font-weight: 600; }
+  em { color: var(--green-dark); font-style: normal; font-weight: 600; }
+  a { color: var(--green-dark); text-decoration: none; border-bottom: 1px solid rgba(118,185,0,0.25); }
+  a:hover { color: var(--green); border-bottom-color: var(--green); }
+
+  .insight {
+    background: var(--green-soft);
+    border-left: 3px solid var(--green);
+    padding: 20px 24px;
+    margin: 24px 0;
+    border-radius: 0 8px 8px 0;
+  }
+  .insight .label { color: var(--green-dark); font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 8px; }
+  .insight p { margin-bottom: 0; color: var(--text); }
+
+  .pill { display: inline-block; padding: 3px 10px; border-radius: 12px; font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; border: 1px solid; white-space: nowrap; }
+  .pill.green { color: var(--green-dark); border-color: var(--green); background: var(--green-soft); }
+  .pill.red { color: var(--red); border-color: var(--red); background: var(--red-soft); }
+  .pill.amber { color: var(--amber); border-color: var(--amber); background: var(--amber-soft); }
+  .pill.blue { color: var(--blue); border-color: var(--blue); background: var(--blue-soft); }
+  .pill.purple { color: var(--purple); border-color: var(--purple); background: var(--purple-soft); }
+
+  .table-wrap { overflow-x: auto; margin: 20px 0 28px; }
+  table { width: 100%; border-collapse: collapse; font-size: 14px; }
+  th, td { text-align: left; padding: 12px 14px; border-bottom: 1px solid var(--border); vertical-align: top; color: var(--text-dim); }
+  th { background: var(--bg-elev); color: var(--text); font-weight: 600; font-size: 12px; text-transform: uppercase; letter-spacing: 1px; border-bottom: 1px solid var(--border-strong); }
+  tr:hover td { background: rgba(118,185,0,0.03); }
+  td.green { color: var(--green-dark); font-weight: 600; }
+  td.target { color: var(--green-dark); font-weight: 600; }
+  td.tabular { font-variant-numeric: tabular-nums; }
+
+  /* VENN DIAGRAM SECTION */
+  .venn-wrap {
+    display: flex; justify-content: center; align-items: center;
+    margin: 16px auto 32px;
+    max-width: 920px;
+  }
+  .venn-wrap svg { width: 100%; height: auto; max-width: 920px; }
+
+  /* STATS */
+  .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 14px; margin: 24px 0; }
+  .stat { background: var(--bg-card); border: 1px solid var(--border); padding: 20px; border-radius: 8px; }
+  .stat .figure { font-size: 32px; font-weight: 700; color: var(--green-dark); line-height: 1; margin-bottom: 6px; letter-spacing: -1px; font-variant-numeric: tabular-nums; }
+  .stat .figure .unit { font-size: 16px; color: var(--text-mute); margin-left: 4px; }
+  .stat .desc { font-size: 13px; color: var(--text-dim); line-height: 1.4; }
+
+  /* PROGRAM HEADLINE BLOCK */
+  .program-card {
+    background: linear-gradient(135deg, var(--green-soft), rgba(46,127,199,0.05));
+    border: 1px solid var(--green);
+    border-radius: 16px;
+    padding: 36px 40px; margin: 28px 0;
+  }
+  .program-card .ribbon { color: var(--green-dark); font-size: 12px; font-weight: 800; letter-spacing: 2.5px; text-transform: uppercase; margin-bottom: 8px; }
+  .program-card .title { font-size: 34px; font-weight: 700; color: var(--text); letter-spacing: -0.7px; margin-bottom: 10px; line-height: 1.1; }
+  .program-card .sub { font-size: 16px; color: var(--text-dim); margin-bottom: 24px; }
+  .program-card-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 14px;
+    border-top: 1px dashed var(--border-strong); padding-top: 22px;
+  }
+  .pcg-item .pcg-fig { font-size: 26px; font-weight: 800; color: var(--green-dark); line-height: 1; margin-bottom: 4px; letter-spacing: -0.5px; font-variant-numeric: tabular-nums; }
+  .pcg-item .pcg-label { font-size: 12px; color: var(--text-dim); letter-spacing: 0.5px; }
+
+  /* CERTIFICATE CARDS — framed certificate styling */
+  .cert {
+    position: relative;
+    background: linear-gradient(180deg, #fffefa 0%, #fdfcf6 100%);
+    border: 2px solid var(--green);
+    border-radius: 6px;
+    padding: 14px;
+    margin: 48px 0;
+    box-shadow: 0 12px 40px rgba(0,0,0,0.08), 0 2px 8px rgba(0,0,0,0.04);
+  }
+  .cert.c2 { border-color: var(--blue); }
+  .cert.c3 { border-color: var(--purple); }
+  .cert.c4 { border-color: var(--amber); }
+  .cert.c5 { border-color: var(--teal); }
+
+  /* Inner thin frame */
+  .cert::before {
+    content: '';
+    position: absolute;
+    inset: 8px;
+    border: 1px solid rgba(118, 185, 0, 0.4);
+    border-radius: 3px;
+    pointer-events: none;
+  }
+  .cert.c2::before { border-color: rgba(46,127,199,0.4); }
+  .cert.c3::before { border-color: rgba(142,78,198,0.4); }
+  .cert.c4::before { border-color: rgba(217,154,0,0.45); }
+  .cert.c5::before { border-color: rgba(26,162,152,0.45); }
+
+  .cert-inner {
+    padding: 50px 56px 38px;
+    position: relative;
+  }
+
+  /* Decorative corner brackets */
+  .cert-corner {
+    position: absolute;
+    width: 22px;
+    height: 22px;
+    pointer-events: none;
+    z-index: 2;
+  }
+  .cert-corner.tl { top: 22px; left: 22px; border-left: 2px solid var(--green); border-top: 2px solid var(--green); }
+  .cert-corner.tr { top: 22px; right: 22px; border-right: 2px solid var(--green); border-top: 2px solid var(--green); }
+  .cert-corner.bl { bottom: 22px; left: 22px; border-left: 2px solid var(--green); border-bottom: 2px solid var(--green); }
+  .cert-corner.br { bottom: 22px; right: 22px; border-right: 2px solid var(--green); border-bottom: 2px solid var(--green); }
+  .cert.c2 .cert-corner { border-color: var(--blue); }
+  .cert.c3 .cert-corner { border-color: var(--purple); }
+  .cert.c4 .cert-corner { border-color: var(--amber); }
+  .cert.c5 .cert-corner { border-color: var(--teal); }
+
+  /* Concentric-circle seal — top-right */
+  .cert-seal {
+    position: absolute;
+    top: 38px;
+    right: 38px;
+    width: 84px;
+    height: 84px;
+    border: 2px solid var(--green);
+    border-radius: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: rgba(118, 185, 0, 0.08);
+    z-index: 3;
+  }
+  .cert-seal::before {
+    content: '';
+    position: absolute;
+    inset: 5px;
+    border: 1px dashed rgba(118, 185, 0, 0.65);
+    border-radius: 50%;
+  }
+  .cert.c2 .cert-seal { border-color: var(--blue); background: rgba(46,127,199,0.07); }
+  .cert.c2 .cert-seal::before { border-color: rgba(46,127,199,0.6); }
+  .cert.c3 .cert-seal { border-color: var(--purple); background: rgba(142,78,198,0.07); }
+  .cert.c3 .cert-seal::before { border-color: rgba(142,78,198,0.6); }
+  .cert.c4 .cert-seal { border-color: var(--amber); background: rgba(217,154,0,0.10); }
+  .cert.c4 .cert-seal::before { border-color: rgba(217,154,0,0.7); }
+  .cert.c5 .cert-seal { border-color: var(--teal); background: rgba(26,162,152,0.07); }
+  .cert.c5 .cert-seal::before { border-color: rgba(26,162,152,0.6); }
+  .cert-seal .seal-num {
+    font-size: 26px;
+    font-weight: 800;
+    color: var(--green-dark);
+    font-family: Georgia, "Times New Roman", serif;
+    line-height: 1;
+    margin-bottom: 4px;
+    position: relative; z-index: 1;
+  }
+  .cert.c2 .cert-seal .seal-num { color: var(--blue); }
+  .cert.c3 .cert-seal .seal-num { color: var(--purple); }
+  .cert.c4 .cert-seal .seal-num { color: var(--amber); }
+  .cert.c5 .cert-seal .seal-num { color: var(--teal); }
+  .cert-seal .seal-label {
+    font-size: 8px;
+    letter-spacing: 1.5px;
+    color: var(--text-mute);
+    text-transform: uppercase;
+    font-weight: 700;
+    position: relative; z-index: 1;
+  }
+
+  /* Brand line */
+  .cert-brand {
+    text-align: center;
+    font-size: 12px;
+    letter-spacing: 5px;
+    color: var(--text-mute);
+    font-weight: 700;
+    margin-bottom: 6px;
+    text-transform: uppercase;
+    padding: 0 110px;
+  }
+  .cert-brand strong { color: var(--green-dark); font-weight: 800; }
+  .cert.c2 .cert-brand strong { color: var(--blue); }
+  .cert.c3 .cert-brand strong { color: var(--purple); }
+  .cert.c4 .cert-brand strong { color: var(--amber); }
+  .cert.c5 .cert-brand strong { color: var(--teal); }
+
+  .cert-program-line {
+    text-align: center;
+    font-size: 10px;
+    letter-spacing: 3px;
+    color: var(--text-mute);
+    text-transform: uppercase;
+    margin-bottom: 28px;
+    padding: 0 110px;
+  }
+
+  .cert-divider {
+    width: 56px;
+    height: 2px;
+    background: var(--green);
+    margin: 0 auto 24px;
+  }
+  .cert.c2 .cert-divider { background: var(--blue); }
+  .cert.c3 .cert-divider { background: var(--purple); }
+  .cert.c4 .cert-divider { background: var(--amber); }
+  .cert.c5 .cert-divider { background: var(--teal); }
+
+  .cert-awarded {
+    text-align: center;
+    font-size: 13px;
+    color: var(--text-dim);
+    font-style: italic;
+    margin-bottom: 12px;
+    letter-spacing: 0.3px;
+  }
+
+  .cert-title {
+    text-align: center;
+    font-size: 34px;
+    font-weight: 700;
+    color: var(--text);
+    letter-spacing: -0.6px;
+    margin: 0 0 22px;
+    font-family: Georgia, "Times New Roman", serif;
+    line-height: 1.1;
+  }
+
+  .cert-meta-row {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 24px;
+  }
+
+  .cert-description {
+    text-align: center;
+    font-size: 14px;
+    color: var(--text-dim);
+    max-width: 720px;
+    margin: 0 auto 24px;
+    line-height: 1.6;
+  }
+
+  .cert-stat-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    margin-bottom: 26px;
+    padding: 18px 0;
+    border-top: 1px dashed var(--border-strong);
+    border-bottom: 1px dashed var(--border-strong);
+    text-align: center;
+  }
+  .cert-stat { text-align: center; }
+  .cert-stat .v { font-size: 20px; font-weight: 700; color: var(--text); line-height: 1; letter-spacing: -0.3px; font-variant-numeric: tabular-nums; }
+  .cert-stat .l { font-size: 10px; color: var(--text-mute); letter-spacing: 1px; text-transform: uppercase; margin-top: 6px; }
+
+  .cert-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+    margin-bottom: 22px;
+  }
+  .cert-block {
+    background: rgba(255, 255, 255, 0.55);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 16px;
+  }
+  .cert-block h5 {
+    color: var(--green-dark);
+    font-size: 11px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    margin: 0 0 8px;
+    font-weight: 700;
+  }
+  .cert.c2 .cert-block h5 { color: var(--blue); }
+  .cert.c3 .cert-block h5 { color: var(--purple); }
+  .cert.c4 .cert-block h5 { color: var(--amber); }
+  .cert.c5 .cert-block h5 { color: var(--teal); }
+  .cert-block ul { margin: 0 0 0 16px; padding: 0; }
+  .cert-block li { font-size: 13px; color: var(--text-dim); margin-bottom: 5px; }
+  .cert-block p { font-size: 13px; color: var(--text-dim); margin: 0; }
+
+  /* Signature line — bottom of the certificate */
+  .cert-signature {
+    border-top: 1px solid var(--border);
+    padding-top: 16px;
+    margin-top: 18px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 10px;
+    color: var(--text-mute);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-weight: 700;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .cert-signature strong { color: var(--green-dark); }
+  .cert.c2 .cert-signature strong { color: var(--blue); }
+  .cert.c3 .cert-signature strong { color: var(--purple); }
+  .cert.c4 .cert-signature strong { color: var(--amber); }
+  .cert.c5 .cert-signature strong { color: var(--teal); }
+
+  @media (max-width: 720px) {
+    .cert { padding: 10px; margin: 32px 0; }
+    .cert-inner { padding: 30px 22px 22px; }
+    .cert-brand, .cert-program-line { padding: 0; }
+    .cert-seal { top: 18px; right: 18px; width: 56px; height: 56px; }
+    .cert-seal .seal-num { font-size: 18px; }
+    .cert-seal .seal-label { font-size: 7px; }
+    .cert-title { font-size: 24px; }
+    .cert-stat-row { grid-template-columns: repeat(2, 1fr); }
+    .cert-grid { grid-template-columns: 1fr; }
+    .cert-corner { display: none; }
+  }
+
+  /* HIRING PORTAL */
+  .portal-flow {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 0; border: 1px solid var(--border); border-radius: 12px; overflow: hidden; margin: 28px 0;
+    background: var(--bg-card);
+  }
+  .portal-step { padding: 22px 18px; border-right: 1px solid var(--border); }
+  .portal-step:last-child { border-right: none; }
+  .portal-step .ps-num { color: var(--green-dark); font-size: 11px; font-weight: 800; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 8px; }
+  .portal-step h4 { color: var(--text); text-transform: none; letter-spacing: 0; margin: 0 0 8px; font-size: 15px; }
+  .portal-step p { font-size: 13px; color: var(--text-dim); margin: 0; line-height: 1.5; }
+  @media (max-width: 720px) {
+    .portal-step { border-right: none; border-bottom: 1px solid var(--border); }
+    .portal-step:last-child { border-bottom: none; }
+  }
+
+  /* PARTNERS */
+  .partner-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 14px; margin: 22px 0; }
+  .partner { background: var(--bg-card); border: 1px solid var(--border); border-radius: 10px; padding: 20px; border-top: 3px solid var(--blue); }
+  .partner .tag { color: var(--blue); font-size: 11px; letter-spacing: 2px; text-transform: uppercase; font-weight: 700; margin-bottom: 6px; }
+  .partner h5 { color: var(--text); font-size: 17px; margin: 0 0 6px; font-weight: 600; }
+  .partner p { font-size: 13px; color: var(--text-dim); margin: 0; }
+
+  /* GRADING */
+  .grading-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 14px; margin: 22px 0; }
+  .grade { background: var(--bg-card); border: 1px solid var(--border); border-radius: 10px; padding: 20px; border-top: 3px solid var(--amber); }
+  .grade .gnum { color: var(--amber); font-size: 11px; letter-spacing: 2px; text-transform: uppercase; font-weight: 700; margin-bottom: 6px; }
+  .grade h5 { color: var(--text); font-size: 16px; margin: 0 0 8px; font-weight: 600; }
+  .grade p { font-size: 13px; color: var(--text-dim); margin: 0; }
+
+  /* FUND */
+  .fund { background: linear-gradient(135deg, var(--green-soft), rgba(46,127,199,0.04)); border: 1px solid var(--green); border-radius: 14px; padding: 32px 36px; margin: 28px 0; }
+  .fund-headline { font-size: 32px; font-weight: 700; color: var(--green-dark); letter-spacing: -0.5px; margin-bottom: 8px; line-height: 1.1; }
+  .fund-sub { color: var(--text); font-size: 16px; margin-bottom: 22px; }
+  .fund-uses { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 14px; }
+  .fund-use { background: var(--bg-card-2); border: 1px solid var(--border); border-radius: 8px; padding: 16px; }
+  .fund-use h5 { color: var(--green-dark); font-size: 12px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; margin: 0 0 6px; }
+  .fund-use p { font-size: 13px; color: var(--text-dim); margin: 0; }
+
+  /* ROI HEADLINE */
+  .roi-headline {
+    display: grid;
+    grid-template-columns: 1fr 50px 1fr 50px 1fr;
+    gap: 0;
+    align-items: stretch;
+    margin: 28px 0 40px;
+  }
+  .roi-block {
+    background: var(--bg-card-2);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 28px 22px;
+    text-align: center;
+  }
+  .roi-block.in { border-top: 4px solid var(--red); }
+  .roi-block.out { border-top: 4px solid var(--blue); }
+  .roi-block.ratio { border-top: 4px solid var(--green); background: var(--green-soft); }
+  .roi-label { font-size: 12px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--text-mute); font-weight: 700; margin-bottom: 12px; }
+  .roi-block.ratio .roi-label { color: var(--green-dark); }
+  .roi-figure { font-size: 44px; font-weight: 800; line-height: 1; letter-spacing: -1.5px; font-variant-numeric: tabular-nums; margin-bottom: 10px; }
+  .roi-block.in .roi-figure { color: var(--red); }
+  .roi-block.out .roi-figure { color: var(--blue); }
+  .roi-block.ratio .roi-figure { color: var(--green-dark); }
+  .roi-sub { font-size: 13px; color: var(--text-dim); }
+  .roi-arrow {
+    display: flex; align-items: center; justify-content: center;
+    font-size: 30px; font-weight: 800; color: var(--text-mute);
+  }
+  @media (max-width: 720px) {
+    .roi-headline { grid-template-columns: 1fr; gap: 12px; }
+    .roi-arrow { transform: rotate(90deg); padding: 4px 0; font-size: 24px; }
+  }
+
+  /* ROADMAP */
+  .roadmap { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 18px; margin: 28px 0; }
+  .phase { background: var(--bg-card); border: 1px solid var(--border); padding: 22px; border-radius: 10px; border-top: 3px solid var(--green); }
+  .phase .when { color: var(--green-dark); font-size: 11px; letter-spacing: 2px; text-transform: uppercase; font-weight: 700; margin-bottom: 6px; }
+  .phase h4 { color: var(--text); text-transform: none; letter-spacing: 0; font-size: 17px; margin: 0 0 10px; }
+  .phase ul { margin: 0 0 0 16px; padding: 0; }
+  .phase li { font-size: 13px; color: var(--text-dim); margin-bottom: 6px; }
+
+  footer { padding: 48px 0 64px; color: var(--text-mute); font-size: 13px; text-align: center; border-top: 1px solid var(--border); }
+  footer a { color: var(--text-dim); }
+
+  @media (max-width: 720px) {
+    h1 { font-size: 42px; }
+    h2 { font-size: 26px; }
+    .hero { padding: 60px 0 44px; }
+    section { padding: 52px 0; }
+    .cert, .fund, .program-card { padding: 22px; }
+    .program-card .title, .fund-headline { font-size: 26px; }
+    .cert h3 { font-size: 22px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="wrap">
+    <div class="brand">NVIDIA · Workforce &amp; Adoption Strategy · v5 · <strong>BUILDER</strong></div>
+    <h1>The <span class="accent">NVIDIA Certified<br>Builder Program</span></h1>
+    <p class="deck">
+      A workforce program that bridges the two largest gaps in the AI economy: an oversupply of scared engineers whose entry-level skills AI can do, and an undersupply of practitioners who can actually deploy AI inside enterprises. <strong>$100M</strong> behind training and placing <strong>100,000 Builders</strong> — five focused certifications, a hiring portal wired to NVIDIA's customers, and Y Combinator–scale promotion.
+    </p>
+    <div class="ticker">$100M Fund · <em>100,000 Builders</em> · 5 Certifications · Free</div>
+    <div class="meta">
+      <span><strong>Prepared:</strong> May 2026</span>
+      <span><strong>Anchor:</strong> NVIDIA 10-Layer Stack</span>
+      <span><strong>North Star:</strong> NVIDIA AI Enterprise adoption via placed workforce</span>
+    </div>
+  </div>
+</div>
+
+<div class="nav">
+  <div class="wrap nav-inner">
+    <a href="#gap">The Gap</a>
+    <a href="#program">The Program</a>
+    <a href="#certs">5 Certifications</a>
+    <a href="#grading">Grading</a>
+    <a href="#portal">Hiring Portal</a>
+    <a href="#partners">Promotion</a>
+    <a href="#fund">$100M Fund</a>
+    <a href="#roi">ROI Math</a>
+    <a href="#roadmap">Roadmap</a>
+    <a href="#metrics">Metrics</a>
+  </div>
+</div>
+
+<section id="gap">
+  <div class="wrap">
+    <h2><span class="num">01</span>The Gap — Two Armies, One Missing Bridge</h2>
+
+    <div class="venn-wrap">
+      <svg viewBox="0 0 920 520" xmlns="http://www.w3.org/2000/svg" aria-label="Supply-Demand Venn diagram with NVIDIA Certified Builders as the bridge">
+        <defs>
+          <radialGradient id="supplyGrad" cx="0.5" cy="0.5" r="0.5">
+            <stop offset="0%" stop-color="rgba(214,69,69,0.30)"/>
+            <stop offset="100%" stop-color="rgba(214,69,69,0.10)"/>
+          </radialGradient>
+          <radialGradient id="demandGrad" cx="0.5" cy="0.5" r="0.5">
+            <stop offset="0%" stop-color="rgba(46,127,199,0.30)"/>
+            <stop offset="100%" stop-color="rgba(46,127,199,0.10)"/>
+          </radialGradient>
+        </defs>
+
+        <!-- Supply circle (red, left) -->
+        <circle cx="340" cy="260" r="230" fill="url(#supplyGrad)" stroke="#d64545" stroke-width="2.5" opacity="0.95"/>
+
+        <!-- Demand circle (blue, right) -->
+        <circle cx="580" cy="260" r="230" fill="url(#demandGrad)" stroke="#2e7fc7" stroke-width="2.5" opacity="0.95"/>
+
+        <!-- SUPPLY side text (centered in left non-overlap region) -->
+        <text x="200" y="160" font-family="-apple-system, sans-serif" font-size="13" font-weight="800" fill="#d64545" text-anchor="middle" letter-spacing="3">SUPPLY</text>
+        <text x="200" y="200" font-family="-apple-system, sans-serif" font-size="24" font-weight="700" fill="#111" text-anchor="middle">Scared engineers</text>
+        <text x="200" y="232" font-family="-apple-system, sans-serif" font-size="14" fill="#4a4a4a" text-anchor="middle">Juniors. Bootcamp grads.</text>
+        <text x="200" y="252" font-family="-apple-system, sans-serif" font-size="14" fill="#4a4a4a" text-anchor="middle">Career switchers.</text>
+        <text x="200" y="272" font-family="-apple-system, sans-serif" font-size="14" fill="#4a4a4a" text-anchor="middle">30M+ on the supply side.</text>
+        <text x="200" y="310" font-family="-apple-system, sans-serif" font-size="13" fill="#888" font-style="italic" text-anchor="middle">"Will AI take my job?"</text>
+        <text x="200" y="340" font-family="-apple-system, sans-serif" font-size="12" font-weight="600" fill="#d64545" text-anchor="middle">30M+ · entry-level work</text>
+        <text x="200" y="358" font-family="-apple-system, sans-serif" font-size="12" font-weight="600" fill="#d64545" text-anchor="middle">already automated by AI</text>
+
+        <!-- DEMAND side text (centered in right non-overlap region) -->
+        <text x="720" y="160" font-family="-apple-system, sans-serif" font-size="13" font-weight="800" fill="#2e7fc7" text-anchor="middle" letter-spacing="3">DEMAND</text>
+        <text x="720" y="200" font-family="-apple-system, sans-serif" font-size="24" font-weight="700" fill="#111" text-anchor="middle">Enterprises stuck</text>
+        <text x="720" y="232" font-family="-apple-system, sans-serif" font-size="14" fill="#4a4a4a" text-anchor="middle">Probabilistic AI vs.</text>
+        <text x="720" y="252" font-family="-apple-system, sans-serif" font-size="14" fill="#4a4a4a" text-anchor="middle">deterministic, customized,</text>
+        <text x="720" y="272" font-family="-apple-system, sans-serif" font-size="14" fill="#4a4a4a" text-anchor="middle">outcome-driven needs.</text>
+        <text x="720" y="310" font-family="-apple-system, sans-serif" font-size="13" fill="#888" font-style="italic" text-anchor="middle">"AI doesn't work for us yet."</text>
+        <text x="720" y="340" font-family="-apple-system, sans-serif" font-size="12" font-weight="600" fill="#2e7fc7" text-anchor="middle">1.3M unfilled US AI jobs</text>
+        <text x="720" y="358" font-family="-apple-system, sans-serif" font-size="12" font-weight="600" fill="#2e7fc7" text-anchor="middle">3.2 : 1 demand-supply ratio</text>
+
+        <!-- OVERLAP / BUILDERS BRIDGE (centered at x=460) -->
+        <text x="460" y="190" font-family="-apple-system, sans-serif" font-size="11" font-weight="800" fill="#5a8c00" text-anchor="middle" letter-spacing="3">THE BRIDGE</text>
+        <text x="460" y="234" font-family="-apple-system, sans-serif" font-size="26" font-weight="800" fill="#5a8c00" text-anchor="middle" letter-spacing="-0.5">NVIDIA</text>
+        <text x="460" y="266" font-family="-apple-system, sans-serif" font-size="26" font-weight="800" fill="#5a8c00" text-anchor="middle" letter-spacing="-0.5">Certified</text>
+        <text x="460" y="298" font-family="-apple-system, sans-serif" font-size="26" font-weight="800" fill="#5a8c00" text-anchor="middle" letter-spacing="-0.5">Builders</text>
+        <text x="460" y="338" font-family="-apple-system, sans-serif" font-size="12" font-weight="600" fill="#5a8c00" text-anchor="middle">100,000 placed · $100M fund</text>
+
+        <!-- Bottom row arrows pointing inward to overlap -->
+        <text x="460" y="445" font-family="-apple-system, sans-serif" font-size="13" font-weight="700" fill="#111" text-anchor="middle" letter-spacing="1">→ Trained on NVIDIA stack · Hired by NVIDIA's customers ←</text>
+        <text x="460" y="468" font-family="-apple-system, sans-serif" font-size="12" fill="#4a4a4a" text-anchor="middle">FDE · ML Engineer · GTM AI · Finance AI · Productivity AI</text>
+      </svg>
+    </div>
+
+    <p class="lede" style="text-align: center; max-width: 760px; margin: 0 auto 24px;">
+      30 million scared engineers on one side. 1.3 million unfilled enterprise AI jobs on the other. NVIDIA Forward Certified Builders are the bridge — trained on NVIDIA's stack, hired by NVIDIA's customers.
+    </p>
+
+    <div class="stats">
+      <div class="stat"><div class="figure">1.3M</div><div class="desc">Unfilled US AI jobs · Bain projects half stay unfilled by 2027</div></div>
+      <div class="stat"><div class="figure">+143%</div><div class="desc">YoY AI engineer postings · LinkedIn #1 fastest-growing role of 2026</div></div>
+      <div class="stat"><div class="figure">+800%</div><div class="desc">YoY Forward-Deployed Engineer postings · $220K–$700K total comp</div></div>
+      <div class="stat"><div class="figure">3.2 : 1</div><div class="desc">Demand-to-supply ratio for enterprise AI roles globally</div></div>
+    </div>
+  </div>
+</section>
+
+<section id="program" class="feature">
+  <div class="wrap">
+    <h2><span class="num">02</span>The NVIDIA Certified Builder Program</h2>
+    <p class="lede">One program. Five certifications. A hiring portal wired to NVIDIA's customers. A $100M fund that pays for everything. The most ambitious vendor workforce program ever announced — and the one with the most defensible economics.</p>
+
+    <div class="program-card">
+      <div class="ribbon">Headline</div>
+      <div class="title">$100M to make 100,000 Builders the world will hire.</div>
+      <div class="sub">Free for every accepted participant. Anchored to the 10-layer NVIDIA stack. Co-promoted with Y Combinator and Coursera. Strict performance-based certification. A hiring portal where NVIDIA's customers post jobs directly to Certified Builders.</div>
+      <div class="program-card-grid">
+        <div class="pcg-item"><div class="pcg-fig">$100M</div><div class="pcg-label">Workforce Fund · 3 years</div></div>
+        <div class="pcg-item"><div class="pcg-fig">100K</div><div class="pcg-label">Builders placed by 2029</div></div>
+        <div class="pcg-item"><div class="pcg-fig">5</div><div class="pcg-label">Focused certifications</div></div>
+        <div class="pcg-item"><div class="pcg-fig">8–16</div><div class="pcg-label">Weeks per certification</div></div>
+        <div class="pcg-item"><div class="pcg-fig">$0</div><div class="pcg-label">Cost to Builders (waived $3K–$8K)</div></div>
+        <div class="pcg-item"><div class="pcg-fig">10</div><div class="pcg-label">Stack layers covered</div></div>
+      </div>
+    </div>
+
+    <h3>ROI at a glance</h3>
+    <div class="roi-headline">
+      <div class="roi-block in">
+        <div class="roi-label">We put in</div>
+        <div class="roi-figure">$100M</div>
+        <div class="roi-sub">Over 3 years · NVIDIA Workforce Fund</div>
+      </div>
+      <div class="roi-arrow">→</div>
+      <div class="roi-block out">
+        <div class="roi-label">We get out · Year-3 ARR</div>
+        <div class="roi-figure">$2.5–10B</div>
+        <div class="roi-sub">New NVIDIA AI Enterprise recurring revenue</div>
+      </div>
+      <div class="roi-arrow">=</div>
+      <div class="roi-block ratio">
+        <div class="roi-label">ROI</div>
+        <div class="roi-figure">50×–100×</div>
+        <div class="roi-sub">Payback &lt; 1 month per placement</div>
+      </div>
+    </div>
+    <p style="font-size: 14px; color: var(--text-dim); margin-bottom: 36px;">Assumptions, status-quo comparison, cost breakdown, and trigger-rate scenarios → <a href="#roi">jump to §08 · The ROI Math</a> for the full detail.</p>
+
+    <h3>What's different about this program</h3>
+    <ul>
+      <li><strong>Job-first, not knowledge-first.</strong> Each certification ends in a named role with real open positions counted live on the portal.</li>
+      <li><strong>Functional, not just technical.</strong> Three of five tracks target department-flavored AI (RevOps, Finance, Productivity) — where enterprise AI hiring happens at scale.</li>
+      <li><strong>Hiring portal wired to NVIDIA's customers.</strong> Every NVIDIA AI Enterprise customer, Inception startup, and Big-Six firm posts directly to certified Builders.</li>
+      <li><strong>Strict certification.</strong> Performance-based: deployed artifact + live skills exam + portfolio walkthrough + peer review + hiring-partner sign-off (senior tier). Modeled on CKA, not multiple-choice.</li>
+      <li><strong>Y Combinator co-promotion.</strong> Garry Tan's GStack hit 20K+ GitHub stars. NVIDIA-co-promoted cohorts get YC's reach. YC startups commit to hire from the portal.</li>
+      <li><strong>Reuses 70%+ of existing NVIDIA content.</strong> DLI, LaunchPad, Blueprints, build.nvidia.com — reorganized along role tracks. The new 30% is connective tissue.</li>
+    </ul>
+  </div>
+</section>
+
+<section id="certs">
+  <div class="wrap">
+    <h2><span class="num">03</span>The Five Certifications</h2>
+    <p class="lede">Each certification = a named role + a verified credential + an active job pipeline. <strong>Two technical tracks</strong> (Forward-Deployed and AI Engineer) for the depth audience. <strong>Three functional tracks</strong> (GTM, Finance, Productivity) for the scale audience — where the bulk of enterprise AI hiring actually happens.</p>
+
+    <!-- CERTIFICATE 01 — Forward-Deployed AI Engineer -->
+    <div class="cert">
+      <span class="cert-corner tl"></span>
+      <span class="cert-corner tr"></span>
+      <span class="cert-corner bl"></span>
+      <span class="cert-corner br"></span>
+      <div class="cert-seal">
+        <div class="seal-num">01</div>
+        <div class="seal-label">Cert · 2026</div>
+      </div>
+      <div class="cert-inner">
+        <div class="cert-brand"><strong>NVIDIA</strong> · CERTIFIED BUILDER</div>
+        <div class="cert-program-line">Program · Technical Track</div>
+        <div class="cert-divider"></div>
+        <div class="cert-awarded">This certifies the holder as a</div>
+        <h3 class="cert-title">Forward-Deployed AI Engineer</h3>
+        <div class="cert-meta-row">
+          <span class="pill green">Technical Track</span>
+          <span class="pill amber">+800% YoY postings</span>
+          <span class="pill blue">12 weeks</span>
+          <span class="pill purple">Pass rate target 40%</span>
+        </div>
+        <p class="cert-description">The fastest-growing role in AI. An FDE embeds inside a customer's organization — bank, hospital, manufacturer — and makes AI actually work in their environment. Part engineer, part operator, part account owner. The role OpenAI, Anthropic, Palantir, and Google Cloud are scaling to thousands of seats in 2026.</p>
+        <div class="cert-stat-row">
+          <div class="cert-stat"><div class="v">$220K–$700K</div><div class="l">Total comp</div></div>
+          <div class="cert-stat"><div class="v">~14,000</div><div class="l">Open US roles</div></div>
+          <div class="cert-stat"><div class="v">$2,500</div><div class="l">Normal · waived</div></div>
+          <div class="cert-stat"><div class="v">L6–L9</div><div class="l">Stack layers</div></div>
+        </div>
+        <div class="cert-grid">
+          <div class="cert-block">
+            <h5>Competencies mastered</h5>
+            <ul>
+              <li>RAG over proprietary data</li>
+              <li>NIM deployment in customer envs</li>
+              <li>Agent design + tool use</li>
+              <li>Eval frameworks &amp; guardrails</li>
+              <li>Customer storytelling &amp; demos</li>
+            </ul>
+          </div>
+          <div class="cert-block">
+            <h5>Tools &amp; stack</h5>
+            <ul>
+              <li>Nemotron 3 Nano / Super</li>
+              <li>NIM + NeMo Retriever</li>
+              <li>NemoGuardrails</li>
+              <li>LangGraph · AgentIQ · MCP</li>
+              <li>Brev for GPU labs</li>
+            </ul>
+          </div>
+          <div class="cert-block">
+            <h5>Capstone</h5>
+            <p>Deploy a working RAG + agent system against a fake-enterprise dataset (medical / financial / manufacturing), with measured latency, eval scores, and a recorded customer demo.</p>
+          </div>
+          <div class="cert-block">
+            <h5>Hiring partners</h5>
+            <p>Palantir-style enterprise consultancies. Inception FDE-flavored startups (Decagon, Sierra, Glean class). Big-Six AI practices. Fortune 500 internal AI orgs.</p>
+          </div>
+        </div>
+        <div class="cert-signature">
+          <div><strong>ISSUED BY NVIDIA</strong> · Workforce &amp; Adoption Program</div>
+          <div>Verified · Valid 3 years · Co-promoted with Y Combinator</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CERTIFICATE 02 — AI / ML Engineer -->
+    <div class="cert c2">
+      <span class="cert-corner tl"></span>
+      <span class="cert-corner tr"></span>
+      <span class="cert-corner bl"></span>
+      <span class="cert-corner br"></span>
+      <div class="cert-seal">
+        <div class="seal-num">02</div>
+        <div class="seal-label">Cert · 2026</div>
+      </div>
+      <div class="cert-inner">
+        <div class="cert-brand"><strong>NVIDIA</strong> · CERTIFIED BUILDER</div>
+        <div class="cert-program-line">Program · Technical Track</div>
+        <div class="cert-divider"></div>
+        <div class="cert-awarded">This certifies the holder as an</div>
+        <h3 class="cert-title">AI / ML Engineer</h3>
+        <div class="cert-meta-row">
+          <span class="pill blue">Technical Track</span>
+          <span class="pill amber">+143% YoY · LinkedIn #1</span>
+          <span class="pill blue">14 weeks</span>
+          <span class="pill purple">Pass rate target 45%</span>
+        </div>
+        <p class="cert-description">The bread-and-butter AI engineer at every enterprise, startup, and consultancy. Owns the full ML/LLM lifecycle: fine-tunes open-weight models, deploys NIM endpoints, ships RAG pipelines, integrates evals, optimizes inference cost. The largest single hiring lane in the program.</p>
+        <div class="cert-stat-row">
+          <div class="cert-stat"><div class="v">$128K–$350K</div><div class="l">Total comp</div></div>
+          <div class="cert-stat"><div class="v">~38,000</div><div class="l">Open US roles</div></div>
+          <div class="cert-stat"><div class="v">$3,000</div><div class="l">Normal · waived</div></div>
+          <div class="cert-stat"><div class="v">L4–L7</div><div class="l">Stack layers</div></div>
+        </div>
+        <div class="cert-grid">
+          <div class="cert-block">
+            <h5>Competencies mastered</h5>
+            <ul>
+              <li>PyTorch + CUDA fundamentals</li>
+              <li>NeMo fine-tuning (LoRA/PEFT)</li>
+              <li>NIM + Triton self-hosting</li>
+              <li>TensorRT-LLM optimization</li>
+              <li>End-to-end eval + observability</li>
+            </ul>
+          </div>
+          <div class="cert-block">
+            <h5>Tools &amp; stack</h5>
+            <ul>
+              <li>NeMo Framework / Curator / RL</li>
+              <li>Nemotron · Llama-Nemotron · NV-Embed v2</li>
+              <li>Triton · vLLM · Dynamo</li>
+              <li>NVIDIA AI Workbench</li>
+              <li>RAPIDS for data prep</li>
+            </ul>
+          </div>
+          <div class="cert-block">
+            <h5>Capstone</h5>
+            <p>Fine-tune a Nemotron variant on a domain dataset, serve via NIM with TensorRT-LLM optimization, ship an eval suite that beats a baseline by a target margin.</p>
+          </div>
+          <div class="cert-block">
+            <h5>Hiring partners</h5>
+            <p>Fortune 500 internal AI teams, all 19K NVIDIA Inception startups, CoreWeave / Lambda / Crusoe customers, the consulting Big-Six.</p>
+          </div>
+        </div>
+        <div class="cert-signature">
+          <div><strong>ISSUED BY NVIDIA</strong> · Workforce &amp; Adoption Program</div>
+          <div>Verified · Valid 3 years · Co-promoted with Y Combinator</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CERTIFICATE 03 — GTM & RevOps AI Engineer -->
+    <div class="cert c3">
+      <span class="cert-corner tl"></span>
+      <span class="cert-corner tr"></span>
+      <span class="cert-corner bl"></span>
+      <span class="cert-corner br"></span>
+      <div class="cert-seal">
+        <div class="seal-num">03</div>
+        <div class="seal-label">Cert · 2026</div>
+      </div>
+      <div class="cert-inner">
+        <div class="cert-brand"><strong>NVIDIA</strong> · CERTIFIED BUILDER</div>
+        <div class="cert-program-line">Program · Functional Track</div>
+        <div class="cert-divider"></div>
+        <div class="cert-awarded">This certifies the holder as a</div>
+        <h3 class="cert-title">GTM &amp; RevOps AI Engineer</h3>
+        <div class="cert-meta-row">
+          <span class="pill purple">Functional Track</span>
+          <span class="pill amber">3,000+ open on LinkedIn</span>
+          <span class="pill blue">10 weeks</span>
+          <span class="pill green">Highest enterprise pull</span>
+        </div>
+        <p class="cert-description">The role every Series A/B startup and every enterprise sales org is racing to fill. GTM AI Engineers build the revenue automation systems that make outbound, enrichment, signal-based triggers, CRM integration, and AI-powered prospecting run at scale. "AI GTM Engineer" is quietly paying $220K to print revenue.</p>
+        <div class="cert-stat-row">
+          <div class="cert-stat"><div class="v">$175K–$250K</div><div class="l">Base (Vercel · OpenAI · LILT)</div></div>
+          <div class="cert-stat"><div class="v">~3,000+</div><div class="l">Open US LinkedIn roles</div></div>
+          <div class="cert-stat"><div class="v">$2,000</div><div class="l">Normal · waived</div></div>
+          <div class="cert-stat"><div class="v">L6 · L8 · L9</div><div class="l">Stack layers</div></div>
+        </div>
+        <div class="cert-grid">
+          <div class="cert-block">
+            <h5>Competencies mastered</h5>
+            <ul>
+              <li>Lead enrichment + scoring with Nemotron</li>
+              <li>Signal-based outbound triggers</li>
+              <li>CRM &amp; data warehouse integration</li>
+              <li>Marketing analytics + attribution agents</li>
+              <li>Workflow design with no-code agent tools</li>
+            </ul>
+          </div>
+          <div class="cert-block">
+            <h5>Tools &amp; stack</h5>
+            <ul>
+              <li>NVIDIA NIM + Nemotron Nano</li>
+              <li><strong>Clay</strong> · Apollo · Instantly</li>
+              <li>HubSpot · Salesforce · Snowflake</li>
+              <li>n8n · Zapier · LangGraph</li>
+              <li>NV-Embed v2 for prospect-fit scoring</li>
+            </ul>
+          </div>
+          <div class="cert-block">
+            <h5>Capstone</h5>
+            <p>Build a working RevOps stack against a fake-company CRM + warehouse: enrichment pipeline, signal-based outbound, attribution dashboard, and an AI BDR agent — all served by NIM and measured against revenue targets.</p>
+          </div>
+          <div class="cert-block">
+            <h5>Hiring partners</h5>
+            <p>Every YC-funded Series A/B startup. Inception companies hiring their first GTM engineer. Mid-market SaaS doubling down on AI-native GTM. Clay, HubSpot, Salesforce ecosystem partners.</p>
+          </div>
+        </div>
+        <div class="cert-signature">
+          <div><strong>ISSUED BY NVIDIA</strong> · Workforce &amp; Adoption Program</div>
+          <div>Verified · Valid 3 years · Co-promoted with Y Combinator</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CERTIFICATE 04 — Finance & Operations AI Engineer -->
+    <div class="cert c4">
+      <span class="cert-corner tl"></span>
+      <span class="cert-corner tr"></span>
+      <span class="cert-corner bl"></span>
+      <span class="cert-corner br"></span>
+      <div class="cert-seal">
+        <div class="seal-num">04</div>
+        <div class="seal-label">Cert · 2026</div>
+      </div>
+      <div class="cert-inner">
+        <div class="cert-brand"><strong>NVIDIA</strong> · CERTIFIED BUILDER</div>
+        <div class="cert-program-line">Program · Functional Track</div>
+        <div class="cert-divider"></div>
+        <div class="cert-awarded">This certifies the holder as a</div>
+        <h3 class="cert-title">Finance &amp; Operations AI Engineer</h3>
+        <div class="cert-meta-row">
+          <span class="pill amber">Functional Track</span>
+          <span class="pill amber">CFO-led hiring 2026</span>
+          <span class="pill blue">10 weeks</span>
+          <span class="pill green">High enterprise demand</span>
+        </div>
+        <p class="cert-description">CFOs are the fastest-moving enterprise AI buyers in 2026 (EY). Finance &amp; Ops AI Engineers build the "company brain" — automated FP&amp;A, expense classification, contract review, vendor risk, ops reporting agents. Touches every Fortune 500 finance org, every consulting CFO advisory, every AP/AR automation startup.</p>
+        <div class="cert-stat-row">
+          <div class="cert-stat"><div class="v">$130K–$210K</div><div class="l">Base · Big-Six + F500</div></div>
+          <div class="cert-stat"><div class="v">~8,500</div><div class="l">Open US FinOps/AI roles</div></div>
+          <div class="cert-stat"><div class="v">$2,000</div><div class="l">Normal · waived</div></div>
+          <div class="cert-stat"><div class="v">L6 · L7 · L9</div><div class="l">Stack layers</div></div>
+        </div>
+        <div class="cert-grid">
+          <div class="cert-block">
+            <h5>Competencies mastered</h5>
+            <ul>
+              <li>Tabular + text RAG over ERP/GL data</li>
+              <li>Document extraction (contracts, invoices)</li>
+              <li>Forecasting + scenario agents</li>
+              <li>Compliance + audit trails (SOX, GDPR)</li>
+              <li>Deterministic guardrails for finance outputs</li>
+            </ul>
+          </div>
+          <div class="cert-block">
+            <h5>Tools &amp; stack</h5>
+            <ul>
+              <li>Nemotron 3 + Nemotron Nano VL (OCR)</li>
+              <li>NV-Embed v2 + vector DBs</li>
+              <li>NeMo Retriever · NemoGuardrails</li>
+              <li>NetSuite · SAP · Oracle integration</li>
+              <li>RAPIDS for tabular pipelines</li>
+            </ul>
+          </div>
+          <div class="cert-block">
+            <h5>Capstone</h5>
+            <p>Build a finance AI suite against a fake-enterprise dataset: invoice classifier, contract clause extractor, forecasting agent, and CFO dashboard. Must pass deterministic guardrails (no hallucinated numbers) and an audit-trail eval.</p>
+          </div>
+          <div class="cert-block">
+            <h5>Hiring partners</h5>
+            <p>Big-Four CFO advisory (Deloitte, PwC, EY, KPMG). Fortune 500 finance orgs. AP/AR automation startups (Ramp, Brex, Vic.ai class). Inception FinTech AI companies.</p>
+          </div>
+        </div>
+        <div class="cert-signature">
+          <div><strong>ISSUED BY NVIDIA</strong> · Workforce &amp; Adoption Program</div>
+          <div>Verified · Valid 3 years · Co-promoted with Y Combinator</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CERTIFICATE 05 — Enterprise Productivity & Internal Tools AI -->
+    <div class="cert c5">
+      <span class="cert-corner tl"></span>
+      <span class="cert-corner tr"></span>
+      <span class="cert-corner bl"></span>
+      <span class="cert-corner br"></span>
+      <div class="cert-seal">
+        <div class="seal-num">05</div>
+        <div class="seal-label">Cert · 2026</div>
+      </div>
+      <div class="cert-inner">
+        <div class="cert-brand"><strong>NVIDIA</strong> · CERTIFIED BUILDER</div>
+        <div class="cert-program-line">Program · Functional · Entry-Friendly</div>
+        <div class="cert-divider"></div>
+        <div class="cert-awarded">This certifies the holder as an</div>
+        <h3 class="cert-title">Enterprise Productivity &amp; Internal Tools AI Engineer</h3>
+        <div class="cert-meta-row">
+          <span class="pill" style="color: var(--teal); border-color: var(--teal); background: var(--teal-soft);">Functional · Entry-friendly</span>
+          <span class="pill amber">40% of apps AI-enabled by EOY 2026 (Gartner)</span>
+          <span class="pill blue">8 weeks</span>
+          <span class="pill green">Largest volume lane</span>
+        </div>
+        <p class="cert-description">The on-ramp track. Builds the AI assistants, internal tools, and workflow agents every Fortune 500 is rolling out: executive-assistant agents, knowledge bots, internal IT helpdesks, document-summary tools, meeting agents. Lower comp ceiling but the highest <em>volume</em> of hiring and the easiest entry for career-switchers.</p>
+        <div class="cert-stat-row">
+          <div class="cert-stat"><div class="v">$110K–$180K</div><div class="l">Base · entry → mid</div></div>
+          <div class="cert-stat"><div class="v">~22,000</div><div class="l">Open EA/internal-tool roles</div></div>
+          <div class="cert-stat"><div class="v">$1,500</div><div class="l">Normal · waived</div></div>
+          <div class="cert-stat"><div class="v">L6 · L8 · L9</div><div class="l">Stack layers</div></div>
+        </div>
+        <div class="cert-grid">
+          <div class="cert-block">
+            <h5>Competencies mastered</h5>
+            <ul>
+              <li>Internal knowledge RAG + permissions</li>
+              <li>Calendar / email / Slack agent design</li>
+              <li>Document summarization + Q&amp;A</li>
+              <li>Workflow automation patterns</li>
+              <li>Cost-efficient prompting + caching</li>
+            </ul>
+          </div>
+          <div class="cert-block">
+            <h5>Tools &amp; stack</h5>
+            <ul>
+              <li>NVIDIA NIM + Nemotron Nano (low-cost)</li>
+              <li>build.nvidia.com + Blueprints</li>
+              <li>LangGraph · MCP · n8n</li>
+              <li>Lindy · Otto · Saner class tools</li>
+              <li>Notion / Google Workspace / Microsoft 365</li>
+            </ul>
+          </div>
+          <div class="cert-block">
+            <h5>Capstone</h5>
+            <p>Ship a deployed productivity AI suite against a fake-enterprise: EA agent, knowledge bot, workflow automation. Must hit cost-per-task targets and user-satisfaction eval.</p>
+          </div>
+          <div class="cert-block">
+            <h5>Hiring partners</h5>
+            <p>Every Fortune 500's internal-AI rollout. Mid-market companies adopting Copilot / Gemini Workspace. EA-agent startups (Lindy, Otto, Saner). Internal-tool builders at every consulting firm.</p>
+          </div>
+        </div>
+        <div class="cert-signature">
+          <div><strong>ISSUED BY NVIDIA</strong> · Workforce &amp; Adoption Program</div>
+          <div>Verified · Valid 3 years · Co-promoted with Y Combinator</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="insight">
+      <div class="label">Why these five</div>
+      <p>Together, certifications 01–05 cover an estimated <strong>85,000+ open US roles right now</strong> across every layer of the NVIDIA stack. Two technical tracks anchor depth. Three functional tracks anchor scale — RevOps, Finance, and Productivity are where enterprises actually deploy AI in 2026. No PhD required for any of them.</p>
+    </div>
+  </div>
+</section>
+
+<section id="grading" class="feature">
+  <div class="wrap">
+    <h2><span class="num">04</span>Grading — Strict, Performance-Based, Verifiable</h2>
+    <p class="lede">The certification matters only if employers trust it. The Builder credential is harder to earn than any AWS/Google/IBM MCQ cert — and worth more because hiring partners actually use it to filter candidates.</p>
+
+    <div class="grading-grid">
+      <div class="grade"><div class="gnum">Component 01</div><h5>Automated Capstone Verification</h5><p>The deployed artifact must call a NIM endpoint, hit a latency/quality bar, and pass a held-out eval. NVIDIA's runtime verifies the build — no other vendor can.</p></div>
+      <div class="grade"><div class="gnum">Component 02</div><h5>Live Skills Exam (90 min, proctored)</h5><p>Write code, debug, deploy — under observation. Replaces multiple-choice. Modeled on CKA (Kubernetes Admin), the most-respected performance exam in cloud.</p></div>
+      <div class="grade"><div class="gnum">Component 03</div><h5>Recorded Portfolio Walkthrough</h5><p>15-minute video explaining architecture, trade-offs, eval results, cost/latency. Standardized rubric. Reviewed by an NVIDIA engineer mentor.</p></div>
+      <div class="grade"><div class="gnum">Component 04</div><h5>Peer Code Review</h5><p>Each capstone gets two cohort peers' reviews using a structured rubric. Reviewers' ratings also count toward the credential — engineering is a two-way skill.</p></div>
+      <div class="grade"><div class="gnum">Component 05</div><h5>Hiring-Partner Sign-Off (senior tier only)</h5><p>For the <em>Distinguished</em> tier: a hiring partner reviews the artifact and confirms it would ship in their environment. Three sign-offs unlock the senior credential.</p></div>
+      <div class="grade"><div class="gnum">Component 06</div><h5>3-Year Renewal · Ship, Don't Test</h5><p>Renewal is not a re-exam. Ship a new artifact using something NVIDIA released in the prior year. Forces relevance. Matches AWS 3-year validity.</p></div>
+    </div>
+
+    <h3>The three tiers</h3>
+    <div class="table-wrap">
+    <table>
+      <thead><tr><th>Tier</th><th>What it takes</th><th>What it signals</th></tr></thead>
+      <tbody>
+        <tr><td><span class="pill green">Builder Certified</span></td><td>Components 1–4</td><td>Job-ready for the role · entry/mid level</td></tr>
+        <tr><td><span class="pill blue">Builder Pro</span></td><td>1–4 + 12 months placed experience + a peer-merged PR to an NVIDIA OSS repo</td><td>Senior IC · ready to lead an enterprise AI initiative</td></tr>
+        <tr><td><span class="pill purple">Builder Distinguished</span></td><td>1–5 + sign-off from 3 hiring partners + a named contribution to a Blueprint or upstream NIM</td><td>Architect-level · the talent every consultancy and Inception startup fights to hire</td></tr>
+      </tbody>
+    </table>
+    </div>
+
+    <p style="color: var(--text-dim); font-size: 14px;">First-attempt pass rate target: <strong>40–50%</strong>. Hard enough to signal capability. Achievable enough to scale to 100,000 graduates.</p>
+  </div>
+</section>
+
+<section id="portal">
+  <div class="wrap">
+    <h2><span class="num">05</span>The Builder Hiring Portal — Wired to NVIDIA's Customers</h2>
+    <p class="lede">A credential without a hiring funnel is wallpaper. The Builder Portal flips it: every NVIDIA customer, Inception startup, and Big-Six consulting partner posts AI roles into one place. Builders get matched, notified, and intro'd — automatically.</p>
+
+    <div class="portal-flow">
+      <div class="portal-step">
+        <div class="ps-num">Step 01</div>
+        <h4>Enterprises post</h4>
+        <p>Every NVIDIA AI Enterprise customer, Inception startup, and Big-Six firm gets a Portal login. They post open AI roles directly, tagged to one of the 5 certifications.</p>
+      </div>
+      <div class="portal-step">
+        <div class="ps-num">Step 02</div>
+        <h4>Builders matched</h4>
+        <p>Every Certified Builder has a public profile showing capstone, eval scores, leaderboard rank, peer ratings. Matching filters by cert + region + tier.</p>
+      </div>
+      <div class="portal-step">
+        <div class="ps-num">Step 03</div>
+        <h4>Real-time notification</h4>
+        <p>Builders get push + email when a role matching their cert opens at a partner. Recruiters get a weekly "top-50 Builders for your open roles" digest.</p>
+      </div>
+      <div class="portal-step">
+        <div class="ps-num">Step 04</div>
+        <h4>Two-way auto-intro</h4>
+        <p>On credential completion, top-tier Builders get auto-introduced to 30 partner companies aligned to their cert. NVIDIA does the warm-intro.</p>
+      </div>
+      <div class="portal-step">
+        <div class="ps-num">Step 05</div>
+        <h4>Hired</h4>
+        <p>Hiring partner reports placement back. Builder gets 6 months of continued Brev credits + mentor access. Recruiter network handles overflow.</p>
+      </div>
+    </div>
+
+    <h3>Live job-count widget — what Builders see when they log in</h3>
+    <div class="table-wrap">
+    <table>
+      <thead><tr><th>Certification</th><th>Open roles now</th><th>Avg base salary</th><th>Avg time-to-intro</th></tr></thead>
+      <tbody>
+        <tr><td><span class="pill green">Forward-Deployed</span></td><td class="tabular">~14,000</td><td class="tabular">$240K</td><td class="green">9 days</td></tr>
+        <tr><td><span class="pill blue">AI / ML Engineer</span></td><td class="tabular">~38,000</td><td class="tabular">$170K</td><td class="green">6 days</td></tr>
+        <tr><td><span class="pill purple">GTM &amp; RevOps</span></td><td class="tabular">~3,000+</td><td class="tabular">$200K</td><td class="green">8 days</td></tr>
+        <tr><td><span class="pill amber">Finance &amp; Ops</span></td><td class="tabular">~8,500</td><td class="tabular">$165K</td><td class="green">11 days</td></tr>
+        <tr><td><span class="pill" style="color: var(--teal); border-color: var(--teal); background: var(--teal-soft);">Enterprise Productivity</span></td><td class="tabular">~22,000</td><td class="tabular">$140K</td><td class="green">5 days</td></tr>
+      </tbody>
+    </table>
+    </div>
+
+    <div class="insight">
+      <div class="label">The portal is the moat</div>
+      <p>NVIDIA already has the demand side no other workforce program can credibly claim: <strong>19,000+ Inception startups</strong> all hiring, <strong>every Fortune 500 NVIDIA AI Enterprise customer</strong> hungry for deployment talent, and access via the <strong>Big Six</strong> to 3M+ consultants and their client engagements. A Builder Portal aggregating all three into one feed is unmatchable.</p>
+    </div>
+  </div>
+</section>
+
+<section id="partners" class="feature">
+  <div class="wrap">
+    <h2><span class="num">06</span>Promotion &amp; Distribution</h2>
+    <p class="lede">Don't build new traffic. Co-promote with the channels learners already trust. Four moves get the program from 5,000 first-cohort seats to 100,000 placements.</p>
+
+    <div class="partner-grid">
+      <div class="partner">
+        <span class="tag">Move 01 · Mindshare</span>
+        <h5>Y Combinator &amp; Garry Tan</h5>
+        <p>YC president Garry Tan open-sourced <strong>GStack</strong> in March 2026 — Claude Code workflows that hit ~20K GitHub stars in weeks. Co-launch a YC-blessed "Builder Stack" companion (NVIDIA NIM + Nemotron + Blueprints) and Garry promotes it to YC's social audience. YC startups commit to hiring Certified Builders on the Portal.</p>
+      </div>
+      <div class="partner">
+        <span class="tag">Move 02 · Self-paced funnel</span>
+        <h5>Coursera Professional Certificate</h5>
+        <p>Ship the <em>"NVIDIA Certified Builder · AI Engineer Pro Cert"</em> on Coursera, co-built with DeepLearning.AI. Distributes via Coursera Plus ($399/yr; 100M+ learners). Target 100K enrollees year-one — IBM's AI Engineering Pro Cert has 111K. The Pro Cert is the self-paced funnel into cohort applications.</p>
+      </div>
+      <div class="partner">
+        <span class="tag">Move 03 · B2B contract</span>
+        <h5>Consulting Big Six white-label</h5>
+        <p>Accenture, Deloitte, EY, PwC, Capgemini, Infosys, TCS, Wipro, Cognizant. 3M+ consultants being reskilled on AI right now. Sell a private NVIDIA Certified Builder track to each. They pay for seats; NVIDIA locks the stack into every Fortune 500 client engagement they staff.</p>
+      </div>
+      <div class="partner">
+        <span class="tag">Move 04 · Local scale</span>
+        <h5>Delivery partners (AWS re/Start playbook)</h5>
+        <p>Per Scholas (US), Andela (Africa), Generation (global), Year Up, HBCUs, community colleges, women-in-tech orgs. Builder Fund pays them to deliver cohorts on the ground in 15+ countries. The reason AWS re/Start hit 20,000 placements since 2017.</p>
+      </div>
+    </div>
+
+    <h3>Ecosystem tool partners built into the curriculum</h3>
+    <p>Each functional certification integrates popular tools so the credential isn't a walled garden — it's the modern AI stack with NVIDIA at the center:</p>
+    <ul>
+      <li><strong>GTM &amp; RevOps</strong> · Clay · Apollo · HubSpot · Salesforce · n8n · Zapier · Instantly</li>
+      <li><strong>Finance &amp; Ops</strong> · SAP · Oracle · NetSuite · Ramp · Brex · Snowflake · Databricks</li>
+      <li><strong>Enterprise Productivity</strong> · Lindy · Otto · Saner · Microsoft 365 · Google Workspace · Notion · Slack</li>
+      <li><strong>All tracks</strong> · LangGraph · LangChain · LlamaIndex · MCP · Hugging Face · Anthropic / OpenAI APIs (interop with NVIDIA stack, not against it)</li>
+    </ul>
+  </div>
+</section>
+
+<section id="fund">
+  <div class="wrap">
+    <h2><span class="num">07</span>The $100M NVIDIA Builder Fund</h2>
+    <p class="lede">A named, three-year commitment. Modeled on Google.org's $75M Career Certificates Fund and Microsoft's $4B AI Skills commitment. Sized to credibly place 100,000+ Builders.</p>
+
+    <div class="fund">
+      <div class="fund-headline">$100M · 3 years · 100,000 Builders · Free</div>
+      <div class="fund-sub">"AI is creating 1.3 million jobs. We're putting $100 million behind getting people into them." — announce at GTC keynote, anchor on a single learner story.</div>
+
+      <div class="fund-uses">
+        <div class="fund-use"><h5>Use 01 · Free tuition</h5><p>All five Builder cohorts are free for admitted applicants. Cohort delivery costs paid by the Fund.</p></div>
+        <div class="fund-use"><h5>Use 02 · Free Brev GPU</h5><p>Full GPU credits during the program + 6 months post-graduation while job-hunting.</p></div>
+        <div class="fund-use"><h5>Use 03 · Cert exam fees</h5><p>$125–$500 per Builder exam fee waived. Normally $1,500–$3,000 per cert end-to-end.</p></div>
+        <div class="fund-use"><h5>Use 04 · Living stipends</h5><p>Means-tested for full-time learners in the US, India, LATAM, Africa, SE Asia.</p></div>
+        <div class="fund-use"><h5>Use 05 · Mentor stipends</h5><p>Paid NVIDIA-engineer mentor compensation. Real engineers, real time.</p></div>
+        <div class="fund-use"><h5>Use 06 · Delivery partner grants</h5><p>Per Scholas, Andela, Generation, HBCUs, women-in-tech orgs get paid to deliver locally.</p></div>
+        <div class="fund-use"><h5>Use 07 · Hardware grants</h5><p>RTX laptops or DGX Spark units to top capstone graduates in low-resource regions.</p></div>
+        <div class="fund-use"><h5>Use 08 · Job-search support</h5><p>Mock interviews, resume reviews, portfolio polish, 6-month coaching for those not yet placed.</p></div>
+      </div>
+    </div>
+
+    <div class="insight">
+      <div class="label">The waived-cost math</div>
+      <p>Across the five certifications, fair-market value of materials, mentor time, cohort delivery, exam fees, and 6-month GPU credits is approximately <strong>$3,000–$8,000 per Builder</strong>. For 100K Builders that's $300M–$800M of effective subsidy — delivered for $100M because NVIDIA's marginal costs (GPU time, mentor labor, internal content reuse) are 3–8x lower than commercial rates.</p>
+    </div>
+  </div>
+</section>
+
+<section id="roi">
+  <div class="wrap">
+    <h2><span class="num">08</span>The ROI Math — $100M In, $2.5B–$10B Out</h2>
+    <p class="lede">Is putting $100M behind 100,000 Builders a great return? <strong>Yes — by a 50× to 100× margin.</strong> Every Builder placed becomes a vector for NVIDIA AI Enterprise adoption at their new employer. Here's the math, with assumptions fully exposed.</p>
+
+    <div class="roi-headline">
+      <div class="roi-block in">
+        <div class="roi-label">We put in</div>
+        <div class="roi-figure">$100M</div>
+        <div class="roi-sub">Over 3 years · NVIDIA Workforce Fund</div>
+      </div>
+      <div class="roi-arrow">→</div>
+      <div class="roi-block out">
+        <div class="roi-label">We get out · Year-3 ARR</div>
+        <div class="roi-figure">$2.5–10B</div>
+        <div class="roi-sub">New NVIDIA AI Enterprise annual recurring revenue</div>
+      </div>
+      <div class="roi-arrow">=</div>
+      <div class="roi-block ratio">
+        <div class="roi-label">ROI</div>
+        <div class="roi-figure">50×–100×</div>
+        <div class="roi-sub">Payback &lt; 1 month per placement</div>
+      </div>
+    </div>
+
+    <h3>Math at a glance</h3>
+    <div class="table-wrap">
+    <table>
+      <thead><tr><th>Metric</th><th>Per Builder</th><th>At 100,000 Builders</th></tr></thead>
+      <tbody>
+        <tr><td>Cost</td><td class="tabular">$1,000 all-in</td><td class="tabular">$100M (over 3 years)</td></tr>
+        <tr><td>NVIDIA AIE ARR triggered (Year-3)</td><td class="tabular">$50K – $150K / yr</td><td class="green tabular">$2.5B – $10B / yr</td></tr>
+        <tr><td>ROI ratio</td><td class="green tabular">50× – 100×</td><td class="green tabular">50× – 100×</td></tr>
+        <tr><td>Payback period</td><td class="tabular">&lt; 1 month</td><td class="tabular">~3 weeks portfolio-wide</td></tr>
+        <tr><td>Cumulative new ARR over 3 years (conservative)</td><td class="tabular">—</td><td class="green tabular">~$4.5B</td></tr>
+      </tbody>
+    </table>
+    </div>
+
+    <h3>Status quo vs. program — annual flow</h3>
+    <p>What it looks like today (NVIDIA's current cert business, no program) versus the proposed NVIDIA Certified Builder program at steady state.</p>
+    <div class="table-wrap">
+    <table>
+      <thead><tr><th>Metric</th><th>Status quo today</th><th>NVIDIA Certified Builder</th></tr></thead>
+      <tbody>
+        <tr><td>Net annual NVIDIA spend</td><td class="tabular">~$0 (cert revenue ≈ marginal cost)</td><td class="tabular">$33M / yr (3-year fund ramp)</td></tr>
+        <tr><td>Certs issued / year (est.)</td><td class="tabular">~20K – 30K</td><td class="tabular">33K placed (Year-3)</td></tr>
+        <tr><td>Net-new enterprise deployments / yr</td><td class="tabular">~1,000 – 3,000</td><td class="tabular">~30,000 – 60,000</td></tr>
+        <tr><td>Incremental NVIDIA AIE ARR</td><td class="tabular">$30M – $90M / yr</td><td class="green tabular">$2.5B – $10B / yr</td></tr>
+        <tr><td>ROI on incremental dollar</td><td class="tabular">~breakeven</td><td class="green tabular">50× – 100×</td></tr>
+      </tbody>
+    </table>
+    </div>
+    <p style="font-size: 14px; color: var(--text-dim);">To reach <strong>1% of the new program's placement target</strong> (i.e., ~1,000 placements) via the status-quo channel would absorb all of NVIDIA's current cert-driven hiring funnel for a year — and produce zero structural change in adoption velocity. The program achieves the same 1,000 placements every ~3 weeks at steady state.</p>
+
+    <h3>Where the $1,000 per Builder goes — fair-market vs. NVIDIA marginal cost</h3>
+    <div class="table-wrap">
+    <table>
+      <thead><tr><th>Component</th><th>Fair-market cost</th><th>NVIDIA marginal cost</th><th>Why it's cheap for NVIDIA</th></tr></thead>
+      <tbody>
+        <tr><td>12-week cohort (instructors, content)</td><td class="tabular">$3,000 – $5,000</td><td class="tabular">$200</td><td>70% reuse of existing DLI / LaunchPad / Blueprints content</td></tr>
+        <tr><td>GPU compute (12 wks + 6 mo post-grad)</td><td class="tabular">$800 – $2,000</td><td class="tabular">$80 – $200</td><td>Brev at internal cost · ~10× below retail GPU rates</td></tr>
+        <tr><td>NVIDIA engineer mentor (~6 hrs/Builder)</td><td class="tabular">$1,200 – $2,400</td><td class="tabular">$300</td><td>Partial loading · amortized across cohort</td></tr>
+        <tr><td>Cert exam + verification</td><td class="tabular">$500</td><td class="tabular">$50</td><td>Proctoring + automated verification on NVIDIA's runtime</td></tr>
+        <tr><td>Means-tested living stipend (~30% of Builders)</td><td class="tabular">$500 averaged</td><td class="tabular">$500</td><td>Cash cost · no leverage</td></tr>
+        <tr><td>Hiring portal + recruiter ops</td><td class="tabular">$300</td><td class="tabular">$50</td><td>Reused engineering infra · minimal new headcount</td></tr>
+        <tr><td><strong>Total per Builder</strong></td><td class="tabular"><strong>$3,300 – $8,200</strong></td><td class="green tabular"><strong>~$1,000 net</strong></td><td><strong>3× – 8× leverage on cash deployed</strong></td></tr>
+      </tbody>
+    </table>
+    </div>
+    <p style="font-size: 14px; color: var(--text-dim);">For 100K Builders, that's <strong>$300M – $800M of effective subsidy delivered for $100M in cash</strong> — before counting any platform-revenue ROI.</p>
+
+    <h3>Revenue side — three scenarios, assumptions fully exposed</h3>
+    <div class="table-wrap">
+    <table>
+      <thead><tr><th>Scenario</th><th>Trigger rate*</th><th>ARR per triggered placement**</th><th>Year-3 ARR @ 100K placements</th></tr></thead>
+      <tbody>
+        <tr><td><span class="pill amber">Conservative</span></td><td class="tabular">50%</td><td class="tabular">$50K / yr</td><td class="green tabular">$2.5B / yr</td></tr>
+        <tr><td><span class="pill blue">Base case</span></td><td class="tabular">60%</td><td class="tabular">$100K / yr</td><td class="green tabular">$6.0B / yr</td></tr>
+        <tr><td><span class="pill green">Aggressive</span></td><td class="tabular">70%</td><td class="tabular">$150K / yr</td><td class="green tabular">$10.5B / yr</td></tr>
+      </tbody>
+    </table>
+    </div>
+    <p style="font-size: 14px; color: var(--text-dim);">
+      <strong>* Trigger rate</strong> — % of placements that lead to net-new or expanded NVIDIA AI Enterprise spend at the hiring company. 50% is conservative; Big-Six consulting placements probably trigger closer to 80% because each consultant deploys at multiple Fortune 500 clients.<br>
+      <strong>** ARR per triggered placement</strong> — NVIDIA AI Enterprise lists at ~$1,000/GPU/year (per the 10-layer cake reference). A mid-size NIM deployment is 50–200 GPUs = $50K–$200K ARR per enterprise customer relationship.
+    </p>
+
+    <h3>Why NVIDIA's economics beat every other workforce program</h3>
+    <div class="table-wrap">
+    <table>
+      <thead><tr><th>Program</th><th>Cost / placement</th><th>Locked-in vendor ARR / placement</th></tr></thead>
+      <tbody>
+        <tr><td>Springboard AI/ML bootcamp</td><td class="tabular">$8K – $15K</td><td class="tabular">$0 · vendor-agnostic</td></tr>
+        <tr><td>Codesmith / Hack Reactor</td><td class="tabular">$10K – $20K</td><td class="tabular">$0</td></tr>
+        <tr><td>AWS re/Start (vendor + partner blended)</td><td class="tabular">~$5K</td><td class="tabular">Some AWS pull-through · not published</td></tr>
+        <tr><td>Google Career Certificates</td><td class="tabular">$2K – $5K effective</td><td class="tabular">$0 · vendor-agnostic</td></tr>
+        <tr><td>IBM SkillsBuild</td><td class="tabular">~$1K (free content)</td><td class="tabular">Modest watsonx pull</td></tr>
+        <tr><td><strong>NVIDIA Certified Builder</strong></td><td class="green tabular"><strong>$1,000</strong></td><td class="green tabular"><strong>$50K – $150K / year ARR</strong></td></tr>
+      </tbody>
+    </table>
+    </div>
+    <p style="font-size: 14px; color: var(--text-dim);">NVIDIA is the only workforce program in the world where <em>the trained workforce is structurally locked into the funder's platform revenue.</em> Microsoft's $4B AI Skills commitment is the closest in scale — but Microsoft doesn't bill the GPUs. NVIDIA does.</p>
+
+    <h3>Honest caveats</h3>
+    <ul>
+      <li><strong>Attribution is fuzzy at the edges.</strong> "ARR triggered by a Builder" is hard to attribute cleanly. But even with a 5× haircut on the trigger rate, ROI still lands at 10× – 20×.</li>
+      <li><strong>Year-1 placements lag.</strong> First cohort places in Q1 2027; full enterprise deployments take 6–18 months. Real cash-flow payback ramps over Year 2–3.</li>
+      <li><strong>Placement-rate risk.</strong> If only 30% of Builders place (vs 60% target), the program still hits ~25× ROI — because each successful placement drives so much downstream platform spend.</li>
+      <li><strong>Cannibalization.</strong> Some "triggered" deployments would have happened without the Builder. Modeled in via the conservative 50% trigger rate in the bottom-end scenario.</li>
+    </ul>
+
+    <div class="insight">
+      <div class="label">The bottom line</div>
+      <p>Even with conservative haircuts on every assumption, this program returns more enterprise platform revenue per dollar than any go-to-market motion NVIDIA currently runs. <strong>$100M is the highest-leverage capital deployment in NVIDIA's adjacent-spending portfolio</strong> — and the workforce becomes the moat for the next decade of enterprise AI spend.</p>
+    </div>
+  </div>
+</section>
+
+<section id="roadmap">
+  <div class="wrap">
+    <h2><span class="num">09</span>Roadmap</h2>
+    <p class="lede">Four quarters from GTC announcement to a live hiring funnel.</p>
+
+    <div class="roadmap">
+      <div class="phase">
+        <div class="when">Q3 2026 · 90 days</div>
+        <h4>Announce &amp; consolidate</h4>
+        <ul>
+          <li>Announce $100M Builder Fund at SIGGRAPH / GTC keynote</li>
+          <li>Stand up <code>builder.nvidia.com</code> (unified hub)</li>
+          <li>Reorganize existing DLI / LaunchPad / Blueprints along 5 cert tracks</li>
+          <li>Open applications for Cohort #1 — 5,000 seats</li>
+          <li>Sign first 100 Inception + 30 Fortune 500 hiring partners</li>
+          <li>Garry Tan / YC co-promotion launches</li>
+        </ul>
+      </div>
+      <div class="phase">
+        <div class="when">Q4 2026</div>
+        <h4>First cohort + Coursera</h4>
+        <ul>
+          <li><strong>Run Builder Cohort #1 · 5,000 seats</strong></li>
+          <li>Builder Hiring Portal goes live</li>
+          <li>Coursera Pro Cert (Cert 02 curriculum) launches</li>
+          <li>Free Brev tier live for all Developer Program members</li>
+          <li>Live skills-exam infrastructure ready (proctored)</li>
+          <li>First Big-Six B2B contract signed</li>
+        </ul>
+      </div>
+      <div class="phase">
+        <div class="when">Q1 2027</div>
+        <h4>Scale &amp; outcomes</h4>
+        <ul>
+          <li><strong>Cohort #2 · 10,000 seats · first 3,000 placements</strong></li>
+          <li>500 Inception + 100 Fortune 500 partners on Portal</li>
+          <li>Delivery partners live in 15 countries</li>
+          <li>Publish first transparent placement-rate report</li>
+          <li>Cert validity extended to 3 years</li>
+        </ul>
+      </div>
+      <div class="phase">
+        <div class="when">Q2 2027</div>
+        <h4>Compound</h4>
+        <ul>
+          <li><strong>Cohort #3 · 25,000 seats · 10,000 cumulative placements</strong></li>
+          <li>Three more Big-Six contracts signed</li>
+          <li>$1B+ NVIDIA AI Enterprise spend influenced</li>
+          <li>Public retrospective at GTC; iterate</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="metrics" class="feature">
+  <div class="wrap">
+    <h2><span class="num">10</span>Metrics — Place People, Track the Platform</h2>
+    <p class="lede">North Star: placed Builders × NVIDIA AI Enterprise spend they drive. Not exam revenue. Not enrollments.</p>
+
+    <div class="table-wrap">
+    <table>
+      <thead><tr><th>Metric</th><th>Baseline</th><th>12-month</th><th>3-year</th><th>Why</th></tr></thead>
+      <tbody>
+        <tr><td>Builders placed</td><td class="tabular">0</td><td class="target tabular">10,000</td><td class="target tabular">100,000</td><td>The North Star</td></tr>
+        <tr><td>Placement rate within 90 days</td><td>n/a</td><td class="target tabular">60%</td><td class="target tabular">75%</td><td>Beats every industry rate</td></tr>
+        <tr><td>Certified pass rate (first attempt)</td><td>n/a</td><td class="target tabular">40–50%</td><td class="target tabular">40–50%</td><td>Strict credential signals real capability</td></tr>
+        <tr><td>NVIDIA AI Enterprise spend influenced</td><td>n/a</td><td class="target tabular">$150M</td><td class="target tabular">$2B+</td><td>The reason this exists</td></tr>
+        <tr><td>Coursera Pro Cert enrollees</td><td class="tabular">0</td><td class="target tabular">100K</td><td class="target tabular">500K</td><td>IBM benchmark: 111K</td></tr>
+        <tr><td>Hiring partners on Portal</td><td class="tabular">0</td><td class="target tabular">600</td><td class="target tabular">5,000+</td><td>Demand-side density</td></tr>
+        <tr><td>Big-Six B2B contracts</td><td class="tabular">0</td><td class="target tabular">3</td><td class="target tabular">9</td><td>3M-consultant workforce locked in</td></tr>
+        <tr><td>Delivery partners onboarded</td><td class="tabular">0</td><td class="target tabular">50</td><td class="target tabular">300</td><td>Scale without org bloat</td></tr>
+        <tr><td>Fund $ deployed</td><td class="tabular">$0</td><td class="target tabular">$25M</td><td class="target tabular">$100M</td><td>Credibility of the commitment</td></tr>
+        <tr><td>Average Builder salary uplift</td><td>n/a</td><td class="target tabular">+$35K</td><td class="target tabular">+$50K</td><td>Builder ROI</td></tr>
+        <tr><td>Time-to-first-intro after credential</td><td>n/a</td><td class="target tabular">&lt; 14 days</td><td class="target tabular">&lt; 7 days</td><td>Portal velocity</td></tr>
+      </tbody>
+    </table>
+    </div>
+
+    <h3>What we explicitly de-prioritize</h3>
+    <ul>
+      <li>Exam-revenue per developer — rounding error vs platform revenue</li>
+      <li>Number of certifications — five is the cap on purpose</li>
+      <li>Pure self-paced enrollment — vanity metric without placement</li>
+    </ul>
+  </div>
+</section>
+
+<section class="no-border">
+  <div class="wrap">
+    <h2><span class="num">11</span>Closing</h2>
+    <p class="lede">NVIDIA can't fix AI anxiety by retraining 30 million software engineers as ML researchers. It can fix it by giving them a clear path into the AI operator jobs the next decade of enterprise spend depends on.</p>
+    <p>The NVIDIA Certified Builder Program is that path. Five focused certifications. Strict performance-based grading. A hiring portal NVIDIA's own customers feed. $100M to make every part of it free. Garry Tan and Y Combinator amplifying it. Coursera distributing it. The Big Six paying NVIDIA to white-label it.</p>
+    <p>Every Builder we certify deploys NVIDIA's stack on day one of the job they got <em>because of the certification</em>. The flywheel — workforce → enterprise → platform — closes itself.</p>
+    <p style="font-size: 18px; color: var(--text);"><strong>"AI isn't taking your job. It's hiring 1.3 million Builders. NVIDIA is making them — and putting $100M behind it."</strong></p>
+    <div class="ticker" style="margin-top: 28px;">NVIDIA Certified Builder · <em>$100M Fund · 100,000 Jobs · 5 Certifications</em></div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <p>Strategy brief v5 · <a href="nvidia-learning-strategy.html">previous version archived</a> · May 2026. Anchored to the <a href="https://nvidia-is-a-10-layer-cake.vercel.app/" target="_blank">10-layer NVIDIA stack</a>. Synthesized from enterprise AI workforce data (Bain, Lightcast, Indeed, LinkedIn, Levels.fyi, EY, Gartner, Deloitte), competitor program research (AWS re/Start, IBM SkillsBuild, Google Career Certificates, Microsoft AI Skills, Anthropic Academy, OpenAI Academy), Y Combinator's GStack release (March 2026), and NVIDIA's existing learning surface (DLI · LaunchPad · build.nvidia.com · Blueprints · Coursera · On-Demand · Academy).</p>
+  </div>
+</footer>
+
+</body>
+</html>
