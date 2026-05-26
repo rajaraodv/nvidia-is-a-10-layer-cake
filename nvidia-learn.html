@@ -1,0 +1,1679 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NVIDIA Learn — One home for every developer who builds on NVIDIA</title>
+<style>
+  :root {
+    --serif: 'Iowan Old Style', 'Sitka Text', 'Charter', Georgia, Cambria, 'Times New Roman', serif;
+    --sans: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Inter', 'Helvetica Neue', Arial, sans-serif;
+    --mono: ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, monospace;
+
+    --bg: #ffffff;
+    --bg-elev: #faf9f6;
+    --bg-card: #ffffff;
+    --bg-dark: #0e0e0e;
+    --border: #e6e4df;
+    --border-strong: #d4d2cc;
+    --green: #76b900;
+    --green-dark: #4f7a00;
+    --green-deep: #344e00;
+    --green-soft: #f1f6e2;
+    --text: #0e0e0e;
+    --text-dim: #383838;
+    --text-mute: #777777;
+    --text-faint: #a4a299;
+    --red: #b34141;
+    --amber: #a07000;
+    --blue: #1e5fa3;
+    --purple: #7a3eb0;
+    --teal: #00857a;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--sans);
+    line-height: 1.55;
+    font-size: 16px;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  .wrap { max-width: 1240px; margin: 0 auto; padding: 0 28px; }
+
+  /* TOP NAV */
+  .topnav {
+    position: sticky;
+    top: 0;
+    background: rgba(255,255,255,0.96);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--border);
+    z-index: 50;
+  }
+  .topnav-inner {
+    max-width: 1240px;
+    margin: 0 auto;
+    padding: 14px 28px;
+    display: flex;
+    align-items: center;
+    gap: 28px;
+  }
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    text-decoration: none;
+    color: var(--text);
+    font-size: 17px;
+    font-weight: 500;
+    letter-spacing: -0.3px;
+    flex-shrink: 0;
+  }
+  .logo strong { color: var(--green-dark); font-weight: 700; }
+  .logo-mark {
+    width: 16px;
+    height: 16px;
+    background: var(--green);
+    border-radius: 3px;
+    transform: rotate(45deg);
+    position: relative;
+  }
+  .logo-mark::after {
+    content: '';
+    position: absolute;
+    inset: 4px;
+    background: white;
+    border-radius: 1px;
+  }
+
+  .topnav-links {
+    display: flex;
+    gap: 22px;
+    margin-left: 12px;
+  }
+  .topnav-links a {
+    color: var(--text-dim);
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    transition: color 0.15s;
+  }
+  .topnav-links a:hover { color: var(--green-dark); }
+
+  .topnav-actions {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .search {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    padding: 7px 14px;
+    color: var(--text-mute);
+    font-size: 13px;
+    background: var(--bg-elev);
+    cursor: text;
+    min-width: 220px;
+    transition: border-color 0.15s, background 0.15s;
+  }
+  .search:hover { border-color: var(--border-strong); background: white; }
+  .search-mark { font-size: 13px; }
+  .search-key {
+    margin-left: auto;
+    font-family: var(--mono);
+    font-size: 11px;
+    background: white;
+    border: 1px solid var(--border);
+    padding: 1px 5px;
+    border-radius: 3px;
+    color: var(--text-faint);
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 14px;
+    font-weight: 500;
+    padding: 8px 16px;
+    border-radius: 6px;
+    border: 1px solid transparent;
+    background: transparent;
+    color: var(--text);
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.15s;
+    font-family: var(--sans);
+    letter-spacing: 0;
+  }
+  .btn-ghost { color: var(--text-dim); }
+  .btn-ghost:hover { color: var(--text); background: var(--bg-elev); }
+  .btn-secondary { border-color: var(--border-strong); color: var(--text); background: white; }
+  .btn-secondary:hover { border-color: var(--text-mute); }
+  .btn-primary { background: var(--green); color: white; font-weight: 600; }
+  .btn-primary:hover { background: var(--green-dark); }
+  .btn-lg { padding: 13px 22px; font-size: 15px; }
+
+  /* HERO */
+  .hero {
+    padding: 80px 0 76px;
+    position: relative;
+    overflow: hidden;
+    border-bottom: 1px solid var(--border);
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -300px;
+    right: -250px;
+    width: 900px;
+    height: 900px;
+    background: radial-gradient(circle, rgba(118,185,0,0.12) 0%, rgba(118,185,0,0.04) 35%, transparent 65%);
+    pointer-events: none;
+    z-index: 0;
+  }
+  .hero::after {
+    content: '';
+    position: absolute;
+    bottom: -200px;
+    left: -150px;
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(30,95,163,0.06) 0%, transparent 60%);
+    pointer-events: none;
+    z-index: 0;
+  }
+  .hero .wrap { position: relative; z-index: 1; }
+
+  .hero-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--green-soft);
+    color: var(--green-deep);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+    padding: 6px 14px;
+    border-radius: 999px;
+    margin-bottom: 28px;
+    border: 1px solid rgba(118,185,0,0.4);
+  }
+  .hero-eyebrow .dot {
+    width: 6px;
+    height: 6px;
+    background: var(--green);
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  .hero h1 {
+    font-family: var(--serif);
+    font-size: 72px;
+    line-height: 1.02;
+    font-weight: 500;
+    letter-spacing: -2.5px;
+    color: var(--text);
+    margin: 0 0 26px;
+    max-width: 1000px;
+  }
+  .hero h1 .g {
+    color: var(--green-dark);
+    font-weight: 600;
+    font-style: italic;
+  }
+  .hero-sub {
+    font-family: var(--serif);
+    font-size: 22px;
+    line-height: 1.55;
+    color: var(--text-dim);
+    max-width: 720px;
+    margin-bottom: 36px;
+  }
+  .hero-sub strong { color: var(--text); font-weight: 600; }
+
+  .hero-ctas {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-bottom: 56px;
+  }
+  .hero-ctas .btn-link {
+    color: var(--green-dark);
+    font-size: 14px;
+    font-weight: 500;
+    padding: 13px 6px;
+    text-decoration: none;
+    align-self: center;
+  }
+  .hero-ctas .btn-link:hover { color: var(--green-deep); }
+
+  .hero-stats {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 0;
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+  .hero-stats > div {
+    padding: 22px 0;
+    border-right: 1px solid var(--border);
+    padding-right: 28px;
+  }
+  .hero-stats > div:not(:first-child) { padding-left: 28px; }
+  .hero-stats > div:last-child { border-right: none; padding-right: 0; }
+  .hero-stats strong {
+    display: block;
+    font-family: var(--serif);
+    font-size: 30px;
+    font-weight: 500;
+    color: var(--text);
+    line-height: 1;
+    margin-bottom: 8px;
+    letter-spacing: -0.5px;
+    font-variant-numeric: tabular-nums;
+  }
+  .hero-stats > div { font-size: 12px; color: var(--text-mute); letter-spacing: 0.2px; }
+
+  /* SECTIONS */
+  section {
+    padding: 96px 0;
+    border-bottom: 1px solid var(--border);
+  }
+  section.feature { background: var(--bg-elev); }
+  section.dark { background: var(--bg-dark); color: white; border-bottom: none; }
+
+  .section-eyebrow {
+    color: var(--green-dark);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    margin-bottom: 14px;
+  }
+  section.dark .section-eyebrow { color: var(--green); }
+  h2 {
+    font-family: var(--serif);
+    font-size: 46px;
+    font-weight: 500;
+    letter-spacing: -1px;
+    color: var(--text);
+    line-height: 1.1;
+    margin-bottom: 18px;
+    max-width: 880px;
+  }
+  section.dark h2 { color: white; }
+  h2 em { font-style: italic; color: var(--green-dark); font-weight: 600; }
+  section.dark h2 em { color: var(--green); }
+  .lede {
+    font-family: var(--serif);
+    font-size: 20px;
+    line-height: 1.55;
+    color: var(--text-dim);
+    max-width: 760px;
+    margin-bottom: 48px;
+  }
+  section.dark .lede { color: #c8c8c8; }
+  .lede strong { color: var(--text); font-weight: 600; }
+  section.dark .lede strong { color: white; }
+  .lede a { color: var(--green-dark); border-bottom: 1px solid rgba(118,185,0,0.3); text-decoration: none; }
+  section.dark .lede a { color: var(--green); }
+
+  /* CONSOLIDATION VISUAL */
+  .consolidate-vis {
+    display: grid;
+    grid-template-columns: 1.4fr 60px 1fr;
+    gap: 24px;
+    margin: 40px 0 16px;
+    align-items: stretch;
+  }
+  .before-box, .after-box {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 26px;
+    position: relative;
+  }
+  .before-box { border-color: var(--red); }
+  .after-box { border-color: var(--green); background: linear-gradient(180deg, white, var(--green-soft)); }
+  .vis-title {
+    font-family: var(--serif);
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 16px;
+  }
+  .before-box .vis-title { color: var(--red); }
+  .after-box .vis-title { color: var(--green-dark); }
+
+  .props {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+  .props span {
+    background: var(--bg-elev);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 5px 9px;
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--text-mute);
+    line-height: 1;
+  }
+
+  .vis-arrow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 36px;
+    color: var(--green);
+    font-weight: 300;
+    font-family: var(--serif);
+  }
+  .one-prop {
+    font-family: var(--serif);
+    font-size: 30px;
+    color: var(--green-deep);
+    font-weight: 500;
+    margin: 24px 0 12px;
+    letter-spacing: -0.5px;
+  }
+  .after-summary {
+    color: var(--text-dim);
+    font-size: 14px;
+    line-height: 1.5;
+  }
+  .after-summary strong { color: var(--text); }
+  .after-pillars {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    margin-top: 16px;
+    padding-top: 16px;
+    border-top: 1px dashed var(--border-strong);
+  }
+  .after-pillars div {
+    font-size: 12px;
+    color: var(--green-deep);
+    font-weight: 600;
+    letter-spacing: 0.4px;
+  }
+  .after-pillars div::before {
+    content: '◆';
+    margin-right: 6px;
+    color: var(--green);
+    font-size: 9px;
+  }
+
+  /* PATHS */
+  .path-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+    margin-top: 36px;
+  }
+  .path-card {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 26px 24px 22px;
+    text-decoration: none;
+    color: var(--text);
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+    position: relative;
+  }
+  .path-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 16px 36px -12px rgba(0,0,0,0.10);
+    border-color: var(--green);
+  }
+  .path-rank {
+    font-size: 10px;
+    font-weight: 700;
+    color: var(--green-dark);
+    letter-spacing: 1.8px;
+    text-transform: uppercase;
+  }
+  .path-card.p2 .path-rank { color: var(--blue); }
+  .path-card.p3 .path-rank { color: var(--purple); }
+  .path-card.p4 .path-rank { color: var(--amber); }
+  .path-card.p5 .path-rank { color: var(--teal); }
+  .path-card.p6 .path-rank { color: #c66; }
+  .path-title {
+    font-family: var(--serif);
+    font-size: 22px;
+    font-weight: 500;
+    color: var(--text);
+    letter-spacing: -0.3px;
+    line-height: 1.15;
+    margin-bottom: 6px;
+  }
+  .path-tagline {
+    font-size: 13px;
+    color: var(--text-dim);
+    line-height: 1.5;
+    margin-bottom: 12px;
+  }
+  .path-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding-top: 14px;
+    border-top: 1px dashed var(--border-strong);
+    margin-top: auto;
+  }
+  .path-salary {
+    font-family: var(--serif);
+    font-size: 18px;
+    font-weight: 500;
+    color: var(--green-dark);
+    letter-spacing: -0.3px;
+    font-variant-numeric: tabular-nums;
+  }
+  .path-card.p2 .path-salary { color: var(--blue); }
+  .path-card.p3 .path-salary { color: var(--purple); }
+  .path-card.p4 .path-salary { color: var(--amber); }
+  .path-card.p5 .path-salary { color: var(--teal); }
+  .path-card.p6 .path-salary { color: #c66; }
+  .path-len { font-size: 12px; color: var(--text-mute); }
+  .path-arrow {
+    margin-top: 14px;
+    font-size: 13px;
+    color: var(--green-dark);
+    font-weight: 600;
+  }
+
+  /* STACK */
+  .stack-wrap {
+    display: grid;
+    grid-template-columns: 1.1fr 1fr;
+    gap: 56px;
+    align-items: center;
+    margin-top: 32px;
+  }
+  .stack-meta { padding-right: 12px; }
+  .cake {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 20px 48px -16px rgba(0,0,0,0.12);
+  }
+  .layer {
+    background: white;
+    border: 1px solid var(--border);
+    padding: 14px 20px;
+    display: grid;
+    grid-template-columns: 40px 1fr auto;
+    gap: 14px;
+    align-items: center;
+    transition: all 0.2s;
+    cursor: pointer;
+    border-radius: 0;
+  }
+  .layer:first-child { border-radius: 10px 10px 0 0; }
+  .layer:last-child { border-radius: 0 0 10px 10px; }
+  .layer:hover {
+    background: var(--green-soft);
+    border-color: var(--green);
+    transform: translateX(4px);
+  }
+  .ln {
+    font-family: var(--serif);
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--green-dark);
+    font-variant-numeric: tabular-nums;
+    line-height: 1;
+    text-align: center;
+  }
+  .layer-name {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 3px;
+  }
+  .layer-comp {
+    font-size: 12px;
+    color: var(--text-mute);
+    font-family: var(--mono);
+    line-height: 1.4;
+  }
+  .layer-count {
+    font-size: 11px;
+    color: var(--green-dark);
+    font-weight: 600;
+    letter-spacing: 0.3px;
+    text-align: right;
+    line-height: 1.3;
+    white-space: nowrap;
+  }
+
+  .stack-cta {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 18px 22px;
+    margin-top: 20px;
+    font-size: 13px;
+    color: var(--text-dim);
+  }
+  .stack-cta a { color: var(--green-dark); font-weight: 600; border-bottom: 1px solid rgba(118,185,0,0.3); text-decoration: none; }
+
+  /* COURSE GRID */
+  .course-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    margin-top: 36px;
+  }
+  .course-card {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 22px 22px 20px;
+    display: flex;
+    flex-direction: column;
+    transition: all 0.2s;
+    cursor: pointer;
+  }
+  .course-card:hover {
+    border-color: var(--green);
+    box-shadow: 0 12px 28px -10px rgba(0,0,0,0.08);
+  }
+  .course-pill {
+    display: inline-block;
+    align-self: flex-start;
+    background: var(--green-soft);
+    color: var(--green-deep);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+    padding: 3px 8px;
+    border-radius: 3px;
+    margin-bottom: 12px;
+  }
+  .course-card.lab .course-pill { background: rgba(30,95,163,0.10); color: var(--blue); }
+  .course-card.bp .course-pill { background: rgba(122,62,176,0.10); color: var(--purple); }
+  .course-card.cohort .course-pill { background: rgba(160,112,0,0.10); color: var(--amber); }
+  .course-title {
+    font-family: var(--serif);
+    font-size: 17px;
+    font-weight: 500;
+    color: var(--text);
+    line-height: 1.25;
+    letter-spacing: -0.2px;
+    margin-bottom: 8px;
+  }
+  .course-desc {
+    font-size: 13px;
+    color: var(--text-dim);
+    line-height: 1.5;
+    margin-bottom: 16px;
+    flex-grow: 1;
+  }
+  .course-meta {
+    font-size: 11px;
+    color: var(--text-mute);
+    padding-top: 12px;
+    border-top: 1px dashed var(--border-strong);
+    letter-spacing: 0.2px;
+  }
+
+  /* CERTIFICATIONS */
+  .cert-row {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 18px;
+    margin-top: 36px;
+  }
+  .cert-badge {
+    background: linear-gradient(180deg, #fffefa, #fdfcf6);
+    border: 2px solid var(--green);
+    border-radius: 10px;
+    padding: 22px 18px 18px;
+    text-align: center;
+    position: relative;
+    transition: transform 0.2s;
+  }
+  .cert-badge:hover { transform: translateY(-4px); }
+  .cert-badge.b2 { border-color: var(--blue); }
+  .cert-badge.b3 { border-color: var(--purple); }
+  .cert-badge.b4 { border-color: var(--amber); }
+  .cert-badge.b5 { border-color: var(--teal); }
+  .cert-seal-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 14px;
+  }
+  .cert-seal-mini {
+    width: 50px;
+    height: 50px;
+    border: 2px solid var(--green);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--green-soft);
+    position: relative;
+  }
+  .cert-seal-mini::before {
+    content: '';
+    position: absolute;
+    inset: 3px;
+    border: 1px dashed rgba(118,185,0,0.6);
+    border-radius: 50%;
+  }
+  .cert-seal-mini .n {
+    font-family: var(--serif);
+    font-size: 17px;
+    font-weight: 600;
+    color: var(--green-dark);
+    position: relative;
+    z-index: 1;
+  }
+  .cert-badge.b2 .cert-seal-mini { border-color: var(--blue); background: rgba(30,95,163,0.07); }
+  .cert-badge.b2 .cert-seal-mini::before { border-color: rgba(30,95,163,0.6); }
+  .cert-badge.b2 .cert-seal-mini .n { color: var(--blue); }
+  .cert-badge.b3 .cert-seal-mini { border-color: var(--purple); background: rgba(122,62,176,0.07); }
+  .cert-badge.b3 .cert-seal-mini::before { border-color: rgba(122,62,176,0.6); }
+  .cert-badge.b3 .cert-seal-mini .n { color: var(--purple); }
+  .cert-badge.b4 .cert-seal-mini { border-color: var(--amber); background: rgba(160,112,0,0.10); }
+  .cert-badge.b4 .cert-seal-mini::before { border-color: rgba(160,112,0,0.7); }
+  .cert-badge.b4 .cert-seal-mini .n { color: var(--amber); }
+  .cert-badge.b5 .cert-seal-mini { border-color: var(--teal); background: rgba(0,133,122,0.07); }
+  .cert-badge.b5 .cert-seal-mini::before { border-color: rgba(0,133,122,0.6); }
+  .cert-badge.b5 .cert-seal-mini .n { color: var(--teal); }
+
+  .cert-name {
+    font-family: var(--serif);
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--text);
+    line-height: 1.25;
+    letter-spacing: -0.2px;
+    margin-bottom: 8px;
+  }
+  .cert-tag {
+    font-size: 11px;
+    color: var(--text-mute);
+    letter-spacing: 0.2px;
+  }
+  .cert-stat {
+    font-family: var(--serif);
+    font-size: 14px;
+    color: var(--green-dark);
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 1px dashed var(--border-strong);
+    font-weight: 500;
+  }
+  .cert-badge.b2 .cert-stat { color: var(--blue); }
+  .cert-badge.b3 .cert-stat { color: var(--purple); }
+  .cert-badge.b4 .cert-stat { color: var(--amber); }
+  .cert-badge.b5 .cert-stat { color: var(--teal); }
+
+  /* HOW IT WORKS */
+  .how-grid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 0;
+    margin-top: 36px;
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+  .how-step {
+    padding: 28px 18px 28px 0;
+    border-right: 1px solid var(--border);
+    position: relative;
+  }
+  .how-step:not(:first-child) { padding-left: 18px; }
+  .how-step:last-child { border-right: none; padding-right: 0; }
+  .how-step .num {
+    font-family: var(--serif);
+    font-size: 26px;
+    font-weight: 500;
+    color: var(--green-dark);
+    line-height: 1;
+    margin-bottom: 14px;
+    letter-spacing: -0.5px;
+  }
+  .how-step .ht {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 8px;
+    line-height: 1.3;
+  }
+  .how-step .hd {
+    font-size: 12px;
+    color: var(--text-mute);
+    line-height: 1.5;
+  }
+
+  /* AUDIENCE */
+  .audience-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+    margin-top: 36px;
+  }
+  .aud-card {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 26px 24px 22px;
+    transition: all 0.2s;
+    cursor: pointer;
+  }
+  .aud-card:hover { border-color: var(--green); background: linear-gradient(180deg, white, var(--green-soft)); }
+  .aud-who {
+    font-family: var(--serif);
+    font-size: 19px;
+    font-weight: 500;
+    color: var(--text);
+    margin-bottom: 8px;
+    letter-spacing: -0.2px;
+  }
+  .aud-tag {
+    font-size: 12px;
+    color: var(--green-dark);
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 14px;
+  }
+  .aud-desc {
+    font-size: 13px;
+    color: var(--text-dim);
+    line-height: 1.55;
+    margin-bottom: 14px;
+  }
+  .aud-perk {
+    font-size: 12px;
+    color: var(--text-mute);
+    padding-top: 12px;
+    border-top: 1px dashed var(--border-strong);
+  }
+  .aud-perk strong { color: var(--green-deep); font-weight: 600; }
+
+  /* JOBS — dark section */
+  .jobs-grid {
+    display: grid;
+    grid-template-columns: 1.1fr 1fr;
+    gap: 56px;
+    align-items: center;
+    margin-top: 36px;
+  }
+  .jobs-table {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.10);
+    border-radius: 10px;
+    padding: 24px 28px;
+  }
+  .jobs-row {
+    display: grid;
+    grid-template-columns: 1fr auto auto;
+    gap: 16px;
+    padding: 14px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    align-items: baseline;
+  }
+  .jobs-row:last-child { border-bottom: none; }
+  .jobs-role {
+    font-family: var(--serif);
+    font-size: 16px;
+    font-weight: 500;
+    color: white;
+    letter-spacing: -0.2px;
+  }
+  .jobs-count {
+    color: var(--green);
+    font-size: 13px;
+    font-weight: 600;
+    font-variant-numeric: tabular-nums;
+  }
+  .jobs-sal {
+    color: #c8c8c8;
+    font-size: 12px;
+    font-variant-numeric: tabular-nums;
+  }
+  .jobs-blurb {
+    color: #c8c8c8;
+    font-size: 16px;
+    line-height: 1.6;
+    margin-bottom: 24px;
+  }
+  .jobs-blurb strong { color: white; }
+  .jobs-cta {
+    display: inline-block;
+    color: var(--green);
+    border-bottom: 1px solid rgba(118,185,0,0.4);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 14px;
+  }
+
+  /* COMMUNITY */
+  .comm-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    margin-top: 36px;
+  }
+  .comm-card {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 26px 24px 22px;
+    transition: all 0.2s;
+    cursor: pointer;
+  }
+  .comm-card:hover { border-color: var(--green-dark); transform: translateY(-3px); }
+  .comm-tag {
+    font-size: 10px;
+    color: var(--green-dark);
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+  .comm-name {
+    font-family: var(--serif);
+    font-size: 22px;
+    font-weight: 500;
+    color: var(--text);
+    margin-bottom: 8px;
+    letter-spacing: -0.3px;
+  }
+  .comm-desc {
+    font-size: 13px;
+    color: var(--text-dim);
+    line-height: 1.5;
+  }
+
+  /* FINAL CTA */
+  .final-cta {
+    background: linear-gradient(135deg, var(--green-soft) 0%, white 60%);
+    padding: 120px 0;
+    text-align: center;
+    border-bottom: 1px solid var(--border);
+  }
+  .final-cta h2 {
+    font-size: 64px;
+    max-width: none;
+    margin-bottom: 24px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .final-cta p {
+    font-family: var(--serif);
+    font-size: 20px;
+    color: var(--text-dim);
+    margin-bottom: 36px;
+    max-width: 640px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  /* FOOTER */
+  footer {
+    background: var(--bg-dark);
+    color: #c8c8c8;
+    padding: 64px 0 40px;
+  }
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr 1fr 1fr 1fr;
+    gap: 36px;
+    margin-bottom: 48px;
+  }
+  .footer-col h6 {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--text-faint);
+    margin-bottom: 16px;
+  }
+  .footer-col a {
+    display: block;
+    color: #b8b8b8;
+    text-decoration: none;
+    font-size: 13px;
+    line-height: 1.9;
+    transition: color 0.15s;
+  }
+  .footer-col a:hover { color: white; }
+  .footer-brand {
+    font-family: var(--serif);
+    font-size: 22px;
+    font-weight: 500;
+    color: white;
+    margin-bottom: 14px;
+    letter-spacing: -0.3px;
+  }
+  .footer-brand strong { color: var(--green); font-weight: 600; }
+  .footer-tagline {
+    font-size: 13px;
+    color: #999;
+    line-height: 1.6;
+    margin-bottom: 18px;
+  }
+  .footer-bar {
+    border-top: 1px solid rgba(255,255,255,0.08);
+    padding-top: 24px;
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px;
+    color: #777;
+    flex-wrap: wrap;
+    gap: 14px;
+  }
+  .footer-bar a { color: #999; text-decoration: none; }
+  .footer-bar a:hover { color: white; }
+
+  /* RESPONSIVE */
+  @media (max-width: 1100px) {
+    .hero h1 { font-size: 56px; }
+    .topnav-links { gap: 18px; }
+    .topnav-links a { font-size: 13px; }
+    .search { min-width: 160px; }
+    .path-grid { grid-template-columns: repeat(2, 1fr); }
+    .course-grid { grid-template-columns: repeat(2, 1fr); }
+    .cert-row { grid-template-columns: repeat(3, 1fr); }
+    .how-grid { grid-template-columns: repeat(3, 1fr); }
+    .how-step:nth-child(3) { border-right: none; }
+    .stack-wrap { grid-template-columns: 1fr; gap: 32px; }
+    .footer-grid { grid-template-columns: 1.5fr 1fr 1fr; }
+  }
+  @media (max-width: 760px) {
+    .hero { padding: 56px 0; }
+    .hero h1 { font-size: 38px; letter-spacing: -1px; }
+    .hero-sub { font-size: 17px; }
+    .hero-stats { grid-template-columns: 1fr 1fr; }
+    .hero-stats > div { border-right: none; padding-left: 0 !important; padding-right: 0; border-bottom: 1px solid var(--border); }
+    .topnav-links { display: none; }
+    .topnav .search { display: none; }
+    section { padding: 64px 0; }
+    h2 { font-size: 32px; }
+    .lede { font-size: 17px; }
+    .consolidate-vis { grid-template-columns: 1fr; }
+    .vis-arrow { transform: rotate(90deg); padding: 8px 0; }
+    .path-grid, .course-grid, .audience-grid, .comm-grid { grid-template-columns: 1fr; }
+    .cert-row { grid-template-columns: 1fr 1fr; }
+    .how-grid { grid-template-columns: 1fr 1fr; }
+    .how-step { border-right: none !important; border-bottom: 1px solid var(--border); padding-left: 0 !important; }
+    .jobs-grid { grid-template-columns: 1fr; }
+    .final-cta { padding: 72px 0; }
+    .final-cta h2 { font-size: 38px; }
+    .footer-grid { grid-template-columns: 1fr 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- TOP NAV -->
+<nav class="topnav">
+  <div class="topnav-inner">
+    <a href="#" class="logo">
+      <span class="logo-mark"></span>
+      NVIDIA <strong>Learn</strong>
+    </a>
+    <div class="topnav-links">
+      <a href="#paths">Paths</a>
+      <a href="#courses">Courses</a>
+      <a href="#certs">Certifications</a>
+      <a href="#stack">Stack</a>
+      <a href="#labs">Labs</a>
+      <a href="#community">Community</a>
+      <a href="nvidia-certified-builder.html">Builder Program ↗</a>
+    </div>
+    <div class="topnav-actions">
+      <div class="search">
+        <span class="search-mark">⌕</span>
+        <span>Search courses, certs, jobs</span>
+        <span class="search-key">⌘ K</span>
+      </div>
+      <a class="btn btn-ghost" href="#">Sign in</a>
+      <a class="btn btn-primary" href="#">Get started · Free</a>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="wrap">
+    <div class="hero-eyebrow">
+      <span class="dot"></span>
+      One place — consolidating 22 NVIDIA portals
+    </div>
+
+    <h1>One home for everyone<br>who builds on <span class="g">NVIDIA</span>.</h1>
+
+    <p class="hero-sub">
+      Pick a path. Take the course. Earn the cert. Get hired. <strong>From your first NIM API call to your first Forward-Deployed Engineer role</strong> — one sign-in, one search, one transcript.
+    </p>
+
+    <div class="hero-ctas">
+      <a class="btn btn-primary btn-lg" href="#paths">Pick a learning path →</a>
+      <a class="btn btn-secondary btn-lg" href="#certs">Earn a certification</a>
+      <a class="btn-link" href="#jobs">See open jobs ↗</a>
+    </div>
+
+    <div class="hero-stats">
+      <div><strong>3.6M+</strong>developers in the program</div>
+      <div><strong>70+</strong>courses, labs, blueprints</div>
+      <div><strong>11</strong>certifications</div>
+      <div><strong>19,000+</strong>startups hiring</div>
+      <div><strong>200+</strong>open-source repos</div>
+    </div>
+  </div>
+</header>
+
+<!-- THE CONSOLIDATION -->
+<section id="why">
+  <div class="wrap">
+    <div class="section-eyebrow">What's new</div>
+    <h2>Twenty-two properties. <em>One home.</em></h2>
+    <p class="lede">
+      For years, learning on NVIDIA meant hopping between DLI, Academy, build.nvidia.com, LaunchPad, Brev, On-Demand, NGC, Inception, Discord, Forums, GitHub, Hugging Face, and a dozen more. <strong>NVIDIA Learn replaces all of them with a single product</strong> — same content, finally findable.
+    </p>
+
+    <div class="consolidate-vis">
+      <div class="before-box">
+        <div class="vis-title">Before</div>
+        <div class="props">
+          <span>nvidia.com/learn</span>
+          <span>learn.nvidia.com</span>
+          <span>nvidia.com/training</span>
+          <span>academy.nvidia.com</span>
+          <span>build.nvidia.com</span>
+          <span>nvidia.com/launchpad</span>
+          <span>developer.nvidia.com</span>
+          <span>developer.nvidia.com/brev</span>
+          <span>developer.nvidia.com/blog</span>
+          <span>developer.nvidia.com/teaching-kits</span>
+          <span>developer.nvidia.com/developer-program</span>
+          <span>nvidia.com/learn/certification</span>
+          <span>nvidia.com/inception</span>
+          <span>nvidia.com/gtc</span>
+          <span>nvidia.com/on-demand</span>
+          <span>docs.nvidia.com</span>
+          <span>catalog.ngc.nvidia.com</span>
+          <span>research.nvidia.com</span>
+          <span>forums.developer.nvidia.com</span>
+          <span>discord.gg/nvidia</span>
+          <span>github.com/NVIDIA</span>
+          <span>huggingface.co/nvidia</span>
+        </div>
+      </div>
+      <div class="vis-arrow">→</div>
+      <div class="after-box">
+        <div class="vis-title">After</div>
+        <div class="one-prop">learn.nvidia.com</div>
+        <div class="after-summary"><strong>One sign-in.</strong> One search across every course, blueprint, lab, repo, and video. One transcript. One profile that follows you into the hiring portal.</div>
+        <div class="after-pillars">
+          <div>Paths</div>
+          <div>Courses</div>
+          <div>Certs</div>
+          <div>Labs</div>
+          <div>Community</div>
+          <div>Jobs</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PICK A PATH -->
+<section id="paths" class="feature">
+  <div class="wrap">
+    <div class="section-eyebrow">Pick a path</div>
+    <h2>What do you want to <em>be</em>?</h2>
+    <p class="lede">
+      Six career paths from the <a href="nvidia-certified-builder.html">NVIDIA Certified Builder Program</a>. Each ends in a named job — with real Indeed demand, a verified credential, and a hiring intro to NVIDIA's customers.
+    </p>
+
+    <div class="path-grid">
+      <a class="path-card" href="nvidia-certified-builder.html#certs">
+        <div class="path-rank">#1 · Fastest growing</div>
+        <div class="path-title">Forward-Deployed AI Engineer</div>
+        <div class="path-tagline">Embedded inside a customer's org. Ship NIM-powered RAG, agents, evals that work in real banks, hospitals, manufacturers.</div>
+        <div class="path-meta">
+          <div class="path-salary">$220K–$700K</div>
+          <div class="path-len">12 weeks</div>
+        </div>
+        <div class="path-arrow">Start path →</div>
+      </a>
+
+      <a class="path-card p2" href="nvidia-certified-builder.html#certs">
+        <div class="path-rank">#1 · Largest workforce</div>
+        <div class="path-title">AI / ML Engineer</div>
+        <div class="path-tagline">Bread-and-butter AI engineering. Fine-tune Nemotron, deploy NIM, ship RAG, optimize inference.</div>
+        <div class="path-meta">
+          <div class="path-salary">$128K–$350K</div>
+          <div class="path-len">14 weeks</div>
+        </div>
+        <div class="path-arrow">Start path →</div>
+      </a>
+
+      <a class="path-card p3" href="nvidia-certified-builder.html#certs">
+        <div class="path-rank">Highest enterprise pull</div>
+        <div class="path-title">GTM &amp; RevOps AI Engineer</div>
+        <div class="path-tagline">Build the revenue automation every Series A/B startup is racing to staff. Clay, Apollo, NIM, Nemotron.</div>
+        <div class="path-meta">
+          <div class="path-salary">$175K–$250K</div>
+          <div class="path-len">10 weeks</div>
+        </div>
+        <div class="path-arrow">Start path →</div>
+      </a>
+
+      <a class="path-card p4" href="nvidia-certified-builder.html#certs">
+        <div class="path-rank">CFO-led demand</div>
+        <div class="path-title">Finance &amp; Operations AI Engineer</div>
+        <div class="path-tagline">The "company brain." FP&amp;A, contract review, vendor risk, ops automation. Deterministic guardrails.</div>
+        <div class="path-meta">
+          <div class="path-salary">$130K–$210K</div>
+          <div class="path-len">10 weeks</div>
+        </div>
+        <div class="path-arrow">Start path →</div>
+      </a>
+
+      <a class="path-card p5" href="nvidia-certified-builder.html#certs">
+        <div class="path-rank">Largest volume lane</div>
+        <div class="path-title">Enterprise Productivity AI</div>
+        <div class="path-tagline">EA agents, internal knowledge bots, workflow automation. Easiest entry for career-switchers.</div>
+        <div class="path-meta">
+          <div class="path-salary">$110K–$180K</div>
+          <div class="path-len">8 weeks</div>
+        </div>
+        <div class="path-arrow">Start path →</div>
+      </a>
+
+      <a class="path-card p6" href="nvidia-certified-builder.html#certs">
+        <div class="path-rank">Advanced · highest comp</div>
+        <div class="path-title">Inference Performance Specialist</div>
+        <div class="path-tagline">CUDA kernels, TensorRT-LLM, FP8 quantization, Dynamo distribution. Niche, prestige, expensive.</div>
+        <div class="path-meta">
+          <div class="path-salary">$200K–$500K</div>
+          <div class="path-len">12 weeks</div>
+        </div>
+        <div class="path-arrow">Start path →</div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- THE STACK -->
+<section id="stack">
+  <div class="wrap">
+    <div class="section-eyebrow">Master the stack</div>
+    <h2>Ten layers. <em>One path</em> through each.</h2>
+
+    <div class="stack-wrap">
+      <div class="stack-meta">
+        <p class="lede">
+          NVIDIA isn't a chip company — it's a ten-layer cake from silicon to developer programs. Click any layer to see the courses, labs, and certifications that teach it. Or take a Builder Path that connects 4–5 layers end-to-end.
+        </p>
+        <div class="stack-cta">
+          Want the full anatomy? See the <a href="https://nvidia-is-a-10-layer-cake.vercel.app/" target="_blank">interactive 10-layer cake</a> or the <a href="nvidia-certified-builder.html#stack">Layer × Career map</a>.
+        </div>
+      </div>
+
+      <div class="cake">
+        <div class="layer">
+          <div class="ln">10</div>
+          <div>
+            <div class="layer-name">Programs, Portals &amp; Community</div>
+            <div class="layer-comp">Developer Program · NGC · DLI · Inception · GitHub · HuggingFace</div>
+          </div>
+          <div class="layer-count">This portal</div>
+        </div>
+        <div class="layer">
+          <div class="ln">9</div>
+          <div>
+            <div class="layer-name">Applications &amp; Verticals</div>
+            <div class="layer-comp">Omniverse · Isaac · Riva · Clara · Blueprints · ACE · Holoscan</div>
+          </div>
+          <div class="layer-count">18 components<br>14 courses</div>
+        </div>
+        <div class="layer">
+          <div class="ln">8</div>
+          <div>
+            <div class="layer-name">Cloud Inference APIs</div>
+            <div class="layer-comp">build.nvidia.com · Bedrock · Brev · DGX Cloud · Together · Fireworks</div>
+          </div>
+          <div class="layer-count">21 components<br>9 courses</div>
+        </div>
+        <div class="layer">
+          <div class="ln">7</div>
+          <div>
+            <div class="layer-name">Self-hosted Inference &amp; Serving</div>
+            <div class="layer-comp">NIM · Triton · vLLM · Dynamo · NeMo Microservices · TensorRT-LLM</div>
+          </div>
+          <div class="layer-count">13 components<br>12 courses</div>
+        </div>
+        <div class="layer">
+          <div class="ln">6</div>
+          <div>
+            <div class="layer-name">Models</div>
+            <div class="layer-comp">Nemotron 3 (Nano/Super/Ultra) · NV-Embed v2 · Parakeet · Cosmos</div>
+          </div>
+          <div class="layer-count">15 components<br>16 courses</div>
+        </div>
+        <div class="layer">
+          <div class="ln">5</div>
+          <div>
+            <div class="layer-name">Training &amp; Fine-tuning</div>
+            <div class="layer-comp">NeMo Framework · Megatron-LM · NeMo Curator · BioNeMo · Isaac Lab</div>
+          </div>
+          <div class="layer-count">10 components<br>11 courses</div>
+        </div>
+        <div class="layer">
+          <div class="ln">4</div>
+          <div>
+            <div class="layer-name">ML Frameworks &amp; Runtime</div>
+            <div class="layer-comp">PyTorch + CUDA · JAX · TensorRT · RAPIDS · cuDNN · DALI</div>
+          </div>
+          <div class="layer-count">12 components<br>15 courses</div>
+        </div>
+        <div class="layer">
+          <div class="ln">3</div>
+          <div>
+            <div class="layer-name">Compute Platform (CUDA)</div>
+            <div class="layer-comp">CUDA Toolkit · cuBLAS · Nsight · NVCC · CUTLASS · CUDA-Q</div>
+          </div>
+          <div class="layer-count">8 components<br>22 courses</div>
+        </div>
+        <div class="layer">
+          <div class="ln">2</div>
+          <div>
+            <div class="layer-name">System Software</div>
+            <div class="layer-comp">GPU Driver · Container Toolkit · DCGM · GPU Operator · DGX OS</div>
+          </div>
+          <div class="layer-count">10 components<br>7 courses</div>
+        </div>
+        <div class="layer">
+          <div class="ln">1</div>
+          <div>
+            <div class="layer-name">GPUs / Silicon</div>
+            <div class="layer-comp">H100 · B200 · Jetson · DGX · Grace · NVLink · BlueField</div>
+          </div>
+          <div class="layer-count">20 components<br>9 courses</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURED COURSES -->
+<section id="courses" class="feature">
+  <div class="wrap">
+    <div class="section-eyebrow">Popular this week</div>
+    <h2>The content that's already <em>here.</em></h2>
+    <p class="lede">
+      ~70 DLI courses, dozens of LaunchPad labs, NVIDIA Blueprints, build.nvidia.com tutorials, on-demand GTC sessions — every piece of NVIDIA learning content, now searchable in one place.
+    </p>
+
+    <div class="course-grid">
+      <div class="course-card">
+        <span class="course-pill">DLI · Free · 2h</span>
+        <div class="course-title">Building RAG Agents with LLMs</div>
+        <div class="course-desc">Production RAG pipeline with NeMo Retriever + NIM. The most popular DLI course.</div>
+        <div class="course-meta">4.7 ★ · 24,800 learners · L6, L7</div>
+      </div>
+      <div class="course-card cohort">
+        <span class="course-pill">Cohort · Free · 12wk</span>
+        <div class="course-title">Forward-Deployed AI Engineer</div>
+        <div class="course-desc">Builder Program path. Cohort, capstone, hiring portal. Open applications for Q4 2026.</div>
+        <div class="course-meta">3,200 in queue · 60% placement target</div>
+      </div>
+      <div class="course-card lab">
+        <span class="course-pill">LaunchPad · Free · 2wk</span>
+        <div class="course-title">Deploy NIM on Kubernetes</div>
+        <div class="course-desc">Hands-on lab on real GPUs. ~$20K cloud-equivalent compute for two weeks free.</div>
+        <div class="course-meta">8,400 completions · L2, L7</div>
+      </div>
+      <div class="course-card bp">
+        <span class="course-pill">Blueprint · OSS</span>
+        <div class="course-title">AI Virtual Assistant</div>
+        <div class="course-desc">Production-grade reference app. Clone, customize, ship to your enterprise.</div>
+        <div class="course-meta">GitHub · 4,200 stars · L8, L9</div>
+      </div>
+
+      <div class="course-card">
+        <span class="course-pill">DLI · Paid · 8h</span>
+        <div class="course-title">Building Agentic AI Applications</div>
+        <div class="course-desc">End-to-end agent project. LangGraph, AgentIQ, NemoGuardrails, NIM. Certificate of competency.</div>
+        <div class="course-meta">4.6 ★ · 11,200 learners · L6, L7, L9</div>
+      </div>
+      <div class="course-card cohort">
+        <span class="course-pill">Cohort · Free · 10wk</span>
+        <div class="course-title">GTM &amp; RevOps AI Engineer</div>
+        <div class="course-desc">Builder Program path. Co-built with Clay. The role paying $220K to print revenue.</div>
+        <div class="course-meta">1,800 in queue · Clay-certified instructors</div>
+      </div>
+      <div class="course-card lab">
+        <span class="course-pill">LaunchPad · Free</span>
+        <div class="course-title">RAPIDS Accelerated Data Science</div>
+        <div class="course-desc">GPU-accelerated pandas + scikit-learn. 50–100× speedups on real datasets.</div>
+        <div class="course-meta">5,900 completions · L4</div>
+      </div>
+      <div class="course-card bp">
+        <span class="course-pill">Blueprint · OSS</span>
+        <div class="course-title">PDF-to-Podcast</div>
+        <div class="course-desc">Document → multi-speaker podcast. Nemotron + Riva + cuOpt. The viral one.</div>
+        <div class="course-meta">GitHub · 9,100 stars · L6, L9</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CERTIFICATIONS -->
+<section id="certs">
+  <div class="wrap">
+    <div class="section-eyebrow">Earn a credential</div>
+    <h2>Certifications employers <em>actually</em> use to filter.</h2>
+    <p class="lede">
+      Strict performance-based exams — deployed capstone artifact, live skills test, peer review, hiring-partner sign-off on the senior tier. <a href="nvidia-certified-builder.html#grading">See how grading works →</a>
+    </p>
+
+    <div class="cert-row">
+      <a class="cert-badge" href="nvidia-certified-builder.html#certs">
+        <div class="cert-seal-row">
+          <div class="cert-seal-mini"><div class="n">01</div></div>
+        </div>
+        <div class="cert-name">Forward-Deployed AI Engineer</div>
+        <div class="cert-tag">Technical · 12 weeks</div>
+        <div class="cert-stat">14,000 jobs · $220–700K</div>
+      </a>
+      <a class="cert-badge b2" href="nvidia-certified-builder.html#certs">
+        <div class="cert-seal-row">
+          <div class="cert-seal-mini"><div class="n">02</div></div>
+        </div>
+        <div class="cert-name">AI / ML Engineer</div>
+        <div class="cert-tag">Technical · 14 weeks</div>
+        <div class="cert-stat">38,000 jobs · $128–350K</div>
+      </a>
+      <a class="cert-badge b3" href="nvidia-certified-builder.html#certs">
+        <div class="cert-seal-row">
+          <div class="cert-seal-mini"><div class="n">03</div></div>
+        </div>
+        <div class="cert-name">GTM &amp; RevOps AI Engineer</div>
+        <div class="cert-tag">Functional · 10 weeks</div>
+        <div class="cert-stat">3,000+ jobs · $175–250K</div>
+      </a>
+      <a class="cert-badge b4" href="nvidia-certified-builder.html#certs">
+        <div class="cert-seal-row">
+          <div class="cert-seal-mini"><div class="n">04</div></div>
+        </div>
+        <div class="cert-name">Finance &amp; Ops AI Engineer</div>
+        <div class="cert-tag">Functional · 10 weeks</div>
+        <div class="cert-stat">8,500 jobs · $130–210K</div>
+      </a>
+      <a class="cert-badge b5" href="nvidia-certified-builder.html#certs">
+        <div class="cert-seal-row">
+          <div class="cert-seal-mini"><div class="n">05</div></div>
+        </div>
+        <div class="cert-name">Enterprise Productivity AI</div>
+        <div class="cert-tag">Entry-friendly · 8 weeks</div>
+        <div class="cert-stat">22,000 jobs · $110–180K</div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section id="how" class="feature">
+  <div class="wrap">
+    <div class="section-eyebrow">How it works</div>
+    <h2>Free signup to first paycheck, in <em>six steps.</em></h2>
+
+    <div class="how-grid">
+      <div class="how-step">
+        <div class="num">01</div>
+        <div class="ht">Sign up with GitHub</div>
+        <div class="hd">Free. Instant NIM API key, free GPU on Brev, public learner profile.</div>
+      </div>
+      <div class="how-step">
+        <div class="num">02</div>
+        <div class="ht">Pick a path</div>
+        <div class="hd">Six career tracks. Or browse all 70+ courses, labs, and Blueprints.</div>
+      </div>
+      <div class="how-step">
+        <div class="num">03</div>
+        <div class="ht">Take the cohort</div>
+        <div class="hd">12 weeks. Live instructors. NVIDIA-engineer mentors. Free Brev GPU credits.</div>
+      </div>
+      <div class="how-step">
+        <div class="num">04</div>
+        <div class="ht">Ship the capstone</div>
+        <div class="hd">Real artifact, deployed via NIM, verified by NVIDIA's runtime — not a multiple-choice exam.</div>
+      </div>
+      <div class="how-step">
+        <div class="num">05</div>
+        <div class="ht">Earn the credential</div>
+        <div class="hd">NVIDIA Certified Builder. Verifiable, shareable on LinkedIn, valid three years.</div>
+      </div>
+      <div class="how-step">
+        <div class="num">06</div>
+        <div class="ht">Get matched to jobs</div>
+        <div class="hd">Auto-intro to 30 Inception &amp; Fortune 500 hiring partners. Real openings, real interviews.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- AUDIENCE -->
+<section id="for-you">
+  <div class="wrap">
+    <div class="section-eyebrow">For you</div>
+    <h2>Whatever you do today, there's a <em>way in.</em></h2>
+    <p class="lede">Six entry points. Six tailored experiences. Same shelf underneath.</p>
+
+    <div class="audience-grid">
+      <div class="aud-card">
+        <div class="aud-tag">Students</div>
+        <div class="aud-who">CS &amp; engineering students</div>
+        <div class="aud-desc">Graduating into an AI-native job market. Free intro courses, free first-cert voucher via GitHub Student Pack, free Brev hours.</div>
+        <div class="aud-perk"><strong>Free</strong> · Teaching Kit · University Ambassador workshops</div>
+      </div>
+      <div class="aud-card">
+        <div class="aud-tag">Mid-career SWE</div>
+        <div class="aud-who">Working developers</div>
+        <div class="aud-desc">1–5 yrs experience in backend, data, or devops. Pivot to AI engineering in a 12-week cohort.</div>
+        <div class="aud-perk"><strong>Free</strong> · Cohort + capstone + job-board access</div>
+      </div>
+      <div class="aud-card">
+        <div class="aud-tag">Career switcher</div>
+        <div class="aud-who">From finance, ops, marketing</div>
+        <div class="aud-desc">Bring your domain expertise. The functional tracks (RevOps, Finance, Productivity) are designed for you.</div>
+        <div class="aud-perk"><strong>Free</strong> · Means-tested living stipend available</div>
+      </div>
+      <div class="aud-card">
+        <div class="aud-tag">Enterprise IT</div>
+        <div class="aud-who">Infrastructure &amp; platform teams</div>
+        <div class="aud-desc">Production NIM, Triton, GPU Operator, DGX. Run AI at the cluster, datacenter, and AI-factory level.</div>
+        <div class="aud-perk"><strong>NCP</strong> Infrastructure / Operations / Networking tracks</div>
+      </div>
+      <div class="aud-card">
+        <div class="aud-tag">Educators</div>
+        <div class="aud-who">Professors &amp; teachers</div>
+        <div class="aud-desc">Bring NVIDIA learning into your classroom. Free Teaching Kits, certified-instructor program, ambassador grants.</div>
+        <div class="aud-perk">Teaching Kit · ambassador program · DLI credits for students</div>
+      </div>
+      <div class="aud-card">
+        <div class="aud-tag">Startups</div>
+        <div class="aud-who">Founders &amp; early teams</div>
+        <div class="aud-desc">Inception: $250K credits, DLI access, hardware discounts, capital connections. Auto-listed on the Builder hiring portal.</div>
+        <div class="aud-perk"><strong>Inception</strong> · 19,000+ members · hiring portal access</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- JOBS — dark section -->
+<section id="jobs" class="dark">
+  <div class="wrap">
+    <div class="section-eyebrow">The end of every path</div>
+    <h2>The job — not the certificate — is the <em>outcome.</em></h2>
+
+    <div class="jobs-grid">
+      <div>
+        <p class="jobs-blurb">
+          Every NVIDIA Learn path ends in a hiring intro. The <strong>NVIDIA Certified Builder hiring portal</strong> wires graduates directly to 19,000+ Inception startups, Fortune 500 AI Enterprise customers, and the consulting Big Six.
+        </p>
+        <a class="jobs-cta" href="nvidia-certified-builder.html#portal">See how the hiring portal works ↗</a>
+      </div>
+      <div class="jobs-table">
+        <div class="jobs-row">
+          <div class="jobs-role">Forward-Deployed AI Engineer</div>
+          <div class="jobs-count">~14,000 open</div>
+          <div class="jobs-sal">$220–700K</div>
+        </div>
+        <div class="jobs-row">
+          <div class="jobs-role">AI / ML Engineer</div>
+          <div class="jobs-count">~38,000 open</div>
+          <div class="jobs-sal">$128–350K</div>
+        </div>
+        <div class="jobs-row">
+          <div class="jobs-role">GTM &amp; RevOps AI Engineer</div>
+          <div class="jobs-count">~3,000+ open</div>
+          <div class="jobs-sal">$175–250K</div>
+        </div>
+        <div class="jobs-row">
+          <div class="jobs-role">Finance &amp; Ops AI Engineer</div>
+          <div class="jobs-count">~8,500 open</div>
+          <div class="jobs-sal">$130–210K</div>
+        </div>
+        <div class="jobs-row">
+          <div class="jobs-role">Enterprise Productivity AI</div>
+          <div class="jobs-count">~22,000 open</div>
+          <div class="jobs-sal">$110–180K</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COMMUNITY -->
+<section id="community">
+  <div class="wrap">
+    <div class="section-eyebrow">Show up</div>
+    <h2>The community is <em>built in.</em></h2>
+    <p class="lede">Discord, Forums, GTC, hackathons, GitHub, Hugging Face — every NVIDIA developer community surface, in one place, with one login.</p>
+
+    <div class="comm-grid">
+      <div class="comm-card">
+        <div class="comm-tag">Discord</div>
+        <div class="comm-name">19K members</div>
+        <div class="comm-desc">Real-time help. Mentors on staff. Cohort channels for every Builder path.</div>
+      </div>
+      <div class="comm-card">
+        <div class="comm-tag">GTC</div>
+        <div class="comm-name">The conference</div>
+        <div class="comm-desc">Top Builder graduates get free passes. Demo on the keynote floor. Free year-round on-demand archive.</div>
+      </div>
+      <div class="comm-card">
+        <div class="comm-tag">Hackathons</div>
+        <div class="comm-name">Quarterly</div>
+        <div class="comm-desc">GTC Hackathon, AgentIQ Hackathon, the Nemotron + LangChain contest. Real prizes. Real hiring.</div>
+      </div>
+      <div class="comm-card">
+        <div class="comm-tag">Open source</div>
+        <div class="comm-name">200+ repos</div>
+        <div class="comm-desc">NeMo, Megatron-LM, Blueprints, TensorRT-LLM, GR00T. Merge a PR to upgrade your Builder tier.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section class="final-cta">
+  <div class="wrap">
+    <h2>Start. <em>It's free.</em></h2>
+    <p>Sign up with GitHub in under 30 seconds. Pick a path. Call your first NIM endpoint on free Brev compute before you finish your coffee.</p>
+    <a class="btn btn-primary btn-lg" href="#">Get started — Free →</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-col">
+        <div class="footer-brand">NVIDIA <strong>Learn</strong></div>
+        <div class="footer-tagline">
+          One home for everyone who builds on NVIDIA. Courses, certifications, labs, blueprints, jobs — all in one place.
+        </div>
+        <div class="footer-tagline" style="font-size: 11px; color: var(--text-faint);">
+          Strategy mockup · May 2026 · Built with the <a href="https://nvidia-is-a-10-layer-cake.vercel.app/" target="_blank">10-layer NVIDIA stack</a>
+        </div>
+      </div>
+
+      <div class="footer-col">
+        <h6>Learn</h6>
+        <a href="#paths">Pick a path</a>
+        <a href="#courses">Courses &amp; labs</a>
+        <a href="#certs">Certifications</a>
+        <a href="#stack">The 10-layer stack</a>
+        <a href="nvidia-certified-builder.html">Builder Program</a>
+      </div>
+
+      <div class="footer-col">
+        <h6>Build</h6>
+        <a href="https://build.nvidia.com" target="_blank">NIM API playground</a>
+        <a href="https://developer.nvidia.com/brev" target="_blank">Brev · free GPU</a>
+        <a href="https://github.com/NVIDIA" target="_blank">Open source</a>
+        <a href="https://huggingface.co/nvidia" target="_blank">Model hub</a>
+        <a href="https://catalog.ngc.nvidia.com" target="_blank">NGC catalog</a>
+      </div>
+
+      <div class="footer-col">
+        <h6>Community</h6>
+        <a href="https://discord.gg/nvidia" target="_blank">Discord</a>
+        <a href="https://forums.developer.nvidia.com" target="_blank">Developer forums</a>
+        <a href="https://nvidia.com/gtc" target="_blank">GTC</a>
+        <a href="https://nvidia.com/en-us/on-demand" target="_blank">On-demand sessions</a>
+        <a href="https://developer.nvidia.com/blog" target="_blank">Technical blog</a>
+      </div>
+
+      <div class="footer-col">
+        <h6>Programs</h6>
+        <a href="https://developer.nvidia.com/developer-program" target="_blank">Developer Program</a>
+        <a href="https://nvidia.com/inception" target="_blank">Inception · startups</a>
+        <a href="https://developer.nvidia.com/teaching-kits" target="_blank">Teaching Kits</a>
+        <a href="https://nvidia.com/en-us/launchpad" target="_blank">LaunchPad</a>
+        <a href="https://academy.nvidia.com" target="_blank">Academy · infra</a>
+      </div>
+    </div>
+
+    <div class="footer-bar">
+      <div>© 2026 NVIDIA Corporation · Strategy mockup, not a live product</div>
+      <div>
+        <a href="nvidia-certified-builder.html">The Builder Program brief →</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
