@@ -2175,20 +2175,28 @@ const LAYERS = {
         goTo:[{ref:['01','DGX SuperPOD'],note:'MGX is the building block'}],
         friction:['Usually invisible to end developers — you buy through an OEM']
       },
-      { name:'DGX Spark', type:'HARDWARE', sub:'Personal AI · GB10 · 1 PFLOP FP4 · NVIDIA Sync multi-node (Jun 2026) · RTX Spark Windows fall 2026', use:'Run frontier AI on your desk · cluster 2-4 Sparks to 512GB unified memory', url:'nvidia.com/en-us/products/workstations/dgx-spark',
-        desc:'Personal AI workstation. GB10 Grace Blackwell Superchip, 1 PFLOP FP4, 128 GB unified memory. Renamed from Project DIGITS. Targets local LLM and agent development.',
+      { name:'DGX Spark', type:'HARDWARE', sub:'Personal AI · GB10 · 1 PFLOP FP4 · NVIDIA Sync multi-node (Jun 2026)', use:'Run frontier AI on your desk · cluster 2-4 Sparks to 512GB unified memory', url:'nvidia.com/en-us/products/workstations/dgx-spark',
+        desc:'Personal AI workstation. GB10 Grace Blackwell Superchip, 1 PFLOP FP4, 128 GB unified memory. Renamed from Project DIGITS. Targets local LLM and agent development. NVIDIA Sync (Jun 2026) clusters 2-4 Sparks to 512GB unified memory.',
         who:'AI researchers · agent developers · NemoClaw users',
         arriveFrom:[{ext:'CES 2025 launch as Project DIGITS'},{ref:['09','NemoClaw'],detail:'Local agent deployment target'}],
         steps:['Order DGX Spark (~$3K retail)','NVIDIA AI software stack pre-installed','Develop locally before cloud deployment'],
-        goTo:[{ref:['09','NemoClaw'],note:'Build local agents'},{ref:['06','Nemotron 3 Nano'],note:'Run locally'},{ref:['04','PyTorch + CUDA'],note:'Local ML dev'}],
+        goTo:[{ref:['09','NemoClaw'],note:'Build local agents'},{ref:['06','Nemotron 3 Nano'],note:'Run locally'},{ref:['04','PyTorch + CUDA'],note:'Local ML dev'},{ref:['01','NVIDIA RTX Spark'],note:'Windows sibling'}],
         friction:['Capacity constrained (high demand)','Desk-sized but loud']
       },
-      { name:'DGX Station', type:'HARDWARE', sub:'Workstation · GB300 · 784GB memory', use:'Desktop AI workstation with frontier-grade memory', url:'nvidia.com/en-us/products/workstations/dgx-station',
-        desc:'Desktop GB300 workstation, 784 GB coherent memory. Ships spring 2026. For researchers and small teams needing data-center-scale memory in a deskside form factor.',
-        who:'Research teams · AI labs · production prototyping',
-        arriveFrom:[{ext:'NVIDIA spring 2026 launch'},{ref:['01','DGX Spark'],detail:'Need more memory than Spark'}],
-        steps:['Pre-order through NVIDIA or OEM','Receive GB300 + Grace + 784GB memory','Install in office (proper power/cooling)','Run team workloads locally'],
-        goTo:[{ref:['01','DGX Systems'],note:'Bigger sibling'}],
+      { name:'NVIDIA RTX Spark', type:'CPU+GPU', sub:'Grace + Blackwell RTX · 1 PFLOP · 128GB unified · NVIDIA × Microsoft for Windows PCs (fall 2026)', use:'Run frontier AI locally on a Windows laptop or compact desktop', url:'nvidianews.nvidia.com/news/nvidia-microsoft-windows-pcs-agents-rtx-spark',
+        desc:'NVIDIA-Microsoft superchip for Windows PCs. 20-core Grace CPU + Blackwell RTX GPU (6,144 CUDA cores, FP4 Tensor Cores) connected via NVLink-C2C. 1 PFLOP AI, up to 128GB unified memory, supports 120B-parameter LLMs at 1M-token context. Ships as both laptops (14-16", as slim as 14mm, ~3 lb) and compact desktops. OEM partners: ASUS, Dell, HP, Lenovo, Microsoft Surface, MSI (Acer, GIGABYTE to follow). Announced Microsoft Build, June 2026. "Unmetered intelligence to every home and every desk with Windows" — Satya Nadella.',
+        who:'Windows AI developers · creators · agentic-PC users · gamers',
+        arriveFrom:[{ext:'Microsoft Build 2026 announcement'},{ref:['01','DGX Spark'],detail:'Windows-targeted sibling of the deskside DGX Spark'},{ext:'OEM channels: Surface, Dell, HP, Lenovo, ASUS, MSI'}],
+        steps:['Wait for fall 2026 OEM launch','Pick form factor (laptop or compact desktop)','Buy via OEM partner','Run NemoClaw / agents / creative apps locally on Windows'],
+        goTo:[{ref:['09','NemoClaw'],note:'On-device agents'},{ref:['06','Nemotron 3 Nano'],note:'Local model'},{ref:['01','DGX Spark'],note:'Deskside dev sibling'},{ref:['01','Grace CPU + Superchips'],note:'CPU family'},{ref:['07','OpenShell'],note:'Agent sandbox runtime'}],
+        friction:['Fall 2026 ship date — OEM SKUs unknown until close to launch','Pricing not yet disclosed','Local LLM ceiling at 120B params depends on quantization']
+      },
+      { name:'DGX Station', type:'HARDWARE', sub:'Workstation · GB300 · 784GB memory · Windows variant announced Jun 2026', use:'Desktop AI workstation with frontier-grade memory', url:'nvidia.com/en-us/products/workstations/dgx-station',
+        desc:'Desktop GB300 workstation, 784 GB coherent memory. Ships spring 2026. For researchers and small teams needing data-center-scale memory in a deskside form factor. DGX Station for Windows announced at Microsoft Build (Jun 2026) — same Blackwell architecture brought to enterprise developers running agents deskside.',
+        who:'Research teams · AI labs · production prototyping · enterprise agent developers',
+        arriveFrom:[{ext:'NVIDIA spring 2026 launch'},{ref:['01','DGX Spark'],detail:'Need more memory than Spark'},{ext:'Microsoft Build 2026 (Windows variant)'}],
+        steps:['Pre-order through NVIDIA or OEM','Receive GB300 + Grace + 784GB memory','Install in office (proper power/cooling)','Run team workloads locally','Windows variant: enterprise agent dev'],
+        goTo:[{ref:['01','DGX Systems'],note:'Bigger sibling'},{ref:['01','NVIDIA RTX Spark'],note:'Consumer Windows sibling'}],
         friction:['Expensive (~$80K+ class)','Spring 2026 ship — backlog likely']
       },
       { name:'Grace CPU + Superchips', type:'CPU', sub:'Grace · GH200 · GB200 · GB300', use:'ARM server CPU paired with GPUs (Superchips)', url:'nvidia.com/en-us/data-center/grace-cpu',
@@ -2447,7 +2455,7 @@ const BOX_ORDER = {
   '04': ['PyTorch + CUDA','TensorRT','RAPIDS','cuDNN','NCCL','JAX + CUDA','TensorRT-LLM','OpenAI Triton (kernel lang)','DALI','NVIDIA Model Optimizer','CuPy','NVIDIA Warp','curoboV2'],
   '03': ['CUDA Toolkit','cuBLAS / cuFFT / cuSPARSE','Nsight Systems / Compute','NVCC / PTX','Thrust / CCCL','NVIDIA HPC SDK','CUTLASS','CUDA-Q'],
   '02': ['GPU Driver','Container Toolkit','DCGM / Fabric Mgr','CUDA Driver API','DOCA','NVIDIA GPU Operator','GPU Sharing (MIG / MPS / Time-Slicing)','Open GPU Kernel Modules','DGX OS / Base OS','Mission Control'],
-  '01': ['Data Center GPUs','GeForce RTX','Jetson','DGX Systems','NVLink / NVSwitch','DRIVE Orin / Thor','L40S / L40 / L4','RTX PRO Blackwell','DGX SuperPOD','HGX','MGX','Quantum-X800 InfiniBand','Spectrum-X Ethernet','BlueField DPUs','ConnectX-7 / ConnectX-8 SuperNIC','Grace CPU + Superchips','DGX Spark','DGX Station','GB300 NVL72','Vera Rubin VR200'],
+  '01': ['Data Center GPUs','GeForce RTX','Jetson','DGX Systems','NVLink / NVSwitch','DRIVE Orin / Thor','L40S / L40 / L4','RTX PRO Blackwell','DGX SuperPOD','HGX','MGX','Quantum-X800 InfiniBand','Spectrum-X Ethernet','BlueField DPUs','ConnectX-7 / ConnectX-8 SuperNIC','Grace CPU + Superchips','DGX Spark','NVIDIA RTX Spark','DGX Station','GB300 NVL72','Vera Rubin VR200'],
 };
 
 Object.keys(BOX_ORDER).forEach(layerId => {
