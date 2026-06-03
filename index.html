@@ -359,6 +359,35 @@ body {
 }
 .layer:not(.expanded) .layer-body { display: none; }
 
+/* Subgroup header — sits between groups inside a layer body */
+.layer-subgroup {
+  grid-column: 1 / -1;
+  padding: 8px 4px 10px;
+  margin-top: 6px;
+  border-bottom: 1.5px solid rgba(0,0,0,0.16);
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 14px;
+}
+.layer-subgroup:first-child { margin-top: -6px; padding-top: 0; }
+.layer-subgroup-name {
+  font-family: var(--mono);
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ink);
+}
+.layer-subgroup-count {
+  font-family: var(--mono);
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--ink3);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
 /* ───────────────── BOX ───────────────── */
 .box {
   text-align: left;
@@ -1202,6 +1231,72 @@ const LAYER_ICONS = {
   '09': '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round" stroke-linecap="round"><rect x="3" y="3" width="8" height="8" rx="1"/><rect x="13" y="3" width="8" height="8" rx="1"/><rect x="3" y="13" width="8" height="8" rx="1"/><rect x="13" y="13" width="8" height="8" rx="1"/></svg>',
   // 10 Programs / Portals / Community — globe
   '10': '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18"/><path d="M12 3c2.5 3 2.5 15 0 18M12 3c-2.5 3-2.5 15 0 18"/></svg>',
+};
+
+// Subgroups for each layer — hottest / most recognizable group first.
+// Box order within each group is also priority order.
+const LAYER_GROUPS = {
+  '01': [
+    { name:'AI GPUs & Core Silicon', boxes:['Data Center GPUs','L40S / L40 / L4','RTX PRO Blackwell','GeForce RTX','GB300 NVL72','Vera Rubin VR200'] },
+    { name:'Turnkey DGX Systems',    boxes:['DGX Systems','DGX SuperPOD','HGX','MGX'] },
+    { name:'Personal & Local AI',    boxes:['DGX Spark','NVIDIA RTX Spark','DGX Station'] },
+    { name:'CPU & Networking',       boxes:['Grace CPU + Superchips','NVLink / NVSwitch','Quantum-X800 InfiniBand','Spectrum-X Ethernet','BlueField DPUs','ConnectX-7 / ConnectX-8 SuperNIC'] },
+    { name:'Edge & Embedded',        boxes:['Jetson','DRIVE Orin / Thor'] },
+  ],
+  '02': [
+    { name:'Drivers & Kernel',           boxes:['GPU Driver','CUDA Driver API','Open GPU Kernel Modules','DGX OS / Base OS'] },
+    { name:'Containers & Orchestration', boxes:['Container Toolkit','NVIDIA GPU Operator','GPU Sharing (MIG / MPS / Time-Slicing)'] },
+    { name:'Cluster Ops & Fabric',       boxes:['DCGM / Fabric Mgr','Mission Control','DOCA'] },
+  ],
+  '03': [
+    { name:'CUDA Core & Compilers',         boxes:['CUDA Toolkit','NVCC / PTX','NVIDIA HPC SDK'] },
+    { name:'Math & Template Libraries',     boxes:['cuBLAS / cuFFT / cuSPARSE','CUTLASS','Thrust / CCCL'] },
+    { name:'Profiling, Debug & Specialized', boxes:['Nsight Systems / Compute','CUDA-Q'] },
+  ],
+  '04': [
+    { name:'AI Frameworks',           boxes:['PyTorch + CUDA','JAX + CUDA','TensorRT','TensorRT-LLM'] },
+    { name:'Core Primitives & Libs',  boxes:['cuDNN','NCCL','NVIDIA Model Optimizer','OpenAI Triton (kernel lang)'] },
+    { name:'Data Science & Pipelines', boxes:['RAPIDS','DALI','CuPy'] },
+    { name:'Graphics & Gaming SDKs',  boxes:['DLSS','NVIDIA Reflex','OptiX'] },
+    { name:'Simulation & Robotics',   boxes:['NVIDIA Warp','curoboV2'] },
+  ],
+  '05': [
+    { name:'LLM Training (NeMo + Megatron)', boxes:['NeMo Framework','NeMo Curator','NeMo RL','NeMo Run','Megatron-LM','Megatron-Core'] },
+    { name:'Robotics & Vision',              boxes:['Isaac Lab','TAO Toolkit'] },
+    { name:'Science & HPC',                  boxes:['BioNeMo','Modulus'] },
+  ],
+  '06': [
+    { name:'Nemotron LLM Family',           boxes:['Nemotron 3 Nano','Nemotron 3 Super','Nemotron 3 Ultra','Nemotron-H','Llama-Nemotron','Nemotron Nano 2 VL'] },
+    { name:'World Models & Physical AI',    boxes:['Cosmos','OmniDreams','Isaac GR00T N1','GR00T-Dreams','NitroGen','GraspGen-X'] },
+    { name:'Speech & Avatar',               boxes:['Parakeet','Canary','Audio2Face-3D'] },
+    { name:'AV / Driving Models',           boxes:['Alpamayo 2 Super','LCDrive'] },
+    { name:'Third-Party LLMs & Embeddings', boxes:['Llama 3.x (NV-hosted)','Mistral / Mixtral','NV-Embed v2'] },
+  ],
+  '07': [
+    { name:'NVIDIA Inference Stack',         boxes:['NIM','NIM Operator','Triton','TensorRT-LLM Serve','Dynamo','NeMo Microservices'] },
+    { name:'Open-Source LLM Serving',        boxes:['vLLM','SGLang','Ollama','llama.cpp'] },
+    { name:'Orchestration & Agent Runtimes', boxes:['KServe','Ray Serve','Run:ai','OpenShell'] },
+  ],
+  '08': [
+    { name:'NVIDIA-Hosted APIs',         boxes:['build.nvidia.com','DGX Cloud','DGX Cloud Lepton','NVIDIA Brev'] },
+    { name:'Hyperscaler Clouds',         boxes:['AWS Bedrock','Azure AI Foundry','GCP Vertex AI','Oracle OCI Gen AI','Cloudflare Workers AI'] },
+    { name:'AI-Native Clouds',           boxes:['Together AI','Fireworks AI','DeepInfra','Lambda Inference','Friendli AI','Crusoe Managed Inference','Baseten','Hyperbolic','RunPod Serverless','Nebius Token Factory'] },
+    { name:'Model Routers & Aggregators', boxes:['OpenRouter','HF Inference Endpoints'] },
+  ],
+  '09': [
+    { name:'AI Agents & Enterprise',     boxes:['NemoClaw','Hermes Agent','AI Blueprints','FOX Blueprint'] },
+    { name:'Robotics & 3D Simulation',   boxes:['Omniverse','Isaac','Newton','Omniverse DSX Blueprint'] },
+    { name:'Media, Gaming & Creators',   boxes:['Riva','NVIDIA ACE','AI for Media','Metropolis','GeForce NOW','NVIDIA Broadcast','RTX Remix','Project G-Assist','NVIDIA Studio'] },
+    { name:'Autonomous, Edge & Telco',   boxes:['DRIVE','Holoscan','IGX','NVIDIA Aerial','Morpheus'] },
+    { name:'Healthcare & Science',       boxes:['Clara','Earth-2'] },
+  ],
+  '10': [
+    { name:'Discover & Read',  boxes:['developer.nvidia.com','docs.nvidia.com','NVIDIA Technical Blog','GTC Conference','NVIDIA On-Demand','NVIDIA Research'] },
+    { name:'Build with Tools', boxes:['GitHub · NVIDIA','HuggingFace','NGC','NVIDIA AI Workbench'] },
+    { name:'Learn & Certify',  boxes:['DLI · learn.nvidia.com','NVIDIA LaunchPad','NVIDIA Certification'] },
+    { name:'Connect & Ask',    boxes:['Developer Program','Discord','Developer Forums'] },
+    { name:'Partner & Fund',   boxes:['AI Enterprise','Inception','Exemplar Cloud Program','Nemotron Coalition'] },
+  ],
 };
 
 const LAYERS = {
@@ -2635,7 +2730,9 @@ function render() {
     stack.appendChild(sec);
 
     const body = sec.querySelector('.layer-body');
-    layer.boxes.forEach((b, idx) => {
+
+    // Helper to build a single box element
+    const buildBox = (b, idx) => {
       const el = document.createElement('button');
       el.className = 'box' + (b.soon ? ' soon' : '');
       el.dataset.layer = layerId;
@@ -2653,8 +2750,49 @@ function render() {
         <div class="box-url">${b.url.replace(/^https?:\/\//,'')}</div>
       `;
       el.addEventListener('click', () => openModal(layerId, idx));
-      body.appendChild(el);
-    });
+      return el;
+    };
+
+    const groups = LAYER_GROUPS[layerId];
+    if (groups) {
+      // Group-aware rendering: subgroup headers + boxes in priority order
+      const boxByName = {};
+      layer.boxes.forEach((b, idx) => { boxByName[b.name] = { b, idx }; });
+      const rendered = new Set();
+
+      groups.forEach(group => {
+        const headerEl = document.createElement('div');
+        headerEl.className = 'layer-subgroup';
+        headerEl.innerHTML = `
+          <span class="layer-subgroup-name">${group.name}</span>
+          <span class="layer-subgroup-count">${group.boxes.length} ${group.boxes.length === 1 ? 'component' : 'components'}</span>
+        `;
+        body.appendChild(headerEl);
+
+        group.boxes.forEach(name => {
+          const item = boxByName[name];
+          if (!item) return;
+          body.appendChild(buildBox(item.b, item.idx));
+          rendered.add(name);
+        });
+      });
+
+      // Catch any uncategorized boxes (shouldn't happen but won't hide them)
+      const orphans = layer.boxes.filter(b => !rendered.has(b.name));
+      if (orphans.length) {
+        const orphanHeader = document.createElement('div');
+        orphanHeader.className = 'layer-subgroup';
+        orphanHeader.innerHTML = `
+          <span class="layer-subgroup-name">Other</span>
+          <span class="layer-subgroup-count">${orphans.length} ${orphans.length === 1 ? 'component' : 'components'}</span>
+        `;
+        body.appendChild(orphanHeader);
+        orphans.forEach(b => body.appendChild(buildBox(b, layer.boxes.indexOf(b))));
+      }
+    } else {
+      // Fallback: flat box list (preserves legacy behavior)
+      layer.boxes.forEach((b, idx) => body.appendChild(buildBox(b, idx)));
+    }
   });
 }
 
