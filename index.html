@@ -215,7 +215,7 @@ body {
   display: flex;
   align-items: stretch;
   border-bottom: 1px solid rgba(0,0,0,0.18);
-  min-height: 116px;
+  min-height: 156px;
 }
 
 .layer-num {
@@ -223,17 +223,32 @@ body {
   top: 16px;
   left: 22px;
   width: 104px;
-  height: 84px;
+  height: 124px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 4px;
+  gap: 6px;
   z-index: 1;
   border: 2.5px solid var(--ink);
   background: rgba(255,255,255,0.7);
   box-shadow: 2px 2px 0 0 var(--ink);
   pointer-events: none;
+  padding: 8px 4px;
+}
+.layer-icon {
+  width: 38px;
+  height: 38px;
+  color: var(--ink);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: -2px;
+}
+.layer-icon svg {
+  width: 100%;
+  height: 100%;
+  display: block;
 }
 .layer-num-label {
   font-family: var(--mono);
@@ -245,7 +260,7 @@ body {
 }
 .layer-num-value {
   font-family: var(--mono);
-  font-size: 42px;
+  font-size: 38px;
   font-weight: 900;
   color: var(--ink);
   letter-spacing: -0.04em;
@@ -1001,9 +1016,10 @@ body {
 
   /* Layer headers: stack vertically */
   .layer-head { flex-wrap: wrap; min-height: auto; padding-bottom: 8px; }
-  .layer-num { position: static; width: 58px; height: 48px; margin: 12px 0 0 14px; }
+  .layer-num { position: static; width: 64px; height: 84px; margin: 12px 0 0 14px; padding: 6px 2px; gap: 3px; }
+  .layer-icon { width: 22px; height: 22px; }
   .layer-num-label { font-size: 7.5px; letter-spacing: 0.14em; }
-  .layer-num-value { font-size: 24px; }
+  .layer-num-value { font-size: 22px; }
   .layer-meta { padding: 12px 14px 6px 14px; gap: 3px; }
   .layer-name { font-size: 13px; }
   .layer-desc { font-size: 11.5px; }
@@ -1085,7 +1101,7 @@ body {
       <div class="cake-plate"></div>
     </div>
     <button class="cake-cta" id="cakeCta">Take a bite →</button>
-    <div class="cake-hint">146 components · click any layer or box in the map to explore</div>
+    <div class="cake-hint">164 components · click any layer or box in the map to explore</div>
   </div>
 </div>
 
@@ -1130,6 +1146,30 @@ body {
 // DATA
 // ═══════════════════════════════════════════════════════════════
 const LAYER_ORDER = ['10','09','08','07','06','05','04','03','02','01'];
+
+// Illustrative SVG icons per layer — sits above the "LAYER 0X" number.
+const LAYER_ICONS = {
+  // 01 Silicon — chip with pins
+  '01': '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="6" width="12" height="12" rx="1"/><rect x="9.5" y="9.5" width="5" height="5"/><path d="M9 3v3M12 3v3M15 3v3M9 18v3M12 18v3M15 18v3M3 9h3M3 12h3M3 15h3M18 9h3M18 12h3M18 15h3"/></svg>',
+  // 02 System Software — gear
+  '02': '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3.5"/><path d="M12 2.5v3M12 18.5v3M2.5 12h3M18.5 12h3M5.6 5.6l2.1 2.1M16.3 16.3l2.1 2.1M5.6 18.4l2.1-2.1M16.3 7.7l2.1-2.1"/></svg>',
+  // 03 Compute Platform / CUDA — code brackets with slash
+  '03': '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6L3 12L9 18"/><path d="M15 6L21 12L15 18"/><path d="M14 4L10 20"/></svg>',
+  // 04 ML Frameworks — stacked layers
+  '04': '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round" stroke-linecap="round"><path d="M12 3l9 4.5L12 12 3 7.5 12 3z"/><path d="M21 12l-9 4.5L3 12"/><path d="M21 16.5L12 21l-9-4.5"/></svg>',
+  // 05 AI Training — graduation cap
+  '05': '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round" stroke-linecap="round"><path d="M2 9l10-5 10 5-10 5L2 9z"/><path d="M6 11v5c0 1.5 3 3 6 3s6-1.5 6-3v-5"/><path d="M22 9v6"/></svg>',
+  // 06 Models — neural-network nodes
+  '06': '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="8" cy="9" r="1.4" fill="currentColor"/><circle cx="16" cy="9" r="1.4" fill="currentColor"/><circle cx="8" cy="15" r="1.4" fill="currentColor"/><circle cx="16" cy="15" r="1.4" fill="currentColor"/><circle cx="12" cy="12" r="1.6" fill="currentColor"/><path d="M8 9L12 12L16 9M8 15L12 12L16 15"/></svg>',
+  // 07 Self-hosted Inference — server stack
+  '07': '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round" stroke-linecap="round"><rect x="3" y="4" width="18" height="5" rx="0.7"/><rect x="3" y="11" width="18" height="5" rx="0.7"/><rect x="3" y="18" width="18" height="3" rx="0.5"/><circle cx="6.5" cy="6.5" r="0.8" fill="currentColor"/><circle cx="6.5" cy="13.5" r="0.8" fill="currentColor"/><path d="M9.5 6.5h8M9.5 13.5h8"/></svg>',
+  // 08 Cloud APIs — cloud
+  '08': '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M17.5 18H7c-2.8 0-5-2.2-5-5 0-2.5 1.9-4.6 4.3-5C7.4 5.6 9.9 4 12.5 4c3.6 0 6.5 2.7 6.6 6.1 1.7.6 3 2.1 3 4 0 2.2-1.8 3.9-4 3.9"/></svg>',
+  // 09 Applications — 2x2 grid
+  '09': '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round" stroke-linecap="round"><rect x="3" y="3" width="8" height="8" rx="1"/><rect x="13" y="3" width="8" height="8" rx="1"/><rect x="3" y="13" width="8" height="8" rx="1"/><rect x="13" y="13" width="8" height="8" rx="1"/></svg>',
+  // 10 Programs / Portals / Community — globe
+  '10': '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18"/><path d="M12 3c2.5 3 2.5 15 0 18M12 3c-2.5 3-2.5 15 0 18"/></svg>',
+};
 
 const LAYERS = {
   '09': {
@@ -2548,7 +2588,7 @@ function render() {
     const count = layer.boxes.length;
     sec.innerHTML = `
       <div class="layer-head">
-        <div class="layer-num"><span class="layer-num-label">LAYER</span><span class="layer-num-value">${layerId}</span></div>
+        <div class="layer-num"><div class="layer-icon">${LAYER_ICONS[layerId] || ''}</div><span class="layer-num-label">LAYER</span><span class="layer-num-value">${layerId}</span></div>
         <div class="layer-meta">
           <div class="layer-name">${layer.name}</div>
           <div class="layer-desc">${layer.desc}</div>
