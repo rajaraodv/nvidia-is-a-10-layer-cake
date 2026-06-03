@@ -350,42 +350,56 @@ body {
   letter-spacing: -0.02em;
 }
 
-/* Layer body — grid of boxes (hidden by default, shown when .layer.expanded) */
+/* Layer body — vertical stack of subgroup blocks */
 .layer-body {
-  padding: 30px 34px 36px;
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(370px, 1fr));
-  gap: 22px;
+  padding: 26px 30px 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }
 .layer:not(.expanded) .layer-body { display: none; }
 
-/* Subgroup header — sits between groups inside a layer body */
+/* Subgroup block — bordered container that wraps one subgroup */
+.subgroup-block {
+  background: rgba(255,255,255,0.55);
+  border: 1.5px solid rgba(0,0,0,0.14);
+  border-radius: 6px;
+  padding: 18px 22px 22px;
+}
+
+/* Subgroup header — bigger, more prominent */
 .layer-subgroup {
-  grid-column: 1 / -1;
-  padding: 8px 4px 10px;
-  margin-top: 6px;
-  border-bottom: 1.5px solid rgba(0,0,0,0.16);
+  padding: 0 0 14px;
+  margin-bottom: 16px;
+  border-bottom: 2px solid var(--ink);
   display: flex;
   align-items: baseline;
   justify-content: space-between;
   gap: 14px;
 }
-.layer-subgroup:first-child { margin-top: -6px; padding-top: 0; }
 .layer-subgroup-name {
   font-family: var(--mono);
-  font-size: 12px;
+  font-size: 16px;
   font-weight: 900;
-  letter-spacing: 0.16em;
+  letter-spacing: 0.13em;
   text-transform: uppercase;
   color: var(--ink);
+  line-height: 1.1;
 }
 .layer-subgroup-count {
   font-family: var(--mono);
-  font-size: 10px;
+  font-size: 11px;
   font-weight: 700;
   color: var(--ink3);
-  letter-spacing: 0.06em;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
+}
+
+/* Inner grid of cards inside one subgroup */
+.subgroup-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 12px;
 }
 
 /* ───────────────── BOX ───────────────── */
@@ -393,21 +407,21 @@ body {
   text-align: left;
   background: #fff;
   border: 1.5px solid var(--rule);
-  padding: 22px 22px 18px;
+  padding: 13px 14px 11px;
   cursor: pointer;
   display: flex;
   flex-direction: column;
-  gap: 7px;
+  gap: 4px;
   position: relative;
   transition: border-color 90ms, box-shadow 90ms, transform 90ms;
   font: inherit;
   color: inherit;
-  min-height: 290px;
+  min-height: 180px;
 }
 .box:hover {
   border-color: var(--ink);
-  box-shadow: 0 6px 24px rgba(0,0,0,0.16);
-  transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.14);
+  transform: translateY(-1px);
   z-index: 1;
 }
 .box.soon { opacity: 0.55; }
@@ -416,56 +430,56 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 8px;
+  margin-bottom: 4px;
 }
 .box-tag {
   font-family: var(--mono);
-  font-size: 13px;
+  font-size: 9.5px;
   font-weight: 800;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  padding: 4px 10px 5px;
+  padding: 3px 7px 3.5px;
   background: var(--ink);
   color: #fff;
   line-height: 1;
 }
 
 .box-status {
-  width: 11px;
-  height: 11px;
+  width: 8px;
+  height: 8px;
   border-radius: 50%;
   background: var(--ink);
   flex-shrink: 0;
 }
 .box.soon .box-status {
   background: transparent;
-  border: 2px solid var(--ink2);
+  border: 1.5px solid var(--ink2);
 }
 
 .box-name {
-  font-size: 22px;
+  font-size: 14.5px;
   font-weight: 800;
   line-height: 1.2;
   color: var(--ink);
-  letter-spacing: -0.01em;
+  letter-spacing: -0.005em;
 }
 .box-sub {
-  font-size: 16px;
+  font-size: 11.5px;
   color: var(--ink2);
-  line-height: 1.4;
+  line-height: 1.35;
 }
 .box-use {
-  margin-top: 12px;
-  padding: 11px 14px 12px;
+  margin-top: 7px;
+  padding: 7px 10px 8px;
   background: linear-gradient(180deg, rgba(255,243,202,0.55) 0%, rgba(255,231,165,0.30) 100%);
-  border-left: 4px solid var(--ink);
+  border-left: 3px solid var(--ink);
   flex: 1;
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 3px;
 }
 .box-use-label {
-  font-size: 10px;
+  font-size: 8.5px;
   font-weight: 800;
   letter-spacing: 0.14em;
   text-transform: uppercase;
@@ -473,32 +487,32 @@ body {
   line-height: 1;
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 4px;
 }
 .box-use-label::before {
   content: '→';
   font-family: var(--mono);
   color: var(--ink);
   font-weight: 900;
-  font-size: 13px;
+  font-size: 11px;
   line-height: 1;
 }
 .box-use-text {
-  font-size: 16.5px;
+  font-size: 12.5px;
   color: var(--ink);
   font-weight: 600;
-  line-height: 1.4;
+  line-height: 1.35;
   letter-spacing: -0.005em;
 }
 .box-url {
-  font-size: 13px;
+  font-size: 10px;
   color: var(--ink3);
   font-family: var(--mono);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  margin-top: 11px;
-  padding-top: 11px;
+  margin-top: 6px;
+  padding-top: 6px;
   border-top: 1px solid var(--rule2);
 }
 
@@ -1050,12 +1064,15 @@ body {
   .rail { width: 124px; }
   .rail-num { font-size: 16px; }
   .rail-name { font-size: 9.5px; }
-  .layer-body { padding: 22px 22px 26px; gap: 16px; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); }
-  .box { min-height: 256px; padding: 18px 18px 16px; }
-  .box-name { font-size: 19px; }
-  .box-sub { font-size: 14.5px; }
-  .box-use-text { font-size: 15px; }
-  .box-url { font-size: 11.5px; }
+  .layer-body { padding: 20px 18px 24px; gap: 16px; }
+  .subgroup-block { padding: 16px 18px 18px; }
+  .subgroup-grid { grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 10px; }
+  .layer-subgroup-name { font-size: 14px; letter-spacing: 0.12em; }
+  .box { min-height: 165px; padding: 12px 13px 11px; }
+  .box-name { font-size: 14px; }
+  .box-sub { font-size: 11px; }
+  .box-use-text { font-size: 12px; }
+  .box-url { font-size: 10px; }
 }
 
 /* ─── Phone (≤640px) ─── */
@@ -1088,18 +1105,22 @@ body {
 
   /* Boxes: single column, slightly smaller */
   .layer-body {
-    padding: 14px 14px 20px;
+    padding: 14px 12px 20px;
     gap: 12px;
-    grid-template-columns: 1fr;
   }
-  .box { min-height: auto; padding: 14px 14px 12px; }
-  .box-tag { font-size: 10px; padding: 3px 8px; }
-  .box-name { font-size: 17px; }
-  .box-sub { font-size: 13px; }
-  .box-use { margin-top: 10px; padding: 10px 12px; }
-  .box-use-label { font-size: 9px; }
-  .box-use-text { font-size: 14px; }
-  .box-url { font-size: 10.5px; padding-top: 8px; }
+  .subgroup-block { padding: 14px 14px 16px; }
+  .subgroup-grid { grid-template-columns: 1fr; gap: 10px; }
+  .layer-subgroup { padding-bottom: 10px; margin-bottom: 12px; }
+  .layer-subgroup-name { font-size: 13px; letter-spacing: 0.12em; }
+  .layer-subgroup-count { font-size: 9.5px; }
+  .box { min-height: auto; padding: 12px 13px 11px; }
+  .box-tag { font-size: 9px; padding: 2.5px 6px; }
+  .box-name { font-size: 14px; }
+  .box-sub { font-size: 11px; }
+  .box-use { margin-top: 6px; padding: 7px 10px; }
+  .box-use-label { font-size: 8px; }
+  .box-use-text { font-size: 12px; }
+  .box-url { font-size: 10px; padding-top: 6px; }
 
   /* Journey modal */
   .modal-backdrop { padding: 0; align-items: stretch; }
@@ -2755,43 +2776,47 @@ function render() {
 
     const groups = LAYER_GROUPS[layerId];
     if (groups) {
-      // Group-aware rendering: subgroup headers + boxes in priority order
+      // Group-aware rendering: each subgroup is its own bordered block
+      // containing a header + an inner grid of boxes.
       const boxByName = {};
       layer.boxes.forEach((b, idx) => { boxByName[b.name] = { b, idx }; });
       const rendered = new Set();
 
-      groups.forEach(group => {
-        const headerEl = document.createElement('div');
-        headerEl.className = 'layer-subgroup';
-        headerEl.innerHTML = `
-          <span class="layer-subgroup-name">${group.name}</span>
-          <span class="layer-subgroup-count">${group.boxes.length} ${group.boxes.length === 1 ? 'component' : 'components'}</span>
+      const buildSubgroupBlock = (groupName, boxNames) => {
+        const block = document.createElement('div');
+        block.className = 'subgroup-block';
+        block.innerHTML = `
+          <div class="layer-subgroup">
+            <span class="layer-subgroup-name">${groupName}</span>
+            <span class="layer-subgroup-count">${boxNames.length} ${boxNames.length === 1 ? 'component' : 'components'}</span>
+          </div>
+          <div class="subgroup-grid"></div>
         `;
-        body.appendChild(headerEl);
-
-        group.boxes.forEach(name => {
+        const innerGrid = block.querySelector('.subgroup-grid');
+        boxNames.forEach(name => {
           const item = boxByName[name];
           if (!item) return;
-          body.appendChild(buildBox(item.b, item.idx));
+          innerGrid.appendChild(buildBox(item.b, item.idx));
           rendered.add(name);
         });
+        return block;
+      };
+
+      groups.forEach(group => {
+        body.appendChild(buildSubgroupBlock(group.name, group.boxes));
       });
 
-      // Catch any uncategorized boxes (shouldn't happen but won't hide them)
+      // Catch any uncategorized boxes (defensive — shouldn't happen)
       const orphans = layer.boxes.filter(b => !rendered.has(b.name));
       if (orphans.length) {
-        const orphanHeader = document.createElement('div');
-        orphanHeader.className = 'layer-subgroup';
-        orphanHeader.innerHTML = `
-          <span class="layer-subgroup-name">Other</span>
-          <span class="layer-subgroup-count">${orphans.length} ${orphans.length === 1 ? 'component' : 'components'}</span>
-        `;
-        body.appendChild(orphanHeader);
-        orphans.forEach(b => body.appendChild(buildBox(b, layer.boxes.indexOf(b))));
+        body.appendChild(buildSubgroupBlock('Other', orphans.map(b => b.name)));
       }
     } else {
       // Fallback: flat box list (preserves legacy behavior)
-      layer.boxes.forEach((b, idx) => body.appendChild(buildBox(b, idx)));
+      const flatGrid = document.createElement('div');
+      flatGrid.className = 'subgroup-grid';
+      layer.boxes.forEach((b, idx) => flatGrid.appendChild(buildBox(b, idx)));
+      body.appendChild(flatGrid);
     }
   });
 }
