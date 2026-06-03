@@ -1145,7 +1145,7 @@ const LAYERS = {
         goTo:[{ref:['01','DRIVE Orin / Thor'],note:'Target hardware'},{ref:['09','Omniverse'],note:'Simulation (DRIVE Sim)'},{ref:['10','AI Enterprise'],note:'Production license'}],
         friction:['Closed program — no self-service path; partnership required','NDA significantly limits open-source community development']
       },
-      { name:'Isaac', type:'VERTICAL', sub:'Robotics & ROS', use:'Build and simulate robots', url:'developer.nvidia.com/isaac',
+      { name:'Isaac', type:'VERTICAL', sub:'Robotics & ROS · Isaac Sim 6.0 + agent skills (Jun 2026 CVPR)', use:'Build and simulate robots · new Neural Reconstruction / Mobility skills', url:'developer.nvidia.com/isaac',
         desc:'GPU-accelerated robotics: Isaac Sim (Omniverse-based simulator), Isaac ROS (ROS 2 packages), Isaac Lab (robot learning). Full sim-to-real pipeline.',
         who:'Robotics engineers · ROS developers',
         arriveFrom:[{ext:'ROS community / ros.org docs'},{ref:['01','Jetson'],detail:'Need edge robotics stack'},{ref:['09','Omniverse'],detail:'Simulation entry'}],
@@ -1233,7 +1233,7 @@ const LAYERS = {
         goTo:[{ref:['01','GeForce RTX'],note:'Required hardware'},{ref:['09','Omniverse'],note:'Higher-end 3D'}],
         friction:['Studio driver branch differs from Game Ready']
       },
-      { name:'NemoClaw', type:'PLATFORM', sub:'Agent runtime + privacy/security · Early preview', use:'Build local AI agents with privacy guardrails', url:'nvidia.com/en-us/ai/nemoclaw',
+      { name:'NemoClaw', type:'PLATFORM', sub:'Agent runtime + privacy/security · Open blueprint w/ Hermes Agent (Jun 2026)', use:'Build long-running autonomous engineering agents · sandboxed via OpenShell', url:'nvidia.com/en-us/ai/nemoclaw',
         desc:'Open-source security and privacy layer on top of OpenClaw (NVIDIA\'s autonomous-agent platform). Bundles Nemotron open-weight models for local inference + the OpenShell runtime for policy-based guardrails. Announced GTC 2026 (March 17). Deploys to RTX, RTX PRO, DGX Station, DGX Spark — local-only, not cloud.',
         who:'Developers building always-on local AI agents ("claws") · enterprise teams needing secure local agents',
         arriveFrom:[{ext:'GTC 2026 keynote announcement'},{ext:'github.com/NVIDIA/NemoClaw'},{ref:['06','Nemotron 3 Nano'],detail:'Want to run Nemotron locally'},{ref:['01','GeForce RTX'],detail:'Have a capable RTX GPU'}],
@@ -1280,6 +1280,22 @@ const LAYERS = {
         steps:['Browse developer.nvidia.com/ace','Pull Audio2Face open-source models','Integrate Riva for speech','Connect Nemotron for dialog','Render avatar with Unreal / Unity'],
         goTo:[{ref:['09','Riva'],note:'Speech subsystem'},{ref:['06','Nemotron 3 Nano'],note:'Dialog LLM'}],
         friction:['Stack complexity (multiple SDKs)','Animation fidelity vs latency tradeoff']
+      },
+      { name:'Hermes Agent', type:'PLATFORM', sub:'Long-running agent harness · OSS · pairs with NemoClaw + OpenShell (Jun 2026)', use:'Build long-horizon autonomous engineering agents', url:'nvidia.com/en-us/ai/nemoclaw',
+        desc:'Agent harness for long-running autonomous engineering agents. Pairs Nemotron 3 Super reasoning with the NVIDIA OpenShell secure runtime. Industrial partners: Cadence, Dassault Systèmes, Siemens, Synopsys. Part of the NemoClaw open blueprint. Announced June 2026.',
+        who:'Industrial software vendors · agentic AI teams',
+        arriveFrom:[{ref:['09','NemoClaw'],detail:'Open blueprint pairing'},{ref:['06','Nemotron 3 Super'],detail:'Reasoning LLM'}],
+        steps:['Clone NemoClaw blueprint','Configure Hermes Agent + Nemotron 3 Super','Run inside OpenShell sandbox','Connect to industrial / enterprise data sources'],
+        goTo:[{ref:['07','OpenShell'],note:'Secure runtime'},{ref:['06','Nemotron 3 Super'],note:'Reasoning model'},{ref:['09','NemoClaw'],note:'Parent platform'}],
+        friction:['Early preview · partner-led adoption','Long-running agents need careful observability']
+      },
+      { name:'FOX Blueprint', type:'PLATFORM', sub:'Factory Operations agent · NemoClaw + AI-Q + Nemotron + Omniverse (May 2026 GTC Taipei)', use:'Build autonomous factory-manager AI agents', url:'blogs.nvidia.com/blog/factory-operations-fox-blueprint-ai-brain',
+        desc:'Reference design for an autonomous factory-manager agent. Built on NemoClaw + AI-Q + Nemotron + Omniverse, with NVIDIA TAO skills for fine-tuning. Announced May 2026 at GTC Taipei / Computex.',
+        who:'Industrial automation engineers · factory operations · system integrators',
+        arriveFrom:[{ref:['09','NemoClaw'],detail:'Agent runtime'},{ref:['09','Omniverse'],detail:'Factory digital twin'},{ext:'GTC Taipei / Computex 2026'}],
+        steps:['Pull FOX Blueprint from NVIDIA AI Blueprints','Connect to factory data sources','Configure Nemotron via NemoClaw','Pair with Omniverse digital twin for simulation'],
+        goTo:[{ref:['09','NemoClaw'],note:'Agent runtime'},{ref:['09','Omniverse'],note:'Digital twin'},{ref:['09','AI Blueprints'],note:'Blueprint family'},{ref:['05','TAO Toolkit'],note:'Fine-tuning skills'}],
+        friction:['Industrial integration always custom','Needs factory data + digital twin to be useful']
       },
     ]
   },
@@ -1569,6 +1585,14 @@ const LAYERS = {
         goTo:[{ref:['07','NIM Operator'],note:'Can deploy alongside'},{ref:['02','Mission Control'],note:'Often complements'}],
         friction:['Licensed product (NVIDIA AI Enterprise)','K8s expertise required']
       },
+      { name:'OpenShell', type:'RUNTIME', sub:'Sandboxed agent runtime · OSS · MS Copilot integration (Jun 2026)', use:'Sandbox AI agents under policy-based security', url:'github.com/nvidia/openshell',
+        desc:'Open-source sandboxed runtime that governs how AI agents access files, networks, and tools under policy-based security. Integrated into GitHub Copilot via Microsoft partnership. The missing "sandbox primitive" for agentic workloads. Announced June 2026 (Microsoft Build).',
+        who:'Agent developers · security / compliance engineers',
+        arriveFrom:[{ref:['09','NemoClaw'],detail:'Default sandbox for NemoClaw'},{ext:'Microsoft Build 2026 partnership'}],
+        steps:['Pull container or install OSS','Define policy (file/net/tool allowlists)','Run agent inside OpenShell','Audit via policy logs'],
+        goTo:[{ref:['09','NemoClaw'],note:'Primary consumer'},{ref:['09','Hermes Agent'],note:'Agent harness'},{ext:'GitHub Copilot integration'}],
+        friction:['Policy authoring is non-trivial','New primitive — patterns still emerging']
+      },
     ]
   },
 
@@ -1593,7 +1617,7 @@ const LAYERS = {
         goTo:[{ref:['08','AWS Bedrock'],note:'Production'},{ref:['06','Nemotron 3 Ultra'],note:'Larger frontier sibling'}],
         friction:['Self-host requires multi-GPU H100 — costly','SKU naming inconsistent between NVIDIA Research (100B/10B) and AWS marketing (120B/12B)']
       },
-      { name:'Nemotron 3 Ultra', type:'MODEL', sub:'~500B / ~50B active · MoE · frontier', use:'Frontier reasoning at research scale', url:'research.nvidia.com/labs/nemotron/Nemotron-3',
+      { name:'Nemotron 3 Ultra', type:'MODEL', sub:'~500B / ~50B active · MoE · frontier reasoning (Jun 2026)', use:'Frontier reasoning + long-horizon agentic workloads', url:'research.nvidia.com/labs/nemotron/Nemotron-3',
         desc:'Frontier reasoning model in the Nemotron 3 lineup. ~500B total / ~50B active parameters per NVIDIA Research. Targeting the largest reasoning workloads.',
         who:'Frontier reasoning workloads · research teams',
         arriveFrom:[{ref:['06','Nemotron 3 Super'],detail:'Need stronger model'},{ext:'NVIDIA Research blog'}],
@@ -1625,7 +1649,7 @@ const LAYERS = {
         goTo:[{ext:'HuggingFace nvidia/canary-1b-v2 (free)'},{ref:['07','NIM'],note:'Riva ASR NIM (NVAIE)'},{ref:['06','Parakeet'],note:'English-only alt'}],
         friction:['Same Public API Endpoints bug as Parakeet','Riva ASR NIM packaging requires NVAIE — but raw weights are free']
       },
-      { name:'Cosmos', type:'MODEL', sub:'World Foundation Model', use:'Generate video for robotics / AV training', url:'developer.nvidia.com/cosmos',
+      { name:'Cosmos', type:'MODEL', sub:'World Foundation Model · Cosmos 3 (Nano 16B · Super 64B) GA May 2026', use:'Generate video + reason + act for physical AI / robotics / AV', url:'developer.nvidia.com/cosmos',
         desc:'Physical AI world model. Generates physically plausible video for robotics and AV training.',
         who:'Robotics researchers · AV teams',
         arriveFrom:[{ref:['09','Isaac'],detail:'Synthetic data'},{ref:['09','DRIVE'],detail:'AV scenarios'}],
@@ -1696,6 +1720,46 @@ const LAYERS = {
         steps:['Download from huggingface.co/nvidia','Fine-tune on your humanoid platform','Deploy to robot ECU'],
         goTo:[{ref:['05','Isaac Lab'],note:'Fine-tune in sim'},{ref:['09','Isaac'],note:'Deployment pipeline'}],
         friction:['Needs humanoid hardware','Sim-to-real gap']
+      },
+      { name:'GraspGen-X', type:'MODEL', sub:'Robot grasping foundation model · 2B simulated grasps · OSS (Jun 2026)', use:'Zero-shot robot grasping for any object', url:'huggingface.co/nvidia',
+        desc:'Open foundation model for zero-shot robot grasping. Trained on 2B simulated grasps. Pairs with curoboV2 (CUDA motion planner). Announced at CVPR 2026.',
+        who:'Robotics researchers · manipulation teams',
+        arriveFrom:[{ref:['09','Isaac'],detail:'Robotics platform target'},{ext:'CVPR 2026 announcement'}],
+        steps:['Download weights from huggingface.co/nvidia','Fine-tune on your robot + gripper setup','Pair with curoboV2 for motion planning','Deploy to robot'],
+        goTo:[{ref:['09','Isaac'],note:'Robotics platform'},{ref:['04','curoboV2'],note:'Motion planning library'}],
+        friction:['Sim-to-real gap','Requires robot + gripper for fine-tuning']
+      },
+      { name:'LCDrive', type:'MODEL', sub:'Latent-reasoning AV planner · OSS (Jun 2026)', use:'AV trajectory planning with latent reasoning', url:'huggingface.co/nvidia',
+        desc:'Latent-reasoning planner for autonomous-driving stack. Generates ego-vehicle trajectories from perception inputs via latent-space reasoning. Announced at CVPR 2026.',
+        who:'AV planning teams · ADAS engineers',
+        arriveFrom:[{ref:['09','DRIVE'],detail:'AV platform target'},{ext:'CVPR 2026 announcement'}],
+        steps:['Download from HuggingFace','Pair with your perception stack','Fine-tune on AV scenario data','Deploy via DRIVE OS'],
+        goTo:[{ref:['09','DRIVE'],note:'AV deployment'},{ref:['06','Alpamayo 2 Super'],note:'Larger VLA alternative'}],
+        friction:['Requires AV-grade data pipeline','Safety validation still needed downstream']
+      },
+      { name:'NitroGen', type:'MODEL', sub:'Embodied agent foundation model · GR00T-based · OSS (Jun 2026)', use:'Foundation model for embodied agents (game-trained)', url:'huggingface.co/nvidia',
+        desc:'Embodied agent foundation model built on Isaac GR00T. Trained on 1,000+ games and 40K hours of gameplay. Generalizes to novel embodied tasks. Announced at CVPR 2026.',
+        who:'Embodied AI · game AI · simulation researchers',
+        arriveFrom:[{ref:['06','Isaac GR00T N1'],detail:'GR00T base'},{ext:'CVPR 2026 announcement'}],
+        steps:['Download weights from HF','Fine-tune on your embodied task','Deploy to sim (Isaac Lab) or robot'],
+        goTo:[{ref:['05','Isaac Lab'],note:'Sim training environment'},{ref:['09','Isaac'],note:'Robot deployment'}],
+        friction:['Compute-intensive fine-tune','Embodied evaluation is task-specific']
+      },
+      { name:'Alpamayo 2 Super', type:'MODEL', sub:'32B vision-language-action · full AV stack · OSS (Jun 2026)', use:'VLA model for self-driving — perception, planning, control', url:'huggingface.co/nvidia',
+        desc:'Open 32B-parameter vision-language-action model covering the full AV driving stack. Bundled with Isaac Sim 6.0 and new agent skills. Available via NVIDIA Brev preconfigured environments. Announced at CVPR 2026.',
+        who:'AV teams · ADAS engineers · VLA researchers',
+        arriveFrom:[{ref:['09','DRIVE'],detail:'AV platform target'},{ext:'CVPR 2026 announcement'}],
+        steps:['Download from HuggingFace or use via Brev','Run in preconfigured dev env','Fine-tune on fleet data','Deploy to AV ECU through DRIVE OS'],
+        goTo:[{ref:['09','DRIVE'],note:'AV deployment'},{ref:['08','NVIDIA Brev'],note:'Dev environment'},{ref:['05','Isaac Lab'],note:'Sim training'}],
+        friction:['32B params — needs serious inference compute','Safety validation pipeline required for deployment']
+      },
+      { name:'OmniDreams', type:'MODEL', sub:'2B action-conditioned world model · Cosmos-Predict2.5 base · 52 FPS @ 720p (Jun 2026)', use:'Generate photorealistic AV world for policy testing', url:'huggingface.co/nvidia/omni-dreams-models',
+        desc:'Action-conditioned generative world model built on Cosmos-Predict2.5. Produces photorealistic multi-camera AV output at ~52 FPS @ 720p on GB300. Lets AV teams test policies in a generative world instead of recorded data. Released June 2026.',
+        who:'AV teams · world-model researchers · sim teams',
+        arriveFrom:[{ref:['06','Cosmos'],detail:'Cosmos-Predict2.5 base'},{ext:'NVIDIA HuggingFace release Jun 2026'}],
+        steps:['Pull from HuggingFace + GitHub','Run on GB300 (real-time) or DGX SuperPOD','Condition generation on policy actions','Evaluate policies in generated world'],
+        goTo:[{ref:['09','DRIVE'],note:'AV policy testing target'},{ref:['05','Isaac Lab'],note:'Sim integration'},{ref:['01','GB300 NVL72'],note:'Hardware target for realtime'}],
+        friction:['Real-time needs GB300-class hardware','2B parameters — smaller than full Cosmos 3']
       },
     ]
   },
@@ -1880,6 +1944,14 @@ const LAYERS = {
         goTo:[{ref:['04','RAPIDS'],note:'Higher-level data science'},{ref:['03','CUDA Toolkit'],note:'Underlying'}],
         friction:['Not every NumPy function supported','Memory transfers can dominate small workloads']
       },
+      { name:'curoboV2', type:'LIBRARY', sub:'CUDA motion planning library · OSS (Jun 2026)', use:'GPU-accelerated motion planning for robots', url:'github.com/nvlabs/curobo',
+        desc:'CUDA-accelerated motion-planning library. Pairs with GraspGen-X for end-to-end robot grasping. v2 announced at CVPR 2026.',
+        who:'Robotics engineers · manipulation teams',
+        arriveFrom:[{ref:['06','GraspGen-X'],detail:'Motion planning partner'},{ext:'CVPR 2026 release'}],
+        steps:['pip install or build from GitHub','Provide robot URDF + obstacle scene','Call planner from Python','Pipe to robot controller'],
+        goTo:[{ref:['06','GraspGen-X'],note:'Grasping pairing'},{ref:['09','Isaac'],note:'Robotics platform'}],
+        friction:['Robot kinematics setup is per-platform','GPU needed for real-time planning']
+      },
     ]
   },
 
@@ -2058,7 +2130,7 @@ const LAYERS = {
         goTo:[{ref:['02','GPU Driver'],note:'GeForce driver'},{ref:['04','PyTorch + CUDA'],note:'Local ML'}],
         friction:['NVLink unavailable on consumer cards (RTX 40+ dropped it)','No ECC memory — not for sustained production','CUDA EULA prohibits some data center uses on consumer cards']
       },
-      { name:'Jetson', type:'HARDWARE', sub:'Edge AI · Robotics', use:'Run AI at the edge (robots, drones, cameras)', url:'developer.nvidia.com/embedded/jetson',
+      { name:'Jetson', type:'HARDWARE', sub:'Edge AI · Robotics · JetPack 7.2 (Jun 2026) · 241 TOPS Super Mode', use:'Run AI at the edge (robots, drones, cameras) · agentic-ready', url:'developer.nvidia.com/embedded/jetson',
         desc:'Edge AI modules: Orin (up to 275 TOPS), AGX, Nano. Used in robots, drones, cameras.',
         who:'Embedded AI · robotics developers',
         arriveFrom:[{ref:['09','Isaac'],detail:'Robotics target'},{ext:'Robotics / IoT communities'}],
@@ -2103,7 +2175,7 @@ const LAYERS = {
         goTo:[{ref:['01','DGX SuperPOD'],note:'MGX is the building block'}],
         friction:['Usually invisible to end developers — you buy through an OEM']
       },
-      { name:'DGX Spark', type:'HARDWARE', sub:'Personal AI · GB10 · 1 PFLOP FP4', use:'Run frontier AI on your desk (was Project DIGITS)', url:'nvidia.com/en-us/products/workstations/dgx-spark',
+      { name:'DGX Spark', type:'HARDWARE', sub:'Personal AI · GB10 · 1 PFLOP FP4 · NVIDIA Sync multi-node (Jun 2026) · RTX Spark Windows fall 2026', use:'Run frontier AI on your desk · cluster 2-4 Sparks to 512GB unified memory', url:'nvidia.com/en-us/products/workstations/dgx-spark',
         desc:'Personal AI workstation. GB10 Grace Blackwell Superchip, 1 PFLOP FP4, 128 GB unified memory. Renamed from Project DIGITS. Targets local LLM and agent development.',
         who:'AI researchers · agent developers · NemoClaw users',
         arriveFrom:[{ext:'CES 2025 launch as Project DIGITS'},{ref:['09','NemoClaw'],detail:'Local agent deployment target'}],
@@ -2347,6 +2419,14 @@ const LAYERS = {
         steps:['Browse research.nvidia.com','Explore by area (LLM, robotics, graphics)','Pull reference implementations from GitHub'],
         goTo:[{ref:['10','GitHub · NVIDIA'],note:'Repo home'},{ref:['10','HuggingFace'],note:'Model releases'}]
       },
+      { name:'Exemplar Cloud Program', type:'PROGRAM', sub:'NVIDIA-certified AI clouds · 6 launch partners (May 2026)', use:'Find vetted multi-region NVIDIA-certified cloud providers', url:'blogs.nvidia.com/blog/ai-cloud-ecosystem',
+        desc:'NVIDIA certification program for AI cloud providers. Six launch Exemplar Cloud partners: CoreWeave, Crusoe, Lambda, Nebius, Vultr, YTL. CoreWeave adopting Vera Rubin + Vera CPU + Spectrum-X Photonics. Nebius launching Physical AI Workbench (Cosmos 3 + Isaac Sim + GR00T). New partners Cassava and Claro. Announced May 2026.',
+        who:'Devs evaluating GPU cloud providers · enterprise procurement',
+        arriveFrom:[{ext:'GPU capacity sourcing'},{ref:['08','DGX Cloud Lepton'],detail:'Multi-cloud GPU marketplace'}],
+        steps:['Browse Exemplar Cloud partner list','Compare regions / hardware / pricing','Provision GPUs via partner of choice','Deploy with standard NVIDIA software stack'],
+        goTo:[{ref:['08','DGX Cloud Lepton'],note:'Multi-cloud marketplace'},{ref:['08','build.nvidia.com'],note:'Model APIs'}],
+        friction:['Pricing varies wildly across partners','Region coverage uneven']
+      },
     ]
   }
 };
@@ -2358,13 +2438,13 @@ const LAYERS = {
 const BOX_ORDER = {
   // Popular / recognizable items first, then newest. So devs see what they
   // already know up front, then discover the new stuff.
-  '10': ['developer.nvidia.com','GitHub · NVIDIA','HuggingFace','docs.nvidia.com','NGC','Developer Program','GTC Conference','DLI · learn.nvidia.com','Discord','Developer Forums','AI Enterprise','Inception','Nemotron Coalition','NVIDIA AI Workbench','NVIDIA Certification','NVIDIA LaunchPad','NVIDIA On-Demand','NVIDIA Technical Blog','NVIDIA Research'],
-  '09': ['Omniverse','Isaac','Riva','DRIVE','Clara','AI Blueprints','NemoClaw','NVIDIA ACE','Earth-2','Newton','NVIDIA Aerial','Metropolis','Holoscan','IGX','AI for Media','Omniverse DSX Blueprint','NVIDIA Studio','Morpheus'],
+  '10': ['developer.nvidia.com','GitHub · NVIDIA','HuggingFace','docs.nvidia.com','NGC','Developer Program','GTC Conference','DLI · learn.nvidia.com','Discord','Developer Forums','AI Enterprise','Inception','Nemotron Coalition','NVIDIA AI Workbench','NVIDIA Certification','NVIDIA LaunchPad','NVIDIA On-Demand','NVIDIA Technical Blog','NVIDIA Research','Exemplar Cloud Program'],
+  '09': ['Omniverse','Isaac','Riva','DRIVE','Clara','AI Blueprints','NemoClaw','NVIDIA ACE','Earth-2','Newton','NVIDIA Aerial','Metropolis','Holoscan','IGX','AI for Media','Omniverse DSX Blueprint','NVIDIA Studio','Morpheus','Hermes Agent','FOX Blueprint'],
   '08': ['build.nvidia.com','AWS Bedrock','OpenRouter','Together AI','Fireworks AI','HF Inference Endpoints','DeepInfra','DGX Cloud','DGX Cloud Lepton','NVIDIA Brev','Cloudflare Workers AI','Lambda Inference','Oracle OCI Gen AI','Friendli AI','Crusoe Managed Inference','Baseten','Hyperbolic','RunPod Serverless','Nebius Token Factory','Azure AI Foundry','GCP Vertex AI'],
-  '07': ['NIM','vLLM','Triton','Ollama','Dynamo','SGLang','llama.cpp','KServe','Ray Serve','NIM Operator','Run:ai','NeMo Microservices','TensorRT-LLM Serve'],
-  '06': ['Llama 3.x (NV-hosted)','Nemotron 3 Nano','Parakeet','Llama-Nemotron','NV-Embed v2','Nemotron 3 Super','Mistral / Mixtral','Canary','Cosmos','Nemotron 3 Ultra','Nemotron Nano 2 VL','Isaac GR00T N1','Nemotron-H','Audio2Face-3D','GR00T-Dreams'],
+  '07': ['NIM','vLLM','Triton','Ollama','Dynamo','SGLang','llama.cpp','KServe','Ray Serve','NIM Operator','Run:ai','NeMo Microservices','TensorRT-LLM Serve','OpenShell'],
+  '06': ['Llama 3.x (NV-hosted)','Nemotron 3 Nano','Parakeet','Llama-Nemotron','NV-Embed v2','Nemotron 3 Super','Mistral / Mixtral','Canary','Cosmos','Nemotron 3 Ultra','Nemotron Nano 2 VL','Isaac GR00T N1','Nemotron-H','Audio2Face-3D','GR00T-Dreams','GraspGen-X','LCDrive','NitroGen','Alpamayo 2 Super','OmniDreams'],
   '05': ['NeMo Framework','Megatron-LM','NeMo Curator','TAO Toolkit','NeMo RL','BioNeMo','Modulus','Megatron-Core','Isaac Lab','NeMo Run'],
-  '04': ['PyTorch + CUDA','TensorRT','RAPIDS','cuDNN','NCCL','JAX + CUDA','TensorRT-LLM','OpenAI Triton (kernel lang)','DALI','NVIDIA Model Optimizer','CuPy','NVIDIA Warp'],
+  '04': ['PyTorch + CUDA','TensorRT','RAPIDS','cuDNN','NCCL','JAX + CUDA','TensorRT-LLM','OpenAI Triton (kernel lang)','DALI','NVIDIA Model Optimizer','CuPy','NVIDIA Warp','curoboV2'],
   '03': ['CUDA Toolkit','cuBLAS / cuFFT / cuSPARSE','Nsight Systems / Compute','NVCC / PTX','Thrust / CCCL','NVIDIA HPC SDK','CUTLASS','CUDA-Q'],
   '02': ['GPU Driver','Container Toolkit','DCGM / Fabric Mgr','CUDA Driver API','DOCA','NVIDIA GPU Operator','GPU Sharing (MIG / MPS / Time-Slicing)','Open GPU Kernel Modules','DGX OS / Base OS','Mission Control'],
   '01': ['Data Center GPUs','GeForce RTX','Jetson','DGX Systems','NVLink / NVSwitch','DRIVE Orin / Thor','L40S / L40 / L4','RTX PRO Blackwell','DGX SuperPOD','HGX','MGX','Quantum-X800 InfiniBand','Spectrum-X Ethernet','BlueField DPUs','ConnectX-7 / ConnectX-8 SuperNIC','Grace CPU + Superchips','DGX Spark','DGX Station','GB300 NVL72','Vera Rubin VR200'],
