@@ -94,6 +94,22 @@ body {
   letter-spacing: 0.04em;
   text-transform: uppercase;
 }
+.hdr-btn {
+  font-family: var(--mono);
+  font-size: 10.5px;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 6px 11px;
+  background: #fff;
+  border: 1.5px solid var(--ink);
+  color: var(--ink);
+  cursor: pointer;
+  box-shadow: 2px 2px 0 0 var(--ink);
+  transition: transform 80ms, box-shadow 80ms;
+}
+.hdr-btn:hover { transform: translate(1px,1px); box-shadow: 1px 1px 0 0 var(--ink); }
+.hdr-btn:active { transform: translate(2px,2px); box-shadow: 0 0 0 0 var(--ink); }
 
 /* ───────────────── MAIN LAYOUT ───────────────── */
 .main {
@@ -216,7 +232,21 @@ body {
   align-items: stretch;
   border-bottom: 1px solid rgba(0,0,0,0.18);
   min-height: 156px;
+  cursor: pointer;
+  user-select: none;
 }
+.layer:not(.expanded) .layer-head { border-bottom-color: transparent; }
+.layer-chevron {
+  align-self: center;
+  padding: 0 24px 0 6px;
+  color: var(--ink2);
+  transition: transform 220ms ease;
+  display: flex;
+  align-items: center;
+}
+.layer-chevron svg { width: 26px; height: 26px; display: block; }
+.layer.expanded .layer-chevron { transform: rotate(180deg); }
+.layer:hover:not(.expanded) .layer-chevron { color: var(--ink); }
 
 .layer-num {
   position: absolute;
@@ -320,13 +350,14 @@ body {
   letter-spacing: -0.02em;
 }
 
-/* Layer body — grid of boxes */
+/* Layer body — grid of boxes (hidden by default, shown when .layer.expanded) */
 .layer-body {
   padding: 30px 34px 36px;
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(370px, 1fr));
   gap: 22px;
 }
+.layer:not(.expanded) .layer-body { display: none; }
 
 /* ───────────────── BOX ───────────────── */
 .box {
@@ -1110,6 +1141,8 @@ body {
   <div class="hdr-title">Developer Stack · Layered Journey Map</div>
   <div class="hdr-spacer"></div>
   <div class="hdr-hint">Click any component to see the developer journey</div>
+  <button class="hdr-btn" id="expandAll" type="button">Expand all</button>
+  <button class="hdr-btn" id="collapseAll" type="button">Collapse all</button>
   <div class="hdr-count"><strong>10</strong> layers</div>
 </div>
 
@@ -2595,6 +2628,7 @@ function render() {
           <div class="layer-who">For: ${layer.who}</div>
         </div>
         <div class="layer-count"><strong>${count}</strong>components</div>
+        <div class="layer-chevron" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></div>
       </div>
       <div class="layer-body" id="body-${layerId}"></div>
     `;
@@ -2630,7 +2664,10 @@ function navigateToBox(layerId, name) {
   const idx = layer.boxes.findIndex(b => b.name === name);
   if (idx < 0) return;
   const sec = document.getElementById('l' + layerId);
-  if (sec) sec.scrollIntoView({behavior:'smooth', block:'start'});
+  if (sec) {
+    sec.classList.add('expanded');
+    sec.scrollIntoView({behavior:'smooth', block:'start'});
+  }
   setTimeout(() => openModal(layerId, idx), 200);
 }
 
@@ -2799,13 +2836,35 @@ document.addEventListener('keydown', (e) => {
   if (e.key === 'Escape' && modalBackdrop.classList.contains('open')) closeModal();
 });
 
-// Rail navigation
+// Layer header collapse / expand (click anywhere on the head except a box)
+stack.addEventListener('click', (e) => {
+  if (e.target.closest('.box')) return; // boxes have their own handler
+  const head = e.target.closest('.layer-head');
+  if (!head) return;
+  const layer = head.closest('.layer');
+  if (layer) layer.classList.toggle('expanded');
+});
+
+// Rail navigation — expand the target layer, then scroll to it
 rail.addEventListener('click', (e) => {
   const item = e.target.closest('[data-jump]');
   if (!item) return;
   const layerId = item.dataset.jump;
   const sec = document.getElementById('l' + layerId);
-  if (sec) sec.scrollIntoView({behavior:'smooth', block:'start'});
+  if (sec) {
+    sec.classList.add('expanded');
+    sec.scrollIntoView({behavior:'smooth', block:'start'});
+  }
+});
+
+// Expand all / Collapse all
+const expandAllBtn = document.getElementById('expandAll');
+const collapseAllBtn = document.getElementById('collapseAll');
+if (expandAllBtn) expandAllBtn.addEventListener('click', () => {
+  document.querySelectorAll('.layer').forEach(l => l.classList.add('expanded'));
+});
+if (collapseAllBtn) collapseAllBtn.addEventListener('click', () => {
+  document.querySelectorAll('.layer').forEach(l => l.classList.remove('expanded'));
 });
 
 // Highlight active layer in rail as user scrolls
