@@ -1297,6 +1297,38 @@ const LAYERS = {
         goTo:[{ref:['09','NemoClaw'],note:'Agent runtime'},{ref:['09','Omniverse'],note:'Digital twin'},{ref:['09','AI Blueprints'],note:'Blueprint family'},{ref:['05','TAO Toolkit'],note:'Fine-tuning skills'}],
         friction:['Industrial integration always custom','Needs factory data + digital twin to be useful']
       },
+      { name:'GeForce NOW', type:'PLATFORM', sub:'Cloud gaming · 4K 120fps · publisher SDK', use:'Stream NVIDIA-powered PC games from cloud to any device', url:'nvidia.com/en-us/geforce-now',
+        desc:'NVIDIA cloud gaming service. Streams PC games from RTX-class data centers to any device (laptop, Mac, mobile, TV). Partner SDK for game publishers to add cloud delivery alongside local installs.',
+        who:'Gamers without local RTX · game publishers integrating cloud delivery',
+        arriveFrom:[{ext:'Steam / Epic / publisher integrations'},{ref:['01','Data Center GPUs'],detail:'Cloud-side RTX hardware'}],
+        steps:['Game publisher partners with NVIDIA','Title validated and added to library','Players stream via GeForce NOW client (any device)','Sub tiers: Free / Performance / Ultimate'],
+        goTo:[{ref:['01','GeForce RTX'],note:'Local alternative'},{ref:['09','NVIDIA Studio'],note:'Creator counterpart'}],
+        friction:['Subscription-based','Latency-sensitive for competitive games','Library limited to partnered publishers']
+      },
+      { name:'NVIDIA Broadcast', type:'PLATFORM', sub:'AI streaming tools · Maxine SDK for app devs', use:'Add AI video / audio enhancement to streaming and comms apps', url:'nvidia.com/en-us/broadcasting',
+        desc:'AI video and audio enhancement for streamers, creators, and comms apps. Noise removal, virtual background, eye contact, gesture detection, voice clarity. Maxine SDK lets developers integrate the same tech — used by Discord, Zoom, OBS Studio, Microsoft Teams.',
+        who:'Streamers · content creators · comms / video app developers',
+        arriveFrom:[{ext:'Streamer / creator community'},{ref:['01','GeForce RTX'],detail:'Required RTX hardware'},{ref:['09','NVIDIA Studio'],detail:'Part of Studio platform'}],
+        steps:['End user: install NVIDIA Broadcast app','Developer: integrate Maxine SDK','Apply AI effects on RTX hardware','Ship in your app or use in OBS / Zoom / Discord'],
+        goTo:[{ref:['09','NVIDIA Studio'],note:'Creator umbrella'},{ref:['09','AI for Media'],note:'Real-time A/V AI'},{ref:['09','NVIDIA ACE'],note:'Avatar tech sibling'}],
+        friction:['Requires RTX GPU','Some effects need decent VRAM']
+      },
+      { name:'RTX Remix', type:'PLATFORM', sub:'Open-source modding · path-trace classic games', use:'Remaster classic PC games with path tracing + DLSS + AI assets', url:'nvidia.com/en-us/geforce/rtx/remix',
+        desc:'Open-source modding platform that lets modders inject path tracing + DLSS + AI-upscaled assets into classic DirectX 8/9 games. Combines USD pipeline (shared with Omniverse) + AI texture tools + OptiX path tracer. Famous remasters: Portal RTX, Half-Life 2 RTX.',
+        who:'Modders · indie remaster teams · classic-game preservation community',
+        arriveFrom:[{ext:'Modding community · Steam / Nexus Mods'},{ref:['09','Omniverse'],detail:'USD pipeline shared'}],
+        steps:['Install RTX Remix toolkit','Capture a target game scene','Re-author meshes / textures / lights in Remix Toolkit','Ship as community mod'],
+        goTo:[{ref:['04','OptiX'],note:'Underlying ray tracing engine'},{ref:['04','DLSS'],note:'Upscaling integration'},{ref:['09','Omniverse'],note:'Shared USD pipeline'}],
+        friction:['Heavy GPU requirement (RTX 30+ recommended)','Engine-specific game support (DX8/9 only)']
+      },
+      { name:'Project G-Assist', type:'PLATFORM', sub:'In-game AI assistant · on-device small model · ISV SDK', use:'AI assistant for game help + system tuning · or integrate into your game', url:'nvidia.com/en-us/geforce/news/g-assist-ai-companion',
+        desc:'AI assistant that runs locally on RTX GPUs. Answers questions about the game you are playing, tunes system / GPU settings, summarizes gameplay. Small LLM runs on-device. SDK for ISVs to plug in their own game knowledge bases.',
+        who:'Gamers · ISVs integrating in-game AI · game publishers',
+        arriveFrom:[{ext:'NVIDIA App / GeForce Experience successor'},{ref:['01','GeForce RTX'],detail:'Requires RTX GPU'}],
+        steps:['Install via NVIDIA App','Bind hotkey for invocation','Ask questions in-game / system context','ISVs: integrate G-Assist SDK in your title'],
+        goTo:[{ref:['06','Nemotron 3 Nano'],note:'Small-model class · similar use case'},{ref:['09','NVIDIA Studio'],note:'Sibling creator tool'},{ref:['01','GeForce RTX'],note:'Hardware path'}],
+        friction:['Early access / evolving feature set','RTX 30+ GPU minimum recommended']
+      },
     ]
   },
 
@@ -1952,6 +1984,30 @@ const LAYERS = {
         goTo:[{ref:['06','GraspGen-X'],note:'Grasping pairing'},{ref:['09','Isaac'],note:'Robotics platform'}],
         friction:['Robot kinematics setup is per-platform','GPU needed for real-time planning']
       },
+      { name:'DLSS', type:'SDK', sub:'Deep Learning Super Sampling · DLSS 4 Multi Frame Gen · for game devs', use:'AI upscale + frame-gen for games (devs integrate SDK)', url:'developer.nvidia.com/rtx/dlss',
+        desc:'NVIDIA Deep Learning Super Sampling. AI-driven upscaling and frame generation. DLSS 4 (current) adds Multi Frame Generation. Game devs integrate via Unreal / Unity plugins or directly. The defining RTX gaming feature — adopted by most modern AAA titles.',
+        who:'Game developers · graphics engineers',
+        arriveFrom:[{ext:'GDC / Unreal Marketplace / Unity Asset Store'},{ref:['01','GeForce RTX'],detail:'Runs on RTX Tensor Cores'}],
+        steps:['Download DLSS SDK from developer.nvidia.com','Integrate via Unreal/Unity plugin or direct API','Tune quality presets per scene','Ship with game'],
+        goTo:[{ref:['04','TensorRT'],note:'Underlying inference engine'},{ref:['01','GeForce RTX'],note:'Target hardware'},{ref:['04','NVIDIA Reflex'],note:'Often paired'}],
+        friction:['Frame Generation needs RTX 40+ Tensor Cores','Image quality requires per-scene tuning']
+      },
+      { name:'NVIDIA Reflex', type:'SDK', sub:'Low-latency gaming framework · CPU+GPU sync', use:'Cut input latency in competitive games', url:'developer.nvidia.com/rendering-technologies/reflex',
+        desc:'Low-latency framework for competitive games. Reflex SDK synchronizes CPU and GPU work to minimize the render queue. Adopted by Valorant, Apex Legends, CS2, Fortnite, Overwatch.',
+        who:'Game developers · esports / competitive titles',
+        arriveFrom:[{ext:'GDC · competitive gaming community'},{ref:['01','GeForce RTX'],detail:'Reflex hardware path'}],
+        steps:['Integrate Reflex SDK in your engine','Enable Reflex mode in graphics settings','Optionally pair with Reflex monitor (G-SYNC)'],
+        goTo:[{ref:['01','GeForce RTX'],note:'Hardware path'},{ref:['04','DLSS'],note:'Often shipped together'}],
+        friction:['Engine-specific integration','Impact strongest in CPU-bound games']
+      },
+      { name:'OptiX', type:'SDK', sub:'Ray tracing API · OptiX 9 · AI denoising', use:'Build path-traced renderers and graphics tools', url:'developer.nvidia.com/rtx/ray-tracing/optix',
+        desc:'NVIDIA OptiX — the ray tracing engine for production renderers, simulation, and AI-enhanced graphics. Used by Adobe, Autodesk, Pixar, Chaos V-Ray, Blender Cycles. OptiX 9 adds AI denoising. Foundation under Omniverse RTX renderer and RTX Remix.',
+        who:'Graphics / rendering engine developers · DCC plugin authors',
+        arriveFrom:[{ext:'SIGGRAPH community'},{ref:['09','Omniverse'],detail:'Used inside Omniverse'},{ref:['09','RTX Remix'],detail:'Path-tracer for Remix mods'}],
+        steps:['Download OptiX SDK','Write ray tracing pipelines','Integrate AI denoiser (built-in)','Ship in renderer'],
+        goTo:[{ref:['03','CUDA Toolkit'],note:'Underlying compute'},{ref:['09','Omniverse'],note:'Common consumer'},{ref:['09','RTX Remix'],note:'Modding platform'}],
+        friction:['Ray tracing pipeline programming is complex','Best with RTX RT cores']
+      },
     ]
   },
 
@@ -2447,12 +2503,12 @@ const BOX_ORDER = {
   // Popular / recognizable items first, then newest. So devs see what they
   // already know up front, then discover the new stuff.
   '10': ['developer.nvidia.com','GitHub · NVIDIA','HuggingFace','docs.nvidia.com','NGC','Developer Program','GTC Conference','DLI · learn.nvidia.com','Discord','Developer Forums','AI Enterprise','Inception','Nemotron Coalition','NVIDIA AI Workbench','NVIDIA Certification','NVIDIA LaunchPad','NVIDIA On-Demand','NVIDIA Technical Blog','NVIDIA Research','Exemplar Cloud Program'],
-  '09': ['Omniverse','Isaac','Riva','DRIVE','Clara','AI Blueprints','NemoClaw','NVIDIA ACE','Earth-2','Newton','NVIDIA Aerial','Metropolis','Holoscan','IGX','AI for Media','Omniverse DSX Blueprint','NVIDIA Studio','Morpheus','Hermes Agent','FOX Blueprint'],
+  '09': ['Omniverse','Isaac','Riva','DRIVE','Clara','AI Blueprints','NemoClaw','NVIDIA ACE','Earth-2','Newton','NVIDIA Aerial','Metropolis','Holoscan','IGX','AI for Media','Omniverse DSX Blueprint','NVIDIA Studio','Morpheus','Hermes Agent','FOX Blueprint','GeForce NOW','NVIDIA Broadcast','RTX Remix','Project G-Assist'],
   '08': ['build.nvidia.com','AWS Bedrock','OpenRouter','Together AI','Fireworks AI','HF Inference Endpoints','DeepInfra','DGX Cloud','DGX Cloud Lepton','NVIDIA Brev','Cloudflare Workers AI','Lambda Inference','Oracle OCI Gen AI','Friendli AI','Crusoe Managed Inference','Baseten','Hyperbolic','RunPod Serverless','Nebius Token Factory','Azure AI Foundry','GCP Vertex AI'],
   '07': ['NIM','vLLM','Triton','Ollama','Dynamo','SGLang','llama.cpp','KServe','Ray Serve','NIM Operator','Run:ai','NeMo Microservices','TensorRT-LLM Serve','OpenShell'],
   '06': ['Llama 3.x (NV-hosted)','Nemotron 3 Nano','Parakeet','Llama-Nemotron','NV-Embed v2','Nemotron 3 Super','Mistral / Mixtral','Canary','Cosmos','Nemotron 3 Ultra','Nemotron Nano 2 VL','Isaac GR00T N1','Nemotron-H','Audio2Face-3D','GR00T-Dreams','GraspGen-X','LCDrive','NitroGen','Alpamayo 2 Super','OmniDreams'],
   '05': ['NeMo Framework','Megatron-LM','NeMo Curator','TAO Toolkit','NeMo RL','BioNeMo','Modulus','Megatron-Core','Isaac Lab','NeMo Run'],
-  '04': ['PyTorch + CUDA','TensorRT','RAPIDS','cuDNN','NCCL','JAX + CUDA','TensorRT-LLM','OpenAI Triton (kernel lang)','DALI','NVIDIA Model Optimizer','CuPy','NVIDIA Warp','curoboV2'],
+  '04': ['PyTorch + CUDA','TensorRT','RAPIDS','cuDNN','NCCL','JAX + CUDA','TensorRT-LLM','OpenAI Triton (kernel lang)','DALI','NVIDIA Model Optimizer','CuPy','NVIDIA Warp','curoboV2','DLSS','NVIDIA Reflex','OptiX'],
   '03': ['CUDA Toolkit','cuBLAS / cuFFT / cuSPARSE','Nsight Systems / Compute','NVCC / PTX','Thrust / CCCL','NVIDIA HPC SDK','CUTLASS','CUDA-Q'],
   '02': ['GPU Driver','Container Toolkit','DCGM / Fabric Mgr','CUDA Driver API','DOCA','NVIDIA GPU Operator','GPU Sharing (MIG / MPS / Time-Slicing)','Open GPU Kernel Modules','DGX OS / Base OS','Mission Control'],
   '01': ['Data Center GPUs','GeForce RTX','Jetson','DGX Systems','NVLink / NVSwitch','DRIVE Orin / Thor','L40S / L40 / L4','RTX PRO Blackwell','DGX SuperPOD','HGX','MGX','Quantum-X800 InfiniBand','Spectrum-X Ethernet','BlueField DPUs','ConnectX-7 / ConnectX-8 SuperNIC','Grace CPU + Superchips','DGX Spark','NVIDIA RTX Spark','DGX Station','GB300 NVL72','Vera Rubin VR200'],
