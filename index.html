@@ -110,6 +110,14 @@ body {
 }
 .hdr-btn:hover { transform: translate(1px,1px); box-shadow: 1px 1px 0 0 var(--ink); }
 .hdr-btn:active { transform: translate(2px,2px); box-shadow: 0 0 0 0 var(--ink); }
+.hdr-switch {
+  font-family: var(--mono); font-size: 10.5px; font-weight: 800;
+  letter-spacing: 0.08em; text-transform: uppercase;
+  padding: 7px 12px; background: var(--ink); color: #fff;
+  text-decoration: none; box-shadow: 2px 2px 0 0 var(--ink);
+  transition: transform 80ms, box-shadow 80ms;
+}
+.hdr-switch:hover { transform: translate(1px,1px); box-shadow: 1px 1px 0 0 var(--ink); }
 
 /* ───────────────── MAIN LAYOUT ───────────────── */
 .main {
@@ -1190,7 +1198,7 @@ body {
   <div class="hdr-brand">NVIDIA</div>
   <div class="hdr-title">Developer Stack · Layered Journey Map</div>
   <div class="hdr-spacer"></div>
-  <div class="hdr-hint">Click any component to see the developer journey</div>
+  <a class="hdr-switch" href="/5-layer">Switch to AI 5-layer view →</a>
   <button class="hdr-btn" id="expandAll" type="button">Expand all</button>
   <button class="hdr-btn" id="collapseAll" type="button">Collapse all</button>
   <div class="hdr-count"><strong>10</strong> layers</div>

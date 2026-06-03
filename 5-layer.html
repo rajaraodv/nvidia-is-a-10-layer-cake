@@ -1,0 +1,887 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Is a 5-Layer Cake · Strategic Stack</title>
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --ink: #0a0a0a;
+  --ink2: #3a3a3a;
+  --ink3: #6e6e6e;
+  --ink4: #a8a8a8;
+  --rule: #d6d6d6;
+  --rule2: #ececec;
+  --rule3: #f4f4f4;
+  --bg: #ffffff;
+
+  /* Per-layer pastel backgrounds — bottom-to-top: Energy → Apps */
+  --l-1: #fff4d6; /* warm cream — energy */
+  --l-2: #dcdce4; /* stone — chips */
+  --l-3: #d4f1ec; /* teal — infrastructure */
+  --l-4: #d7f0db; /* mint — models */
+  --l-5: #ffe1e6; /* rose — applications */
+
+  --sans: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', 'Inter', Arial, sans-serif;
+  --mono: 'SF Mono', 'JetBrains Mono', 'Fira Code', Menlo, monospace;
+}
+
+html, body { height: 100%; }
+body {
+  font-family: var(--sans);
+  background: #efefef;
+  color: var(--ink);
+  font-size: 13px;
+  line-height: 1.4;
+  -webkit-font-smoothing: antialiased;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ─────────────── HEADER ─────────────── */
+.hdr {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  padding: 16px 28px;
+  border-bottom: 2px solid var(--ink);
+  flex-shrink: 0;
+  background: #fff;
+  z-index: 30;
+  position: sticky;
+  top: 0;
+}
+.hdr-brand { font-weight: 900; font-size: 15px; letter-spacing: -0.01em; }
+.hdr-title { font-size: 12.5px; color: var(--ink2); font-weight: 500; }
+.hdr-spacer { flex: 1; }
+.hdr-count {
+  display: flex; align-items: baseline; gap: 6px;
+  font-family: var(--mono); font-size: 11px; color: var(--ink);
+}
+.hdr-count strong { font-size: 18px; font-weight: 900; letter-spacing: -0.02em; }
+.hdr-switch {
+  font-family: var(--mono); font-size: 10.5px; font-weight: 800;
+  letter-spacing: 0.08em; text-transform: uppercase;
+  padding: 7px 12px; background: var(--ink); color: #fff;
+  text-decoration: none; box-shadow: 2px 2px 0 0 var(--ink);
+  transition: transform 80ms, box-shadow 80ms;
+}
+.hdr-switch:hover { transform: translate(1px,1px); box-shadow: 1px 1px 0 0 var(--ink); }
+.hdr-btn {
+  font-family: var(--mono); font-size: 10.5px; font-weight: 800;
+  letter-spacing: 0.06em; text-transform: uppercase;
+  padding: 6px 11px; background: #fff; border: 1.5px solid var(--ink); color: var(--ink);
+  cursor: pointer; box-shadow: 2px 2px 0 0 var(--ink);
+  transition: transform 80ms, box-shadow 80ms;
+}
+.hdr-btn:hover { transform: translate(1px,1px); box-shadow: 1px 1px 0 0 var(--ink); }
+
+/* ─────────────── MAIN LAYOUT ─────────────── */
+.main { display: flex; flex: 1; min-height: 0; }
+.rail {
+  width: 174px; flex-shrink: 0;
+  background: #fafafa; border-right: 1.5px solid var(--ink);
+  padding: 14px 0; display: flex; flex-direction: column; gap: 1px;
+  position: sticky; top: 64px; align-self: flex-start;
+  max-height: calc(100vh - 64px); overflow-y: auto;
+}
+.rail-heading {
+  font-family: var(--mono); font-size: 9.5px; font-weight: 700;
+  letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink3);
+  padding: 0 16px 10px; margin-bottom: 4px;
+}
+.rail-item {
+  display: flex; align-items: center; gap: 10px;
+  padding: 8px 16px; min-height: 56px; cursor: pointer;
+  text-decoration: none; color: var(--ink2);
+  font-family: var(--mono); font-size: 11px; font-weight: 700;
+  letter-spacing: 0.04em; border-left: 3px solid transparent;
+  transition: filter 80ms, color 80ms;
+}
+.rail-item:hover { filter: brightness(0.95); color: var(--ink); }
+.rail-item[data-jump="1"] { background: var(--l-1); }
+.rail-item[data-jump="2"] { background: var(--l-2); }
+.rail-item[data-jump="3"] { background: var(--l-3); }
+.rail-item[data-jump="4"] { background: var(--l-4); }
+.rail-item[data-jump="5"] { background: var(--l-5); }
+.rail-item.active { filter: brightness(0.92); border-left-color: var(--ink); color: var(--ink); }
+.rail-num { font-size: 18px; font-weight: 900; }
+.rail-name { font-size: 10.5px; line-height: 1.2; }
+
+.stack-wrap { flex: 1; overflow-y: auto; padding: 0; }
+.stack { display: flex; flex-direction: column; }
+
+/* ─────────────── LAYERS ─────────────── */
+.layer { display: flex; flex-direction: column; border-bottom: 1px solid rgba(0,0,0,0.18); }
+.layer[data-id="1"] { background: var(--l-1); }
+.layer[data-id="2"] { background: var(--l-2); }
+.layer[data-id="3"] { background: var(--l-3); }
+.layer[data-id="4"] { background: var(--l-4); }
+.layer[data-id="5"] { background: var(--l-5); }
+
+.layer-head {
+  position: relative; display: flex; align-items: stretch;
+  border-bottom: 1px solid rgba(0,0,0,0.18); min-height: 156px;
+  cursor: pointer; user-select: none;
+}
+.layer:not(.expanded) .layer-head { border-bottom-color: transparent; }
+.layer-num {
+  position: absolute; top: 16px; left: 22px; width: 104px; height: 124px;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: 6px; z-index: 1; border: 2.5px solid var(--ink);
+  background: rgba(255,255,255,0.7); box-shadow: 2px 2px 0 0 var(--ink);
+  pointer-events: none; padding: 8px 4px;
+}
+.layer-icon {
+  width: 38px; height: 38px; color: var(--ink);
+  display: flex; align-items: center; justify-content: center; margin-bottom: -2px;
+}
+.layer-icon svg { width: 100%; height: 100%; display: block; }
+.layer-num-label {
+  font-family: var(--mono); font-size: 10px; font-weight: 800;
+  letter-spacing: 0.16em; color: var(--ink2); line-height: 1;
+}
+.layer-num-value {
+  font-family: var(--mono); font-size: 38px; font-weight: 900;
+  color: var(--ink); letter-spacing: -0.04em; line-height: 1;
+}
+.layer-meta {
+  flex: 1; padding: 20px 26px 20px 150px;
+  display: flex; flex-direction: column; justify-content: center; gap: 4px;
+}
+.layer-name {
+  font-size: 18px; font-weight: 900; letter-spacing: 0.02em;
+  text-transform: uppercase; color: var(--ink); line-height: 1.1;
+}
+.layer-desc { font-size: 13px; color: var(--ink2); line-height: 1.45; max-width: 740px; }
+.layer-who {
+  font-size: 10.5px; font-family: var(--mono); color: var(--ink3);
+  text-transform: uppercase; letter-spacing: 0.06em; margin-top: 2px;
+}
+.layer-count {
+  align-self: center; padding: 18px 22px;
+  font-family: var(--mono); font-size: 11px; color: var(--ink3);
+  text-transform: uppercase; letter-spacing: 0.06em;
+  border-left: 1px solid rgba(0,0,0,0.10);
+  display: flex; flex-direction: column; align-items: flex-end; gap: 2px;
+  min-width: 110px;
+}
+.layer-count strong {
+  font-size: 22px; font-weight: 900; color: var(--ink); letter-spacing: -0.02em;
+}
+.layer-chevron {
+  align-self: center; padding: 0 24px 0 6px; color: var(--ink2);
+  transition: transform 220ms ease; display: flex; align-items: center;
+}
+.layer-chevron svg { width: 26px; height: 26px; display: block; }
+.layer.expanded .layer-chevron { transform: rotate(180deg); }
+.layer:hover:not(.expanded) .layer-chevron { color: var(--ink); }
+
+/* ─────────────── LAYER BODY ─────────────── */
+.layer-body {
+  padding: 26px 30px 32px;
+  display: flex; flex-direction: column; gap: 20px;
+}
+.layer:not(.expanded) .layer-body { display: none; }
+
+.subgroup-block {
+  background: rgba(255,255,255,0.55);
+  border: 1.5px solid rgba(0,0,0,0.14);
+  border-radius: 6px;
+  padding: 18px 22px 22px;
+}
+.layer-subgroup {
+  padding: 0 0 14px; margin-bottom: 16px;
+  border-bottom: 2px solid var(--ink);
+  display: flex; align-items: baseline; justify-content: space-between; gap: 14px;
+}
+.layer-subgroup-name {
+  font-family: var(--mono); font-size: 16px; font-weight: 900;
+  letter-spacing: 0.13em; text-transform: uppercase; color: var(--ink); line-height: 1.1;
+}
+.layer-subgroup-count {
+  font-family: var(--mono); font-size: 11px; font-weight: 700;
+  color: var(--ink3); letter-spacing: 0.08em; text-transform: uppercase;
+}
+.subgroup-grid {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 12px;
+}
+
+/* ─────────────── BOX ─────────────── */
+.box {
+  text-align: left; background: #fff; border: 1.5px solid var(--rule);
+  padding: 13px 14px 11px; cursor: pointer;
+  display: flex; flex-direction: column; gap: 4px;
+  position: relative; transition: border-color 90ms, box-shadow 90ms, transform 90ms;
+  font: inherit; color: inherit; min-height: 150px;
+}
+.box:hover {
+  border-color: var(--ink); box-shadow: 0 4px 16px rgba(0,0,0,0.14);
+  transform: translateY(-1px); z-index: 1;
+}
+.box-top {
+  display: flex; align-items: center; justify-content: space-between; margin-bottom: 4px;
+}
+.box-tag {
+  font-family: var(--mono); font-size: 9.5px; font-weight: 800;
+  letter-spacing: 0.08em; text-transform: uppercase;
+  padding: 3px 7px 3.5px; background: var(--ink); color: #fff; line-height: 1;
+}
+.box-status {
+  width: 8px; height: 8px; border-radius: 50%; background: var(--ink); flex-shrink: 0;
+}
+.box-name {
+  font-size: 14.5px; font-weight: 800; line-height: 1.2;
+  color: var(--ink); letter-spacing: -0.005em;
+}
+.box-sub {
+  font-size: 11.5px; color: var(--ink2); line-height: 1.35;
+}
+.box-use {
+  margin-top: 7px; padding: 7px 10px 8px;
+  background: linear-gradient(180deg, rgba(255,243,202,0.55) 0%, rgba(255,231,165,0.30) 100%);
+  border-left: 3px solid var(--ink);
+  flex: 1; display: flex; flex-direction: column; gap: 3px;
+}
+.box-use-label {
+  font-size: 8.5px; font-weight: 800; letter-spacing: 0.14em;
+  text-transform: uppercase; color: var(--ink2); line-height: 1;
+}
+.box-use-text {
+  font-size: 12.5px; color: var(--ink); font-weight: 600; line-height: 1.35;
+}
+.box-url {
+  font-size: 10px; color: var(--ink3); font-family: var(--mono);
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  margin-top: 6px; padding-top: 6px; border-top: 1px solid var(--rule2);
+}
+
+/* ─────────────── MODAL ─────────────── */
+.modal-backdrop {
+  position: fixed; inset: 0; background: rgba(0,0,0,0.55);
+  display: none; align-items: center; justify-content: center;
+  padding: 24px; z-index: 50; backdrop-filter: blur(2px);
+}
+.modal-backdrop.open { display: flex; }
+.modal {
+  background: #fff; max-width: 720px; width: 100%; max-height: 90vh;
+  overflow-y: auto; border: 2px solid var(--ink);
+  box-shadow: 6px 6px 0 0 var(--ink); position: relative;
+}
+.modal-close {
+  position: absolute; top: 14px; right: 14px;
+  width: 30px; height: 30px; border: 1.5px solid var(--ink); background: #fff;
+  cursor: pointer; font-size: 16px; font-weight: 900; line-height: 1;
+  display: flex; align-items: center; justify-content: center;
+}
+.modal-close:hover { background: var(--ink); color: #fff; }
+.modal-body { padding: 32px 36px 36px; }
+.m-eyebrow {
+  font-family: var(--mono); font-size: 10.5px; font-weight: 800;
+  letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink3);
+  margin-bottom: 8px;
+}
+.m-tag {
+  display: inline-block; font-family: var(--mono); font-size: 10px;
+  font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase;
+  padding: 3px 8px; background: var(--ink); color: #fff;
+  margin-bottom: 12px;
+}
+.m-title { font-size: 28px; font-weight: 900; line-height: 1.1; margin-bottom: 6px; letter-spacing: -0.015em; }
+.m-sub { font-size: 14px; color: var(--ink2); margin-bottom: 18px; }
+.m-section { margin-top: 22px; }
+.m-section-label {
+  font-family: var(--mono); font-size: 10px; font-weight: 800;
+  letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink3);
+  margin-bottom: 8px;
+}
+.m-desc { font-size: 14px; line-height: 1.55; color: var(--ink); }
+.m-who { font-size: 13px; color: var(--ink2); font-style: italic; }
+.m-link {
+  display: inline-block; padding: 8px 14px;
+  background: var(--ink); color: #fff; text-decoration: none;
+  font-family: var(--mono); font-size: 11px; font-weight: 800;
+  letter-spacing: 0.08em; text-transform: uppercase;
+  margin-top: 14px;
+}
+
+/* ─────────────── CAKE INTRO MODAL ─────────────── */
+.cake-modal {
+  position: fixed; inset: 0; background: rgba(0,0,0,0.55);
+  display: flex; align-items: center; justify-content: center;
+  padding: 24px; z-index: 60; backdrop-filter: blur(2px);
+}
+.cake-modal.closing { opacity: 0; transition: opacity 250ms; pointer-events: none; }
+.cake-modal.dismissed { display: none; }
+.cake-card {
+  background: #fff; max-width: 560px; width: 100%;
+  border: 2.5px solid var(--ink); box-shadow: 6px 6px 0 0 var(--ink);
+  padding: 36px 32px 30px; position: relative; text-align: center;
+}
+.cake-close {
+  position: absolute; top: 14px; right: 14px;
+  width: 30px; height: 30px; border: 1.5px solid var(--ink); background: #fff;
+  cursor: pointer; font-size: 16px; font-weight: 900;
+  display: flex; align-items: center; justify-content: center;
+}
+.cake-title { font-size: 26px; font-weight: 900; line-height: 1.15; margin-bottom: 6px; letter-spacing: -0.02em; }
+.cake-sub { font-size: 13.5px; color: var(--ink2); margin-bottom: 22px; }
+.cake {
+  position: relative; display: flex; flex-direction: column; align-items: center;
+  margin: 0 auto 22px; padding-top: 36px;
+}
+.cake-candle-wrap { position: absolute; top: 0; left: 50%; transform: translateX(-50%); }
+.cake-candle {
+  width: 10px; height: 32px; background: #d65a47; margin: 0 auto;
+  border: 1px solid var(--ink);
+}
+.cake-flame {
+  width: 14px; height: 18px; background: #f0c14b;
+  border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+  margin: 0 auto -3px; border: 1px solid var(--ink);
+  animation: flicker 1.4s ease-in-out infinite alternate;
+}
+@keyframes flicker {
+  0% { transform: rotate(-2deg) scale(1); }
+  100% { transform: rotate(2deg) scale(1.06); }
+}
+.cake-frosting-top {
+  width: 280px; height: 14px; background: #fff;
+  border: 1.5px solid var(--ink); border-bottom: none;
+  position: relative;
+}
+.cake-frosting-top::before, .cake-frosting-top::after {
+  content: ''; position: absolute; bottom: -8px; width: 30px; height: 14px;
+  background: #fff; border: 1.5px solid var(--ink); border-top: none;
+  border-radius: 0 0 50% 50%;
+}
+.cake-frosting-top::before { left: 36px; }
+.cake-frosting-top::after { right: 36px; }
+.cake-layer {
+  height: 36px; border: 1.5px solid var(--ink); border-top: 1px dashed rgba(0,0,0,0.3);
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 14px; font-size: 12.5px; font-weight: 700;
+}
+.cake-layer:first-of-type { border-top: none; }
+.cake-layer[data-l="5"] { background: var(--l-5); width: 320px; }
+.cake-layer[data-l="4"] { background: var(--l-4); width: 380px; }
+.cake-layer[data-l="3"] { background: var(--l-3); width: 440px; }
+.cake-layer[data-l="2"] { background: var(--l-2); width: 500px; }
+.cake-layer[data-l="1"] { background: var(--l-1); width: 560px; }
+.cake-num {
+  font-family: var(--mono); font-size: 13px; font-weight: 900;
+  color: var(--ink); width: 22px;
+}
+.cake-name { font-size: 12px; letter-spacing: 0.02em; }
+.cake-plate {
+  width: 600px; height: 18px; background: #ddd;
+  border: 1.5px solid var(--ink); margin-top: 1px;
+  box-shadow: 0 4px 0 0 #bbb;
+}
+.cake-cta {
+  font-family: var(--mono); font-size: 13px; font-weight: 800;
+  letter-spacing: 0.06em; text-transform: uppercase;
+  padding: 13px 26px; background: var(--ink); color: #fff;
+  border: 2px solid var(--ink); cursor: pointer;
+  box-shadow: 3px 3px 0 0 var(--ink);
+  transition: transform 80ms, box-shadow 80ms;
+}
+.cake-cta:hover { transform: translate(1px,1px); box-shadow: 2px 2px 0 0 var(--ink); }
+.cake-hint {
+  font-size: 11px; color: var(--ink3); margin-top: 12px;
+  font-family: var(--mono); letter-spacing: 0.04em;
+}
+
+/* ─────────────── RESPONSIVE ─────────────── */
+@media (max-width: 960px) {
+  .hdr { padding: 14px 18px; gap: 14px; }
+  .rail { width: 130px; }
+  .rail-num { font-size: 16px; }
+  .rail-name { font-size: 10px; }
+  .layer-body { padding: 20px 18px 24px; gap: 16px; }
+  .subgroup-block { padding: 16px 18px 18px; }
+  .subgroup-grid { grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 10px; }
+  .layer-subgroup-name { font-size: 14px; }
+  .box { min-height: 140px; padding: 12px 13px 11px; }
+  .box-name { font-size: 14px; }
+  .box-sub { font-size: 11px; }
+  .box-use-text { font-size: 12px; }
+}
+
+@media (max-width: 640px) {
+  body { font-size: 13px; }
+  .hdr { padding: 10px 14px; gap: 10px; flex-wrap: nowrap; }
+  .hdr-brand { font-size: 13px; }
+  .hdr-title { display: none; }
+  .hdr-switch { font-size: 9px; padding: 6px 9px; }
+  .hdr-count { display: none; }
+  .rail { width: 56px; padding: 10px 0; }
+  .rail-heading { font-size: 8px; }
+  .rail-item { height: 48px; padding: 4px 2px; gap: 1px; }
+  .rail-num { font-size: 14px; }
+  .rail-name { display: none; }
+  .layer-head { flex-wrap: wrap; min-height: auto; padding-bottom: 8px; }
+  .layer-num { position: static; width: 64px; height: 84px; margin: 12px 0 0 14px; padding: 6px 2px; gap: 3px; }
+  .layer-icon { width: 22px; height: 22px; }
+  .layer-num-label { font-size: 7.5px; }
+  .layer-num-value { font-size: 22px; }
+  .layer-meta { padding: 12px 14px 6px 14px; gap: 3px; }
+  .layer-name { font-size: 13px; }
+  .layer-desc { font-size: 11.5px; }
+  .layer-who { font-size: 9.5px; }
+  .layer-count { display: none; }
+  .layer-body { padding: 14px 12px 20px; gap: 12px; }
+  .subgroup-block { padding: 14px 14px 16px; }
+  .subgroup-grid { grid-template-columns: 1fr; gap: 10px; }
+  .layer-subgroup-name { font-size: 13px; }
+  .box { min-height: auto; padding: 12px 13px 11px; }
+  .box-name { font-size: 14px; }
+  .box-sub { font-size: 11px; }
+  .modal-body { padding: 22px 22px 28px; }
+  .m-title { font-size: 22px; }
+  .cake-card { padding: 24px 20px 22px; }
+  .cake-title { font-size: 19px; }
+  .cake-layer { height: 28px; font-size: 11px; padding: 0 12px; }
+  .cake-layer[data-l="5"] { width: 240px; }
+  .cake-layer[data-l="4"] { width: 280px; }
+  .cake-layer[data-l="3"] { width: 320px; }
+  .cake-layer[data-l="2"] { width: 360px; }
+  .cake-layer[data-l="1"] { width: 400px; }
+  .cake-plate { width: 440px; }
+  .cake-frosting-top { width: 200px; height: 12px; }
+}
+</style>
+</head>
+<body>
+
+<!-- Cake intro modal -->
+<div class="cake-modal" id="cakeModal">
+  <div class="cake-card">
+    <button class="cake-close" id="cakeClose" aria-label="Close">✕</button>
+    <h1 class="cake-title">AI is a 5-Layer Cake 🎂</h1>
+    <p class="cake-sub">From the power plant at the bottom to the killer app on top — NVIDIA's strategic stack</p>
+    <div class="cake">
+      <div class="cake-candle-wrap">
+        <div class="cake-flame"></div>
+        <div class="cake-candle"></div>
+      </div>
+      <div class="cake-frosting-top"></div>
+      <div class="cake-layer" data-l="5"><span class="cake-num">5</span><span class="cake-name">Applications</span></div>
+      <div class="cake-layer" data-l="4"><span class="cake-num">4</span><span class="cake-name">Models</span></div>
+      <div class="cake-layer" data-l="3"><span class="cake-num">3</span><span class="cake-name">Infrastructure · AI Factories</span></div>
+      <div class="cake-layer" data-l="2"><span class="cake-num">2</span><span class="cake-name">Chips · Silicon</span></div>
+      <div class="cake-layer" data-l="1"><span class="cake-num">1</span><span class="cake-name">Energy</span></div>
+      <div class="cake-plate"></div>
+    </div>
+    <button class="cake-cta" id="cakeCta">Take a bite →</button>
+    <div class="cake-hint">5 layers · click any header to expand · based on NVIDIA's investor framing</div>
+  </div>
+</div>
+
+<div class="hdr">
+  <div class="hdr-brand">NVIDIA</div>
+  <div class="hdr-title">AI Strategic Stack · 5-Layer View</div>
+  <div class="hdr-spacer"></div>
+  <a class="hdr-switch" href="/">← Switch to Developer Stack (10 layers)</a>
+  <button class="hdr-btn" id="expandAll" type="button">Expand all</button>
+  <button class="hdr-btn" id="collapseAll" type="button">Collapse all</button>
+  <div class="hdr-count"><strong>5</strong> layers</div>
+</div>
+
+<div class="main">
+  <nav class="rail" id="rail">
+    <div class="rail-heading">Layers</div>
+    <a class="rail-item" data-jump="5"><span class="rail-num">5</span><span class="rail-name">Applications</span></a>
+    <a class="rail-item" data-jump="4"><span class="rail-num">4</span><span class="rail-name">Models</span></a>
+    <a class="rail-item" data-jump="3"><span class="rail-num">3</span><span class="rail-name">Infrastructure</span></a>
+    <a class="rail-item" data-jump="2"><span class="rail-num">2</span><span class="rail-name">Chips</span></a>
+    <a class="rail-item" data-jump="1"><span class="rail-num">1</span><span class="rail-name">Energy</span></a>
+  </nav>
+
+  <div class="stack-wrap" id="stackWrap">
+    <div class="stack" id="stack"></div>
+  </div>
+</div>
+
+<!-- Box detail modal -->
+<div class="modal-backdrop" id="modalBackdrop">
+  <div class="modal">
+    <button class="modal-close" id="modalClose" aria-label="Close">✕</button>
+    <div class="modal-body" id="modalBody"></div>
+  </div>
+</div>
+
+<script>
+const LAYER_ORDER = ['5','4','3','2','1'];
+
+const LAYER_ICONS = {
+  // 1 Energy — lightning bolt
+  '1': '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L4 14h7v8l9-12h-7V2z"/></svg>',
+  // 2 Chips — chip with pins
+  '2': '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="6" width="12" height="12" rx="1"/><rect x="9.5" y="9.5" width="5" height="5"/><path d="M9 3v3M12 3v3M15 3v3M9 18v3M12 18v3M15 18v3M3 9h3M3 12h3M3 15h3M18 9h3M18 12h3M18 15h3"/></svg>',
+  // 3 Infrastructure — building with rooftop
+  '3': '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21V9l9-6 9 6v12"/><path d="M3 21h18"/><rect x="7" y="13" width="3" height="4"/><rect x="14" y="13" width="3" height="4"/><path d="M10 21v-3.5h4V21"/></svg>',
+  // 4 Models — neural-network nodes
+  '4': '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="8" cy="9" r="1.4" fill="currentColor"/><circle cx="16" cy="9" r="1.4" fill="currentColor"/><circle cx="8" cy="15" r="1.4" fill="currentColor"/><circle cx="16" cy="15" r="1.4" fill="currentColor"/><circle cx="12" cy="12" r="1.6" fill="currentColor"/><path d="M8 9L12 12L16 9M8 15L12 12L16 15"/></svg>',
+  // 5 Applications — 2x2 grid
+  '5': '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round" stroke-linecap="round"><rect x="3" y="3" width="8" height="8" rx="1"/><rect x="13" y="3" width="8" height="8" rx="1"/><rect x="3" y="13" width="8" height="8" rx="1"/><rect x="13" y="13" width="8" height="8" rx="1"/></svg>',
+};
+
+const LAYERS = {
+  '1': {
+    name: 'Energy',
+    desc: 'Real-time intelligence requires real-time power generation. The foundation under every AI workload — the power plants, grid capacity, and energy-efficient tech that make AI economically possible at scale.',
+    who: 'Utility partners · grid operators · facility planners · sustainability leads',
+    boxes: [
+      { name:'Nuclear Power', type:'POWER', sub:'Baseload, carbon-free', use:'Power AI factories with always-on, zero-emission energy', url:'world-nuclear.org', desc:'NVIDIA partners with utilities investing in nuclear (Constellation Energy, Vistra) to source 24/7 carbon-free power for AI factories. SMR (small modular reactor) deployments now active.' },
+      { name:'Constellation Energy', type:'UTILITY', sub:'Nuclear · NVIDIA-aligned utility partner', use:'Direct-purchase nuclear power for data centers', url:'constellationenergy.com', desc:'Largest US producer of carbon-free energy. Power-purchase agreements with hyperscalers and AI compute customers. Restarting Three Mile Island Unit 1 for AI demand.' },
+      { name:'Natural Gas (Grid)', type:'POWER', sub:'Dispatchable peak power · ERCOT', use:'Bridge power for AI factories as nuclear ramps', url:'eia.gov/energyexplained/natural-gas', desc:'Texas (ERCOT) and Permian region are emerging AI-factory locations specifically because natural gas baseload is cheap, fast to deploy, and grid-connected.' },
+      { name:'Renewable Sources', type:'POWER', sub:'Solar · Wind · Hydro', use:'Carbon-neutral AI compute (where geo allows)', url:'iea.org/topics/renewables', desc:'Wind/solar via PPAs from hyperscalers (AWS, Microsoft). Crusoe Energy specializes in renewable-powered AI compute. Geographic constraints limit baseload role.' },
+      { name:'FP4 Precision', type:'EFFICIENCY', sub:'Blackwell · 4× perf-per-watt', use:'Halve power per inference token via lower precision', url:'developer.nvidia.com/blog/nvfp4', desc:'NVFP4 precision (4-bit floating point) in Blackwell GPUs delivers 2-4× the throughput per watt compared to FP8/FP16. Backbone of NVIDIA\'s "more intelligence per watt" pitch.' },
+      { name:'Liquid Cooling', type:'EFFICIENCY', sub:'DGX SuperPOD · GB300 NVL72', use:'Cut data-center cooling power by 30-40%', url:'nvidia.com/en-us/data-center/dgx-superpod', desc:'Direct-to-chip liquid cooling required for Blackwell-class density. Cuts cooling overhead and enables higher GPU density per rack. Vertiv, CoolIT, Schneider Electric are key vendors.' },
+      { name:'Spectrum-X Photonics', type:'EFFICIENCY', sub:'Optical networking · GTC 2026', use:'Cut networking power 3-5× vs copper', url:'nvidia.com/en-us/networking/spectrum-x', desc:'Co-packaged optics replace copper interconnects at scale. Major power savings for hyperscale fabric — networking is 8-12% of an AI factory\'s power budget today.' },
+      { name:'BlueField DPUs', type:'EFFICIENCY', sub:'Offload networking + storage', use:'Free GPUs from infra overhead', url:'nvidia.com/en-us/networking/products/data-processing-unit', desc:'DPUs offload network, storage, security from CPUs/GPUs. Net effect: same workload runs on less silicon at less power.' },
+    ]
+  },
+
+  '2': {
+    name: 'Chips · Silicon',
+    desc: 'Processors that transform energy into computation. NVIDIA\'s silicon — and the foundry and memory partners that make it possible — sit at the heart of every modern AI factory.',
+    who: 'Hardware engineers · cloud architects · OEMs · semiconductor analysts',
+    boxes: [
+      { name:'Blackwell Data Center GPUs', type:'GPU', sub:'B200 · B300 · GB200 · GB300', use:'Train and serve frontier-scale AI workloads', url:'nvidia.com/en-us/data-center/blackwell', desc:'NVIDIA Blackwell (B200, B300) and Grace Blackwell superchips (GB200, GB300). Up to 20 PFLOPs FP4 per GPU. NVLink 5 for chip-to-chip bandwidth. The current frontier-AI silicon.' },
+      { name:'Hopper Data Center GPUs', type:'GPU', sub:'H100 · H200', use:'Mainstream training and inference', url:'nvidia.com/en-us/data-center/h100', desc:'Hopper architecture: H100 (80GB HBM3) and H200 (141GB HBM3e). Still the volume product for training. Power: ~700W.' },
+      { name:'Vera Rubin VR200', type:'GPU', sub:'Next-gen platform · 2027 ramp', use:'Post-Blackwell frontier silicon', url:'nvidia.com/en-us/data-center/vera-rubin', desc:'Announced GTC 2026. VR200 GPU + Vera CPU. Production ramp 2026-2027. The platform after Blackwell.' },
+      { name:'Grace CPU', type:'CPU', sub:'72-core ARM Neoverse · NVLink-C2C', use:'NVIDIA\'s server CPU paired with GPUs', url:'nvidia.com/en-us/data-center/grace-cpu', desc:'72-core ARM Neoverse V2 CPU. Pairs with Hopper (GH200) or Blackwell (GB200, GB300) via NVLink-C2C. Powers DGX Spark, Station, GB300 NVL72.' },
+      { name:'GB10 Superchip', type:'CPU+GPU', sub:'1 PFLOP · 128GB unified · personal AI', use:'Run frontier AI locally on a desk', url:'nvidia.com/en-us/products/workstations/dgx-spark', desc:'20-core Grace CPU + Blackwell RTX GPU on one package. Drives DGX Spark and RTX Spark personal AI workstations. 1 PFLOP FP4, 128 GB unified memory.' },
+      { name:'GeForce RTX', type:'GPU', sub:'Consumer · RTX 4090 · 5090', use:'Local inference, gaming, prosumer ML', url:'nvidia.com/en-us/geforce/graphics-cards', desc:'Consumer Blackwell GPUs (RTX 50 series). 16-32GB GDDR7. Local LLM inference, small fine-tunes, gaming, creator workflows.' },
+      { name:'RTX PRO Blackwell', type:'GPU', sub:'96GB GDDR7 · workstation + server', use:'Pro workstation and ISV server inference', url:'nvidia.com/en-us/data-center/rtx-pro-6000-blackwell-server-edition', desc:'RTX PRO 6000 Blackwell — 96GB GDDR7. Workstation Edition for individual workstations, Server Edition for LLM inference / agentic AI.' },
+      { name:'Jetson', type:'SOC', sub:'Edge AI · Orin / Thor · 275 TOPS', use:'Run AI at the edge (robots, drones, cameras)', url:'developer.nvidia.com/embedded/jetson', desc:'Edge AI modules. Orin (up to 275 TOPS), Thor (next-gen). Used in robots, drones, cameras, industrial controllers.' },
+      { name:'DRIVE Orin / Thor', type:'SOC', sub:'Automotive · 254 TOPS Orin · Thor next', use:'Run AI on car ECUs · safety-rated', url:'developer.nvidia.com/drive/orin', desc:'Automotive-grade SoC for autonomous vehicle ECUs. CPU + GPU + DLA. Used in Mercedes EQS, BYD, Volvo EX90, Nio.' },
+      { name:'NVLink / NVSwitch', type:'INTERCONNECT', sub:'900 GB/s GPU-to-GPU', use:'Build coherent multi-GPU compute fabrics', url:'nvidia.com/en-us/data-center/nvlink', desc:'High-bandwidth GPU-to-GPU interconnect. NVLink 5: 900 GB/s bidirectional. NVSwitch for all-to-all in DGX SuperPOD.' },
+      { name:'BlueField DPUs', type:'DPU', sub:'BlueField-3 · BlueField-4 (GTC 2026)', use:'Offload networking, storage, security', url:'nvidia.com/en-us/networking/products/data-processing-unit', desc:'Data Processing Units — programmable accelerators for network, storage, security tasks. Used in AI clouds, sovereign AI, zero-trust infra.' },
+      { name:'ConnectX SuperNICs', type:'NIC', sub:'ConnectX-7 / 8 · up to 800 Gb/s', use:'Connect AI cluster nodes at 800 Gb/s', url:'nvidia.com/en-us/networking/products/ethernet/supernic', desc:'NICs at up to 800 Gb/s. Standard in HGX B300 and GB300 NVL72 systems. RDMA over Ethernet or InfiniBand.' },
+      { name:'Quantum-X800 InfiniBand', type:'FABRIC', sub:'800 Gb/s InfiniBand · Q3400 switch', use:'High-end AI cluster fabric (HPC pedigree)', url:'nvidia.com/en-us/networking/products/infiniband/quantum-x800', desc:'NVIDIA InfiniBand for AI factories. 800 Gb/s per port. Default fabric in DGX SuperPOD.' },
+      { name:'Spectrum-X Ethernet', type:'FABRIC', sub:'AI-tuned Ethernet · SN5600', use:'Ethernet fabric for AI clouds', url:'nvidia.com/en-us/networking/spectrum-x', desc:'NVIDIA Ethernet optimized for AI workloads. Default in B300 SuperPOD Ethernet configs. Used by CoreWeave, Crusoe.' },
+      { name:'TSMC (foundry)', type:'PARTNER', sub:'4N / 4NP custom process', use:'Manufacture the silicon NVIDIA designs', url:'tsmc.com', desc:'NVIDIA\'s sole leading-edge fab partner. Blackwell, Hopper, and Vera Rubin all manufactured on TSMC custom nodes. Capacity allocation is NVIDIA\'s biggest supply variable.' },
+      { name:'SK Hynix · Micron (HBM)', type:'PARTNER', sub:'HBM3e · HBM4 memory', use:'Stack high-bandwidth memory next to GPUs', url:'skhynix.com', desc:'HBM (High Bandwidth Memory) is the memory tier directly attached to Blackwell GPUs. SK Hynix is the primary supplier, Micron and Samsung secondary. HBM4 ramps with Vera Rubin.' },
+      { name:'ARM (CPU IP)', type:'PARTNER', sub:'Neoverse V2 architecture', use:'License the CPU instruction set Grace uses', url:'arm.com', desc:'Grace is built on ARM Neoverse V2 IP. NVIDIA holds an architecture license from ARM Holdings. Strategic dependency for the CPU side of the stack.' },
+    ]
+  },
+
+  '3': {
+    name: 'Infrastructure · AI Factories',
+    desc: 'Land, power delivery, cooling, networking. The "AI factories" that house the chips — from the rack-scale DGX SuperPOD to the desk-scale DGX Spark. NVIDIA-operated and partner clouds that rent capacity by the hour.',
+    who: 'Hyperscalers · cloud architects · enterprise infra · sovereign-AI builders',
+    boxes: [
+      { name:'DGX SuperPOD', type:'AI FACTORY', sub:'Pre-validated cluster · B200 / GB300', use:'Build a turnkey AI factory at any scale', url:'nvidia.com/en-us/data-center/dgx-superpod', desc:'NVIDIA reference architecture for AI factories: DGX nodes + InfiniBand fabric + storage + Mission Control software. SuperPOD variants for B200, B300, GB200 NVL72, GB300 NVL72.' },
+      { name:'GB300 NVL72', type:'AI FACTORY', sub:'72 Blackwell Ultra + 36 Grace · liquid-cooled', use:'Rack-scale reasoning inference infrastructure', url:'nvidia.com/en-us/data-center/gb300-nvl72', desc:'Rack-scale system: 72 Blackwell Ultra GPUs + 36 Grace CPUs, NVLink 5, liquid-cooled. Purpose-built for test-time scaling and reasoning inference at frontier scale.' },
+      { name:'DGX Systems', type:'AI FACTORY', sub:'8-GPU turnkey AI servers · H100 → B300', use:'Buy a complete NVIDIA-built AI server', url:'nvidia.com/en-us/data-center/dgx-systems', desc:'NVIDIA-built AI servers with DGX OS pre-installed. 8 GPUs per chassis. The original "AI in a box" SKU.' },
+      { name:'HGX · MGX', type:'AI FACTORY', sub:'Reference boards for OEMs', use:'OEM-built NVIDIA-validated servers', url:'nvidia.com/en-us/data-center/hgx', desc:'HGX (8-GPU baseboard) and MGX (modular reference platform) used by Supermicro, HPE, Dell, Lenovo, Foxconn, Wiwynn to build branded AI servers.' },
+      { name:'DGX Spark', type:'PERSONAL', sub:'GB10 · 1 PFLOP · personal AI deskside', use:'Run frontier AI on your desk', url:'nvidia.com/en-us/products/workstations/dgx-spark', desc:'Personal AI workstation. GB10 Grace Blackwell Superchip, 1 PFLOP FP4, 128 GB unified memory. NVIDIA Sync clusters 2-4 Sparks to 512GB unified memory.' },
+      { name:'NVIDIA RTX Spark', type:'PERSONAL', sub:'Windows PCs · laptops + desktops · fall 2026', use:'Run frontier AI on a Windows PC', url:'nvidianews.nvidia.com/news/nvidia-microsoft-windows-pcs-agents-rtx-spark', desc:'NVIDIA × Microsoft superchip for Windows PCs. 20-core Grace CPU + Blackwell RTX GPU, 1 PFLOP, 128 GB. Supports 120B LLMs at 1M tokens. ASUS, Dell, HP, Lenovo, Surface, MSI.' },
+      { name:'DGX Station', type:'PERSONAL', sub:'GB300 · 784GB memory · spring 2026', use:'Deskside AI supercomputer for teams', url:'nvidia.com/en-us/products/workstations/dgx-station', desc:'GB300 + Grace + 784GB coherent memory in a deskside form factor. For research teams needing data-center-scale memory locally.' },
+      { name:'DGX Cloud', type:'CLOUD', sub:'NVIDIA-managed training infra', use:'Rent NVIDIA-managed H100 / B200 clusters', url:'nvidia.com/en-us/data-center/dgx-cloud', desc:'NVIDIA\'s own managed cloud for training: pre-validated clusters, NeMo + AI Enterprise included, multi-cloud back-end (AWS / Azure / GCP / Oracle / NVIDIA POPs).' },
+      { name:'DGX Cloud Lepton', type:'CLOUD', sub:'Multi-cloud GPU marketplace', use:'Buy GPU capacity across CoreWeave, Crusoe, Lambda, AWS, Azure', url:'nvidia.com/en-us/data-center/dgx-cloud-lepton', desc:'Multi-cloud GPU marketplace from NVIDIA: aggregates capacity from CoreWeave, Crusoe, Lambda, AWS, Azure. Unified API across clouds.' },
+      { name:'AWS', type:'HYPERSCALER', sub:'p5 (H100) · p5e (H200) · trn2 instances', use:'Rent NVIDIA GPUs on AWS', url:'aws.amazon.com/ec2/instance-types/p5', desc:'AWS offers H100, H200, and Trainium2 instances. Bedrock now hosts Nemotron 3 Nano (Dec 2025) and Super (Mar 2026). The largest NVIDIA-hosting hyperscaler.' },
+      { name:'Microsoft Azure', type:'HYPERSCALER', sub:'ND H100 v5 · ND H200 v5 · Azure AI Foundry', use:'Rent NVIDIA GPUs on Azure', url:'azure.microsoft.com', desc:'ND H100 v5 (8x H100), ND H200 v5 (8x H200), plus emerging B200 SKUs. Azure AI Foundry hosts Nemotron via the Microsoft AI catalog.' },
+      { name:'Google Cloud (GCP)', type:'HYPERSCALER', sub:'A3 · A3 Mega · A3 Ultra', use:'Rent NVIDIA GPUs on GCP', url:'cloud.google.com/compute', desc:'A3 family (H100), A3 Mega (3.2 Tbps GPU bandwidth), A3 Ultra (H200). Vertex AI catalog hosts Nemotron in preview.' },
+      { name:'Oracle OCI', type:'HYPERSCALER', sub:'Bare-metal H100 / B200', use:'Rent NVIDIA GPUs on Oracle Cloud', url:'oracle.com/cloud', desc:'Oracle Cloud bare-metal GPU instances. Oracle Gen AI hosts Nemotron 3 Super and Nano Omni at GA.' },
+      { name:'CoreWeave', type:'AI CLOUD', sub:'Exemplar Cloud · Vera Rubin adopter', use:'NVIDIA-certified AI cloud · IPO 2024', url:'coreweave.com', desc:'Pure-play AI cloud built on NVIDIA GPUs. Public via IPO (Mar 2024). Confirmed as Vera Rubin + Spectrum-X Photonics adopter. The Exemplar Cloud Program reference partner.' },
+      { name:'Crusoe', type:'AI CLOUD', sub:'Exemplar Cloud · Renewable-powered', use:'Renewable-powered AI cloud (no fossil fuels)', url:'crusoe.ai', desc:'AI cloud running on stranded renewable energy. Designs and operates its own AI factories. Exemplar Cloud Program member.' },
+      { name:'Lambda · Nebius · Vultr · YTL', type:'AI CLOUD', sub:'4 more Exemplar Cloud partners', use:'NVIDIA-certified specialized AI clouds', url:'blogs.nvidia.com/blog/ai-cloud-ecosystem', desc:'Lambda (US, Bay-Area-bred), Nebius (EU/global, ex-Yandex), Vultr (global edge), YTL (Malaysia / Southeast Asia). All Exemplar Cloud Program partners, all built on NVIDIA stack.' },
+      { name:'Mission Control', type:'SOFTWARE', sub:'Cluster ops · DGX SuperPOD', use:'Operate large-scale AI factories', url:'nvidia.com/en-us/data-center/dgx-superpod', desc:'Cluster orchestration software for DGX SuperPOD. Manages telemetry, scheduling, multi-tenancy, recovery. Required for at-scale operation.' },
+      { name:'DGX OS / Base OS', type:'SOFTWARE', sub:'Pre-validated stack', use:'Boot DGX systems with the right CUDA + drivers', url:'docs.nvidia.com/dgx', desc:'Ubuntu-based OS pre-validated with the matching CUDA, drivers, NVIDIA AI Enterprise. Shipped on DGX systems.' },
+      { name:'DOCA', type:'SOFTWARE', sub:'BlueField DPU SDK', use:'Program BlueField DPUs for network/security', url:'developer.nvidia.com/networking/doca', desc:'NVIDIA\'s SDK for BlueField DPUs. Programmable offload of network, storage, security tasks. Used in zero-trust and high-perf cluster infra.' },
+    ]
+  },
+
+  '4': {
+    name: 'Models',
+    desc: 'AI systems trained on language, biology, chemistry, physics. Pre-trained capability that turns infrastructure into intelligence. NVIDIA\'s own model families plus the third-party open models that run on NVIDIA infra.',
+    who: 'AI researchers · model fine-tuners · application builders · ML platform teams',
+    boxes: [
+      { name:'Nemotron 3 Family', type:'NVIDIA LLM', sub:'Nano · Super · Ultra · Nemotron-H', use:'NVIDIA\'s flagship open-weight LLM line', url:'huggingface.co/nvidia', desc:'NVIDIA\'s open-weight LLM family. Nemotron 3 Nano (5B/9B), Super (47B-A4B / 120B-A12B), Ultra (~500B MoE frontier reasoning), Nemotron-H (hybrid Mamba). All open-weight on HuggingFace.' },
+      { name:'Nemotron Nano 2 VL', type:'NVIDIA LLM', sub:'Vision-language model · open', use:'Multimodal text + image reasoning', url:'huggingface.co/nvidia', desc:'Vision-language model on Nemotron Nano 2 base. For VLM tasks: chart QA, document understanding, image reasoning.' },
+      { name:'Nemotron 3 Nano Omni', type:'NVIDIA LLM', sub:'30B-A3B MoE · audio + image + video in', use:'Open omni-modal model (#1 VoiceBench)', url:'huggingface.co/nvidia', desc:'Multimodal-input LLM: text + image + video + audio in, text out. #1 on VoiceBench (89.4) and Daily-Omni (74.5). 30B total / 3B active. Released April 2026.' },
+      { name:'Cosmos 3', type:'NVIDIA MODEL', sub:'World model · Nano 16B · Super 64B', use:'Generate video + reason + act for physical AI', url:'developer.nvidia.com/cosmos', desc:'Frontier open world model. Combines physical reasoning, world generation, action generation. Used for robotics / AV / spatial AI training. Cosmos 3 GA May 2026.' },
+      { name:'Isaac GR00T N1', type:'NVIDIA MODEL', sub:'Humanoid robotics foundation model', use:'Pre-trained model for humanoid robot policies', url:'developer.nvidia.com/isaac/gr00t', desc:'Open humanoid robotics foundation model. Trained on simulated + real-world demonstrations. Used by Figure AI, 1X, Sanctuary, Tesla Optimus research.' },
+      { name:'Alpamayo 2 Super', type:'NVIDIA MODEL', sub:'32B VLA for full AV stack', use:'Vision-language-action model for driving', url:'huggingface.co/nvidia', desc:'Open 32B-parameter vision-language-action model covering the full AV driving stack. Bundled with Isaac Sim 6.0. Announced CVPR June 2026.' },
+      { name:'Parakeet · Canary', type:'NVIDIA SPEECH', sub:'ASR models · OSS', use:'Best-in-class open speech recognition', url:'developer.nvidia.com/riva', desc:'Parakeet (CTC-based ASR, multilingual) and Canary (encoder-decoder ASR, top of HF Open-ASR leaderboard). Open-weight, integrated with NVIDIA Riva.' },
+      { name:'Audio2Face-3D', type:'NVIDIA MODEL', sub:'Facial animation · MIT licensed', use:'Generate face animation from speech', url:'huggingface.co/nvidia/Audio2Face-3D-v3.0', desc:'Open-source facial animation. Generates 3D face animation from audio input. Used in NVIDIA ACE digital humans, gaming avatars.' },
+      { name:'BioNeMo', type:'NVIDIA MODEL', sub:'Drug discovery + protein models', use:'Pretrained models for biology / drug design', url:'nvidia.com/en-us/clara/bionemo', desc:'Foundation models for proteins, molecules, gene editing. Trained on biological corpora. Used by drug-discovery teams (Recursion, Insilico, Genentech).' },
+      { name:'NV-Embed v2', type:'NVIDIA MODEL', sub:'Embedding model · open · #1 MTEB', use:'Convert text to embeddings (RAG, search)', url:'huggingface.co/nvidia/NV-Embed-v2', desc:'NVIDIA embedding model, #1 on MTEB leaderboard at release. Used in retrieval-augmented generation, semantic search, and RAG pipelines.' },
+      { name:'Meta Llama', type:'PARTNER LLM', sub:'Llama 3.x · 4 series · NV-hosted', use:'Meta\'s open LLMs running on NVIDIA infra', url:'huggingface.co/meta-llama', desc:'Meta\'s Llama 3.x and 4 series — open-weight LLMs from 7B to 405B. Top-3 by HF downloads. NVIDIA hosts on build.nvidia.com with TensorRT-LLM optimization.' },
+      { name:'Mistral · Mixtral', type:'PARTNER LLM', sub:'European open models · NV-hosted', use:'Mistral AI\'s open and gated models', url:'mistral.ai', desc:'Mistral 7B, Mixtral 8x7B, Mistral Large. European frontier-model lab. Apache 2.0 open variants. Hosted on build.nvidia.com.' },
+      { name:'DeepSeek R1 / V4', type:'PARTNER LLM', sub:'Frontier reasoning · MIT licensed', use:'Best open reasoning model · cheap inference', url:'huggingface.co/deepseek-ai', desc:'DeepSeek R1 (reasoning) and V4 (frontier). MIT-licensed open weights. The model NVIDIA explicitly cites in its 5-layer cake framing as an example. ~7× cheaper than Claude at parity.' },
+      { name:'Qwen (Alibaba)', type:'PARTNER LLM', sub:'Qwen 3.5 / 3.6 · 1B+ HF downloads', use:'Largest open-model family by adoption', url:'huggingface.co/Qwen', desc:'Alibaba\'s open LLM line. 1B+ HF downloads. Includes Qwen-Omni (multimodal), Qwen-Math, Qwen-Coder. Currently the #1 open-source LLM family by developer mindshare.' },
+      { name:'NeMo Framework', type:'TRAINING', sub:'Speech · Multimodal LLM · OSS', use:'Train and fine-tune models on NVIDIA GPUs', url:'github.com/NVIDIA-NeMo/NeMo', desc:'NVIDIA\'s open-source training framework. Used to build Nemotron, Parakeet, Canary, and customer models. Distinct from NeMo Microservices (enterprise).' },
+      { name:'HuggingFace', type:'MODEL HUB', sub:'Where weights actually live', use:'Discover, download, share open model weights', url:'huggingface.co/nvidia', desc:'The de facto open-model hub. NVIDIA\'s HF org hosts Nemotron, Parakeet, Canary, Audio2Face, Cosmos. Hub-of-record for almost every open model.' },
+      { name:'Nemotron Coalition', type:'ALLIANCE', sub:'Open-frontier-model alliance · GTC 2026', use:'NVIDIA + 8 partners shaping Nemotron 4', url:'nvidianews.nvidia.com/news/nvidia-launches-nemotron-coalition', desc:'Open-frontier-model alliance launched GTC 2026 with Black Forest Labs, Cursor, LangChain, Mistral AI, Perplexity, Reflection AI, Sarvam, Thinking Machines. Feeds Nemotron 4.' },
+    ]
+  },
+
+  '5': {
+    name: 'Applications',
+    desc: 'Where economic value is created. The applications and verticals that pull on every layer below — from autonomous vehicles to drug discovery to humanoid robots. NVIDIA-built platforms plus the industry that runs on them.',
+    who: 'Industry leaders · founders · product builders · vertical-AI teams',
+    boxes: [
+      { name:'NemoClaw', type:'PLATFORM', sub:'Agent runtime + privacy/security', use:'Build long-running autonomous agents', url:'nvidia.com/en-us/ai/nemoclaw', desc:'Open blueprint for agentic engineering AI. Pairs Nemotron 3 Super reasoning with OpenShell secure runtime. Industrial partners: Cadence, Dassault Systèmes, Siemens, Synopsys.' },
+      { name:'Hermes Agent', type:'PLATFORM', sub:'Long-running agent harness · OSS', use:'Build long-horizon autonomous engineering agents', url:'nvidia.com/en-us/ai/nemoclaw', desc:'Agent harness for autonomous engineering tasks. Pairs Nemotron 3 Super with OpenShell secure sandbox. Part of the NemoClaw open blueprint.' },
+      { name:'FOX Blueprint', type:'PLATFORM', sub:'Factory Operations agent · GTC Taipei 2026', use:'Build autonomous factory-manager agents', url:'blogs.nvidia.com/blog/factory-operations-fox-blueprint-ai-brain', desc:'Reference design for autonomous factory-manager agents. NemoClaw + AI-Q + Nemotron + Omniverse. NVIDIA TAO for fine-tuning. Industrial automation focus.' },
+      { name:'AI Blueprints', type:'PLATFORM', sub:'Reference apps · RAG · Video Search · Agents', use:'Drop-in starting points for production AI apps', url:'github.com/NVIDIA-AI-Blueprints', desc:'Production-ready reference architectures: RAG, video search, knowledge agents, robot manipulation. Each blueprint is a forkable starting point.' },
+      { name:'Morpheus', type:'PLATFORM', sub:'Cybersecurity AI framework', use:'Detect cyber threats in real time at scale', url:'developer.nvidia.com/morpheus', desc:'GPU-accelerated cybersecurity AI. Real-time pipeline for threat detection, log analytics, fraud detection. Used by enterprise security teams.' },
+      { name:'Harvey (Legal AI)', type:'INDUSTRY APP', sub:'NVIDIA-mentioned application example', use:'Generative legal AI for attorneys', url:'harvey.ai', desc:'GenAI for legal: contract analysis, discovery, drafting. NVIDIA explicitly names "legal copilots" as a Layer 5 example. Harvey leads the category.' },
+      { name:'Isaac', type:'PLATFORM', sub:'Robotics SDK · Isaac Sim 6.0', use:'Build and simulate robot software', url:'developer.nvidia.com/isaac', desc:'NVIDIA Isaac robotics platform. Isaac Sim 6.0 + new agent skills (Neural Reconstruction, Defect Image Gen, Video Augmentation, Mobility). For humanoid, mobile, manipulation robots.' },
+      { name:'Omniverse', type:'PLATFORM', sub:'Physical AI · 3D simulation · digital twins', use:'Build 3D simulations and digital twins', url:'developer.nvidia.com/omniverse', desc:'Physical-AI platform. Industrial digital twins, robot simulation, virtual factories. Used by BMW (production planning), Foxconn, Mercedes, Lockheed Martin.' },
+      { name:'Newton', type:'PLATFORM', sub:'OSS physics engine · NVIDIA + DeepMind + Disney', use:'GPU-accelerated robot simulation (sim-to-real)', url:'developer.nvidia.com/newton-physics', desc:'GPU-accelerated physics engine for robotics. Joint NVIDIA + DeepMind + Disney project. Open-source. Used in Isaac Lab and Omniverse.' },
+      { name:'Figure AI', type:'INDUSTRY APP', sub:'Humanoid robots (Helix AI)', use:'NVIDIA-mentioned humanoid example', url:'figure.ai', desc:'Humanoid robotics company. Helix AI policy model. Trained on Isaac + Cosmos. One of the most prominent customers in the humanoid race NVIDIA highlights.' },
+      { name:'1X', type:'INDUSTRY APP', sub:'NEO humanoid robot', use:'Humanoid robots for home and work', url:'1x.tech', desc:'Norwegian humanoid robotics. NEO home humanoid. Backed by OpenAI. Builds on Isaac + Cosmos for sim-to-real.' },
+      { name:'Tesla Optimus', type:'INDUSTRY APP', sub:'Tesla humanoid program', use:'In-factory humanoid for Tesla', url:'tesla.com/AI', desc:'Tesla\'s humanoid robot. While Tesla uses in-house Dojo + custom chips for FSD, Optimus development heavily references NVIDIA-style training pipelines.' },
+      { name:'DRIVE', type:'PLATFORM', sub:'Autonomous vehicles · Orin / Thor', use:'Build self-driving car software', url:'developer.nvidia.com/drive', desc:'NVIDIA\'s full-stack AV platform. DRIVE OS + DRIVE Hyperion + DRIVE Concierge. Customers: Mercedes EQS, BYD, Volvo EX90, Nio, Foxconn EVs.' },
+      { name:'Waymo', type:'INDUSTRY APP', sub:'L4 robotaxi (NVIDIA-adjacent)', use:'NVIDIA-mentioned AV example', url:'waymo.com', desc:'Alphabet\'s L4 robotaxi operating in SF, LA, Phoenix. Trained partly on NVIDIA GPUs. NVIDIA names "self-driving cars" as a Layer 5 example.' },
+      { name:'Mercedes-Benz', type:'INDUSTRY APP', sub:'DRIVE-powered AV platform', use:'NVIDIA DRIVE adopter at scale', url:'mercedes-benz.com', desc:'Mercedes EQS uses NVIDIA DRIVE Orin for L2+/L3 autonomous driving. Reference customer for DRIVE platform.' },
+      { name:'Clara', type:'PLATFORM', sub:'Healthcare AI · imaging + genomics', use:'Build medical imaging / drug discovery AI', url:'developer.nvidia.com/clara', desc:'NVIDIA\'s healthcare AI platform. Medical imaging, genomics, drug discovery, smart hospital. Powers BioNeMo, MONAI.' },
+      { name:'Recursion', type:'INDUSTRY APP', sub:'NVIDIA-partnered drug discovery', use:'NVIDIA-mentioned drug-discovery example', url:'recursion.com', desc:'AI-driven drug discovery. NVIDIA partnership: BioHive-2 supercomputer (one of the largest pharma-owned GPU clusters). Generates clinical-stage drug candidates.' },
+      { name:'Insilico Medicine', type:'INDUSTRY APP', sub:'End-to-end AI drug discovery', use:'AI-designed drugs in clinical trials', url:'insilico.com', desc:'AI-designed drug discovery from target ID through preclinical. Multiple AI-discovered drugs in human trials. Heavy NVIDIA GPU user.' },
+      { name:'Earth-2', type:'PLATFORM', sub:'Climate digital twin · GA', use:'High-resolution climate / weather simulation', url:'nvidia.com/en-us/high-performance-computing/earth-2', desc:'NVIDIA\'s climate digital twin. High-resolution weather + climate simulation. Customers: insurance, government, agriculture, energy.' },
+      { name:'GeForce NOW', type:'PLATFORM', sub:'Cloud gaming · 4K 120fps', use:'Stream NVIDIA-powered games to any device', url:'nvidia.com/en-us/geforce-now', desc:'NVIDIA cloud gaming. Streams PC games from RTX data centers to any device. Partner SDK lets publishers add cloud delivery alongside local installs.' },
+      { name:'NVIDIA ACE', type:'PLATFORM', sub:'Avatar Cloud Engine · digital humans', use:'Build animated AI avatars', url:'developer.nvidia.com/ace', desc:'Avatar Cloud Engine. Combines Audio2Face, Riva ASR/TTS, Nemotron for dialog. For games, customer service avatars, virtual assistants.' },
+      { name:'Riva', type:'PLATFORM', sub:'Conversational AI · ASR + TTS + NLU', use:'Build voice apps (ASR, TTS, NLU)', url:'developer.nvidia.com/riva', desc:'NVIDIA\'s production speech and conversational AI platform. Used in call centers, voice agents, accessibility tools.' },
+      { name:'NVIDIA Broadcast', type:'PLATFORM', sub:'AI streaming tools · Maxine SDK', use:'AI video/audio enhancement for creators', url:'nvidia.com/en-us/broadcasting', desc:'AI streaming tools for creators. Noise removal, virtual background, eye contact, voice clarity. Maxine SDK integrated into Discord, Zoom, OBS, Teams.' },
+      { name:'RTX Remix', type:'PLATFORM', sub:'Open-source modding · path-traced classics', use:'Remaster classic PC games with path tracing', url:'nvidia.com/en-us/geforce/rtx/remix', desc:'Open-source modding platform. Inject path tracing + DLSS + AI assets into classic DX8/9 games. Portal RTX, Half-Life 2 RTX.' },
+      { name:'NVIDIA Studio', type:'PLATFORM', sub:'Creator platform · drivers + tools', use:'Creator pipeline on NVIDIA RTX', url:'nvidia.com/en-us/studio', desc:'Creator-tier platform: Studio Drivers, Broadcast, Canvas, Omniverse Audio2Face. For 3D artists, video editors, photographers, streamers.' },
+      { name:'AI for Media', type:'PLATFORM', sub:'Real-time A/V AI (was Maxine)', use:'Build studio-quality video / livestream AI', url:'developer.nvidia.com/topics/ai/generative-ai/ai-for-media', desc:'Real-time A/V AI for broadcast / livestream / video. Background replacement, voice clarity, eye contact, body pose. Successor to Maxine branding.' },
+      { name:'Metropolis', type:'PLATFORM', sub:'Video AI · DeepStream SDK', use:'Build video analytics (cameras, retail, traffic)', url:'developer.nvidia.com/metropolis', desc:'NVIDIA video analytics platform. DeepStream SDK for streaming inference. Used in retail, smart cities, manufacturing.' },
+      { name:'Holoscan', type:'PLATFORM', sub:'Medical / industrial edge AI', use:'Stream sensor data through AI on edge devices', url:'developer.nvidia.com/holoscan-sdk', desc:'Edge AI platform for real-time sensor data (medical devices, industrial sensors). Latency-critical. Pairs with IGX safety-certified hardware.' },
+      { name:'IGX', type:'PLATFORM', sub:'Industrial / medical edge · functional safety', use:'Run safety-certified edge AI', url:'nvidia.com/en-us/edge-computing/products/igx', desc:'Safety-certified industrial / medical edge AI platform. ISO 26262 (auto) and IEC 61508 (industrial) functional safety. Pairs with Holoscan.' },
+      { name:'NVIDIA Aerial', type:'PLATFORM', sub:'CUDA-accelerated 5G/6G RAN', use:'Build AI-native 5G/6G base station software', url:'developer.nvidia.com/aerial-cuda-accelerated-ran', desc:'Software-defined CUDA-accelerated 5G/6G Radio Access Network. Replaces dedicated baseband ASICs with NVIDIA GPUs. Telco partnership target.' },
+      { name:'BMW · Foxconn · Mercedes', type:'INDUSTRY APP', sub:'Omniverse digital twin customers', use:'NVIDIA-mentioned industrial examples', url:'nvidia.com/en-us/omniverse/customer-stories', desc:'Industrial customers using Omniverse for production planning, virtual factories, robot training. NVIDIA Aerial customers also include AT&T, Vodafone, Telefonica.' },
+      { name:'build.nvidia.com', type:'API GATEWAY', sub:'NVIDIA-hosted Model API Catalog', use:'Try NVIDIA models from your browser', url:'build.nvidia.com', desc:'NVIDIA\'s own API gateway. Free tier for trying Nemotron, Parakeet, Llama, Mistral, others. The "front door" for developers experimenting before production.' },
+      { name:'AWS Bedrock · Azure AI · GCP Vertex', type:'API GATEWAY', sub:'Hyperscaler model marketplaces', use:'Call Nemotron + 100 other models via your existing cloud', url:'aws.amazon.com/bedrock', desc:'The hyperscaler AI marketplaces. Nemotron 3 hosted in all three (varying GA dates). The most common production-delivery path.' },
+    ]
+  }
+};
+
+// Subgroups for each layer — hottest first
+const LAYER_GROUPS = {
+  '1': [
+    { name:'Power Sources',         boxes:['Nuclear Power','Natural Gas (Grid)','Renewable Sources'] },
+    { name:'Utility & Grid Partners', boxes:['Constellation Energy'] },
+    { name:'NVIDIA Energy Efficiency', boxes:['FP4 Precision','Liquid Cooling','Spectrum-X Photonics','BlueField DPUs'] },
+  ],
+  '2': [
+    { name:'Data Center GPUs',     boxes:['Blackwell Data Center GPUs','Hopper Data Center GPUs','Vera Rubin VR200'] },
+    { name:'CPUs & Superchips',    boxes:['Grace CPU','GB10 Superchip'] },
+    { name:'Consumer & Edge Silicon', boxes:['GeForce RTX','RTX PRO Blackwell','Jetson','DRIVE Orin / Thor'] },
+    { name:'Networking Silicon',   boxes:['NVLink / NVSwitch','BlueField DPUs','ConnectX SuperNICs','Quantum-X800 InfiniBand','Spectrum-X Ethernet'] },
+    { name:'Foundry & Memory Partners', boxes:['TSMC (foundry)','SK Hynix · Micron (HBM)','ARM (CPU IP)'] },
+  ],
+  '3': [
+    { name:'Turnkey AI Factories', boxes:['DGX SuperPOD','GB300 NVL72','DGX Systems','HGX · MGX'] },
+    { name:'Personal AI Factories', boxes:['DGX Spark','NVIDIA RTX Spark','DGX Station'] },
+    { name:'NVIDIA-Operated Clouds', boxes:['DGX Cloud','DGX Cloud Lepton'] },
+    { name:'Hyperscaler Clouds',   boxes:['AWS','Microsoft Azure','Google Cloud (GCP)','Oracle OCI'] },
+    { name:'Exemplar Cloud Partners', boxes:['CoreWeave','Crusoe','Lambda · Nebius · Vultr · YTL'] },
+    { name:'Infrastructure Software', boxes:['Mission Control','DGX OS / Base OS','DOCA'] },
+  ],
+  '4': [
+    { name:'NVIDIA Foundation LLMs', boxes:['Nemotron 3 Family','Nemotron Nano 2 VL','Nemotron 3 Nano Omni'] },
+    { name:'NVIDIA Physical-AI & Science Models', boxes:['Cosmos 3','Isaac GR00T N1','Alpamayo 2 Super','BioNeMo'] },
+    { name:'NVIDIA Speech & Utility Models', boxes:['Parakeet · Canary','Audio2Face-3D','NV-Embed v2'] },
+    { name:'Third-Party Open Models', boxes:['Meta Llama','Mistral · Mixtral','DeepSeek R1 / V4','Qwen (Alibaba)'] },
+    { name:'Training & Model Hubs', boxes:['NeMo Framework','HuggingFace','Nemotron Coalition'] },
+  ],
+  '5': [
+    { name:'AI Agents & Enterprise', boxes:['NemoClaw','Hermes Agent','FOX Blueprint','AI Blueprints','Morpheus','Harvey (Legal AI)'] },
+    { name:'Robotics & Humanoids', boxes:['Isaac','Omniverse','Newton','Figure AI','1X','Tesla Optimus'] },
+    { name:'Autonomous Vehicles', boxes:['DRIVE','Waymo','Mercedes-Benz'] },
+    { name:'Healthcare & Science', boxes:['Clara','Recursion','Insilico Medicine','Earth-2'] },
+    { name:'Media, Gaming & Creators', boxes:['GeForce NOW','NVIDIA ACE','Riva','NVIDIA Broadcast','RTX Remix','NVIDIA Studio','AI for Media','Metropolis'] },
+    { name:'Industrial, Telco & Edge', boxes:['Holoscan','IGX','NVIDIA Aerial','BMW · Foxconn · Mercedes'] },
+    { name:'API Delivery', boxes:['build.nvidia.com','AWS Bedrock · Azure AI · GCP Vertex'] },
+  ],
+};
+
+// ─── Render ───
+const stack = document.getElementById('stack');
+const stackWrap = document.getElementById('stackWrap');
+const rail = document.getElementById('rail');
+const modalBackdrop = document.getElementById('modalBackdrop');
+const modalBody = document.getElementById('modalBody');
+const modalClose = document.getElementById('modalClose');
+
+function render() {
+  stack.innerHTML = '';
+  LAYER_ORDER.forEach(layerId => {
+    const layer = LAYERS[layerId];
+    const sec = document.createElement('section');
+    sec.className = 'layer';
+    sec.dataset.id = layerId;
+    sec.id = 'l' + layerId;
+
+    const count = layer.boxes.length;
+    sec.innerHTML = `
+      <div class="layer-head">
+        <div class="layer-num"><div class="layer-icon">${LAYER_ICONS[layerId] || ''}</div><span class="layer-num-label">LAYER</span><span class="layer-num-value">${layerId}</span></div>
+        <div class="layer-meta">
+          <div class="layer-name">${layer.name}</div>
+          <div class="layer-desc">${layer.desc}</div>
+          <div class="layer-who">For: ${layer.who}</div>
+        </div>
+        <div class="layer-count"><strong>${count}</strong>components</div>
+        <div class="layer-chevron" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></div>
+      </div>
+      <div class="layer-body" id="body-${layerId}"></div>
+    `;
+    stack.appendChild(sec);
+
+    const body = sec.querySelector('.layer-body');
+
+    const buildBox = (b, idx) => {
+      const el = document.createElement('button');
+      el.className = 'box';
+      el.dataset.layer = layerId;
+      el.dataset.idx = idx;
+      el.dataset.name = b.name;
+      el.type = 'button';
+      el.innerHTML = `
+        <div class="box-top">
+          <span class="box-tag">${b.type || ''}</span>
+          <span class="box-status"></span>
+        </div>
+        <div class="box-name">${b.name}</div>
+        <div class="box-sub">${b.sub}</div>
+        ${b.use ? `<div class="box-use"><div class="box-use-label">→ Use it to</div><div class="box-use-text">${b.use}</div></div>` : ''}
+        <div class="box-url">${b.url ? b.url.replace(/^https?:\/\//,'') : ''}</div>
+      `;
+      el.addEventListener('click', () => openModal(layerId, idx));
+      return el;
+    };
+
+    const groups = LAYER_GROUPS[layerId];
+    if (groups) {
+      const boxByName = {};
+      layer.boxes.forEach((b, idx) => { boxByName[b.name] = { b, idx }; });
+      const rendered = new Set();
+
+      const buildSubgroupBlock = (groupName, boxNames) => {
+        const block = document.createElement('div');
+        block.className = 'subgroup-block';
+        block.innerHTML = `
+          <div class="layer-subgroup">
+            <span class="layer-subgroup-name">${groupName}</span>
+            <span class="layer-subgroup-count">${boxNames.length} ${boxNames.length === 1 ? 'component' : 'components'}</span>
+          </div>
+          <div class="subgroup-grid"></div>
+        `;
+        const innerGrid = block.querySelector('.subgroup-grid');
+        boxNames.forEach(name => {
+          const item = boxByName[name];
+          if (!item) return;
+          innerGrid.appendChild(buildBox(item.b, item.idx));
+          rendered.add(name);
+        });
+        return block;
+      };
+
+      groups.forEach(group => {
+        body.appendChild(buildSubgroupBlock(group.name, group.boxes));
+      });
+
+      const orphans = layer.boxes.filter(b => !rendered.has(b.name));
+      if (orphans.length) {
+        body.appendChild(buildSubgroupBlock('Other', orphans.map(b => b.name)));
+      }
+    } else {
+      const flatGrid = document.createElement('div');
+      flatGrid.className = 'subgroup-grid';
+      layer.boxes.forEach((b, idx) => flatGrid.appendChild(buildBox(b, idx)));
+      body.appendChild(flatGrid);
+    }
+  });
+}
+
+// ─── Modal ───
+function openModal(layerId, idx) {
+  const b = LAYERS[layerId].boxes[idx];
+  const layerName = LAYERS[layerId].name;
+  modalBody.innerHTML = `
+    <div class="m-eyebrow">Layer ${layerId} · ${layerName}</div>
+    <div class="m-tag">${b.type || ''}</div>
+    <h2 class="m-title">${b.name}</h2>
+    <div class="m-sub">${b.sub}</div>
+    ${b.desc ? `<div class="m-section"><div class="m-section-label">What it is</div><div class="m-desc">${b.desc}</div></div>` : ''}
+    ${b.use ? `<div class="m-section"><div class="m-section-label">→ Use it to</div><div class="m-desc">${b.use}</div></div>` : ''}
+    ${b.url ? `<a class="m-link" href="https://${b.url.replace(/^https?:\/\//,'')}" target="_blank" rel="noopener">Visit ${b.url.replace(/^https?:\/\//,'').split('/')[0]} →</a>` : ''}
+  `;
+  modalBackdrop.classList.add('open');
+}
+function closeModal() { modalBackdrop.classList.remove('open'); }
+modalClose.addEventListener('click', closeModal);
+modalBackdrop.addEventListener('click', (e) => { if (e.target === modalBackdrop) closeModal(); });
+document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeModal(); });
+
+// ─── Collapse / expand ───
+stack.addEventListener('click', (e) => {
+  if (e.target.closest('.box')) return;
+  const head = e.target.closest('.layer-head');
+  if (!head) return;
+  const layer = head.closest('.layer');
+  if (layer) layer.classList.toggle('expanded');
+});
+
+// Rail nav — expand target, then scroll
+rail.addEventListener('click', (e) => {
+  const item = e.target.closest('[data-jump]');
+  if (!item) return;
+  const layerId = item.dataset.jump;
+  const sec = document.getElementById('l' + layerId);
+  if (sec) {
+    sec.classList.add('expanded');
+    sec.scrollIntoView({behavior:'smooth', block:'start'});
+  }
+});
+
+// Expand / Collapse all
+document.getElementById('expandAll').addEventListener('click', () => {
+  document.querySelectorAll('.layer').forEach(l => l.classList.add('expanded'));
+});
+document.getElementById('collapseAll').addEventListener('click', () => {
+  document.querySelectorAll('.layer').forEach(l => l.classList.remove('expanded'));
+});
+
+// Highlight active layer in rail on scroll
+const railItems = Array.from(rail.querySelectorAll('[data-jump]'));
+function updateActiveRail() {
+  const wrapTop = stackWrap.getBoundingClientRect().top;
+  let active = railItems[0];
+  for (const item of railItems) {
+    const sec = document.getElementById('l' + item.dataset.jump);
+    if (!sec) continue;
+    const r = sec.getBoundingClientRect();
+    if (r.top - wrapTop <= 80) active = item;
+  }
+  railItems.forEach(i => i.classList.toggle('active', i === active));
+}
+stackWrap.addEventListener('scroll', updateActiveRail);
+
+render();
+updateActiveRail();
+
+// ─── Cake intro dismiss ───
+const cakeModal = document.getElementById('cakeModal');
+const cakeClose = document.getElementById('cakeClose');
+const cakeCta = document.getElementById('cakeCta');
+function dismissCake() {
+  cakeModal.classList.add('closing');
+  setTimeout(() => cakeModal.classList.add('dismissed'), 280);
+}
+if (cakeClose) cakeClose.addEventListener('click', dismissCake);
+if (cakeCta) cakeCta.addEventListener('click', dismissCake);
+cakeModal.addEventListener('click', (e) => { if (e.target === cakeModal) dismissCake(); });
+</script>
+</body>
+</html>
