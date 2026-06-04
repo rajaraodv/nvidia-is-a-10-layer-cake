@@ -253,7 +253,7 @@ footer a { color: var(--ink2); text-decoration: none; border-bottom: 1px solid v
   <div class="hero">
     <div class="hero-label">The thesis</div>
     <div class="hero-text">
-      <em>Brand awareness is not developer love.</em> NVIDIA has a hundred-million-developer TAM and the deepest stack in AI, but in 2025–2026 the dev-engagement winners are Anthropic, Cursor, Vercel, Hugging Face, and Ollama — smaller surfaces with <b>tighter, more engaged, more visible developer cultures</b>. Their playbook is reproducible. Here's what to copy, what to skip, and the <b>seven moves</b> NVIDIA needs to make in 2026.
+      <em>Brand awareness is not developer love.</em> NVIDIA has roughly 100 million developers in its total addressable market (TAM) and the deepest stack in AI, but in 2025–2026 the dev-engagement winners are Anthropic, Cursor, Vercel, Hugging Face, and Ollama — smaller surfaces with <b>tighter, more engaged, more visible developer cultures</b>. Their playbook is reproducible. Here's what to copy, what to skip, and the <b>seven moves</b> NVIDIA needs to make in 2026.
     </div>
   </div>
 
@@ -271,25 +271,25 @@ footer a { color: var(--ink2); text-decoration: none; border-bottom: 1px solid v
       <div class="friction">
         <div class="friction-num">2</div>
         <div class="friction-body">
-          <b>Certifications are buried.</b> NCA / NCP credentials exist (7+ tracks including the new NCP-AAI for Agentic AI) but you'd struggle to find them organically. They live on a separate site (<i>nvidia.com/en-us/learn/certification</i>) with no clear path from "I want to learn" → "here's the cert" → "here's how to display it." AWS, GCP, and Microsoft certs are LinkedIn-tier social currency. NVIDIA's aren't yet.
+          <b>Certifications are buried.</b> NVIDIA-Certified Associate (NCA) and NVIDIA-Certified Professional (NCP) credentials exist across 7+ tracks — including the new NCP-AAI (NVIDIA-Certified Professional in Agentic AI) — but you'd struggle to find them organically. They live on a separate site (<i>nvidia.com/en-us/learn/certification</i>) with no clear path from "I want to learn" → "here's the cert" → "here's how to display it on LinkedIn." Amazon Web Services (AWS), Google Cloud (GCP), and Microsoft Azure certifications are LinkedIn-tier social currency. NVIDIA's aren't yet.
         </div>
       </div>
       <div class="friction">
         <div class="friction-num">3</div>
         <div class="friction-body">
-          <b>build.nvidia.com free tier is broken.</b> The "Public API Endpoints" permission is missing for many new accounts. Silent 401 errors. ~10-day support cycle to enable. First-touch experience for the most common developer path — and it's broken roughly a third of the time.
+          <b>build.nvidia.com free tier is broken.</b> The "Public API Endpoints" permission (needed to actually call any model) is missing for many new accounts. Silent 401 "unauthorized" errors with no clear remediation. ~10-day support cycle to enable. First-touch experience for the most common developer path — and it's broken roughly a third of the time.
         </div>
       </div>
       <div class="friction">
         <div class="friction-num">4</div>
         <div class="friction-body">
-          <b>40 RPM free tier doesn't survive a real agent.</b> Agentic workloads hit 40 requests per minute in seconds. There's no usable "individual developer" pricing between free (40 RPM) and NVIDIA AI Enterprise (~$1,000/GPU/yr). Anthropic has Pro ($20/mo) and Max ($100/mo) tiers that are explicitly designed for the indie dev. NVIDIA doesn't.
+          <b>40 RPM free tier doesn't survive a real agent.</b> The free tier on build.nvidia.com caps at 40 requests per minute (RPM). An agentic workload — where one user prompt triggers many backend LLM calls — hits that cap in seconds. There's no usable "individual developer" pricing between the free tier and NVIDIA AI Enterprise (NVAIE, the production license starting at ~$1,000 per GPU per year). Anthropic has Pro ($20/mo) and Max ($100/mo) tiers explicitly designed for the indie developer. NVIDIA doesn't.
         </div>
       </div>
       <div class="friction">
         <div class="friction-num">5</div>
         <div class="friction-body">
-          <b>Big community, low engagement.</b> ~5M registered developers on developer.nvidia.com. Discord: ~19K members. Active OSS contributors to Nemotron-related repos: hundreds. Compare to Hugging Face: 1M+ HF active monthly users contributing to model cards, datasets, spaces. The brand is everywhere; the engagement isn't.
+          <b>Big community, low engagement.</b> Roughly 5 million registered developers on developer.nvidia.com. NVIDIA Discord: about 19,000 members. Active open-source software (OSS) contributors to Nemotron-related public repositories: hundreds. Compare to Hugging Face — over 1 million monthly active users contributing to model cards, datasets, and Spaces (HF's interactive demo platform). The brand is everywhere; the engagement isn't.
         </div>
       </div>
       <div class="friction">
@@ -309,44 +309,44 @@ footer a { color: var(--ink2); text-decoration: none; border-bottom: 1px solid v
       <div class="play-card">
         <div class="play-tag">Anthropic</div>
         <div class="play-name">Claude Code as developer flywheel</div>
-        <div class="play-move">A terminal-native agentic IDE that ships with the API. Install in 5 minutes, agent ships your next PR, you tell your team. Built distribution into the product itself.</div>
+        <div class="play-move">A terminal-native agentic IDE (integrated development environment) that ships with their API. Install in 5 minutes, the agent ships your next pull request to GitHub, you tell your team. Distribution was built into the product itself.</div>
         <div class="play-lesson">Lesson</div>
         <div class="play-lesson-text">Ship the magic upfront. Let it spread peer-to-peer.</div>
       </div>
       <div class="play-card">
         <div class="play-tag">Cursor</div>
         <div class="play-name">Be in the IDE devs already use</div>
-        <div class="play-move">Cursor took VS Code's IDE behavior and wrapped it in the best inline AI experience. By 2026 it's the default LLM-powered editor for hundreds of thousands of developers. ARR &gt;$500M, mostly individual devs.</div>
+        <div class="play-move">Cursor took VS Code's IDE behavior and wrapped it in the best inline AI experience. By 2026 it's the default LLM (large language model)-powered editor for hundreds of thousands of developers. Annual recurring revenue (ARR) over $500M, mostly individual developers.</div>
         <div class="play-lesson">Lesson</div>
         <div class="play-lesson-text">Don't make devs come to you. Be where they already are.</div>
       </div>
       <div class="play-card">
         <div class="play-tag">Vercel</div>
         <div class="play-name">Founder-led voice on X</div>
-        <div class="play-move">Guillermo Rauch and the entire Vercel team are highly visible on X. Personalities driving culture. "DX-first" mantra. New product launches happen on Twitter before press releases.</div>
+        <div class="play-move">Guillermo Rauch (CEO) and the entire Vercel team are highly visible on X (formerly Twitter). Personalities driving culture. Their mantra is "DX-first" — developer experience above everything. New product launches happen on Twitter before any press release.</div>
         <div class="play-lesson">Lesson</div>
         <div class="play-lesson-text">You can't outspend Apple on ads. You can outpost them on X.</div>
       </div>
       <div class="play-card">
         <div class="play-tag">Hugging Face</div>
         <div class="play-name">Community-built model hub</div>
-        <div class="play-move">HF became the de-facto model registry because the community built it together. Every open model lives there first, then maybe elsewhere. They became infrastructure by being open.</div>
+        <div class="play-move">Hugging Face became the de-facto model registry because the community built it together. Every open-weight model lives there first, then maybe elsewhere. They became infrastructure by being open.</div>
         <div class="play-lesson">Lesson</div>
         <div class="play-lesson-text">Meet developers in their ecosystem. Build with them, not for them.</div>
       </div>
       <div class="play-card">
         <div class="play-tag">Ollama</div>
         <div class="play-name">Local-first, hyper-active community</div>
-        <div class="play-move">Ollama is the simplest path to running models locally. Three commands and you're hosting Llama 3 or Mistral on your laptop. Millions of downloads. Active Discord.</div>
+        <div class="play-move">Ollama is the simplest path to running models locally on your laptop. Three terminal commands and you're hosting Llama 3 or Mistral. Millions of downloads. Active Discord with thousands of contributors.</div>
         <div class="play-lesson">Lesson</div>
         <div class="play-lesson-text">"Easy" is a moat in 2026. Underestimate the simplest path at your peril.</div>
       </div>
       <div class="play-card">
         <div class="play-tag">Supabase</div>
-        <div class="play-name">OSS-flavored backend community</div>
-        <div class="play-move">Built a 100K+ developer community by being open-source, transparent, and constantly shipping in public. Changelog is a feature. Founders ship code visible on GitHub.</div>
+        <div class="play-name">Open-source backend community</div>
+        <div class="play-move">Built a 100,000+ developer community by being open-source software (OSS), transparent, and constantly shipping in public. Their public changelog is a feature. Founders ship code visible on GitHub. Business development (BD) is replaced by community presence.</div>
         <div class="play-lesson">Lesson</div>
-        <div class="play-lesson-text">The new BD is "build in public." The trust dividend is huge.</div>
+        <div class="play-lesson-text">The new business development is "build in public." The trust dividend is huge.</div>
       </div>
     </div>
   </section>
@@ -376,10 +376,10 @@ footer a { color: var(--ink2); text-decoration: none; border-bottom: 1px solid v
           <div class="move-title">Be in the tools developers already use</div>
         </div>
         <div class="move-body">
-          <div class="move-row"><div class="move-row-label">Problem</div><div class="move-row-text">Developers live in Cursor, VS Code, Claude Code, Cline, Aider — not on developer.nvidia.com.</div></div>
-          <div class="move-row"><div class="move-row-label">Move</div><div class="move-row-text">Ship Nemotron-powered extensions for every major AI IDE. Cursor MCP server. VS Code extension. Cline templates. Aider config presets. Goal: <b>be the default LLM in 10+ dev tools by EOY 2026.</b></div></div>
-          <div class="move-row"><div class="move-row-label">Owner</div><div class="move-row-text">DevRel + Engineering (joint).</div></div>
-          <div class="move-row"><div class="move-row-label">Metric</div><div class="move-row-text">Nemotron-via-IDE token volume vs. Nemotron-via-direct API.</div></div>
+          <div class="move-row"><div class="move-row-label">Problem</div><div class="move-row-text">Developers live in their integrated development environment (IDE) — Cursor, VS Code, Claude Code, Cline, Aider — not on developer.nvidia.com.</div></div>
+          <div class="move-row"><div class="move-row-label">Move</div><div class="move-row-text">Ship Nemotron-powered extensions for every major AI IDE. Cursor MCP (Model Context Protocol — Anthropic's open standard for connecting models to tools) server. VS Code extension. Cline templates. Aider configuration presets. Goal: <b>be the default LLM in 10+ developer tools by the end of 2026.</b></div></div>
+          <div class="move-row"><div class="move-row-label">Owner</div><div class="move-row-text">Developer Relations (DevRel) + Engineering, jointly led.</div></div>
+          <div class="move-row"><div class="move-row-label">Metric</div><div class="move-row-text">Nemotron-via-IDE token volume vs. Nemotron-via-direct API. The first should grow faster.</div></div>
         </div>
       </li>
 
@@ -389,10 +389,10 @@ footer a { color: var(--ink2); text-decoration: none; border-bottom: 1px solid v
           <div class="move-title">Open the certificate path</div>
         </div>
         <div class="move-body">
-          <div class="move-row"><div class="move-row-label">Problem</div><div class="move-row-text">NCA / NCP credentials exist but are buried. Devs don't know they exist. Certs = social currency in dev land.</div></div>
-          <div class="move-row"><div class="move-row-label">Move</div><div class="move-row-text">Add cert badges to every Nemotron blog post, video, conference talk. Get NVIDIA certs on LinkedIn (like AWS). Sponsor cert prep bootcamps at top universities. Promote <b>NCP-AAI (Agentic AI)</b> as the new "must-have" cert.</div></div>
-          <div class="move-row"><div class="move-row-label">Owner</div><div class="move-row-text">DLI + Brand + Partnerships.</div></div>
-          <div class="move-row"><div class="move-row-label">Metric</div><div class="move-row-text">NCP-AAI grads / month. LinkedIn cert displays (track via API).</div></div>
+          <div class="move-row"><div class="move-row-label">Problem</div><div class="move-row-text">NVIDIA-Certified Associate (NCA) and NVIDIA-Certified Professional (NCP) credentials exist but are buried. Developers don't know they exist. Certifications are social currency in developer land — see LinkedIn for proof.</div></div>
+          <div class="move-row"><div class="move-row-label">Move</div><div class="move-row-text">Add certification badges to every Nemotron blog post, video, and conference talk. Get NVIDIA certs displayable as LinkedIn credentials (the way Amazon Web Services certs work today). Sponsor cert-prep bootcamps at top universities. Promote <b>NCP-AAI (NVIDIA-Certified Professional in Agentic AI)</b> as the new "must-have" credential for AI engineers.</div></div>
+          <div class="move-row"><div class="move-row-label">Owner</div><div class="move-row-text">Deep Learning Institute (DLI — NVIDIA's training arm) + Brand + Partnerships.</div></div>
+          <div class="move-row"><div class="move-row-label">Metric</div><div class="move-row-text">NCP-AAI graduates per month. LinkedIn certification displays (tracked via LinkedIn's API).</div></div>
         </div>
       </li>
 
@@ -402,10 +402,10 @@ footer a { color: var(--ink2); text-decoration: none; border-bottom: 1px solid v
           <div class="move-title">Founder + researcher voice on X (and YouTube, and Bluesky)</div>
         </div>
         <div class="move-body">
-          <div class="move-row"><div class="move-row-label">Problem</div><div class="move-row-text">NVIDIA's developer-facing voice is Jensen (CEO-tier) or anonymous corporate accounts. No mid-tier researchers visible. Anthropic has Dario, Mike, Karpathy. Vercel has Guillermo and the whole team. NVIDIA has corporate handles.</div></div>
-          <div class="move-row"><div class="move-row-label">Move</div><div class="move-row-text">Identify <b>20 NVIDIA Research / NeMo / Cosmos / GR00T / Nemotron team members</b> who can be "the face." Train on dev comms. Quarterly content quotas. They're the new MKBHD-tier voices for NVIDIA. Founder fellowship + comms training.</div></div>
-          <div class="move-row"><div class="move-row-label">Owner</div><div class="move-row-text">DevRel + Brand + HR.</div></div>
-          <div class="move-row"><div class="move-row-label">Metric</div><div class="move-row-text">Aggregated weekly reach of NVIDIA dev-team posts on X. Goal: 5 voices at 100K+ followers within 12 months.</div></div>
+          <div class="move-row"><div class="move-row-label">Problem</div><div class="move-row-text">NVIDIA's developer-facing voice is Jensen (CEO level) or anonymous corporate accounts. No mid-tier researchers visible. Anthropic has Dario Amodei, Mike Krieger, Andrej Karpathy. Vercel has Guillermo Rauch and the whole team. NVIDIA has corporate handles.</div></div>
+          <div class="move-row"><div class="move-row-label">Move</div><div class="move-row-text">Identify <b>20 NVIDIA Research / NeMo / Cosmos / GR00T / Nemotron team members</b> who can be "the face." Train them on developer-facing communications. Set quarterly content quotas. They become the equivalent of Marques Brownlee (MKBHD) for the AI-developer audience — recognizable individuals associated with the product. Pair with a founder-fellowship program + dedicated communications training.</div></div>
+          <div class="move-row"><div class="move-row-label">Owner</div><div class="move-row-text">Developer Relations + Brand + Human Resources (HR).</div></div>
+          <div class="move-row"><div class="move-row-label">Metric</div><div class="move-row-text">Aggregated weekly reach of NVIDIA dev-team posts on X. Goal: 5 named voices at 100,000+ followers each within 12 months.</div></div>
         </div>
       </li>
 
@@ -442,9 +442,9 @@ footer a { color: var(--ink2); text-decoration: none; border-bottom: 1px solid v
         </div>
         <div class="move-body">
           <div class="move-row"><div class="move-row-label">Problem</div><div class="move-row-text">Hackathon culture has shifted in 2025-2026. Cool demos aren't enough — modern hackathons produce shipped products (Sundai Club, Hack the North, AGI House). NVIDIA sponsors hackathons but they produce slide demos, not GitHub stars.</div></div>
-          <div class="move-row"><div class="move-row-label">Move</div><div class="move-row-text"><b>Nemotron Cup</b> — quarterly. $100K cash + Inception membership for the winning team. Judging criteria: <i>shipped traction</i> (DAU, signups, revenue), not just demo polish. Cosponsor Cursor / Anthropic / OpenRouter community events. NVIDIA shows up where developers already gather.</div></div>
-          <div class="move-row"><div class="move-row-label">Owner</div><div class="move-row-text">Inception + DevRel + Brand.</div></div>
-          <div class="move-row"><div class="move-row-label">Metric</div><div class="move-row-text">Nemotron-powered products entering YC / Inception batch each quarter. Real revenue traction tracked at 6 / 12 months.</div></div>
+          <div class="move-row"><div class="move-row-label">Move</div><div class="move-row-text"><b>Nemotron Cup</b> — run quarterly. $100,000 cash prize + admission to NVIDIA Inception (the startup program with $250K credits) for the winning team. Judging criteria: <i>shipped traction</i> — daily active users (DAU), signups, real revenue — not just demo polish. Cosponsor Cursor, Anthropic, and OpenRouter community events. NVIDIA shows up where developers already gather.</div></div>
+          <div class="move-row"><div class="move-row-label">Owner</div><div class="move-row-text">NVIDIA Inception + Developer Relations + Brand.</div></div>
+          <div class="move-row"><div class="move-row-label">Metric</div><div class="move-row-text">Nemotron-powered products entering Y Combinator (YC) and NVIDIA Inception batches each quarter. Real revenue traction tracked at 6 and 12 months post-hackathon.</div></div>
         </div>
       </li>
     </ol>
@@ -469,7 +469,7 @@ footer a { color: var(--ink2); text-decoration: none; border-bottom: 1px solid v
       </div>
       <div class="voice-card">
         <div class="voice-name">Vercel</div>
-        <div class="voice-line">"DX first. Always."</div>
+        <div class="voice-line">"Developer experience first. Always."</div>
       </div>
       <div class="voice-card">
         <div class="voice-name">Hugging Face</div>
@@ -505,31 +505,31 @@ footer a { color: var(--ink2); text-decoration: none; border-bottom: 1px solid v
       <div class="tl-row">
         <div class="tl-when">Days 1-30</div>
         <div class="tl-what">
-          • <b>Fix the build.nvidia.com permissions bug.</b> Today. (One person, one week.)<br>
-          • <b>Audit cert pathways</b> and write a single "How to get NCP-AAI" landing page.<br>
-          • <b>Identify the 20 researcher voices</b> (NeMo, Cosmos, GR00T, Nemotron teams). Brief them on the program.<br>
-          • <b>Spin up the <code>nemotron-cookbook</code> GitHub repo</b> with 5 placeholder reference agents and an explicit roadmap to 30.<br>
-          • <b>Pick the one-line positioning claim</b> for Nemotron. Get exec sign-off.
+          • <b>Fix the build.nvidia.com permissions bug.</b> Today. (One engineer, one week.)<br>
+          • <b>Audit certification pathways</b> and write a single "How to get the NCP-AAI (NVIDIA-Certified Professional in Agentic AI)" landing page.<br>
+          • <b>Identify the 20 researcher voices</b> across NeMo, Cosmos, GR00T (humanoid robotics), and Nemotron teams. Brief them on the program.<br>
+          • <b>Spin up the <code>nemotron-cookbook</code> GitHub repository</b> with 5 placeholder reference agents and an explicit roadmap to 30.<br>
+          • <b>Pick the one-line positioning claim</b> for Nemotron. Get executive sign-off.
         </div>
       </div>
       <div class="tl-row">
         <div class="tl-when">Days 31-60</div>
         <div class="tl-what">
-          • <b>Launch Nemotron Cookbook v1</b> with 10 production-ready agents. Each on GitHub with README + deploy button.<br>
-          • <b>Ship Cursor MCP server</b> for Nemotron. Get listed in the Cursor extensions marketplace.<br>
-          • <b>Run the first Nemotron Cup hackathon.</b> Partner with Sundai Club or AGI House for venue / judging.<br>
-          • <b>Hire DevRel head</b> if the role isn't filled yet. Job description spec'd against this playbook.<br>
-          • <b>5 of 20 researcher voices</b> published their first thread / video.
+          • <b>Launch Nemotron Cookbook v1</b> with 10 production-ready agents. Each on GitHub with a README and a one-click deploy button.<br>
+          • <b>Ship the Cursor MCP (Model Context Protocol) server</b> for Nemotron. Get listed in the Cursor extensions marketplace.<br>
+          • <b>Run the first Nemotron Cup hackathon.</b> Partner with Sundai Club or AGI House (active AI dev communities) for venue and judging.<br>
+          • <b>Hire a Head of Developer Relations</b> if the role isn't filled yet. Job description spec'd against this playbook.<br>
+          • <b>5 of the 20 researcher voices</b> have published their first thread or video.
         </div>
       </div>
       <div class="tl-row">
         <div class="tl-when">Days 61-90</div>
         <div class="tl-what">
-          • <b>One front door</b> launched in beta. Either nvidia.dev or rebranded developer.nvidia.com. Less than 5-minute Quick Start measured.<br>
+          • <b>One front door</b> launched in beta. Either a new domain (nvidia.dev) or a rebranded developer.nvidia.com. Time to first API call measured and below 5 minutes.<br>
           • <b>"Agentic AI 101 with Nemotron"</b> tutorial series live. Weekly cadence.<br>
-          • <b>DLI cert path simplified.</b> NCP-AAI promotion live across LinkedIn + Discord.<br>
-          • <b>$50M "Built with Nemotron" co-marketing fund</b> deployed. Inception members and Coalition partners get the first checks.<br>
-          • <b>5 of 20 researcher voices have 10K+ followers each.</b>
+          • <b>DLI (Deep Learning Institute) certification path simplified.</b> NCP-AAI promotion live across LinkedIn and Discord.<br>
+          • <b>$50M "Built with Nemotron" co-marketing fund</b> deployed. NVIDIA Inception members and Nemotron Coalition partners get the first checks.<br>
+          • <b>5 of the 20 researcher voices</b> have 10,000+ followers each on X / LinkedIn / YouTube.
         </div>
       </div>
     </div>
