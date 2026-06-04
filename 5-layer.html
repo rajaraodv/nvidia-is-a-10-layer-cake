@@ -334,13 +334,13 @@ body {
 }
 .cake-candle-wrap { position: absolute; top: 0; left: 50%; transform: translateX(-50%); }
 .cake-candle {
-  width: 10px; height: 32px; background: #d65a47; margin: 0 auto;
+  width: 8px; height: 26px; background: #d65a47; margin: 0 auto;
   border: 1px solid var(--ink);
 }
 .cake-flame {
-  width: 14px; height: 18px; background: #f0c14b;
+  width: 12px; height: 16px; background: #f0c14b;
   border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
-  margin: 0 auto -3px; border: 1px solid var(--ink);
+  margin: 0 auto -2px; border: 1px solid var(--ink);
   animation: flicker 1.4s ease-in-out infinite alternate;
 }
 @keyframes flicker {
@@ -348,35 +348,27 @@ body {
   100% { transform: rotate(2deg) scale(1.06); }
 }
 .cake-frosting-top {
-  width: 280px; height: 14px; background: #fff;
+  width: 200px; height: 10px; background: #fff;
   border: 1.5px solid var(--ink); border-bottom: none;
-  position: relative;
 }
-.cake-frosting-top::before, .cake-frosting-top::after {
-  content: ''; position: absolute; bottom: -8px; width: 30px; height: 14px;
-  background: #fff; border: 1.5px solid var(--ink); border-top: none;
-  border-radius: 0 0 50% 50%;
-}
-.cake-frosting-top::before { left: 36px; }
-.cake-frosting-top::after { right: 36px; }
 .cake-layer {
-  height: 36px; border: 1.5px solid var(--ink); border-top: 1px dashed rgba(0,0,0,0.3);
+  height: 32px; border: 1.5px solid var(--ink); border-top: 1px dashed rgba(0,0,0,0.3);
   display: flex; align-items: center; justify-content: space-between;
-  padding: 0 14px; font-size: 12.5px; font-weight: 700;
+  padding: 0 14px; font-size: 12px; font-weight: 700;
 }
 .cake-layer:first-of-type { border-top: none; }
-.cake-layer[data-l="5"] { background: var(--l-5); width: 320px; }
-.cake-layer[data-l="4"] { background: var(--l-4); width: 380px; }
-.cake-layer[data-l="3"] { background: var(--l-3); width: 440px; }
-.cake-layer[data-l="2"] { background: var(--l-2); width: 500px; }
-.cake-layer[data-l="1"] { background: var(--l-1); width: 560px; }
+.cake-layer[data-l="5"] { background: var(--l-5); width: 240px; }
+.cake-layer[data-l="4"] { background: var(--l-4); width: 280px; }
+.cake-layer[data-l="3"] { background: var(--l-3); width: 320px; }
+.cake-layer[data-l="2"] { background: var(--l-2); width: 360px; }
+.cake-layer[data-l="1"] { background: var(--l-1); width: 400px; }
 .cake-num {
   font-family: var(--mono); font-size: 13px; font-weight: 900;
   color: var(--ink); width: 22px;
 }
 .cake-name { font-size: 12px; letter-spacing: 0.02em; }
 .cake-plate {
-  width: 600px; height: 18px; background: #ddd;
+  width: 430px; height: 14px; background: #ddd;
   border: 1.5px solid var(--ink); margin-top: 1px;
   box-shadow: 0 4px 0 0 #bbb;
 }
@@ -443,14 +435,14 @@ body {
   .m-title { font-size: 22px; }
   .cake-card { padding: 24px 20px 22px; }
   .cake-title { font-size: 19px; }
-  .cake-layer { height: 28px; font-size: 11px; padding: 0 12px; }
-  .cake-layer[data-l="5"] { width: 240px; }
-  .cake-layer[data-l="4"] { width: 280px; }
-  .cake-layer[data-l="3"] { width: 320px; }
-  .cake-layer[data-l="2"] { width: 360px; }
-  .cake-layer[data-l="1"] { width: 400px; }
-  .cake-plate { width: 440px; }
-  .cake-frosting-top { width: 200px; height: 12px; }
+  .cake-layer { height: 26px; font-size: 11px; padding: 0 12px; }
+  .cake-layer[data-l="5"] { width: 200px; }
+  .cake-layer[data-l="4"] { width: 230px; }
+  .cake-layer[data-l="3"] { width: 260px; }
+  .cake-layer[data-l="2"] { width: 290px; }
+  .cake-layer[data-l="1"] { width: 320px; }
+  .cake-plate { width: 350px; }
+  .cake-frosting-top { width: 170px; height: 9px; }
 }
 </style>
 </head>
