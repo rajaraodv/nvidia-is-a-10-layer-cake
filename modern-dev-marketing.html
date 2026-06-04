@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Modern Developer Marketing for NVIDIA · Strategy</title>
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --ink: #0a0a0a;
+  --ink2: #3a3a3a;
+  --ink3: #6e6e6e;
+  --ink4: #a8a8a8;
+  --rule: #d6d6d6;
+  --rule2: #ececec;
+  --rule3: #f4f4f4;
+  --bg: #ffffff;
+  --green: #76b900;
+  --green-dim: #5a8e00;
+  --green-bg: #f3f9e6;
+  --amber: #d97706;
+  --amber-bg: #fff5e0;
+  --amber-text: #b45309;
+  --red: #c83232;
+  --red-bg: #fdebeb;
+  --gold: #c8a04a;
+  --gold-bg: #fbf6ea;
+  --sans: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', 'Inter', Arial, sans-serif;
+  --mono: 'SF Mono', 'JetBrains Mono', 'Fira Code', Menlo, monospace;
+}
+
+html, body { height: 100%; }
+body {
+  font-family: var(--sans);
+  background: var(--bg);
+  color: var(--ink);
+  font-size: 15.5px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+.wrap { max-width: 880px; margin: 0 auto; padding: 56px 32px 80px; }
+
+/* HEADER */
+.posting-meta {
+  font-family: var(--mono); font-size: 10.5px; font-weight: 800;
+  letter-spacing: 0.14em; text-transform: uppercase; color: var(--green-dim);
+  margin-bottom: 18px; display: flex; align-items: center; gap: 12px; flex-wrap: wrap;
+}
+.posting-meta .pipe { color: var(--ink4); }
+.posting-meta a { color: var(--ink2); text-decoration: none; border-bottom: 1px solid var(--ink3); }
+.posting-meta a:hover { color: var(--green-dim); border-bottom-color: var(--green-dim); }
+
+h1.page-title {
+  font-size: clamp(30px, 4.5vw, 44px); font-weight: 900; line-height: 1.05;
+  letter-spacing: -0.025em; margin-bottom: 10px;
+}
+.subhead {
+  font-size: 17px; color: var(--ink3); max-width: 720px; margin-bottom: 32px; line-height: 1.5;
+}
+
+/* HERO */
+.hero {
+  background: var(--ink); color: #fff;
+  padding: 32px 36px 36px; border-left: 6px solid var(--green);
+  margin-bottom: 44px;
+}
+.hero-label {
+  font-family: var(--mono); font-size: 10.5px; font-weight: 800;
+  letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--green); margin-bottom: 14px;
+}
+.hero-text {
+  font-size: clamp(18px, 2.2vw, 22px); font-weight: 700;
+  line-height: 1.45; color: #fff; letter-spacing: -0.005em;
+}
+.hero-text b { color: var(--green); font-weight: 900; }
+.hero-text em { font-style: italic; color: #fff; }
+
+/* SECTIONS */
+section { margin-bottom: 44px; }
+section h2 {
+  font-size: 21px; font-weight: 900; letter-spacing: -0.015em;
+  margin-bottom: 16px; padding-bottom: 10px; border-bottom: 2px solid var(--ink);
+}
+section p {
+  font-size: 15.5px; line-height: 1.65; margin-bottom: 12px;
+}
+section p:last-child { margin-bottom: 0; }
+section ul { margin-left: 20px; margin-bottom: 12px; }
+section li { font-size: 15px; line-height: 1.6; margin-bottom: 6px; }
+
+.sub-h3 {
+  font-family: var(--mono); font-size: 11px; font-weight: 800;
+  letter-spacing: 0.12em; text-transform: uppercase; color: var(--green-dim);
+  margin-top: 26px; margin-bottom: 10px;
+}
+
+/* DIAGNOSIS FRICTION ITEMS */
+.friction-list { display: grid; grid-template-columns: 1fr; gap: 10px; }
+.friction {
+  display: grid; grid-template-columns: 38px 1fr; gap: 14px; align-items: start;
+  padding: 14px 18px; background: var(--amber-bg);
+  border-left: 4px solid var(--amber);
+}
+.friction-num {
+  font-family: var(--mono); font-size: 17px; font-weight: 900;
+  color: var(--amber-text); letter-spacing: -0.02em;
+}
+.friction-body { font-size: 14.5px; line-height: 1.55; color: var(--ink); }
+.friction-body b { font-weight: 800; }
+
+/* PLAYBOOK CARDS */
+.playbook-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 12px;
+}
+.play-card {
+  border: 1.5px solid var(--rule); padding: 16px 18px; background: #fff;
+}
+.play-tag {
+  font-family: var(--mono); font-size: 10px; font-weight: 800;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--green-dim); margin-bottom: 6px;
+}
+.play-name {
+  font-size: 17px; font-weight: 900; letter-spacing: -0.01em;
+  margin-bottom: 6px;
+}
+.play-move {
+  font-size: 13.5px; color: var(--ink2); line-height: 1.5; margin-bottom: 10px;
+}
+.play-lesson {
+  font-family: var(--mono); font-size: 10px; font-weight: 700;
+  color: var(--green-dim); letter-spacing: 0.06em; text-transform: uppercase;
+  margin-bottom: 4px;
+}
+.play-lesson-text {
+  font-size: 13.5px; font-weight: 600; line-height: 1.5; color: var(--ink);
+}
+@media (max-width: 720px) { .playbook-grid { grid-template-columns: 1fr; } }
+
+/* MOVES — numbered list */
+.moves { list-style: none; padding: 0; counter-reset: m-counter; }
+.move {
+  padding: 22px 0 24px; border-bottom: 1px solid var(--rule2);
+  position: relative; counter-increment: m-counter;
+}
+.move:last-child { border-bottom: none; }
+.move-head {
+  display: flex; align-items: baseline; gap: 14px; margin-bottom: 12px;
+}
+.move-num {
+  font-family: var(--mono); font-size: 32px; font-weight: 900;
+  color: var(--green-dim); letter-spacing: -0.03em; line-height: 1;
+  min-width: 50px;
+}
+.move-num::before { content: counter(m-counter, decimal-leading-zero); }
+.move-title {
+  font-size: 22px; font-weight: 900; letter-spacing: -0.015em;
+  line-height: 1.2; color: var(--ink);
+}
+.move-body {
+  padding-left: 64px; display: flex; flex-direction: column; gap: 8px;
+}
+.move-row {
+  display: grid; grid-template-columns: 100px 1fr; gap: 12px;
+  font-size: 14.5px; line-height: 1.55;
+}
+.move-row-label {
+  font-family: var(--mono); font-size: 10px; font-weight: 800;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--green-dim); padding-top: 3px;
+}
+.move-row-text { color: var(--ink); }
+.move-row-text b { font-weight: 800; }
+@media (max-width: 640px) {
+  .move-body { padding-left: 0; }
+  .move-row { grid-template-columns: 1fr; gap: 2px; }
+}
+
+/* CALLOUT */
+.callout {
+  margin-top: 24px; padding: 18px 22px;
+  background: linear-gradient(180deg, var(--green-bg) 0%, #fff 100%);
+  border-left: 4px solid var(--green); font-size: 15px; line-height: 1.6;
+}
+.callout b { font-weight: 800; }
+
+/* TIMELINE */
+.timeline { display: grid; grid-template-columns: 1fr; gap: 14px; }
+.tl-row {
+  display: grid; grid-template-columns: 110px 1fr; gap: 16px; align-items: start;
+  padding: 14px 18px; background: var(--rule3); border-left: 4px solid var(--green);
+}
+.tl-when {
+  font-family: var(--mono); font-size: 11px; font-weight: 800;
+  letter-spacing: 0.1em; text-transform: uppercase; color: var(--green-dim);
+  padding-top: 3px;
+}
+.tl-what { font-size: 14.5px; line-height: 1.55; color: var(--ink); }
+.tl-what b { font-weight: 800; }
+@media (max-width: 640px) {
+  .tl-row { grid-template-columns: 1fr; gap: 4px; }
+}
+
+/* BRAND VOICE BLOCK */
+.voice-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; margin-top: 14px; }
+.voice-card {
+  border: 1.5px solid var(--rule); padding: 12px 14px; background: #fafafa;
+}
+.voice-name {
+  font-family: var(--mono); font-size: 10.5px; font-weight: 800;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--green-dim); margin-bottom: 6px;
+}
+.voice-line {
+  font-size: 14px; font-weight: 700; color: var(--ink); line-height: 1.35;
+}
+@media (max-width: 640px) { .voice-grid { grid-template-columns: 1fr; } }
+
+footer {
+  margin-top: 56px; padding-top: 22px; border-top: 1px solid var(--rule);
+  font-family: var(--mono); font-size: 11px; color: var(--ink3);
+  letter-spacing: 0.04em;
+  display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px;
+}
+footer a { color: var(--ink2); text-decoration: none; border-bottom: 1px solid var(--ink3); }
+
+@media (max-width: 600px) {
+  .wrap { padding: 36px 18px 50px; }
+  h1.page-title { font-size: 28px; }
+  .hero { padding: 22px 22px 26px; }
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="posting-meta">
+    Internal · Strategy · Modern Developer Marketing
+    <span class="pipe">·</span>
+    2026
+    <span class="pipe">·</span>
+    <a href="private-raja">← Strategy deck</a>
+  </div>
+
+  <h1 class="page-title">Modern Developer Marketing for NVIDIA</h1>
+  <p class="subhead">What works in the agentic AI era — and what NVIDIA needs to change to flip "everyone knows NVIDIA" into "every developer ships with NVIDIA."</p>
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-label">The thesis</div>
+    <div class="hero-text">
+      <em>Brand awareness is not developer love.</em> NVIDIA has a hundred-million-developer TAM and the deepest stack in AI, but in 2025–2026 the dev-engagement winners are Anthropic, Cursor, Vercel, Hugging Face, and Ollama — smaller surfaces with <b>tighter, more engaged, more visible developer cultures</b>. Their playbook is reproducible. Here's what to copy, what to skip, and the <b>seven moves</b> NVIDIA needs to make in 2026.
+    </div>
+  </div>
+
+  <!-- THE DIAGNOSIS -->
+  <section>
+    <h2>The diagnosis · friction on the surface today</h2>
+    <p>Pulled from the field audit (see also <a href="nvidia-now" style="color: var(--green-dim);">/nvidia-now</a>). Each is a real, observable issue that blocks a developer between "I want to try Nemotron" and "I shipped a product."</p>
+    <div class="friction-list">
+      <div class="friction">
+        <div class="friction-num">1</div>
+        <div class="friction-body">
+          <b>19+ portals, no front door.</b> developer.nvidia.com, build.nvidia.com, docs.nvidia.com, ngc.nvidia.com, learn.nvidia.com, research.nvidia.com — plus product-specific subdomains. A new dev has no idea where to start. Compare to Anthropic: one URL (claude.ai), one console, one path to API. Or Cursor: one download, you're in.
+        </div>
+      </div>
+      <div class="friction">
+        <div class="friction-num">2</div>
+        <div class="friction-body">
+          <b>Certifications are buried.</b> NCA / NCP credentials exist (7+ tracks including the new NCP-AAI for Agentic AI) but you'd struggle to find them organically. They live on a separate site (<i>nvidia.com/en-us/learn/certification</i>) with no clear path from "I want to learn" → "here's the cert" → "here's how to display it." AWS, GCP, and Microsoft certs are LinkedIn-tier social currency. NVIDIA's aren't yet.
+        </div>
+      </div>
+      <div class="friction">
+        <div class="friction-num">3</div>
+        <div class="friction-body">
+          <b>build.nvidia.com free tier is broken.</b> The "Public API Endpoints" permission is missing for many new accounts. Silent 401 errors. ~10-day support cycle to enable. First-touch experience for the most common developer path — and it's broken roughly a third of the time.
+        </div>
+      </div>
+      <div class="friction">
+        <div class="friction-num">4</div>
+        <div class="friction-body">
+          <b>40 RPM free tier doesn't survive a real agent.</b> Agentic workloads hit 40 requests per minute in seconds. There's no usable "individual developer" pricing between free (40 RPM) and NVIDIA AI Enterprise (~$1,000/GPU/yr). Anthropic has Pro ($20/mo) and Max ($100/mo) tiers that are explicitly designed for the indie dev. NVIDIA doesn't.
+        </div>
+      </div>
+      <div class="friction">
+        <div class="friction-num">5</div>
+        <div class="friction-body">
+          <b>Big community, low engagement.</b> ~5M registered developers on developer.nvidia.com. Discord: ~19K members. Active OSS contributors to Nemotron-related repos: hundreds. Compare to Hugging Face: 1M+ HF active monthly users contributing to model cards, datasets, spaces. The brand is everywhere; the engagement isn't.
+        </div>
+      </div>
+      <div class="friction">
+        <div class="friction-num">6</div>
+        <div class="friction-body">
+          <b>Docs are exhaustive but not navigable.</b> NVIDIA docs are the most comprehensive in the industry. Developers don't want comprehensive — they want a <b>5-minute Quick Start</b>. Anthropic's docs read like a friend explaining things. NVIDIA's read like a 200-page reference manual.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHAT MODERN DEV MARKETING LOOKS LIKE -->
+  <section>
+    <h2>What modern developer marketing looks like in 2026</h2>
+    <p>Six companies that figured out how to convert developer awareness into developer love. Each one has one specific move you can name. Each move is reproducible.</p>
+    <div class="playbook-grid">
+      <div class="play-card">
+        <div class="play-tag">Anthropic</div>
+        <div class="play-name">Claude Code as developer flywheel</div>
+        <div class="play-move">A terminal-native agentic IDE that ships with the API. Install in 5 minutes, agent ships your next PR, you tell your team. Built distribution into the product itself.</div>
+        <div class="play-lesson">Lesson</div>
+        <div class="play-lesson-text">Ship the magic upfront. Let it spread peer-to-peer.</div>
+      </div>
+      <div class="play-card">
+        <div class="play-tag">Cursor</div>
+        <div class="play-name">Be in the IDE devs already use</div>
+        <div class="play-move">Cursor took VS Code's IDE behavior and wrapped it in the best inline AI experience. By 2026 it's the default LLM-powered editor for hundreds of thousands of developers. ARR &gt;$500M, mostly individual devs.</div>
+        <div class="play-lesson">Lesson</div>
+        <div class="play-lesson-text">Don't make devs come to you. Be where they already are.</div>
+      </div>
+      <div class="play-card">
+        <div class="play-tag">Vercel</div>
+        <div class="play-name">Founder-led voice on X</div>
+        <div class="play-move">Guillermo Rauch and the entire Vercel team are highly visible on X. Personalities driving culture. "DX-first" mantra. New product launches happen on Twitter before press releases.</div>
+        <div class="play-lesson">Lesson</div>
+        <div class="play-lesson-text">You can't outspend Apple on ads. You can outpost them on X.</div>
+      </div>
+      <div class="play-card">
+        <div class="play-tag">Hugging Face</div>
+        <div class="play-name">Community-built model hub</div>
+        <div class="play-move">HF became the de-facto model registry because the community built it together. Every open model lives there first, then maybe elsewhere. They became infrastructure by being open.</div>
+        <div class="play-lesson">Lesson</div>
+        <div class="play-lesson-text">Meet developers in their ecosystem. Build with them, not for them.</div>
+      </div>
+      <div class="play-card">
+        <div class="play-tag">Ollama</div>
+        <div class="play-name">Local-first, hyper-active community</div>
+        <div class="play-move">Ollama is the simplest path to running models locally. Three commands and you're hosting Llama 3 or Mistral on your laptop. Millions of downloads. Active Discord.</div>
+        <div class="play-lesson">Lesson</div>
+        <div class="play-lesson-text">"Easy" is a moat in 2026. Underestimate the simplest path at your peril.</div>
+      </div>
+      <div class="play-card">
+        <div class="play-tag">Supabase</div>
+        <div class="play-name">OSS-flavored backend community</div>
+        <div class="play-move">Built a 100K+ developer community by being open-source, transparent, and constantly shipping in public. Changelog is a feature. Founders ship code visible on GitHub.</div>
+        <div class="play-lesson">Lesson</div>
+        <div class="play-lesson-text">The new BD is "build in public." The trust dividend is huge.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- THE 7 MOVES -->
+  <section>
+    <h2>The seven modern dev-marketing moves for NVIDIA</h2>
+    <p>Each move below is sized as a 90-day initiative. Each has a clear "do this," an owner concept, and a measurable outcome. None of these are expensive. All of them are well-understood from the playbooks above. The only thing missing is execution.</p>
+
+    <ol class="moves">
+      <li class="move">
+        <div class="move-head">
+          <div class="move-num"></div>
+          <div class="move-title">One front door</div>
+        </div>
+        <div class="move-body">
+          <div class="move-row"><div class="move-row-label">Problem</div><div class="move-row-text">19+ portals, no clear starting point. New devs Google "NVIDIA Nemotron" and land in five different places.</div></div>
+          <div class="move-row"><div class="move-row-label">Move</div><div class="move-row-text">Acquire <b>nvidia.dev</b> (or rebrand developer.nvidia.com). Single hero: "Try Nemotron in 60 seconds." Free-tier badge prominent. Quick-links to: <b>build</b> (try), <b>docs</b> (read), <b>learn</b> (DLI), <b>HF</b> (weights), <b>GitHub</b> (code).</div></div>
+          <div class="move-row"><div class="move-row-label">Owner</div><div class="move-row-text">VP Developer Marketing + Web (Product) + Brand.</div></div>
+          <div class="move-row"><div class="move-row-label">Metric</div><div class="move-row-text">Time to first API call &lt; 5 minutes. (Today, friction-bound to 20+.)</div></div>
+        </div>
+      </li>
+
+      <li class="move">
+        <div class="move-head">
+          <div class="move-num"></div>
+          <div class="move-title">Be in the tools developers already use</div>
+        </div>
+        <div class="move-body">
+          <div class="move-row"><div class="move-row-label">Problem</div><div class="move-row-text">Developers live in Cursor, VS Code, Claude Code, Cline, Aider — not on developer.nvidia.com.</div></div>
+          <div class="move-row"><div class="move-row-label">Move</div><div class="move-row-text">Ship Nemotron-powered extensions for every major AI IDE. Cursor MCP server. VS Code extension. Cline templates. Aider config presets. Goal: <b>be the default LLM in 10+ dev tools by EOY 2026.</b></div></div>
+          <div class="move-row"><div class="move-row-label">Owner</div><div class="move-row-text">DevRel + Engineering (joint).</div></div>
+          <div class="move-row"><div class="move-row-label">Metric</div><div class="move-row-text">Nemotron-via-IDE token volume vs. Nemotron-via-direct API.</div></div>
+        </div>
+      </li>
+
+      <li class="move">
+        <div class="move-head">
+          <div class="move-num"></div>
+          <div class="move-title">Open the certificate path</div>
+        </div>
+        <div class="move-body">
+          <div class="move-row"><div class="move-row-label">Problem</div><div class="move-row-text">NCA / NCP credentials exist but are buried. Devs don't know they exist. Certs = social currency in dev land.</div></div>
+          <div class="move-row"><div class="move-row-label">Move</div><div class="move-row-text">Add cert badges to every Nemotron blog post, video, conference talk. Get NVIDIA certs on LinkedIn (like AWS). Sponsor cert prep bootcamps at top universities. Promote <b>NCP-AAI (Agentic AI)</b> as the new "must-have" cert.</div></div>
+          <div class="move-row"><div class="move-row-label">Owner</div><div class="move-row-text">DLI + Brand + Partnerships.</div></div>
+          <div class="move-row"><div class="move-row-label">Metric</div><div class="move-row-text">NCP-AAI grads / month. LinkedIn cert displays (track via API).</div></div>
+        </div>
+      </li>
+
+      <li class="move">
+        <div class="move-head">
+          <div class="move-num"></div>
+          <div class="move-title">Founder + researcher voice on X (and YouTube, and Bluesky)</div>
+        </div>
+        <div class="move-body">
+          <div class="move-row"><div class="move-row-label">Problem</div><div class="move-row-text">NVIDIA's developer-facing voice is Jensen (CEO-tier) or anonymous corporate accounts. No mid-tier researchers visible. Anthropic has Dario, Mike, Karpathy. Vercel has Guillermo and the whole team. NVIDIA has corporate handles.</div></div>
+          <div class="move-row"><div class="move-row-label">Move</div><div class="move-row-text">Identify <b>20 NVIDIA Research / NeMo / Cosmos / GR00T / Nemotron team members</b> who can be "the face." Train on dev comms. Quarterly content quotas. They're the new MKBHD-tier voices for NVIDIA. Founder fellowship + comms training.</div></div>
+          <div class="move-row"><div class="move-row-label">Owner</div><div class="move-row-text">DevRel + Brand + HR.</div></div>
+          <div class="move-row"><div class="move-row-label">Metric</div><div class="move-row-text">Aggregated weekly reach of NVIDIA dev-team posts on X. Goal: 5 voices at 100K+ followers within 12 months.</div></div>
+        </div>
+      </li>
+
+      <li class="move">
+        <div class="move-head">
+          <div class="move-num"></div>
+          <div class="move-title">Demos that ship · Nemotron Cookbook</div>
+        </div>
+        <div class="move-body">
+          <div class="move-row"><div class="move-row-label">Problem</div><div class="move-row-text">NVIDIA demos look like slide decks. They don't ship to GitHub. They don't have READMEs. They aren't forkable. Compare to LangChain's <i>cookbook</i> repo or OpenAI's <i>openai-cookbook</i>.</div></div>
+          <div class="move-row"><div class="move-row-label">Move</div><div class="move-row-text">A single GitHub repo: <b>nemotron-cookbook</b>. 30 forkable production-grade reference agents on NemoClaw + Nemotron. Sales agent. Support agent. RevOps agent. Code-review agent. Ops agent. Each is real, runs end-to-end, has a README, has a Lovable / Vercel deploy button. The "AutoGen of open."</div></div>
+          <div class="move-row"><div class="move-row-label">Owner</div><div class="move-row-text">DevRel + Engineering (joint, with budget for full-time builders).</div></div>
+          <div class="move-row"><div class="move-row-label">Metric</div><div class="move-row-text">Stars + forks per reference agent. Target: top 5 each cross 1K stars in 6 months.</div></div>
+        </div>
+      </li>
+
+      <li class="move">
+        <div class="move-head">
+          <div class="move-num"></div>
+          <div class="move-title">The agentic-era canonical path</div>
+        </div>
+        <div class="move-body">
+          <div class="move-row"><div class="move-row-label">Problem</div><div class="move-row-text">The agentic AI shift is the defining 2026 narrative. NVIDIA has every component (NemoClaw, OpenShell, Nemotron 3 Ultra, Hermes Agent, NeMo Retriever) — but no canonical "<b>here's how to build an agent</b>" path the rest of the field references.</div></div>
+          <div class="move-row"><div class="move-row-label">Move</div><div class="move-row-text">"<b>Agentic AI 101 with Nemotron</b>" — a single living document + tutorial series + GitHub repo. "Build a customer support agent in 50 lines." "Add safety to your agent." "Deploy your agent to production with OpenShell." Maintained weekly. The de-facto agentic 101, written by NVIDIA.</div></div>
+          <div class="move-row"><div class="move-row-label">Owner</div><div class="move-row-text">DevRel + Open-source team + AI Blueprints.</div></div>
+          <div class="move-row"><div class="move-row-label">Metric</div><div class="move-row-text">GitHub stars + monthly unique readers. Goal: top-50 GitHub agentic-AI repo in 6 months.</div></div>
+        </div>
+      </li>
+
+      <li class="move">
+        <div class="move-head">
+          <div class="move-num"></div>
+          <div class="move-title">Hackathons that ship · the Nemotron Cup</div>
+        </div>
+        <div class="move-body">
+          <div class="move-row"><div class="move-row-label">Problem</div><div class="move-row-text">Hackathon culture has shifted in 2025-2026. Cool demos aren't enough — modern hackathons produce shipped products (Sundai Club, Hack the North, AGI House). NVIDIA sponsors hackathons but they produce slide demos, not GitHub stars.</div></div>
+          <div class="move-row"><div class="move-row-label">Move</div><div class="move-row-text"><b>Nemotron Cup</b> — quarterly. $100K cash + Inception membership for the winning team. Judging criteria: <i>shipped traction</i> (DAU, signups, revenue), not just demo polish. Cosponsor Cursor / Anthropic / OpenRouter community events. NVIDIA shows up where developers already gather.</div></div>
+          <div class="move-row"><div class="move-row-label">Owner</div><div class="move-row-text">Inception + DevRel + Brand.</div></div>
+          <div class="move-row"><div class="move-row-label">Metric</div><div class="move-row-text">Nemotron-powered products entering YC / Inception batch each quarter. Real revenue traction tracked at 6 / 12 months.</div></div>
+        </div>
+      </li>
+    </ol>
+
+    <div class="callout">
+      <b>The pattern across all seven:</b> shift from corporate marketing → developer-native marketing. From "we ran a campaign" → "the community moved." From "press release" → "GitHub commit." The companies winning developer love in 2026 don't think of marketing as a budget line. They think of it as <b>making it stupid-easy for developers to build something they're proud of.</b>
+    </div>
+  </section>
+
+  <!-- BRAND VOICE -->
+  <section>
+    <h2>The brand-voice problem · Nemotron needs an identity</h2>
+    <p>NVIDIA has product names but not a developer-facing voice. The companies winning in 2026 all have one:</p>
+    <div class="voice-grid">
+      <div class="voice-card">
+        <div class="voice-name">Anthropic</div>
+        <div class="voice-line">"Thoughtful + safe + great DX."</div>
+      </div>
+      <div class="voice-card">
+        <div class="voice-name">Cursor</div>
+        <div class="voice-line">"10× your code."</div>
+      </div>
+      <div class="voice-card">
+        <div class="voice-name">Vercel</div>
+        <div class="voice-line">"DX first. Always."</div>
+      </div>
+      <div class="voice-card">
+        <div class="voice-name">Hugging Face</div>
+        <div class="voice-line">"AI that's open by default."</div>
+      </div>
+      <div class="voice-card">
+        <div class="voice-name">Ollama</div>
+        <div class="voice-line">"Run any model. Locally. Now."</div>
+      </div>
+      <div class="voice-card">
+        <div class="voice-name">NVIDIA today</div>
+        <div class="voice-line" style="color: var(--amber-text);">"... compute? GPUs?"</div>
+      </div>
+    </div>
+
+    <h3 class="sub-h3">Candidate positioning claims for Nemotron</h3>
+    <ul>
+      <li><b>"The open model US enterprise trusts."</b> — sovereign / regulatory angle. Strong with Fortune 500 and gov customers.</li>
+      <li><b>"Best at agentic reasoning, open by default."</b> — capability angle. Strong with builders.</li>
+      <li><b>"The model that fits on your desk."</b> — DGX Spark / on-device angle. Strong with indie devs.</li>
+      <li><b>"The model behind every flagship open agent."</b> — ecosystem angle. Strong if NemoClaw delivers.</li>
+    </ul>
+
+    <p style="margin-top: 18px;">Pick one. Land it everywhere — site copy, launches, sales decks, every researcher tweet. Use it consistently for <b>12 months</b>. Resist the urge to refresh quarterly. <i>Voice compounds.</i></p>
+  </section>
+
+  <!-- 90-DAY PLAYS -->
+  <section>
+    <h2>The first 90 days · what to ship</h2>
+    <p>Specific actions in priority order. Each one's small enough to start Monday, big enough to matter.</p>
+
+    <div class="timeline">
+      <div class="tl-row">
+        <div class="tl-when">Days 1-30</div>
+        <div class="tl-what">
+          • <b>Fix the build.nvidia.com permissions bug.</b> Today. (One person, one week.)<br>
+          • <b>Audit cert pathways</b> and write a single "How to get NCP-AAI" landing page.<br>
+          • <b>Identify the 20 researcher voices</b> (NeMo, Cosmos, GR00T, Nemotron teams). Brief them on the program.<br>
+          • <b>Spin up the <code>nemotron-cookbook</code> GitHub repo</b> with 5 placeholder reference agents and an explicit roadmap to 30.<br>
+          • <b>Pick the one-line positioning claim</b> for Nemotron. Get exec sign-off.
+        </div>
+      </div>
+      <div class="tl-row">
+        <div class="tl-when">Days 31-60</div>
+        <div class="tl-what">
+          • <b>Launch Nemotron Cookbook v1</b> with 10 production-ready agents. Each on GitHub with README + deploy button.<br>
+          • <b>Ship Cursor MCP server</b> for Nemotron. Get listed in the Cursor extensions marketplace.<br>
+          • <b>Run the first Nemotron Cup hackathon.</b> Partner with Sundai Club or AGI House for venue / judging.<br>
+          • <b>Hire DevRel head</b> if the role isn't filled yet. Job description spec'd against this playbook.<br>
+          • <b>5 of 20 researcher voices</b> published their first thread / video.
+        </div>
+      </div>
+      <div class="tl-row">
+        <div class="tl-when">Days 61-90</div>
+        <div class="tl-what">
+          • <b>One front door</b> launched in beta. Either nvidia.dev or rebranded developer.nvidia.com. Less than 5-minute Quick Start measured.<br>
+          • <b>"Agentic AI 101 with Nemotron"</b> tutorial series live. Weekly cadence.<br>
+          • <b>DLI cert path simplified.</b> NCP-AAI promotion live across LinkedIn + Discord.<br>
+          • <b>$50M "Built with Nemotron" co-marketing fund</b> deployed. Inception members and Coalition partners get the first checks.<br>
+          • <b>5 of 20 researcher voices have 10K+ followers each.</b>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BOTTOM LINE -->
+  <section>
+    <h2>Bottom line</h2>
+    <p>NVIDIA has every input: the best chips, the best open models (Nemotron #1 on VoiceBench, #1 on Daily-Omni, #2 on OCRBench v2 — see <a href="omni-launchpad" style="color: var(--green-dim);">/omni-launchpad</a>), the biggest brand, the most-cited research, the largest pool of registered developers. <b>What's missing is the developer-marketing surface that turns brand recognition into shipping behavior.</b></p>
+    <p>The seven moves above are the playbook. None of them are expensive. All of them are well-understood from Anthropic, Cursor, Vercel, Hugging Face, Ollama, Supabase — the companies that figured out how to convert awareness into love in 2025-2026.</p>
+    <p style="font-size: 17px; font-weight: 800; padding-top: 8px;">The only thing missing is execution. <span style="color: var(--green-dim);">This role is the execution.</span></p>
+  </section>
+
+  <footer>
+    <div>NVIDIA · Confidential · Internal Strategy</div>
+    <div>Last updated · June 4, 2026</div>
+  </footer>
+
+</div>
+</body>
+</html>
