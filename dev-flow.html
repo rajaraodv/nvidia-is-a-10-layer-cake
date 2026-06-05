@@ -288,6 +288,88 @@ section p { font-size: 14.5px; line-height: 1.6; margin-bottom: 12px; color: var
 .journey-block.clarity .journey-list li .icon { color: var(--green-dim); }
 .journey-list li b { font-weight: 800; }
 
+/* ════════════════ SIMPLE BEFORE / AFTER GRAPHICS ════════════════ */
+.simple-graphic {
+  background: var(--rule3);
+  border: 2px solid var(--ink);
+  padding: 24px;
+  display: grid;
+  gap: 16px;
+}
+.simple-before { grid-template-columns: 1fr 32px 1.6fr 32px 1fr; }
+.simple-after  { grid-template-columns: 1fr 32px 2.2fr; }
+
+.sg-col {
+  display: flex; flex-direction: column;
+  background: #fff; border: 1.5px solid var(--rule);
+  padding: 14px 14px 16px;
+}
+.sg-col-label {
+  font-family: var(--mono); font-size: 10px; font-weight: 800;
+  letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--ink); margin-bottom: 10px;
+  padding-bottom: 7px; border-bottom: 2px solid var(--ink);
+}
+.sg-entry {
+  font-size: 12.5px; font-weight: 700; padding: 6px 9px;
+  background: #fff; border: 1px solid var(--rule); margin-bottom: 4px;
+  color: var(--ink);
+}
+.sg-entry.new {
+  background: var(--green-bg); border: 1px solid var(--green);
+  border-left-width: 4px; font-weight: 800;
+}
+.sg-entry.new::before { content: '+ '; color: var(--green-dim); font-weight: 900; }
+.sg-arrow {
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--mono); font-size: 28px; font-weight: 900;
+  color: var(--ink);
+}
+.sg-arrow.broken { color: var(--red); }
+.sg-arrow.good { color: var(--green-dim); }
+
+.sg-portals-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 3px;
+}
+.sg-portal {
+  font-family: var(--mono); font-size: 9.5px; font-weight: 700;
+  padding: 5px 7px; background: #fff;
+  border: 1px solid var(--rule); border-left: 3px solid var(--red);
+  color: var(--ink); line-height: 1.2;
+}
+
+.sg-dead {
+  font-size: 12.5px; font-weight: 700; padding: 7px 10px;
+  background: var(--red-bg); border: 1px solid var(--red);
+  border-left-width: 4px; color: var(--ink);
+  margin-bottom: 4px;
+}
+.sg-summary {
+  margin-top: auto; padding: 10px 12px;
+  background: var(--ink); color: #fff;
+  font-size: 12.5px; font-weight: 800;
+  letter-spacing: 0.04em; text-align: center;
+}
+
+.sg-flywheel-wrap {
+  background: #fff; border: 1.5px solid var(--rule); padding: 16px;
+  display: flex; flex-direction: column; align-items: center;
+  justify-content: center;
+}
+.sg-flywheel-wrap svg {
+  width: 100%; max-width: 480px; height: auto;
+}
+.sg-flywheel-caption {
+  font-family: var(--mono); font-size: 10.5px; font-weight: 800;
+  color: var(--green-dim); letter-spacing: 0.1em; text-transform: uppercase;
+  margin-top: 12px; text-align: center; line-height: 1.5;
+}
+
+@media (max-width: 880px) {
+  .simple-before, .simple-after { grid-template-columns: 1fr; gap: 12px; }
+  .sg-arrow { display: none; }
+}
+
 /* ════════════════ LIFECYCLE FLYWHEEL ════════════════ */
 .lifecycle {
   display: flex; flex-direction: column; gap: 0;
@@ -525,100 +607,187 @@ footer a { color: var(--ink2); text-decoration: none; border-bottom: 1px solid v
   <p class="subhead">How a developer goes from "I heard about Nemotron" all the way to "I run a certified consultancy training the next wave" — modeled on Salesforce Trailhead and adapted for the 2026 agentic AI era. Today the journey breaks. Tomorrow it's a self-reinforcing flywheel.</p>
 
   <div class="intro">
-    <b>Read this as one continuous picture.</b> Today (Diagram 1) developers land on one of <b>19+ scattered NVIDIA portals</b>, hit friction, and mostly drop off. There's no central badge system, no marketplace for certified engineers, no champions program, no local user groups, no testimonials. The journey ends. <b>Tomorrow (Diagram 2 — the flywheel)</b> the same arrival channels feed into a <b>continuous developer lifecycle</b>: discover → learn → build → certify → get hired → become a champion → multiply. Champions become consultancy founders, training-center operators, and hackathon hosts. The flywheel spins. The network effect compounds. <i>Salesforce Trailhead grew from zero to 3M+ Trailblazers using exactly this pattern — adapted, NVIDIA can do it for AI.</i>
+    <b>Two pictures, one idea.</b> Today the developer journey breaks — devs arrive, land on one of 19+ scattered NVIDIA portals, and there's no clear next step. Tomorrow the same arrivals flow into a closed lifecycle loop — discover → learn → build → certify → hire → champion → multiply — and champions become the entry channels for the next wave. <i>The flywheel spins. Modeled on Salesforce Trailhead, which grew from zero to 3M+ Trailblazers using exactly this pattern.</i>
   </div>
 
-  <!-- ───────────── DIAGRAM 1: CURRENT ───────────── -->
+  <!-- ───────────── DIAGRAM 1: SIMPLE BEFORE ───────────── -->
   <section>
-    <div class="diagram-state current">Diagram 1 · Current State</div>
-    <div class="diagram-title">What happens to a developer who tries Nemotron today</div>
-    <div class="diagram-sub">19+ landing surfaces, chaotic middle, mostly drop-off. Estimated traffic split per outcome.</div>
+    <div class="diagram-state current">Diagram 1 · Before</div>
+    <div class="diagram-title">Today · entry points lead nowhere</div>
+    <div class="diagram-sub">8 channels of arrival · 19+ landing surfaces · no clear next step</div>
 
-    <div class="diagram">
-      <!-- ENTRY -->
-      <div class="diagram-col entry">
-        <div class="diagram-col-label">Where they land · 19+ portals</div>
-        <div class="diagram-col-sub">Same brand, scattered surfaces</div>
-        <div class="arrival-note">
-          Devs arrive from <b>Google search, Hugging Face, GitHub, Cursor / Claude Code, NGC search, conference talks, Discord, word-of-mouth</b> — and land on one of these 19+ NVIDIA-controlled pages:
-        </div>
-        <div class="portals-label">The 19+ portals</div>
-        <div class="portals-grid">
-          <div class="portal-box"><span class="portal-url">developer.nvidia.com</span><span class="portal-label">main dev hub</span></div>
-          <div class="portal-box"><span class="portal-url">build.nvidia.com</span><span class="portal-label">model API catalog</span></div>
-          <div class="portal-box"><span class="portal-url">docs.nvidia.com</span><span class="portal-label">reference docs</span></div>
-          <div class="portal-box"><span class="portal-url">catalog.ngc.nvidia.com</span><span class="portal-label">NGC public</span></div>
-          <div class="portal-box"><span class="portal-url">ngc.nvidia.com</span><span class="portal-label">NGC private</span></div>
-          <div class="portal-box"><span class="portal-url">learn.nvidia.com</span><span class="portal-label">DLI training</span></div>
-          <div class="portal-box"><span class="portal-url">research.nvidia.com</span><span class="portal-label">NVIDIA Research</span></div>
-          <div class="portal-box"><span class="portal-url">huggingface.co/nvidia</span><span class="portal-label">model weights</span></div>
-          <div class="portal-box"><span class="portal-url">github.com/NVIDIA</span><span class="portal-label">OSS repos</span></div>
-          <div class="portal-box"><span class="portal-url">forums.developer...</span><span class="portal-label">Q&amp;A</span></div>
-          <div class="portal-box"><span class="portal-url">discord.gg/nvidia</span><span class="portal-label">community</span></div>
-          <div class="portal-box"><span class="portal-url">developer.../blog</span><span class="portal-label">Tech Blog</span></div>
-          <div class="portal-box"><span class="portal-url">blogs.nvidia.com</span><span class="portal-label">corporate blog</span></div>
-          <div class="portal-box"><span class="portal-url">nvidia.com/gtc</span><span class="portal-label">GTC conference</span></div>
-          <div class="portal-box"><span class="portal-url">nvidia.com/on-demand</span><span class="portal-label">recorded talks</span></div>
-          <div class="portal-box"><span class="portal-url">.../certification</span><span class="portal-label">NCA / NCP certs</span></div>
-          <div class="portal-box"><span class="portal-url">.../launchpad</span><span class="portal-label">hands-on labs</span></div>
-          <div class="portal-box"><span class="portal-url">nvidia.com/inception</span><span class="portal-label">startup program</span></div>
-          <div class="portal-box"><span class="portal-url">.../ai-enterprise</span><span class="portal-label">NVAIE license</span></div>
+    <div class="simple-graphic simple-before">
+
+      <!-- Entry channels -->
+      <div class="sg-col">
+        <div class="sg-col-label">Devs arrive from</div>
+        <div class="sg-entry">Google search</div>
+        <div class="sg-entry">Hugging Face</div>
+        <div class="sg-entry">GitHub</div>
+        <div class="sg-entry">Cursor / Claude Code</div>
+        <div class="sg-entry">NGC search</div>
+        <div class="sg-entry">Conference talk</div>
+        <div class="sg-entry">Discord</div>
+        <div class="sg-entry">Direct URL</div>
+      </div>
+
+      <div class="sg-arrow">→</div>
+
+      <!-- 19 portals -->
+      <div class="sg-col">
+        <div class="sg-col-label">Land on 19+ portals</div>
+        <div class="sg-portals-grid">
+          <div class="sg-portal">developer.nvidia.com</div>
+          <div class="sg-portal">build.nvidia.com</div>
+          <div class="sg-portal">docs.nvidia.com</div>
+          <div class="sg-portal">catalog.ngc.nvidia.com</div>
+          <div class="sg-portal">ngc.nvidia.com</div>
+          <div class="sg-portal">learn.nvidia.com</div>
+          <div class="sg-portal">research.nvidia.com</div>
+          <div class="sg-portal">huggingface.co/nvidia</div>
+          <div class="sg-portal">github.com/NVIDIA</div>
+          <div class="sg-portal">forums.developer...</div>
+          <div class="sg-portal">discord.gg/nvidia</div>
+          <div class="sg-portal">developer.../blog</div>
+          <div class="sg-portal">blogs.nvidia.com</div>
+          <div class="sg-portal">nvidia.com/gtc</div>
+          <div class="sg-portal">nvidia.com/on-demand</div>
+          <div class="sg-portal">.../certification</div>
+          <div class="sg-portal">.../launchpad</div>
+          <div class="sg-portal">nvidia.com/inception</div>
+          <div class="sg-portal">.../ai-enterprise</div>
         </div>
       </div>
 
-      <!-- JOURNEY -->
-      <div class="diagram-col journey">
-        <div class="diagram-col-label">Journey · what they try to do</div>
-        <div class="diagram-col-sub">Where they get lost</div>
-        <div class="journey-block chaos">
-          <div class="journey-block-tag">Friction Zone</div>
-          <div class="journey-block-name">No front door · 8 friction points</div>
-          <ul class="journey-list">
-            <li><span class="icon">✕</span><span><b>No clear next step</b> from whichever portal they landed on</span></li>
-            <li><span class="icon">✕</span><span><b>build.nvidia.com 401 permission bug</b> · silent failure</span></li>
-            <li><span class="icon">✕</span><span><b>40 RPM cap</b> kills the first agent test</span></li>
-            <li><span class="icon">✕</span><span><b>No middle pricing tier</b> · gap from free to $1K/GPU/yr</span></li>
-            <li><span class="icon">✕</span><span><b>Certifications buried</b> · NCA/NCP exist but you can't find them</span></li>
-            <li><span class="icon">✕</span><span><b>Docs are 200-page references</b> · no 5-min Quick Start</span></li>
-            <li><span class="icon">✕</span><span><b>No canonical demos</b> · slide-tier, not GitHub-tier</span></li>
-            <li><span class="icon">✕</span><span><b>No researcher voices</b> on X to ask · only corporate handles</span></li>
-          </ul>
-        </div>
+      <div class="sg-arrow broken">→</div>
+
+      <!-- Dead ends -->
+      <div class="sg-col">
+        <div class="sg-col-label">Next step?</div>
+        <div class="sg-dead">✕ No clear next step</div>
+        <div class="sg-dead">✕ No lifecycle</div>
+        <div class="sg-dead">✕ No flow</div>
+        <div class="sg-dead">✕ No marketplace</div>
+        <div class="sg-dead">✕ No champions</div>
+        <div class="sg-dead">✕ No testimonials</div>
+        <div class="sg-dead">✕ Not LLM-readable</div>
+        <div class="sg-summary">~90% drop off</div>
       </div>
 
-      <!-- OUTCOMES -->
-      <div class="diagram-col outcomes">
-        <div class="diagram-col-label">Outcome · journey ends here</div>
-        <div class="diagram-col-sub">Mostly drop-off · no lifecycle</div>
-        <div class="flow-box bad"><span class="flow-box-name">Dropped off entirely</span><span class="flow-box-meta">~70%</span></div>
-        <div class="flow-box warn"><span class="flow-box-name">Tried &amp; bounced to a competitor</span><span class="flow-box-meta">~20%</span></div>
-        <div class="flow-box good"><span class="flow-box-name">Shipped <i>despite</i> the friction</span><span class="flow-box-meta">~8%</span></div>
-        <div class="flow-box good"><span class="flow-box-name">Got NVIDIA certified</span><span class="flow-box-meta">~1.5%</span></div>
-        <div class="flow-box good"><span class="flow-box-name">Became enterprise customer</span><span class="flow-box-meta">~0.5%</span></div>
-        <div style="margin-top: 14px; padding: 10px 12px; background: var(--red-bg); border-left: 3px solid var(--red); font-size: 11.5px; line-height: 1.45; color: var(--ink);">
-          <b style="color: var(--red);">Structural absences:</b><br>
-          ✕ No central badge system<br>
-          ✕ No marketplace / job board<br>
-          ✕ No champions program<br>
-          ✕ No local user groups<br>
-          ✕ No testimonials engine<br>
-          ✕ Not LLM-readable<br>
-          ✕ No paid cert prestige
-        </div>
-        <div style="margin-top: 14px;">
-          <div style="font-size: 12px; color: var(--red); font-weight: 800; letter-spacing: 0.04em; padding-top: 12px; border-top: 1px dashed var(--rule);">
-            ~90% of traffic doesn't ship anything · journey terminates
-          </div>
-        </div>
-      </div>
     </div>
   </section>
 
-  <!-- ───────────── DIAGRAM 2: LIFECYCLE FLYWHEEL ───────────── -->
+  <!-- ───────────── DIAGRAM 2: SIMPLE AFTER ───────────── -->
   <section>
-    <div class="diagram-state optimized">Diagram 2 · The Modern Lifecycle Flywheel</div>
-    <div class="diagram-title">From "I heard about Nemotron" → "I train the next wave"</div>
-    <div class="diagram-sub">7 stages, badges at every stage, super badges for combinations, paid certification, marketplace, champions, local user groups, network effect. Modeled on Salesforce Trailhead.</div>
+    <div class="diagram-state optimized">Diagram 2 · After</div>
+    <div class="diagram-title">Tomorrow · a closed lifecycle that becomes a flywheel</div>
+    <div class="diagram-sub">Same entry channels. 7 stages in a loop. Champions become the entry channels for the next wave.</div>
+
+    <div class="simple-graphic simple-after">
+
+      <!-- Entry channels (same as before) -->
+      <div class="sg-col">
+        <div class="sg-col-label">Same arrival channels</div>
+        <div class="sg-entry">Google search</div>
+        <div class="sg-entry">Hugging Face</div>
+        <div class="sg-entry">GitHub</div>
+        <div class="sg-entry">Cursor / Claude Code</div>
+        <div class="sg-entry">NGC search</div>
+        <div class="sg-entry">Conference talk</div>
+        <div class="sg-entry">Discord</div>
+        <div class="sg-entry">Direct URL</div>
+        <div class="sg-entry new">Champions in their city</div>
+      </div>
+
+      <div class="sg-arrow good">→</div>
+
+      <!-- The flywheel SVG -->
+      <div class="sg-flywheel-wrap">
+        <svg viewBox="-220 -220 440 440" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <marker id="arrow-flow" markerWidth="10" markerHeight="10" refX="7" refY="3" orient="auto">
+              <path d="M 0 0 L 0 6 L 8 3 Z" fill="#0a0a0a" />
+            </marker>
+          </defs>
+
+          <!-- Inner dashed circle (background) -->
+          <circle cx="0" cy="0" r="105" fill="#f3f9e6" stroke="#76b900" stroke-width="2" stroke-dasharray="4 4" />
+
+          <!-- Center label -->
+          <text x="0" y="-14" text-anchor="middle" font-size="11" font-weight="800" fill="#5a8e00" font-family="SF Mono, monospace" letter-spacing="2">NEMOTRON</text>
+          <text x="0" y="2" text-anchor="middle" font-size="11" font-weight="800" fill="#5a8e00" font-family="SF Mono, monospace" letter-spacing="2">LIFECYCLE</text>
+          <text x="0" y="22" text-anchor="middle" font-size="9.5" fill="#5a8e00" font-style="italic">the flywheel spins</text>
+
+          <!-- 7 arcs (clockwise) between consecutive stage nodes -->
+          <g stroke="#0a0a0a" stroke-width="2.5" fill="none">
+            <path d="M 38 -150 A 155 155 0 0 1 94 -123" marker-end="url(#arrow-flow)" />
+            <path d="M 141 -64 A 155 155 0 0 1 155 -3" marker-end="url(#arrow-flow)" />
+            <path d="M 138 70 A 155 155 0 0 1 99 119" marker-end="url(#arrow-flow)" />
+            <path d="M 32 152 A 155 155 0 0 1 -32 152" marker-end="url(#arrow-flow)" />
+            <path d="M -99 119 A 155 155 0 0 1 -138 70" marker-end="url(#arrow-flow)" />
+            <path d="M -155 3 A 155 155 0 0 1 -141 -64" marker-end="url(#arrow-flow)" />
+            <path d="M -94 -123 A 155 155 0 0 1 -38 -150" marker-end="url(#arrow-flow)" />
+          </g>
+
+          <!-- 7 stage nodes around the heptagon -->
+          <g font-family="SF Mono, monospace">
+            <!-- Stage 1: Discover (top) -->
+            <g transform="translate(0, -160)">
+              <circle r="42" fill="white" stroke="#0a0a0a" stroke-width="2.5" />
+              <text y="-6" text-anchor="middle" font-size="11" font-weight="800" fill="#5a8e00">01</text>
+              <text y="10" text-anchor="middle" font-size="10.5" font-weight="800" fill="#0a0a0a" font-family="inherit">Discover</text>
+            </g>
+            <!-- Stage 2: Learn -->
+            <g transform="translate(125, -100)">
+              <circle r="42" fill="white" stroke="#0a0a0a" stroke-width="2.5" />
+              <text y="-6" text-anchor="middle" font-size="11" font-weight="800" fill="#5a8e00">02</text>
+              <text y="10" text-anchor="middle" font-size="10.5" font-weight="800" fill="#0a0a0a">Learn</text>
+            </g>
+            <!-- Stage 3: Build -->
+            <g transform="translate(156, 36)">
+              <circle r="42" fill="white" stroke="#0a0a0a" stroke-width="2.5" />
+              <text y="-6" text-anchor="middle" font-size="11" font-weight="800" fill="#5a8e00">03</text>
+              <text y="10" text-anchor="middle" font-size="10.5" font-weight="800" fill="#0a0a0a">Build</text>
+            </g>
+            <!-- Stage 4: Certify -->
+            <g transform="translate(69, 144)">
+              <circle r="42" fill="white" stroke="#0a0a0a" stroke-width="2.5" />
+              <text y="-6" text-anchor="middle" font-size="11" font-weight="800" fill="#5a8e00">04</text>
+              <text y="10" text-anchor="middle" font-size="10.5" font-weight="800" fill="#0a0a0a">Certify</text>
+            </g>
+            <!-- Stage 5: Hire -->
+            <g transform="translate(-69, 144)">
+              <circle r="42" fill="white" stroke="#0a0a0a" stroke-width="2.5" />
+              <text y="-6" text-anchor="middle" font-size="11" font-weight="800" fill="#5a8e00">05</text>
+              <text y="10" text-anchor="middle" font-size="10.5" font-weight="800" fill="#0a0a0a">Hire</text>
+            </g>
+            <!-- Stage 6: Champion -->
+            <g transform="translate(-156, 36)">
+              <circle r="42" fill="white" stroke="#0a0a0a" stroke-width="2.5" />
+              <text y="-6" text-anchor="middle" font-size="11" font-weight="800" fill="#5a8e00">06</text>
+              <text y="10" text-anchor="middle" font-size="10.5" font-weight="800" fill="#0a0a0a">Champion</text>
+            </g>
+            <!-- Stage 7: Multiply -->
+            <g transform="translate(-125, -100)">
+              <circle r="42" fill="white" stroke="#0a0a0a" stroke-width="2.5" />
+              <text y="-6" text-anchor="middle" font-size="11" font-weight="800" fill="#5a8e00">07</text>
+              <text y="10" text-anchor="middle" font-size="10.5" font-weight="800" fill="#0a0a0a">Multiply</text>
+            </g>
+          </g>
+        </svg>
+        <div class="sg-flywheel-caption">
+          7 stages in a closed loop · Stage 7 feeds back into Stage 1<br>
+          <span style="color: var(--ink3); font-weight: 600;">champions become the new arrival channel for the next wave</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ───────────── STAGES IN DETAIL ───────────── -->
+  <section>
+    <h2>The 7 stages in detail · badges, activities, unlocks</h2>
+    <p>Each stage has badges (Trailhead-style), activities, and what it unlocks. Read once if you want the depth; skip if the diagram above already tells the story.</p>
 
     <div class="lifecycle">
 
