@@ -159,6 +159,76 @@ section p { font-size: 14.5px; line-height: 1.6; margin-bottom: 12px; color: var
 }
 .flow-box.new::before { content: '+'; color: var(--green-dim); font-weight: 900; }
 
+/* Arrival annotation at top of entry column */
+.arrival-note {
+  font-size: 11.5px;
+  color: var(--ink2);
+  line-height: 1.45;
+  margin-bottom: 10px;
+  padding: 8px 10px;
+  background: var(--rule3);
+  border-left: 3px solid var(--ink3);
+}
+.arrival-note b { color: var(--ink); font-weight: 800; }
+
+/* 2-column mini-grid for the 19 portals */
+.portals-label {
+  font-family: var(--mono); font-size: 10px; font-weight: 800;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--red); margin-bottom: 8px;
+}
+.portals-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4px;
+}
+.portal-box {
+  background: #fff;
+  border: 1px solid var(--rule);
+  border-left: 3px solid var(--red);
+  padding: 5px 7px;
+  font-family: var(--mono);
+  font-size: 9.5px;
+  line-height: 1.3;
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  min-height: 32px;
+}
+.portal-url { color: var(--ink); font-weight: 800; }
+.portal-label { color: var(--ink3); font-size: 8.5px; font-style: italic; }
+
+/* The single front-door box for optimized state */
+.front-door {
+  background: var(--green-bg);
+  border: 3px solid var(--green);
+  padding: 26px 18px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-top: 4px;
+  box-shadow: 4px 4px 0 0 var(--green);
+}
+.front-door-tag {
+  font-family: var(--mono); font-size: 9.5px; font-weight: 800;
+  letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--green-dim);
+}
+.front-door-url {
+  font-family: var(--mono); font-size: 22px; font-weight: 900;
+  color: var(--ink); letter-spacing: -0.02em;
+}
+.front-door-sub {
+  font-size: 12px; color: var(--ink2); font-weight: 600; margin-top: 4px;
+}
+.front-door-replaces {
+  font-size: 10.5px; color: var(--green-dim); font-style: italic;
+  margin-top: 8px; padding-top: 8px; border-top: 1px dashed var(--green-dim);
+  line-height: 1.4;
+}
+.front-door-replaces b { color: var(--ink); font-weight: 800; }
+
 /* OUTCOME COLOR CODING */
 .flow-box.bad {
   background: var(--red-bg); border-color: var(--red); border-left-width: 4px;
@@ -290,21 +360,38 @@ footer a { color: var(--ink2); text-decoration: none; border-bottom: 1px solid v
   <section>
     <div class="diagram-state current">Diagram 1 · Current State</div>
     <div class="diagram-title">What happens to a developer who tries Nemotron today</div>
-    <div class="diagram-sub">Same entry points, chaotic middle, mostly drop-off. Estimated traffic split per outcome.</div>
+    <div class="diagram-sub">19+ landing surfaces, chaotic middle, mostly drop-off. Estimated traffic split per outcome.</div>
 
     <div class="diagram">
       <!-- ENTRY -->
       <div class="diagram-col entry">
-        <div class="diagram-col-label">Entry · how they arrive</div>
-        <div class="diagram-col-sub">8 common starting points</div>
-        <div class="flow-box neutral"><span class="flow-box-num">1</span><span class="flow-box-name">Google "Nemotron"</span></div>
-        <div class="flow-box neutral"><span class="flow-box-num">2</span><span class="flow-box-name">Hugging Face</span></div>
-        <div class="flow-box neutral"><span class="flow-box-num">3</span><span class="flow-box-name">GitHub OSS lists</span></div>
-        <div class="flow-box neutral"><span class="flow-box-num">4</span><span class="flow-box-name">Cursor / Claude Code</span></div>
-        <div class="flow-box neutral"><span class="flow-box-num">5</span><span class="flow-box-name">NGC container search</span></div>
-        <div class="flow-box neutral"><span class="flow-box-num">6</span><span class="flow-box-name">build.nvidia.com (direct)</span></div>
-        <div class="flow-box neutral"><span class="flow-box-num">7</span><span class="flow-box-name">GTC / conference talk</span></div>
-        <div class="flow-box neutral"><span class="flow-box-num">8</span><span class="flow-box-name">Discord / referral</span></div>
+        <div class="diagram-col-label">Where they land · 19+ portals</div>
+        <div class="diagram-col-sub">Same brand, scattered surfaces</div>
+        <div class="arrival-note">
+          Devs arrive from <b>Google search, Hugging Face, GitHub, Cursor / Claude Code, NGC search, conference talks, Discord, word-of-mouth</b> — and land on one of these 19+ NVIDIA-controlled pages:
+        </div>
+        <div class="portals-label">The 19+ portals</div>
+        <div class="portals-grid">
+          <div class="portal-box"><span class="portal-url">developer.nvidia.com</span><span class="portal-label">main dev hub</span></div>
+          <div class="portal-box"><span class="portal-url">build.nvidia.com</span><span class="portal-label">model API catalog</span></div>
+          <div class="portal-box"><span class="portal-url">docs.nvidia.com</span><span class="portal-label">reference docs</span></div>
+          <div class="portal-box"><span class="portal-url">catalog.ngc.nvidia.com</span><span class="portal-label">NGC public</span></div>
+          <div class="portal-box"><span class="portal-url">ngc.nvidia.com</span><span class="portal-label">NGC private</span></div>
+          <div class="portal-box"><span class="portal-url">learn.nvidia.com</span><span class="portal-label">DLI training</span></div>
+          <div class="portal-box"><span class="portal-url">research.nvidia.com</span><span class="portal-label">NVIDIA Research</span></div>
+          <div class="portal-box"><span class="portal-url">huggingface.co/nvidia</span><span class="portal-label">model weights</span></div>
+          <div class="portal-box"><span class="portal-url">github.com/NVIDIA</span><span class="portal-label">OSS repos</span></div>
+          <div class="portal-box"><span class="portal-url">forums.developer...</span><span class="portal-label">Q&amp;A</span></div>
+          <div class="portal-box"><span class="portal-url">discord.gg/nvidia</span><span class="portal-label">community</span></div>
+          <div class="portal-box"><span class="portal-url">developer.../blog</span><span class="portal-label">Tech Blog</span></div>
+          <div class="portal-box"><span class="portal-url">blogs.nvidia.com</span><span class="portal-label">corporate blog</span></div>
+          <div class="portal-box"><span class="portal-url">nvidia.com/gtc</span><span class="portal-label">GTC conference</span></div>
+          <div class="portal-box"><span class="portal-url">nvidia.com/on-demand</span><span class="portal-label">recorded talks</span></div>
+          <div class="portal-box"><span class="portal-url">.../certification</span><span class="portal-label">NCA / NCP certs</span></div>
+          <div class="portal-box"><span class="portal-url">.../launchpad</span><span class="portal-label">hands-on labs</span></div>
+          <div class="portal-box"><span class="portal-url">nvidia.com/inception</span><span class="portal-label">startup program</span></div>
+          <div class="portal-box"><span class="portal-url">.../ai-enterprise</span><span class="portal-label">NVAIE license</span></div>
+        </div>
       </div>
 
       <!-- JOURNEY -->
@@ -313,9 +400,9 @@ footer a { color: var(--ink2); text-decoration: none; border-bottom: 1px solid v
         <div class="diagram-col-sub">Where they get lost</div>
         <div class="journey-block chaos">
           <div class="journey-block-tag">Friction Zone</div>
-          <div class="journey-block-name">19+ portals · 8 friction points</div>
+          <div class="journey-block-name">No front door · 8 friction points</div>
           <ul class="journey-list">
-            <li><span class="icon">✕</span><span>Land on <b>one of 19+ portals</b> · no clear front door</span></li>
+            <li><span class="icon">✕</span><span><b>No clear next step</b> from whichever portal they landed on</span></li>
             <li><span class="icon">✕</span><span><b>build.nvidia.com 401 permission bug</b> · silent failure</span></li>
             <li><span class="icon">✕</span><span><b>40 RPM cap</b> kills the first agent test</span></li>
             <li><span class="icon">✕</span><span><b>No middle pricing tier</b> · gap from free to $1K/GPU/yr</span></li>
@@ -349,24 +436,24 @@ footer a { color: var(--ink2); text-decoration: none; border-bottom: 1px solid v
   <section>
     <div class="diagram-state optimized">Diagram 2 · Optimized State</div>
     <div class="diagram-title">What happens after the 8 moves ship (90-day plan)</div>
-    <div class="diagram-sub">Same 8 entry points plus 3 new ones, one clear middle, mostly shipping outcomes.</div>
+    <div class="diagram-sub">Same arrival channels, all 19+ portals collapsed into one front door, mostly shipping outcomes.</div>
 
     <div class="diagram">
       <!-- ENTRY -->
       <div class="diagram-col entry">
-        <div class="diagram-col-label">Entry · same starting points + 3 new</div>
-        <div class="diagram-col-sub">11 channels, same brand reach</div>
-        <div class="flow-box neutral"><span class="flow-box-num">1</span><span class="flow-box-name">Google "Nemotron"</span></div>
-        <div class="flow-box neutral"><span class="flow-box-num">2</span><span class="flow-box-name">Hugging Face</span></div>
-        <div class="flow-box neutral"><span class="flow-box-num">3</span><span class="flow-box-name">GitHub OSS lists</span></div>
-        <div class="flow-box neutral"><span class="flow-box-num">4</span><span class="flow-box-name">Cursor / Claude Code</span></div>
-        <div class="flow-box neutral"><span class="flow-box-num">5</span><span class="flow-box-name">NGC container search</span></div>
-        <div class="flow-box neutral"><span class="flow-box-num">6</span><span class="flow-box-name">nvidia.dev (rebranded)</span></div>
-        <div class="flow-box neutral"><span class="flow-box-num">7</span><span class="flow-box-name">GTC / conference talk</span></div>
-        <div class="flow-box neutral"><span class="flow-box-num">8</span><span class="flow-box-name">Discord / referral</span></div>
-        <div class="flow-box new"><span class="flow-box-num">9</span><span class="flow-box-name">Cursor MCP server</span></div>
-        <div class="flow-box new"><span class="flow-box-num">10</span><span class="flow-box-name">Researcher voice on X</span></div>
-        <div class="flow-box new"><span class="flow-box-num">11</span><span class="flow-box-name">Nemotron Cookbook (GitHub)</span></div>
+        <div class="diagram-col-label">Where they land · 1 front door</div>
+        <div class="diagram-col-sub">Same arrival channels, one destination</div>
+        <div class="arrival-note">
+          Devs still arrive from <b>Google, Hugging Face, GitHub, Cursor / Claude Code, NGC, conferences, Discord</b> — plus three new channels (<b>Cursor MCP server, researcher voices on X, the Nemotron Cookbook on GitHub</b>). All of them now funnel to one place:
+        </div>
+        <div class="front-door">
+          <div class="front-door-tag">The one front door</div>
+          <div class="front-door-url">nvidia.dev</div>
+          <div class="front-door-sub">Try Nemotron in 60 seconds.</div>
+          <div class="front-door-replaces">
+            Replaces all <b>19+ portals</b> from the current state. Existing URLs redirect / cross-link. One sign-in. One Quick Start. One pricing ladder. Clear path to: <b>docs · cookbook · DLI · certs · NGC · build · GitHub</b>.
+          </div>
+        </div>
       </div>
 
       <!-- JOURNEY -->
