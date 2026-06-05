@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>NVIDIA Developer Journey · Current vs Optimized · Strategy</title>
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --ink: #0a0a0a;
+  --ink2: #3a3a3a;
+  --ink3: #6e6e6e;
+  --ink4: #a8a8a8;
+  --rule: #d6d6d6;
+  --rule2: #ececec;
+  --rule3: #f4f4f4;
+  --bg: #ffffff;
+  --green: #76b900;
+  --green-dim: #5a8e00;
+  --green-bg: #f3f9e6;
+  --amber: #d97706;
+  --amber-bg: #fff5e0;
+  --amber-text: #b45309;
+  --red: #c83232;
+  --red-bg: #fdebeb;
+  --gold: #c8a04a;
+  --gold-bg: #fbf6ea;
+  --sans: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', 'Inter', Arial, sans-serif;
+  --mono: 'SF Mono', 'JetBrains Mono', 'Fira Code', Menlo, monospace;
+}
+
+html, body { height: 100%; }
+body {
+  font-family: var(--sans);
+  background: var(--bg);
+  color: var(--ink);
+  font-size: 15px;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+}
+
+.wrap { max-width: 1180px; margin: 0 auto; padding: 56px 32px 80px; }
+
+/* HEADER */
+.posting-meta {
+  font-family: var(--mono); font-size: 10.5px; font-weight: 800;
+  letter-spacing: 0.14em; text-transform: uppercase; color: var(--green-dim);
+  margin-bottom: 18px; display: flex; align-items: center; gap: 12px; flex-wrap: wrap;
+}
+.posting-meta .pipe { color: var(--ink4); }
+.posting-meta a { color: var(--ink2); text-decoration: none; border-bottom: 1px solid var(--ink3); }
+.posting-meta a:hover { color: var(--green-dim); border-bottom-color: var(--green-dim); }
+
+h1.page-title {
+  font-size: clamp(30px, 4vw, 42px); font-weight: 900; line-height: 1.05;
+  letter-spacing: -0.025em; margin-bottom: 10px;
+}
+.subhead {
+  font-size: 16px; color: var(--ink3); max-width: 800px; margin-bottom: 32px; line-height: 1.5;
+}
+
+/* INTRO HERO */
+.intro {
+  padding: 20px 24px; background: #fafafa; border-left: 4px solid var(--ink);
+  margin-bottom: 40px; font-size: 14.5px; line-height: 1.6;
+}
+.intro b { font-weight: 800; }
+
+/* SECTIONS */
+section { margin-bottom: 56px; }
+section h2 {
+  font-size: 22px; font-weight: 900; letter-spacing: -0.015em;
+  margin-bottom: 16px; padding-bottom: 10px; border-bottom: 2px solid var(--ink);
+}
+section p { font-size: 14.5px; line-height: 1.6; margin-bottom: 12px; color: var(--ink2); }
+
+/* DIAGRAM CONTAINERS */
+.diagram-state {
+  font-family: var(--mono); font-size: 10.5px; font-weight: 800;
+  letter-spacing: 0.14em; text-transform: uppercase;
+  padding: 6px 11px; display: inline-block; margin-bottom: 14px;
+}
+.diagram-state.current { background: var(--red-bg); color: var(--red); border: 1.5px solid var(--red); }
+.diagram-state.optimized { background: var(--green-bg); color: var(--green-dim); border: 1.5px solid var(--green); }
+
+.diagram-title {
+  font-size: 19px; font-weight: 900; letter-spacing: -0.01em; margin-bottom: 4px;
+}
+.diagram-sub {
+  font-size: 13.5px; color: var(--ink3); font-style: italic; margin-bottom: 22px;
+}
+
+.diagram {
+  display: grid;
+  grid-template-columns: 1fr 1.4fr 1fr;
+  gap: 0;
+  background: var(--rule3);
+  border: 1.5px solid var(--ink);
+  position: relative;
+  overflow: hidden;
+}
+.diagram-col {
+  padding: 18px 16px;
+  display: flex; flex-direction: column;
+  position: relative;
+}
+.diagram-col:not(:last-child)::after {
+  content: '→';
+  position: absolute;
+  right: -10px; top: 50%;
+  transform: translate(50%, -50%);
+  font-family: var(--mono); font-size: 22px; font-weight: 900;
+  color: var(--ink); background: var(--rule3);
+  padding: 4px 6px;
+  z-index: 2;
+}
+.diagram-col-label {
+  font-family: var(--mono); font-size: 10px; font-weight: 800;
+  letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--ink3); margin-bottom: 12px;
+  padding-bottom: 8px; border-bottom: 1px solid var(--ink);
+}
+.diagram-col-sub {
+  font-size: 11.5px; color: var(--ink3); font-style: italic;
+  margin-top: -10px; margin-bottom: 12px;
+}
+
+.diagram-col.entry { background: rgba(255,255,255,0.6); }
+.diagram-col.journey { background: rgba(255,255,255,0.4); }
+.diagram-col.outcomes { background: rgba(255,255,255,0.6); }
+
+/* BOXES IN ENTRY / OUTCOME COLUMNS */
+.flow-box {
+  background: #fff;
+  border: 1.5px solid var(--rule);
+  padding: 7px 11px;
+  font-size: 12.5px;
+  line-height: 1.3;
+  margin-bottom: 6px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.flow-box-num {
+  font-family: var(--mono); font-size: 10px; font-weight: 800;
+  color: var(--ink3); min-width: 18px;
+}
+.flow-box-name {
+  flex: 1; font-weight: 700; color: var(--ink);
+}
+.flow-box-meta {
+  font-family: var(--mono); font-size: 10.5px; font-weight: 800;
+  letter-spacing: 0.02em;
+}
+.flow-box.new {
+  background: var(--green-bg); border-color: var(--green); border-left-width: 4px;
+}
+.flow-box.new::before { content: '+'; color: var(--green-dim); font-weight: 900; }
+
+/* OUTCOME COLOR CODING */
+.flow-box.bad {
+  background: var(--red-bg); border-color: var(--red); border-left-width: 4px;
+}
+.flow-box.bad .flow-box-meta { color: var(--red); }
+.flow-box.warn {
+  background: var(--amber-bg); border-color: var(--amber); border-left-width: 4px;
+}
+.flow-box.warn .flow-box-meta { color: var(--amber-text); }
+.flow-box.good {
+  background: var(--green-bg); border-color: var(--green); border-left-width: 4px;
+}
+.flow-box.good .flow-box-meta { color: var(--green-dim); }
+.flow-box.neutral { background: #fff; }
+
+/* THE BIG MIDDLE BLOCK (Journey) */
+.journey-block {
+  background: #fff; border: 1.5px solid var(--ink);
+  padding: 14px 16px; flex: 1;
+  display: flex; flex-direction: column;
+  height: 100%;
+}
+.journey-block.chaos {
+  background: var(--red-bg); border-color: var(--red);
+}
+.journey-block.clarity {
+  background: var(--green-bg); border-color: var(--green);
+}
+.journey-block-name {
+  font-size: 15px; font-weight: 900; letter-spacing: -0.005em;
+  margin-bottom: 4px;
+}
+.journey-block.chaos .journey-block-name { color: var(--red); }
+.journey-block.clarity .journey-block-name { color: var(--green-dim); }
+.journey-block-tag {
+  font-family: var(--mono); font-size: 9.5px; font-weight: 800;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  margin-bottom: 12px;
+}
+.journey-block.chaos .journey-block-tag { color: var(--red); }
+.journey-block.clarity .journey-block-tag { color: var(--green-dim); }
+.journey-list {
+  list-style: none; padding: 0; margin: 0;
+  display: flex; flex-direction: column; gap: 4px;
+}
+.journey-list li {
+  font-size: 12.5px; line-height: 1.4;
+  padding: 6px 8px; background: rgba(255,255,255,0.7);
+  border-left: 3px solid;
+  position: relative;
+  display: flex; align-items: baseline; gap: 8px;
+}
+.journey-block.chaos .journey-list li { border-left-color: var(--red); }
+.journey-block.clarity .journey-list li { border-left-color: var(--green); }
+.journey-list li .icon { font-family: var(--mono); font-weight: 900; font-size: 13px; min-width: 14px; }
+.journey-block.chaos .journey-list li .icon { color: var(--red); }
+.journey-block.clarity .journey-list li .icon { color: var(--green-dim); }
+.journey-list li b { font-weight: 800; }
+
+/* DELTA TABLE */
+.delta-table {
+  border: 1.5px solid var(--ink);
+  background: #fff;
+  margin-top: 8px;
+}
+.delta-row {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr 1fr 1fr;
+  align-items: center;
+  padding: 12px 18px;
+  border-bottom: 1px solid var(--rule);
+  font-size: 14px;
+  gap: 14px;
+}
+.delta-row:last-child { border-bottom: none; }
+.delta-row.head {
+  background: var(--ink); color: #fff;
+  font-family: var(--mono); font-size: 10.5px; font-weight: 800;
+  letter-spacing: 0.1em; text-transform: uppercase;
+}
+.delta-row:nth-child(even):not(.head) { background: #fafafa; }
+.d-metric { font-weight: 800; color: var(--ink); }
+.d-current { font-family: var(--mono); font-weight: 700; color: var(--red); }
+.d-target { font-family: var(--mono); font-weight: 700; color: var(--green-dim); }
+.d-delta {
+  font-family: var(--mono); font-weight: 800; color: var(--ink);
+  background: var(--green-bg); padding: 3px 9px; display: inline-block;
+}
+
+/* MOBILE */
+@media (max-width: 880px) {
+  .diagram { grid-template-columns: 1fr; }
+  .diagram-col:not(:last-child)::after { display: none; }
+  .diagram-col-label { font-size: 11px; }
+  .delta-row { grid-template-columns: 1fr; gap: 4px; }
+  .delta-row.head { display: none; }
+}
+
+footer {
+  margin-top: 56px; padding-top: 22px; border-top: 1px solid var(--rule);
+  font-family: var(--mono); font-size: 11px; color: var(--ink3);
+  letter-spacing: 0.04em;
+  display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px;
+}
+footer a { color: var(--ink2); text-decoration: none; border-bottom: 1px solid var(--ink3); }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="posting-meta">
+    Internal · Strategy · Developer Journey Flow
+    <span class="pipe">·</span>
+    Current vs Optimized
+    <span class="pipe">·</span>
+    <a href="modern-dev-marketing">← Modern Developer Marketing</a>
+    <span class="pipe">·</span>
+    <a href="private-raja">← Strategy deck</a>
+  </div>
+
+  <h1 class="page-title">The NVIDIA Developer Journey</h1>
+  <p class="subhead">A single picture for what happens to a developer who tries to start with Nemotron today — and what should happen instead. Read left-to-right: entry → journey → outcome.</p>
+
+  <div class="intro">
+    <b>Read these two diagrams side-by-side.</b> The entry points stay roughly the same — developers still arrive from Google, Hugging Face, GitHub, Cursor, NGC, conferences, build.nvidia.com, Discord. <b>What changes is the middle.</b> Today it's a maze of 19+ portals and silent permission bugs that funnel most developers to drop-off. In the optimized state it's a single front door, a forkable cookbook, a real cert path, and a tier-up pricing ladder — which funnels the same traffic to shipped products and recurring revenue. <i>The percentages below are directional estimates, not committed numbers.</i>
+  </div>
+
+  <!-- ───────────── DIAGRAM 1: CURRENT ───────────── -->
+  <section>
+    <div class="diagram-state current">Diagram 1 · Current State</div>
+    <div class="diagram-title">What happens to a developer who tries Nemotron today</div>
+    <div class="diagram-sub">Same entry points, chaotic middle, mostly drop-off. Estimated traffic split per outcome.</div>
+
+    <div class="diagram">
+      <!-- ENTRY -->
+      <div class="diagram-col entry">
+        <div class="diagram-col-label">Entry · how they arrive</div>
+        <div class="diagram-col-sub">8 common starting points</div>
+        <div class="flow-box neutral"><span class="flow-box-num">1</span><span class="flow-box-name">Google "Nemotron"</span></div>
+        <div class="flow-box neutral"><span class="flow-box-num">2</span><span class="flow-box-name">Hugging Face</span></div>
+        <div class="flow-box neutral"><span class="flow-box-num">3</span><span class="flow-box-name">GitHub OSS lists</span></div>
+        <div class="flow-box neutral"><span class="flow-box-num">4</span><span class="flow-box-name">Cursor / Claude Code</span></div>
+        <div class="flow-box neutral"><span class="flow-box-num">5</span><span class="flow-box-name">NGC container search</span></div>
+        <div class="flow-box neutral"><span class="flow-box-num">6</span><span class="flow-box-name">build.nvidia.com (direct)</span></div>
+        <div class="flow-box neutral"><span class="flow-box-num">7</span><span class="flow-box-name">GTC / conference talk</span></div>
+        <div class="flow-box neutral"><span class="flow-box-num">8</span><span class="flow-box-name">Discord / referral</span></div>
+      </div>
+
+      <!-- JOURNEY -->
+      <div class="diagram-col journey">
+        <div class="diagram-col-label">Journey · what they try to do</div>
+        <div class="diagram-col-sub">Where they get lost</div>
+        <div class="journey-block chaos">
+          <div class="journey-block-tag">Friction Zone</div>
+          <div class="journey-block-name">19+ portals · 8 friction points</div>
+          <ul class="journey-list">
+            <li><span class="icon">✕</span><span>Land on <b>one of 19+ portals</b> · no clear front door</span></li>
+            <li><span class="icon">✕</span><span><b>build.nvidia.com 401 permission bug</b> · silent failure</span></li>
+            <li><span class="icon">✕</span><span><b>40 RPM cap</b> kills the first agent test</span></li>
+            <li><span class="icon">✕</span><span><b>No middle pricing tier</b> · gap from free to $1K/GPU/yr</span></li>
+            <li><span class="icon">✕</span><span><b>Certifications buried</b> · NCA/NCP exist but you can't find them</span></li>
+            <li><span class="icon">✕</span><span><b>Docs are 200-page references</b> · no 5-min Quick Start</span></li>
+            <li><span class="icon">✕</span><span><b>No canonical demos</b> · slide-tier, not GitHub-tier</span></li>
+            <li><span class="icon">✕</span><span><b>No researcher voices</b> on X to ask · only corporate handles</span></li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- OUTCOMES -->
+      <div class="diagram-col outcomes">
+        <div class="diagram-col-label">Outcome · what actually happens</div>
+        <div class="diagram-col-sub">Mostly drop-off (estimates)</div>
+        <div class="flow-box bad"><span class="flow-box-name">Dropped off entirely</span><span class="flow-box-meta">~70%</span></div>
+        <div class="flow-box warn"><span class="flow-box-name">Tried &amp; bounced to a competitor</span><span class="flow-box-meta">~20%</span></div>
+        <div class="flow-box good"><span class="flow-box-name">Shipped <i>despite</i> the friction</span><span class="flow-box-meta">~8%</span></div>
+        <div class="flow-box good"><span class="flow-box-name">Got NVIDIA certified</span><span class="flow-box-meta">~1.5%</span></div>
+        <div class="flow-box good"><span class="flow-box-name">Became enterprise customer</span><span class="flow-box-meta">~0.5%</span></div>
+        <div style="margin-top: auto; padding-top: 16px;">
+          <div style="font-size: 12px; color: var(--red); font-weight: 800; letter-spacing: 0.04em; padding-top: 12px; border-top: 1px dashed var(--rule);">
+            ~90% of traffic doesn't ship anything
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ───────────── DIAGRAM 2: OPTIMIZED ───────────── -->
+  <section>
+    <div class="diagram-state optimized">Diagram 2 · Optimized State</div>
+    <div class="diagram-title">What happens after the 8 moves ship (90-day plan)</div>
+    <div class="diagram-sub">Same 8 entry points plus 3 new ones, one clear middle, mostly shipping outcomes.</div>
+
+    <div class="diagram">
+      <!-- ENTRY -->
+      <div class="diagram-col entry">
+        <div class="diagram-col-label">Entry · same starting points + 3 new</div>
+        <div class="diagram-col-sub">11 channels, same brand reach</div>
+        <div class="flow-box neutral"><span class="flow-box-num">1</span><span class="flow-box-name">Google "Nemotron"</span></div>
+        <div class="flow-box neutral"><span class="flow-box-num">2</span><span class="flow-box-name">Hugging Face</span></div>
+        <div class="flow-box neutral"><span class="flow-box-num">3</span><span class="flow-box-name">GitHub OSS lists</span></div>
+        <div class="flow-box neutral"><span class="flow-box-num">4</span><span class="flow-box-name">Cursor / Claude Code</span></div>
+        <div class="flow-box neutral"><span class="flow-box-num">5</span><span class="flow-box-name">NGC container search</span></div>
+        <div class="flow-box neutral"><span class="flow-box-num">6</span><span class="flow-box-name">nvidia.dev (rebranded)</span></div>
+        <div class="flow-box neutral"><span class="flow-box-num">7</span><span class="flow-box-name">GTC / conference talk</span></div>
+        <div class="flow-box neutral"><span class="flow-box-num">8</span><span class="flow-box-name">Discord / referral</span></div>
+        <div class="flow-box new"><span class="flow-box-num">9</span><span class="flow-box-name">Cursor MCP server</span></div>
+        <div class="flow-box new"><span class="flow-box-num">10</span><span class="flow-box-name">Researcher voice on X</span></div>
+        <div class="flow-box new"><span class="flow-box-num">11</span><span class="flow-box-name">Nemotron Cookbook (GitHub)</span></div>
+      </div>
+
+      <!-- JOURNEY -->
+      <div class="diagram-col journey">
+        <div class="diagram-col-label">Journey · one clear path</div>
+        <div class="diagram-col-sub">From land to ship in &lt; 5 min</div>
+        <div class="journey-block clarity">
+          <div class="journey-block-tag">Single Front Door</div>
+          <div class="journey-block-name">nvidia.dev · 8 frictions removed</div>
+          <ul class="journey-list">
+            <li><span class="icon">✓</span><span><b>One front door</b> (nvidia.dev) · 60-second Quick Start</span></li>
+            <li><span class="icon">✓</span><span><b>Free tier works on first try</b> · permission bug fixed</span></li>
+            <li><span class="icon">✓</span><span><b>Tier-up ladder</b>: free → Pro ($20/mo) → Team → Enterprise</span></li>
+            <li><span class="icon">✓</span><span><b>NCP-AAI cert path visible</b> · LinkedIn-displayable badges</span></li>
+            <li><span class="icon">✓</span><span><b>Nemotron Cookbook</b>: 30 forkable production agents on GitHub</span></li>
+            <li><span class="icon">✓</span><span><b>"Agentic AI 101"</b> tutorial series · weekly cadence</span></li>
+            <li><span class="icon">✓</span><span><b>20 researcher voices</b> active on X · ask &amp; answer</span></li>
+            <li><span class="icon">✓</span><span><b>Pages are agent-readable</b> · /llms.txt · MCP-wrapped docs</span></li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- OUTCOMES -->
+      <div class="diagram-col outcomes">
+        <div class="diagram-col-label">Outcome · what actually happens</div>
+        <div class="diagram-col-sub">Most ship (target estimates)</div>
+        <div class="flow-box bad"><span class="flow-box-name">Still drops off</span><span class="flow-box-meta">~25%</span></div>
+        <div class="flow-box warn"><span class="flow-box-name">Tried &amp; bounced</span><span class="flow-box-meta">~10%</span></div>
+        <div class="flow-box good"><span class="flow-box-name">Shipped a product on Nemotron</span><span class="flow-box-meta">~30%</span></div>
+        <div class="flow-box good"><span class="flow-box-name">Got NVIDIA certified</span><span class="flow-box-meta">~15%</span></div>
+        <div class="flow-box good"><span class="flow-box-name">Became enterprise customer</span><span class="flow-box-meta">~3%</span></div>
+        <div class="flow-box good"><span class="flow-box-name">Active community member</span><span class="flow-box-meta">~12%</span></div>
+        <div class="flow-box good"><span class="flow-box-name">Joined Inception / Coalition</span><span class="flow-box-meta">~5%</span></div>
+        <div style="margin-top: auto; padding-top: 16px;">
+          <div style="font-size: 12px; color: var(--green-dim); font-weight: 800; letter-spacing: 0.04em; padding-top: 12px; border-top: 1px dashed var(--rule);">
+            ~65% of traffic does something concrete
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ───────────── DELTA TABLE ───────────── -->
+  <section>
+    <h2>The delta · numbers that should move</h2>
+    <p>Same brand reach, same TAM, same set of entry points (plus three new ones the moves themselves create). The change is in the middle — the path from arrival to outcome. These are directional targets for a 12-month window after the eight moves ship.</p>
+
+    <div class="delta-table">
+      <div class="delta-row head">
+        <div>Outcome</div>
+        <div>Today</div>
+        <div>Target</div>
+        <div>Lift</div>
+      </div>
+      <div class="delta-row">
+        <div class="d-metric">Dropped off entirely</div>
+        <div class="d-current">~70%</div>
+        <div class="d-target">~25%</div>
+        <div><span class="d-delta">−2.8× lower</span></div>
+      </div>
+      <div class="delta-row">
+        <div class="d-metric">Tried &amp; bounced to a competitor</div>
+        <div class="d-current">~20%</div>
+        <div class="d-target">~10%</div>
+        <div><span class="d-delta">−2× lower</span></div>
+      </div>
+      <div class="delta-row">
+        <div class="d-metric">Shipped a product on Nemotron</div>
+        <div class="d-current">~8%</div>
+        <div class="d-target">~30%</div>
+        <div><span class="d-delta">+3.75× higher</span></div>
+      </div>
+      <div class="delta-row">
+        <div class="d-metric">Got NVIDIA certified (NCP / NCA)</div>
+        <div class="d-current">~1.5%</div>
+        <div class="d-target">~15%</div>
+        <div><span class="d-delta">+10× higher</span></div>
+      </div>
+      <div class="delta-row">
+        <div class="d-metric">Became enterprise customer (NVAIE)</div>
+        <div class="d-current">~0.5%</div>
+        <div class="d-target">~3%</div>
+        <div><span class="d-delta">+6× higher</span></div>
+      </div>
+      <div class="delta-row">
+        <div class="d-metric">Joined Inception / Nemotron Coalition</div>
+        <div class="d-current">&lt; 0.1%</div>
+        <div class="d-target">~5%</div>
+        <div><span class="d-delta">+50× higher</span></div>
+      </div>
+      <div class="delta-row">
+        <div class="d-metric">Active community participant</div>
+        <div class="d-current">~0.5%</div>
+        <div class="d-target">~12%</div>
+        <div><span class="d-delta">+24× higher</span></div>
+      </div>
+    </div>
+
+    <p style="margin-top: 22px; font-size: 13.5px; color: var(--ink3); font-style: italic;">
+      These percentages are <b>directional estimates</b>, not committed targets. Real numbers would come from instrumented funnel analysis once the front door is in place. The point of the table is the <i>shape</i> of the change — same total developer traffic flowing into very different outcomes.
+    </p>
+  </section>
+
+  <!-- WHAT'S DIFFERENT -->
+  <section>
+    <h2>What's actually different in the optimized state</h2>
+    <p>Eight things shift between the two pictures:</p>
+    <ol style="margin-left: 22px; font-size: 14.5px; line-height: 1.7;">
+      <li><b>One front door</b> at nvidia.dev replaces the 19+ portals.</li>
+      <li><b>The build.nvidia.com permission bug is fixed</b> — first contact actually works.</li>
+      <li><b>A middle pricing tier</b> ($20/mo Pro, $100/mo Max) lives between Free and NVAIE.</li>
+      <li><b>Certifications are surfaced</b> — NCP-AAI is the new "must-have," LinkedIn-displayable badge.</li>
+      <li><b>The Nemotron Cookbook</b> exists on GitHub with 30 forkable production-grade agents.</li>
+      <li><b>20 researcher voices</b> are publicly visible — Anthropic-style identifiable individuals.</li>
+      <li><b>Three new entry channels appear</b>: Cursor MCP server, researcher voices, the Cookbook itself.</li>
+      <li><b>Every page is agent-readable</b> — /llms.txt files, MCP-wrapped docs, structured schema markup.</li>
+    </ol>
+    <p style="margin-top: 22px; font-size: 14.5px;">All eight are documented in detail in <a href="modern-dev-marketing" style="color: var(--green-dim); font-weight: 700;">/modern-dev-marketing</a> with owner, problem, move, and metric per item.</p>
+  </section>
+
+  <footer>
+    <div>NVIDIA · Confidential · Internal Strategy</div>
+    <div>Last updated · June 2026</div>
+  </footer>
+
+</div>
+</body>
+</html>

@@ -253,7 +253,7 @@ footer a { color: var(--ink2); text-decoration: none; border-bottom: 1px solid v
   <div class="hero">
     <div class="hero-label">The thesis</div>
     <div class="hero-text">
-      <em>Brand awareness is not developer love.</em> NVIDIA has roughly 100 million developers in its total addressable market (TAM) and the deepest stack in AI, but in 2025–2026 the dev-engagement winners are Anthropic, Cursor, Vercel, Hugging Face, and Ollama — smaller surfaces with <b>tighter, more engaged, more visible developer cultures</b>. Their playbook is reproducible. Here's what to copy, what to skip, and the <b>seven moves</b> NVIDIA needs to make in 2026.
+      <em>Brand awareness is not developer love.</em> NVIDIA has roughly 100 million developers in its total addressable market (TAM) and the deepest stack in AI, but in 2025–2026 the dev-engagement winners are Anthropic, Cursor, Vercel, Hugging Face, and Ollama — smaller surfaces with <b>tighter, more engaged, more visible developer cultures</b>. Their playbook is reproducible. Here's what to copy, what to skip, and the <b>eight moves</b> NVIDIA needs to make in 2026 — including the move every other AI company already made: <b>make the docs themselves agent-readable</b>.
     </div>
   </div>
 
@@ -353,7 +353,7 @@ footer a { color: var(--ink2); text-decoration: none; border-bottom: 1px solid v
 
   <!-- THE 7 MOVES -->
   <section>
-    <h2>The seven modern dev-marketing moves for NVIDIA</h2>
+    <h2>The eight modern dev-marketing moves for NVIDIA</h2>
     <p>Each move below is sized as a 90-day initiative. Each has a clear "do this," an owner concept, and a measurable outcome. None of these are expensive. All of them are well-understood from the playbooks above. The only thing missing is execution.</p>
 
     <ol class="moves">
@@ -447,10 +447,27 @@ footer a { color: var(--ink2); text-decoration: none; border-bottom: 1px solid v
           <div class="move-row"><div class="move-row-label">Metric</div><div class="move-row-text">Nemotron-powered products entering Y Combinator (YC) and NVIDIA Inception batches each quarter. Real revenue traction tracked at 6 and 12 months post-hackathon.</div></div>
         </div>
       </li>
+
+      <li class="move">
+        <div class="move-head">
+          <div class="move-num"></div>
+          <div class="move-title">Make every page agent-readable (the new SEO)</div>
+        </div>
+        <div class="move-body">
+          <div class="move-row"><div class="move-row-label">Problem</div><div class="move-row-text">In 2026, AI agents are the new search engine. When a developer asks Claude, Cursor, ChatGPT, or Perplexity <i>"how do I fine-tune Nemotron?"</i>, the answer comes from whatever content is most parseable <b>by an agent</b>. NVIDIA docs are written for human eyes — 200-page references, deep nesting, lots of marketing prose around the actual answer. Agents skim them and end up citing Anthropic's docs, OpenAI's docs, or Mistral's docs instead. <b>Stripe, Vercel, Anthropic, Cloudflare, and Cursor all publish <code>/llms.txt</code> files today. NVIDIA does not.</b></div></div>
+          <div class="move-row"><div class="move-row-label">Move</div><div class="move-row-text">Make every developer-facing NVIDIA page readable by humans <i>and</i> machines:<br>• <b>Publish <code>/llms.txt</code> files</b> at every developer surface (build.nvidia.com, docs.nvidia.com, developer.nvidia.com, learn.nvidia.com). The emerging standard for "here's what an LLM needs to know about this site."<br>• <b>Write Anthropic-style Skills</b> (structured <code>SKILL.md</code> manifests) for every Nemotron capability. Each Skill declares what the model can do, when to invoke it, and where the docs/examples live. Agents discover these via the LLM-readable index.<br>• <b>Ship MCP (Model Context Protocol) servers for the docs themselves.</b> Cursor and Claude Code can then query NVIDIA documentation as a live tool — not as scraped HTML.<br>• <b>Add schema.org markup + Open Graph tags</b> so search and LLM previews look great. Treat every doc page like a product page.<br>• <b>Publish executable code samples</b> in a machine-extractable format. Agents that try to <i>run</i> the example (not just read it) should succeed on the first try.</div></div>
+          <div class="move-row"><div class="move-row-label">Owner</div><div class="move-row-text">Developer Relations + Documentation Team + Web Engineering.</div></div>
+          <div class="move-row"><div class="move-row-label">Metric</div><div class="move-row-text">Three numbers to track quarterly:<br>• % of NVIDIA developer URLs with a valid <code>/llms.txt</code> file<br>• # of MCP-wrapped documentation endpoints (target: every major product)<br>• Agent citations of NVIDIA content (sample queries across Perplexity, ChatGPT search, Cursor — count how often NVIDIA URLs appear in the answer)</div></div>
+        </div>
+      </li>
     </ol>
 
     <div class="callout">
-      <b>The pattern across all seven:</b> shift from corporate marketing → developer-native marketing. From "we ran a campaign" → "the community moved." From "press release" → "GitHub commit." The companies winning developer love in 2026 don't think of marketing as a budget line. They think of it as <b>making it stupid-easy for developers to build something they're proud of.</b>
+      <b>The pattern across all eight:</b> shift from corporate marketing → developer-native marketing. From "we ran a campaign" → "the community moved." From "press release" → "GitHub commit." From "documentation site" → "agent-queryable knowledge base." The companies winning developer love in 2026 don't think of marketing as a budget line. They think of it as <b>making it stupid-easy for developers (and the agents working on their behalf) to build something they're proud of.</b>
+    </div>
+
+    <div class="callout" style="background: linear-gradient(180deg, #fafafa 0%, #fff 100%); border-left-color: var(--ink); margin-top: 14px;">
+      <b>Visualize this:</b> see <a href="dev-flow" style="color: var(--green-dim); font-weight: 700;">/dev-flow</a> for two side-by-side flow diagrams — the current chaotic developer journey vs. the optimized one after these 8 moves ship. Includes a delta table of directional traffic targets.
     </div>
   </section>
 
@@ -539,7 +556,7 @@ footer a { color: var(--ink2); text-decoration: none; border-bottom: 1px solid v
   <section>
     <h2>Bottom line</h2>
     <p>NVIDIA has every input: the best chips, the best open models (Nemotron #1 on VoiceBench, #1 on Daily-Omni, #2 on OCRBench v2 — see <a href="omni-launchpad" style="color: var(--green-dim);">/omni-launchpad</a>), the biggest brand, the most-cited research, the largest pool of registered developers. <b>What's missing is the developer-marketing surface that turns brand recognition into shipping behavior.</b></p>
-    <p>The seven moves above are the playbook. None of them are expensive. All of them are well-understood from Anthropic, Cursor, Vercel, Hugging Face, Ollama, Supabase — the companies that figured out how to convert awareness into love in 2025-2026.</p>
+    <p>The eight moves above are the playbook. None of them are expensive. All of them are well-understood from Anthropic, Cursor, Vercel, Hugging Face, Ollama, Supabase — the companies that figured out how to convert awareness into love in 2025-2026.</p>
     <p style="font-size: 17px; font-weight: 800; padding-top: 8px;">The only thing missing is execution. <span style="color: var(--green-dim);">This role is the execution.</span></p>
   </section>
 
