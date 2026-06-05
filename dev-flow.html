@@ -288,6 +288,72 @@ section p { font-size: 14.5px; line-height: 1.6; margin-bottom: 12px; color: var
 .journey-block.clarity .journey-list li .icon { color: var(--green-dim); }
 .journey-list li b { font-weight: 800; }
 
+/* ════════════════ PERSONA FLYWHEELS ════════════════ */
+.persona-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 14px;
+}
+.persona-card {
+  border: 1.5px solid var(--ink);
+  background: #fff;
+  padding: 18px 20px 18px;
+  display: flex; flex-direction: column;
+}
+.persona-head {
+  display: flex; align-items: center; gap: 12px; margin-bottom: 4px;
+}
+.persona-icon { font-size: 28px; line-height: 1; }
+.persona-name {
+  font-size: 17px; font-weight: 900; letter-spacing: -0.01em;
+}
+.persona-tagline {
+  font-size: 12.5px; color: var(--ink3); font-style: italic;
+  margin-bottom: 14px; line-height: 1.4;
+}
+.persona-section { margin-bottom: 12px; }
+.persona-section:last-child { margin-bottom: 0; }
+.persona-label {
+  font-family: var(--mono); font-size: 9.5px; font-weight: 800;
+  letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--green-dim); margin-bottom: 5px;
+}
+.persona-arrives {
+  font-size: 12px; color: var(--ink); line-height: 1.5;
+}
+.persona-flow {
+  display: flex; flex-wrap: wrap; gap: 3px 4px; align-items: center;
+}
+.persona-step {
+  background: #fff; border: 1.5px solid var(--ink);
+  padding: 5px 9px 6px; font-size: 11px;
+  display: inline-flex; align-items: baseline; gap: 4px;
+}
+.persona-step .num {
+  font-family: var(--mono); font-weight: 800; color: var(--green-dim);
+  font-size: 9.5px;
+}
+.persona-step .name { font-weight: 700; color: var(--ink); }
+.persona-flow .arrow {
+  color: var(--ink3); font-family: var(--mono); font-weight: 800; font-size: 12px;
+}
+.persona-loop {
+  display: inline-flex; align-items: center; gap: 4px;
+  margin-left: 4px;
+  background: var(--green-bg); border: 1.5px dashed var(--green);
+  padding: 4px 8px;
+  font-family: var(--mono); font-size: 10px;
+  font-weight: 800; color: var(--green-dim);
+}
+.persona-loop .icon { font-size: 14px; line-height: 1; }
+.persona-outcome {
+  background: var(--green-bg); border-left: 4px solid var(--green);
+  padding: 9px 12px; font-size: 12.5px; line-height: 1.5;
+  color: var(--ink);
+}
+.persona-outcome b { font-weight: 800; }
+@media (max-width: 720px) {
+  .persona-grid { grid-template-columns: 1fr; }
+}
+
 /* ════════════════ SIMPLE BEFORE / AFTER GRAPHICS ════════════════ */
 .simple-graphic {
   background: var(--rule3);
@@ -703,18 +769,35 @@ footer a { color: var(--ink2); text-decoration: none; border-bottom: 1px solid v
 
       <!-- The flywheel SVG -->
       <div class="sg-flywheel-wrap">
-        <svg viewBox="-220 -220 440 440" xmlns="http://www.w3.org/2000/svg">
+        <svg viewBox="-260 -220 480 440" xmlns="http://www.w3.org/2000/svg">
           <defs>
             <marker id="arrow-flow" markerWidth="10" markerHeight="10" refX="7" refY="3" orient="auto">
               <path d="M 0 0 L 0 6 L 8 3 Z" fill="#0a0a0a" />
             </marker>
+            <marker id="arrow-feed" markerWidth="10" markerHeight="10" refX="7" refY="3" orient="auto">
+              <path d="M 0 0 L 0 6 L 8 3 Z" fill="#5a8e00" />
+            </marker>
           </defs>
+
+          <!-- Feeder arrow: from arrivals (left) into Stage 1 (top) -->
+          <g>
+            <path d="M -250 0 Q -180 -180 -40 -150"
+                  stroke="#5a8e00" stroke-width="2.5"
+                  stroke-dasharray="6 5" fill="none"
+                  marker-end="url(#arrow-feed)" />
+            <text x="-244" y="-12" font-size="10" font-weight="700"
+                  fill="#5a8e00" font-style="italic"
+                  font-family="SF Mono, monospace">arrivals</text>
+            <text x="-244" y="2" font-size="10" font-weight="700"
+                  fill="#5a8e00" font-style="italic"
+                  font-family="SF Mono, monospace">enter here</text>
+          </g>
 
           <!-- Inner dashed circle (background) -->
           <circle cx="0" cy="0" r="105" fill="#f3f9e6" stroke="#76b900" stroke-width="2" stroke-dasharray="4 4" />
 
           <!-- Center label -->
-          <text x="0" y="-14" text-anchor="middle" font-size="11" font-weight="800" fill="#5a8e00" font-family="SF Mono, monospace" letter-spacing="2">NEMOTRON</text>
+          <text x="0" y="-14" text-anchor="middle" font-size="11" font-weight="800" fill="#5a8e00" font-family="SF Mono, monospace" letter-spacing="2">DEVELOPER</text>
           <text x="0" y="2" text-anchor="middle" font-size="11" font-weight="800" fill="#5a8e00" font-family="SF Mono, monospace" letter-spacing="2">LIFECYCLE</text>
           <text x="0" y="22" text-anchor="middle" font-size="9.5" fill="#5a8e00" font-style="italic">the flywheel spins</text>
 
@@ -782,6 +865,212 @@ footer a { color: var(--ink2); text-decoration: none; border-bottom: 1px solid v
       </div>
 
     </div>
+  </section>
+
+  <!-- ───────────── PERSONA FLYWHEELS ───────────── -->
+  <section>
+    <h2>Persona flywheels · same loop, six different journeys</h2>
+    <p>NVIDIA is vertically integrated — different developers come for very different reasons. The same 7-stage flywheel applies to all of them, but the <i>specific activities at each stage</i> change per persona. Six common variants below.</p>
+
+    <div class="persona-grid">
+
+      <!-- AI / AGENT BUILDER -->
+      <div class="persona-card">
+        <div class="persona-head">
+          <div class="persona-icon">🧠</div>
+          <div class="persona-name">AI / Agent Builder</div>
+        </div>
+        <div class="persona-tagline">"I want to build agentic AI products with Nemotron."</div>
+
+        <div class="persona-section">
+          <div class="persona-label">Arrives from</div>
+          <div class="persona-arrives">Cursor / Claude Code · Hugging Face · X researcher posts · GitHub agent repos · Anthropic / OpenAI alumni referrals</div>
+        </div>
+
+        <div class="persona-section">
+          <div class="persona-label">Their journey · same flywheel, persona-specific stages</div>
+          <div class="persona-flow">
+            <span class="persona-step"><span class="num">01</span><span class="name">Discover Nemotron</span></span><span class="arrow">→</span>
+            <span class="persona-step"><span class="num">02</span><span class="name">Agentic AI 101</span></span><span class="arrow">→</span>
+            <span class="persona-step"><span class="num">03</span><span class="name">Cookbook agents</span></span><span class="arrow">→</span>
+            <span class="persona-step"><span class="num">04</span><span class="name">NCP-AAI cert</span></span><span class="arrow">→</span>
+            <span class="persona-step"><span class="num">05</span><span class="name">Hire / Inception</span></span><span class="arrow">→</span>
+            <span class="persona-step"><span class="num">06</span><span class="name">NVIDIA Champion</span></span><span class="arrow">→</span>
+            <span class="persona-step"><span class="num">07</span><span class="name">Found consultancy</span></span>
+            <span class="persona-loop"><span class="icon">↻</span>loops</span>
+          </div>
+        </div>
+
+        <div class="persona-outcome">
+          <b>Outcome:</b> Ships a Nemotron-powered agentic product. Hired as an AI engineer or founds a startup. Trains the next wave.
+        </div>
+      </div>
+
+      <!-- GAME DEVELOPER -->
+      <div class="persona-card">
+        <div class="persona-head">
+          <div class="persona-icon">🎮</div>
+          <div class="persona-name">Game Developer</div>
+        </div>
+        <div class="persona-tagline">"I want my game to use RTX features and reach more players."</div>
+
+        <div class="persona-section">
+          <div class="persona-label">Arrives from</div>
+          <div class="persona-arrives">GDC · Unreal Marketplace · Unity Asset Store · NVIDIA Developer Forums · Reddit r/gamedev</div>
+        </div>
+
+        <div class="persona-section">
+          <div class="persona-label">Their journey · same flywheel, persona-specific stages</div>
+          <div class="persona-flow">
+            <span class="persona-step"><span class="num">01</span><span class="name">Discover RTX</span></span><span class="arrow">→</span>
+            <span class="persona-step"><span class="num">02</span><span class="name">DLSS / Reflex SDK docs</span></span><span class="arrow">→</span>
+            <span class="persona-step"><span class="num">03</span><span class="name">Integrate in engine</span></span><span class="arrow">→</span>
+            <span class="persona-step"><span class="num">04</span><span class="name">Ship game w/ DLSS</span></span><span class="arrow">→</span>
+            <span class="persona-step"><span class="num">05</span><span class="name">GeForce NOW partner</span></span><span class="arrow">→</span>
+            <span class="persona-step"><span class="num">06</span><span class="name">RTX Remix Champion</span></span><span class="arrow">→</span>
+            <span class="persona-step"><span class="num">07</span><span class="name">Teach indie devs</span></span>
+            <span class="persona-loop"><span class="icon">↻</span>loops</span>
+          </div>
+        </div>
+
+        <div class="persona-outcome">
+          <b>Outcome:</b> Their game ships with DLSS / Reflex / RTX path tracing. Distributed via GeForce NOW. Modder community forms around their title.
+        </div>
+      </div>
+
+      <!-- ROBOTICS / PHYSICAL AI -->
+      <div class="persona-card">
+        <div class="persona-head">
+          <div class="persona-icon">🤖</div>
+          <div class="persona-name">Robotics / Physical AI Dev</div>
+        </div>
+        <div class="persona-tagline">"I want to ship a robot built on Isaac and GR00T."</div>
+
+        <div class="persona-section">
+          <div class="persona-label">Arrives from</div>
+          <div class="persona-arrives">CVPR · Isaac docs · GR00T launch posts · robotics PhD networks · Hugging Face robotics datasets</div>
+        </div>
+
+        <div class="persona-section">
+          <div class="persona-label">Their journey · same flywheel, persona-specific stages</div>
+          <div class="persona-flow">
+            <span class="persona-step"><span class="num">01</span><span class="name">Discover Isaac / GR00T</span></span><span class="arrow">→</span>
+            <span class="persona-step"><span class="num">02</span><span class="name">Isaac Lab tutorials</span></span><span class="arrow">→</span>
+            <span class="persona-step"><span class="num">03</span><span class="name">Sim-to-real on Jetson</span></span><span class="arrow">→</span>
+            <span class="persona-step"><span class="num">04</span><span class="name">Robotics certificate</span></span><span class="arrow">→</span>
+            <span class="persona-step"><span class="num">05</span><span class="name">Robot ships / Inception</span></span><span class="arrow">→</span>
+            <span class="persona-step"><span class="num">06</span><span class="name">GTC robotics speaker</span></span><span class="arrow">→</span>
+            <span class="persona-step"><span class="num">07</span><span class="name">Train robotics teams</span></span>
+            <span class="persona-loop"><span class="icon">↻</span>loops</span>
+          </div>
+        </div>
+
+        <div class="persona-outcome">
+          <b>Outcome:</b> Their humanoid / mobile robot ships on the NVIDIA Isaac + GR00T + Jetson stack. Sim-to-real works. Inception startup or hired by Figure / 1X / Apptronik tier.
+        </div>
+      </div>
+
+      <!-- INFRASTRUCTURE / DATA CENTER -->
+      <div class="persona-card">
+        <div class="persona-head">
+          <div class="persona-icon">🏗</div>
+          <div class="persona-name">Infrastructure / Data Center</div>
+        </div>
+        <div class="persona-tagline">"I want to deploy NVIDIA at scale in my org."</div>
+
+        <div class="persona-section">
+          <div class="persona-label">Arrives from</div>
+          <div class="persona-arrives">NGC catalog · DevOps + Kubernetes meetups · cloud architecture forums · AI Enterprise sales touchpoints</div>
+        </div>
+
+        <div class="persona-section">
+          <div class="persona-label">Their journey · same flywheel, persona-specific stages</div>
+          <div class="persona-flow">
+            <span class="persona-step"><span class="num">01</span><span class="name">Discover DGX / NIM</span></span><span class="arrow">→</span>
+            <span class="persona-step"><span class="num">02</span><span class="name">DLI infrastructure courses</span></span><span class="arrow">→</span>
+            <span class="persona-step"><span class="num">03</span><span class="name">LaunchPad → prod deploy</span></span><span class="arrow">→</span>
+            <span class="persona-step"><span class="num">04</span><span class="name">NCP-AIO cert</span></span><span class="arrow">→</span>
+            <span class="persona-step"><span class="num">05</span><span class="name">Cloud Architect role</span></span><span class="arrow">→</span>
+            <span class="persona-step"><span class="num">06</span><span class="name">GTC infra speaker</span></span><span class="arrow">→</span>
+            <span class="persona-step"><span class="num">07</span><span class="name">Open Training Center</span></span>
+            <span class="persona-loop"><span class="icon">↻</span>loops</span>
+          </div>
+        </div>
+
+        <div class="persona-outcome">
+          <b>Outcome:</b> Deploys DGX SuperPOD / NIM containers at scale. Certified. Becomes the infra expert in their company. Eligible to run an NVIDIA-Authorized Training Center.
+        </div>
+      </div>
+
+      <!-- CREATOR / STUDIO PRO -->
+      <div class="persona-card">
+        <div class="persona-head">
+          <div class="persona-icon">🎨</div>
+          <div class="persona-name">Creator / Studio Pro</div>
+        </div>
+        <div class="persona-tagline">"I want NVIDIA Studio to make my content stand out."</div>
+
+        <div class="persona-section">
+          <div class="persona-label">Arrives from</div>
+          <div class="persona-arrives">YouTube creator community · Adobe MAX · Discord creator servers · NVIDIA Studio campaigns · Twitch</div>
+        </div>
+
+        <div class="persona-section">
+          <div class="persona-label">Their journey · same flywheel, persona-specific stages</div>
+          <div class="persona-flow">
+            <span class="persona-step"><span class="num">01</span><span class="name">Discover NVIDIA Studio</span></span><span class="arrow">→</span>
+            <span class="persona-step"><span class="num">02</span><span class="name">Broadcast / Audio2Face tutorials</span></span><span class="arrow">→</span>
+            <span class="persona-step"><span class="num">03</span><span class="name">Build w/ Omniverse + RTX Remix</span></span><span class="arrow">→</span>
+            <span class="persona-step"><span class="num">04</span><span class="name">Publish content</span></span><span class="arrow">→</span>
+            <span class="persona-step"><span class="num">05</span><span class="name">Sponsored creator deal</span></span><span class="arrow">→</span>
+            <span class="persona-step"><span class="num">06</span><span class="name">Studio Champion</span></span><span class="arrow">→</span>
+            <span class="persona-step"><span class="num">07</span><span class="name">Run creator meetups</span></span>
+            <span class="persona-loop"><span class="icon">↻</span>loops</span>
+          </div>
+        </div>
+
+        <div class="persona-outcome">
+          <b>Outcome:</b> Content distinguishes them in their field. Monetizes via creator deals, sponsorships, brand work. Champion drives discovery for other creators.
+        </div>
+      </div>
+
+      <!-- LEARNER / CERTIFICATION-ONLY -->
+      <div class="persona-card">
+        <div class="persona-head">
+          <div class="persona-icon">📚</div>
+          <div class="persona-name">Learner / Certification Path</div>
+        </div>
+        <div class="persona-tagline">"I want to learn AI properly and land a job with credentials."</div>
+
+        <div class="persona-section">
+          <div class="persona-label">Arrives from</div>
+          <div class="persona-arrives">University curriculum · LinkedIn jobs requiring AI certs · career-pivot bootcamps · DLI direct marketing</div>
+        </div>
+
+        <div class="persona-section">
+          <div class="persona-label">Their journey · same flywheel, persona-specific stages</div>
+          <div class="persona-flow">
+            <span class="persona-step"><span class="num">01</span><span class="name">Discover DLI</span></span><span class="arrow">→</span>
+            <span class="persona-step"><span class="num">02</span><span class="name">DLI courses (free + paid)</span></span><span class="arrow">→</span>
+            <span class="persona-step"><span class="num">03</span><span class="name">LaunchPad practice labs</span></span><span class="arrow">→</span>
+            <span class="persona-step"><span class="num">04</span><span class="name">NCA-GENL → NCP-AAI</span></span><span class="arrow">→</span>
+            <span class="persona-step"><span class="num">05</span><span class="name">Apply via marketplace</span></span><span class="arrow">→</span>
+            <span class="persona-step"><span class="num">06</span><span class="name">Local user group host</span></span><span class="arrow">→</span>
+            <span class="persona-step"><span class="num">07</span><span class="name">Mentor new learners</span></span>
+            <span class="persona-loop"><span class="icon">↻</span>loops</span>
+          </div>
+        </div>
+
+        <div class="persona-outcome">
+          <b>Outcome:</b> Certified. LinkedIn badge displayed. Hired as an AI engineer through the certified-engineers marketplace. Closes the loop by hosting local user groups for the next learners.
+        </div>
+      </div>
+
+    </div>
+
+    <p style="margin-top: 20px; font-size: 13.5px; color: var(--ink3); font-style: italic; padding: 10px 14px; background: var(--rule3); border-left: 3px solid var(--ink3);">
+      Same lifecycle, six developer journeys. The flywheel above is the universal pattern; the persona variants are how the same 7 stages get walked by an AI builder vs. a game dev vs. a robotics engineer vs. an infrastructure architect vs. a creator vs. a learner. The loop closes for each.
+    </p>
   </section>
 
   <!-- ───────────── STAGES IN DETAIL ───────────── -->
