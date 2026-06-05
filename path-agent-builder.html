@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Agent Builder Path · nvidia.dev</title>
+<style>
+:root {
+  --ink: #0e0e0e;
+  --ink2: #383838;
+  --ink3: #777777;
+  --ink4: #a4a299;
+  --rule: #e6e4df;
+  --rule-strong: #d4d2cc;
+  --bg: #ffffff;
+  --bg-soft: #faf9f6;
+  --green: #76b900;
+  --green-dim: #4f7a00;
+  --green-deep: #344e00;
+  --green-bg: #f1f6e2;
+  --gold: #c8a04a;
+  --gold-bg: #fbf6ea;
+  --serif: 'Iowan Old Style', 'Sitka Text', 'Charter', Georgia, Cambria, 'Times New Roman', serif;
+  --sans: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Inter', 'Helvetica Neue', Arial, sans-serif;
+  --mono: ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, monospace;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { font-family: var(--sans); background: var(--bg); color: var(--ink); font-size: 15px; line-height: 1.55; -webkit-font-smoothing: antialiased; }
+a { color: inherit; }
+.wrap { max-width: 1100px; margin: 0 auto; padding: 0 28px; }
+section { padding: 64px 0; }
+section.soft { background: var(--bg-soft); border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); }
+h2.sec-title { font-family: var(--serif); font-weight: 600; font-size: 32px; letter-spacing: -0.01em; line-height: 1.15; margin-bottom: 10px; }
+.sec-kicker { font-family: var(--mono); font-size: 10.5px; font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase; color: var(--green-dim); margin-bottom: 14px; }
+.sec-lede { font-size: 15.5px; color: var(--ink2); max-width: 700px; margin-bottom: 34px; }
+
+.ribbon { background: var(--ink); color: #cfcdc6; font-family: var(--mono); font-size: 10.5px; letter-spacing: 0.08em; text-align: center; padding: 7px 12px; }
+.ribbon a { color: var(--green); text-decoration: none; font-weight: 700; }
+
+nav { border-bottom: 1px solid var(--rule); background: rgba(255,255,255,0.96); position: sticky; top: 0; z-index: 50; backdrop-filter: blur(8px); }
+.nav-inner { max-width: 1100px; margin: 0 auto; padding: 0 28px; height: 58px; display: flex; align-items: center; gap: 28px; }
+.wordmark { font-family: var(--mono); font-weight: 800; font-size: 15px; text-decoration: none; display: flex; align-items: center; gap: 8px; }
+.wordmark .dot { width: 10px; height: 10px; background: var(--green); display: inline-block; }
+.wordmark span.tld { color: var(--green-dim); }
+.nav-bc { font-family: var(--mono); font-size: 11px; color: var(--ink3); }
+.nav-bc b { color: var(--ink); }
+.nav-spacer { flex: 1; }
+.nav-user { font-family: var(--mono); font-size: 11px; color: var(--ink3); }
+.nav-user .chip { border: 1px solid var(--rule-strong); padding: 4px 10px; background: var(--bg-soft); }
+.nav-user .chip b { color: var(--green-dim); }
+
+/* hero */
+.hero { padding: 64px 0 56px; }
+.hero-grid { display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 52px; align-items: center; }
+.path-tag { display: inline-flex; align-items: center; gap: 9px; font-family: var(--mono); font-size: 10px; font-weight: 800; letter-spacing: 0.18em; text-transform: uppercase; color: var(--green-dim); border: 1px solid var(--green); background: var(--green-bg); padding: 6px 14px; margin-bottom: 20px; }
+.hero h1 { font-family: var(--serif); font-weight: 600; font-size: 50px; line-height: 1.06; letter-spacing: -0.015em; margin-bottom: 18px; }
+.hero h1 em { font-style: italic; color: var(--green-dim); }
+.hero-sub { font-size: 16.5px; color: var(--ink2); max-width: 520px; margin-bottom: 26px; line-height: 1.6; }
+.hero-sub b { font-weight: 700; }
+.hero-meta { display: flex; flex-wrap: wrap; gap: 8px 22px; font-family: var(--mono); font-size: 11px; color: var(--ink3); border-top: 1.5px solid var(--ink); border-bottom: 1.5px solid var(--ink); padding: 13px 2px; margin-bottom: 26px; }
+.hero-meta b { color: var(--green-dim); font-weight: 800; }
+.hex-btn { font-size: 14.5px; font-weight: 700; text-decoration: none; padding: 13px 30px; clip-path: polygon(14px 0, 100% 0, calc(100% - 14px) 100%, 0 100%); display: inline-block; }
+.hex-btn.primary { background: var(--ink); color: #fff; }
+.hex-btn.primary:hover { background: var(--green-deep); }
+.hex-btn.ghost { background: var(--green-bg); color: var(--green-deep); outline: 1.5px solid var(--green); outline-offset: -1.5px; }
+
+/* progress card */
+.prog-card { border: 1.5px solid var(--ink); background: #fff; }
+.prog-head { display: flex; align-items: center; gap: 14px; padding: 18px 22px; border-bottom: 1px solid var(--rule); }
+.prog-head svg { width: 46px; height: 46px; }
+.prog-name { font-weight: 800; font-size: 15px; }
+.prog-rank { font-family: var(--mono); font-size: 9.5px; font-weight: 800; letter-spacing: 0.12em; color: var(--ink3); margin-top: 2px; }
+.prog-rank b { color: var(--green-dim); }
+.prog-body { padding: 18px 22px; }
+.prog-row { display: flex; justify-content: space-between; font-family: var(--mono); font-size: 11px; color: var(--ink3); margin-bottom: 6px; }
+.prog-row b { color: var(--ink); }
+.prog-bar { height: 10px; border: 1px solid var(--ink); background: #fff; margin: 4px 0 14px; }
+.prog-bar .fill { height: 100%; background: var(--green); width: 50%; }
+.prog-badges { display: flex; gap: 8px; margin-top: 4px; }
+.prog-badges svg { width: 34px; height: 34px; }
+.prog-badges .empty { opacity: 0.22; }
+.prog-foot { border-top: 1px solid var(--rule); padding: 13px 22px; font-size: 12px; color: var(--ink2); background: var(--green-bg); }
+.prog-foot b { color: var(--green-deep); }
+.league { padding: 13px 22px; border-top: 1px solid var(--rule); font-family: var(--mono); font-size: 10.5px; color: var(--ink3); }
+.league b { color: var(--ink); }
+
+/* why strip */
+.why-stats { display: grid; grid-template-columns: repeat(3, 1fr); border-top: 1.5px solid var(--ink); border-bottom: 1.5px solid var(--ink); }
+.why-stat { padding: 20px 24px; border-left: 1px solid var(--rule); }
+.why-stat:first-child { border-left: none; }
+.why-stat .ws-num { font-family: var(--serif); font-size: 30px; font-weight: 600; }
+.why-stat .ws-label { font-size: 12px; color: var(--ink3); margin-top: 3px; line-height: 1.45; }
+.testimonial { margin-top: 36px; display: grid; grid-template-columns: 64px 1fr; gap: 22px; align-items: start; max-width: 760px; }
+.testimonial svg { width: 64px; height: 64px; }
+.testimonial blockquote { font-family: var(--serif); font-size: 21px; line-height: 1.45; font-weight: 500; letter-spacing: -0.005em; }
+.testimonial .t-who { font-family: var(--mono); font-size: 11px; color: var(--ink3); margin-top: 10px; }
+.testimonial .t-who b { color: var(--green-dim); }
+
+/* trail */
+.trail { position: relative; padding-left: 56px; }
+.trail::before { content: ""; position: absolute; left: 22px; top: 24px; bottom: 24px; width: 2px; background: repeating-linear-gradient(to bottom, var(--rule-strong) 0 6px, transparent 6px 12px); }
+.unit { position: relative; margin-bottom: 28px; border: 1.5px solid var(--ink); background: #fff; }
+.unit-node { position: absolute; left: -56px; top: 18px; width: 46px; height: 46px; }
+.unit-head { display: flex; align-items: baseline; gap: 14px; flex-wrap: wrap; padding: 20px 26px 6px; }
+.unit-kicker { font-family: var(--mono); font-size: 9.5px; font-weight: 800; letter-spacing: 0.16em; text-transform: uppercase; color: var(--green-dim); }
+.unit h3 { font-family: var(--serif); font-size: 25px; font-weight: 600; letter-spacing: -0.01em; width: 100%; }
+.unit-stats { font-family: var(--mono); font-size: 10.5px; color: var(--ink3); }
+.unit-stats b { color: var(--green-dim); font-weight: 800; }
+.unit-desc { padding: 8px 26px 16px; font-size: 13.5px; color: var(--ink2); max-width: 800px; }
+.unit-desc b { font-weight: 700; }
+.mods { border-top: 1px solid var(--rule); }
+.mod { display: grid; grid-template-columns: 1fr 130px 110px 110px; align-items: center; padding: 11px 26px; border-bottom: 1px solid var(--rule); font-size: 13px; }
+.mod:last-child { border-bottom: none; }
+.mod-name { font-weight: 700; }
+.mod-name a { text-decoration: none; border-bottom: 1px solid var(--rule-strong); }
+.mod-name a:hover { border-bottom-color: var(--green); }
+.mod-name .real { font-family: var(--mono); font-size: 8.5px; font-weight: 800; letter-spacing: 0.1em; color: var(--green-dim); border: 1px solid var(--green); background: var(--green-bg); padding: 1px 6px; margin-left: 8px; vertical-align: 2px; white-space: nowrap; }
+.mod-kind { font-family: var(--mono); font-size: 10px; color: var(--ink4); letter-spacing: 0.06em; text-transform: uppercase; }
+.mod-time { font-family: var(--mono); font-size: 11px; color: var(--ink3); }
+.mod-pts { font-family: var(--mono); font-size: 11px; font-weight: 800; color: var(--green-dim); text-align: right; }
+.unit-foot { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; padding: 14px 26px; background: var(--bg-soft); border-top: 1px solid var(--rule); }
+.uf-label { font-family: var(--mono); font-size: 9.5px; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink4); }
+.badge-chip { display: inline-flex; align-items: center; gap: 8px; border: 1px solid var(--rule-strong); background: #fff; padding: 5px 12px 5px 7px; font-family: var(--mono); font-size: 10.5px; font-weight: 700; }
+.badge-chip svg { width: 22px; height: 22px; }
+.badge-chip.gold { border-color: var(--gold); background: var(--gold-bg); }
+
+/* superbadge unit */
+.unit.super { border-width: 2.5px; background: var(--green-bg); }
+.unit.super .unit-foot { background: #fff; }
+.spec-list { padding: 4px 26px 18px; display: grid; grid-template-columns: 1fr 1fr; gap: 8px 26px; }
+.spec { display: flex; gap: 10px; font-size: 13px; color: var(--ink2); align-items: baseline; }
+.spec::before { content: "▢"; color: var(--green-dim); font-weight: 800; }
+.spec b { font-weight: 700; }
+.auto-verify { margin: 0 26px 20px; border-left: 4px solid var(--green); background: #fff; padding: 11px 16px; font-size: 12.5px; color: var(--ink2); }
+.auto-verify b { font-weight: 800; }
+
+/* cert cards */
+.cert-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+.cert-card { border: 1.5px solid var(--ink); background: #fff; padding: 26px; position: relative; }
+.cert-card.framed { outline: 1px solid var(--rule-strong); outline-offset: 5px; }
+.cert-card .cc-code { font-family: var(--mono); font-size: 11px; font-weight: 800; color: var(--green-dim); letter-spacing: 0.12em; }
+.cert-card h3 { font-family: var(--serif); font-size: 24px; font-weight: 600; margin: 6px 0 4px; }
+.cert-card .cc-lvl { font-family: var(--mono); font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink3); margin-bottom: 14px; }
+.cert-card p { font-size: 13px; color: var(--ink2); margin-bottom: 14px; }
+.cert-facts { font-family: var(--mono); font-size: 10.5px; color: var(--ink3); line-height: 2; border-top: 1px solid var(--rule); padding-top: 12px; }
+.cert-facts b { color: var(--ink); }
+.cert-card a.cta { font-size: 13px; font-weight: 800; color: var(--green-deep); text-decoration: none; }
+.cert-card .seal { position: absolute; top: 22px; right: 22px; width: 54px; height: 54px; }
+
+/* after grid */
+.after-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+.after-card { border: 1.5px solid var(--ink); background: #fff; padding: 26px; }
+.after-card h3 { font-family: var(--serif); font-size: 23px; font-weight: 600; margin-bottom: 10px; }
+.after-card p { font-size: 13.5px; color: var(--ink2); margin-bottom: 14px; }
+.after-card ul { list-style: none; }
+.after-card li { font-size: 13px; color: var(--ink2); padding: 7px 0 7px 22px; border-top: 1px solid var(--rule); position: relative; }
+.after-card li::before { content: "→"; position: absolute; left: 0; color: var(--green-dim); font-family: var(--mono); font-weight: 800; }
+.after-card li b { font-weight: 700; }
+
+/* multiply + leaderboard */
+.mult-grid { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 40px; align-items: start; }
+.mult-acts { border: 1.5px solid var(--ink); background: #fff; }
+.mult-act { display: grid; grid-template-columns: 1fr 110px; gap: 10px; padding: 13px 20px; border-top: 1px solid var(--rule); align-items: center; }
+.mult-act:first-child { border-top: none; }
+.mult-act .ma-name { font-weight: 700; font-size: 13.5px; }
+.mult-act .ma-name span { display: block; font-weight: 400; font-size: 12px; color: var(--ink3); }
+.mult-act .ma-pts { font-family: var(--mono); font-size: 11px; font-weight: 800; color: var(--green-dim); text-align: right; }
+.lb-mini { border: 1.5px solid var(--ink); background: #fff; }
+.lb-mini-head { font-family: var(--mono); font-size: 9.5px; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; color: var(--green-dim); padding: 11px 18px; border-bottom: 2px solid var(--ink); background: var(--bg-soft); }
+.lb-mini-row { display: grid; grid-template-columns: 30px 1fr auto; gap: 10px; padding: 10px 18px; border-bottom: 1px solid var(--rule); align-items: center; font-size: 13px; }
+.lb-mini-row:last-child { border-bottom: none; }
+.lb-mini-row .p { font-family: var(--serif); font-size: 16px; font-weight: 600; }
+.lb-mini-row .n { font-weight: 700; }
+.lb-mini-row .n span { font-family: var(--mono); font-size: 9px; color: var(--ink4); margin-left: 6px; letter-spacing: 0.08em; }
+.lb-mini-row .c { font-family: var(--mono); font-size: 11px; font-weight: 800; color: var(--green-dim); }
+.champ-story { margin-top: 18px; border-left: 4px solid var(--green); background: var(--green-bg); padding: 16px 20px; font-size: 13px; color: var(--ink2); }
+.champ-story b { font-weight: 800; }
+
+/* final */
+.final-cta { text-align: center; padding: 80px 0; }
+.final-cta h2 { font-family: var(--serif); font-size: 38px; font-weight: 600; letter-spacing: -0.015em; margin-bottom: 12px; }
+.final-cta p { font-size: 15.5px; color: var(--ink2); max-width: 540px; margin: 0 auto 28px; }
+
+footer { background: var(--ink); color: #b9b7b0; padding: 40px 0; font-size: 13px; }
+footer .wrap { display: flex; justify-content: space-between; gap: 30px; flex-wrap: wrap; }
+footer a { color: #9adf2e; text-decoration: none; }
+.foot-fine { font-family: var(--mono); font-size: 10px; color: #6e6c66; }
+
+@media (max-width: 880px) {
+  .hero-grid, .cert-pair, .after-grid, .mult-grid, .spec-list { grid-template-columns: 1fr; }
+  .hero h1 { font-size: 38px; }
+  .why-stats { grid-template-columns: 1fr; }
+  .why-stat { border-left: none; border-top: 1px solid var(--rule); }
+  .mod { grid-template-columns: 1fr 90px; }
+  .mod-kind, .mod-time { display: none; }
+  .trail { padding-left: 0; }
+  .trail::before, .unit-node { display: none; }
+}
+</style>
+</head>
+<body>
+
+<!-- sprite -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="hex" viewBox="0 0 64 64">
+      <polygon points="32,4 56,18 56,46 32,60 8,46 8,18" fill="#fff" stroke="#0e0e0e" stroke-width="2.5"/>
+      <polygon points="32,10 51,21 51,43 32,54 13,43 13,21" fill="none" stroke="#76b900" stroke-width="1.2"/>
+    </symbol>
+    <symbol id="hex-gold" viewBox="0 0 64 64">
+      <polygon points="32,4 56,18 56,46 32,60 8,46 8,18" fill="#fbf6ea" stroke="#0e0e0e" stroke-width="2.5"/>
+      <polygon points="32,10 51,21 51,43 32,54 13,43 13,21" fill="none" stroke="#c8a04a" stroke-width="1.6"/>
+    </symbol>
+    <symbol id="hex-green" viewBox="0 0 64 64">
+      <polygon points="32,4 56,18 56,46 32,60 8,46 8,18" fill="#f1f6e2" stroke="#0e0e0e" stroke-width="2.5"/>
+      <polygon points="32,10 51,21 51,43 32,54 13,43 13,21" fill="none" stroke="#76b900" stroke-width="1.6"/>
+    </symbol>
+    <symbol id="hex-num" viewBox="0 0 64 64">
+      <polygon points="32,4 56,18 56,46 32,60 8,46 8,18" fill="#fff" stroke="#0e0e0e" stroke-width="3"/>
+    </symbol>
+    <symbol id="avatar" viewBox="0 0 48 48">
+      <circle cx="24" cy="24" r="22" fill="#f1f6e2" stroke="#0e0e0e" stroke-width="2"/>
+      <circle cx="24" cy="19" r="7" fill="none" stroke="#0e0e0e" stroke-width="1.8"/>
+      <path d="M11 40c1.5-7 6.5-10.5 13-10.5S35.5 33 37 40" fill="none" stroke="#0e0e0e" stroke-width="1.8"/>
+    </symbol>
+    <symbol id="seal" viewBox="0 0 60 60">
+      <circle cx="30" cy="30" r="27" fill="none" stroke="#c8a04a" stroke-width="1.5"/>
+      <circle cx="30" cy="30" r="21" fill="none" stroke="#c8a04a" stroke-width="0.8" stroke-dasharray="3 2"/>
+      <path d="M30 17l3.6 7.6 8.4 1-6.2 5.7 1.7 8.2-7.5-4.2-7.5 4.2 1.7-8.2-6.2-5.7 8.4-1L30 17z" fill="none" stroke="#c8a04a" stroke-width="1.4" stroke-linejoin="round"/>
+    </symbol>
+  </defs>
+</svg>
+
+<div class="ribbon">CONCEPT MOCKUP · one persona path, fully built · template for the other nine · mechanics from <a href="/dev-flow">the Developer Flywheel</a></div>
+
+<nav>
+  <div class="nav-inner">
+    <a class="wordmark" href="/nvidia-dev"><span class="dot"></span>nvidia<span class="tld">.dev</span></a>
+    <div class="nav-bc">paths / <b>agent-builder</b></div>
+    <div class="nav-spacer"></div>
+    <div class="nav-user"><span class="chip">you · SPARK · <b>1,250 cores</b></span></div>
+  </div>
+</nav>
+
+<!-- ═══════════ HERO ═══════════ -->
+<header class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <div class="path-tag">PATH 01 · LIVE · ENTERS THE STACK AT L6 MODELS · L7 INFERENCE · L8 CLOUD APIS</div>
+      <h1>The Agent Builder<br><em>Path.</em></h1>
+      <p class="hero-sub">
+        From your first Nemotron API call to a <b>production agent with verified evals</b> —
+        then an official NVIDIA Agentic AI certification, a listing on the hiring marketplace,
+        and a community that knows your name. <b>Free to start. 30 minutes to your first badge.</b>
+      </p>
+      <div class="hero-meta">
+        <span><b>~40 hrs</b> guided work</span>
+        <span><b>11</b> badges</span>
+        <span><b>2</b> superbadges</span>
+        <span><b>2</b> official certs</span>
+        <span><b>21,300</b> cores on completion</span>
+      </div>
+      <a class="hex-btn primary" href="#unit-1">Start Unit 1 — free</a>
+    </div>
+    <div>
+      <div class="prog-card">
+        <div class="prog-head">
+          <svg><use href="#avatar"/></svg>
+          <div>
+            <div class="prog-name">Your progress</div>
+            <div class="prog-rank">RANK · <b>SPARK</b> · GLOBAL #4,217</div>
+          </div>
+        </div>
+        <div class="prog-body">
+          <div class="prog-row"><span>cores to Builder rank</span><b>1,250 / 2,500</b></div>
+          <div class="prog-bar"><div class="fill"></div></div>
+          <div class="prog-row"><span>path badges</span><b>3 / 13</b></div>
+          <div class="prog-badges">
+            <svg><use href="#hex"/></svg>
+            <svg><use href="#hex"/></svg>
+            <svg><use href="#hex"/></svg>
+            <svg class="empty"><use href="#hex"/></svg>
+            <svg class="empty"><use href="#hex"/></svg>
+            <svg class="empty"><use href="#hex-green"/></svg>
+            <svg class="empty"><use href="#hex-gold"/></svg>
+          </div>
+        </div>
+        <div class="league">THIS WEEK'S LEAGUE · <b>#7 of 30</b> in your cohort · top 10 promote</div>
+        <div class="prog-foot">Next up: <b>Tool Calling Fundamentals</b> · +250 cores · ~45 min. Finish Unit 2 this week and you hit Builder rank.</div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- ═══════════ WHY ═══════════ -->
+<section class="soft">
+  <div class="wrap">
+    <div class="sec-kicker">Why this path</div>
+    <h2 class="sec-title">Agents are the job market now</h2>
+    <p class="sec-lede">Every enterprise is hiring people who can make agents work in production — and almost nobody can prove they can. This path exists to make you provably one of them.</p>
+    <div class="why-stats">
+      <div class="why-stat"><div class="ws-num">+800%</div><div class="ws-label">YoY growth in Forward-Deployed Engineer postings — the fastest-growing AI title (MarkTechPost, 2026)</div></div>
+      <div class="why-stat"><div class="ws-num">$220K–700K</div><div class="ws-label">FDE total comp at Palantir / OpenAI / Anthropic tier (Levels.fyi) · AI/ML engineer median $187.5K</div></div>
+      <div class="why-stat"><div class="ws-num">~14,000</div><div class="ws-label">open US roles matching this path's skill set — agent development, orchestration, evals, guardrails</div></div>
+    </div>
+    <div class="testimonial">
+      <svg><use href="#avatar"/></svg>
+      <div>
+        <blockquote>"I'd watched a hundred tutorials and shipped nothing. The path made me ship in week one — and the superbadge was the first credential a recruiter ever actually clicked on."</blockquote>
+        <div class="t-who"><b>MINJI PARK</b> · ARCHITECT RANK · SEOUL · HIRED AS AN AI ENGINEER 11 WEEKS AFTER STARTING</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ TRAIL ═══════════ -->
+<section id="trail">
+  <div class="wrap">
+    <div class="sec-kicker">The trail</div>
+    <h2 class="sec-title">Seven units. Each one ships something.</h2>
+    <p class="sec-lede">Modules marked <span style="font-family: var(--mono); font-size: 9px; font-weight: 800; letter-spacing: 0.1em; color: var(--green-dim); border: 1px solid var(--green); background: var(--green-bg); padding: 1px 6px;">LIVE TODAY</span> are real NVIDIA courses and tools you can take right now — the path wraps them in one sequence with points, badges, and gates. Quizzes pay 100 cores on the first try, 50 on the second, 25 after — read carefully.</p>
+
+    <div class="trail">
+
+      <!-- UNIT 1 -->
+      <div class="unit" id="unit-1">
+        <svg class="unit-node"><use href="#hex-num"/><text x="32" y="40" text-anchor="middle" font-family="ui-monospace, Menlo, monospace" font-size="20" font-weight="800" fill="#4f7a00">1</text></svg>
+        <div class="unit-head">
+          <span class="unit-kicker">Unit 01 · Discover</span>
+          <span class="unit-stats"><b>~30 min</b> · <b>+250</b> cores</span>
+          <h3>First Token</h3>
+        </div>
+        <div class="unit-desc">Make a frontier open model do something. No credit card, no setup — an email, an API key, and one request to <b>Nemotron 3 Nano</b> running on NVIDIA's own infrastructure.</div>
+        <div class="mods">
+          <div class="mod"><div class="mod-name"><a href="https://build.nvidia.com">Create your build.nvidia.com account + nvapi key</a><span class="real">LIVE TODAY</span></div><div class="mod-kind">hands-on</div><div class="mod-time">10 min</div><div class="mod-pts">+50</div></div>
+          <div class="mod"><div class="mod-name"><a href="https://build.nvidia.com">First call to Nemotron 3 Nano (OpenAI-compatible API)</a><span class="real">LIVE TODAY</span></div><div class="mod-kind">hands-on</div><div class="mod-time">15 min</div><div class="mod-pts">+100</div></div>
+          <div class="mod"><div class="mod-name"><a href="https://discord.gg/nvidia">Join the builder community + claim your public profile</a><span class="real">LIVE TODAY</span></div><div class="mod-kind">community</div><div class="mod-time">5 min</div><div class="mod-pts">+100</div></div>
+        </div>
+        <div class="unit-foot"><span class="uf-label">Badge earned</span><span class="badge-chip"><svg><use href="#hex"/></svg>First Token</span></div>
+      </div>
+
+      <!-- UNIT 2 -->
+      <div class="unit">
+        <svg class="unit-node"><use href="#hex-num"/><text x="32" y="40" text-anchor="middle" font-family="ui-monospace, Menlo, monospace" font-size="20" font-weight="800" fill="#4f7a00">2</text></svg>
+        <div class="unit-head">
+          <span class="unit-kicker">Unit 02 · Learn</span>
+          <span class="unit-stats"><b>~11 hrs</b> · <b>+1,100</b> cores</span>
+          <h3>Agentic Foundations</h3>
+        </div>
+        <div class="unit-desc">What agents actually are, why most demos die in production, and how retrieval, tools, and memory fit together. Built on NVIDIA's existing DLI courses — free GPU lab included while you learn.</div>
+        <div class="mods">
+          <div class="mod"><div class="mod-name"><a href="https://learn.nvidia.com/courses/course-detail?course_id=course-v1:DLI+S-FX-39+V1">Agentic AI Explained (DLI)</a><span class="real">LIVE TODAY</span></div><div class="mod-kind">course</div><div class="mod-time">~2 hrs</div><div class="mod-pts">+200</div></div>
+          <div class="mod"><div class="mod-name"><a href="https://learn.nvidia.com/courses/course-detail?course_id=course-v1:DLI+C-FX-15+V1">Building RAG Agents with LLMs (DLI)</a><span class="real">LIVE TODAY</span></div><div class="mod-kind">course + lab</div><div class="mod-time">8 hrs</div><div class="mod-pts">+500</div></div>
+          <div class="mod"><div class="mod-name">Tool Calling Fundamentals — function schemas, MCP, guardrails</div><div class="mod-kind">module + quiz</div><div class="mod-time">45 min</div><div class="mod-pts">+250</div></div>
+          <div class="mod"><div class="mod-name">Agent Memory &amp; State — sessions, scratchpads, long-horizon tasks</div><div class="mod-kind">module + quiz</div><div class="mod-time">45 min</div><div class="mod-pts">+150</div></div>
+        </div>
+        <div class="unit-foot"><span class="uf-label">Badges earned</span><span class="badge-chip"><svg><use href="#hex"/></svg>RAG Apprentice</span><span class="badge-chip"><svg><use href="#hex"/></svg>Tool Caller</span></div>
+      </div>
+
+      <!-- UNIT 3 -->
+      <div class="unit">
+        <svg class="unit-node"><use href="#hex-num"/><text x="32" y="40" text-anchor="middle" font-family="ui-monospace, Menlo, monospace" font-size="20" font-weight="800" fill="#4f7a00">3</text></svg>
+        <div class="unit-head">
+          <span class="unit-kicker">Unit 03 · Build</span>
+          <span class="unit-stats"><b>~14 hrs</b> · <b>+1,950</b> cores</span>
+          <h3>Build Real Agents</h3>
+        </div>
+        <div class="unit-desc">Three working agents from NVIDIA's cookbook recipes, an eval harness that tells you the truth, and a NIM microservice running on your own machine — the production muscle memory.</div>
+        <div class="mods">
+          <div class="mod"><div class="mod-name"><a href="https://learn.nvidia.com/courses/course-detail?course_id=course-v1:DLI+C-FX-25+V1">Building Agentic AI Applications with LLMs (DLI)</a><span class="real">LIVE TODAY</span></div><div class="mod-kind">course + lab</div><div class="mod-time">8 hrs</div><div class="mod-pts">+500</div></div>
+          <div class="mod"><div class="mod-name"><a href="https://github.com/NVIDIA/GenerativeAIExamples">Cookbook build: research agent + support agent (NVIDIA examples)</a><span class="real">LIVE TODAY</span></div><div class="mod-kind">project</div><div class="mod-time">3 hrs</div><div class="mod-pts">+500</div></div>
+          <div class="mod"><div class="mod-name"><a href="https://www.nvidia.com/en-us/learn/certification/agentic-ai-professional/">Evaluating RAG &amp; Semantic Search Systems (DLI)</a><span class="real">LIVE TODAY</span></div><div class="mod-kind">course</div><div class="mod-time">3 hrs</div><div class="mod-pts">+300</div></div>
+          <div class="mod"><div class="mod-name"><a href="https://developer.nvidia.com/developer-program">Deploy a NIM locally — free dev license, up to 16 GPUs</a><span class="real">LIVE TODAY</span></div><div class="mod-kind">hands-on</div><div class="mod-time">90 min</div><div class="mod-pts">+350</div></div>
+          <div class="mod"><div class="mod-name">Publish your build blog — what broke, what you fixed</div><div class="mod-kind">community</div><div class="mod-time">~1 hr</div><div class="mod-pts">+300</div></div>
+        </div>
+        <div class="unit-foot"><span class="uf-label">Badges earned</span><span class="badge-chip"><svg><use href="#hex"/></svg>Agent Smith</span><span class="badge-chip"><svg><use href="#hex"/></svg>Eval Runner</span><span class="badge-chip"><svg><use href="#hex"/></svg>NIM Operator</span></div>
+      </div>
+
+      <!-- UNIT 4: SUPERBADGE -->
+      <div class="unit super">
+        <svg class="unit-node"><use href="#hex-green"/></svg>
+        <div class="unit-head">
+          <span class="unit-kicker">Unit 04 · Superbadge · Gated by Units 1–3</span>
+          <span class="unit-stats"><b>~8 hrs</b> · <b>+2,000</b> cores</span>
+          <h3>The Production Agent Superbadge</h3>
+        </div>
+        <div class="unit-desc">No quiz. No video. A spec — and your agent either meets it or it doesn't. This is the credential recruiters click, because it can't be faked:</div>
+        <div class="spec-list">
+          <div class="spec">A working agent solving a <b>real scenario</b> (provided brief, your design)</div>
+          <div class="spec">Served via a <b>NIM endpoint</b> you deployed yourself</div>
+          <div class="spec"><b>Eval suite ≥ 85%</b> on the held-out test set</div>
+          <div class="spec"><b>p95 latency under target</b> on the reference load</div>
+          <div class="spec">Guardrails: prompt-injection + tool-abuse checks pass</div>
+          <div class="spec">Public repo + a write-up that another builder can follow</div>
+        </div>
+        <div class="auto-verify"><b>Auto-verified, unlimited resubmissions.</b> Our harness hits your endpoint, runs the evals, and grades in minutes — exactly how Trailhead superbadges and Clay's cert-by-artifact work. Passing unlocks the certification exams below.</div>
+        <div class="unit-foot"><span class="uf-label">Superbadge earned</span><span class="badge-chip"><svg><use href="#hex-green"/></svg>Production Agent · +2,000</span></div>
+      </div>
+
+      <!-- UNIT 5: CERTS -->
+      <div class="unit">
+        <svg class="unit-node"><use href="#hex-num"/><text x="32" y="40" text-anchor="middle" font-family="ui-monospace, Menlo, monospace" font-size="20" font-weight="800" fill="#4f7a00">5</text></svg>
+        <div class="unit-head">
+          <span class="unit-kicker">Unit 05 · Certify · Real exams, live today</span>
+          <span class="unit-stats"><b>+10,000</b> cores</span>
+          <h3>Make It Official</h3>
+        </div>
+        <div class="unit-desc" style="padding-bottom: 22px;">Two proctored NVIDIA certifications, in sequence. Builder rank gets you 25% off the first exam; the superbadge means you walk in having already done the job.</div>
+        <div style="padding: 0 26px 24px;">
+          <div class="cert-pair">
+            <div class="cert-card framed">
+              <svg class="seal"><use href="#seal"/></svg>
+              <div class="cc-code">NCA-GENL · $125</div>
+              <h3>Generative AI LLMs</h3>
+              <div class="cc-lvl">NVIDIA-Certified Associate</div>
+              <p>The foundation credential: prompting, transformers, the NVIDIA inference stack. Most builders pass it right after Unit 2.</p>
+              <div class="cert-facts"><b>Format</b> proctored online · <b>+5,000</b> cores · unlocks marketplace draft profile</div>
+              <p style="margin-top:14px;"><a class="cta" href="https://www.nvidia.com/en-us/learn/certification/generative-ai-llm-associate/">Exam details →</a></p>
+            </div>
+            <div class="cert-card framed">
+              <svg class="seal"><use href="#seal"/></svg>
+              <div class="cc-code">NCP-AAI · $200</div>
+              <h3>Agentic AI</h3>
+              <div class="cc-lvl">NVIDIA-Certified Professional · the flagship</div>
+              <p>Agent development, multi-agent orchestration, tool integration, evaluation, observability, guardrails. 120 minutes, 60–70 questions, valid 2 years.</p>
+              <div class="cert-facts"><b>Format</b> proctored · 120 min · <b>+5,000</b> cores · full marketplace listing + Architect-rank credit</div>
+              <p style="margin-top:14px;"><a class="cta" href="https://www.nvidia.com/en-us/learn/certification/agentic-ai-professional/">Exam details →</a></p>
+            </div>
+          </div>
+        </div>
+        <div class="unit-foot"><span class="uf-label">Badges earned</span><span class="badge-chip gold"><svg><use href="#hex-gold"/></svg>NCA-GENL</span><span class="badge-chip gold"><svg><use href="#hex-gold"/></svg>NCP-AAI</span></div>
+      </div>
+
+      <!-- UNIT 6 -->
+      <div class="unit">
+        <svg class="unit-node"><use href="#hex-num"/><text x="32" y="40" text-anchor="middle" font-family="ui-monospace, Menlo, monospace" font-size="20" font-weight="800" fill="#4f7a00">6</text></svg>
+        <div class="unit-head">
+          <span class="unit-kicker">Unit 06 · Get hired / found</span>
+          <span class="unit-stats">ongoing · <b>+2,500</b> cores</span>
+          <h3>Turn Proof into Income</h3>
+        </div>
+        <div class="unit-desc" style="padding-bottom: 22px;">Certified + superbadged means your profile is now a verified portfolio. Two doors open; both count.</div>
+        <div style="padding: 0 26px 24px;">
+          <div class="after-grid">
+            <div class="after-card">
+              <h3>Get hired</h3>
+              <p>Your marketplace profile is searchable by partner recruiters — rank, badges, certs, and the live superbadge endpoint they can actually test.</p>
+              <ul>
+                <li><b>Certified-builder marketplace</b> listing (Accelerator rank+)</li>
+                <li><b>Job board</b>: agent-engineering roles from ecosystem companies</li>
+                <li><b>Interview fast-track</b> with hiring partners · +1,000 cores on placement story</li>
+              </ul>
+            </div>
+            <div class="after-card">
+              <h3>Found something</h3>
+              <p>Building a product or an agency instead? The ecosystem is set up to fund and route work to you.</p>
+              <ul>
+                <li><b>NVIDIA Inception</b> — free for startups: DLI credits, preferred pricing, VC exposure</li>
+                <li><b>Certified Consultancy tier</b> — referral pipeline once your team holds certs</li>
+                <li><b>Launch story</b> featured in the weekly digest · +1,500 cores</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="unit-foot"><span class="uf-label">Badge earned</span><span class="badge-chip"><svg><use href="#hex"/></svg>Open for Business</span></div>
+      </div>
+
+      <!-- UNIT 7 -->
+      <div class="unit">
+        <svg class="unit-node"><use href="#hex-num"/><text x="32" y="40" text-anchor="middle" font-family="ui-monospace, Menlo, monospace" font-size="20" font-weight="800" fill="#4f7a00">7</text></svg>
+        <div class="unit-head">
+          <span class="unit-kicker">Unit 07 · Multiply · The loop closes</span>
+          <span class="unit-stats">ongoing · uncapped cores</span>
+          <h3>Become the Arrival Channel</h3>
+        </div>
+        <div class="unit-desc" style="padding-bottom: 22px;">Everything after certification earns cores forever — because your output is how the next builder discovers this page. This is the entire point of the system.</div>
+        <div style="padding: 0 26px 24px;">
+          <div class="mult-grid">
+            <div>
+              <div class="mult-acts">
+                <div class="mult-act"><div class="ma-name">Mentor a new builder to Builder rank<span>pair via the mentor queue · both of you earn</span></div><div class="ma-pts">+500 each</div></div>
+                <div class="mult-act"><div class="ma-name">Speak at a city user group<span>slides + demo kit provided</span></div><div class="ma-pts">+1,000</div></div>
+                <div class="mult-act"><div class="ma-name">Host a Nemotron User Group<span>Champion track · funded venue + swag</span></div><div class="ma-pts">+1,500 / event</div></div>
+                <div class="mult-act"><div class="ma-name">Judge or run a hackathon<span>hackathon-in-a-box: GPU credits + prize pool</span></div><div class="ma-pts">+1,200</div></div>
+                <div class="mult-act"><div class="ma-name">Author a path module<span>accepted modules carry your name forever</span></div><div class="ma-pts">+3,000</div></div>
+                <div class="mult-act"><div class="ma-name">Open an Authorized Training Center<span>Champion rank · official curriculum · revenue share</span></div><div class="ma-pts">+10,000</div></div>
+              </div>
+              <div class="champ-story"><b>How it compounds:</b> Priya finished this exact path in 2026. Her user group has since produced <b>312 certified builders</b> — 9 are Champions, 2 run training centers of their own. One person's Unit 7 is now a permanent arrival channel for an entire city.</div>
+            </div>
+            <div class="lb-mini">
+              <div class="lb-mini-head">Agent Builder Path · Top 5</div>
+              <div class="lb-mini-row"><div class="p">1</div><div class="n">Priya Sharma<span>IN · CHAMPION</span></div><div class="c">286,400</div></div>
+              <div class="lb-mini-row"><div class="p">2</div><div class="n">Amara Okafor<span>NG · ARCHITECT</span></div><div class="c">215,860</div></div>
+              <div class="lb-mini-row"><div class="p">3</div><div class="n">Minji Park<span>KR · ARCHITECT</span></div><div class="c">171,480</div></div>
+              <div class="lb-mini-row"><div class="p">4</div><div class="n">Linh Tran<span>VN · ARCHITECT</span></div><div class="c">148,200</div></div>
+              <div class="lb-mini-row"><div class="p">5</div><div class="n">Tomás Ferreira<span>PT · ACCELERATOR</span></div><div class="c">96,310</div></div>
+              <div class="lb-mini-row" style="background: var(--green-bg);"><div class="p" style="font-size:13px;">4,217</div><div class="n">You<span>SPARK</span></div><div class="c">1,250</div></div>
+            </div>
+          </div>
+        </div>
+        <div class="unit-foot"><span class="uf-label">Badges earned</span><span class="badge-chip"><svg><use href="#hex"/></svg>First Talk</span><span class="badge-chip"><svg><use href="#hex"/></svg>Group Host</span><span class="badge-chip"><svg><use href="#hex"/></svg>Mentor ×10</span></div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ FINAL CTA ═══════════ -->
+<div class="final-cta">
+  <div class="wrap">
+    <h2>Unit 1 is thirty minutes. Right now.</h2>
+    <p>An email address, an API key, one call to Nemotron 3 Nano — and your name goes on the board. Everything else follows from that.</p>
+    <a class="hex-btn primary" href="https://build.nvidia.com">Get your free API key at build.nvidia.com</a>
+    &nbsp;&nbsp;
+    <a class="hex-btn ghost" href="/nvidia-dev">Back to all paths</a>
+  </div>
+</div>
+
+<footer>
+  <div class="wrap">
+    <div>
+      <b style="color:#fff; font-family: var(--mono);">nvidia.dev</b> · The Agent Builder Path —
+      <a href="/nvidia-dev">hub</a> · <a href="/dev-flow">flywheel mechanics</a> · <a href="/nvidia-certified-builder">program brief</a>
+    </div>
+    <div class="foot-fine">CONCEPT MOCKUP · courses + certs marked LIVE TODAY are real NVIDIA offerings (verified June 2026) · points, ranks &amp; marketplace are proposed</div>
+  </div>
+</footer>
+
+</body>
+</html>
