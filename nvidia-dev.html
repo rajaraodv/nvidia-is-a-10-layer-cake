@@ -78,7 +78,7 @@ nav { border-bottom: 1px solid var(--rule); background: rgba(255,255,255,0.96); 
 .hex-btn.ghost:hover { background: #e7f0d2; }
 .hero-social { display: flex; align-items: center; gap: 14px; }
 .face-stack { display: flex; }
-.face-stack img { width: 34px; height: 34px; border-radius: 50%; border: 2px solid #fff; box-shadow: 0 0 0 1px var(--rule-strong); margin-left: -9px; }
+.face-stack img { width: 42px; height: 42px; border-radius: 50%; border: 2px solid #fff; box-shadow: 0 0 0 1px var(--rule-strong); margin-left: -9px; }
 .face-stack img:first-child { margin-left: 0; }
 .hero-social-txt { font-size: 12.5px; color: var(--ink3); }
 .hero-social-txt b { color: var(--ink); font-weight: 700; }
@@ -89,7 +89,7 @@ nav { border-bottom: 1px solid var(--rule); background: rgba(255,255,255,0.96); 
 .win-card:nth-child(1) { transform: rotate(-1.2deg); }
 .win-card:nth-child(2) { transform: rotate(0.9deg) translateX(14px); }
 .win-card:nth-child(3) { transform: rotate(-0.8deg); }
-.win-card img { width: 52px; height: 52px; border-radius: 50%; object-fit: cover; border: 2px solid var(--green); }
+.win-card img { width: 66px; height: 66px; border-radius: 50%; object-fit: cover; border: 2px solid var(--green); }
 .win-tag { font-family: var(--mono); font-size: 9px; font-weight: 800; letter-spacing: 0.14em; color: var(--green-dim); }
 .win-line { font-size: 14px; font-weight: 700; line-height: 1.35; }
 .win-sub { font-size: 11.5px; color: var(--ink3); margin-top: 1px; }
@@ -117,7 +117,7 @@ nav { border-bottom: 1px solid var(--rule); background: rgba(255,255,255,0.96); 
 .out-card { border: 1px solid var(--rule-strong); background: #fff; padding: 24px; position: relative; }
 .out-card:hover { border-color: var(--ink); }
 .out-head { display: flex; align-items: center; gap: 12px; margin-bottom: 14px; }
-.out-head img { width: 44px; height: 44px; border-radius: 50%; object-fit: cover; border: 2px solid var(--green); }
+.out-head img { width: 58px; height: 58px; border-radius: 50%; object-fit: cover; border: 2px solid var(--green); }
 .out-tag { font-family: var(--mono); font-size: 9.5px; font-weight: 800; letter-spacing: 0.16em; color: var(--green-dim); }
 .out-card h3 { font-family: var(--serif); font-size: 22px; font-weight: 600; letter-spacing: -0.01em; margin-bottom: 8px; line-height: 1.2; }
 .out-card p { font-size: 13px; color: var(--ink2); line-height: 1.55; }
@@ -203,7 +203,7 @@ nav { border-bottom: 1px solid var(--rule); background: rgba(255,255,255,0.96); 
 .testi-card blockquote { font-family: var(--serif); font-size: 17.5px; line-height: 1.45; font-weight: 500; letter-spacing: -0.005em; margin-bottom: 20px; }
 .testi-card blockquote em { color: var(--green-dim); }
 .testi-who { display: flex; align-items: center; gap: 12px; margin-top: auto; border-top: 1px solid var(--rule); padding-top: 16px; }
-.testi-who img { width: 44px; height: 44px; border-radius: 50%; object-fit: cover; border: 2px solid var(--green); }
+.testi-who img { width: 54px; height: 54px; border-radius: 50%; object-fit: cover; border: 2px solid var(--green); }
 .testi-name { font-size: 13px; font-weight: 800; }
 .testi-meta { font-family: var(--mono); font-size: 9.5px; color: var(--ink3); letter-spacing: 0.08em; margin-top: 1px; }
 .testi-meta b { color: var(--green-dim); }
@@ -270,7 +270,7 @@ tr.lb-gap td { text-align: center; font-family: var(--mono); color: var(--ink4);
 .champ-unlock .cu-body span { font-size: 12.5px; color: var(--ink3); display: block; margin-top: 1px; }
 .champ-people { display: grid; gap: 12px; }
 .champ-person { display: flex; gap: 14px; align-items: center; border: 1px solid var(--rule-strong); background: #fff; padding: 14px 16px; }
-.champ-person img { width: 50px; height: 50px; border-radius: 50%; object-fit: cover; border: 2px solid var(--green); flex-shrink: 0; }
+.champ-person img { width: 62px; height: 62px; border-radius: 50%; object-fit: cover; border: 2px solid var(--green); flex-shrink: 0; }
 .cp-name { font-weight: 800; font-size: 13.5px; }
 .cp-deed { font-size: 12px; color: var(--ink3); line-height: 1.45; }
 .cp-deed b { color: var(--green-dim); }
@@ -298,6 +298,71 @@ tr.lb-gap td { text-align: center; font-family: var(--mono); color: var(--ink4);
 .cert-lvl { font-family: var(--mono); font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink3); white-space: nowrap; }
 .cert-note { font-size: 12px; color: var(--ink3); }
 .cert-tag { font-family: var(--mono); font-size: 9px; font-weight: 800; letter-spacing: 0.1em; padding: 2px 7px; background: var(--gold-bg); color: #8a6914; border: 1px solid var(--gold); white-space: nowrap; }
+
+
+/* ── TAU-style badges ── */
+.badge2 { display: flex; flex-direction: column; align-items: center; gap: 7px; width: 104px; }
+.badge2 svg.art { width: 84px; height: 105px; }
+.badge2.shield svg.art { width: 84px; height: 96px; }
+.badge2 .b-name { font-family: var(--mono); font-size: 9.5px; font-weight: 800; letter-spacing: 0.04em; text-align: center; color: var(--ink); line-height: 1.4; }
+.badge2 .b-pts { font-family: var(--mono); font-size: 9px; color: var(--green-dim); font-weight: 700; }
+
+/* ── Builder 100 ── */
+.b100-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+.b100-card { border: 1.5px solid var(--ink); background: #fff; display: flex; flex-direction: column; }
+.b100-photo { position: relative; border-bottom: 1.5px solid var(--ink); }
+.b100-photo img { width: 100%; aspect-ratio: 1 / 0.92; object-fit: cover; }
+.b100-num { position: absolute; top: 8px; left: 16px; font-family: var(--serif); font-size: 58px; font-weight: 600; color: #fff; text-shadow: 0 2px 14px rgba(0,0,0,0.55); line-height: 1; }
+.b100-card.podium .b100-num { color: #f2d98c; }
+.b100-rank { position: absolute; bottom: 12px; left: 14px; font-family: var(--mono); font-size: 9.5px; font-weight: 800; letter-spacing: 0.14em; padding: 4px 11px; background: rgba(14,14,14,0.82); color: #9adf2e; }
+.b100-body { padding: 16px 18px 15px; display: flex; flex-direction: column; flex: 1; }
+.b100-name { font-family: var(--serif); font-size: 23px; font-weight: 600; letter-spacing: -0.01em; line-height: 1.1; }
+.b100-title { font-size: 12.5px; color: var(--ink2); margin-top: 4px; line-height: 1.4; }
+.b100-loc { font-family: var(--mono); font-size: 9px; letter-spacing: 0.14em; color: var(--ink4); margin-top: 5px; }
+.b100-stamps { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 12px; }
+.stampchip { display: inline-flex; align-items: center; gap: 5px; border: 1px solid var(--gold); background: var(--gold-bg); color: #8a6914; font-family: var(--mono); font-size: 9px; font-weight: 800; letter-spacing: 0.05em; padding: 3px 8px 3px 5px; }
+.stampchip svg { width: 14px; height: 14px; }
+.b100-foot { display: flex; justify-content: space-between; align-items: baseline; border-top: 1px solid var(--rule); margin-top: 13px; padding-top: 11px; }
+.b100-cores { font-family: var(--mono); font-size: 13px; font-weight: 800; color: var(--green-dim); }
+.b100-cores span { font-size: 9px; color: var(--ink4); font-weight: 700; letter-spacing: 0.1em; }
+.b100-badges { font-family: var(--mono); font-size: 10px; color: var(--ink3); }
+.b100-you { margin-top: 20px; border: 1.5px dashed var(--green); background: var(--green-bg); display: flex; align-items: center; gap: 18px; padding: 14px 22px; flex-wrap: wrap; }
+.b100-you .y-pos { font-family: var(--serif); font-size: 26px; font-weight: 600; }
+.b100-you .y-txt { font-size: 13px; color: var(--ink2); }
+.b100-you .y-txt b { font-weight: 800; }
+.b100-you a { margin-left: auto; font-family: var(--mono); font-size: 11px; font-weight: 800; color: var(--green-deep); text-decoration: none; letter-spacing: 0.06em; }
+
+/* ── certificates ── */
+.cert-gallery { display: grid; grid-template-columns: 1fr 1fr; gap: 26px; margin-bottom: 34px; }
+.certificate { position: relative; border: 2.5px solid var(--ink); outline: 1px solid var(--gold); outline-offset: 6px; background: #fffdf6; padding: 34px 36px 70px; margin: 7px; }
+.certificate .corner { position: absolute; width: 16px; height: 16px; }
+.certificate .corner.tl { top: 7px; left: 7px; border-top: 2px solid var(--gold); border-left: 2px solid var(--gold); }
+.certificate .corner.tr { top: 7px; right: 7px; border-top: 2px solid var(--gold); border-right: 2px solid var(--gold); }
+.certificate .corner.bl { bottom: 7px; left: 7px; border-bottom: 2px solid var(--gold); border-left: 2px solid var(--gold); }
+.certificate .corner.br { bottom: 7px; right: 7px; border-bottom: 2px solid var(--gold); border-right: 2px solid var(--gold); }
+.cert-head { font-family: var(--mono); font-size: 9px; font-weight: 800; letter-spacing: 0.34em; text-transform: uppercase; color: #8a6914; text-align: center; margin-bottom: 16px; }
+.cert-title { font-family: var(--serif); font-size: 30px; font-weight: 600; letter-spacing: -0.01em; text-align: center; line-height: 1.15; }
+.cert-sub { font-family: var(--mono); font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--ink3); text-align: center; margin-top: 6px; }
+.cert-awardee { display: flex; align-items: center; justify-content: center; gap: 14px; margin: 22px 0 6px; }
+.cert-awardee img { width: 52px; height: 52px; border-radius: 50%; object-fit: cover; border: 2px solid var(--gold); }
+.cert-awardee .a-label { font-family: var(--mono); font-size: 8.5px; letter-spacing: 0.2em; color: var(--ink4); text-transform: uppercase; }
+.cert-awardee .a-name { font-family: var(--serif); font-size: 24px; font-weight: 600; font-style: italic; }
+.cert-line { text-align: center; font-size: 12px; color: var(--ink2); max-width: 380px; margin: 0 auto; line-height: 1.55; }
+.cert-verify { font-family: var(--mono); font-size: 9px; color: var(--ink4); text-align: center; margin: 14px 92px 0 0; letter-spacing: 0.06em; }
+.cert-sig { position: absolute; bottom: 22px; left: 36px; text-align: center; }
+.cert-sig .sig { font-family: 'Snell Roundhand', 'Savoye LET', 'Brush Script MT', cursive; font-size: 26px; color: var(--ink); transform: rotate(-3deg); }
+.cert-sig .sig-rule { border-top: 1px solid var(--ink3); margin-top: 2px; padding-top: 4px; font-family: var(--mono); font-size: 8px; letter-spacing: 0.16em; color: var(--ink3); text-transform: uppercase; }
+.cert-seal { position: absolute; right: 24px; bottom: -16px; width: 88px; height: 123px; filter: drop-shadow(0 2px 4px rgba(138,105,20,0.25)); }
+
+/* ── path leader chips ── */
+.path-leader { display: flex; align-items: center; gap: 10px; margin-bottom: 14px; }
+.path-leader img { width: 34px; height: 34px; border-radius: 50%; object-fit: cover; border: 2px solid var(--green); }
+.path-leader .pl-txt { font-size: 11.5px; color: var(--ink3); line-height: 1.35; }
+.path-leader .pl-txt b { color: var(--ink); font-weight: 800; display: block; }
+
+@media (max-width: 880px) {
+  .b100-grid, .cert-gallery { grid-template-columns: 1fr; }
+}
 
 /* ── final cta ── */
 .final-cta { text-align: center; padding: 88px 0; }
@@ -430,6 +495,31 @@ footer a:hover { color: #fff; }
     <symbol id="g-people" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><circle cx="9" cy="8" r="3.2"/><path d="M3.5 20c.5-3.5 2.5-5.5 5.5-5.5S14 16.5 14.5 20"/><circle cx="17" cy="9" r="2.6"/><path d="M16 14.7c2.6.3 4.2 2 4.6 5"/></g></symbol>
     <symbol id="g-seal" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="10" r="6"/><path d="M9 15l-1.5 6L12 18.5 16.5 21 15 15"/><path d="M9.8 10l1.6 1.6 3-3.2"/></g></symbol>
     <symbol id="g-flag" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M5 21V4"/><path d="M5 4c4-2 7 2 11 0v9c-4 2-7-2-11 0"/></g></symbol>
+    <!-- TAU-style badge frames -->
+    <symbol id="star5" viewBox="-5 -5 10 10"><polygon points="0.0,-4.6 1.1,-1.5 4.4,-1.4 1.8,0.6 2.7,3.7 0.0,1.9 -2.7,3.7 -1.8,0.6 -4.4,-1.4 -1.1,-1.5" fill="currentColor"/></symbol>
+    <symbol id="medal" viewBox="0 0 80 100">
+      <polygon points="24,0 36,0 44,32 30,34" fill="#f1f6e2" stroke="#0e0e0e" stroke-width="2" stroke-linejoin="round"/>
+      <polygon points="56,0 44,0 36,32 50,34" fill="#dcebbe" stroke="#0e0e0e" stroke-width="2" stroke-linejoin="round"/>
+      <circle cx="40" cy="60" r="28" fill="#fff" stroke="#0e0e0e" stroke-width="2.5"/>
+      <circle cx="40" cy="60" r="22.5" fill="none" stroke="#76b900" stroke-width="1.4" stroke-dasharray="3 2.6"/>
+    </symbol>
+    <symbol id="shield" viewBox="0 0 80 92">
+      <path d="M40 3 L73 13 V44 C73 64 59 79 40 89 C21 79 7 64 7 44 V13 Z" fill="#f1f6e2" stroke="#0e0e0e" stroke-width="2.5" stroke-linejoin="round"/>
+      <path d="M40 11 L65 19 V44 C65 60 54 72 40 80 C26 72 15 60 15 44 V19 Z" fill="#fff" stroke="#76b900" stroke-width="1.5" stroke-linejoin="round"/>
+      <path d="M15 26 L40 18 L65 26" fill="none" stroke="#76b900" stroke-width="1.2"/>
+    </symbol>
+    <symbol id="rosette" viewBox="0 0 80 112">
+      <polygon points="31,72 23,104 35,95 40,78" fill="#fbf6ea" stroke="#c8a04a" stroke-width="2" stroke-linejoin="round"/>
+      <polygon points="49,72 57,104 45,95 40,78" fill="#f3e6c3" stroke="#c8a04a" stroke-width="2" stroke-linejoin="round"/>
+      <polygon points="40.0,15.0 45.6,21.6 53.5,18.1 55.6,26.5 64.2,26.7 62.5,35.2 70.2,39.1 65.0,46.0 70.2,52.9 62.5,56.8 64.2,65.3 55.6,65.5 53.5,73.9 45.6,70.4 40.0,77.0 34.4,70.4 26.5,73.9 24.4,65.5 15.8,65.3 17.5,56.8 9.8,52.9 15.0,46.0 9.8,39.1 17.5,35.2 15.8,26.7 24.4,26.5 26.5,18.1 34.4,21.6" fill="#edd9a3" stroke="#8a6914" stroke-width="2" stroke-linejoin="round"/>
+      <circle cx="40" cy="46" r="17.5" fill="#fbf6ea" stroke="#8a6914" stroke-width="1.5"/>
+      <circle cx="40" cy="46" r="14" fill="none" stroke="#8a6914" stroke-width="0.8" stroke-dasharray="2.5 2"/>
+    </symbol>
+    <symbol id="rosette-plain" viewBox="0 0 80 80">
+      <polygon points="40.0,9.0 45.6,15.6 53.5,12.1 55.6,20.5 64.2,20.7 62.5,29.2 70.2,33.1 65.0,40.0 70.2,46.9 62.5,50.8 64.2,59.3 55.6,59.5 53.5,67.9 45.6,64.4 40.0,71.0 34.4,64.4 26.5,67.9 24.4,59.5 15.8,59.3 17.5,50.8 9.8,46.9 15.0,40.0 9.8,33.1 17.5,29.2 15.8,20.7 24.4,20.5 26.5,12.1 34.4,15.6" fill="#edd9a3" stroke="#8a6914" stroke-width="2" stroke-linejoin="round"/>
+      <circle cx="40" cy="40" r="17.5" fill="#fbf6ea" stroke="#8a6914" stroke-width="1.5"/>
+      <circle cx="40" cy="40" r="14" fill="none" stroke="#8a6914" stroke-width="0.8" stroke-dasharray="2.5 2"/>
+    </symbol>
   </defs>
 </svg>
 
@@ -471,18 +561,18 @@ footer a:hover { color: #fff; }
       </div>
       <div class="hero-social">
         <div class="face-stack">
-          <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="">
-          <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="">
-          <img src="https://randomuser.me/api/portraits/women/65.jpg" alt="">
-          <img src="https://randomuser.me/api/portraits/men/75.jpg" alt="">
-          <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="">
+          <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400&h=400&fit=crop&crop=faces&auto=format" alt="">
+          <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=400&h=400&fit=crop&crop=faces&auto=format" alt="">
+          <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400&h=400&fit=crop&crop=faces&auto=format" alt="">
+          <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop&crop=faces&auto=format" alt="">
+          <img src="https://images.unsplash.com/photo-1531123897727-8f129e1688ce?w=400&h=400&fit=crop&crop=faces&auto=format" alt="">
         </div>
         <div class="hero-social-txt"><b>6M+ NVIDIA developers</b> · 312 certified this week · 41 hired this month</div>
       </div>
     </div>
     <div class="wins">
       <div class="win-card">
-        <img src="https://randomuser.me/api/portraits/women/65.jpg" alt="">
+        <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400&h=400&fit=crop&crop=faces&auto=format" alt="">
         <div>
           <div class="win-tag">HIRED · 11 WEEKS IN</div>
           <div class="win-line">Minji Park — AI Engineer, Series B agent startup</div>
@@ -490,7 +580,7 @@ footer a:hover { color: #fff; }
         </div>
       </div>
       <div class="win-card">
-        <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="">
+        <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=400&h=400&fit=crop&crop=faces&auto=format" alt="">
         <div>
           <div class="win-tag">GTC SPEAKER · 2026</div>
           <div class="win-line">Diego Almeida — "Sim-to-real, in production"</div>
@@ -498,7 +588,7 @@ footer a:hover { color: #fff; }
         </div>
       </div>
       <div class="win-card">
-        <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="">
+        <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400&h=400&fit=crop&crop=faces&auto=format" alt="">
         <div>
           <div class="win-tag">FOUNDER · CERTIFIED CONSULTANCY</div>
           <div class="win-line">Priya Sharma — 6-engineer agency, training center license</div>
@@ -567,37 +657,37 @@ footer a:hover { color: #fff; }
     <p class="sec-lede">Education is the engine, not the destination. Everything you do here converts into something you can <b>put on a resume, a stage, a storefront — or a wall</b>.</p>
     <div class="out-grid">
       <div class="out-card">
-        <div class="out-head"><img src="https://randomuser.me/api/portraits/women/65.jpg" alt=""><div class="out-tag">GET HIRED</div></div>
+        <div class="out-head"><img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400&h=400&fit=crop&crop=faces&auto=format" alt=""><div class="out-tag">GET HIRED</div></div>
         <h3>A job offer, not a certificate of attendance</h3>
         <p>Recruiters search the marketplace by rank, cert, and superbadge — and they can hit your live agent endpoint before the first call. Your portfolio interviews for you.</p>
         <div class="out-proof"><b>41 builders hired this month</b> · median search-to-offer: 19 days</div>
       </div>
       <div class="out-card">
-        <div class="out-head"><img src="https://randomuser.me/api/portraits/men/41.jpg" alt=""><div class="out-tag">GET PROMOTED</div></div>
+        <div class="out-head"><img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&h=400&fit=crop&crop=faces&auto=format" alt=""><div class="out-tag">GET PROMOTED</div></div>
         <h3>Walk into your review with receipts</h3>
         <p>Verified shipped work, public rank, official certs — the promotion case writes itself. Carlos took cuDF to his data team; six months later he runs the platform group.</p>
         <div class="out-proof">Trailhead precedent: <b>50% promoted or raised</b> · 1 in 3 landed a new role</div>
       </div>
       <div class="out-card">
-        <div class="out-head"><img src="https://randomuser.me/api/portraits/men/32.jpg" alt=""><div class="out-tag">TAKE THE STAGE</div></div>
+        <div class="out-head"><img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=400&h=400&fit=crop&crop=faces&auto=format" alt=""><div class="out-tag">TAKE THE STAGE</div></div>
         <h3>From watching keynotes to giving one</h3>
         <p>Wolf rank comes with a reserved GTC speaker track. Your build story, recorded forever, with your name in the program. Legends sit at Jensen's table.</p>
         <div class="out-proof"><b>300 Champion talks/yr</b> · top 50 join the Legends dinner at GTC</div>
       </div>
       <div class="out-card">
-        <div class="out-head"><img src="https://randomuser.me/api/portraits/women/68.jpg" alt=""><div class="out-tag">ON THE BOARD</div></div>
+        <div class="out-head"><img src="https://images.unsplash.com/photo-1531123897727-8f129e1688ce?w=400&h=400&fit=crop&crop=faces&auto=format" alt=""><div class="out-tag">ON THE BOARD</div></div>
         <h3>A public ladder the industry reads</h3>
         <p>Every core, badge, and cert is public. Your city, your company, your country — there's a board for each, and your name climbs all of them at once.</p>
         <div class="out-proof">Amara Okafor: <b>#3 global</b> · first Owl in West Africa · 215,860 cores</div>
       </div>
       <div class="out-card">
-        <div class="out-head"><img src="https://randomuser.me/api/portraits/women/44.jpg" alt=""><div class="out-tag">RUN YOUR CITY</div></div>
+        <div class="out-head"><img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400&h=400&fit=crop&crop=faces&auto=format" alt=""><div class="out-tag">RUN YOUR CITY</div></div>
         <h3>A community that knows your name</h3>
         <p>Champions get a funded user group: venue budget, swag, GPU credits, guest speakers. You teach, you host, you become the person your city's AI scene runs through.</p>
         <div class="out-proof"><b>150 funded city groups</b> · hackathon-in-a-box for every Champion</div>
       </div>
       <div class="out-card">
-        <div class="out-head"><img src="https://randomuser.me/api/portraits/men/57.jpg" alt=""><div class="out-tag">OWN THE FIRM</div></div>
+        <div class="out-head"><img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=400&h=400&fit=crop&crop=faces&auto=format" alt=""><div class="out-tag">OWN THE FIRM</div></div>
         <h3>Your own consultancy or training center</h3>
         <p>The ladder doesn't end at "employed." Certified teams get the partner tier — referral pipeline, co-marketing — and training centers teach official curriculum for revenue share.</p>
         <div class="out-proof"><b>Authorized Training Center</b> license · Certified Consultancy referrals</div>
@@ -675,6 +765,7 @@ footer a:hover { color: #fff; }
         </div>
         <div class="path-quote">"I want to build agentic AI products that actually work in production."</div>
         <div class="path-desc">Go from your first Nemotron API call to a production-grade agent with verified evals — then get certified, get hired, and train the next wave.</div>
+        <div class="path-leader"><img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400&h=400&fit=crop&crop=faces&auto=format" alt=""><div class="pl-txt"><b>Priya Sharma — path #1</b>286,400 cores · Wolf · founder</div></div>
         <div class="path-meta">
           <span><b>~40 hrs</b> guided</span><span><b>11 badges</b> + 2 superbadges</span><span><b>2 certs</b></span><span><b>~14K</b> open roles</span><span><b>$220K+</b> top comp</span>
         </div>
@@ -687,6 +778,7 @@ footer a:hover { color: #fff; }
         </div>
         <div class="path-quote">"I want to ship a robot built on Isaac and GR00T."</div>
         <div class="path-desc">Isaac Lab → sim-to-real on Jetson → a robot that works outside the simulator. The physical-AI decade needs builders who've closed the gap.</div>
+        <div class="path-leader"><img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=400&h=400&fit=crop&crop=faces&auto=format" alt=""><div class="pl-txt"><b>Diego Almeida — path #1</b>251,090 cores · Wolf · GTC speaker</div></div>
         <div class="path-meta">
           <span><b>~60 hrs</b> guided</span><span><b>13 badges</b></span><span><b>1 cert</b></span><span>Jetson kit discount included</span>
         </div>
@@ -699,6 +791,7 @@ footer a:hover { color: #fff; }
         </div>
         <div class="path-quote">"I want 10× speedups straight from the silicon."</div>
         <div class="path-desc">CUDA, CUTLASS, Nsight. Write kernels that make production workloads embarrassingly fast — the rarest, best-paid skill in the stack.</div>
+        <div class="path-leader"><img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop&crop=faces&auto=format" alt=""><div class="pl-txt"><b>Kenji Watanabe — path #1</b>204,310 cores · Wolf · quant fund</div></div>
         <div class="path-meta">
           <span><b>~80 hrs</b> guided</span><span><b>15 badges</b></span><span>HPC + quant pipeline</span>
         </div>
@@ -711,6 +804,7 @@ footer a:hover { color: #fff; }
         </div>
         <div class="path-quote">"I want my pandas / Spark pipelines to run 100× faster."</div>
         <div class="path-desc">RAPIDS and cuDF: port your existing pipeline, benchmark it, publish the numbers. The fastest path from "data scientist" to "the data scientist."</div>
+        <div class="path-leader"><img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&h=400&fit=crop&crop=faces&auto=format" alt=""><div class="pl-txt"><b>Carlos Reyes — path #1</b>165,030 cores · Wolf · promoted twice</div></div>
         <div class="path-meta">
           <span><b>~24 hrs</b> guided</span><span><b>8 badges</b></span><span>Kaggle-ready</span>
         </div>
@@ -802,40 +896,82 @@ footer a:hover { color: #fff; }
   <div class="wrap">
     <div class="sec-kicker">Badges</div>
     <h2 class="sec-title">Proof you can hold</h2>
-    <p class="sec-lede">Four kinds of badge, all public on your profile, all verifiable by anyone — including the LLMs recruiters now ask about you. Collect a family, unlock the next animal.</p>
+    <p class="sec-lede">Medals for modules. Shields for verified deployed work. Gold stamps for official certifications. All public on your profile, all verifiable by anyone — including the LLMs recruiters now ask about you. <b>Collect a family, unlock the next animal.</b></p>
     <div class="badge-rows">
       <div class="badge-row">
-        <div class="badge-row-label"><div class="brl-name">Module badges</div><div class="brl-sub">finish a unit · 100–300 cores</div></div>
+        <div class="badge-row-label"><div class="brl-name">Module medals</div><div class="brl-sub">finish a unit · stars = tier</div></div>
         <div class="badge-set">
-          <div class="badge"><svg viewBox="0 0 64 64"><use href="#hex"/><g transform="translate(21,21)" color="#4f7a00"><use href="#g-spark" width="22" height="22"/></g></svg><div class="b-name">First Token</div><div class="b-pts">+100</div></div>
-          <div class="badge"><svg viewBox="0 0 64 64"><use href="#hex"/><g transform="translate(21,21)" color="#4f7a00"><use href="#g-book" width="22" height="22"/></g></svg><div class="b-name">RAG Apprentice</div><div class="b-pts">+250</div></div>
-          <div class="badge"><svg viewBox="0 0 64 64"><use href="#hex"/><g transform="translate(21,21)" color="#4f7a00"><use href="#g-wrench" width="22" height="22"/></g></svg><div class="b-name">Tool Caller</div><div class="b-pts">+250</div></div>
-          <div class="badge"><svg viewBox="0 0 64 64"><use href="#hex"/><g transform="translate(21,21)" color="#4f7a00"><use href="#g-gauge" width="22" height="22"/></g></svg><div class="b-name">Eval Runner</div><div class="b-pts">+300</div></div>
-          <div class="badge"><svg viewBox="0 0 64 64"><use href="#hex"/><g transform="translate(21,21)" color="#4f7a00"><use href="#g-server" width="22" height="22"/></g></svg><div class="b-name">NIM Operator</div><div class="b-pts">+300</div></div>
+          <div class="badge2">
+            <svg class="art" viewBox="0 0 80 100"><use href="#medal"/><g transform="translate(29,44)" color="#4f7a00"><use href="#g-spark" width="22" height="22"/></g><polygon points="40.0,69.6 41.1,72.5 44.2,72.6 41.7,74.6 42.6,77.6 40.0,75.8 37.4,77.6 38.3,74.6 35.8,72.6 38.9,72.5" fill="#c8a04a"/></svg>
+            <div class="b-name">First Token</div><div class="b-pts">+100</div>
+          </div>
+          <div class="badge2">
+            <svg class="art" viewBox="0 0 80 100"><use href="#medal"/><g transform="translate(29,44)" color="#4f7a00"><use href="#g-book" width="22" height="22"/></g><polygon points="40.0,69.6 41.1,72.5 44.2,72.6 41.7,74.6 42.6,77.6 40.0,75.8 37.4,77.6 38.3,74.6 35.8,72.6 38.9,72.5" fill="#c8a04a"/></svg>
+            <div class="b-name">RAG Apprentice</div><div class="b-pts">+250</div>
+          </div>
+          <div class="badge2">
+            <svg class="art" viewBox="0 0 80 100"><use href="#medal"/><g transform="translate(29,44)" color="#4f7a00"><use href="#g-wrench" width="22" height="22"/></g><polygon points="33.0,69.6 34.1,72.5 37.2,72.6 34.7,74.6 35.6,77.6 33.0,75.8 30.4,77.6 31.3,74.6 28.8,72.6 31.9,72.5" fill="#c8a04a"/><polygon points="47.0,69.6 48.1,72.5 51.2,72.6 48.7,74.6 49.6,77.6 47.0,75.8 44.4,77.6 45.3,74.6 42.8,72.6 45.9,72.5" fill="#c8a04a"/></svg>
+            <div class="b-name">Tool Caller</div><div class="b-pts">+250</div>
+          </div>
+          <div class="badge2">
+            <svg class="art" viewBox="0 0 80 100"><use href="#medal"/><g transform="translate(29,44)" color="#4f7a00"><use href="#g-gauge" width="22" height="22"/></g><polygon points="33.0,69.6 34.1,72.5 37.2,72.6 34.7,74.6 35.6,77.6 33.0,75.8 30.4,77.6 31.3,74.6 28.8,72.6 31.9,72.5" fill="#c8a04a"/><polygon points="47.0,69.6 48.1,72.5 51.2,72.6 48.7,74.6 49.6,77.6 47.0,75.8 44.4,77.6 45.3,74.6 42.8,72.6 45.9,72.5" fill="#c8a04a"/></svg>
+            <div class="b-name">Eval Runner</div><div class="b-pts">+300</div>
+          </div>
+          <div class="badge2">
+            <svg class="art" viewBox="0 0 80 100"><use href="#medal"/><g transform="translate(29,44)" color="#4f7a00"><use href="#g-server" width="22" height="22"/></g><polygon points="27.0,69.6 28.1,72.5 31.2,72.6 28.7,74.6 29.6,77.6 27.0,75.8 24.4,77.6 25.3,74.6 22.8,72.6 25.9,72.5" fill="#c8a04a"/><polygon points="40.0,69.6 41.1,72.5 44.2,72.6 41.7,74.6 42.6,77.6 40.0,75.8 37.4,77.6 38.3,74.6 35.8,72.6 38.9,72.5" fill="#c8a04a"/><polygon points="53.0,69.6 54.1,72.5 57.2,72.6 54.7,74.6 55.6,77.6 53.0,75.8 50.4,77.6 51.3,74.6 48.8,72.6 51.9,72.5" fill="#c8a04a"/></svg>
+            <div class="b-name">NIM Operator</div><div class="b-pts">+300</div>
+          </div>
         </div>
       </div>
       <div class="badge-row">
-        <div class="badge-row-label"><div class="brl-name">Superbadges</div><div class="brl-sub">verified deployed work · 2,000 cores</div></div>
+        <div class="badge-row-label"><div class="brl-name">Superbadge shields</div><div class="brl-sub">auto-verified deployed work</div></div>
         <div class="badge-set">
-          <div class="badge super"><svg viewBox="0 0 64 64"><use href="#hex-green"/><g transform="translate(20,20)" color="#344e00"><use href="#g-shield" width="24" height="24"/></g></svg><div class="b-name">Production Agent</div><div class="b-pts">+2,000</div></div>
-          <div class="badge super"><svg viewBox="0 0 64 64"><use href="#hex-green"/><g transform="translate(20,20)" color="#344e00"><use href="#i-robot" width="24" height="24"/></g></svg><div class="b-name">Sim-to-Real</div><div class="b-pts">+2,000</div></div>
-          <div class="badge super"><svg viewBox="0 0 64 64"><use href="#hex-green"/><g transform="translate(20,20)" color="#344e00"><use href="#g-gauge" width="24" height="24"/></g></svg><div class="b-name">Kernel Surgeon</div><div class="b-pts">+2,000</div></div>
+          <div class="badge2 shield">
+            <svg class="art" viewBox="0 0 80 92"><use href="#shield"/><g transform="translate(28,30)" color="#344e00"><use href="#g-shield" width="24" height="24"/></g><polygon points="40.0,59.0 41.2,62.4 44.8,62.5 41.9,64.6 42.9,68.0 40.0,66.0 37.1,68.0 38.1,64.6 35.2,62.5 38.8,62.4" fill="#76b900"/></svg>
+            <div class="b-name">Production Agent</div><div class="b-pts">+2,000</div>
+          </div>
+          <div class="badge2 shield">
+            <svg class="art" viewBox="0 0 80 92"><use href="#shield"/><g transform="translate(28,30)" color="#344e00"><use href="#i-robot" width="24" height="24"/></g><polygon points="40.0,59.0 41.2,62.4 44.8,62.5 41.9,64.6 42.9,68.0 40.0,66.0 37.1,68.0 38.1,64.6 35.2,62.5 38.8,62.4" fill="#76b900"/></svg>
+            <div class="b-name">Sim-to-Real</div><div class="b-pts">+2,000</div>
+          </div>
+          <div class="badge2 shield">
+            <svg class="art" viewBox="0 0 80 92"><use href="#shield"/><g transform="translate(28,30)" color="#344e00"><use href="#g-spark" width="24" height="24"/></g><polygon points="40.0,59.0 41.2,62.4 44.8,62.5 41.9,64.6 42.9,68.0 40.0,66.0 37.1,68.0 38.1,64.6 35.2,62.5 38.8,62.4" fill="#76b900"/></svg>
+            <div class="b-name">Kernel Surgeon</div><div class="b-pts">+2,000</div>
+          </div>
         </div>
       </div>
       <div class="badge-row">
-        <div class="badge-row-label"><div class="brl-name">Certification badges</div><div class="brl-sub">official NVIDIA certs · 5,000 cores</div></div>
+        <div class="badge-row-label"><div class="brl-name">Certification stamps</div><div class="brl-sub">official · proctored · gold</div></div>
         <div class="badge-set">
-          <div class="badge super"><svg viewBox="0 0 64 64"><use href="#hex-gold"/><g transform="translate(20,20)" color="#8a6914"><use href="#g-seal" width="24" height="24"/></g></svg><div class="b-name">NCA-GENL</div><div class="b-pts">+5,000</div></div>
-          <div class="badge super"><svg viewBox="0 0 64 64"><use href="#hex-gold"/><g transform="translate(20,20)" color="#8a6914"><use href="#g-seal" width="24" height="24"/></g></svg><div class="b-name">NCP-AAI</div><div class="b-pts">+5,000</div></div>
-          <div class="badge super"><svg viewBox="0 0 64 64"><use href="#hex-gold"/><g transform="translate(20,20)" color="#8a6914"><use href="#g-seal" width="24" height="24"/></g></svg><div class="b-name">NCP-AIO</div><div class="b-pts">+5,000</div></div>
+          <div class="badge2">
+            <svg class="art" viewBox="0 0 80 112"><use href="#rosette"/><text x="40" y="43" text-anchor="middle" font-family="ui-monospace, Menlo, monospace" font-size="11" font-weight="800" fill="#8a6914">NCA</text><text x="40" y="55" text-anchor="middle" font-family="ui-monospace, Menlo, monospace" font-size="11" font-weight="800" fill="#8a6914">GENL</text></svg>
+            <div class="b-name">Generative AI LLMs</div><div class="b-pts">+5,000</div>
+          </div>
+          <div class="badge2">
+            <svg class="art" viewBox="0 0 80 112"><use href="#rosette"/><text x="40" y="43" text-anchor="middle" font-family="ui-monospace, Menlo, monospace" font-size="11" font-weight="800" fill="#8a6914">NCP</text><text x="40" y="55" text-anchor="middle" font-family="ui-monospace, Menlo, monospace" font-size="11" font-weight="800" fill="#8a6914">AAI</text></svg>
+            <div class="b-name">Agentic AI</div><div class="b-pts">+5,000</div>
+          </div>
+          <div class="badge2">
+            <svg class="art" viewBox="0 0 80 112"><use href="#rosette"/><text x="40" y="43" text-anchor="middle" font-family="ui-monospace, Menlo, monospace" font-size="11" font-weight="800" fill="#8a6914">NCP</text><text x="40" y="55" text-anchor="middle" font-family="ui-monospace, Menlo, monospace" font-size="11" font-weight="800" fill="#8a6914">AIO</text></svg>
+            <div class="b-name">AI Operations</div><div class="b-pts">+5,000</div>
+          </div>
         </div>
       </div>
       <div class="badge-row">
-        <div class="badge-row-label"><div class="brl-name">Community badges</div><div class="brl-sub">multiply the ecosystem</div></div>
+        <div class="badge-row-label"><div class="brl-name">Community medals</div><div class="brl-sub">multiply the ecosystem</div></div>
         <div class="badge-set">
-          <div class="badge"><svg viewBox="0 0 64 64"><use href="#hex"/><g transform="translate(21,21)" color="#4f7a00"><use href="#g-mic" width="22" height="22"/></g></svg><div class="b-name">First Talk</div><div class="b-pts">+1,000</div></div>
-          <div class="badge"><svg viewBox="0 0 64 64"><use href="#hex"/><g transform="translate(21,21)" color="#4f7a00"><use href="#g-people" width="22" height="22"/></g></svg><div class="b-name">Group Host</div><div class="b-pts">+1,500</div></div>
-          <div class="badge"><svg viewBox="0 0 64 64"><use href="#hex"/><g transform="translate(21,21)" color="#4f7a00"><use href="#g-flag" width="22" height="22"/></g></svg><div class="b-name">Mentor ×10</div><div class="b-pts">+5,000</div></div>
+          <div class="badge2">
+            <svg class="art" viewBox="0 0 80 100"><use href="#medal"/><g transform="translate(29,44)" color="#4f7a00"><use href="#g-mic" width="22" height="22"/></g><polygon points="40.0,69.6 41.1,72.5 44.2,72.6 41.7,74.6 42.6,77.6 40.0,75.8 37.4,77.6 38.3,74.6 35.8,72.6 38.9,72.5" fill="#c8a04a"/></svg>
+            <div class="b-name">First Talk</div><div class="b-pts">+1,000</div>
+          </div>
+          <div class="badge2">
+            <svg class="art" viewBox="0 0 80 100"><use href="#medal"/><g transform="translate(29,44)" color="#4f7a00"><use href="#g-people" width="22" height="22"/></g><polygon points="33.0,69.6 34.1,72.5 37.2,72.6 34.7,74.6 35.6,77.6 33.0,75.8 30.4,77.6 31.3,74.6 28.8,72.6 31.9,72.5" fill="#c8a04a"/><polygon points="47.0,69.6 48.1,72.5 51.2,72.6 48.7,74.6 49.6,77.6 47.0,75.8 44.4,77.6 45.3,74.6 42.8,72.6 45.9,72.5" fill="#c8a04a"/></svg>
+            <div class="b-name">Group Host</div><div class="b-pts">+1,500</div>
+          </div>
+          <div class="badge2">
+            <svg class="art" viewBox="0 0 80 100"><use href="#medal"/><g transform="translate(29,44)" color="#4f7a00"><use href="#g-flag" width="22" height="22"/></g><polygon points="27.0,69.6 28.1,72.5 31.2,72.6 28.7,74.6 29.6,77.6 27.0,75.8 24.4,77.6 25.3,74.6 22.8,72.6 25.9,72.5" fill="#c8a04a"/><polygon points="40.0,69.6 41.1,72.5 44.2,72.6 41.7,74.6 42.6,77.6 40.0,75.8 37.4,77.6 38.3,74.6 35.8,72.6 38.9,72.5" fill="#c8a04a"/><polygon points="53.0,69.6 54.1,72.5 57.2,72.6 54.7,74.6 55.6,77.6 53.0,75.8 50.4,77.6 51.3,74.6 48.8,72.6 51.9,72.5" fill="#c8a04a"/></svg>
+            <div class="b-name">Mentor ×10</div><div class="b-pts">+5,000</div>
+          </div>
         </div>
       </div>
     </div>
@@ -845,29 +981,169 @@ footer a:hover { color: #fff; }
 <!-- ═══════════ LEADERBOARD ═══════════ -->
 <section class="soft" id="leaderboard">
   <div class="wrap">
-    <div class="sec-kicker">Leaderboard</div>
-    <h2 class="sec-title">The global top ten</h2>
-    <p class="sec-lede">Updated continuously. Annual top 50 become Dragons. Filter by path, country, or company — your city's ladder is one click away.</p>
-    <table class="lb-table">
-      <thead>
-        <tr><th>#</th><th>Builder</th><th>Path</th><th>Rank</th><th>Badges</th><th>Certs</th><th>Cores</th></tr>
-      </thead>
-      <tbody>
-        <tr><td class="lb-pos medal">1</td><td class="lb-builder"><span class="face"><img src="https://randomuser.me/api/portraits/women/44.jpg" alt="">Priya Sharma<span class="cc">IN</span></span></td><td class="lb-path">Agent Builder</td><td><span class="lb-rank-chip wolf">Wolf</span></td><td class="lb-num">214</td><td class="lb-num">4</td><td class="lb-cores">286,400</td></tr>
-        <tr><td class="lb-pos medal">2</td><td class="lb-builder"><span class="face"><img src="https://randomuser.me/api/portraits/men/32.jpg" alt="">Diego Almeida<span class="cc">BR</span></span></td><td class="lb-path">Robotics</td><td><span class="lb-rank-chip wolf">Wolf</span></td><td class="lb-num">198</td><td class="lb-num">3</td><td class="lb-cores">251,090</td></tr>
-        <tr><td class="lb-pos medal">3</td><td class="lb-builder"><span class="face"><img src="https://randomuser.me/api/portraits/women/68.jpg" alt="">Amara Okafor<span class="cc">NG</span></span></td><td class="lb-path">Agent Builder</td><td><span class="lb-rank-chip owl">Owl</span></td><td class="lb-num">171</td><td class="lb-num">3</td><td class="lb-cores">215,860</td></tr>
-        <tr><td class="lb-pos">4</td><td class="lb-builder"><span class="face"><img src="https://randomuser.me/api/portraits/men/75.jpg" alt="">Kenji Watanabe<span class="cc">JP</span></span></td><td class="lb-path">Performance</td><td><span class="lb-rank-chip wolf">Wolf</span></td><td class="lb-num">166</td><td class="lb-num">4</td><td class="lb-cores">204,310</td></tr>
-        <tr><td class="lb-pos">5</td><td class="lb-builder"><span class="face"><img src="https://randomuser.me/api/portraits/women/12.jpg" alt="">Lena Hoffmann<span class="cc">DE</span></span></td><td class="lb-path">Infrastructure</td><td><span class="lb-rank-chip owl">Owl</span></td><td class="lb-num">159</td><td class="lb-num">2</td><td class="lb-cores">187,925</td></tr>
-        <tr><td class="lb-pos">6</td><td class="lb-builder"><span class="face"><img src="https://randomuser.me/api/portraits/women/65.jpg" alt="">Minji Park<span class="cc">KR</span></span></td><td class="lb-path">Agent Builder</td><td><span class="lb-rank-chip owl">Owl</span></td><td class="lb-num">147</td><td class="lb-num">3</td><td class="lb-cores">171,480</td></tr>
-        <tr><td class="lb-pos">7</td><td class="lb-builder"><span class="face"><img src="https://randomuser.me/api/portraits/men/41.jpg" alt="">Carlos Reyes<span class="cc">MX</span></span></td><td class="lb-path">Data Science</td><td><span class="lb-rank-chip wolf">Wolf</span></td><td class="lb-num">139</td><td class="lb-num">2</td><td class="lb-cores">165,030</td></tr>
-        <tr><td class="lb-pos">8</td><td class="lb-builder"><span class="face"><img src="https://randomuser.me/api/portraits/women/29.jpg" alt="">Zofia Nowak<span class="cc">PL</span></span></td><td class="lb-path">Robotics</td><td><span class="lb-rank-chip owl">Owl</span></td><td class="lb-num">131</td><td class="lb-num">2</td><td class="lb-cores">152,615</td></tr>
-        <tr><td class="lb-pos">9</td><td class="lb-builder"><span class="face"><img src="https://randomuser.me/api/portraits/women/26.jpg" alt="">Linh Tran<span class="cc">VN</span></span></td><td class="lb-path">Agent Builder</td><td><span class="lb-rank-chip owl">Owl</span></td><td class="lb-num">126</td><td class="lb-num">3</td><td class="lb-cores">148,200</td></tr>
-        <tr><td class="lb-pos">10</td><td class="lb-builder"><span class="face"><img src="https://randomuser.me/api/portraits/men/22.jpg" alt="">Sam Whitfield<span class="cc">US</span></span></td><td class="lb-path">Game Dev</td><td><span class="lb-rank-chip owl">Owl</span></td><td class="lb-num">118</td><td class="lb-num">2</td><td class="lb-cores">139,775</td></tr>
-        <tr class="lb-gap"><td colspan="7">· · ·</td></tr>
-        <tr class="lb-you"><td class="lb-pos">4,217</td><td class="lb-builder">You</td><td class="lb-path">Agent Builder</td><td><span class="lb-rank-chip gecko">Gecko</span></td><td class="lb-num">3</td><td class="lb-num">0</td><td class="lb-cores">1,250</td></tr>
-      </tbody>
-    </table>
-    <p class="lb-note">1,250 more cores to Fox rank — finishing "Agentic Foundations" gets you there this week.</p>
+    <div class="sec-kicker">The Builder 100</div>
+    <h2 class="sec-title">The hundred faces the industry watches</h2>
+    <p class="sec-lede">Updated continuously, like a Forbes list that anyone can climb. Rank, certifications, and verified work — with a face and a name. The annual top 50 become Dragons. <b>Your city's hundred is one click away.</b></p>
+    <div class="b100-grid">
+      <div class="b100-card podium">
+        <div class="b100-photo">
+          <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=640&h=680&fit=crop&crop=faces&auto=format" alt="Priya Sharma">
+          <div class="b100-num">01</div>
+          <div class="b100-rank">WOLF</div>
+        </div>
+        <div class="b100-body">
+          <div class="b100-name">Priya Sharma</div>
+          <div class="b100-title">Founder · Certified AI Consultancy + Training Center</div>
+          <div class="b100-loc">BENGALURU · IN</div>
+          <div class="b100-stamps"><span class="stampchip"><svg viewBox="0 0 80 80"><use href="#rosette-plain"/></svg>NCP-AAI</span><span class="stampchip"><svg viewBox="0 0 80 80"><use href="#rosette-plain"/></svg>NCA-GENL</span><span class="stampchip"><svg viewBox="0 0 80 80"><use href="#rosette-plain"/></svg>NCP-AIO</span></div>
+          <div class="b100-foot">
+            <span class="b100-badges">214 badges</span>
+            <span class="b100-cores">286,400 <span>CORES</span></span>
+          </div>
+        </div>
+      </div>
+      <div class="b100-card podium">
+        <div class="b100-photo">
+          <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=640&h=680&fit=crop&crop=faces&auto=format" alt="Diego Almeida">
+          <div class="b100-num">02</div>
+          <div class="b100-rank">WOLF</div>
+        </div>
+        <div class="b100-body">
+          <div class="b100-name">Diego Almeida</div>
+          <div class="b100-title">Robotics Lead · Inception startup founder</div>
+          <div class="b100-loc">SÃO PAULO · BR</div>
+          <div class="b100-stamps"><span class="stampchip"><svg viewBox="0 0 80 80"><use href="#rosette-plain"/></svg>NCP-OUSD</span><span class="stampchip"><svg viewBox="0 0 80 80"><use href="#rosette-plain"/></svg>NCA-GENL</span></div>
+          <div class="b100-foot">
+            <span class="b100-badges">198 badges</span>
+            <span class="b100-cores">251,090 <span>CORES</span></span>
+          </div>
+        </div>
+      </div>
+      <div class="b100-card podium">
+        <div class="b100-photo">
+          <img src="https://images.unsplash.com/photo-1531123897727-8f129e1688ce?w=640&h=680&fit=crop&crop=faces&auto=format" alt="Amara Okafor">
+          <div class="b100-num">03</div>
+          <div class="b100-rank">OWL</div>
+        </div>
+        <div class="b100-body">
+          <div class="b100-name">Amara Okafor</div>
+          <div class="b100-title">Forward-Deployed AI Engineer · first Owl in W. Africa</div>
+          <div class="b100-loc">LAGOS · NG</div>
+          <div class="b100-stamps"><span class="stampchip"><svg viewBox="0 0 80 80"><use href="#rosette-plain"/></svg>NCP-AAI</span><span class="stampchip"><svg viewBox="0 0 80 80"><use href="#rosette-plain"/></svg>NCA-GENL</span></div>
+          <div class="b100-foot">
+            <span class="b100-badges">171 badges</span>
+            <span class="b100-cores">215,860 <span>CORES</span></span>
+          </div>
+        </div>
+      </div>
+      <div class="b100-card">
+        <div class="b100-photo">
+          <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=640&h=680&fit=crop&crop=faces&auto=format" alt="Kenji Watanabe">
+          <div class="b100-num">04</div>
+          <div class="b100-rank">WOLF</div>
+        </div>
+        <div class="b100-body">
+          <div class="b100-name">Kenji Watanabe</div>
+          <div class="b100-title">CUDA Performance Engineer · quant fund</div>
+          <div class="b100-loc">TOKYO · JP</div>
+          <div class="b100-stamps"><span class="stampchip"><svg viewBox="0 0 80 80"><use href="#rosette-plain"/></svg>NCP-AII</span><span class="stampchip"><svg viewBox="0 0 80 80"><use href="#rosette-plain"/></svg>NCA-AIIO</span></div>
+          <div class="b100-foot">
+            <span class="b100-badges">166 badges</span>
+            <span class="b100-cores">204,310 <span>CORES</span></span>
+          </div>
+        </div>
+      </div>
+      <div class="b100-card">
+        <div class="b100-photo">
+          <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=640&h=680&fit=crop&crop=faces&auto=format" alt="Lena Hoffmann">
+          <div class="b100-num">05</div>
+          <div class="b100-rank">OWL</div>
+        </div>
+        <div class="b100-body">
+          <div class="b100-name">Lena Hoffmann</div>
+          <div class="b100-title">AI Platform Architect · global health platform</div>
+          <div class="b100-loc">MUNICH · DE</div>
+          <div class="b100-stamps"><span class="stampchip"><svg viewBox="0 0 80 80"><use href="#rosette-plain"/></svg>NCP-AIO</span></div>
+          <div class="b100-foot">
+            <span class="b100-badges">159 badges</span>
+            <span class="b100-cores">187,925 <span>CORES</span></span>
+          </div>
+        </div>
+      </div>
+      <div class="b100-card">
+        <div class="b100-photo">
+          <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=640&h=680&fit=crop&crop=faces&auto=format" alt="Minji Park">
+          <div class="b100-num">06</div>
+          <div class="b100-rank">OWL</div>
+        </div>
+        <div class="b100-body">
+          <div class="b100-name">Minji Park</div>
+          <div class="b100-title">AI Engineer · Series B agent startup</div>
+          <div class="b100-loc">SEOUL · KR</div>
+          <div class="b100-stamps"><span class="stampchip"><svg viewBox="0 0 80 80"><use href="#rosette-plain"/></svg>NCP-AAI</span></div>
+          <div class="b100-foot">
+            <span class="b100-badges">147 badges</span>
+            <span class="b100-cores">171,480 <span>CORES</span></span>
+          </div>
+        </div>
+      </div>
+      <div class="b100-card">
+        <div class="b100-photo">
+          <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=640&h=680&fit=crop&crop=faces&auto=format" alt="Carlos Reyes">
+          <div class="b100-num">07</div>
+          <div class="b100-rank">WOLF</div>
+        </div>
+        <div class="b100-body">
+          <div class="b100-name">Carlos Reyes</div>
+          <div class="b100-title">Head of Data Platform · promoted twice in a year</div>
+          <div class="b100-loc">CDMX · MX</div>
+          <div class="b100-stamps"><span class="stampchip"><svg viewBox="0 0 80 80"><use href="#rosette-plain"/></svg>NCP-ADS</span></div>
+          <div class="b100-foot">
+            <span class="b100-badges">139 badges</span>
+            <span class="b100-cores">165,030 <span>CORES</span></span>
+          </div>
+        </div>
+      </div>
+      <div class="b100-card">
+        <div class="b100-photo">
+          <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=640&h=680&fit=crop&crop=faces&auto=format" alt="Zofia Nowak">
+          <div class="b100-num">08</div>
+          <div class="b100-rank">OWL</div>
+        </div>
+        <div class="b100-body">
+          <div class="b100-name">Zofia Nowak</div>
+          <div class="b100-title">Robotics Engineer · Isaac sim-to-real specialist</div>
+          <div class="b100-loc">WARSAW · PL</div>
+          <div class="b100-stamps"><span class="stampchip"><svg viewBox="0 0 80 80"><use href="#rosette-plain"/></svg>NCP-OUSD</span></div>
+          <div class="b100-foot">
+            <span class="b100-badges">131 badges</span>
+            <span class="b100-cores">152,615 <span>CORES</span></span>
+          </div>
+        </div>
+      </div>
+      <div class="b100-card">
+        <div class="b100-photo">
+          <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=640&h=680&fit=crop&crop=faces&auto=format" alt="Linh Tran">
+          <div class="b100-num">09</div>
+          <div class="b100-rank">OWL</div>
+        </div>
+        <div class="b100-body">
+          <div class="b100-name">Linh Tran</div>
+          <div class="b100-title">Agentic Systems Engineer · runs Hanoi user group</div>
+          <div class="b100-loc">HANOI · VN</div>
+          <div class="b100-stamps"><span class="stampchip"><svg viewBox="0 0 80 80"><use href="#rosette-plain"/></svg>NCP-AAI</span></div>
+          <div class="b100-foot">
+            <span class="b100-badges">126 badges</span>
+            <span class="b100-cores">148,200 <span>CORES</span></span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="b100-you">
+      <span class="y-pos">#4,217</span>
+      <span class="y-txt"><b>You</b> · Gecko · 3 badges · 1,250 cores — <b>1,250 more to Fox rank.</b> Finish "Agentic Foundations" and you jump ~1,900 places this week.</span>
+      <a href="/path-agent-builder">CLIMB →</a>
+    </div>
   </div>
 </section>
 
@@ -880,21 +1156,21 @@ footer a:hover { color: #fff; }
       <div class="testi-card">
         <blockquote>"I'd watched a hundred tutorials and shipped nothing. The path made me ship in week one — and the superbadge was the first credential a recruiter <em>ever actually clicked</em>."</blockquote>
         <div class="testi-who">
-          <img src="https://randomuser.me/api/portraits/women/65.jpg" alt="">
+          <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400&h=400&fit=crop&crop=faces&auto=format" alt="">
           <div><div class="testi-name">Minji Park</div><div class="testi-meta">SEOUL · <b>OWL</b> · HIRED IN 11 WEEKS</div></div>
         </div>
       </div>
       <div class="testi-card">
         <blockquote>"My manager didn't promote me because I asked. He promoted me because my profile made it <em>embarrassing not to</em>. The receipts were public."</blockquote>
         <div class="testi-who">
-          <img src="https://randomuser.me/api/portraits/men/41.jpg" alt="">
+          <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&h=400&fit=crop&crop=faces&auto=format" alt="">
           <div><div class="testi-name">Carlos Reyes</div><div class="testi-meta">CDMX · <b>WOLF</b> · DS LEAD → PLATFORM HEAD</div></div>
         </div>
       </div>
       <div class="testi-card">
         <blockquote>"I started for the job. I stayed because 2,400 people in my city now learn this stack <em>in a group with my name on the door</em>. That feeling doesn't expire."</blockquote>
         <div class="testi-who">
-          <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="">
+          <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400&h=400&fit=crop&crop=faces&auto=format" alt="">
           <div><div class="testi-name">Priya Sharma</div><div class="testi-meta">BENGALURU · <b>WOLF</b> · #1 GLOBAL · FOUNDER</div></div>
         </div>
       </div>
@@ -917,7 +1193,7 @@ footer a:hover { color: #fff; }
           <div class="event-desc">48 hours, GPU credits for every team, judges from NVIDIA + Inception startups. Top team demos at the next user group.</div>
         </div>
         <div class="event-foot">
-          <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="">
+          <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400&h=400&fit=crop&crop=faces&auto=format" alt="">
           <div class="event-host"><b>Priya Sharma</b>Wolf · host</div>
           <div class="event-seats">400 SEATS<br>61 LEFT</div>
         </div>
@@ -930,7 +1206,7 @@ footer a:hover { color: #fff; }
           <div class="event-desc">Sim-to-real live demo night: three Jetson robots, one stage, zero slides. Beginners explicitly welcome.</div>
         </div>
         <div class="event-foot">
-          <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="">
+          <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=400&h=400&fit=crop&crop=faces&auto=format" alt="">
           <div class="event-host"><b>Diego Almeida</b>Wolf · host</div>
           <div class="event-seats">120 SEATS<br>23 LEFT</div>
         </div>
@@ -943,7 +1219,7 @@ footer a:hover { color: #fff; }
           <div class="event-desc">Mock exam + walkthrough of every domain by builders who passed. Bring your weakest topic; leave without it.</div>
         </div>
         <div class="event-foot">
-          <img src="https://randomuser.me/api/portraits/women/65.jpg" alt="">
+          <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400&h=400&fit=crop&crop=faces&auto=format" alt="">
           <div class="event-host"><b>Minji Park</b>Owl · host</div>
           <div class="event-seats">80 SEATS<br>FULL · WAITLIST</div>
         </div>
@@ -956,7 +1232,7 @@ footer a:hover { color: #fff; }
           <div class="event-desc">Hands-on DLI workshop: build the eval harness your agent deserves. Counts toward the Eval Runner badge.</div>
         </div>
         <div class="event-foot">
-          <img src="https://randomuser.me/api/portraits/women/12.jpg" alt="">
+          <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=400&h=400&fit=crop&crop=faces&auto=format" alt="">
           <div class="event-host"><b>Lena Hoffmann</b>Owl · host</div>
           <div class="event-seats">60 SEATS<br>14 LEFT</div>
         </div>
@@ -1008,7 +1284,32 @@ footer a:hover { color: #fff; }
             <marker id="m-arrow" markerWidth="10" markerHeight="10" refX="7" refY="3" orient="auto">
               <path d="M 0 0 L 0 6 L 8 3 Z" fill="#0e0e0e"/>
             </marker>
-          </defs>
+            <!-- TAU-style badge frames -->
+    <symbol id="star5" viewBox="-5 -5 10 10"><polygon points="0.0,-4.6 1.1,-1.5 4.4,-1.4 1.8,0.6 2.7,3.7 0.0,1.9 -2.7,3.7 -1.8,0.6 -4.4,-1.4 -1.1,-1.5" fill="currentColor"/></symbol>
+    <symbol id="medal" viewBox="0 0 80 100">
+      <polygon points="24,0 36,0 44,32 30,34" fill="#f1f6e2" stroke="#0e0e0e" stroke-width="2" stroke-linejoin="round"/>
+      <polygon points="56,0 44,0 36,32 50,34" fill="#dcebbe" stroke="#0e0e0e" stroke-width="2" stroke-linejoin="round"/>
+      <circle cx="40" cy="60" r="28" fill="#fff" stroke="#0e0e0e" stroke-width="2.5"/>
+      <circle cx="40" cy="60" r="22.5" fill="none" stroke="#76b900" stroke-width="1.4" stroke-dasharray="3 2.6"/>
+    </symbol>
+    <symbol id="shield" viewBox="0 0 80 92">
+      <path d="M40 3 L73 13 V44 C73 64 59 79 40 89 C21 79 7 64 7 44 V13 Z" fill="#f1f6e2" stroke="#0e0e0e" stroke-width="2.5" stroke-linejoin="round"/>
+      <path d="M40 11 L65 19 V44 C65 60 54 72 40 80 C26 72 15 60 15 44 V19 Z" fill="#fff" stroke="#76b900" stroke-width="1.5" stroke-linejoin="round"/>
+      <path d="M15 26 L40 18 L65 26" fill="none" stroke="#76b900" stroke-width="1.2"/>
+    </symbol>
+    <symbol id="rosette" viewBox="0 0 80 112">
+      <polygon points="31,72 23,104 35,95 40,78" fill="#fbf6ea" stroke="#c8a04a" stroke-width="2" stroke-linejoin="round"/>
+      <polygon points="49,72 57,104 45,95 40,78" fill="#f3e6c3" stroke="#c8a04a" stroke-width="2" stroke-linejoin="round"/>
+      <polygon points="40.0,15.0 45.6,21.6 53.5,18.1 55.6,26.5 64.2,26.7 62.5,35.2 70.2,39.1 65.0,46.0 70.2,52.9 62.5,56.8 64.2,65.3 55.6,65.5 53.5,73.9 45.6,70.4 40.0,77.0 34.4,70.4 26.5,73.9 24.4,65.5 15.8,65.3 17.5,56.8 9.8,52.9 15.0,46.0 9.8,39.1 17.5,35.2 15.8,26.7 24.4,26.5 26.5,18.1 34.4,21.6" fill="#edd9a3" stroke="#8a6914" stroke-width="2" stroke-linejoin="round"/>
+      <circle cx="40" cy="46" r="17.5" fill="#fbf6ea" stroke="#8a6914" stroke-width="1.5"/>
+      <circle cx="40" cy="46" r="14" fill="none" stroke="#8a6914" stroke-width="0.8" stroke-dasharray="2.5 2"/>
+    </symbol>
+    <symbol id="rosette-plain" viewBox="0 0 80 80">
+      <polygon points="40.0,9.0 45.6,15.6 53.5,12.1 55.6,20.5 64.2,20.7 62.5,29.2 70.2,33.1 65.0,40.0 70.2,46.9 62.5,50.8 64.2,59.3 55.6,59.5 53.5,67.9 45.6,64.4 40.0,71.0 34.4,64.4 26.5,67.9 24.4,59.5 15.8,59.3 17.5,50.8 9.8,46.9 15.0,40.0 9.8,33.1 17.5,29.2 15.8,20.7 24.4,20.5 26.5,12.1 34.4,15.6" fill="#edd9a3" stroke="#8a6914" stroke-width="2" stroke-linejoin="round"/>
+      <circle cx="40" cy="40" r="17.5" fill="#fbf6ea" stroke="#8a6914" stroke-width="1.5"/>
+      <circle cx="40" cy="40" r="14" fill="none" stroke="#8a6914" stroke-width="0.8" stroke-dasharray="2.5 2"/>
+    </symbol>
+  </defs>
           <g stroke="#0e0e0e" stroke-width="1.8" fill="none">
             <path d="M 18.3 -86.1 A 88 88 0 0 1 55.9 -68.0" marker-end="url(#m-arrow)"/>
             <path d="M 78.7 -39.4 A 88 88 0 0 1 88.0 1.3" marker-end="url(#m-arrow)"/>
@@ -1077,15 +1378,15 @@ footer a:hover { color: #fff; }
       </div>
       <div class="champ-people">
         <div class="champ-person">
-          <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="">
+          <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400&h=400&fit=crop&crop=faces&auto=format" alt="">
           <div><div class="cp-name">Priya Sharma · Bengaluru</div><div class="cp-deed">Runs the 2,400-member Bengaluru Nemotron User Group. Her training center certified <b>312 builders</b> last year — 9 are now Wolves themselves.</div></div>
         </div>
         <div class="champ-person">
-          <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="">
+          <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=400&h=400&fit=crop&crop=faces&auto=format" alt="">
           <div><div class="cp-name">Diego Almeida · São Paulo</div><div class="cp-deed">Founded a 6-person certified consultancy after his sim-to-real superbadge. Now runs Brazil's largest robotics hackathon — <b>3 Inception startups</b> came out of it.</div></div>
         </div>
         <div class="champ-person">
-          <img src="https://randomuser.me/api/portraits/men/41.jpg" alt="">
+          <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&h=400&fit=crop&crop=faces&auto=format" alt="">
           <div><div class="cp-name">Carlos Reyes · CDMX</div><div class="cp-deed">His "pandas to cuDF in a weekend" workshop has run in <b>11 cities</b>. Mentored 40 builders to Fox rank — that's +20,000 cores from mentoring alone.</div></div>
         </div>
       </div>
@@ -1106,10 +1407,35 @@ footer a:hover { color: #fff; }
             <path d="M 0 0 L 0 6 L 8 3 Z" fill="#4f7a00"/>
           </marker>
           <clipPath id="clip-a"><circle cx="0" cy="0" r="30"/></clipPath>
-        </defs>
+          <!-- TAU-style badge frames -->
+    <symbol id="star5" viewBox="-5 -5 10 10"><polygon points="0.0,-4.6 1.1,-1.5 4.4,-1.4 1.8,0.6 2.7,3.7 0.0,1.9 -2.7,3.7 -1.8,0.6 -4.4,-1.4 -1.1,-1.5" fill="currentColor"/></symbol>
+    <symbol id="medal" viewBox="0 0 80 100">
+      <polygon points="24,0 36,0 44,32 30,34" fill="#f1f6e2" stroke="#0e0e0e" stroke-width="2" stroke-linejoin="round"/>
+      <polygon points="56,0 44,0 36,32 50,34" fill="#dcebbe" stroke="#0e0e0e" stroke-width="2" stroke-linejoin="round"/>
+      <circle cx="40" cy="60" r="28" fill="#fff" stroke="#0e0e0e" stroke-width="2.5"/>
+      <circle cx="40" cy="60" r="22.5" fill="none" stroke="#76b900" stroke-width="1.4" stroke-dasharray="3 2.6"/>
+    </symbol>
+    <symbol id="shield" viewBox="0 0 80 92">
+      <path d="M40 3 L73 13 V44 C73 64 59 79 40 89 C21 79 7 64 7 44 V13 Z" fill="#f1f6e2" stroke="#0e0e0e" stroke-width="2.5" stroke-linejoin="round"/>
+      <path d="M40 11 L65 19 V44 C65 60 54 72 40 80 C26 72 15 60 15 44 V19 Z" fill="#fff" stroke="#76b900" stroke-width="1.5" stroke-linejoin="round"/>
+      <path d="M15 26 L40 18 L65 26" fill="none" stroke="#76b900" stroke-width="1.2"/>
+    </symbol>
+    <symbol id="rosette" viewBox="0 0 80 112">
+      <polygon points="31,72 23,104 35,95 40,78" fill="#fbf6ea" stroke="#c8a04a" stroke-width="2" stroke-linejoin="round"/>
+      <polygon points="49,72 57,104 45,95 40,78" fill="#f3e6c3" stroke="#c8a04a" stroke-width="2" stroke-linejoin="round"/>
+      <polygon points="40.0,15.0 45.6,21.6 53.5,18.1 55.6,26.5 64.2,26.7 62.5,35.2 70.2,39.1 65.0,46.0 70.2,52.9 62.5,56.8 64.2,65.3 55.6,65.5 53.5,73.9 45.6,70.4 40.0,77.0 34.4,70.4 26.5,73.9 24.4,65.5 15.8,65.3 17.5,56.8 9.8,52.9 15.0,46.0 9.8,39.1 17.5,35.2 15.8,26.7 24.4,26.5 26.5,18.1 34.4,21.6" fill="#edd9a3" stroke="#8a6914" stroke-width="2" stroke-linejoin="round"/>
+      <circle cx="40" cy="46" r="17.5" fill="#fbf6ea" stroke="#8a6914" stroke-width="1.5"/>
+      <circle cx="40" cy="46" r="14" fill="none" stroke="#8a6914" stroke-width="0.8" stroke-dasharray="2.5 2"/>
+    </symbol>
+    <symbol id="rosette-plain" viewBox="0 0 80 80">
+      <polygon points="40.0,9.0 45.6,15.6 53.5,12.1 55.6,20.5 64.2,20.7 62.5,29.2 70.2,33.1 65.0,40.0 70.2,46.9 62.5,50.8 64.2,59.3 55.6,59.5 53.5,67.9 45.6,64.4 40.0,71.0 34.4,64.4 26.5,67.9 24.4,59.5 15.8,59.3 17.5,50.8 9.8,46.9 15.0,40.0 9.8,33.1 17.5,29.2 15.8,20.7 24.4,20.5 26.5,12.1 34.4,15.6" fill="#edd9a3" stroke="#8a6914" stroke-width="2" stroke-linejoin="round"/>
+      <circle cx="40" cy="40" r="17.5" fill="#fbf6ea" stroke="#8a6914" stroke-width="1.5"/>
+      <circle cx="40" cy="40" r="14" fill="none" stroke="#8a6914" stroke-width="0.8" stroke-dasharray="2.5 2"/>
+    </symbol>
+  </defs>
         <g transform="translate(70, 105)">
           <circle r="32" fill="none" stroke="#0e0e0e" stroke-width="2"/>
-          <image href="https://randomuser.me/api/portraits/women/26.jpg" x="-30" y="-30" width="60" height="60" clip-path="url(#clip-a)"/>
+          <image href="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=400&h=400&fit=crop&crop=faces&auto=format" x="-30" y="-30" width="60" height="60" clip-path="url(#clip-a)"/>
           <text y="50" text-anchor="middle" font-size="12" font-weight="800" fill="#0e0e0e">1 builder</text>
           <text y="65" text-anchor="middle" font-size="10" fill="#777">finishes the loop</text>
         </g>
@@ -1159,6 +1485,42 @@ footer a:hover { color: #fff; }
     <div class="sec-kicker">Official certifications</div>
     <h2 class="sec-title">The credentials behind the climb</h2>
     <p class="sec-lede"><b>Eleven</b> real, proctored NVIDIA certification exams — already live today at <a href="https://www.nvidia.com/en-us/learn/certification/" style="color: var(--green-deep); font-weight: 700;">nvidia.com/learn/certification</a>. NVIDIA already built the credentials; the paths above are the guided, gamified road to passing them.</p>
+        <div class="cert-gallery">
+      <div class="certificate">
+        <div class="corner tl"></div><div class="corner tr"></div><div class="corner bl"></div><div class="corner br"></div>
+        <div class="cert-head">NVIDIA Developer Certification Program</div>
+        <div class="cert-title">Agentic AI</div>
+        <div class="cert-sub">NVIDIA-Certified Professional · NCP-AAI</div>
+        <div class="cert-awardee">
+          <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400&h=400&fit=crop&crop=faces&auto=format" alt="">
+          <div>
+            <div class="a-label">Awarded to</div>
+            <div class="a-name">Minji Park</div>
+          </div>
+        </div>
+        <div class="cert-line">for demonstrating production-grade competency in agent development, multi-agent orchestration, evaluation, and guardrails — verified by proctored examination and a live deployed system.</div>
+        <div class="cert-verify">VERIFY · nvidia.dev/cert/NCPAAI-26-04417 · ISSUED JUNE 2026 · VALID 2 YEARS</div>
+        <div class="cert-sig"><div class="sig">Jensen Huang</div><div class="sig-rule">Founder &amp; CEO · NVIDIA</div></div>
+        <svg class="cert-seal" viewBox="0 0 80 112"><use href="#rosette"/><text x="40" y="43" text-anchor="middle" font-family="ui-monospace, Menlo, monospace" font-size="10" font-weight="800" fill="#8a6914">NCP</text><text x="40" y="54" text-anchor="middle" font-family="ui-monospace, Menlo, monospace" font-size="10" font-weight="800" fill="#8a6914">AAI</text></svg>
+      </div>
+      <div class="certificate">
+        <div class="corner tl"></div><div class="corner tr"></div><div class="corner bl"></div><div class="corner br"></div>
+        <div class="cert-head">NVIDIA Developer Certification Program</div>
+        <div class="cert-title">Generative AI LLMs</div>
+        <div class="cert-sub">NVIDIA-Certified Associate · NCA-GENL</div>
+        <div class="cert-awardee">
+          <img src="https://images.unsplash.com/photo-1531123897727-8f129e1688ce?w=400&h=400&fit=crop&crop=faces&auto=format" alt="">
+          <div>
+            <div class="a-label">Awarded to</div>
+            <div class="a-name">Amara Okafor</div>
+          </div>
+        </div>
+        <div class="cert-line">for demonstrated proficiency across large language models, prompt engineering, and the NVIDIA inference stack — the first credential on the climb from Gecko to Dragon.</div>
+        <div class="cert-verify">VERIFY · nvidia.dev/cert/NCAGENL-25-88112 · ISSUED NOVEMBER 2025 · RENEWED ON CHAIN OF WORK</div>
+        <div class="cert-sig"><div class="sig">Jensen Huang</div><div class="sig-rule">Founder &amp; CEO · NVIDIA</div></div>
+        <svg class="cert-seal" viewBox="0 0 80 112"><use href="#rosette"/><text x="40" y="43" text-anchor="middle" font-family="ui-monospace, Menlo, monospace" font-size="10" font-weight="800" fill="#8a6914">NCA</text><text x="40" y="54" text-anchor="middle" font-family="ui-monospace, Menlo, monospace" font-size="10" font-weight="800" fill="#8a6914">GENL</text></svg>
+      </div>
+    </div>
     <table class="cert-table">
       <thead><tr><th>Code</th><th>Certification</th><th>Level</th><th>Exam</th><th>Feeds which path</th></tr></thead>
       <tbody>
