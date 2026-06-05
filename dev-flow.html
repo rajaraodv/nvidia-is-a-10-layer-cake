@@ -319,31 +319,36 @@ section p { font-size: 14.5px; line-height: 1.6; margin-bottom: 12px; color: var
 .persona-arrives {
   font-size: 12px; color: var(--ink); line-height: 1.5;
 }
-.persona-flow {
-  display: flex; flex-wrap: wrap; gap: 3px 4px; align-items: center;
+.persona-layers {
+  display: flex; flex-wrap: wrap; gap: 4px; align-items: center; margin-top: 4px;
 }
-.persona-step {
-  background: #fff; border: 1.5px solid var(--ink);
-  padding: 5px 9px 6px; font-size: 11px;
-  display: inline-flex; align-items: baseline; gap: 4px;
+.persona-layers span {
+  font-family: var(--mono); font-size: 8.5px; font-weight: 800;
+  letter-spacing: 0.06em; text-transform: uppercase;
+  border: 1px solid var(--green); background: var(--green-bg); color: var(--green-dim);
+  padding: 2px 6px;
 }
-.persona-step .num {
-  font-family: var(--mono); font-weight: 800; color: var(--green-dim);
-  font-size: 9.5px;
+.persona-wheel { flex: 1; }
+.persona-wheel svg { width: 100%; max-width: 410px; display: block; margin: 4px auto 2px; }
+.derive-table { width: 100%; border-collapse: collapse; margin: 16px 0 28px; font-size: 12.5px; }
+.derive-table th {
+  font-family: var(--mono); font-size: 9.5px; font-weight: 800;
+  letter-spacing: 0.12em; text-transform: uppercase; color: var(--green-dim);
+  text-align: left; padding: 7px 10px; border-bottom: 2px solid var(--ink);
+  white-space: nowrap;
 }
-.persona-step .name { font-weight: 700; color: var(--ink); }
-.persona-flow .arrow {
-  color: var(--ink3); font-family: var(--mono); font-weight: 800; font-size: 12px;
+.derive-table td {
+  padding: 6px 10px; border-bottom: 1px solid var(--rule2);
+  vertical-align: top; line-height: 1.45;
 }
-.persona-loop {
-  display: inline-flex; align-items: center; gap: 4px;
-  margin-left: 4px;
-  background: var(--green-bg); border: 1.5px dashed var(--green);
-  padding: 4px 8px;
-  font-family: var(--mono); font-size: 10px;
-  font-weight: 800; color: var(--green-dim);
+.derive-table td.dt-persona { font-weight: 800; white-space: nowrap; }
+.derive-table td.dt-layers {
+  font-family: var(--mono); font-size: 10.5px; font-weight: 700;
+  color: var(--green-dim);
 }
-.persona-loop .icon { font-size: 14px; line-height: 1; }
+.derive-table td.dt-q { color: var(--ink2); font-style: italic; }
+.derive-table tr.dt-excluded td { color: var(--ink3); }
+.derive-table tr.dt-excluded td.dt-persona { font-weight: 700; text-decoration: line-through; text-decoration-thickness: 1px; }
 .persona-outcome {
   background: var(--green-bg); border-left: 4px solid var(--green);
   padding: 9px 12px; font-size: 12.5px; line-height: 1.5;
@@ -684,7 +689,7 @@ footer a { color: var(--ink2); text-decoration: none; border-bottom: 1px solid v
   <section>
     <div class="diagram-state current">Diagram 1 · Before</div>
     <div class="diagram-title">Today · entry points lead nowhere</div>
-    <div class="diagram-sub">8 channels of arrival · 19+ landing surfaces · no clear next step</div>
+    <div class="diagram-sub">9 channels of arrival · 19+ landing surfaces · no clear next step</div>
 
     <div class="simple-graphic simple-before">
 
@@ -692,6 +697,7 @@ footer a { color: var(--ink2); text-decoration: none; border-bottom: 1px solid v
       <div class="sg-col">
         <div class="sg-col-label">Devs arrive from</div>
         <div class="sg-entry">Google search</div>
+        <div class="sg-entry">ChatGPT / Claude answers</div>
         <div class="sg-entry">Hugging Face</div>
         <div class="sg-entry">GitHub</div>
         <div class="sg-entry">Cursor / Claude Code</div>
@@ -759,6 +765,7 @@ footer a { color: var(--ink2); text-decoration: none; border-bottom: 1px solid v
       <div class="sg-col">
         <div class="sg-col-label">Same arrival channels</div>
         <div class="sg-entry">Google search</div>
+        <div class="sg-entry">ChatGPT / Claude answers</div>
         <div class="sg-entry">Hugging Face</div>
         <div class="sg-entry">GitHub</div>
         <div class="sg-entry">Cursor / Claude Code</div>
@@ -873,112 +880,333 @@ footer a { color: var(--ink2); text-decoration: none; border-bottom: 1px solid v
 
   <!-- ───────────── PERSONA FLYWHEELS ───────────── -->
   <section>
-    <h2>Persona flywheels · same loop, six different journeys</h2>
-    <p>NVIDIA is vertically integrated — different developers come for very different reasons. The same 7-stage flywheel applies to all of them, but the <i>specific activities at each stage</i> change per persona. Six common variants below.</p>
+    <h2>Persona lifecycles · ten journeys, read off the cake</h2>
+    <p>Who are NVIDIA's developers? Don't guess — <b>read them off the 10-layer cake</b>. Each layer attracts a different kind of builder with a different definition of success: layer 3 pulls kernel engineers chasing speedups, layer 6 pulls agent builders chasing the best open model, layer 9 splits into game devs, roboticists, creators, and clinicians. Cluster the layers by <i>who shows up and what outcome they leave with</i>, and ten self-serve personas fall out — covering all 10 layers. Every persona walks the same 7-stage loop; only the specifics at each stage change.</p>
+
+    <table class="derive-table">
+      <thead>
+        <tr><th>Persona</th><th>Enters the cake at</th><th>The question they arrive with</th></tr>
+      </thead>
+      <tbody>
+        <tr><td class="dt-persona">01 · AI / Agent Builder</td><td class="dt-layers">L6 · L7 · L8</td><td class="dt-q">“What's the best open model for agents?”</td></tr>
+        <tr><td class="dt-persona">02 · Model Builder / Researcher</td><td class="dt-layers">L4 · L5 · L6</td><td class="dt-q">“How do I fine-tune across multiple nodes?”</td></tr>
+        <tr><td class="dt-persona">03 · CUDA / Performance Engineer</td><td class="dt-layers">L1 · L3</td><td class="dt-q">“How do I make this kernel faster?”</td></tr>
+        <tr><td class="dt-persona">04 · Data Scientist</td><td class="dt-layers">L4</td><td class="dt-q">“pandas is too slow on 100M rows”</td></tr>
+        <tr><td class="dt-persona">05 · Infrastructure / Platform Eng</td><td class="dt-layers">L1 · L2 · L7</td><td class="dt-q">“How do I run GPUs on Kubernetes?”</td></tr>
+        <tr><td class="dt-persona">06 · Robotics / Physical AI Dev</td><td class="dt-layers">L1 · L6 · L9</td><td class="dt-q">“How do I train sim-to-real robot policies?”</td></tr>
+        <tr><td class="dt-persona">07 · Game Developer</td><td class="dt-layers">L4 · L9</td><td class="dt-q">“How do I add DLSS to Unreal?”</td></tr>
+        <tr><td class="dt-persona">08 · Creator / Studio Pro</td><td class="dt-layers">L9</td><td class="dt-q">“AI noise removal for my stream?”</td></tr>
+        <tr><td class="dt-persona">09 · Healthcare / Science Dev</td><td class="dt-layers">L5 · L9</td><td class="dt-q">“GPU genomics / imaging pipeline?”</td></tr>
+        <tr><td class="dt-persona">10 · Student / Career Learner</td><td class="dt-layers">L10</td><td class="dt-q">“How do I get certified in AI?”</td></tr>
+        <tr class="dt-excluded"><td class="dt-persona">Automotive / AV Engineer</td><td class="dt-layers">L9 DRIVE</td><td class="dt-q">Deliberately excluded — DRIVE is partnership-gated + NDA'd; no self-serve path, so no flywheel. Handled by NVIDIA Automotive B2B.</td></tr>
+      </tbody>
+    </table>
 
     <div class="persona-grid">
 
-      <!-- AI / AGENT BUILDER -->
       <div class="persona-card">
         <div class="persona-head">
           <div class="persona-icon">🧠</div>
-          <div class="persona-name">AI / Agent Builder</div>
+          <div>
+            <div class="persona-name">AI / Agent Builder</div>
+            <div class="persona-layers"><span>L6 Models</span><span>L7 Inference</span><span>L8 Cloud APIs</span></div>
+          </div>
         </div>
         <div class="persona-tagline">"I want to build agentic AI products with Nemotron."</div>
 
         <div class="persona-section">
           <div class="persona-label">Arrives from</div>
-          <div class="persona-arrives">Cursor / Claude Code · Hugging Face · X researcher posts · GitHub agent repos · Anthropic / OpenAI alumni referrals</div>
+          <div class="persona-arrives">ChatGPT / Claude answers · Cursor / Claude Code · Hugging Face · GitHub agent repos · X researcher posts</div>
         </div>
 
-        <div class="persona-section">
-          <div class="persona-label">Their journey · same flywheel, persona-specific stages</div>
-          <div class="persona-flow">
-            <span class="persona-step"><span class="num">01</span><span class="name">Discover Nemotron</span></span><span class="arrow">→</span>
-            <span class="persona-step"><span class="num">02</span><span class="name">Agentic AI 101</span></span><span class="arrow">→</span>
-            <span class="persona-step"><span class="num">03</span><span class="name">Cookbook agents</span></span><span class="arrow">→</span>
-            <span class="persona-step"><span class="num">04</span><span class="name">NCP-AAI cert</span></span><span class="arrow">→</span>
-            <span class="persona-step"><span class="num">05</span><span class="name">Hire / Inception</span></span><span class="arrow">→</span>
-            <span class="persona-step"><span class="num">06</span><span class="name">NVIDIA Champion</span></span><span class="arrow">→</span>
-            <span class="persona-step"><span class="num">07</span><span class="name">Found consultancy</span></span>
-            <span class="persona-loop"><span class="icon">↻</span>loops</span>
-          </div>
+        <div class="persona-section persona-wheel">
+          <div class="persona-label">Their lifecycle · the same 7-stage loop</div>
+          <svg viewBox="-185 -138 370 240" xmlns="http://www.w3.org/2000/svg" role="img">
+            <circle cx="0" cy="0" r="52" fill="#f3f9e6" stroke="#76b900" stroke-width="1.5" stroke-dasharray="4 4" />
+            <text x="0" y="6" text-anchor="middle" font-size="24" font-weight="800" fill="#5a8e00">&#8635;</text>
+            <text x="0" y="24" text-anchor="middle" font-size="7.5" font-weight="800" fill="#5a8e00" letter-spacing="1.5" font-family="SF Mono, monospace">LOOPS</text>
+            <g stroke="#0a0a0a" stroke-width="1.8" fill="none">
+              <path d="M 18.3 -86.1 A 88 88 0 0 1 55.9 -68.0" marker-end="url(#arrow-flow)" />
+              <path d="M 78.7 -39.4 A 88 88 0 0 1 88.0 1.3" marker-end="url(#arrow-flow)" />
+              <path d="M 79.8 37.0 A 88 88 0 0 1 53.9 69.6" marker-end="url(#arrow-flow)" />
+              <path d="M 20.9 85.5 A 88 88 0 0 1 -20.9 85.5" marker-end="url(#arrow-flow)" />
+              <path d="M -53.9 69.6 A 88 88 0 0 1 -79.8 37.0" marker-end="url(#arrow-flow)" />
+              <path d="M -88.0 1.3 A 88 88 0 0 1 -78.7 -39.4" marker-end="url(#arrow-flow)" />
+              <path d="M -55.9 -68.0 A 88 88 0 0 1 -18.3 -86.1" marker-end="url(#arrow-flow)" />
+            </g>
+            <g font-family="SF Mono, monospace">
+              <g transform="translate(0, -88)">
+                <circle r="15" fill="#fff" stroke="#0a0a0a" stroke-width="1.8" />
+                <text y="3.5" text-anchor="middle" font-size="10" font-weight="800" fill="#5a8e00">01</text>
+              </g>
+              <text x="0" y="-124" text-anchor="middle" font-size="9.5" font-weight="700" fill="#0a0a0a" font-family="-apple-system, BlinkMacSystemFont, sans-serif">Discover<tspan x="0" dy="11">Nemotron</tspan></text>
+              <g transform="translate(68.8, -54.9)">
+                <circle r="15" fill="#fff" stroke="#0a0a0a" stroke-width="1.8" />
+                <text y="3.5" text-anchor="middle" font-size="10" font-weight="800" fill="#5a8e00">02</text>
+              </g>
+              <text x="88" y="-58" text-anchor="start" font-size="9.5" font-weight="700" fill="#0a0a0a" font-family="-apple-system, BlinkMacSystemFont, sans-serif">Agentic<tspan x="88" dy="11">AI 101</tspan></text>
+              <g transform="translate(85.8, 19.6)">
+                <circle r="15" fill="#fff" stroke="#0a0a0a" stroke-width="1.8" />
+                <text y="3.5" text-anchor="middle" font-size="10" font-weight="800" fill="#5a8e00">03</text>
+              </g>
+              <text x="105" y="14" text-anchor="start" font-size="9.5" font-weight="700" fill="#0a0a0a" font-family="-apple-system, BlinkMacSystemFont, sans-serif">Cookbook<tspan x="105" dy="11">agents</tspan></text>
+              <g transform="translate(38.2, 79.3)">
+                <circle r="15" fill="#fff" stroke="#0a0a0a" stroke-width="1.8" />
+                <text y="3.5" text-anchor="middle" font-size="10" font-weight="800" fill="#5a8e00">04</text>
+              </g>
+              <text x="58" y="75" text-anchor="start" font-size="9.5" font-weight="700" fill="#0a0a0a" font-family="-apple-system, BlinkMacSystemFont, sans-serif">NCP-AAI<tspan x="58" dy="11">cert</tspan></text>
+              <g transform="translate(-38.2, 79.3)">
+                <circle r="15" fill="#fff" stroke="#0a0a0a" stroke-width="1.8" />
+                <text y="3.5" text-anchor="middle" font-size="10" font-weight="800" fill="#5a8e00">05</text>
+              </g>
+              <text x="-58" y="75" text-anchor="end" font-size="9.5" font-weight="700" fill="#0a0a0a" font-family="-apple-system, BlinkMacSystemFont, sans-serif">Hired ·<tspan x="-58" dy="11">Inception</tspan></text>
+              <g transform="translate(-85.8, 19.6)">
+                <circle r="15" fill="#fff" stroke="#0a0a0a" stroke-width="1.8" />
+                <text y="3.5" text-anchor="middle" font-size="10" font-weight="800" fill="#5a8e00">06</text>
+              </g>
+              <text x="-105" y="14" text-anchor="end" font-size="9.5" font-weight="700" fill="#0a0a0a" font-family="-apple-system, BlinkMacSystemFont, sans-serif">NVIDIA<tspan x="-105" dy="11">Champion</tspan></text>
+              <g transform="translate(-68.8, -54.9)">
+                <circle r="15" fill="#fff" stroke="#0a0a0a" stroke-width="1.8" />
+                <text y="3.5" text-anchor="middle" font-size="10" font-weight="800" fill="#5a8e00">07</text>
+              </g>
+              <text x="-88" y="-58" text-anchor="end" font-size="9.5" font-weight="700" fill="#0a0a0a" font-family="-apple-system, BlinkMacSystemFont, sans-serif">Trains<tspan x="-88" dy="11">next wave</tspan></text>
+            </g>
+          </svg>
         </div>
 
         <div class="persona-outcome">
           <b>Outcome:</b> Ships a Nemotron-powered agentic product. Hired as an AI engineer or founds a startup. Trains the next wave.
         </div>
       </div>
-
-      <!-- GAME DEVELOPER -->
       <div class="persona-card">
         <div class="persona-head">
-          <div class="persona-icon">🎮</div>
-          <div class="persona-name">Game Developer</div>
+          <div class="persona-icon">🔬</div>
+          <div>
+            <div class="persona-name">Model Builder / Researcher</div>
+            <div class="persona-layers"><span>L4 Frameworks</span><span>L5 Training</span><span>L6 Models</span></div>
+          </div>
         </div>
-        <div class="persona-tagline">"I want my game to use RTX features and reach more players."</div>
+        <div class="persona-tagline">"I want to pre-train and fine-tune frontier-class models."</div>
 
         <div class="persona-section">
           <div class="persona-label">Arrives from</div>
-          <div class="persona-arrives">GDC · Unreal Marketplace · Unity Asset Store · NVIDIA Developer Forums · Reddit r/gamedev</div>
+          <div class="persona-arrives">arXiv + Papers with Code · Hugging Face model cards · PyTorch / JAX docs · university lab clusters · X research threads</div>
         </div>
 
-        <div class="persona-section">
-          <div class="persona-label">Their journey · same flywheel, persona-specific stages</div>
-          <div class="persona-flow">
-            <span class="persona-step"><span class="num">01</span><span class="name">Discover RTX</span></span><span class="arrow">→</span>
-            <span class="persona-step"><span class="num">02</span><span class="name">DLSS / Reflex SDK docs</span></span><span class="arrow">→</span>
-            <span class="persona-step"><span class="num">03</span><span class="name">Integrate in engine</span></span><span class="arrow">→</span>
-            <span class="persona-step"><span class="num">04</span><span class="name">Ship game w/ DLSS</span></span><span class="arrow">→</span>
-            <span class="persona-step"><span class="num">05</span><span class="name">GeForce NOW partner</span></span><span class="arrow">→</span>
-            <span class="persona-step"><span class="num">06</span><span class="name">RTX Remix Champion</span></span><span class="arrow">→</span>
-            <span class="persona-step"><span class="num">07</span><span class="name">Teach indie devs</span></span>
-            <span class="persona-loop"><span class="icon">↻</span>loops</span>
-          </div>
+        <div class="persona-section persona-wheel">
+          <div class="persona-label">Their lifecycle · the same 7-stage loop</div>
+          <svg viewBox="-185 -138 370 240" xmlns="http://www.w3.org/2000/svg" role="img">
+            <circle cx="0" cy="0" r="52" fill="#f3f9e6" stroke="#76b900" stroke-width="1.5" stroke-dasharray="4 4" />
+            <text x="0" y="6" text-anchor="middle" font-size="24" font-weight="800" fill="#5a8e00">&#8635;</text>
+            <text x="0" y="24" text-anchor="middle" font-size="7.5" font-weight="800" fill="#5a8e00" letter-spacing="1.5" font-family="SF Mono, monospace">LOOPS</text>
+            <g stroke="#0a0a0a" stroke-width="1.8" fill="none">
+              <path d="M 18.3 -86.1 A 88 88 0 0 1 55.9 -68.0" marker-end="url(#arrow-flow)" />
+              <path d="M 78.7 -39.4 A 88 88 0 0 1 88.0 1.3" marker-end="url(#arrow-flow)" />
+              <path d="M 79.8 37.0 A 88 88 0 0 1 53.9 69.6" marker-end="url(#arrow-flow)" />
+              <path d="M 20.9 85.5 A 88 88 0 0 1 -20.9 85.5" marker-end="url(#arrow-flow)" />
+              <path d="M -53.9 69.6 A 88 88 0 0 1 -79.8 37.0" marker-end="url(#arrow-flow)" />
+              <path d="M -88.0 1.3 A 88 88 0 0 1 -78.7 -39.4" marker-end="url(#arrow-flow)" />
+              <path d="M -55.9 -68.0 A 88 88 0 0 1 -18.3 -86.1" marker-end="url(#arrow-flow)" />
+            </g>
+            <g font-family="SF Mono, monospace">
+              <g transform="translate(0, -88)">
+                <circle r="15" fill="#fff" stroke="#0a0a0a" stroke-width="1.8" />
+                <text y="3.5" text-anchor="middle" font-size="10" font-weight="800" fill="#5a8e00">01</text>
+              </g>
+              <text x="0" y="-124" text-anchor="middle" font-size="9.5" font-weight="700" fill="#0a0a0a" font-family="-apple-system, BlinkMacSystemFont, sans-serif">Discover<tspan x="0" dy="11">NeMo</tspan></text>
+              <g transform="translate(68.8, -54.9)">
+                <circle r="15" fill="#fff" stroke="#0a0a0a" stroke-width="1.8" />
+                <text y="3.5" text-anchor="middle" font-size="10" font-weight="800" fill="#5a8e00">02</text>
+              </g>
+              <text x="88" y="-58" text-anchor="start" font-size="9.5" font-weight="700" fill="#0a0a0a" font-family="-apple-system, BlinkMacSystemFont, sans-serif">NeMo +<tspan x="88" dy="11">Megatron docs</tspan></text>
+              <g transform="translate(85.8, 19.6)">
+                <circle r="15" fill="#fff" stroke="#0a0a0a" stroke-width="1.8" />
+                <text y="3.5" text-anchor="middle" font-size="10" font-weight="800" fill="#5a8e00">03</text>
+              </g>
+              <text x="105" y="14" text-anchor="start" font-size="9.5" font-weight="700" fill="#0a0a0a" font-family="-apple-system, BlinkMacSystemFont, sans-serif">Fine-tune on<tspan x="105" dy="11">DGX Cloud</tspan></text>
+              <g transform="translate(38.2, 79.3)">
+                <circle r="15" fill="#fff" stroke="#0a0a0a" stroke-width="1.8" />
+                <text y="3.5" text-anchor="middle" font-size="10" font-weight="800" fill="#5a8e00">04</text>
+              </g>
+              <text x="58" y="75" text-anchor="start" font-size="9.5" font-weight="700" fill="#0a0a0a" font-family="-apple-system, BlinkMacSystemFont, sans-serif">Publish ckpt<tspan x="58" dy="11">+ paper</tspan></text>
+              <g transform="translate(-38.2, 79.3)">
+                <circle r="15" fill="#fff" stroke="#0a0a0a" stroke-width="1.8" />
+                <text y="3.5" text-anchor="middle" font-size="10" font-weight="800" fill="#5a8e00">05</text>
+              </g>
+              <text x="-58" y="75" text-anchor="end" font-size="9.5" font-weight="700" fill="#0a0a0a" font-family="-apple-system, BlinkMacSystemFont, sans-serif">Research<tspan x="-58" dy="11">role</tspan></text>
+              <g transform="translate(-85.8, 19.6)">
+                <circle r="15" fill="#fff" stroke="#0a0a0a" stroke-width="1.8" />
+                <text y="3.5" text-anchor="middle" font-size="10" font-weight="800" fill="#5a8e00">06</text>
+              </g>
+              <text x="-105" y="14" text-anchor="end" font-size="9.5" font-weight="700" fill="#0a0a0a" font-family="-apple-system, BlinkMacSystemFont, sans-serif">GTC paper<tspan x="-105" dy="11">talk</tspan></text>
+              <g transform="translate(-68.8, -54.9)">
+                <circle r="15" fill="#fff" stroke="#0a0a0a" stroke-width="1.8" />
+                <text y="3.5" text-anchor="middle" font-size="10" font-weight="800" fill="#5a8e00">07</text>
+              </g>
+              <text x="-88" y="-58" text-anchor="end" font-size="9.5" font-weight="700" fill="#0a0a0a" font-family="-apple-system, BlinkMacSystemFont, sans-serif">Open-source<tspan x="-88" dy="11">recipes</tspan></text>
+            </g>
+          </svg>
         </div>
 
         <div class="persona-outcome">
-          <b>Outcome:</b> Their game ships with DLSS / Reflex / RTX path tracing. Distributed via GeForce NOW. Modder community forms around their title.
+          <b>Outcome:</b> Their checkpoints and training recipes ship on Hugging Face inside the NVIDIA ecosystem. The lab standardizes on NeMo. Citations compound.
         </div>
       </div>
-
-      <!-- ROBOTICS / PHYSICAL AI -->
       <div class="persona-card">
         <div class="persona-head">
-          <div class="persona-icon">🤖</div>
-          <div class="persona-name">Robotics / Physical AI Dev</div>
+          <div class="persona-icon">⚡</div>
+          <div>
+            <div class="persona-name">CUDA / Performance Engineer</div>
+            <div class="persona-layers"><span>L1 Silicon</span><span>L3 CUDA</span></div>
+          </div>
         </div>
-        <div class="persona-tagline">"I want to ship a robot built on Isaac and GR00T."</div>
+        <div class="persona-tagline">"I want 10× speedups straight from the silicon."</div>
 
         <div class="persona-section">
           <div class="persona-label">Arrives from</div>
-          <div class="persona-arrives">CVPR · Isaac docs · GR00T launch posts · robotics PhD networks · Hugging Face robotics datasets</div>
+          <div class="persona-arrives">Supercomputing (SC) · Nsight + CUTLASS docs · Stack Overflow · quant-finance networks · university HPC centers</div>
         </div>
 
-        <div class="persona-section">
-          <div class="persona-label">Their journey · same flywheel, persona-specific stages</div>
-          <div class="persona-flow">
-            <span class="persona-step"><span class="num">01</span><span class="name">Discover Isaac / GR00T</span></span><span class="arrow">→</span>
-            <span class="persona-step"><span class="num">02</span><span class="name">Isaac Lab tutorials</span></span><span class="arrow">→</span>
-            <span class="persona-step"><span class="num">03</span><span class="name">Sim-to-real on Jetson</span></span><span class="arrow">→</span>
-            <span class="persona-step"><span class="num">04</span><span class="name">Robotics certificate</span></span><span class="arrow">→</span>
-            <span class="persona-step"><span class="num">05</span><span class="name">Robot ships / Inception</span></span><span class="arrow">→</span>
-            <span class="persona-step"><span class="num">06</span><span class="name">GTC robotics speaker</span></span><span class="arrow">→</span>
-            <span class="persona-step"><span class="num">07</span><span class="name">Train robotics teams</span></span>
-            <span class="persona-loop"><span class="icon">↻</span>loops</span>
-          </div>
+        <div class="persona-section persona-wheel">
+          <div class="persona-label">Their lifecycle · the same 7-stage loop</div>
+          <svg viewBox="-185 -138 370 240" xmlns="http://www.w3.org/2000/svg" role="img">
+            <circle cx="0" cy="0" r="52" fill="#f3f9e6" stroke="#76b900" stroke-width="1.5" stroke-dasharray="4 4" />
+            <text x="0" y="6" text-anchor="middle" font-size="24" font-weight="800" fill="#5a8e00">&#8635;</text>
+            <text x="0" y="24" text-anchor="middle" font-size="7.5" font-weight="800" fill="#5a8e00" letter-spacing="1.5" font-family="SF Mono, monospace">LOOPS</text>
+            <g stroke="#0a0a0a" stroke-width="1.8" fill="none">
+              <path d="M 18.3 -86.1 A 88 88 0 0 1 55.9 -68.0" marker-end="url(#arrow-flow)" />
+              <path d="M 78.7 -39.4 A 88 88 0 0 1 88.0 1.3" marker-end="url(#arrow-flow)" />
+              <path d="M 79.8 37.0 A 88 88 0 0 1 53.9 69.6" marker-end="url(#arrow-flow)" />
+              <path d="M 20.9 85.5 A 88 88 0 0 1 -20.9 85.5" marker-end="url(#arrow-flow)" />
+              <path d="M -53.9 69.6 A 88 88 0 0 1 -79.8 37.0" marker-end="url(#arrow-flow)" />
+              <path d="M -88.0 1.3 A 88 88 0 0 1 -78.7 -39.4" marker-end="url(#arrow-flow)" />
+              <path d="M -55.9 -68.0 A 88 88 0 0 1 -18.3 -86.1" marker-end="url(#arrow-flow)" />
+            </g>
+            <g font-family="SF Mono, monospace">
+              <g transform="translate(0, -88)">
+                <circle r="15" fill="#fff" stroke="#0a0a0a" stroke-width="1.8" />
+                <text y="3.5" text-anchor="middle" font-size="10" font-weight="800" fill="#5a8e00">01</text>
+              </g>
+              <text x="0" y="-124" text-anchor="middle" font-size="9.5" font-weight="700" fill="#0a0a0a" font-family="-apple-system, BlinkMacSystemFont, sans-serif">Discover<tspan x="0" dy="11">CUDA</tspan></text>
+              <g transform="translate(68.8, -54.9)">
+                <circle r="15" fill="#fff" stroke="#0a0a0a" stroke-width="1.8" />
+                <text y="3.5" text-anchor="middle" font-size="10" font-weight="800" fill="#5a8e00">02</text>
+              </g>
+              <text x="88" y="-58" text-anchor="start" font-size="9.5" font-weight="700" fill="#0a0a0a" font-family="-apple-system, BlinkMacSystemFont, sans-serif">DLI CUDA<tspan x="88" dy="11">courses</tspan></text>
+              <g transform="translate(85.8, 19.6)">
+                <circle r="15" fill="#fff" stroke="#0a0a0a" stroke-width="1.8" />
+                <text y="3.5" text-anchor="middle" font-size="10" font-weight="800" fill="#5a8e00">03</text>
+              </g>
+              <text x="105" y="14" text-anchor="start" font-size="9.5" font-weight="700" fill="#0a0a0a" font-family="-apple-system, BlinkMacSystemFont, sans-serif">Write kernels<tspan x="105" dy="11">(CUTLASS)</tspan></text>
+              <g transform="translate(38.2, 79.3)">
+                <circle r="15" fill="#fff" stroke="#0a0a0a" stroke-width="1.8" />
+                <text y="3.5" text-anchor="middle" font-size="10" font-weight="800" fill="#5a8e00">04</text>
+              </g>
+              <text x="58" y="75" text-anchor="start" font-size="9.5" font-weight="700" fill="#0a0a0a" font-family="-apple-system, BlinkMacSystemFont, sans-serif">Kernel ships<tspan x="58" dy="11">to prod</tspan></text>
+              <g transform="translate(-38.2, 79.3)">
+                <circle r="15" fill="#fff" stroke="#0a0a0a" stroke-width="1.8" />
+                <text y="3.5" text-anchor="middle" font-size="10" font-weight="800" fill="#5a8e00">05</text>
+              </g>
+              <text x="-58" y="75" text-anchor="end" font-size="9.5" font-weight="700" fill="#0a0a0a" font-family="-apple-system, BlinkMacSystemFont, sans-serif">HPC / quant<tspan x="-58" dy="11">role</tspan></text>
+              <g transform="translate(-85.8, 19.6)">
+                <circle r="15" fill="#fff" stroke="#0a0a0a" stroke-width="1.8" />
+                <text y="3.5" text-anchor="middle" font-size="10" font-weight="800" fill="#5a8e00">06</text>
+              </g>
+              <text x="-105" y="14" text-anchor="end" font-size="9.5" font-weight="700" fill="#0a0a0a" font-family="-apple-system, BlinkMacSystemFont, sans-serif">CUDA<tspan x="-105" dy="11">Champion</tspan></text>
+              <g transform="translate(-68.8, -54.9)">
+                <circle r="15" fill="#fff" stroke="#0a0a0a" stroke-width="1.8" />
+                <text y="3.5" text-anchor="middle" font-size="10" font-weight="800" fill="#5a8e00">07</text>
+              </g>
+              <text x="-88" y="-58" text-anchor="end" font-size="9.5" font-weight="700" fill="#0a0a0a" font-family="-apple-system, BlinkMacSystemFont, sans-serif">Teach kernel<tspan x="-88" dy="11">school</tspan></text>
+            </g>
+          </svg>
         </div>
 
         <div class="persona-outcome">
-          <b>Outcome:</b> Their humanoid / mobile robot ships on the NVIDIA Isaac + GR00T + Jetson stack. Sim-to-real works. Inception startup or hired by Figure / 1X / Apptronik tier.
+          <b>Outcome:</b> Production workloads run on their kernels; they contribute upstream to CUTLASS / Thrust. The org's GPU bill drops — their market value doesn't.
         </div>
       </div>
+      <div class="persona-card">
+        <div class="persona-head">
+          <div class="persona-icon">📊</div>
+          <div>
+            <div class="persona-name">Data Scientist</div>
+            <div class="persona-layers"><span>L4 RAPIDS</span></div>
+          </div>
+        </div>
+        <div class="persona-tagline">"I want my pandas / Spark pipelines to run 100× faster."</div>
 
-      <!-- INFRASTRUCTURE / DATA CENTER -->
+        <div class="persona-section">
+          <div class="persona-label">Arrives from</div>
+          <div class="persona-arrives">PyData + Kaggle · “speed up pandas” ChatGPT answers · Spark summits · RAPIDS blog posts · r/datascience</div>
+        </div>
+
+        <div class="persona-section persona-wheel">
+          <div class="persona-label">Their lifecycle · the same 7-stage loop</div>
+          <svg viewBox="-185 -138 370 240" xmlns="http://www.w3.org/2000/svg" role="img">
+            <circle cx="0" cy="0" r="52" fill="#f3f9e6" stroke="#76b900" stroke-width="1.5" stroke-dasharray="4 4" />
+            <text x="0" y="6" text-anchor="middle" font-size="24" font-weight="800" fill="#5a8e00">&#8635;</text>
+            <text x="0" y="24" text-anchor="middle" font-size="7.5" font-weight="800" fill="#5a8e00" letter-spacing="1.5" font-family="SF Mono, monospace">LOOPS</text>
+            <g stroke="#0a0a0a" stroke-width="1.8" fill="none">
+              <path d="M 18.3 -86.1 A 88 88 0 0 1 55.9 -68.0" marker-end="url(#arrow-flow)" />
+              <path d="M 78.7 -39.4 A 88 88 0 0 1 88.0 1.3" marker-end="url(#arrow-flow)" />
+              <path d="M 79.8 37.0 A 88 88 0 0 1 53.9 69.6" marker-end="url(#arrow-flow)" />
+              <path d="M 20.9 85.5 A 88 88 0 0 1 -20.9 85.5" marker-end="url(#arrow-flow)" />
+              <path d="M -53.9 69.6 A 88 88 0 0 1 -79.8 37.0" marker-end="url(#arrow-flow)" />
+              <path d="M -88.0 1.3 A 88 88 0 0 1 -78.7 -39.4" marker-end="url(#arrow-flow)" />
+              <path d="M -55.9 -68.0 A 88 88 0 0 1 -18.3 -86.1" marker-end="url(#arrow-flow)" />
+            </g>
+            <g font-family="SF Mono, monospace">
+              <g transform="translate(0, -88)">
+                <circle r="15" fill="#fff" stroke="#0a0a0a" stroke-width="1.8" />
+                <text y="3.5" text-anchor="middle" font-size="10" font-weight="800" fill="#5a8e00">01</text>
+              </g>
+              <text x="0" y="-124" text-anchor="middle" font-size="9.5" font-weight="700" fill="#0a0a0a" font-family="-apple-system, BlinkMacSystemFont, sans-serif">Discover<tspan x="0" dy="11">RAPIDS</tspan></text>
+              <g transform="translate(68.8, -54.9)">
+                <circle r="15" fill="#fff" stroke="#0a0a0a" stroke-width="1.8" />
+                <text y="3.5" text-anchor="middle" font-size="10" font-weight="800" fill="#5a8e00">02</text>
+              </g>
+              <text x="88" y="-58" text-anchor="start" font-size="9.5" font-weight="700" fill="#0a0a0a" font-family="-apple-system, BlinkMacSystemFont, sans-serif">cuDF<tspan x="88" dy="11">quickstart</tspan></text>
+              <g transform="translate(85.8, 19.6)">
+                <circle r="15" fill="#fff" stroke="#0a0a0a" stroke-width="1.8" />
+                <text y="3.5" text-anchor="middle" font-size="10" font-weight="800" fill="#5a8e00">03</text>
+              </g>
+              <text x="105" y="14" text-anchor="start" font-size="9.5" font-weight="700" fill="#0a0a0a" font-family="-apple-system, BlinkMacSystemFont, sans-serif">Port the<tspan x="105" dy="11">pipeline</tspan></text>
+              <g transform="translate(38.2, 79.3)">
+                <circle r="15" fill="#fff" stroke="#0a0a0a" stroke-width="1.8" />
+                <text y="3.5" text-anchor="middle" font-size="10" font-weight="800" fill="#5a8e00">04</text>
+              </g>
+              <text x="58" y="75" text-anchor="start" font-size="9.5" font-weight="700" fill="#0a0a0a" font-family="-apple-system, BlinkMacSystemFont, sans-serif">Benchmark<tspan x="58" dy="11">+ blog post</tspan></text>
+              <g transform="translate(-38.2, 79.3)">
+                <circle r="15" fill="#fff" stroke="#0a0a0a" stroke-width="1.8" />
+                <text y="3.5" text-anchor="middle" font-size="10" font-weight="800" fill="#5a8e00">05</text>
+              </g>
+              <text x="-58" y="75" text-anchor="end" font-size="9.5" font-weight="700" fill="#0a0a0a" font-family="-apple-system, BlinkMacSystemFont, sans-serif">Senior DS<tspan x="-58" dy="11">role</tspan></text>
+              <g transform="translate(-85.8, 19.6)">
+                <circle r="15" fill="#fff" stroke="#0a0a0a" stroke-width="1.8" />
+                <text y="3.5" text-anchor="middle" font-size="10" font-weight="800" fill="#5a8e00">06</text>
+              </g>
+              <text x="-105" y="14" text-anchor="end" font-size="9.5" font-weight="700" fill="#0a0a0a" font-family="-apple-system, BlinkMacSystemFont, sans-serif">RAPIDS<tspan x="-105" dy="11">Champion</tspan></text>
+              <g transform="translate(-68.8, -54.9)">
+                <circle r="15" fill="#fff" stroke="#0a0a0a" stroke-width="1.8" />
+                <text y="3.5" text-anchor="middle" font-size="10" font-weight="800" fill="#5a8e00">07</text>
+              </g>
+              <text x="-88" y="-58" text-anchor="end" font-size="9.5" font-weight="700" fill="#0a0a0a" font-family="-apple-system, BlinkMacSystemFont, sans-serif">PyData<tspan x="-88" dy="11">talks</tspan></text>
+            </g>
+          </svg>
+        </div>
+
+        <div class="persona-outcome">
+          <b>Outcome:</b> The org's data stack moves to GPUs. Kaggle medals follow. Becomes the internal advocate who converts the next team.
+        </div>
+      </div>
       <div class="persona-card">
         <div class="persona-head">
           <div class="persona-icon">🏗</div>
-          <div class="persona-name">Infrastructure / Data Center</div>
+          <div>
+            <div class="persona-name">Infrastructure / Platform Eng</div>
+            <div class="persona-layers"><span>L1 Silicon</span><span>L2 System SW</span><span>L7 Inference</span></div>
+          </div>
         </div>
         <div class="persona-tagline">"I want to deploy NVIDIA at scale in my org."</div>
 
@@ -987,30 +1215,220 @@ footer a { color: var(--ink2); text-decoration: none; border-bottom: 1px solid v
           <div class="persona-arrives">NGC catalog · DevOps + Kubernetes meetups · cloud architecture forums · AI Enterprise sales touchpoints</div>
         </div>
 
-        <div class="persona-section">
-          <div class="persona-label">Their journey · same flywheel, persona-specific stages</div>
-          <div class="persona-flow">
-            <span class="persona-step"><span class="num">01</span><span class="name">Discover DGX / NIM</span></span><span class="arrow">→</span>
-            <span class="persona-step"><span class="num">02</span><span class="name">DLI infrastructure courses</span></span><span class="arrow">→</span>
-            <span class="persona-step"><span class="num">03</span><span class="name">LaunchPad → prod deploy</span></span><span class="arrow">→</span>
-            <span class="persona-step"><span class="num">04</span><span class="name">NCP-AIO cert</span></span><span class="arrow">→</span>
-            <span class="persona-step"><span class="num">05</span><span class="name">Cloud Architect role</span></span><span class="arrow">→</span>
-            <span class="persona-step"><span class="num">06</span><span class="name">GTC infra speaker</span></span><span class="arrow">→</span>
-            <span class="persona-step"><span class="num">07</span><span class="name">Open Training Center</span></span>
-            <span class="persona-loop"><span class="icon">↻</span>loops</span>
-          </div>
+        <div class="persona-section persona-wheel">
+          <div class="persona-label">Their lifecycle · the same 7-stage loop</div>
+          <svg viewBox="-185 -138 370 240" xmlns="http://www.w3.org/2000/svg" role="img">
+            <circle cx="0" cy="0" r="52" fill="#f3f9e6" stroke="#76b900" stroke-width="1.5" stroke-dasharray="4 4" />
+            <text x="0" y="6" text-anchor="middle" font-size="24" font-weight="800" fill="#5a8e00">&#8635;</text>
+            <text x="0" y="24" text-anchor="middle" font-size="7.5" font-weight="800" fill="#5a8e00" letter-spacing="1.5" font-family="SF Mono, monospace">LOOPS</text>
+            <g stroke="#0a0a0a" stroke-width="1.8" fill="none">
+              <path d="M 18.3 -86.1 A 88 88 0 0 1 55.9 -68.0" marker-end="url(#arrow-flow)" />
+              <path d="M 78.7 -39.4 A 88 88 0 0 1 88.0 1.3" marker-end="url(#arrow-flow)" />
+              <path d="M 79.8 37.0 A 88 88 0 0 1 53.9 69.6" marker-end="url(#arrow-flow)" />
+              <path d="M 20.9 85.5 A 88 88 0 0 1 -20.9 85.5" marker-end="url(#arrow-flow)" />
+              <path d="M -53.9 69.6 A 88 88 0 0 1 -79.8 37.0" marker-end="url(#arrow-flow)" />
+              <path d="M -88.0 1.3 A 88 88 0 0 1 -78.7 -39.4" marker-end="url(#arrow-flow)" />
+              <path d="M -55.9 -68.0 A 88 88 0 0 1 -18.3 -86.1" marker-end="url(#arrow-flow)" />
+            </g>
+            <g font-family="SF Mono, monospace">
+              <g transform="translate(0, -88)">
+                <circle r="15" fill="#fff" stroke="#0a0a0a" stroke-width="1.8" />
+                <text y="3.5" text-anchor="middle" font-size="10" font-weight="800" fill="#5a8e00">01</text>
+              </g>
+              <text x="0" y="-124" text-anchor="middle" font-size="9.5" font-weight="700" fill="#0a0a0a" font-family="-apple-system, BlinkMacSystemFont, sans-serif">Discover<tspan x="0" dy="11">DGX · NIM</tspan></text>
+              <g transform="translate(68.8, -54.9)">
+                <circle r="15" fill="#fff" stroke="#0a0a0a" stroke-width="1.8" />
+                <text y="3.5" text-anchor="middle" font-size="10" font-weight="800" fill="#5a8e00">02</text>
+              </g>
+              <text x="88" y="-58" text-anchor="start" font-size="9.5" font-weight="700" fill="#0a0a0a" font-family="-apple-system, BlinkMacSystemFont, sans-serif">DLI infra<tspan x="88" dy="11">courses</tspan></text>
+              <g transform="translate(85.8, 19.6)">
+                <circle r="15" fill="#fff" stroke="#0a0a0a" stroke-width="1.8" />
+                <text y="3.5" text-anchor="middle" font-size="10" font-weight="800" fill="#5a8e00">03</text>
+              </g>
+              <text x="105" y="14" text-anchor="start" font-size="9.5" font-weight="700" fill="#0a0a0a" font-family="-apple-system, BlinkMacSystemFont, sans-serif">LaunchPad →<tspan x="105" dy="11">prod deploy</tspan></text>
+              <g transform="translate(38.2, 79.3)">
+                <circle r="15" fill="#fff" stroke="#0a0a0a" stroke-width="1.8" />
+                <text y="3.5" text-anchor="middle" font-size="10" font-weight="800" fill="#5a8e00">04</text>
+              </g>
+              <text x="58" y="75" text-anchor="start" font-size="9.5" font-weight="700" fill="#0a0a0a" font-family="-apple-system, BlinkMacSystemFont, sans-serif">NCP-AIO<tspan x="58" dy="11">cert</tspan></text>
+              <g transform="translate(-38.2, 79.3)">
+                <circle r="15" fill="#fff" stroke="#0a0a0a" stroke-width="1.8" />
+                <text y="3.5" text-anchor="middle" font-size="10" font-weight="800" fill="#5a8e00">05</text>
+              </g>
+              <text x="-58" y="75" text-anchor="end" font-size="9.5" font-weight="700" fill="#0a0a0a" font-family="-apple-system, BlinkMacSystemFont, sans-serif">Cloud<tspan x="-58" dy="11">Architect role</tspan></text>
+              <g transform="translate(-85.8, 19.6)">
+                <circle r="15" fill="#fff" stroke="#0a0a0a" stroke-width="1.8" />
+                <text y="3.5" text-anchor="middle" font-size="10" font-weight="800" fill="#5a8e00">06</text>
+              </g>
+              <text x="-105" y="14" text-anchor="end" font-size="9.5" font-weight="700" fill="#0a0a0a" font-family="-apple-system, BlinkMacSystemFont, sans-serif">GTC infra<tspan x="-105" dy="11">speaker</tspan></text>
+              <g transform="translate(-68.8, -54.9)">
+                <circle r="15" fill="#fff" stroke="#0a0a0a" stroke-width="1.8" />
+                <text y="3.5" text-anchor="middle" font-size="10" font-weight="800" fill="#5a8e00">07</text>
+              </g>
+              <text x="-88" y="-58" text-anchor="end" font-size="9.5" font-weight="700" fill="#0a0a0a" font-family="-apple-system, BlinkMacSystemFont, sans-serif">Open Training<tspan x="-88" dy="11">Center</tspan></text>
+            </g>
+          </svg>
         </div>
 
         <div class="persona-outcome">
           <b>Outcome:</b> Deploys DGX SuperPOD / NIM containers at scale. Certified. Becomes the infra expert in their company. Eligible to run an NVIDIA-Authorized Training Center.
         </div>
       </div>
+      <div class="persona-card">
+        <div class="persona-head">
+          <div class="persona-icon">🤖</div>
+          <div>
+            <div class="persona-name">Robotics / Physical AI Dev</div>
+            <div class="persona-layers"><span>L1 Jetson</span><span>L6 GR00T</span><span>L9 Isaac</span></div>
+          </div>
+        </div>
+        <div class="persona-tagline">"I want to ship a robot built on Isaac and GR00T."</div>
 
-      <!-- CREATOR / STUDIO PRO -->
+        <div class="persona-section">
+          <div class="persona-label">Arrives from</div>
+          <div class="persona-arrives">CVPR · Isaac docs · GR00T launch posts · robotics PhD networks · Hugging Face robotics datasets</div>
+        </div>
+
+        <div class="persona-section persona-wheel">
+          <div class="persona-label">Their lifecycle · the same 7-stage loop</div>
+          <svg viewBox="-185 -138 370 240" xmlns="http://www.w3.org/2000/svg" role="img">
+            <circle cx="0" cy="0" r="52" fill="#f3f9e6" stroke="#76b900" stroke-width="1.5" stroke-dasharray="4 4" />
+            <text x="0" y="6" text-anchor="middle" font-size="24" font-weight="800" fill="#5a8e00">&#8635;</text>
+            <text x="0" y="24" text-anchor="middle" font-size="7.5" font-weight="800" fill="#5a8e00" letter-spacing="1.5" font-family="SF Mono, monospace">LOOPS</text>
+            <g stroke="#0a0a0a" stroke-width="1.8" fill="none">
+              <path d="M 18.3 -86.1 A 88 88 0 0 1 55.9 -68.0" marker-end="url(#arrow-flow)" />
+              <path d="M 78.7 -39.4 A 88 88 0 0 1 88.0 1.3" marker-end="url(#arrow-flow)" />
+              <path d="M 79.8 37.0 A 88 88 0 0 1 53.9 69.6" marker-end="url(#arrow-flow)" />
+              <path d="M 20.9 85.5 A 88 88 0 0 1 -20.9 85.5" marker-end="url(#arrow-flow)" />
+              <path d="M -53.9 69.6 A 88 88 0 0 1 -79.8 37.0" marker-end="url(#arrow-flow)" />
+              <path d="M -88.0 1.3 A 88 88 0 0 1 -78.7 -39.4" marker-end="url(#arrow-flow)" />
+              <path d="M -55.9 -68.0 A 88 88 0 0 1 -18.3 -86.1" marker-end="url(#arrow-flow)" />
+            </g>
+            <g font-family="SF Mono, monospace">
+              <g transform="translate(0, -88)">
+                <circle r="15" fill="#fff" stroke="#0a0a0a" stroke-width="1.8" />
+                <text y="3.5" text-anchor="middle" font-size="10" font-weight="800" fill="#5a8e00">01</text>
+              </g>
+              <text x="0" y="-124" text-anchor="middle" font-size="9.5" font-weight="700" fill="#0a0a0a" font-family="-apple-system, BlinkMacSystemFont, sans-serif">Discover<tspan x="0" dy="11">Isaac · GR00T</tspan></text>
+              <g transform="translate(68.8, -54.9)">
+                <circle r="15" fill="#fff" stroke="#0a0a0a" stroke-width="1.8" />
+                <text y="3.5" text-anchor="middle" font-size="10" font-weight="800" fill="#5a8e00">02</text>
+              </g>
+              <text x="88" y="-58" text-anchor="start" font-size="9.5" font-weight="700" fill="#0a0a0a" font-family="-apple-system, BlinkMacSystemFont, sans-serif">Isaac Lab<tspan x="88" dy="11">tutorials</tspan></text>
+              <g transform="translate(85.8, 19.6)">
+                <circle r="15" fill="#fff" stroke="#0a0a0a" stroke-width="1.8" />
+                <text y="3.5" text-anchor="middle" font-size="10" font-weight="800" fill="#5a8e00">03</text>
+              </g>
+              <text x="105" y="14" text-anchor="start" font-size="9.5" font-weight="700" fill="#0a0a0a" font-family="-apple-system, BlinkMacSystemFont, sans-serif">Sim-to-real<tspan x="105" dy="11">on Jetson</tspan></text>
+              <g transform="translate(38.2, 79.3)">
+                <circle r="15" fill="#fff" stroke="#0a0a0a" stroke-width="1.8" />
+                <text y="3.5" text-anchor="middle" font-size="10" font-weight="800" fill="#5a8e00">04</text>
+              </g>
+              <text x="58" y="75" text-anchor="start" font-size="9.5" font-weight="700" fill="#0a0a0a" font-family="-apple-system, BlinkMacSystemFont, sans-serif">Robotics<tspan x="58" dy="11">certificate</tspan></text>
+              <g transform="translate(-38.2, 79.3)">
+                <circle r="15" fill="#fff" stroke="#0a0a0a" stroke-width="1.8" />
+                <text y="3.5" text-anchor="middle" font-size="10" font-weight="800" fill="#5a8e00">05</text>
+              </g>
+              <text x="-58" y="75" text-anchor="end" font-size="9.5" font-weight="700" fill="#0a0a0a" font-family="-apple-system, BlinkMacSystemFont, sans-serif">Robot ships ·<tspan x="-58" dy="11">Inception</tspan></text>
+              <g transform="translate(-85.8, 19.6)">
+                <circle r="15" fill="#fff" stroke="#0a0a0a" stroke-width="1.8" />
+                <text y="3.5" text-anchor="middle" font-size="10" font-weight="800" fill="#5a8e00">06</text>
+              </g>
+              <text x="-105" y="14" text-anchor="end" font-size="9.5" font-weight="700" fill="#0a0a0a" font-family="-apple-system, BlinkMacSystemFont, sans-serif">GTC robotics<tspan x="-105" dy="11">speaker</tspan></text>
+              <g transform="translate(-68.8, -54.9)">
+                <circle r="15" fill="#fff" stroke="#0a0a0a" stroke-width="1.8" />
+                <text y="3.5" text-anchor="middle" font-size="10" font-weight="800" fill="#5a8e00">07</text>
+              </g>
+              <text x="-88" y="-58" text-anchor="end" font-size="9.5" font-weight="700" fill="#0a0a0a" font-family="-apple-system, BlinkMacSystemFont, sans-serif">Train robotics<tspan x="-88" dy="11">teams</tspan></text>
+            </g>
+          </svg>
+        </div>
+
+        <div class="persona-outcome">
+          <b>Outcome:</b> Their humanoid / mobile robot ships on the NVIDIA Isaac + GR00T + Jetson stack. Sim-to-real works. Inception startup or hired by Figure / 1X / Apptronik tier.
+        </div>
+      </div>
+      <div class="persona-card">
+        <div class="persona-head">
+          <div class="persona-icon">🎮</div>
+          <div>
+            <div class="persona-name">Game Developer</div>
+            <div class="persona-layers"><span>L4 Graphics SDKs</span><span>L9 Gaming</span></div>
+          </div>
+        </div>
+        <div class="persona-tagline">"I want my game to use RTX features and reach more players."</div>
+
+        <div class="persona-section">
+          <div class="persona-label">Arrives from</div>
+          <div class="persona-arrives">GDC · Unreal Marketplace · Unity Asset Store · NVIDIA Developer Forums · Reddit r/gamedev</div>
+        </div>
+
+        <div class="persona-section persona-wheel">
+          <div class="persona-label">Their lifecycle · the same 7-stage loop</div>
+          <svg viewBox="-185 -138 370 240" xmlns="http://www.w3.org/2000/svg" role="img">
+            <circle cx="0" cy="0" r="52" fill="#f3f9e6" stroke="#76b900" stroke-width="1.5" stroke-dasharray="4 4" />
+            <text x="0" y="6" text-anchor="middle" font-size="24" font-weight="800" fill="#5a8e00">&#8635;</text>
+            <text x="0" y="24" text-anchor="middle" font-size="7.5" font-weight="800" fill="#5a8e00" letter-spacing="1.5" font-family="SF Mono, monospace">LOOPS</text>
+            <g stroke="#0a0a0a" stroke-width="1.8" fill="none">
+              <path d="M 18.3 -86.1 A 88 88 0 0 1 55.9 -68.0" marker-end="url(#arrow-flow)" />
+              <path d="M 78.7 -39.4 A 88 88 0 0 1 88.0 1.3" marker-end="url(#arrow-flow)" />
+              <path d="M 79.8 37.0 A 88 88 0 0 1 53.9 69.6" marker-end="url(#arrow-flow)" />
+              <path d="M 20.9 85.5 A 88 88 0 0 1 -20.9 85.5" marker-end="url(#arrow-flow)" />
+              <path d="M -53.9 69.6 A 88 88 0 0 1 -79.8 37.0" marker-end="url(#arrow-flow)" />
+              <path d="M -88.0 1.3 A 88 88 0 0 1 -78.7 -39.4" marker-end="url(#arrow-flow)" />
+              <path d="M -55.9 -68.0 A 88 88 0 0 1 -18.3 -86.1" marker-end="url(#arrow-flow)" />
+            </g>
+            <g font-family="SF Mono, monospace">
+              <g transform="translate(0, -88)">
+                <circle r="15" fill="#fff" stroke="#0a0a0a" stroke-width="1.8" />
+                <text y="3.5" text-anchor="middle" font-size="10" font-weight="800" fill="#5a8e00">01</text>
+              </g>
+              <text x="0" y="-124" text-anchor="middle" font-size="9.5" font-weight="700" fill="#0a0a0a" font-family="-apple-system, BlinkMacSystemFont, sans-serif">Discover<tspan x="0" dy="11">RTX</tspan></text>
+              <g transform="translate(68.8, -54.9)">
+                <circle r="15" fill="#fff" stroke="#0a0a0a" stroke-width="1.8" />
+                <text y="3.5" text-anchor="middle" font-size="10" font-weight="800" fill="#5a8e00">02</text>
+              </g>
+              <text x="88" y="-58" text-anchor="start" font-size="9.5" font-weight="700" fill="#0a0a0a" font-family="-apple-system, BlinkMacSystemFont, sans-serif">DLSS / Reflex<tspan x="88" dy="11">SDK docs</tspan></text>
+              <g transform="translate(85.8, 19.6)">
+                <circle r="15" fill="#fff" stroke="#0a0a0a" stroke-width="1.8" />
+                <text y="3.5" text-anchor="middle" font-size="10" font-weight="800" fill="#5a8e00">03</text>
+              </g>
+              <text x="105" y="14" text-anchor="start" font-size="9.5" font-weight="700" fill="#0a0a0a" font-family="-apple-system, BlinkMacSystemFont, sans-serif">Integrate<tspan x="105" dy="11">in engine</tspan></text>
+              <g transform="translate(38.2, 79.3)">
+                <circle r="15" fill="#fff" stroke="#0a0a0a" stroke-width="1.8" />
+                <text y="3.5" text-anchor="middle" font-size="10" font-weight="800" fill="#5a8e00">04</text>
+              </g>
+              <text x="58" y="75" text-anchor="start" font-size="9.5" font-weight="700" fill="#0a0a0a" font-family="-apple-system, BlinkMacSystemFont, sans-serif">Ship game<tspan x="58" dy="11">w/ DLSS</tspan></text>
+              <g transform="translate(-38.2, 79.3)">
+                <circle r="15" fill="#fff" stroke="#0a0a0a" stroke-width="1.8" />
+                <text y="3.5" text-anchor="middle" font-size="10" font-weight="800" fill="#5a8e00">05</text>
+              </g>
+              <text x="-58" y="75" text-anchor="end" font-size="9.5" font-weight="700" fill="#0a0a0a" font-family="-apple-system, BlinkMacSystemFont, sans-serif">GeForce NOW<tspan x="-58" dy="11">partner</tspan></text>
+              <g transform="translate(-85.8, 19.6)">
+                <circle r="15" fill="#fff" stroke="#0a0a0a" stroke-width="1.8" />
+                <text y="3.5" text-anchor="middle" font-size="10" font-weight="800" fill="#5a8e00">06</text>
+              </g>
+              <text x="-105" y="14" text-anchor="end" font-size="9.5" font-weight="700" fill="#0a0a0a" font-family="-apple-system, BlinkMacSystemFont, sans-serif">RTX Remix<tspan x="-105" dy="11">Champion</tspan></text>
+              <g transform="translate(-68.8, -54.9)">
+                <circle r="15" fill="#fff" stroke="#0a0a0a" stroke-width="1.8" />
+                <text y="3.5" text-anchor="middle" font-size="10" font-weight="800" fill="#5a8e00">07</text>
+              </g>
+              <text x="-88" y="-58" text-anchor="end" font-size="9.5" font-weight="700" fill="#0a0a0a" font-family="-apple-system, BlinkMacSystemFont, sans-serif">Teach<tspan x="-88" dy="11">indie devs</tspan></text>
+            </g>
+          </svg>
+        </div>
+
+        <div class="persona-outcome">
+          <b>Outcome:</b> Their game ships with DLSS / Reflex / RTX path tracing. Distributed via GeForce NOW. Modder community forms around their title.
+        </div>
+      </div>
       <div class="persona-card">
         <div class="persona-head">
           <div class="persona-icon">🎨</div>
-          <div class="persona-name">Creator / Studio Pro</div>
+          <div>
+            <div class="persona-name">Creator / Studio Pro</div>
+            <div class="persona-layers"><span>L9 Media & Creators</span></div>
+          </div>
         </div>
         <div class="persona-tagline">"I want NVIDIA Studio to make my content stand out."</div>
 
@@ -1019,30 +1437,146 @@ footer a { color: var(--ink2); text-decoration: none; border-bottom: 1px solid v
           <div class="persona-arrives">YouTube creator community · Adobe MAX · Discord creator servers · NVIDIA Studio campaigns · Twitch</div>
         </div>
 
-        <div class="persona-section">
-          <div class="persona-label">Their journey · same flywheel, persona-specific stages</div>
-          <div class="persona-flow">
-            <span class="persona-step"><span class="num">01</span><span class="name">Discover NVIDIA Studio</span></span><span class="arrow">→</span>
-            <span class="persona-step"><span class="num">02</span><span class="name">Broadcast / Audio2Face tutorials</span></span><span class="arrow">→</span>
-            <span class="persona-step"><span class="num">03</span><span class="name">Build w/ Omniverse + RTX Remix</span></span><span class="arrow">→</span>
-            <span class="persona-step"><span class="num">04</span><span class="name">Publish content</span></span><span class="arrow">→</span>
-            <span class="persona-step"><span class="num">05</span><span class="name">Sponsored creator deal</span></span><span class="arrow">→</span>
-            <span class="persona-step"><span class="num">06</span><span class="name">Studio Champion</span></span><span class="arrow">→</span>
-            <span class="persona-step"><span class="num">07</span><span class="name">Run creator meetups</span></span>
-            <span class="persona-loop"><span class="icon">↻</span>loops</span>
-          </div>
+        <div class="persona-section persona-wheel">
+          <div class="persona-label">Their lifecycle · the same 7-stage loop</div>
+          <svg viewBox="-185 -138 370 240" xmlns="http://www.w3.org/2000/svg" role="img">
+            <circle cx="0" cy="0" r="52" fill="#f3f9e6" stroke="#76b900" stroke-width="1.5" stroke-dasharray="4 4" />
+            <text x="0" y="6" text-anchor="middle" font-size="24" font-weight="800" fill="#5a8e00">&#8635;</text>
+            <text x="0" y="24" text-anchor="middle" font-size="7.5" font-weight="800" fill="#5a8e00" letter-spacing="1.5" font-family="SF Mono, monospace">LOOPS</text>
+            <g stroke="#0a0a0a" stroke-width="1.8" fill="none">
+              <path d="M 18.3 -86.1 A 88 88 0 0 1 55.9 -68.0" marker-end="url(#arrow-flow)" />
+              <path d="M 78.7 -39.4 A 88 88 0 0 1 88.0 1.3" marker-end="url(#arrow-flow)" />
+              <path d="M 79.8 37.0 A 88 88 0 0 1 53.9 69.6" marker-end="url(#arrow-flow)" />
+              <path d="M 20.9 85.5 A 88 88 0 0 1 -20.9 85.5" marker-end="url(#arrow-flow)" />
+              <path d="M -53.9 69.6 A 88 88 0 0 1 -79.8 37.0" marker-end="url(#arrow-flow)" />
+              <path d="M -88.0 1.3 A 88 88 0 0 1 -78.7 -39.4" marker-end="url(#arrow-flow)" />
+              <path d="M -55.9 -68.0 A 88 88 0 0 1 -18.3 -86.1" marker-end="url(#arrow-flow)" />
+            </g>
+            <g font-family="SF Mono, monospace">
+              <g transform="translate(0, -88)">
+                <circle r="15" fill="#fff" stroke="#0a0a0a" stroke-width="1.8" />
+                <text y="3.5" text-anchor="middle" font-size="10" font-weight="800" fill="#5a8e00">01</text>
+              </g>
+              <text x="0" y="-124" text-anchor="middle" font-size="9.5" font-weight="700" fill="#0a0a0a" font-family="-apple-system, BlinkMacSystemFont, sans-serif">Discover<tspan x="0" dy="11">Studio</tspan></text>
+              <g transform="translate(68.8, -54.9)">
+                <circle r="15" fill="#fff" stroke="#0a0a0a" stroke-width="1.8" />
+                <text y="3.5" text-anchor="middle" font-size="10" font-weight="800" fill="#5a8e00">02</text>
+              </g>
+              <text x="88" y="-58" text-anchor="start" font-size="9.5" font-weight="700" fill="#0a0a0a" font-family="-apple-system, BlinkMacSystemFont, sans-serif">Broadcast<tspan x="88" dy="11">tutorials</tspan></text>
+              <g transform="translate(85.8, 19.6)">
+                <circle r="15" fill="#fff" stroke="#0a0a0a" stroke-width="1.8" />
+                <text y="3.5" text-anchor="middle" font-size="10" font-weight="800" fill="#5a8e00">03</text>
+              </g>
+              <text x="105" y="14" text-anchor="start" font-size="9.5" font-weight="700" fill="#0a0a0a" font-family="-apple-system, BlinkMacSystemFont, sans-serif">Omniverse +<tspan x="105" dy="11">RTX Remix</tspan></text>
+              <g transform="translate(38.2, 79.3)">
+                <circle r="15" fill="#fff" stroke="#0a0a0a" stroke-width="1.8" />
+                <text y="3.5" text-anchor="middle" font-size="10" font-weight="800" fill="#5a8e00">04</text>
+              </g>
+              <text x="58" y="75" text-anchor="start" font-size="9.5" font-weight="700" fill="#0a0a0a" font-family="-apple-system, BlinkMacSystemFont, sans-serif">Publish<tspan x="58" dy="11">content</tspan></text>
+              <g transform="translate(-38.2, 79.3)">
+                <circle r="15" fill="#fff" stroke="#0a0a0a" stroke-width="1.8" />
+                <text y="3.5" text-anchor="middle" font-size="10" font-weight="800" fill="#5a8e00">05</text>
+              </g>
+              <text x="-58" y="75" text-anchor="end" font-size="9.5" font-weight="700" fill="#0a0a0a" font-family="-apple-system, BlinkMacSystemFont, sans-serif">Sponsored<tspan x="-58" dy="11">creator deal</tspan></text>
+              <g transform="translate(-85.8, 19.6)">
+                <circle r="15" fill="#fff" stroke="#0a0a0a" stroke-width="1.8" />
+                <text y="3.5" text-anchor="middle" font-size="10" font-weight="800" fill="#5a8e00">06</text>
+              </g>
+              <text x="-105" y="14" text-anchor="end" font-size="9.5" font-weight="700" fill="#0a0a0a" font-family="-apple-system, BlinkMacSystemFont, sans-serif">Studio<tspan x="-105" dy="11">Champion</tspan></text>
+              <g transform="translate(-68.8, -54.9)">
+                <circle r="15" fill="#fff" stroke="#0a0a0a" stroke-width="1.8" />
+                <text y="3.5" text-anchor="middle" font-size="10" font-weight="800" fill="#5a8e00">07</text>
+              </g>
+              <text x="-88" y="-58" text-anchor="end" font-size="9.5" font-weight="700" fill="#0a0a0a" font-family="-apple-system, BlinkMacSystemFont, sans-serif">Run creator<tspan x="-88" dy="11">meetups</tspan></text>
+            </g>
+          </svg>
         </div>
 
         <div class="persona-outcome">
           <b>Outcome:</b> Content distinguishes them in their field. Monetizes via creator deals, sponsorships, brand work. Champion drives discovery for other creators.
         </div>
       </div>
+      <div class="persona-card">
+        <div class="persona-head">
+          <div class="persona-icon">🧬</div>
+          <div>
+            <div class="persona-name">Healthcare / Science Dev</div>
+            <div class="persona-layers"><span>L5 BioNeMo</span><span>L9 Clara · Earth-2</span></div>
+          </div>
+        </div>
+        <div class="persona-tagline">"I want GPU-accelerated discovery — genomics, imaging, climate."</div>
 
-      <!-- LEARNER / CERTIFICATION-ONLY -->
+        <div class="persona-section">
+          <div class="persona-label">Arrives from</div>
+          <div class="persona-arrives">MONAI open-source community · Bio-IT + genomics journals · BioNeMo papers · hospital + pharma research networks</div>
+        </div>
+
+        <div class="persona-section persona-wheel">
+          <div class="persona-label">Their lifecycle · the same 7-stage loop</div>
+          <svg viewBox="-185 -138 370 240" xmlns="http://www.w3.org/2000/svg" role="img">
+            <circle cx="0" cy="0" r="52" fill="#f3f9e6" stroke="#76b900" stroke-width="1.5" stroke-dasharray="4 4" />
+            <text x="0" y="6" text-anchor="middle" font-size="24" font-weight="800" fill="#5a8e00">&#8635;</text>
+            <text x="0" y="24" text-anchor="middle" font-size="7.5" font-weight="800" fill="#5a8e00" letter-spacing="1.5" font-family="SF Mono, monospace">LOOPS</text>
+            <g stroke="#0a0a0a" stroke-width="1.8" fill="none">
+              <path d="M 18.3 -86.1 A 88 88 0 0 1 55.9 -68.0" marker-end="url(#arrow-flow)" />
+              <path d="M 78.7 -39.4 A 88 88 0 0 1 88.0 1.3" marker-end="url(#arrow-flow)" />
+              <path d="M 79.8 37.0 A 88 88 0 0 1 53.9 69.6" marker-end="url(#arrow-flow)" />
+              <path d="M 20.9 85.5 A 88 88 0 0 1 -20.9 85.5" marker-end="url(#arrow-flow)" />
+              <path d="M -53.9 69.6 A 88 88 0 0 1 -79.8 37.0" marker-end="url(#arrow-flow)" />
+              <path d="M -88.0 1.3 A 88 88 0 0 1 -78.7 -39.4" marker-end="url(#arrow-flow)" />
+              <path d="M -55.9 -68.0 A 88 88 0 0 1 -18.3 -86.1" marker-end="url(#arrow-flow)" />
+            </g>
+            <g font-family="SF Mono, monospace">
+              <g transform="translate(0, -88)">
+                <circle r="15" fill="#fff" stroke="#0a0a0a" stroke-width="1.8" />
+                <text y="3.5" text-anchor="middle" font-size="10" font-weight="800" fill="#5a8e00">01</text>
+              </g>
+              <text x="0" y="-124" text-anchor="middle" font-size="9.5" font-weight="700" fill="#0a0a0a" font-family="-apple-system, BlinkMacSystemFont, sans-serif">Discover Clara<tspan x="0" dy="11">+ BioNeMo</tspan></text>
+              <g transform="translate(68.8, -54.9)">
+                <circle r="15" fill="#fff" stroke="#0a0a0a" stroke-width="1.8" />
+                <text y="3.5" text-anchor="middle" font-size="10" font-weight="800" fill="#5a8e00">02</text>
+              </g>
+              <text x="88" y="-58" text-anchor="start" font-size="9.5" font-weight="700" fill="#0a0a0a" font-family="-apple-system, BlinkMacSystemFont, sans-serif">MONAI<tspan x="88" dy="11">tutorials</tspan></text>
+              <g transform="translate(85.8, 19.6)">
+                <circle r="15" fill="#fff" stroke="#0a0a0a" stroke-width="1.8" />
+                <text y="3.5" text-anchor="middle" font-size="10" font-weight="800" fill="#5a8e00">03</text>
+              </g>
+              <text x="105" y="14" text-anchor="start" font-size="9.5" font-weight="700" fill="#0a0a0a" font-family="-apple-system, BlinkMacSystemFont, sans-serif">Parabricks<tspan x="105" dy="11">pipeline</tspan></text>
+              <g transform="translate(38.2, 79.3)">
+                <circle r="15" fill="#fff" stroke="#0a0a0a" stroke-width="1.8" />
+                <text y="3.5" text-anchor="middle" font-size="10" font-weight="800" fill="#5a8e00">04</text>
+              </g>
+              <text x="58" y="75" text-anchor="start" font-size="9.5" font-weight="700" fill="#0a0a0a" font-family="-apple-system, BlinkMacSystemFont, sans-serif">Validated<tspan x="58" dy="11">study</tspan></text>
+              <g transform="translate(-38.2, 79.3)">
+                <circle r="15" fill="#fff" stroke="#0a0a0a" stroke-width="1.8" />
+                <text y="3.5" text-anchor="middle" font-size="10" font-weight="800" fill="#5a8e00">05</text>
+              </g>
+              <text x="-58" y="75" text-anchor="end" font-size="9.5" font-weight="700" fill="#0a0a0a" font-family="-apple-system, BlinkMacSystemFont, sans-serif">Pharma / health<tspan x="-58" dy="11">AI role</tspan></text>
+              <g transform="translate(-85.8, 19.6)">
+                <circle r="15" fill="#fff" stroke="#0a0a0a" stroke-width="1.8" />
+                <text y="3.5" text-anchor="middle" font-size="10" font-weight="800" fill="#5a8e00">06</text>
+              </g>
+              <text x="-105" y="14" text-anchor="end" font-size="9.5" font-weight="700" fill="#0a0a0a" font-family="-apple-system, BlinkMacSystemFont, sans-serif">GTC health<tspan x="-105" dy="11">speaker</tspan></text>
+              <g transform="translate(-68.8, -54.9)">
+                <circle r="15" fill="#fff" stroke="#0a0a0a" stroke-width="1.8" />
+                <text y="3.5" text-anchor="middle" font-size="10" font-weight="800" fill="#5a8e00">07</text>
+              </g>
+              <text x="-88" y="-58" text-anchor="end" font-size="9.5" font-weight="700" fill="#0a0a0a" font-family="-apple-system, BlinkMacSystemFont, sans-serif">Mentor<tspan x="-88" dy="11">researchers</tspan></text>
+            </g>
+          </svg>
+        </div>
+
+        <div class="persona-outcome">
+          <b>Outcome:</b> Their imaging / genomics pipeline runs on the NVIDIA stack and clears clinical validation. Published. Their lab becomes the reference deployment.
+        </div>
+      </div>
       <div class="persona-card">
         <div class="persona-head">
           <div class="persona-icon">📚</div>
-          <div class="persona-name">Learner / Certification Path</div>
+          <div>
+            <div class="persona-name">Student / Career Learner</div>
+            <div class="persona-layers"><span>L10 Programs & Community</span></div>
+          </div>
         </div>
         <div class="persona-tagline">"I want to learn AI properly and land a job with credentials."</div>
 
@@ -1051,29 +1585,69 @@ footer a { color: var(--ink2); text-decoration: none; border-bottom: 1px solid v
           <div class="persona-arrives">University curriculum · LinkedIn jobs requiring AI certs · career-pivot bootcamps · DLI direct marketing</div>
         </div>
 
-        <div class="persona-section">
-          <div class="persona-label">Their journey · same flywheel, persona-specific stages</div>
-          <div class="persona-flow">
-            <span class="persona-step"><span class="num">01</span><span class="name">Discover DLI</span></span><span class="arrow">→</span>
-            <span class="persona-step"><span class="num">02</span><span class="name">DLI courses (free + paid)</span></span><span class="arrow">→</span>
-            <span class="persona-step"><span class="num">03</span><span class="name">LaunchPad practice labs</span></span><span class="arrow">→</span>
-            <span class="persona-step"><span class="num">04</span><span class="name">NCA-GENL → NCP-AAI</span></span><span class="arrow">→</span>
-            <span class="persona-step"><span class="num">05</span><span class="name">Apply via marketplace</span></span><span class="arrow">→</span>
-            <span class="persona-step"><span class="num">06</span><span class="name">Local user group host</span></span><span class="arrow">→</span>
-            <span class="persona-step"><span class="num">07</span><span class="name">Mentor new learners</span></span>
-            <span class="persona-loop"><span class="icon">↻</span>loops</span>
-          </div>
+        <div class="persona-section persona-wheel">
+          <div class="persona-label">Their lifecycle · the same 7-stage loop</div>
+          <svg viewBox="-185 -138 370 240" xmlns="http://www.w3.org/2000/svg" role="img">
+            <circle cx="0" cy="0" r="52" fill="#f3f9e6" stroke="#76b900" stroke-width="1.5" stroke-dasharray="4 4" />
+            <text x="0" y="6" text-anchor="middle" font-size="24" font-weight="800" fill="#5a8e00">&#8635;</text>
+            <text x="0" y="24" text-anchor="middle" font-size="7.5" font-weight="800" fill="#5a8e00" letter-spacing="1.5" font-family="SF Mono, monospace">LOOPS</text>
+            <g stroke="#0a0a0a" stroke-width="1.8" fill="none">
+              <path d="M 18.3 -86.1 A 88 88 0 0 1 55.9 -68.0" marker-end="url(#arrow-flow)" />
+              <path d="M 78.7 -39.4 A 88 88 0 0 1 88.0 1.3" marker-end="url(#arrow-flow)" />
+              <path d="M 79.8 37.0 A 88 88 0 0 1 53.9 69.6" marker-end="url(#arrow-flow)" />
+              <path d="M 20.9 85.5 A 88 88 0 0 1 -20.9 85.5" marker-end="url(#arrow-flow)" />
+              <path d="M -53.9 69.6 A 88 88 0 0 1 -79.8 37.0" marker-end="url(#arrow-flow)" />
+              <path d="M -88.0 1.3 A 88 88 0 0 1 -78.7 -39.4" marker-end="url(#arrow-flow)" />
+              <path d="M -55.9 -68.0 A 88 88 0 0 1 -18.3 -86.1" marker-end="url(#arrow-flow)" />
+            </g>
+            <g font-family="SF Mono, monospace">
+              <g transform="translate(0, -88)">
+                <circle r="15" fill="#fff" stroke="#0a0a0a" stroke-width="1.8" />
+                <text y="3.5" text-anchor="middle" font-size="10" font-weight="800" fill="#5a8e00">01</text>
+              </g>
+              <text x="0" y="-124" text-anchor="middle" font-size="9.5" font-weight="700" fill="#0a0a0a" font-family="-apple-system, BlinkMacSystemFont, sans-serif">Discover<tspan x="0" dy="11">DLI</tspan></text>
+              <g transform="translate(68.8, -54.9)">
+                <circle r="15" fill="#fff" stroke="#0a0a0a" stroke-width="1.8" />
+                <text y="3.5" text-anchor="middle" font-size="10" font-weight="800" fill="#5a8e00">02</text>
+              </g>
+              <text x="88" y="-58" text-anchor="start" font-size="9.5" font-weight="700" fill="#0a0a0a" font-family="-apple-system, BlinkMacSystemFont, sans-serif">DLI courses<tspan x="88" dy="11">free + paid</tspan></text>
+              <g transform="translate(85.8, 19.6)">
+                <circle r="15" fill="#fff" stroke="#0a0a0a" stroke-width="1.8" />
+                <text y="3.5" text-anchor="middle" font-size="10" font-weight="800" fill="#5a8e00">03</text>
+              </g>
+              <text x="105" y="14" text-anchor="start" font-size="9.5" font-weight="700" fill="#0a0a0a" font-family="-apple-system, BlinkMacSystemFont, sans-serif">LaunchPad<tspan x="105" dy="11">practice labs</tspan></text>
+              <g transform="translate(38.2, 79.3)">
+                <circle r="15" fill="#fff" stroke="#0a0a0a" stroke-width="1.8" />
+                <text y="3.5" text-anchor="middle" font-size="10" font-weight="800" fill="#5a8e00">04</text>
+              </g>
+              <text x="58" y="75" text-anchor="start" font-size="9.5" font-weight="700" fill="#0a0a0a" font-family="-apple-system, BlinkMacSystemFont, sans-serif">NCA-GENL →<tspan x="58" dy="11">NCP-AAI</tspan></text>
+              <g transform="translate(-38.2, 79.3)">
+                <circle r="15" fill="#fff" stroke="#0a0a0a" stroke-width="1.8" />
+                <text y="3.5" text-anchor="middle" font-size="10" font-weight="800" fill="#5a8e00">05</text>
+              </g>
+              <text x="-58" y="75" text-anchor="end" font-size="9.5" font-weight="700" fill="#0a0a0a" font-family="-apple-system, BlinkMacSystemFont, sans-serif">Hired via<tspan x="-58" dy="11">marketplace</tspan></text>
+              <g transform="translate(-85.8, 19.6)">
+                <circle r="15" fill="#fff" stroke="#0a0a0a" stroke-width="1.8" />
+                <text y="3.5" text-anchor="middle" font-size="10" font-weight="800" fill="#5a8e00">06</text>
+              </g>
+              <text x="-105" y="14" text-anchor="end" font-size="9.5" font-weight="700" fill="#0a0a0a" font-family="-apple-system, BlinkMacSystemFont, sans-serif">User group<tspan x="-105" dy="11">host</tspan></text>
+              <g transform="translate(-68.8, -54.9)">
+                <circle r="15" fill="#fff" stroke="#0a0a0a" stroke-width="1.8" />
+                <text y="3.5" text-anchor="middle" font-size="10" font-weight="800" fill="#5a8e00">07</text>
+              </g>
+              <text x="-88" y="-58" text-anchor="end" font-size="9.5" font-weight="700" fill="#0a0a0a" font-family="-apple-system, BlinkMacSystemFont, sans-serif">Mentor new<tspan x="-88" dy="11">learners</tspan></text>
+            </g>
+          </svg>
         </div>
 
         <div class="persona-outcome">
           <b>Outcome:</b> Certified. LinkedIn badge displayed. Hired as an AI engineer through the certified-engineers marketplace. Closes the loop by hosting local user groups for the next learners.
         </div>
       </div>
-
     </div>
 
     <p style="margin-top: 20px; font-size: 13.5px; color: var(--ink3); font-style: italic; padding: 10px 14px; background: var(--rule3); border-left: 3px solid var(--ink3);">
-      Same lifecycle, six developer journeys. The flywheel above is the universal pattern; the persona variants are how the same 7 stages get walked by an AI builder vs. a game dev vs. a robotics engineer vs. an infrastructure architect vs. a creator vs. a learner. The loop closes for each.
+      Same lifecycle, ten developer journeys — one per audience cluster of the cake. The flywheel above is the universal pattern; each persona walks the same 7 stages as a closed loop of their own, and every loop ends by feeding the next wave at stage 01. That is what makes it a flywheel instead of a funnel.
     </p>
   </section>
 
@@ -1099,6 +1673,7 @@ footer a { color: var(--ink2); text-decoration: none; border-bottom: 1px solid v
               <div class="stage-block-label">Activities</div>
               <ul class="stage-list">
                 <li>Google search "open AI model"</li>
+                <li>ChatGPT / Claude recommends Nemotron</li>
                 <li>Hugging Face explore</li>
                 <li>GitHub trending repos</li>
                 <li>Cursor MCP suggests Nemotron</li>
@@ -1460,8 +2035,8 @@ footer a { color: var(--ink2); text-decoration: none; border-bottom: 1px solid v
       </div>
       <div class="component-card exists">
         <div class="component-num">10 · PARTIAL <span class="status-tag partial">orchestrate</span></div>
-        <div class="component-name">LLM-Ready Pages (covered in /modern-dev-marketing Move #8)</div>
-        <div class="component-desc">Every page above needs to be agent-readable. <code>/llms.txt</code> at every surface. SKILL.md manifests. MCP-wrapped docs. Without this, the entire flywheel is invisible to Cursor / Claude / Perplexity / ChatGPT — the discovery channels of 2026. Some scaffolding exists; nothing is shipped.</div>
+        <div class="component-name">LLM-Ready Pages + Agent Skills (covered in /modern-dev-marketing Move #8)</div>
+        <div class="component-desc">ChatGPT / Claude / Cursor / Perplexity are now arrival channels — and they only recommend what they can read. So agent-readability is a <b>content-authoring discipline</b>, not a one-off feature. Four artifact types, written alongside every doc: <b>(1)</b> <code>/llms.txt</code> at every surface — the agent-facing sitemap; <b>(2)</b> <code>SKILL.md</code> agent skills per product — teaches Claude Code / Cursor how to actually use NIM, NeMo, RAPIDS, Isaac (so "add DLSS to my game" or "serve this model with NIM" just works inside the editor); <b>(3)</b> MCP-wrapped docs + APIs — agents query live instead of scraping stale pages; <b>(4)</b> cookbooks as structured, runnable recipes — authored once for humans, once for agents. Without this layer the entire flywheel is invisible to the discovery channels of 2026. Some scaffolding exists; nothing is shipped.</div>
       </div>
     </div>
   </section>
