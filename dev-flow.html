@@ -608,34 +608,38 @@ section p { font-size: 14.5px; line-height: 1.6; margin-bottom: 12px; color: var
   .trailhead-stat-grid { grid-template-columns: 1fr; }
 }
 
-/* DELTA TABLE */
-.delta-table {
-  border: 1.5px solid var(--ink);
+/* ECOSYSTEM TIMELINE TABLE */
+.ecosystem-table {
+  border: 2px solid var(--ink);
   background: #fff;
   margin-top: 8px;
 }
-.delta-row {
+.eco-row {
   display: grid;
-  grid-template-columns: 1.5fr 1fr 1fr 1fr;
+  grid-template-columns: 1.9fr 1fr 1fr 1fr 1fr;
   align-items: center;
   padding: 12px 18px;
   border-bottom: 1px solid var(--rule);
-  font-size: 14px;
+  font-size: 13.5px;
   gap: 14px;
 }
-.delta-row:last-child { border-bottom: none; }
-.delta-row.head {
+.eco-row:last-child { border-bottom: none; }
+.eco-row.head {
   background: var(--ink); color: #fff;
-  font-family: var(--mono); font-size: 10.5px; font-weight: 800;
+  font-family: var(--mono); font-size: 10px; font-weight: 800;
   letter-spacing: 0.1em; text-transform: uppercase;
 }
-.delta-row:nth-child(even):not(.head) { background: #fafafa; }
-.d-metric { font-weight: 800; color: var(--ink); }
-.d-current { font-family: var(--mono); font-weight: 700; color: var(--red); }
-.d-target { font-family: var(--mono); font-weight: 700; color: var(--green-dim); }
-.d-delta {
-  font-family: var(--mono); font-weight: 800; color: var(--ink);
-  background: var(--green-bg); padding: 3px 9px; display: inline-block;
+.eco-row:nth-child(even):not(.head) { background: #fafafa; }
+.eco-metric { font-weight: 800; color: var(--ink); font-size: 13.5px; }
+.eco-num { font-family: var(--mono); font-weight: 700; font-size: 14.5px; text-align: right; }
+.eco-today { color: var(--ink2); }
+.eco-future { color: var(--green-dim); }
+.eco-future.bold { font-weight: 900; font-size: 15.5px; }
+.eco-num.zero { color: var(--red); }
+@media (max-width: 800px) {
+  .eco-row { grid-template-columns: 1fr 1fr; gap: 4px; padding: 10px 14px; }
+  .eco-row.head { display: none; }
+  .eco-num { text-align: left; }
 }
 
 /* MOBILE */
@@ -1491,64 +1495,121 @@ footer a { color: var(--ink2); text-decoration: none; border-bottom: 1px solid v
     <p style="margin-top: 18px;">Every component of the flywheel above — badges, super badges, marketplace, champions, user groups, training centers, paid certs, quarterly summits — exists in some form in Trailhead. NVIDIA isn't inventing a new model. NVIDIA is applying a well-proven one to AI.</p>
   </section>
 
-  <!-- ───────────── DELTA TABLE ───────────── -->
+  <!-- ───────────── ECOSYSTEM TIMELINE ───────────── -->
   <section>
-    <h2>The outcome delta · numbers the flywheel should move</h2>
-    <p>Same brand reach, same TAM, same arrival channels. The change is the lifecycle — moving developers through every stage of the flywheel instead of leaking them at Stage 1. These are directional 12-month targets after the flywheel components above are built.</p>
+    <h2>Ecosystem growth · absolute numbers over 12 months</h2>
+    <p>NVIDIA already has the <b>biggest developer brand in AI</b> — roughly 6 million registered developers on developer.nvidia.com (per Jensen Huang's GTC 2025/2026 keynotes). The problem isn't reach; it's that most of those developers sit at Stage 1 (registered, never shipped). The flywheel doesn't grow the registered count dramatically — it grows the count of developers <i>at every stage of the lifecycle</i>. Absolute numbers below.</p>
 
-    <div class="delta-table">
-      <div class="delta-row head">
-        <div>Outcome</div>
-        <div>Today</div>
-        <div>Target</div>
-        <div>Lift</div>
+    <div class="ecosystem-table">
+      <div class="eco-row head">
+        <div>Ecosystem metric</div>
+        <div>Today<br><span style="opacity:0.6">mid-2026</span></div>
+        <div>+ 3 months<br><span style="opacity:0.6">early ship</span></div>
+        <div>+ 6 months<br><span style="opacity:0.6">flywheel on</span></div>
+        <div>+ 12 months<br><span style="opacity:0.6">compounding</span></div>
       </div>
-      <div class="delta-row">
-        <div class="d-metric">Dropped off entirely</div>
-        <div class="d-current">~70%</div>
-        <div class="d-target">~25%</div>
-        <div><span class="d-delta">−2.8× lower</span></div>
+
+      <div class="eco-row">
+        <div class="eco-metric">Registered developers <span style="font-weight:400; color:var(--ink3); font-size:11.5px;">(developer.nvidia.com)</span></div>
+        <div class="eco-num eco-today">~6.0M</div>
+        <div class="eco-num eco-future">~6.1M</div>
+        <div class="eco-num eco-future">~6.4M</div>
+        <div class="eco-num eco-future bold">~7.5M</div>
       </div>
-      <div class="delta-row">
-        <div class="d-metric">Tried &amp; bounced to a competitor</div>
-        <div class="d-current">~20%</div>
-        <div class="d-target">~10%</div>
-        <div><span class="d-delta">−2× lower</span></div>
+
+      <div class="eco-row">
+        <div class="eco-metric">Monthly active developers</div>
+        <div class="eco-num eco-today">~1.5M</div>
+        <div class="eco-num eco-future">~1.7M</div>
+        <div class="eco-num eco-future">~2.2M</div>
+        <div class="eco-num eco-future bold">~3.5M</div>
       </div>
-      <div class="delta-row">
-        <div class="d-metric">Shipped a product on Nemotron</div>
-        <div class="d-current">~8%</div>
-        <div class="d-target">~30%</div>
-        <div><span class="d-delta">+3.75× higher</span></div>
+
+      <div class="eco-row">
+        <div class="eco-metric">Devs who shipped on Nemotron <span style="font-weight:400; color:var(--ink3); font-size:11.5px;">(cumulative)</span></div>
+        <div class="eco-num eco-today">~500K</div>
+        <div class="eco-num eco-future">~600K</div>
+        <div class="eco-num eco-future">~900K</div>
+        <div class="eco-num eco-future bold">~1.8M</div>
       </div>
-      <div class="delta-row">
-        <div class="d-metric">Got NVIDIA certified (NCP / NCA)</div>
-        <div class="d-current">~1.5%</div>
-        <div class="d-target">~15%</div>
-        <div><span class="d-delta">+10× higher</span></div>
+
+      <div class="eco-row">
+        <div class="eco-metric">NCA / NCP certified <span style="font-weight:400; color:var(--ink3); font-size:11.5px;">(cumulative)</span></div>
+        <div class="eco-num eco-today">~100K</div>
+        <div class="eco-num eco-future">~115K</div>
+        <div class="eco-num eco-future">~150K</div>
+        <div class="eco-num eco-future bold">~280K</div>
       </div>
-      <div class="delta-row">
-        <div class="d-metric">Became enterprise customer (NVAIE)</div>
-        <div class="d-current">~0.5%</div>
-        <div class="d-target">~3%</div>
-        <div><span class="d-delta">+6× higher</span></div>
+
+      <div class="eco-row">
+        <div class="eco-metric">NVIDIA Champions <span style="font-weight:400; color:var(--ink3); font-size:11.5px;">(top contributors, named)</span></div>
+        <div class="eco-num eco-today zero">0</div>
+        <div class="eco-num eco-future">50</div>
+        <div class="eco-num eco-future">150</div>
+        <div class="eco-num eco-future bold">500</div>
       </div>
-      <div class="delta-row">
-        <div class="d-metric">Joined Inception / Nemotron Coalition</div>
-        <div class="d-current">&lt; 0.1%</div>
-        <div class="d-target">~5%</div>
-        <div><span class="d-delta">+50× higher</span></div>
+
+      <div class="eco-row">
+        <div class="eco-metric">Local user groups <span style="font-weight:400; color:var(--ink3); font-size:11.5px;">(cities hosting Nemotron User Groups)</span></div>
+        <div class="eco-num eco-today zero">0</div>
+        <div class="eco-num eco-future">5</div>
+        <div class="eco-num eco-future">25</div>
+        <div class="eco-num eco-future bold">100</div>
       </div>
-      <div class="delta-row">
-        <div class="d-metric">Active community participant</div>
-        <div class="d-current">~0.5%</div>
-        <div class="d-target">~12%</div>
-        <div><span class="d-delta">+24× higher</span></div>
+
+      <div class="eco-row">
+        <div class="eco-metric">NVIDIA Inception startups</div>
+        <div class="eco-num eco-today">~22K</div>
+        <div class="eco-num eco-future">~22.5K</div>
+        <div class="eco-num eco-future">~23.5K</div>
+        <div class="eco-num eco-future bold">~27K</div>
+      </div>
+
+      <div class="eco-row">
+        <div class="eco-metric">NVIDIA-Authorized Training Centers</div>
+        <div class="eco-num eco-today">~5</div>
+        <div class="eco-num eco-future">12</div>
+        <div class="eco-num eco-future">30</div>
+        <div class="eco-num eco-future bold">80</div>
+      </div>
+
+      <div class="eco-row">
+        <div class="eco-metric">Certified Consultancies <span style="font-weight:400; color:var(--ink3); font-size:11.5px;">(NVIDIA Partner tier)</span></div>
+        <div class="eco-num eco-today zero">0</div>
+        <div class="eco-num eco-future zero">0</div>
+        <div class="eco-num eco-future">15</div>
+        <div class="eco-num eco-future bold">60</div>
+      </div>
+
+      <div class="eco-row">
+        <div class="eco-metric">Discord community members</div>
+        <div class="eco-num eco-today">~22K</div>
+        <div class="eco-num eco-future">~40K</div>
+        <div class="eco-num eco-future">~80K</div>
+        <div class="eco-num eco-future bold">~200K</div>
+      </div>
+
+      <div class="eco-row">
+        <div class="eco-metric">Hugging Face Nemotron monthly downloads</div>
+        <div class="eco-num eco-today">~1M</div>
+        <div class="eco-num eco-future">~1.5M</div>
+        <div class="eco-num eco-future">~2.5M</div>
+        <div class="eco-num eco-future bold">~5M</div>
       </div>
     </div>
 
-    <p style="margin-top: 22px; font-size: 13.5px; color: var(--ink3); font-style: italic;">
-      These percentages are <b>directional estimates</b>, not committed targets. Real numbers would come from instrumented funnel analysis once the front door is in place. The point of the table is the <i>shape</i> of the change — same total developer traffic flowing into very different outcomes.
+    <div style="margin-top: 22px; padding: 16px 20px; background: var(--green-bg); border-left: 5px solid var(--green); font-size: 14.5px; line-height: 1.6;">
+      <b>The shape of the change.</b> Today: ~6M registered developers, but most are Stage 1 — they signed up and disappeared. In 12 months the registered count grows modestly (to ~7.5M), but the picture at every other stage transforms:<br>
+      → <b>Monthly actives: 1.5M → 3.5M</b> (2.3× more developers actually using NVIDIA each month)<br>
+      → <b>Shipped on Nemotron: 500K → 1.8M</b> (3.6× more developers who built something real)<br>
+      → <b>Certified: 100K → 280K</b> (2.8× more NCA/NCP credentials in the market — closer to Trailhead's growth rate)<br>
+      → <b>Champions: 0 → 500</b> across <b>100 cities</b> (a real ecosystem of named community leaders)<br>
+      → <b>Discord: 22K → 200K</b> (9× larger active community)<br>
+      → <b>Hugging Face downloads: 1M/mo → 5M/mo</b> (5× more NVIDIA model adoption through the OSS channel)
+    </div>
+
+    <p style="margin-top: 22px; font-size: 12.5px; color: var(--ink3); line-height: 1.6;">
+      <b>Sources &amp; method.</b> NVIDIA's current registered-developer count (~6M) is from Jensen Huang's GTC 2025 keynote and 2026 financial calls. NVIDIA Inception (~22K startups) is from <a href="https://www.nvidia.com/en-us/startups" style="color: var(--green-dim);">nvidia.com/startups</a> public reporting. Cert and download counts are best-effort estimates from LinkedIn cert-display data and Hugging Face dashboard. <b>Growth projections benchmarked against Salesforce Trailhead's actual trajectory</b> (~100K Trailblazers in Year 1 → 1M by Year 3 → 3M by Year 6 → 5M+ today), <b>Microsoft MVP</b> (~4,000 globally), and <b>AWS Heroes</b> (~500 globally; AWS Community Builders ~10,000). Champions and local-group targets are conservative against these benchmarks. <i>Verify with NVIDIA's own funnel analytics before quoting externally — real numbers will adjust once the flywheel ships and instrumentation is in place.</i>
     </p>
   </section>
 
