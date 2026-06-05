@@ -288,6 +288,178 @@ section p { font-size: 14.5px; line-height: 1.6; margin-bottom: 12px; color: var
 .journey-block.clarity .journey-list li .icon { color: var(--green-dim); }
 .journey-list li b { font-weight: 800; }
 
+/* ════════════════ LIFECYCLE FLYWHEEL ════════════════ */
+.lifecycle {
+  display: flex; flex-direction: column; gap: 0;
+}
+.stage-card {
+  border: 2px solid var(--ink);
+  background: #fff;
+  display: grid;
+  grid-template-columns: 130px 1fr;
+  overflow: hidden;
+  position: relative;
+}
+.stage-header {
+  background: var(--ink); color: #fff;
+  padding: 24px 14px;
+  display: flex; flex-direction: column;
+  justify-content: center; align-items: center;
+  gap: 6px; text-align: center;
+}
+.stage-num {
+  font-family: var(--mono); font-size: 14px; font-weight: 800;
+  letter-spacing: 0.16em; color: rgba(255,255,255,0.55);
+}
+.stage-icon { font-size: 28px; line-height: 1; }
+.stage-name-tag {
+  font-family: var(--mono); font-size: 11px; font-weight: 800;
+  letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--green); margin-top: 4px;
+}
+.stage-body {
+  padding: 18px 22px;
+}
+.stage-title {
+  font-size: 19px; font-weight: 900; letter-spacing: -0.015em;
+  margin-bottom: 4px; line-height: 1.15;
+}
+.stage-tagline {
+  font-size: 13.5px; color: var(--ink3); font-style: italic;
+  margin-bottom: 14px;
+}
+.stage-grid {
+  display: grid; grid-template-columns: 1.1fr 1.4fr 1fr; gap: 18px;
+}
+.stage-block-label {
+  font-family: var(--mono); font-size: 9.5px; font-weight: 800;
+  letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--green-dim); margin-bottom: 8px;
+  padding-bottom: 4px; border-bottom: 1px solid var(--rule);
+}
+.stage-list { list-style: none; padding: 0; margin: 0; }
+.stage-list li {
+  font-size: 12.5px; line-height: 1.45; color: var(--ink); margin-bottom: 4px;
+  padding-left: 12px; position: relative;
+}
+.stage-list li::before {
+  content: '›'; position: absolute; left: 0;
+  color: var(--green-dim); font-weight: 800; font-family: var(--mono);
+}
+.stage-list li b { font-weight: 800; }
+.badges-list {
+  display: flex; flex-wrap: wrap; gap: 4px;
+}
+.badge {
+  display: inline-flex; align-items: center; gap: 4px;
+  padding: 3px 9px 4px; background: var(--green-bg);
+  border: 1px solid var(--green);
+  font-size: 11px; font-weight: 700; color: var(--ink);
+  border-radius: 12px;
+}
+.badge.super {
+  background: var(--ink); color: var(--green);
+  border-color: var(--ink);
+}
+.badge.super .badge-name { color: #fff; }
+.badge-icon { font-size: 13px; line-height: 1; }
+@media (max-width: 880px) {
+  .stage-card { grid-template-columns: 1fr; }
+  .stage-header { padding: 14px; flex-direction: row; justify-content: space-between; }
+  .stage-icon { font-size: 22px; }
+  .stage-grid { grid-template-columns: 1fr; gap: 12px; }
+}
+
+.stage-arrow {
+  display: flex; align-items: center; justify-content: center;
+  height: 30px; color: var(--ink2);
+  font-family: var(--mono); font-size: 28px; font-weight: 900;
+}
+
+.loop-back {
+  border: 2px dashed var(--green); background: var(--green-bg);
+  padding: 20px 26px; margin-top: 10px;
+  display: grid; grid-template-columns: 60px 1fr;
+  gap: 18px; align-items: center;
+}
+.loop-icon {
+  font-size: 42px; color: var(--green-dim); font-weight: 900;
+  text-align: center; line-height: 1;
+}
+.loop-text {
+  font-size: 14.5px; line-height: 1.6; color: var(--ink);
+}
+.loop-text b { font-weight: 800; color: var(--green-dim); }
+
+/* COMPONENT BUILD-LIST */
+.components-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 12px;
+}
+.component-card {
+  border: 1.5px solid var(--rule); background: #fff;
+  padding: 14px 18px 16px;
+  border-left: 4px solid var(--green);
+}
+.component-num {
+  font-family: var(--mono); font-size: 11px; font-weight: 800;
+  letter-spacing: 0.14em; color: var(--green-dim); margin-bottom: 4px;
+}
+.component-name {
+  font-size: 15px; font-weight: 900; letter-spacing: -0.005em;
+  margin-bottom: 6px;
+}
+.component-desc {
+  font-size: 12.5px; line-height: 1.5; color: var(--ink2);
+}
+.component-desc b { color: var(--ink); font-weight: 800; }
+.component-card.exists {
+  border-left-color: var(--amber); background: var(--amber-bg);
+}
+.component-card.exists .component-num { color: var(--amber-text); }
+.component-card.missing {
+  border-left-color: var(--red); background: var(--red-bg);
+}
+.component-card.missing .component-num { color: var(--red); }
+@media (max-width: 720px) {
+  .components-grid { grid-template-columns: 1fr; }
+}
+
+.status-tag {
+  display: inline-block; font-family: var(--mono); font-size: 9px;
+  font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase;
+  padding: 2px 7px; border-radius: 2px; margin-left: 6px;
+  vertical-align: 1px;
+}
+.status-tag.missing { background: var(--red); color: #fff; }
+.status-tag.partial { background: var(--amber); color: #fff; }
+
+/* TRAILHEAD REFERENCE */
+.trailhead-ref {
+  background: linear-gradient(180deg, #f8f7ff 0%, #fff 100%);
+  border: 1.5px solid #6e57d9;
+  padding: 22px 26px;
+}
+.trailhead-tag {
+  font-family: var(--mono); font-size: 10.5px; font-weight: 800;
+  letter-spacing: 0.14em; text-transform: uppercase;
+  color: #6e57d9; margin-bottom: 8px;
+}
+.trailhead-stat-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px;
+  margin-top: 14px; padding-top: 14px;
+  border-top: 1px solid rgba(110,87,217,0.25);
+}
+.trailhead-stat-num {
+  font-family: var(--mono); font-size: 24px; font-weight: 900;
+  color: #6e57d9; letter-spacing: -0.03em;
+}
+.trailhead-stat-label {
+  font-size: 12px; color: var(--ink2); line-height: 1.4;
+}
+@media (max-width: 640px) {
+  .trailhead-stat-grid { grid-template-columns: 1fr; }
+}
+
 /* DELTA TABLE */
 .delta-table {
   border: 1.5px solid var(--ink);
@@ -349,11 +521,11 @@ footer a { color: var(--ink2); text-decoration: none; border-bottom: 1px solid v
     <a href="private-raja">← Strategy deck</a>
   </div>
 
-  <h1 class="page-title">The NVIDIA Developer Journey</h1>
-  <p class="subhead">A single picture for what happens to a developer who tries to start with Nemotron today — and what should happen instead. Read left-to-right: entry → journey → outcome.</p>
+  <h1 class="page-title">The NVIDIA Developer Lifecycle Flywheel</h1>
+  <p class="subhead">How a developer goes from "I heard about Nemotron" all the way to "I run a certified consultancy training the next wave" — modeled on Salesforce Trailhead and adapted for the 2026 agentic AI era. Today the journey breaks. Tomorrow it's a self-reinforcing flywheel.</p>
 
   <div class="intro">
-    <b>Read these two diagrams side-by-side.</b> The entry points stay roughly the same — developers still arrive from Google, Hugging Face, GitHub, Cursor, NGC, conferences, build.nvidia.com, Discord. <b>What changes is the middle.</b> Today it's a maze of 19+ portals and silent permission bugs that funnel most developers to drop-off. In the optimized state it's a single front door, a forkable cookbook, a real cert path, and a tier-up pricing ladder — which funnels the same traffic to shipped products and recurring revenue. <i>The percentages below are directional estimates, not committed numbers.</i>
+    <b>Read this as one continuous picture.</b> Today (Diagram 1) developers land on one of <b>19+ scattered NVIDIA portals</b>, hit friction, and mostly drop off. There's no central badge system, no marketplace for certified engineers, no champions program, no local user groups, no testimonials. The journey ends. <b>Tomorrow (Diagram 2 — the flywheel)</b> the same arrival channels feed into a <b>continuous developer lifecycle</b>: discover → learn → build → certify → get hired → become a champion → multiply. Champions become consultancy founders, training-center operators, and hackathon hosts. The flywheel spins. The network effect compounds. <i>Salesforce Trailhead grew from zero to 3M+ Trailblazers using exactly this pattern — adapted, NVIDIA can do it for AI.</i>
   </div>
 
   <!-- ───────────── DIAGRAM 1: CURRENT ───────────── -->
@@ -416,90 +588,455 @@ footer a { color: var(--ink2); text-decoration: none; border-bottom: 1px solid v
 
       <!-- OUTCOMES -->
       <div class="diagram-col outcomes">
-        <div class="diagram-col-label">Outcome · what actually happens</div>
-        <div class="diagram-col-sub">Mostly drop-off (estimates)</div>
+        <div class="diagram-col-label">Outcome · journey ends here</div>
+        <div class="diagram-col-sub">Mostly drop-off · no lifecycle</div>
         <div class="flow-box bad"><span class="flow-box-name">Dropped off entirely</span><span class="flow-box-meta">~70%</span></div>
         <div class="flow-box warn"><span class="flow-box-name">Tried &amp; bounced to a competitor</span><span class="flow-box-meta">~20%</span></div>
         <div class="flow-box good"><span class="flow-box-name">Shipped <i>despite</i> the friction</span><span class="flow-box-meta">~8%</span></div>
         <div class="flow-box good"><span class="flow-box-name">Got NVIDIA certified</span><span class="flow-box-meta">~1.5%</span></div>
         <div class="flow-box good"><span class="flow-box-name">Became enterprise customer</span><span class="flow-box-meta">~0.5%</span></div>
-        <div style="margin-top: auto; padding-top: 16px;">
+        <div style="margin-top: 14px; padding: 10px 12px; background: var(--red-bg); border-left: 3px solid var(--red); font-size: 11.5px; line-height: 1.45; color: var(--ink);">
+          <b style="color: var(--red);">Structural absences:</b><br>
+          ✕ No central badge system<br>
+          ✕ No marketplace / job board<br>
+          ✕ No champions program<br>
+          ✕ No local user groups<br>
+          ✕ No testimonials engine<br>
+          ✕ Not LLM-readable<br>
+          ✕ No paid cert prestige
+        </div>
+        <div style="margin-top: 14px;">
           <div style="font-size: 12px; color: var(--red); font-weight: 800; letter-spacing: 0.04em; padding-top: 12px; border-top: 1px dashed var(--rule);">
-            ~90% of traffic doesn't ship anything
+            ~90% of traffic doesn't ship anything · journey terminates
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ───────────── DIAGRAM 2: OPTIMIZED ───────────── -->
+  <!-- ───────────── DIAGRAM 2: LIFECYCLE FLYWHEEL ───────────── -->
   <section>
-    <div class="diagram-state optimized">Diagram 2 · Optimized State</div>
-    <div class="diagram-title">What happens after the 8 moves ship (90-day plan)</div>
-    <div class="diagram-sub">Same arrival channels, all 19+ portals collapsed into one front door, mostly shipping outcomes.</div>
+    <div class="diagram-state optimized">Diagram 2 · The Modern Lifecycle Flywheel</div>
+    <div class="diagram-title">From "I heard about Nemotron" → "I train the next wave"</div>
+    <div class="diagram-sub">7 stages, badges at every stage, super badges for combinations, paid certification, marketplace, champions, local user groups, network effect. Modeled on Salesforce Trailhead.</div>
 
-    <div class="diagram">
-      <!-- ENTRY -->
-      <div class="diagram-col entry">
-        <div class="diagram-col-label">Where they land · 1 front door</div>
-        <div class="diagram-col-sub">Same arrival channels, one destination</div>
-        <div class="arrival-note">
-          Devs still arrive from <b>Google, Hugging Face, GitHub, Cursor / Claude Code, NGC, conferences, Discord</b> — plus three new channels (<b>Cursor MCP server, researcher voices on X, the Nemotron Cookbook on GitHub</b>). All of them now funnel to one place:
+    <div class="lifecycle">
+
+      <!-- STAGE 1 — DISCOVER -->
+      <div class="stage-card">
+        <div class="stage-header">
+          <div class="stage-num">01</div>
+          <div class="stage-icon">🌐</div>
+          <div class="stage-name-tag">Discover</div>
         </div>
-        <div class="front-door">
-          <div class="front-door-tag">The one front door</div>
-          <div class="front-door-url">nvidia.dev</div>
-          <div class="front-door-sub">Try Nemotron in 60 seconds.</div>
-          <div class="front-door-replaces">
-            Replaces all <b>19+ portals</b> from the current state. Existing URLs redirect / cross-link. One sign-in. One Quick Start. One pricing ladder. Clear path to: <b>docs · cookbook · DLI · certs · NGC · build · GitHub</b>.
+        <div class="stage-body">
+          <div class="stage-title">"I heard about Nemotron"</div>
+          <div class="stage-tagline">A developer encounters NVIDIA for the first time.</div>
+          <div class="stage-grid">
+            <div class="stage-block">
+              <div class="stage-block-label">Activities</div>
+              <ul class="stage-list">
+                <li>Google search "open AI model"</li>
+                <li>Hugging Face explore</li>
+                <li>GitHub trending repos</li>
+                <li>Cursor MCP suggests Nemotron</li>
+                <li>Friend / champion referral</li>
+                <li>Conference talk · YouTube</li>
+              </ul>
+            </div>
+            <div class="stage-block">
+              <div class="stage-block-label">Badges earned</div>
+              <div class="badges-list">
+                <span class="badge"><span class="badge-icon">🥚</span><span class="badge-name">First Visit</span></span>
+                <span class="badge"><span class="badge-icon">🌱</span><span class="badge-name">Welcome to nvidia.dev</span></span>
+                <span class="badge"><span class="badge-icon">🔍</span><span class="badge-name">Curious Explorer</span></span>
+              </div>
+            </div>
+            <div class="stage-block">
+              <div class="stage-block-label">Unlocks</div>
+              <ul class="stage-list">
+                <li>Free account</li>
+                <li>Public profile page</li>
+                <li><b>Stage 2 · Learn</b></li>
+              </ul>
+            </div>
           </div>
         </div>
       </div>
 
-      <!-- JOURNEY -->
-      <div class="diagram-col journey">
-        <div class="diagram-col-label">Journey · one clear path</div>
-        <div class="diagram-col-sub">From land to ship in &lt; 5 min</div>
-        <div class="journey-block clarity">
-          <div class="journey-block-tag">Single Front Door</div>
-          <div class="journey-block-name">nvidia.dev · 8 frictions removed</div>
-          <ul class="journey-list">
-            <li><span class="icon">✓</span><span><b>One front door</b> (nvidia.dev) · 60-second Quick Start</span></li>
-            <li><span class="icon">✓</span><span><b>Free tier works on first try</b> · permission bug fixed</span></li>
-            <li><span class="icon">✓</span><span><b>Tier-up ladder</b>: free → Pro ($20/mo) → Team → Enterprise</span></li>
-            <li><span class="icon">✓</span><span><b>NCP-AAI cert path visible</b> · LinkedIn-displayable badges</span></li>
-            <li><span class="icon">✓</span><span><b>Nemotron Cookbook</b>: 30 forkable production agents on GitHub</span></li>
-            <li><span class="icon">✓</span><span><b>"Agentic AI 101"</b> tutorial series · weekly cadence</span></li>
-            <li><span class="icon">✓</span><span><b>20 researcher voices</b> active on X · ask &amp; answer</span></li>
-            <li><span class="icon">✓</span><span><b>Pages are agent-readable</b> · /llms.txt · MCP-wrapped docs</span></li>
-          </ul>
+      <div class="stage-arrow">↓</div>
+
+      <!-- STAGE 2 — LEARN -->
+      <div class="stage-card">
+        <div class="stage-header">
+          <div class="stage-num">02</div>
+          <div class="stage-icon">📚</div>
+          <div class="stage-name-tag">Learn · Free</div>
+        </div>
+        <div class="stage-body">
+          <div class="stage-title">"Teach me how to actually use this"</div>
+          <div class="stage-tagline">Structured learning path with badges for every milestone.</div>
+          <div class="stage-grid">
+            <div class="stage-block">
+              <div class="stage-block-label">Activities</div>
+              <ul class="stage-list">
+                <li>"Agentic AI 101 with Nemotron" tutorial</li>
+                <li>DLI intro courses (free tier)</li>
+                <li>LaunchPad hands-on labs (real GPUs)</li>
+                <li>NVIDIA Technical Blog</li>
+                <li>Cookbook walk-throughs</li>
+                <li>Video demos by researcher voices</li>
+              </ul>
+            </div>
+            <div class="stage-block">
+              <div class="stage-block-label">Badges earned</div>
+              <div class="badges-list">
+                <span class="badge"><span class="badge-icon">📘</span><span class="badge-name">First Tutorial</span></span>
+                <span class="badge"><span class="badge-icon">🛠</span><span class="badge-name">First Lab</span></span>
+                <span class="badge"><span class="badge-icon">📚</span><span class="badge-name">Module Complete</span></span>
+                <span class="badge"><span class="badge-icon">🎬</span><span class="badge-name">Demo Watched</span></span>
+                <span class="badge super"><span class="badge-icon">⭐</span><span class="badge-name">NVIDIA Learner</span></span>
+              </div>
+            </div>
+            <div class="stage-block">
+              <div class="stage-block-label">Unlocks</div>
+              <ul class="stage-list">
+                <li>Practitioner profile</li>
+                <li>Build templates access</li>
+                <li><b>Stage 3 · Build</b></li>
+              </ul>
+            </div>
+          </div>
         </div>
       </div>
 
-      <!-- OUTCOMES -->
-      <div class="diagram-col outcomes">
-        <div class="diagram-col-label">Outcome · what actually happens</div>
-        <div class="diagram-col-sub">Most ship (target estimates)</div>
-        <div class="flow-box bad"><span class="flow-box-name">Still drops off</span><span class="flow-box-meta">~25%</span></div>
-        <div class="flow-box warn"><span class="flow-box-name">Tried &amp; bounced</span><span class="flow-box-meta">~10%</span></div>
-        <div class="flow-box good"><span class="flow-box-name">Shipped a product on Nemotron</span><span class="flow-box-meta">~30%</span></div>
-        <div class="flow-box good"><span class="flow-box-name">Got NVIDIA certified</span><span class="flow-box-meta">~15%</span></div>
-        <div class="flow-box good"><span class="flow-box-name">Became enterprise customer</span><span class="flow-box-meta">~3%</span></div>
-        <div class="flow-box good"><span class="flow-box-name">Active community member</span><span class="flow-box-meta">~12%</span></div>
-        <div class="flow-box good"><span class="flow-box-name">Joined Inception / Coalition</span><span class="flow-box-meta">~5%</span></div>
-        <div style="margin-top: auto; padding-top: 16px;">
-          <div style="font-size: 12px; color: var(--green-dim); font-weight: 800; letter-spacing: 0.04em; padding-top: 12px; border-top: 1px dashed var(--rule);">
-            ~65% of traffic does something concrete
+      <div class="stage-arrow">↓</div>
+
+      <!-- STAGE 3 — BUILD -->
+      <div class="stage-card">
+        <div class="stage-header">
+          <div class="stage-num">03</div>
+          <div class="stage-icon">🛠</div>
+          <div class="stage-name-tag">Build</div>
+        </div>
+        <div class="stage-body">
+          <div class="stage-title">"I'm shipping with Nemotron"</div>
+          <div class="stage-tagline">Real work begins. Output is GitHub-tier, not slide-tier.</div>
+          <div class="stage-grid">
+            <div class="stage-block">
+              <div class="stage-block-label">Activities</div>
+              <ul class="stage-list">
+                <li>Fork an agent from the Nemotron Cookbook</li>
+                <li>Deploy on build.nvidia.com</li>
+                <li>Cursor MCP-driven coding sessions</li>
+                <li>Push to public GitHub repo</li>
+                <li>Ship a Nemotron-powered product</li>
+                <li>Submit to the Nemotron Cup quarterly hackathon</li>
+              </ul>
+            </div>
+            <div class="stage-block">
+              <div class="stage-block-label">Badges earned</div>
+              <div class="badges-list">
+                <span class="badge"><span class="badge-icon">🚀</span><span class="badge-name">First Ship</span></span>
+                <span class="badge"><span class="badge-icon">🔧</span><span class="badge-name">Cookbook Fork</span></span>
+                <span class="badge"><span class="badge-icon">🌟</span><span class="badge-name">OSS Contribution</span></span>
+                <span class="badge"><span class="badge-icon">💯</span><span class="badge-name">1K GitHub Stars</span></span>
+                <span class="badge super"><span class="badge-icon">⭐</span><span class="badge-name">NVIDIA Builder</span></span>
+              </div>
+            </div>
+            <div class="stage-block">
+              <div class="stage-block-label">Unlocks</div>
+              <ul class="stage-list">
+                <li>Showcase profile listing</li>
+                <li>Nemotron Cup eligibility</li>
+                <li><b>Stage 4 · Certify</b></li>
+              </ul>
+            </div>
           </div>
+        </div>
+      </div>
+
+      <div class="stage-arrow">↓</div>
+
+      <!-- STAGE 4 — CERTIFY -->
+      <div class="stage-card">
+        <div class="stage-header">
+          <div class="stage-num">04</div>
+          <div class="stage-icon">🏆</div>
+          <div class="stage-name-tag">Certify · Paid</div>
+        </div>
+        <div class="stage-body">
+          <div class="stage-title">"I want it official"</div>
+          <div class="stage-tagline">Paid certification with LinkedIn-displayable credentials. The Trailhead-style "branded" cert.</div>
+          <div class="stage-grid">
+            <div class="stage-block">
+              <div class="stage-block-label">Activities</div>
+              <ul class="stage-list">
+                <li><b>NCA-GENL</b> (Generative AI Associate) · $135 entry exam</li>
+                <li><b>NCP-AAI</b> (Agentic AI Professional) · $400</li>
+                <li><b>NCP-AIO</b> (AI Infrastructure Operations) · $400</li>
+                <li>Hands-on practical exam (build + defend)</li>
+                <li>Cert badge auto-publishes to LinkedIn</li>
+              </ul>
+            </div>
+            <div class="stage-block">
+              <div class="stage-block-label">Badges earned</div>
+              <div class="badges-list">
+                <span class="badge"><span class="badge-icon">🏅</span><span class="badge-name">NCA-GENL</span></span>
+                <span class="badge"><span class="badge-icon">🏆</span><span class="badge-name">NCP-AAI</span></span>
+                <span class="badge"><span class="badge-icon">🏆</span><span class="badge-name">NCP-AIO</span></span>
+                <span class="badge super"><span class="badge-icon">💎</span><span class="badge-name">Super Pro (3+ certs)</span></span>
+              </div>
+            </div>
+            <div class="stage-block">
+              <div class="stage-block-label">Unlocks</div>
+              <ul class="stage-list">
+                <li>Listing in <b>Certified Engineers Marketplace</b></li>
+                <li>Eligibility for jobs board</li>
+                <li>Champion-track invitation</li>
+                <li><b>Stage 5 · Get Hired</b></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="stage-arrow">↓</div>
+
+      <!-- STAGE 5 — GET HIRED / GIG -->
+      <div class="stage-card">
+        <div class="stage-header">
+          <div class="stage-num">05</div>
+          <div class="stage-icon">💼</div>
+          <div class="stage-name-tag">Get Hired</div>
+        </div>
+        <div class="stage-body">
+          <div class="stage-title">"My skills now pay"</div>
+          <div class="stage-tagline">The Nemotron Marketplace + Job Board converts skills into income. Testimonials publish to compound social proof.</div>
+          <div class="stage-grid">
+            <div class="stage-block">
+              <div class="stage-block-label">Activities</div>
+              <ul class="stage-list">
+                <li>List profile in <b>Nemotron Certified Engineers</b> directory</li>
+                <li>Get hired through job board (companies post AI roles)</li>
+                <li>Take consulting gigs through marketplace</li>
+                <li>Found a certified consultancy (with N certified devs)</li>
+                <li>Publish testimonial: "I learned X → got hired by Y"</li>
+              </ul>
+            </div>
+            <div class="stage-block">
+              <div class="stage-block-label">Badges earned</div>
+              <div class="badges-list">
+                <span class="badge"><span class="badge-icon">💼</span><span class="badge-name">First Hire</span></span>
+                <span class="badge"><span class="badge-icon">👥</span><span class="badge-name">First Client</span></span>
+                <span class="badge"><span class="badge-icon">🎤</span><span class="badge-name">Testimonial Published</span></span>
+                <span class="badge"><span class="badge-icon">🏛</span><span class="badge-name">Founded Consultancy</span></span>
+              </div>
+            </div>
+            <div class="stage-block">
+              <div class="stage-block-label">Unlocks</div>
+              <ul class="stage-list">
+                <li>Marketplace ranking</li>
+                <li>NVIDIA Certified Partner tier (for agencies)</li>
+                <li><b>Stage 6 · Champion</b></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="stage-arrow">↓</div>
+
+      <!-- STAGE 6 — CHAMPION -->
+      <div class="stage-card">
+        <div class="stage-header">
+          <div class="stage-num">06</div>
+          <div class="stage-icon">🌟</div>
+          <div class="stage-name-tag">Champion</div>
+        </div>
+        <div class="stage-body">
+          <div class="stage-title">"I represent NVIDIA in my city"</div>
+          <div class="stage-tagline">Top contributors are invited to the NVIDIA Champions Program. Like Salesforce MVPs, AWS Heroes, Microsoft MVPs.</div>
+          <div class="stage-grid">
+            <div class="stage-block">
+              <div class="stage-block-label">Activities</div>
+              <ul class="stage-list">
+                <li>Invited / apply to <b>NVIDIA Champions Program</b></li>
+                <li>Receive swag, training credits, early product access</li>
+                <li>Speak at GTC + regional NVIDIA events</li>
+                <li>Host monthly <b>Nemotron User Group</b> in their city</li>
+                <li>Run regional hackathons (NVIDIA-supported)</li>
+                <li>Quarterly summit invitations</li>
+              </ul>
+            </div>
+            <div class="stage-block">
+              <div class="stage-block-label">Badges earned</div>
+              <div class="badges-list">
+                <span class="badge super"><span class="badge-icon">🌟</span><span class="badge-name">NVIDIA Champion</span></span>
+                <span class="badge"><span class="badge-icon">🌍</span><span class="badge-name">User Group Founder</span></span>
+                <span class="badge"><span class="badge-icon">🎤</span><span class="badge-name">GTC Speaker</span></span>
+                <span class="badge"><span class="badge-icon">🥇</span><span class="badge-name">Top Contributor</span></span>
+              </div>
+            </div>
+            <div class="stage-block">
+              <div class="stage-block-label">Unlocks</div>
+              <ul class="stage-list">
+                <li>Annual GTC Champion summit</li>
+                <li>Co-marketing dollars for events</li>
+                <li>Direct line to NVIDIA product teams</li>
+                <li><b>Stage 7 · Multiply</b></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="stage-arrow">↓</div>
+
+      <!-- STAGE 7 — MULTIPLY -->
+      <div class="stage-card">
+        <div class="stage-header">
+          <div class="stage-num">07</div>
+          <div class="stage-icon">🌍</div>
+          <div class="stage-name-tag">Multiply</div>
+        </div>
+        <div class="stage-body">
+          <div class="stage-title">"I build the next wave"</div>
+          <div class="stage-tagline">Champions become the ecosystem. NVIDIA enables — doesn't centralize. Network effect compounds.</div>
+          <div class="stage-grid">
+            <div class="stage-block">
+              <div class="stage-block-label">Activities</div>
+              <ul class="stage-list">
+                <li>Run an <b>NVIDIA-Authorized Training Center</b> (paid teaching, revenue share)</li>
+                <li>Found a <b>Certified Consultancy</b> (with co-marketing budget)</li>
+                <li>Mentor next batch of Stage-1 developers</li>
+                <li>Host quarterly hackathons in their region</li>
+                <li>Feed insights back to NVIDIA product teams</li>
+                <li>Speak at and run regional NVIDIA summits</li>
+              </ul>
+            </div>
+            <div class="stage-block">
+              <div class="stage-block-label">Badges earned</div>
+              <div class="badges-list">
+                <span class="badge super"><span class="badge-icon">🏛</span><span class="badge-name">Training Center Founder</span></span>
+                <span class="badge super"><span class="badge-icon">💡</span><span class="badge-name">Certified Consultancy</span></span>
+                <span class="badge"><span class="badge-icon">👨‍🏫</span><span class="badge-name">100 Devs Mentored</span></span>
+                <span class="badge super"><span class="badge-icon">🌟</span><span class="badge-name">NVIDIA Hero</span></span>
+              </div>
+            </div>
+            <div class="stage-block">
+              <div class="stage-block-label">Unlocks</div>
+              <ul class="stage-list">
+                <li>Recurring revenue stream</li>
+                <li>NVIDIA Hero hall-of-fame</li>
+                <li><b>→ Loops back to Stage 1</b></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- THE FLYWHEEL FEEDBACK LOOP -->
+      <div class="loop-back">
+        <div class="loop-icon">↻</div>
+        <div class="loop-text">
+          <b>The flywheel spins.</b> Each NVIDIA Hero at Stage 7 becomes the discovery channel for a new wave of Stage-1 developers. Their training centers train. Their user groups host. Their consultancies hire NCA/NCP-certified engineers. Their testimonials drive the next cohort. <b>NVIDIA's job becomes enabling — providing swag, content, tooling, certification, and the marketplace — not centralizing the ecosystem.</b> This is the multi-level effect (in the good way) that took Salesforce Trailhead from zero to 3M+ Trailblazers.
         </div>
       </div>
     </div>
+  </section>
+
+  <!-- WHAT NVIDIA NEEDS TO BUILD -->
+  <section>
+    <h2>What NVIDIA needs to build · the missing components</h2>
+    <p>The flywheel above needs ten components. Some exist in scattered form today but aren't orchestrated. Some don't exist at all. Color-coded by status.</p>
+    <div class="components-grid">
+      <div class="component-card missing">
+        <div class="component-num">01 · MISSING <span class="status-tag missing">build</span></div>
+        <div class="component-name">Unified Badge System</div>
+        <div class="component-desc">One developer profile. Every action (tutorial completed, lab finished, repo starred, cert passed) earns a badge. Badges accumulate on a public profile. Trailhead has Trailmix + MyTrailhead — NVIDIA has nothing equivalent.</div>
+      </div>
+      <div class="component-card missing">
+        <div class="component-num">02 · MISSING <span class="status-tag missing">build</span></div>
+        <div class="component-name">Super Badges</div>
+        <div class="component-desc">Earned by combining N regular badges via a hands-on project (e.g., "Built and Deployed an Agentic Customer Support Bot"). The flagship credential between learning and paid certification. <b>Doesn't exist yet.</b></div>
+      </div>
+      <div class="component-card missing">
+        <div class="component-num">03 · MISSING <span class="status-tag missing">build</span></div>
+        <div class="component-name">Nemotron Certified Engineers Marketplace</div>
+        <div class="component-desc">A searchable directory of engineers with their NCA/NCP credentials displayed. Filter by skill, region, hourly rate, languages. Companies hire directly. Like AWS Certified Solutions Architect directory, but searchable + with a job board.</div>
+      </div>
+      <div class="component-card missing">
+        <div class="component-num">04 · MISSING <span class="status-tag missing">build</span></div>
+        <div class="component-name">Job Board</div>
+        <div class="component-desc">Companies post AI engineering roles requiring NCP-AAI / NCP-AIO certifications. Certified engineers see jobs filtered to their cert level. Closes the loop from "I learned" to "I got paid for it." Doesn't exist.</div>
+      </div>
+      <div class="component-card missing">
+        <div class="component-num">05 · MISSING <span class="status-tag missing">build</span></div>
+        <div class="component-name">Testimonials Engine</div>
+        <div class="component-desc">Every certified engineer asked: <i>"Tell us how Nemotron and NVIDIA certification changed your career."</i> Video-first. Published as marketing collateral. <b>NVIDIA currently has zero "I learned X → got Y job" stories visible to prospective developers.</b></div>
+      </div>
+      <div class="component-card missing">
+        <div class="component-num">06 · MISSING <span class="status-tag missing">build</span></div>
+        <div class="component-name">NVIDIA Champions Program</div>
+        <div class="component-desc">An annual class of 100-300 community leaders selected from top contributors. Equivalents: Salesforce MVPs, AWS Heroes, Microsoft MVPs, Stripe Press Builders. They get swag, training credits, early access, GTC speaker spots, and direct lines to product teams. <b>Doesn't exist for NVIDIA today.</b></div>
+      </div>
+      <div class="component-card missing">
+        <div class="component-num">07 · MISSING <span class="status-tag missing">build</span></div>
+        <div class="component-name">Local User Groups (Nemotron User Groups)</div>
+        <div class="component-desc">NVIDIA-supported but community-led. Champions run them in their city. NVIDIA provides swag, demo content, guest speakers. Like Salesforce Trailblazer Community Groups (200+ cities) or Microsoft User Groups. Currently no formal program.</div>
+      </div>
+      <div class="component-card missing">
+        <div class="component-num">08 · MISSING <span class="status-tag missing">build</span></div>
+        <div class="component-name">Authorized Training Centers</div>
+        <div class="component-desc">Champions can spin up paid training operations under an "NVIDIA-Authorized Training Center" badge. Revenue share or licensing fee. NVIDIA provides curriculum + content. Bootcamps fed through this network. Multi-level marketing in the good way: NVIDIA enables, partners deliver.</div>
+      </div>
+      <div class="component-card missing">
+        <div class="component-num">09 · MISSING <span class="status-tag missing">build</span></div>
+        <div class="component-name">NVIDIA Certified Consultancy Program</div>
+        <div class="component-desc">Agencies with ≥ N NCP-certified engineers get an "NVIDIA Certified Partner" tier. Co-marketing dollars, joint deals, referrals from the marketplace. Closes the loop from certified individual → certified business.</div>
+      </div>
+      <div class="component-card exists">
+        <div class="component-num">10 · PARTIAL <span class="status-tag partial">orchestrate</span></div>
+        <div class="component-name">LLM-Ready Pages (covered in /modern-dev-marketing Move #8)</div>
+        <div class="component-desc">Every page above needs to be agent-readable. <code>/llms.txt</code> at every surface. SKILL.md manifests. MCP-wrapped docs. Without this, the entire flywheel is invisible to Cursor / Claude / Perplexity / ChatGPT — the discovery channels of 2026. Some scaffolding exists; nothing is shipped.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TRAILHEAD REFERENCE -->
+  <section>
+    <h2>The Trailhead reference · what Salesforce got right</h2>
+    <p>Salesforce launched Trailhead in 2014 to solve exactly this problem — fragmented developer education, no badges, no community, no marketplace. They built a unified lifecycle. Within 6 years they grew the Salesforce ecosystem from a few hundred thousand developers to a multi-million Trailblazer community. NVIDIA can adapt the same pattern for AI in 2026.</p>
+
+    <div class="trailhead-ref">
+      <div class="trailhead-tag">What Trailhead did</div>
+      <p style="font-size: 14.5px; line-height: 1.6; margin: 0;">
+        Made every action a badge. Made badges public and accumulate. Combined badges into super badges via projects. Connected super badges to paid certifications. Created the <b>Trailblazer</b> identity (rank ladder: Scout → Adventurer → Mountaineer → Expeditioner → Ranger → All-Star). Selected ~300 <b>Salesforce MVPs</b> per year. Empowered MVPs to start local <b>Trailblazer Community Groups</b> in 200+ cities. Held quarterly <b>Trailblazer DX</b> events. Treated the developer ecosystem as a product with its own roadmap.
+      </p>
+      <div class="trailhead-stat-grid">
+        <div>
+          <div class="trailhead-stat-num">3M+</div>
+          <div class="trailhead-stat-label">Trailblazers by 2020 (from ~0 in 2014)</div>
+        </div>
+        <div>
+          <div class="trailhead-stat-num">200+</div>
+          <div class="trailhead-stat-label">cities with Trailblazer Community Groups</div>
+        </div>
+        <div>
+          <div class="trailhead-stat-num">~300</div>
+          <div class="trailhead-stat-label">MVPs per year — invitation-only champions</div>
+        </div>
+      </div>
+    </div>
+
+    <p style="margin-top: 18px;">Every component of the flywheel above — badges, super badges, marketplace, champions, user groups, training centers, paid certs, quarterly summits — exists in some form in Trailhead. NVIDIA isn't inventing a new model. NVIDIA is applying a well-proven one to AI.</p>
   </section>
 
   <!-- ───────────── DELTA TABLE ───────────── -->
   <section>
-    <h2>The delta · numbers that should move</h2>
-    <p>Same brand reach, same TAM, same set of entry points (plus three new ones the moves themselves create). The change is in the middle — the path from arrival to outcome. These are directional targets for a 12-month window after the eight moves ship.</p>
+    <h2>The outcome delta · numbers the flywheel should move</h2>
+    <p>Same brand reach, same TAM, same arrival channels. The change is the lifecycle — moving developers through every stage of the flywheel instead of leaking them at Stage 1. These are directional 12-month targets after the flywheel components above are built.</p>
 
     <div class="delta-table">
       <div class="delta-row head">
@@ -557,21 +1094,13 @@ footer a { color: var(--ink2); text-decoration: none; border-bottom: 1px solid v
     </p>
   </section>
 
-  <!-- WHAT'S DIFFERENT -->
+  <!-- BOTTOM LINE -->
   <section>
-    <h2>What's actually different in the optimized state</h2>
-    <p>Eight things shift between the two pictures:</p>
-    <ol style="margin-left: 22px; font-size: 14.5px; line-height: 1.7;">
-      <li><b>One front door</b> at nvidia.dev replaces the 19+ portals.</li>
-      <li><b>The build.nvidia.com permission bug is fixed</b> — first contact actually works.</li>
-      <li><b>A middle pricing tier</b> ($20/mo Pro, $100/mo Max) lives between Free and NVAIE.</li>
-      <li><b>Certifications are surfaced</b> — NCP-AAI is the new "must-have," LinkedIn-displayable badge.</li>
-      <li><b>The Nemotron Cookbook</b> exists on GitHub with 30 forkable production-grade agents.</li>
-      <li><b>20 researcher voices</b> are publicly visible — Anthropic-style identifiable individuals.</li>
-      <li><b>Three new entry channels appear</b>: Cursor MCP server, researcher voices, the Cookbook itself.</li>
-      <li><b>Every page is agent-readable</b> — /llms.txt files, MCP-wrapped docs, structured schema markup.</li>
-    </ol>
-    <p style="margin-top: 22px; font-size: 14.5px;">All eight are documented in detail in <a href="modern-dev-marketing" style="color: var(--green-dim); font-weight: 700;">/modern-dev-marketing</a> with owner, problem, move, and metric per item.</p>
+    <h2>Bottom line · treat the developer ecosystem as a product</h2>
+    <p>The current state (Diagram 1) is a developer marketing <b>surface</b> that catches awareness and lets it leak. The flywheel (Diagram 2) is a self-reinforcing <b>system</b> that converts awareness into shipped products, into careers, into champions, into the next wave of developers. Each stage feeds the next. Each champion creates 100 new developers. Each consultancy hires 10 certified engineers. The flywheel spins.</p>
+    <p>None of the ten missing components are exotic. <b>Salesforce Trailhead, AWS Heroes, Microsoft MVPs, Stripe Press, Hugging Face Hub</b> all build this — each in their own flavor. NVIDIA has the inputs, the brand, the audience, and now the chip-level moat for the agentic era. <b>What's missing is the system that turns those inputs into a self-sustaining developer economy.</b></p>
+    <p style="font-size: 17px; font-weight: 800; padding-top: 8px;">This role builds the system. <span style="color: var(--green-dim);">It's not eight moves. It's the operating system for NVIDIA developer marketing in 2026.</span></p>
+    <p style="font-size: 14px; color: var(--ink3); padding-top: 12px;">Cross-references: <a href="modern-dev-marketing" style="color: var(--green-dim); font-weight: 700;">/modern-dev-marketing</a> (the eight moves with owner / metric / 90-day plan) · <a href="omni-launchpad" style="color: var(--green-dim); font-weight: 700;">/omni-launchpad</a> (the benchmark wins backing the "we have the inputs" claim) · <a href="nvidia-now" style="color: var(--green-dim); font-weight: 700;">/nvidia-now</a> (the audit of what's already there in scattered form).</p>
   </section>
 
   <footer>
