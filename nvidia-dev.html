@@ -687,6 +687,50 @@ tr.lb-gap td { text-align: center; font-family: var(--mono); color: var(--ink4);
   .oxp-top { grid-template-columns: 1fr; }
 }
 
+
+/* ── simplified outcome panels ── */
+.need-label { font-family: var(--mono); font-size: 9px; font-weight: 800; letter-spacing: 0.18em; color: var(--ink4); margin: 16px 0 10px; }
+.needs { display: grid; gap: 10px; }
+.need { display: flex; gap: 14px; align-items: flex-start; border: 1px solid var(--rule-strong); background: #fff; padding: 13px 16px; }
+.nd-num { width: 30px; height: 30px; flex-shrink: 0; display: inline-flex; align-items: center; justify-content: center; font-family: var(--serif); font-size: 16px; font-weight: 600; border-radius: 50%; }
+.nd-num.free { background: var(--green-bg); border: 1.5px solid var(--green); color: var(--green-deep); }
+.nd-num.paid { background: var(--gold-bg); border: 1.5px solid var(--gold); color: #8a6914; }
+.nd-num.rank { background: #fff; border: 1.5px solid var(--ink); color: var(--ink); }
+.nd-num.apply { background: var(--bg-soft); border: 1.5px dashed var(--ink); color: var(--ink); }
+.nd-num.none { background: #fff; border: 1.5px dashed var(--rule-strong); color: var(--ink4); }
+.nd-txt b { display: block; font-size: 15px; font-weight: 800; line-height: 1.3; }
+.nd-txt span { font-size: 12px; color: var(--ink3); }
+.then-row { display: flex; gap: 12px; align-items: baseline; margin-top: 12px; background: var(--green-bg); border-left: 4px solid var(--green); padding: 11px 14px; font-size: 13px; color: var(--ink); font-weight: 600; }
+.then-row .tr-label { font-family: var(--mono); font-size: 9px; font-weight: 800; letter-spacing: 0.16em; color: var(--green-deep); }
+.oxp-foot { display: flex; align-items: center; justify-content: space-between; gap: 18px; margin-top: 18px; flex-wrap: wrap; }
+.life-strip.small .ls { font-size: 10px; padding: 5px 9px; }
+.hex-btn.small { font-size: 12.5px; padding: 10px 22px; }
+
+/* ── plans ── */
+.plan { border: 1.5px solid var(--ink); background: #fff; margin-bottom: 26px; }
+.plan-head { display: flex; align-items: baseline; gap: 16px; flex-wrap: wrap; padding: 16px 22px; border-bottom: 1.5px solid var(--ink); background: var(--bg-soft); }
+.plan-num { font-family: var(--mono); font-size: 9.5px; font-weight: 800; letter-spacing: 0.18em; color: var(--green-dim); }
+.plan-head h3 { font-family: var(--serif); font-size: 23px; font-weight: 600; letter-spacing: -0.01em; }
+.plan-out { font-family: var(--mono); font-size: 9.5px; letter-spacing: 0.08em; color: var(--ink3); margin-left: auto; }
+.prow { display: grid; grid-template-columns: 44px 1.35fr 1fr 190px; gap: 14px; align-items: center; padding: 11px 22px; border-bottom: 1px solid var(--rule); }
+.prow:last-child { border-bottom: none; }
+.p-step { font-family: var(--serif); font-size: 19px; font-weight: 600; color: var(--green-dim); }
+.p-do b { font-size: 13.5px; font-weight: 800; display: block; line-height: 1.3; }
+.p-do span { font-size: 11.5px; color: var(--ink3); }
+.p-where { display: flex; flex-wrap: wrap; gap: 5px; }
+.lk { font-family: var(--mono); font-size: 9.5px; font-weight: 700; color: var(--green-deep); text-decoration: none; border: 1px solid var(--rule-strong); background: #fff; padding: 3px 9px; white-space: nowrap; }
+.lk:hover { border-color: var(--green); background: var(--green-bg); }
+.p-earn { font-family: var(--mono); font-size: 9.5px; font-weight: 800; color: var(--ink2); text-align: right; letter-spacing: 0.04em; }
+.prow.cap { background: var(--green-bg); border-top: 1.5px solid var(--ink); }
+.prow.cap .p-step { color: var(--green-deep); }
+.prow.cap .p-earn { color: var(--green-deep); }
+
+@media (max-width: 880px) {
+  .prow { grid-template-columns: 30px 1fr; }
+  .p-where, .p-earn { grid-column: 2; text-align: left; }
+  .plan-out { margin-left: 0; }
+}
+
 /* ── final cta ── */
 .final-cta { text-align: center; padding: 88px 0; }
 .final-cta h2 { font-family: var(--serif); font-size: 42px; font-weight: 600; letter-spacing: -0.015em; margin-bottom: 14px; }
@@ -972,15 +1016,7 @@ footer a:hover { color: #fff; }
   <div class="wrap">
     <div class="sec-kicker">Start with the ending</div>
     <h2 class="sec-title">Choose your outcome. There are six.</h2>
-    <p class="sec-lede">Pick one on the left; the right side shows the <b>artifact you walk away with</b>, the route through the lifecycle, and the exact requirement stack: free badges, superbadges, and the proctored certifications that count (+5,000 cores each).</p>
-
-    <div class="cred-legend">
-      <div class="cl-item"><svg viewBox="0 0 64 64"><use href="#hex"/></svg><div><b>Badges</b><span>free · do the task, pass the quiz</span><i>+100–300 cores</i></div></div>
-      <div class="cl-item"><svg viewBox="0 0 80 92"><use href="#shield"/></svg><div><b>Superbadges</b><span>free · live deployed work, auto-verified</span><i>+2,000 cores</i></div></div>
-      <div class="cl-item"><svg viewBox="0 0 80 80"><use href="#rosette-plain"/></svg><div><b>Certifications</b><span>paid · proctored · official NVIDIA</span><i>+5,000 cores · biggest rank jump</i></div></div>
-      <div class="cl-item"><svg viewBox="0 0 24 24" style="padding:6px;" color="#4f7a00"><use href="#g-people"/></svg><div><b>Workshops</b><span>instructor-led · same curriculum, one guided day</span><i>+1,000 cores</i></div></div>
-    </div>
-
+    <p class="sec-lede">Pick one on the left. The right side shows the <b>three things you need</b>, what happens then, and a full step-by-step plan with real links.</p>
     <input type="radio" name="route" id="r1" checked><input type="radio" name="route" id="r2"><input type="radio" name="route" id="r3"><input type="radio" name="route" id="r4"><input type="radio" name="route" id="r5"><input type="radio" name="route" id="r6">
     <div class="ox-grid">
       <div class="ox-left">
@@ -1018,135 +1054,361 @@ footer a:hover { color: #fff; }
       <div class="ox-right">
         <div class="oxp p-r1">
           <div class="rp-tagline">Eat the whole thing, layer by layer</div>
-          <div class="oxp-top">
-            <div class="art-cake">
-              <svg viewBox="0 0 170 100" class="cake-art"><rect x="10" y="87" width="150" height="8" fill="#344e00" stroke="#0e0e0e" stroke-width="1"/><rect x="14" y="77" width="141" height="8" fill="#3f5f00" stroke="#0e0e0e" stroke-width="1"/><rect x="19" y="67" width="132" height="8" fill="#4a7000" stroke="#0e0e0e" stroke-width="1"/><rect x="24" y="57" width="123" height="8" fill="#558200" stroke="#0e0e0e" stroke-width="1"/><rect x="28" y="47" width="114" height="8" fill="#609400" stroke="#0e0e0e" stroke-width="1"/><rect x="32" y="37" width="105" height="8" fill="#6ba600" stroke="#0e0e0e" stroke-width="1"/><rect x="37" y="27" width="96" height="8" fill="#76b900" stroke="#0e0e0e" stroke-width="1"/><rect x="42" y="17" width="87" height="8" fill="#fff" stroke="#a4a299" stroke-width="1.2" stroke-dasharray="3 2"/><rect x="46" y="7" width="78" height="8" fill="#fff" stroke="#a4a299" stroke-width="1.2" stroke-dasharray="3 2"/><rect x="50" y="-3" width="69" height="8" fill="#fff" stroke="#a4a299" stroke-width="1.2" stroke-dasharray="3 2"/></svg>
-              <div class="ak-meta"><b>7 / 10 layers</b> · each = hands-on task + quiz · all ten unlock the <b>Cake Master superbadge</b></div>
-            </div>
-            <div>
-              <div class="life-label">YOUR ROUTE THROUGH THE LIFECYCLE</div>
-              <div class="life-strip"><span class="ls on">Discover</span><i>→</i><span class="ls on">Learn</span><i>→</i><span class="ls on">Build</span><i>→</i><span class="ls">Certify</span><i>→</i><span class="ls">Hire</span><i>→</i><span class="ls">Champion</span><i>→</i><span class="ls">Multiply</span></div>
-              <div class="oxp-reqs"><span class="rq free">10 LAYER BADGES</span><span class="rq free">CAKE SUPERBADGE</span><span class="rq none">NO CERT REQUIRED · EVER</span></div>
-            </div>
+          <div class="need-label">YOU NEED THREE THINGS</div>
+          <div class="needs"><div class="need"><span class="nd-num free">1</span><div class="nd-txt"><b>10 layer badges</b><span>free · one hands-on task + one quiz per layer</span></div></div><div class="need"><span class="nd-num free">2</span><div class="nd-txt"><b>The Cake Master superbadge</b><span>free · a capstone touching every layer, auto-verified</span></div></div><div class="need"><span class="nd-num none">3</span><div class="nd-txt"><b>Nothing else</b><span>no exam, no fee, ever · certs stay optional</span></div></div></div>
+          <div class="then-row"><span class="tr-label">THEN</span><span>Rank follows the work. The whole plan below is $0.</span></div>
+          <div class="oxp-foot">
+            <div class="life-strip small"><span class="ls on">Discover</span><i>→</i><span class="ls on">Learn</span><i>→</i><span class="ls on">Build</span><i>→</i><span class="ls">Certify</span><i>→</i><span class="ls">Hire</span><i>→</i><span class="ls">Champion</span><i>→</i><span class="ls">Multiply</span></div>
+            <a class="hex-btn primary small" href="#plan-cake">See the full plan ↓</a>
           </div>
-          <div class="rp-cols">
-            <div class="rp-col"><div class="rc-head free">FREE · BADGES &amp; SUPERBADGES</div><ul><li>10 layer badges · each is a hands-on task + quiz (100/50/25 cores by attempt)</li><li>Cake Master superbadge · a capstone touching every layer, auto-verified</li></ul></div>
-            <div class="rp-col"><div class="rc-head paid">PAID · PROCTORED CERTIFICATIONS</div><ul><li>None required. Ever.</li><li>Optional: NCA-GENL ($125) if you want the gold stamp · +5,000 cores</li></ul></div>
-            <div class="rp-col"><div class="rc-head then">THEN</div><ul><li>Nothing to apply for. Keep building; rank follows the work.</li></ul></div>
-          </div>
-          <div class="rp-boost">Workshops compress any layer into one guided, instructor-led day (+1,000 cores).</div>
         </div>
         <div class="oxp p-r2">
           <div class="rp-tagline">Badges prove it, certs make it official, the marketplace sells it</div>
-          <div class="oxp-top">
-            <div class="art-offer">
-              <div class="ao-co">SERIES B · AGENTIC AI · REMOTE</div>
-              <div class="ao-role">Forward-Deployed AI Engineer</div>
-              <div class="ao-comp">$280K–$340K <span>+ EQUITY</span></div>
-              <div class="ao-reqs"><span>NCP-AAI</span><span>Production Agent superbadge</span></div>
-            </div>
-            <div>
-              <div class="life-label">YOUR ROUTE THROUGH THE LIFECYCLE</div>
-              <div class="life-strip"><span class="ls">Discover</span><i>→</i><span class="ls on">Learn</span><i>→</i><span class="ls on">Build</span><i>→</i><span class="ls on">Certify</span><i>→</i><span class="ls on">Hire</span><i>→</i><span class="ls">Champion</span><i>→</i><span class="ls">Multiply</span></div>
-              <div class="oxp-reqs"><span class="rq free">PATH BADGES</span><span class="rq free">1 SUPERBADGE</span><span class="rq paid">NCA-GENL + NCP-AAI</span></div>
-            </div>
+          <div class="need-label">YOU NEED THREE THINGS</div>
+          <div class="needs"><div class="need"><span class="nd-num free">1</span><div class="nd-txt"><b>Path badges</b><span>free · two agentic courses with GPU labs included</span></div></div><div class="need"><span class="nd-num free">2</span><div class="nd-txt"><b>The Production Agent superbadge</b><span>free · your live endpoint, auto-verified</span></div></div><div class="need"><span class="nd-num paid">3</span><div class="nd-txt"><b>Two certifications</b><span>paid · proctored · NCA-GENL ($125) → NCP-AAI ($200)</span></div></div></div>
+          <div class="then-row"><span class="tr-label">THEN</span><span>You're listed on the certified marketplace at Falcon rank. Offers come to you.</span></div>
+          <div class="oxp-foot">
+            <div class="life-strip small"><span class="ls">Discover</span><i>→</i><span class="ls on">Learn</span><i>→</i><span class="ls on">Build</span><i>→</i><span class="ls on">Certify</span><i>→</i><span class="ls on">Hire</span><i>→</i><span class="ls">Champion</span><i>→</i><span class="ls">Multiply</span></div>
+            <a class="hex-btn primary small" href="#plan-hired">See the full plan ↓</a>
           </div>
-          <div class="rp-cols">
-            <div class="rp-col"><div class="rc-head free">FREE · BADGES &amp; SUPERBADGES</div><ul><li>Path badges through Units 1–3</li><li>Production Agent superbadge · your live endpoint, auto-verified</li></ul></div>
-            <div class="rp-col"><div class="rc-head paid">PAID · PROCTORED CERTIFICATIONS</div><ul><li>NCA-GENL ($125, proctored) → NCP-AAI ($200, proctored, 120 min)</li><li>Each cert: +5,000 cores · the single biggest rank jump</li></ul></div>
-            <div class="rp-col"><div class="rc-head then">THEN</div><ul><li>List on the certified marketplace at Falcon rank. Offers come to you.</li></ul></div>
-          </div>
-          <div class="rp-boost">Cert-prep workshops run monthly in 150 cities. Same curriculum, one day, proctored.</div>
         </div>
         <div class="oxp p-r3">
           <div class="rp-tagline">Ship publicly, certify officially, walk in with receipts</div>
-          <div class="oxp-top">
-            <div class="art-receipts2">
-              <div class="ar-title">Your profile, the night before the review:</div>
-              <div class="ar-row">✓ 38 shipped projects, publicly verified</div>
-              <div class="ar-row">✓ NCP-AAI · proctored, official</div>
-              <div class="ar-quote2"><img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=300&h=300&fit=crop&crop=faces&auto=format" alt=""><span>"It made not promoting me embarrassing." · <b>Carlos R.</b></span></div>
-            </div>
-            <div>
-              <div class="life-label">YOUR ROUTE THROUGH THE LIFECYCLE</div>
-              <div class="life-strip"><span class="ls">Discover</span><i>→</i><span class="ls on">Learn</span><i>→</i><span class="ls on">Build</span><i>→</i><span class="ls on">Certify</span><i>→</i><span class="ls">Hire</span><i>→</i><span class="ls">Champion</span><i>→</i><span class="ls">Multiply</span></div>
-              <div class="oxp-reqs"><span class="rq free">PROJECT BADGES</span><span class="rq paid">1 ROLE-MATCHED NCP CERT</span></div>
-            </div>
+          <div class="need-label">YOU NEED THREE THINGS</div>
+          <div class="needs"><div class="need"><span class="nd-num free">1</span><div class="nd-txt"><b>Shipped-project badges</b><span>free · every project publicly verified on your profile</span></div></div><div class="need"><span class="nd-num paid">2</span><div class="nd-txt"><b>One role-matched cert</b><span>paid · proctored · NCP-AAI, NCP-AIO, or NCP-ADS</span></div></div><div class="need"><span class="nd-num free">3</span><div class="nd-txt"><b>Your public profile</b><span>automatic · rank, badges, certs, all on one link</span></div></div></div>
+          <div class="then-row"><span class="tr-label">THEN</span><span>Send the profile link before your review. The case makes itself.</span></div>
+          <div class="oxp-foot">
+            <div class="life-strip small"><span class="ls">Discover</span><i>→</i><span class="ls on">Learn</span><i>→</i><span class="ls on">Build</span><i>→</i><span class="ls on">Certify</span><i>→</i><span class="ls">Hire</span><i>→</i><span class="ls">Champion</span><i>→</i><span class="ls">Multiply</span></div>
+            <a class="hex-btn primary small" href="#plan-promoted">See the full plan ↓</a>
           </div>
-          <div class="rp-cols">
-            <div class="rp-col"><div class="rc-head free">FREE · BADGES &amp; SUPERBADGES</div><ul><li>Shipped-project badges · every one publicly verified on your profile</li></ul></div>
-            <div class="rp-col"><div class="rc-head paid">PAID · PROCTORED CERTIFICATIONS</div><ul><li>One role-matched professional cert: NCP-AAI (agents) · NCP-AIO (infra) · NCP-ADS (data)</li></ul></div>
-            <div class="rp-col"><div class="rc-head then">THEN</div><ul><li>No application. Send your profile link before the review.</li></ul></div>
-          </div>
-          <div class="rp-boost">Team workshops count: your whole org can climb together, proctored on-site.</div>
         </div>
         <div class="oxp p-r4">
           <div class="rp-tagline">The stage is a rank perk, and rank is earned</div>
-          <div class="oxp-top">
-            <div class="art-session2">
-              <div class="as-code">GTC 2027 · SESSION DL4321 · HALL 3</div>
-              <div class="as-title">"From zero to production agents"</div>
-              <div class="as-speaker">SPEAKER: <b>YOU</b> · RECORDED FOREVER · NAME IN THE PROGRAM</div>
-            </div>
-            <div>
-              <div class="life-label">YOUR ROUTE THROUGH THE LIFECYCLE</div>
-              <div class="life-strip"><span class="ls">Discover</span><i>→</i><span class="ls">Learn</span><i>→</i><span class="ls">Build</span><i>→</i><span class="ls on">Certify</span><i>→</i><span class="ls on">Hire</span><i>→</i><span class="ls on">Champion</span><i>→</i><span class="ls">Multiply</span></div>
-              <div class="oxp-reqs"><span class="rq free">3 COMMUNITY BADGES</span><span class="rq rank">OWL RANK</span><span class="rq apply">APPLY · SPEAKER TRACK</span></div>
-            </div>
+          <div class="need-label">YOU NEED THREE THINGS</div>
+          <div class="needs"><div class="need"><span class="nd-num free">1</span><div class="nd-txt"><b>3 community badges</b><span>free · talks at your city's group, host-attested</span></div></div><div class="need"><span class="nd-num rank">2</span><div class="nd-txt"><b>Owl rank</b><span>30,000 cores · 50 badges · 1 professional cert</span></div></div><div class="need"><span class="nd-num apply">3</span><div class="nd-txt"><b>One application</b><span>Champion speaker track · or the open GTC CFP</span></div></div></div>
+          <div class="then-row"><span class="tr-label">THEN</span><span>Your session code, your name in the program, recorded forever.</span></div>
+          <div class="oxp-foot">
+            <div class="life-strip small"><span class="ls">Discover</span><i>→</i><span class="ls">Learn</span><i>→</i><span class="ls">Build</span><i>→</i><span class="ls on">Certify</span><i>→</i><span class="ls on">Hire</span><i>→</i><span class="ls on">Champion</span><i>→</i><span class="ls">Multiply</span></div>
+            <a class="hex-btn primary small" href="#plan-gtc">See the full plan ↓</a>
           </div>
-          <div class="rp-cols">
-            <div class="rp-col"><div class="rc-head free">FREE · BADGES &amp; SUPERBADGES</div><ul><li>3 community badges · First Talk and friends, earned at city groups</li></ul></div>
-            <div class="rp-col"><div class="rc-head paid">PAID · PROCTORED CERTIFICATIONS</div><ul><li>1 professional cert · required for Owl rank (30,000 cores · 50 badges · 1 cert)</li></ul></div>
-            <div class="rp-col"><div class="rc-head then">THEN</div><ul><li>Apply to the Champion speaker track at Owl rank. Champions get reserved GTC slots; everyone else enters the open CFP.</li></ul></div>
-          </div>
-          <div class="rp-boost">City-group talks are the farm league: +1,000 cores each, and hosts attest you showed up.</div>
         </div>
         <div class="oxp p-r5">
           <div class="rp-tagline">Champion is a real certification: live, proctored, applied for</div>
-          <div class="oxp-top">
-            <div class="art-event2">
-              <div class="ce-date">SEPT 12 · YOUR CITY</div>
-              <div class="ce-name">Nemotron User Group #1</div>
-              <div class="ce-meta">HOST: <b>YOU</b> · VENUE FUNDED · SWAG KIT SHIPPED · 80 SEATS</div>
-            </div>
-            <div>
-              <div class="life-label">YOUR ROUTE THROUGH THE LIFECYCLE</div>
-              <div class="life-strip"><span class="ls">Discover</span><i>→</i><span class="ls">Learn</span><i>→</i><span class="ls">Build</span><i>→</i><span class="ls on">Certify</span><i>→</i><span class="ls">Hire</span><i>→</i><span class="ls on">Champion</span><i>→</i><span class="ls on">Multiply</span></div>
-              <div class="oxp-reqs"><span class="rq free">HOST + MENTOR BADGES</span><span class="rq paid">1 NCP CERT</span><span class="rq apply">APPLY · CHAMPION (PROCTORED)</span></div>
-            </div>
+          <div class="need-label">YOU NEED THREE THINGS</div>
+          <div class="needs"><div class="need"><span class="nd-num free">1</span><div class="nd-txt"><b>Host + Mentor badges</b><span>free · service first: run events, mentor builders</span></div></div><div class="need"><span class="nd-num paid">2</span><div class="nd-txt"><b>One professional cert</b><span>paid · proctored · the Owl-rank prerequisite</span></div></div><div class="need"><span class="nd-num apply">3</span><div class="nd-txt"><b>The Champion certification</b><span>apply annually · 300 selected · live proctored defense</span></div></div></div>
+          <div class="then-row"><span class="tr-label">THEN</span><span>NVIDIA funds your group: venue, swag, speakers. You lead it.</span></div>
+          <div class="oxp-foot">
+            <div class="life-strip small"><span class="ls">Discover</span><i>→</i><span class="ls">Learn</span><i>→</i><span class="ls">Build</span><i>→</i><span class="ls on">Certify</span><i>→</i><span class="ls">Hire</span><i>→</i><span class="ls on">Champion</span><i>→</i><span class="ls on">Multiply</span></div>
+            <a class="hex-btn primary small" href="#plan-community">See the full plan ↓</a>
           </div>
-          <div class="rp-cols">
-            <div class="rp-col"><div class="rc-head free">FREE · BADGES &amp; SUPERBADGES</div><ul><li>Group Host + Mentor ×10 badges · service is the prerequisite, not popularity</li></ul></div>
-            <div class="rp-col"><div class="rc-head paid">PAID · PROCTORED CERTIFICATIONS</div><ul><li>1 professional cert (Owl prereq) · then the Champion certification itself: a live, proctored defense in front of examiners</li></ul></div>
-            <div class="rp-col"><div class="rc-head then">THEN</div><ul><li>Apply annually · 300 selected worldwide · pass the Champion certification → funded user group, hackathon kit, direct product line.</li></ul></div>
-          </div>
-          <div class="rp-boost">Champions earn cores forever: +1,500 per hosted event, +500 per mentee to Fox rank.</div>
         </div>
         <div class="oxp p-r6">
           <div class="rp-tagline">Certify the team, license the business</div>
-          <div class="oxp-top">
-            <div class="art-plaque2">
-              <svg viewBox="0 0 80 80"><use href="#rosette-plain"/></svg>
-              <div class="ap-mid">
-                <div class="ap-title">AUTHORIZED TRAINING CENTER</div>
-                <div class="ap-lic">License № ATC-2027-091</div>
-                <div class="ap-line">Official curriculum · revenue share · your name on the door</div>
-              </div>
-              <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=300&h=300&fit=crop&crop=faces&auto=format" alt="">
-            </div>
-            <div>
-              <div class="life-label">YOUR ROUTE THROUGH THE LIFECYCLE</div>
-              <div class="life-strip"><span class="ls">Discover</span><i>→</i><span class="ls">Learn</span><i>→</i><span class="ls">Build</span><i>→</i><span class="ls on">Certify</span><i>→</i><span class="ls">Hire</span><i>→</i><span class="ls">Champion</span><i>→</i><span class="ls on">Multiply</span></div>
-              <div class="oxp-reqs"><span class="rq paid">3+ CERTIFIED ENGINEERS</span><span class="rq apply">APPLY · PARTNER TIER OR ATC LICENSE</span></div>
-            </div>
+          <div class="need-label">YOU NEED THREE THINGS</div>
+          <div class="needs"><div class="need"><span class="nd-num paid">1</span><div class="nd-txt"><b>3+ certified engineers</b><span>paid certs across your team · the consultancy bar</span></div></div><div class="need"><span class="nd-num apply">2</span><div class="nd-txt"><b>One application</b><span>Certified Consultancy tier · or the ATC license (Champion)</span></div></div><div class="need"><span class="nd-num free">3</span><div class="nd-txt"><b>The startup shortcut</b><span>NVIDIA Inception is open today, zero requirements</span></div></div></div>
+          <div class="then-row"><span class="tr-label">THEN</span><span>Referral pipeline, revenue share, and a company page on the board.</span></div>
+          <div class="oxp-foot">
+            <div class="life-strip small"><span class="ls">Discover</span><i>→</i><span class="ls">Learn</span><i>→</i><span class="ls">Build</span><i>→</i><span class="ls on">Certify</span><i>→</i><span class="ls">Hire</span><i>→</i><span class="ls">Champion</span><i>→</i><span class="ls on">Multiply</span></div>
+            <a class="hex-btn primary small" href="#plan-firm">See the full plan ↓</a>
           </div>
-          <div class="rp-cols">
-            <div class="rp-col"><div class="rc-head free">FREE · BADGES &amp; SUPERBADGES</div><ul><li>Superbadges across the team · proof you ship, not just study</li></ul></div>
-            <div class="rp-col"><div class="rc-head paid">PAID · PROCTORED CERTIFICATIONS</div><ul><li>3+ engineers holding NCP certs · consultancy tier requirement</li><li>Training center: Champion certification + curriculum exam</li></ul></div>
-            <div class="rp-col"><div class="rc-head then">THEN</div><ul><li>Apply: Certified Consultancy tier (referral pipeline) or Authorized Training Center license (revenue share). Startups: NVIDIA Inception is open today, no requirements.</li></ul></div>
-          </div>
-          <div class="rp-boost">Every certified hire your firm makes climbs the same board. Your company page shows its collective cores.</div>
         </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ PLANS ═══════════ -->
+<section class="soft" id="plans">
+  <div class="wrap">
+    <div class="sec-kicker">One level deeper</div>
+    <h2 class="sec-title">The full plans. Real links. Go do.</h2>
+    <p class="sec-lede">Every step below is an action, not a reading assignment. The links go to the actual NVIDIA properties where each step happens today.</p>
+    <div class="plan" id="plan-cake">
+      <div class="plan-head">
+        <span class="plan-num">PLAN 01</span>
+        <h3>Master the 10-Layer Cake</h3>
+        <span class="plan-out">OUTCOME: the whole stack, mastered · total cost: $0</span>
+      </div>
+      <div class="plan-rows">
+      <div class="prow">
+        <span class="p-step">1</span>
+        <div class="p-do"><b>See how the silicon thinks</b><span>GPU architecture in 30 minutes, from the source</span></div>
+        <div class="p-where"><a class="lk" href="https://www.nvidia.com/en-us/on-demand/">GTC On-Demand ↗</a></div>
+        <div class="p-earn">Layer 1 badge · +100</div>
+      </div>
+      <div class="prow">
+        <span class="p-step">2</span>
+        <div class="p-do"><b>Run your first GPU container</b><span>pull from NGC, run it, break it, fix it</span></div>
+        <div class="p-where"><a class="lk" href="https://catalog.ngc.nvidia.com">catalog.ngc.nvidia.com ↗</a><a class="lk" href="https://docs.nvidia.com">docs.nvidia.com ↗</a></div>
+        <div class="p-earn">Layer 2 badge · +150</div>
+      </div>
+      <div class="prow">
+        <span class="p-step">3</span>
+        <div class="p-do"><b>Write your first CUDA kernel</b><span>Fundamentals of Accelerated Computing (DLI, GPU lab included)</span></div>
+        <div class="p-where"><a class="lk" href="https://learn.nvidia.com">learn.nvidia.com ↗</a><a class="lk" href="https://developer.nvidia.com/cuda-toolkit">CUDA Toolkit ↗</a></div>
+        <div class="p-earn">Layer 3 badge · +300</div>
+      </div>
+      <div class="prow">
+        <span class="p-step">4</span>
+        <div class="p-do"><b>Make pandas 50× faster</b><span>port one of your own pipelines to RAPIDS cuDF</span></div>
+        <div class="p-where"><a class="lk" href="https://developer.nvidia.com/rapids">developer.nvidia.com/rapids ↗</a></div>
+        <div class="p-earn">Layer 4 badge · +200</div>
+      </div>
+      <div class="prow">
+        <span class="p-step">5</span>
+        <div class="p-do"><b>Fine-tune a model with NeMo</b><span>small model, real dataset, your checkpoint</span></div>
+        <div class="p-where"><a class="lk" href="https://developer.nvidia.com/nemo">developer.nvidia.com/nemo ↗</a></div>
+        <div class="p-earn">Layer 5 badge · +300</div>
+      </div>
+      <div class="prow">
+        <span class="p-step">6</span>
+        <div class="p-do"><b>Call Nemotron 3 Nano</b><span>one API request to a frontier open model · free key, no card</span></div>
+        <div class="p-where"><a class="lk" href="https://build.nvidia.com">build.nvidia.com ↗</a><a class="lk" href="https://huggingface.co/nvidia">huggingface.co/nvidia ↗</a></div>
+        <div class="p-earn">Layer 6 badge · +100</div>
+      </div>
+      <div class="prow">
+        <span class="p-step">7</span>
+        <div class="p-do"><b>Serve a NIM microservice</b><span>run it locally · free dev license up to 16 GPUs</span></div>
+        <div class="p-where"><a class="lk" href="https://developer.nvidia.com/developer-program">developer program ↗</a><a class="lk" href="https://docs.nvidia.com">docs.nvidia.com ↗</a></div>
+        <div class="p-earn">Layer 7 badge · +300</div>
+      </div>
+      <div class="prow">
+        <span class="p-step">8</span>
+        <div class="p-do"><b>Ship a tiny cloud app</b><span>free API credits, then a GPU sandbox when you outgrow them</span></div>
+        <div class="p-where"><a class="lk" href="https://build.nvidia.com">build.nvidia.com ↗</a><a class="lk" href="https://developer.nvidia.com/brev">Brev ↗</a></div>
+        <div class="p-earn">Layer 8 badge · +200</div>
+      </div>
+      <div class="prow">
+        <span class="p-step">9</span>
+        <div class="p-do"><b>Pick a vertical and play</b><span>simulate a robot in Isaac, or build a scene in Omniverse</span></div>
+        <div class="p-where"><a class="lk" href="https://developer.nvidia.com/isaac">Isaac ↗</a><a class="lk" href="https://developer.nvidia.com/omniverse">Omniverse ↗</a></div>
+        <div class="p-earn">Layer 9 badge · +250</div>
+      </div>
+      <div class="prow">
+        <span class="p-step">10</span>
+        <div class="p-do"><b>Join the community layer</b><span>developer program, forums, Discord · claim your public profile</span></div>
+        <div class="p-where"><a class="lk" href="https://developer.nvidia.com/developer-program">developer program ↗</a><a class="lk" href="https://forums.developer.nvidia.com">forums ↗</a></div>
+        <div class="p-earn">Layer 10 badge · +100</div>
+      </div>
+      <div class="prow cap">
+        <span class="p-step">★</span>
+        <div class="p-do"><b>The Cake Master capstone</b><span>one build that touches every layer · auto-verified, unlimited retries</span></div>
+        <div class="p-where"><a class="lk" href="/path-agent-builder">the Agent Builder Path ↗</a></div>
+        <div class="p-earn">CAKE MASTER SUPERBADGE · +2,000</div>
+      </div>
+      </div>
+    </div>
+    <div class="plan" id="plan-hired">
+      <div class="plan-head">
+        <span class="plan-num">PLAN 02</span>
+        <h3>Get hired</h3>
+        <span class="plan-out">OUTCOME: offers come to you · cost: $325 in exams</span>
+      </div>
+      <div class="plan-rows">
+      <div class="prow">
+        <span class="p-step">1</span>
+        <div class="p-do"><b>Free account, first Nemotron call</b><span>30 minutes, no credit card</span></div>
+        <div class="p-where"><a class="lk" href="https://build.nvidia.com">build.nvidia.com ↗</a></div>
+        <div class="p-earn">First Token · +100</div>
+      </div>
+      <div class="prow">
+        <span class="p-step">2</span>
+        <div class="p-do"><b>Building RAG Agents with LLMs</b><span>8 hrs · DLI course with free GPU lab</span></div>
+        <div class="p-where"><a class="lk" href="https://learn.nvidia.com/courses/course-detail?course_id=course-v1:DLI+C-FX-15+V1">learn.nvidia.com ↗</a></div>
+        <div class="p-earn">RAG Apprentice · +500</div>
+      </div>
+      <div class="prow">
+        <span class="p-step">3</span>
+        <div class="p-do"><b>Building Agentic AI Applications</b><span>8 hrs · DLI · the production patterns</span></div>
+        <div class="p-where"><a class="lk" href="https://learn.nvidia.com/courses/course-detail?course_id=course-v1:DLI+C-FX-25+V1">learn.nvidia.com ↗</a></div>
+        <div class="p-earn">Agent Smith · +500</div>
+      </div>
+      <div class="prow">
+        <span class="p-step">4</span>
+        <div class="p-do"><b>The capstone: a live agent behind a NIM endpoint</b><span>evals ≥ 85%, latency target, guardrails · auto-verified</span></div>
+        <div class="p-where"><a class="lk" href="/path-agent-builder">the Agent Builder Path ↗</a></div>
+        <div class="p-earn">PRODUCTION AGENT SUPERBADGE · +2,000</div>
+      </div>
+      <div class="prow">
+        <span class="p-step">5</span>
+        <div class="p-do"><b>Sit NCA-GENL</b><span>$125 · proctored · the foundation credential</span></div>
+        <div class="p-where"><a class="lk" href="https://www.nvidia.com/en-us/learn/certification/generative-ai-llm-associate/">exam details ↗</a></div>
+        <div class="p-earn">Gold stamp · +5,000</div>
+      </div>
+      <div class="prow">
+        <span class="p-step">6</span>
+        <div class="p-do"><b>Sit NCP-AAI</b><span>$200 · proctored · 120 min · the flagship agentic cert</span></div>
+        <div class="p-where"><a class="lk" href="https://www.nvidia.com/en-us/learn/certification/agentic-ai-professional/">exam details ↗</a></div>
+        <div class="p-earn">Gold stamp · +5,000</div>
+      </div>
+      <div class="prow cap">
+        <span class="p-step">★</span>
+        <div class="p-do"><b>List on the certified marketplace</b><span>Falcon rank unlocks it · recruiters test your live endpoint</span></div>
+        <div class="p-where"><a class="lk" href="#offers">see live offers ↗</a></div>
+        <div class="p-earn">OFFERS COME TO YOU</div>
+      </div>
+      </div>
+    </div>
+    <div class="plan" id="plan-promoted">
+      <div class="plan-head">
+        <span class="plan-num">PLAN 03</span>
+        <h3>Get promoted</h3>
+        <span class="plan-out">OUTCOME: receipts no review can ignore · cost: one exam</span>
+      </div>
+      <div class="plan-rows">
+      <div class="prow">
+        <span class="p-step">1</span>
+        <div class="p-do"><b>Pick the path that matches your role</b><span>agents, infrastructure, or data science</span></div>
+        <div class="p-where"><a class="lk" href="#paths">the ten paths ↗</a></div>
+        <div class="p-earn">path enrolled</div>
+      </div>
+      <div class="prow">
+        <span class="p-step">2</span>
+        <div class="p-do"><b>Ship three verified projects</b><span>start from NVIDIA's cookbook, make them yours</span></div>
+        <div class="p-where"><a class="lk" href="https://github.com/NVIDIA/GenerativeAIExamples">GenerativeAIExamples ↗</a></div>
+        <div class="p-earn">project badges · +1,500</div>
+      </div>
+      <div class="prow">
+        <span class="p-step">3</span>
+        <div class="p-do"><b>Publish your build blog</b><span>what broke, what you fixed · indexed on your profile</span></div>
+        <div class="p-where"><a class="lk" href="https://developer.nvidia.com/blog">inspiration ↗</a></div>
+        <div class="p-earn">+750</div>
+      </div>
+      <div class="prow">
+        <span class="p-step">4</span>
+        <div class="p-do"><b>Sit your role cert</b><span>NCP-AAI · NCP-AIO · NCP-ADS · all proctored</span></div>
+        <div class="p-where"><a class="lk" href="https://www.nvidia.com/en-us/learn/certification/">certifications ↗</a></div>
+        <div class="p-earn">Gold stamp · +5,000</div>
+      </div>
+      <div class="prow cap">
+        <span class="p-step">★</span>
+        <div class="p-do"><b>Send your profile link before the review</b><span>rank, certs, verified work · one URL</span></div>
+        <div class="p-where"><a class="lk" href="#leaderboard">what a profile shows ↗</a></div>
+        <div class="p-earn">THE CASE MAKES ITSELF</div>
+      </div>
+      </div>
+    </div>
+    <div class="plan" id="plan-gtc">
+      <div class="plan-head">
+        <span class="plan-num">PLAN 04</span>
+        <h3>Present at GTC</h3>
+        <span class="plan-out">OUTCOME: your name in the program · cost: one exam + the work</span>
+      </div>
+      <div class="plan-rows">
+      <div class="prow">
+        <span class="p-step">1</span>
+        <div class="p-do"><b>Show up at your city's group</b><span>this month, no badge required</span></div>
+        <div class="p-where"><a class="lk" href="#events">events ↗</a></div>
+        <div class="p-earn">in the room</div>
+      </div>
+      <div class="prow">
+        <span class="p-step">2</span>
+        <div class="p-do"><b>Give your first talk</b><span>slides + demo kit provided · host attests you showed up</span></div>
+        <div class="p-where"><a class="lk" href="#events">events ↗</a></div>
+        <div class="p-earn">First Talk · +1,000</div>
+      </div>
+      <div class="prow">
+        <span class="p-step">3</span>
+        <div class="p-do"><b>Study the masters</b><span>every great GTC talk ever, free</span></div>
+        <div class="p-where"><a class="lk" href="https://www.nvidia.com/en-us/on-demand/">GTC On-Demand ↗</a></div>
+        <div class="p-earn">taste</div>
+      </div>
+      <div class="prow">
+        <span class="p-step">4</span>
+        <div class="p-do"><b>Reach Owl rank</b><span>30,000 cores · 50 badges · 1 proctored cert</span></div>
+        <div class="p-where"><a class="lk" href="#ranks">the ranks ↗</a></div>
+        <div class="p-earn">OWL</div>
+      </div>
+      <div class="prow">
+        <span class="p-step">5</span>
+        <div class="p-do"><b>Apply to the Champion speaker track</b><span>reserved GTC slots for Champions · or enter the open CFP</span></div>
+        <div class="p-where"><a class="lk" href="https://www.nvidia.com/gtc/">GTC ↗</a><a class="lk" href="#champions">champions ↗</a></div>
+        <div class="p-earn">application in</div>
+      </div>
+      <div class="prow cap">
+        <span class="p-step">★</span>
+        <div class="p-do"><b>Your session, your name, recorded forever</b><span>GTC 2027 · the program lists you</span></div>
+        <div class="p-where"><a class="lk" href="#champions">what champions get ↗</a></div>
+        <div class="p-earn">THE STAGE</div>
+      </div>
+      </div>
+    </div>
+    <div class="plan" id="plan-community">
+      <div class="plan-head">
+        <span class="plan-num">PLAN 05</span>
+        <h3>Lead your community</h3>
+        <span class="plan-out">OUTCOME: a funded group with your name on the door</span>
+      </div>
+      <div class="plan-rows">
+      <div class="prow">
+        <span class="p-step">1</span>
+        <div class="p-do"><b>Serve first: host and mentor</b><span>Group Host badge + Mentor ×10 · service is the prerequisite</span></div>
+        <div class="p-where"><a class="lk" href="#events">events ↗</a></div>
+        <div class="p-earn">+6,500 over time</div>
+      </div>
+      <div class="prow">
+        <span class="p-step">2</span>
+        <div class="p-do"><b>One professional cert</b><span>the Owl-rank prerequisite · proctored</span></div>
+        <div class="p-where"><a class="lk" href="https://www.nvidia.com/en-us/learn/certification/">certifications ↗</a></div>
+        <div class="p-earn">Gold stamp · +5,000</div>
+      </div>
+      <div class="prow">
+        <span class="p-step">3</span>
+        <div class="p-do"><b>Apply to the Champion class</b><span>annual · 300 worldwide</span></div>
+        <div class="p-where"><a class="lk" href="#champions">champions ↗</a></div>
+        <div class="p-earn">application in</div>
+      </div>
+      <div class="prow">
+        <span class="p-step">4</span>
+        <div class="p-do"><b>Pass the Champion certification</b><span>live, proctored defense in front of examiners</span></div>
+        <div class="p-where"><a class="lk" href="#champions">how it works ↗</a></div>
+        <div class="p-earn">WOLF RANK</div>
+      </div>
+      <div class="prow cap">
+        <span class="p-step">★</span>
+        <div class="p-do"><b>Launch your funded group</b><span>venue budget, swag, demo content, guest speakers · you lead</span></div>
+        <div class="p-where"><a class="lk" href="#events">events ↗</a></div>
+        <div class="p-earn">+1,500 PER EVENT, FOREVER</div>
+      </div>
+      </div>
+    </div>
+    <div class="plan" id="plan-firm">
+      <div class="plan-head">
+        <span class="plan-num">PLAN 06</span>
+        <h3>Found your firm</h3>
+        <span class="plan-out">OUTCOME: a business built on the badge</span>
+      </div>
+      <div class="plan-rows">
+      <div class="prow">
+        <span class="p-step">1</span>
+        <div class="p-do"><b>Startup? Skip the line</b><span>NVIDIA Inception is open today: DLI credits, preferred pricing, VC exposure</span></div>
+        <div class="p-where"><a class="lk" href="https://nvidia.com/inception">nvidia.com/inception ↗</a></div>
+        <div class="p-earn">member</div>
+      </div>
+      <div class="prow">
+        <span class="p-step">2</span>
+        <div class="p-do"><b>Certify the team</b><span>3+ engineers holding NCP certs · the consultancy bar</span></div>
+        <div class="p-where"><a class="lk" href="https://www.nvidia.com/en-us/learn/certification/">certifications ↗</a></div>
+        <div class="p-earn">team stamps</div>
+      </div>
+      <div class="prow">
+        <span class="p-step">3</span>
+        <div class="p-do"><b>Apply for the Certified Consultancy tier</b><span>referral pipeline, co-marketing, joint deals</span></div>
+        <div class="p-where"><a class="lk" href="#champions">partner tier ↗</a></div>
+        <div class="p-earn">listed</div>
+      </div>
+      <div class="prow">
+        <span class="p-step">4</span>
+        <div class="p-do"><b>Champion on the team? License an ATC</b><span>Authorized Training Center · official curriculum · revenue share</span></div>
+        <div class="p-where"><a class="lk" href="#champions">how Wolves earn ↗</a></div>
+        <div class="p-earn">LICENSE № YOURS</div>
+      </div>
+      <div class="prow cap">
+        <span class="p-step">★</span>
+        <div class="p-do"><b>Your firm joins the board</b><span>a company page aggregating the team's cores and certs</span></div>
+        <div class="p-where"><a class="lk" href="#leaderboard">the Builder 100 ↗</a></div>
+        <div class="p-earn">COLLECTIVE RANK</div>
+      </div>
       </div>
     </div>
   </div>
