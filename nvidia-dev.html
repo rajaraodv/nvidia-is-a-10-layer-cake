@@ -364,6 +364,60 @@ tr.lb-gap td { text-align: center; font-family: var(--mono); color: var(--ink4);
   .b100-grid, .cert-gallery { grid-template-columns: 1fr; }
 }
 
+
+/* ── hero scene cards ── */
+.wins2 { display: flex; flex-direction: column; gap: 16px; }
+.win2 { border: 1.5px solid var(--ink); background: #fff; overflow: hidden; box-shadow: 5px 5px 0 var(--green-bg), 5px 5px 0 1px var(--rule-strong); }
+.win2:nth-child(1) { transform: rotate(-1.2deg); }
+.win2:nth-child(2) { transform: rotate(0.9deg) translateX(14px); }
+.win2:nth-child(3) { transform: rotate(-0.8deg); }
+.win2 img { width: 100%; height: 138px; object-fit: cover; display: block; border-bottom: 1.5px solid var(--ink); }
+.w2-cap { display: flex; align-items: baseline; gap: 10px; padding: 9px 14px 10px; }
+.w2-tag { font-family: var(--mono); font-size: 9px; font-weight: 800; letter-spacing: 0.14em; color: var(--green-dim); white-space: nowrap; }
+.w2-line { font-size: 12.5px; font-weight: 700; line-height: 1.35; }
+
+/* ── outcomes v2 ── */
+.out2-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+.out2 { border: 1.5px solid var(--ink); border-top: 6px solid var(--acc); background: #fff; display: flex; flex-direction: column; }
+.out2-photo { position: relative; border-bottom: 1.5px solid var(--ink); }
+.out2-photo img { width: 100%; height: 200px; object-fit: cover; display: block; }
+.out2-tag { position: absolute; bottom: 0; left: 0; background: var(--acc); color: #fff; font-family: var(--mono); font-size: 9.5px; font-weight: 800; letter-spacing: 0.16em; padding: 6px 14px; }
+.out2-body { padding: 16px 18px 15px; flex: 1; display: flex; flex-direction: column; background: color-mix(in srgb, var(--acc) 4%, #fff); }
+.out2-body h3 { font-family: var(--serif); font-size: 21px; font-weight: 600; letter-spacing: -0.01em; line-height: 1.2; margin-bottom: 7px; }
+.out2-body p { font-size: 12.5px; color: var(--ink2); line-height: 1.55; }
+.out2-proof { margin-top: auto; padding-top: 11px; border-top: 1px solid var(--rule); font-family: var(--mono); font-size: 10px; font-weight: 700; color: var(--acc); line-height: 1.6; }
+
+/* ── testimonials v2 ── */
+.testi2-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+.testi2 { border: 1.5px solid var(--ink); background: #fff; display: flex; flex-direction: column; }
+.testi2 img { width: 100%; height: 280px; object-fit: cover; display: block; border-bottom: 1.5px solid var(--ink); }
+.t2-body { padding: 16px 18px 15px; display: flex; flex-direction: column; flex: 1; }
+.t2-body blockquote { font-family: var(--serif); font-size: 15.5px; line-height: 1.45; font-weight: 500; }
+.t2-body blockquote em { color: var(--green-dim); }
+.t2-who { margin-top: auto; padding-top: 12px; border-top: 1px solid var(--rule); font-family: var(--mono); font-size: 9.5px; color: var(--ink3); letter-spacing: 0.08em; }
+.t2-who b:first-child { color: var(--ink); }
+.t2-who b { color: var(--green-dim); }
+
+/* ── champions v2 ── */
+.champ-unlocks2 { display: grid; grid-template-columns: 1fr 1fr; border: 1.5px solid var(--ink); background: #fff; margin-bottom: 30px; }
+.champ-unlocks2 .champ-unlock { border-top: 1px solid var(--rule); }
+.champ-unlocks2 .champ-unlock:nth-child(-n+2) { border-top: none; }
+.champ-unlocks2 .champ-unlock:nth-child(even) { border-left: 1px solid var(--rule); }
+.champ-people2 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+.champ2 { border: 1.5px solid var(--ink); background: #fff; display: flex; flex-direction: column; }
+.champ2 img { width: 100%; height: 260px; object-fit: cover; display: block; border-bottom: 1.5px solid var(--ink); }
+.c2-body { padding: 15px 18px 14px; }
+.c2-name { font-family: var(--serif); font-size: 21px; font-weight: 600; }
+.c2-meta { font-family: var(--mono); font-size: 9px; letter-spacing: 0.14em; color: var(--green-dim); font-weight: 800; margin: 3px 0 9px; }
+.c2-deed { font-size: 12.5px; color: var(--ink2); line-height: 1.55; }
+.c2-deed b { color: var(--green-dim); font-weight: 800; }
+
+@media (max-width: 880px) {
+  .out2-grid, .testi2-grid, .champ-people2, .champ-unlocks2 { grid-template-columns: 1fr; }
+  .champ-unlocks2 .champ-unlock { border-left: none !important; }
+  .champ-unlocks2 .champ-unlock:nth-child(2) { border-top: 1px solid var(--rule); }
+}
+
 /* ── final cta ── */
 .final-cta { text-align: center; padding: 88px 0; }
 .final-cta h2 { font-family: var(--serif); font-size: 42px; font-weight: 600; letter-spacing: -0.015em; margin-bottom: 14px; }
@@ -412,7 +466,7 @@ footer a:hover { color: #fff; }
       <polygon points="32,10 51,21 51,43 32,54 13,43 13,21" fill="none" stroke="#76b900" stroke-width="1.6"/>
     </symbol>
     <!-- ════ THE SIX RANK ANIMALS ════ -->
-    <!-- Gecko: the starter — small, quick, climbs anything (top-down) -->
+    <!-- Gecko: the starter: small, quick, climbs anything (top-down) -->
     <symbol id="a-gecko" viewBox="0 0 64 64">
       <g fill="none" stroke="#0e0e0e" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
         <ellipse cx="32" cy="12" rx="7" ry="6"/>
@@ -425,7 +479,7 @@ footer a:hover { color: #fff; }
       </g>
       <circle cx="26.5" cy="9.5" r="1.7" fill="#0e0e0e"/><circle cx="37.5" cy="9.5" r="1.7" fill="#0e0e0e"/>
     </symbol>
-    <!-- Fox: the builder — clever, resourceful -->
+    <!-- Fox: the builder: clever, resourceful -->
     <symbol id="a-fox" viewBox="0 0 64 64">
       <g fill="none" stroke="#0e0e0e" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round">
         <path d="M13 25 L8 6 L27 15"/>
@@ -435,7 +489,7 @@ footer a:hover { color: #fff; }
       <path d="M32 45 l-4.5 -4.5 h9 z" fill="#0e0e0e"/>
       <circle cx="23.5" cy="30" r="1.9" fill="#0e0e0e"/><circle cx="40.5" cy="30" r="1.9" fill="#0e0e0e"/>
     </symbol>
-    <!-- Falcon: the accelerator — fastest thing in the sky (profile, hooked beak + malar stripe) -->
+    <!-- Falcon: the accelerator: fastest thing in the sky (profile, hooked beak + malar stripe) -->
     <symbol id="a-falcon" viewBox="0 0 64 64">
       <g fill="none" stroke="#0e0e0e" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round">
         <path d="M16 43 C12 26 18 13 33 12 C44 11 51 17 53 24 L61 28 C59 32 55 33 51 33 C50 36 48 37 46 37 C44 45 36 50 27 49 C20 48 17 47 16 43 Z"/>
@@ -444,7 +498,7 @@ footer a:hover { color: #fff; }
       </g>
       <circle cx="41" cy="23.5" r="2.5" fill="#0e0e0e"/>
     </symbol>
-    <!-- Owl: the architect — sees the whole system -->
+    <!-- Owl: the architect: sees the whole system -->
     <symbol id="a-owl" viewBox="0 0 64 64">
       <g fill="none" stroke="#0e0e0e" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round">
         <path d="M15 19 L10 5 L23 12"/>
@@ -456,7 +510,7 @@ footer a:hover { color: #fff; }
       </g>
       <circle cx="23.5" cy="31" r="2.1" fill="#0e0e0e"/><circle cx="40.5" cy="31" r="2.1" fill="#0e0e0e"/>
     </symbol>
-    <!-- Wolf: the champion — leads the pack -->
+    <!-- Wolf: the champion: leads the pack -->
     <symbol id="a-wolf" viewBox="0 0 64 64">
       <g fill="none" stroke="#0e0e0e" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round">
         <path d="M15 21 L11 2 L27 12"/>
@@ -466,7 +520,7 @@ footer a:hover { color: #fff; }
       <path d="M32 49 l-4 -4.5 h8 z" fill="#0e0e0e"/>
       <path d="M21 27.5 l6.5 2.5 M43 27.5 l-6.5 2.5" stroke="#0e0e0e" stroke-width="2.2" stroke-linecap="round"/>
     </symbol>
-    <!-- Dragon: the legend — 50 a year, by invitation (front face, swept horns, slit eyes) -->
+    <!-- Dragon: the legend: 50 a year, by invitation (front face, swept horns, slit eyes) -->
     <symbol id="a-dragon" viewBox="0 0 64 64">
       <g fill="none" stroke="#0e0e0e" stroke-width="2.3" stroke-linejoin="round" stroke-linecap="round">
         <path d="M17 20 Q6 12 9 2"/>
@@ -549,14 +603,14 @@ footer a:hover { color: #fff; }
       <div class="hero-kicker">THE NVIDIA BUILDER PROGRAM · FREE TO START</div>
       <h1>From your first API call<br>to the <em>GTC stage.</em></h1>
       <p class="hero-sub">
-        This is not a course catalog. It's the ranked path through the NVIDIA stack —
+        This is not a course catalog. It's the ranked path through the NVIDIA stack,
         where the work you do to learn is the same work that gets you
         <b>hired, promoted, certified, on stage, and running a community with your name on it</b>.
         The whole industry can watch you climb.
       </p>
       <p class="hero-lore">Everyone starts a Gecko. Fifty a year become Dragons. <b>→ SEE THE RANKS</b></p>
       <div class="hero-ctas">
-        <a class="hex-btn primary" href="/path-agent-builder">Start free — first badge in 30 min</a>
+        <a class="hex-btn primary" href="/path-agent-builder">Start free · first badge in 30 min</a>
         <a class="hex-btn ghost" href="#outcomes">Where it leads ↓</a>
       </div>
       <div class="hero-social">
@@ -570,30 +624,18 @@ footer a:hover { color: #fff; }
         <div class="hero-social-txt"><b>6M+ NVIDIA developers</b> · 312 certified this week · 41 hired this month</div>
       </div>
     </div>
-    <div class="wins">
-      <div class="win-card">
-        <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400&h=400&fit=crop&crop=faces&auto=format" alt="">
-        <div>
-          <div class="win-tag">HIRED · 11 WEEKS IN</div>
-          <div class="win-line">Minji Park — AI Engineer, Series B agent startup</div>
-          <div class="win-sub">Seoul · Owl rank · NCP-AAI certified · found via the marketplace</div>
-        </div>
+    <div class="wins2">
+      <div class="win2">
+        <img src="https://images.unsplash.com/photo-1541339907198-e08756dedf3f?w=640&h=420&fit=crop&auto=format" alt="Certificate day">
+        <div class="w2-cap"><span class="w2-tag">CERTIFIED</span><span class="w2-line">Cohort 7, certificate day. 312 new NCP-AAI holders, Bengaluru.</span></div>
       </div>
-      <div class="win-card">
-        <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=400&h=400&fit=crop&crop=faces&auto=format" alt="">
-        <div>
-          <div class="win-tag">GTC SPEAKER · 2026</div>
-          <div class="win-line">Diego Almeida — "Sim-to-real, in production"</div>
-          <div class="win-sub">São Paulo · Wolf rank · from first badge to mainstage in 14 months</div>
-        </div>
+      <div class="win2">
+        <img src="https://images.unsplash.com/photo-1521791136064-7986c2920216?w=640&h=420&fit=crop&auto=format" alt="Signing the offer">
+        <div class="w2-cap"><span class="w2-tag">HIRED</span><span class="w2-line">Minji signs with a Series B agent startup. Week eleven.</span></div>
       </div>
-      <div class="win-card">
-        <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400&h=400&fit=crop&crop=faces&auto=format" alt="">
-        <div>
-          <div class="win-tag">FOUNDER · CERTIFIED CONSULTANCY</div>
-          <div class="win-line">Priya Sharma — 6-engineer agency, training center license</div>
-          <div class="win-sub">Bengaluru · Wolf rank · her cohort produced 312 certified builders</div>
-        </div>
+      <div class="win2">
+        <img src="https://images.unsplash.com/photo-1505373877841-8d25f7d46678?w=640&h=420&fit=crop&auto=format" alt="On the GTC stage">
+        <div class="w2-cap"><span class="w2-tag">GTC STAGE</span><span class="w2-line">Diego's sim-to-real talk. From first badge to this in 14 months.</span></div>
       </div>
     </div>
   </div>
@@ -631,7 +673,7 @@ footer a:hover { color: #fff; }
     <div class="stat-strip">
       <div class="stat-cell">
         <div class="stat-num">1.3M</div>
-        <div class="stat-label">unfilled AI jobs in the US alone — half will stay unfilled through 2027 (Bain)</div>
+        <div class="stat-label">unfilled AI jobs in the US alone. Half will stay unfilled through 2027 (Bain)</div>
       </div>
       <div class="stat-cell">
         <div class="stat-num">$187.5K</div>
@@ -639,11 +681,11 @@ footer a:hover { color: #fff; }
       </div>
       <div class="stat-cell">
         <div class="stat-num">+800%</div>
-        <div class="stat-label">YoY growth in Forward-Deployed Engineer postings — the fastest-growing title in tech</div>
+        <div class="stat-label">YoY growth in Forward-Deployed Engineer postings. The fastest-growing title in tech</div>
       </div>
       <div class="stat-cell">
         <div class="stat-num">11</div>
-        <div class="stat-label">official NVIDIA certifications, live today — this is the guided road to them</div>
+        <div class="stat-label">official NVIDIA certifications, live today. This is the guided road to them</div>
       </div>
     </div>
   </div>
@@ -652,45 +694,75 @@ footer a:hover { color: #fff; }
 <!-- ═══════════ OUTCOMES ═══════════ -->
 <section id="outcomes">
   <div class="wrap">
-    <div class="sec-kicker">What you walk out with</div>
-    <h2 class="sec-title">Six outcomes. Pick yours. Or take all six.</h2>
-    <p class="sec-lede">Education is the engine, not the destination. Everything you do here converts into something you can <b>put on a resume, a stage, a storefront — or a wall</b>.</p>
-    <div class="out-grid">
-      <div class="out-card">
-        <div class="out-head"><img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400&h=400&fit=crop&crop=faces&auto=format" alt=""><div class="out-tag">GET HIRED</div></div>
-        <h3>A job offer, not a certificate of attendance</h3>
-        <p>Recruiters search the marketplace by rank, cert, and superbadge — and they can hit your live agent endpoint before the first call. Your portfolio interviews for you.</p>
-        <div class="out-proof"><b>41 builders hired this month</b> · median search-to-offer: 19 days</div>
+    <div class="sec-kicker">Why climb</div>
+    <h2 class="sec-title">What winning looks like</h2>
+    <p class="sec-lede">Six finish lines, one ladder. Every one of them comes with a face, a payday, and a story you'll tell for years. <b>Education is the engine. These are the destinations.</b></p>
+    <div class="out2-grid">
+      <div class="out2" style="--acc: #1e5fa3;">
+        <div class="out2-photo">
+          <img src="https://images.unsplash.com/photo-1521791055366-0d553872125f?w=640&h=440&fit=crop&auto=format" alt="">
+          <div class="out2-tag">GET HIRED</div>
+        </div>
+        <div class="out2-body">
+          <h3>A job offer with your name on it</h3>
+          <p>Recruiters search by rank, cert, and superbadge. They can test your live agent endpoint before the first call. Your portfolio interviews for you.</p>
+          <div class="out2-proof">41 hired this month · median search-to-offer: 19 days</div>
+        </div>
       </div>
-      <div class="out-card">
-        <div class="out-head"><img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&h=400&fit=crop&crop=faces&auto=format" alt=""><div class="out-tag">GET PROMOTED</div></div>
-        <h3>Walk into your review with receipts</h3>
-        <p>Verified shipped work, public rank, official certs — the promotion case writes itself. Carlos took cuDF to his data team; six months later he runs the platform group.</p>
-        <div class="out-proof">Trailhead precedent: <b>50% promoted or raised</b> · 1 in 3 landed a new role</div>
+      <div class="out2" style="--acc: #a07000;">
+        <div class="out2-photo">
+          <img src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=640&h=440&fit=crop&auto=format" alt="">
+          <div class="out2-tag">GET PROMOTED</div>
+        </div>
+        <div class="out2-body">
+          <h3>Walk into your review with receipts</h3>
+          <p>Verified shipped work, public rank, official certs. The promotion case writes itself. Carlos took cuDF to his team; he runs the platform group now.</p>
+          <div class="out2-proof">Trailhead precedent: 50% promoted or raised · 1 in 3 landed a new role</div>
+        </div>
       </div>
-      <div class="out-card">
-        <div class="out-head"><img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=400&h=400&fit=crop&crop=faces&auto=format" alt=""><div class="out-tag">TAKE THE STAGE</div></div>
-        <h3>From watching keynotes to giving one</h3>
-        <p>Wolf rank comes with a reserved GTC speaker track. Your build story, recorded forever, with your name in the program. Legends sit at Jensen's table.</p>
-        <div class="out-proof"><b>300 Champion talks/yr</b> · top 50 join the Legends dinner at GTC</div>
+      <div class="out2" style="--acc: #7a3eb0;">
+        <div class="out2-photo">
+          <img src="https://images.unsplash.com/photo-1475721027785-f74eccf877e2?w=640&h=440&fit=crop&auto=format" alt="">
+          <div class="out2-tag">TAKE THE STAGE</div>
+        </div>
+        <div class="out2-body">
+          <h3>From watching keynotes to giving one</h3>
+          <p>Wolf rank includes a reserved GTC speaker track. Your build story, recorded forever, with your name in the program. Dragons sit at Jensen's table.</p>
+          <div class="out2-proof">300 Champion talks a year · top 50 join the Legends dinner</div>
+        </div>
       </div>
-      <div class="out-card">
-        <div class="out-head"><img src="https://images.unsplash.com/photo-1531123897727-8f129e1688ce?w=400&h=400&fit=crop&crop=faces&auto=format" alt=""><div class="out-tag">ON THE BOARD</div></div>
-        <h3>A public ladder the industry reads</h3>
-        <p>Every core, badge, and cert is public. Your city, your company, your country — there's a board for each, and your name climbs all of them at once.</p>
-        <div class="out-proof">Amara Okafor: <b>#3 global</b> · first Owl in West Africa · 215,860 cores</div>
+      <div class="out2" style="--acc: #b34141;">
+        <div class="out2-photo">
+          <img src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=640&h=440&fit=crop&auto=format" alt="">
+          <div class="out2-tag">ON THE BOARD</div>
+        </div>
+        <div class="out2-body">
+          <h3>A public ladder the industry reads</h3>
+          <p>Every core, badge, and cert is public. Your city, your company, your country: there's a board for each, and your name climbs all of them at once.</p>
+          <div class="out2-proof">Amara Okafor: #3 global · first Owl in West Africa</div>
+        </div>
       </div>
-      <div class="out-card">
-        <div class="out-head"><img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400&h=400&fit=crop&crop=faces&auto=format" alt=""><div class="out-tag">RUN YOUR CITY</div></div>
-        <h3>A community that knows your name</h3>
-        <p>Champions get a funded user group: venue budget, swag, GPU credits, guest speakers. You teach, you host, you become the person your city's AI scene runs through.</p>
-        <div class="out-proof"><b>150 funded city groups</b> · hackathon-in-a-box for every Champion</div>
+      <div class="out2" style="--acc: #00857a;">
+        <div class="out2-photo">
+          <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=640&h=440&fit=crop&auto=format" alt="">
+          <div class="out2-tag">RUN YOUR CITY</div>
+        </div>
+        <div class="out2-body">
+          <h3>A community that knows your name</h3>
+          <p>Champions get a funded user group: venue budget, swag, GPU credits, guest speakers. You become the person your city's AI scene runs through.</p>
+          <div class="out2-proof">150 funded city groups · hackathon-in-a-box for every Champion</div>
+        </div>
       </div>
-      <div class="out-card">
-        <div class="out-head"><img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=400&h=400&fit=crop&crop=faces&auto=format" alt=""><div class="out-tag">OWN THE FIRM</div></div>
-        <h3>Your own consultancy or training center</h3>
-        <p>The ladder doesn't end at "employed." Certified teams get the partner tier — referral pipeline, co-marketing — and training centers teach official curriculum for revenue share.</p>
-        <div class="out-proof"><b>Authorized Training Center</b> license · Certified Consultancy referrals</div>
+      <div class="out2" style="--acc: #4f7a00;">
+        <div class="out2-photo">
+          <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=640&h=440&fit=crop&auto=format" alt="">
+          <div class="out2-tag">OWN THE FIRM</div>
+        </div>
+        <div class="out2-body">
+          <h3>Your own firm, built on the badge</h3>
+          <p>Training centers teach official curriculum for revenue share. Certified consultancies get the referral pipeline. Employed is a rung, not the roof.</p>
+          <div class="out2-proof">Authorized Training Center license · partner-tier referrals</div>
+        </div>
       </div>
     </div>
   </div>
@@ -701,7 +773,7 @@ footer a:hover { color: #fff; }
   <div class="wrap">
     <div class="sec-kicker">Proof, not promises</div>
     <h2 class="sec-title">Offers sent through the marketplace this month</h2>
-    <p class="sec-lede">Companies post against <b>ranks, certs, and superbadges</b> — not keyword soup. When your profile qualifies, the offer comes to you.</p>
+    <p class="sec-lede">Companies post against <b>ranks, certs, and superbadges</b>, not keyword soup. When your profile qualifies, the offer comes to you.</p>
     <div class="offer-grid">
       <div class="offer-card">
         <div class="offer-stamp">SENT 4 DAYS AGO</div>
@@ -754,7 +826,7 @@ footer a:hover { color: #fff; }
   <div class="wrap">
     <div class="sec-kicker">Find your path</div>
     <h2 class="sec-title">What do you want to ship?</h2>
-    <p class="sec-lede">Ten paths, one per developer persona, each read off a layer of the <a href="https://nvidia-is-a-10-layer-cake.vercel.app/" style="color: var(--green-deep); font-weight:700;">10-layer NVIDIA stack</a> and anchored to a real job market. Pick the outcome — the path handles the rest.</p>
+    <p class="sec-lede">Ten paths, one per developer persona, each read off a layer of the <a href="https://nvidia-is-a-10-layer-cake.vercel.app/" style="color: var(--green-deep); font-weight:700;">10-layer NVIDIA stack</a> and anchored to a real job market. Pick the outcome. The path handles the rest.</p>
 
     <div class="paths-grid">
       <a class="path-card live" href="/path-agent-builder">
@@ -764,8 +836,8 @@ footer a:hover { color: #fff; }
           <h3>The Agent Builder Path</h3>
         </div>
         <div class="path-quote">"I want to build agentic AI products that actually work in production."</div>
-        <div class="path-desc">Go from your first Nemotron API call to a production-grade agent with verified evals — then get certified, get hired, and train the next wave.</div>
-        <div class="path-leader"><img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400&h=400&fit=crop&crop=faces&auto=format" alt=""><div class="pl-txt"><b>Priya Sharma — path #1</b>286,400 cores · Wolf · founder</div></div>
+        <div class="path-desc">Go from your first Nemotron API call to a production-grade agent with verified evals, then get certified, get hired, and train the next wave.</div>
+        <div class="path-leader"><img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400&h=400&fit=crop&crop=faces&auto=format" alt=""><div class="pl-txt"><b>Priya Sharma · path #1</b>286,400 cores · Wolf · founder</div></div>
         <div class="path-meta">
           <span><b>~40 hrs</b> guided</span><span><b>11 badges</b> + 2 superbadges</span><span><b>2 certs</b></span><span><b>~14K</b> open roles</span><span><b>$220K+</b> top comp</span>
         </div>
@@ -778,7 +850,7 @@ footer a:hover { color: #fff; }
         </div>
         <div class="path-quote">"I want to ship a robot built on Isaac and GR00T."</div>
         <div class="path-desc">Isaac Lab → sim-to-real on Jetson → a robot that works outside the simulator. The physical-AI decade needs builders who've closed the gap.</div>
-        <div class="path-leader"><img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=400&h=400&fit=crop&crop=faces&auto=format" alt=""><div class="pl-txt"><b>Diego Almeida — path #1</b>251,090 cores · Wolf · GTC speaker</div></div>
+        <div class="path-leader"><img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=400&h=400&fit=crop&crop=faces&auto=format" alt=""><div class="pl-txt"><b>Diego Almeida · path #1</b>251,090 cores · Wolf · GTC speaker</div></div>
         <div class="path-meta">
           <span><b>~60 hrs</b> guided</span><span><b>13 badges</b></span><span><b>1 cert</b></span><span>Jetson kit discount included</span>
         </div>
@@ -790,8 +862,8 @@ footer a:hover { color: #fff; }
           <h3>The Performance Path</h3>
         </div>
         <div class="path-quote">"I want 10× speedups straight from the silicon."</div>
-        <div class="path-desc">CUDA, CUTLASS, Nsight. Write kernels that make production workloads embarrassingly fast — the rarest, best-paid skill in the stack.</div>
-        <div class="path-leader"><img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop&crop=faces&auto=format" alt=""><div class="pl-txt"><b>Kenji Watanabe — path #1</b>204,310 cores · Wolf · quant fund</div></div>
+        <div class="path-desc">CUDA, CUTLASS, Nsight. Write kernels that make production workloads embarrassingly fast. The rarest, best-paid skill in the stack.</div>
+        <div class="path-leader"><img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop&crop=faces&auto=format" alt=""><div class="pl-txt"><b>Kenji Watanabe · path #1</b>204,310 cores · Wolf · quant fund</div></div>
         <div class="path-meta">
           <span><b>~80 hrs</b> guided</span><span><b>15 badges</b></span><span>HPC + quant pipeline</span>
         </div>
@@ -804,14 +876,14 @@ footer a:hover { color: #fff; }
         </div>
         <div class="path-quote">"I want my pandas / Spark pipelines to run 100× faster."</div>
         <div class="path-desc">RAPIDS and cuDF: port your existing pipeline, benchmark it, publish the numbers. The fastest path from "data scientist" to "the data scientist."</div>
-        <div class="path-leader"><img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&h=400&fit=crop&crop=faces&auto=format" alt=""><div class="pl-txt"><b>Carlos Reyes — path #1</b>165,030 cores · Wolf · promoted twice</div></div>
+        <div class="path-leader"><img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&h=400&fit=crop&crop=faces&auto=format" alt=""><div class="pl-txt"><b>Carlos Reyes · path #1</b>165,030 cores · Wolf · promoted twice</div></div>
         <div class="path-meta">
           <span><b>~24 hrs</b> guided</span><span><b>8 badges</b></span><span>Kaggle-ready</span>
         </div>
       </a>
     </div>
 
-    <div class="path-more">Six more paths follow the same template — see the full persona derivation on the <a href="/dev-flow">Developer Flywheel page</a>:</div>
+    <div class="path-more">Six more paths follow the same template. See the full persona derivation on the <a href="/dev-flow">Developer Flywheel page</a>:</div>
     <div class="path-chips">
       <a class="path-chip" href="/dev-flow">Model Builder / Researcher</a>
       <a class="path-chip" href="/dev-flow">Infrastructure / Platform</a>
@@ -868,7 +940,7 @@ footer a:hover { color: #fff; }
           <svg viewBox="0 0 64 64"><use href="#hex-green"/><g transform="translate(15,14) scale(0.55)"><use href="#a-wolf" width="64" height="64"/></g></svg>
           <div><div class="rung-name">Wolf</div><div class="rung-tier">Rank 05 · leads the pack · selected</div></div>
         </div>
-        <div class="rung-req">selected annually · <b>300 worldwide</b> · Owl+ with community impact — this is the <b>NVIDIA Champions</b> class</div>
+        <div class="rung-req">selected annually · <b>300 worldwide</b> · Owl+ with community impact. This is the <b>NVIDIA Champions</b> class</div>
         <div class="rung-perks"><b>Direct line to product teams</b> · GTC speaker slot · funded city user group · Authorized Training Center license · Certified Consultancy tier · annual Champion Summit</div>
       </div>
       <div class="rung apex">
@@ -885,7 +957,7 @@ footer a:hover { color: #fff; }
       <svg width="48" height="48" viewBox="0 0 24 24" color="#8a6914" style="flex-shrink:0;"><g fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"><path d="M8 4l-4 3 1.5 4L7 10v10h10V10l1.5 1L20 7l-4-3-1 2h-6L8 4z"/><path d="M12 6v14M9.5 13h-1M15.5 13h-1"/></g></svg>
       <div>
         <div style="font-family: var(--serif); font-size: 19px; font-weight: 600;">And once a year: the Leather Jacket.</div>
-        <div style="font-size: 13.5px; color: var(--ink2); margin-top: 3px;">On stage, at GTC, one builder gets the jacket — not for the most cores, but for the best story. Salesforce has the Golden Hoodie; NVIDIA has something better. Lore is a mechanic too.</div>
+        <div style="font-size: 13.5px; color: var(--ink2); margin-top: 3px;">On stage, at GTC, one builder gets the jacket. Not for the most cores, but for the best story. Salesforce has the Golden Hoodie; NVIDIA has something better. Lore is a mechanic too.</div>
       </div>
     </div>
   </div>
@@ -896,7 +968,7 @@ footer a:hover { color: #fff; }
   <div class="wrap">
     <div class="sec-kicker">Badges</div>
     <h2 class="sec-title">Proof you can hold</h2>
-    <p class="sec-lede">Medals for modules. Shields for verified deployed work. Gold stamps for official certifications. All public on your profile, all verifiable by anyone — including the LLMs recruiters now ask about you. <b>Collect a family, unlock the next animal.</b></p>
+    <p class="sec-lede">Medals for modules. Shields for verified deployed work. Gold stamps for official certifications. All public on your profile, all verifiable by anyone, including the LLMs recruiters now ask about you. <b>Collect a family, unlock the next animal.</b></p>
     <div class="badge-rows">
       <div class="badge-row">
         <div class="badge-row-label"><div class="brl-name">Module medals</div><div class="brl-sub">finish a unit · stars = tier</div></div>
@@ -983,7 +1055,7 @@ footer a:hover { color: #fff; }
   <div class="wrap">
     <div class="sec-kicker">The Builder 100</div>
     <h2 class="sec-title">The hundred faces the industry watches</h2>
-    <p class="sec-lede">Updated continuously, like a Forbes list that anyone can climb. Rank, certifications, and verified work — with a face and a name. The annual top 50 become Dragons. <b>Your city's hundred is one click away.</b></p>
+    <p class="sec-lede">Updated continuously, like a Forbes list that anyone can climb. Rank, certifications, and verified work, with a face and a name. The annual top 50 become Dragons. <b>Your city's hundred is one click away.</b></p>
     <div class="b100-grid">
       <div class="b100-card podium">
         <div class="b100-photo">
@@ -1141,7 +1213,7 @@ footer a:hover { color: #fff; }
     </div>
     <div class="b100-you">
       <span class="y-pos">#4,217</span>
-      <span class="y-txt"><b>You</b> · Gecko · 3 badges · 1,250 cores — <b>1,250 more to Fox rank.</b> Finish "Agentic Foundations" and you jump ~1,900 places this week.</span>
+      <span class="y-txt"><b>You</b> · Gecko · 3 badges · 1,250 cores. <b>1,250 more to Fox rank.</b> Finish "Agentic Foundations" and you jump ~1,900 places this week.</span>
       <a href="/path-agent-builder">CLIMB →</a>
     </div>
   </div>
@@ -1151,27 +1223,27 @@ footer a:hover { color: #fff; }
 <section>
   <div class="wrap">
     <div class="sec-kicker">In their words</div>
-    <h2 class="sec-title">Builders on what actually changed</h2>
-    <div class="testi-grid">
-      <div class="testi-card">
-        <blockquote>"I'd watched a hundred tutorials and shipped nothing. The path made me ship in week one — and the superbadge was the first credential a recruiter <em>ever actually clicked</em>."</blockquote>
-        <div class="testi-who">
-          <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400&h=400&fit=crop&crop=faces&auto=format" alt="">
-          <div><div class="testi-name">Minji Park</div><div class="testi-meta">SEOUL · <b>OWL</b> · HIRED IN 11 WEEKS</div></div>
+    <h2 class="sec-title">The moment it clicked</h2>
+    <div class="testi2-grid">
+      <div class="testi2">
+        <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=600&h=520&fit=crop&crop=faces&auto=format" alt="MINJI PARK">
+        <div class="t2-body">
+          <blockquote>"I'd watched a hundred tutorials and shipped nothing. The path made me ship in week one. The superbadge was the first credential a recruiter <em>ever actually clicked</em>."</blockquote>
+          <div class="t2-who"><b>MINJI PARK</b> · SEOUL · <b>OWL</b> · HIRED IN 11 WEEKS</div>
         </div>
       </div>
-      <div class="testi-card">
-        <blockquote>"My manager didn't promote me because I asked. He promoted me because my profile made it <em>embarrassing not to</em>. The receipts were public."</blockquote>
-        <div class="testi-who">
-          <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&h=400&fit=crop&crop=faces&auto=format" alt="">
-          <div><div class="testi-name">Carlos Reyes</div><div class="testi-meta">CDMX · <b>WOLF</b> · DS LEAD → PLATFORM HEAD</div></div>
+      <div class="testi2">
+        <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=600&h=520&fit=crop&crop=faces&auto=format" alt="CARLOS REYES">
+        <div class="t2-body">
+          <blockquote>"My manager didn't promote me because I asked. He promoted me because my profile made it <em>embarrassing not to</em>. The receipts were public."</blockquote>
+          <div class="t2-who"><b>CARLOS REYES</b> · CDMX · <b>WOLF</b> · DS LEAD → PLATFORM HEAD</div>
         </div>
       </div>
-      <div class="testi-card">
-        <blockquote>"I started for the job. I stayed because 2,400 people in my city now learn this stack <em>in a group with my name on the door</em>. That feeling doesn't expire."</blockquote>
-        <div class="testi-who">
-          <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400&h=400&fit=crop&crop=faces&auto=format" alt="">
-          <div><div class="testi-name">Priya Sharma</div><div class="testi-meta">BENGALURU · <b>WOLF</b> · #1 GLOBAL · FOUNDER</div></div>
+      <div class="testi2">
+        <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=600&h=520&fit=crop&crop=faces&auto=format" alt="PRIYA SHARMA">
+        <div class="t2-body">
+          <blockquote>"I came for the job. I stayed because 2,400 people in my city now learn this stack <em>in a group with my name on the door</em>. That feeling doesn't expire."</blockquote>
+          <div class="t2-who"><b>PRIYA SHARMA</b> · BENGALURU · <b>WOLF</b> · #1 GLOBAL · FOUNDER</div>
         </div>
       </div>
     </div>
@@ -1183,7 +1255,7 @@ footer a:hover { color: #fff; }
   <div class="wrap">
     <div class="sec-kicker">Happening now</div>
     <h2 class="sec-title">This month, in 150 cities</h2>
-    <p class="sec-lede">Hackathons, cert-prep nights, workshops, user groups — run by Champions, funded by NVIDIA, open to every rank. Walk in a stranger, walk out with a crew.</p>
+    <p class="sec-lede">Hackathons, cert-prep nights, workshops, user groups. Run by Champions, funded by NVIDIA, open to every rank. Walk in a stranger, walk out with a crew.</p>
     <div class="event-grid">
       <div class="event-card">
         <div class="event-date"><span class="d">14</span><span class="m">JUNE</span></div>
@@ -1238,7 +1310,7 @@ footer a:hover { color: #fff; }
         </div>
       </div>
     </div>
-    <div class="event-more">No event in your city? That's not a gap — that's <b>your opening</b>. Champions get the venue budget, the swag, and the speaker network to start one. <a href="#ranks" style="color: var(--green-deep); font-weight: 800;">See the Wolf rank →</a></div>
+    <div class="event-more">No event in your city? That's not a gap. That's <b>your opening</b>. Champions get the venue budget, the swag, and the speaker network to start one. <a href="#ranks" style="color: var(--green-deep); font-weight: 800;">See the Wolf rank →</a></div>
   </div>
 </section>
 
@@ -1257,12 +1329,12 @@ footer a:hover { color: #fff; }
         <div class="how-step">
           <div class="hs-num">02</div>
           <div><h4>Earn cores by shipping</h4>
-          <p>Modules, projects, and capstones pay out <code>cores</code> — the points currency. Badges mark milestones; superbadges verify real deployed work automatically.</p></div>
+          <p>Modules, projects, and capstones pay out <code>cores</code>, the points currency. Badges mark milestones; superbadges verify real deployed work automatically.</p></div>
         </div>
         <div class="how-step">
           <div class="hs-num">03</div>
           <div><h4>Certify, officially</h4>
-          <p>Superbadges unlock official NVIDIA certification exams — proctored, hands-on, respected. Certs list you on the hiring marketplace.</p></div>
+          <p>Superbadges unlock official NVIDIA certification exams: proctored, hands-on, respected. Certs list you on the hiring marketplace.</p></div>
         </div>
         <div class="how-step">
           <div class="hs-num">04</div>
@@ -1272,7 +1344,7 @@ footer a:hover { color: #fff; }
         <div class="how-step">
           <div class="hs-num">05</div>
           <div><h4>Multiply</h4>
-          <p>Wolves teach, host, hire, and found. Their output is the next builder's first click — that's the flywheel, and it's the entire point.</p></div>
+          <p>Wolves teach, host, hire, and found. Their output is the next builder's first click. That's the flywheel, and it's the entire point.</p></div>
         </div>
       </div>
       <div>
@@ -1364,30 +1436,38 @@ footer a:hover { color: #fff; }
   <div class="wrap">
     <div class="sec-kicker">The Wolves · NVIDIA Champions</div>
     <h2 class="sec-title">300 people who run the ecosystem</h2>
-    <p class="sec-lede">Selected once a year from Owl-rank builders with real community impact. Wolves aren't an award — they're an operating layer: they run the city groups, train the cohorts, judge the hackathons, and feed product teams the truth.</p>
-    <div class="champ-grid">
-      <div>
-        <div class="champ-unlocks">
-          <div class="champ-unlock"><div class="cu-n">01</div><div class="cu-body"><b>Run a funded city user group</b><span>Venue budget, swag, demo content, guest speakers — NVIDIA supplies, you lead.</span></div></div>
-          <div class="champ-unlock"><div class="cu-n">02</div><div class="cu-body"><b>License an Authorized Training Center</b><span>Teach official curriculum, keep a revenue share. Education as a business, not a hobby.</span></div></div>
-          <div class="champ-unlock"><div class="cu-n">03</div><div class="cu-body"><b>List a Certified Consultancy</b><span>Agencies with certified engineers get the partner tier: referrals, co-marketing, joint deals.</span></div></div>
-          <div class="champ-unlock"><div class="cu-n">04</div><div class="cu-body"><b>Host funded hackathons</b><span>The hackathon-in-a-box kit: GPU credits for every team, judge network, prize pool.</span></div></div>
-          <div class="champ-unlock"><div class="cu-n">05</div><div class="cu-body"><b>Speak at GTC</b><span>Reserved Champion track. Your build story, mainstage-adjacent, recorded forever.</span></div></div>
-          <div class="champ-unlock"><div class="cu-n">06</div><div class="cu-body"><b>Direct product-team line</b><span>Quarterly roadmap sessions. Wolves' bug reports and feature asks skip the queue.</span></div></div>
+    <p class="sec-lede">Selected once a year from Owl-rank builders with real community impact. Wolves aren't an award. They're an operating layer: they run the city groups, train the cohorts, judge the hackathons, and feed product teams the truth.</p>
+    <div class="champ-unlocks2">
+      <div class="champ-unlock"><div class="cu-n">01</div><div class="cu-body"><b>Run a funded city user group</b><span>Venue budget, swag, demo content, guest speakers. NVIDIA supplies, you lead.</span></div></div>
+      <div class="champ-unlock"><div class="cu-n">02</div><div class="cu-body"><b>License an Authorized Training Center</b><span>Teach official curriculum, keep a revenue share. Education as a business, not a hobby.</span></div></div>
+      <div class="champ-unlock"><div class="cu-n">03</div><div class="cu-body"><b>List a Certified Consultancy</b><span>Agencies with certified engineers get the partner tier: referrals, co-marketing, joint deals.</span></div></div>
+      <div class="champ-unlock"><div class="cu-n">04</div><div class="cu-body"><b>Host funded hackathons</b><span>The hackathon-in-a-box kit: GPU credits for every team, judge network, prize pool.</span></div></div>
+      <div class="champ-unlock"><div class="cu-n">05</div><div class="cu-body"><b>Speak at GTC</b><span>Reserved Champion track. Your build story, mainstage-adjacent, recorded forever.</span></div></div>
+      <div class="champ-unlock"><div class="cu-n">06</div><div class="cu-body"><b>Direct product-team line</b><span>Quarterly roadmap sessions. Wolves' bug reports and feature asks skip the queue.</span></div></div>
+    </div>
+    <div class="champ-people2">
+      <div class="champ2">
+        <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=600&h=480&fit=crop&crop=faces&auto=format" alt="Priya Sharma">
+        <div class="c2-body">
+          <div class="c2-name">Priya Sharma</div>
+          <div class="c2-meta">BENGALURU · WOLF</div>
+          <div class="c2-deed">Runs the 2,400-member Bengaluru Nemotron User Group. Her training center certified <b>312 builders</b> last year. 9 are now Wolves themselves.</div>
         </div>
       </div>
-      <div class="champ-people">
-        <div class="champ-person">
-          <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400&h=400&fit=crop&crop=faces&auto=format" alt="">
-          <div><div class="cp-name">Priya Sharma · Bengaluru</div><div class="cp-deed">Runs the 2,400-member Bengaluru Nemotron User Group. Her training center certified <b>312 builders</b> last year — 9 are now Wolves themselves.</div></div>
+      <div class="champ2">
+        <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=600&h=480&fit=crop&crop=faces&auto=format" alt="Diego Almeida">
+        <div class="c2-body">
+          <div class="c2-name">Diego Almeida</div>
+          <div class="c2-meta">SÃO PAULO · WOLF</div>
+          <div class="c2-deed">Founded a 6-person certified consultancy after his sim-to-real superbadge. Now runs Brazil's largest robotics hackathon. <b>3 Inception startups</b> came out of it.</div>
         </div>
-        <div class="champ-person">
-          <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=400&h=400&fit=crop&crop=faces&auto=format" alt="">
-          <div><div class="cp-name">Diego Almeida · São Paulo</div><div class="cp-deed">Founded a 6-person certified consultancy after his sim-to-real superbadge. Now runs Brazil's largest robotics hackathon — <b>3 Inception startups</b> came out of it.</div></div>
-        </div>
-        <div class="champ-person">
-          <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&h=400&fit=crop&crop=faces&auto=format" alt="">
-          <div><div class="cp-name">Carlos Reyes · CDMX</div><div class="cp-deed">His "pandas to cuDF in a weekend" workshop has run in <b>11 cities</b>. Mentored 40 builders to Fox rank — that's +20,000 cores from mentoring alone.</div></div>
+      </div>
+      <div class="champ2">
+        <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=600&h=480&fit=crop&crop=faces&auto=format" alt="Carlos Reyes">
+        <div class="c2-body">
+          <div class="c2-name">Carlos Reyes</div>
+          <div class="c2-meta">CDMX · WOLF</div>
+          <div class="c2-deed">His "pandas to cuDF in a weekend" workshop has run in <b>11 cities</b>. Mentored 40 builders to Fox rank. That's <b>+20,000 cores</b> from mentoring alone.</div>
         </div>
       </div>
     </div>
@@ -1474,7 +1554,7 @@ footer a:hover { color: #fff; }
     <div class="net-stats">
       <div class="net-stat"><div class="ns-num">1 → 3+</div><div class="ns-label">Target reproduction rate: every finished builder recruits at least three more through their public output.</div></div>
       <div class="net-stat"><div class="ns-num">300 × 150</div><div class="ns-label">Wolves × cities: each funded user group is a permanent local arrival channel no ad budget can buy.</div></div>
-      <div class="net-stat"><div class="ns-num">0 → 3M</div><div class="ns-label">Trailhead's Trailblazer count in six years on this exact pattern — with 1 in 3 learners landing a new job. NVIDIA starts with 6M registered devs.</div></div>
+      <div class="net-stat"><div class="ns-num">0 → 3M</div><div class="ns-label">Trailhead's Trailblazer count in six years on this exact pattern, with 1 in 3 learners landing a new job. NVIDIA starts with 6M registered devs.</div></div>
     </div>
   </div>
 </section>
@@ -1484,7 +1564,7 @@ footer a:hover { color: #fff; }
   <div class="wrap">
     <div class="sec-kicker">Official certifications</div>
     <h2 class="sec-title">The credentials behind the climb</h2>
-    <p class="sec-lede"><b>Eleven</b> real, proctored NVIDIA certification exams — already live today at <a href="https://www.nvidia.com/en-us/learn/certification/" style="color: var(--green-deep); font-weight: 700;">nvidia.com/learn/certification</a>. NVIDIA already built the credentials; the paths above are the guided, gamified road to passing them.</p>
+    <p class="sec-lede"><b>Eleven</b> real, proctored NVIDIA certification exams, already live today at <a href="https://www.nvidia.com/en-us/learn/certification/" style="color: var(--green-deep); font-weight: 700;">nvidia.com/learn/certification</a>. NVIDIA already built the credentials; the paths above are the guided, gamified road to passing them.</p>
         <div class="cert-gallery">
       <div class="certificate">
         <div class="corner tl"></div><div class="corner tr"></div><div class="corner bl"></div><div class="corner br"></div>
@@ -1498,7 +1578,7 @@ footer a:hover { color: #fff; }
             <div class="a-name">Minji Park</div>
           </div>
         </div>
-        <div class="cert-line">for demonstrating production-grade competency in agent development, multi-agent orchestration, evaluation, and guardrails — verified by proctored examination and a live deployed system.</div>
+        <div class="cert-line">for demonstrating production-grade competency in agent development, multi-agent orchestration, evaluation, and guardrails, verified by proctored examination and a live deployed system.</div>
         <div class="cert-verify">VERIFY · nvidia.dev/cert/NCPAAI-26-04417 · ISSUED JUNE 2026 · VALID 2 YEARS</div>
         <div class="cert-sig"><div class="sig">Jensen Huang</div><div class="sig-rule">Founder &amp; CEO · NVIDIA</div></div>
         <svg class="cert-seal" viewBox="0 0 80 112"><use href="#rosette"/><text x="40" y="43" text-anchor="middle" font-family="ui-monospace, Menlo, monospace" font-size="10" font-weight="800" fill="#8a6914">NCP</text><text x="40" y="54" text-anchor="middle" font-family="ui-monospace, Menlo, monospace" font-size="10" font-weight="800" fill="#8a6914">AAI</text></svg>
@@ -1515,7 +1595,7 @@ footer a:hover { color: #fff; }
             <div class="a-name">Amara Okafor</div>
           </div>
         </div>
-        <div class="cert-line">for demonstrated proficiency across large language models, prompt engineering, and the NVIDIA inference stack — the first credential on the climb from Gecko to Dragon.</div>
+        <div class="cert-line">for demonstrated proficiency across large language models, prompt engineering, and the NVIDIA inference stack. The first credential on the climb from Gecko to Dragon.</div>
         <div class="cert-verify">VERIFY · nvidia.dev/cert/NCAGENL-25-88112 · ISSUED NOVEMBER 2025 · RENEWED ON CHAIN OF WORK</div>
         <div class="cert-sig"><div class="sig">Jensen Huang</div><div class="sig-rule">Founder &amp; CEO · NVIDIA</div></div>
         <svg class="cert-seal" viewBox="0 0 80 112"><use href="#rosette"/><text x="40" y="43" text-anchor="middle" font-family="ui-monospace, Menlo, monospace" font-size="10" font-weight="800" fill="#8a6914">NCA</text><text x="40" y="54" text-anchor="middle" font-family="ui-monospace, Menlo, monospace" font-size="10" font-weight="800" fill="#8a6914">GENL</text></svg>
@@ -1536,7 +1616,7 @@ footer a:hover { color: #fff; }
           <td class="cert-name"><a href="https://www.nvidia.com/en-us/learn/certification/agentic-ai-professional/">Agentic AI</a> <span class="cert-tag">FLAGSHIP</span></td>
           <td class="cert-lvl">Professional</td>
           <td class="cert-note">$200 · 120 min</td>
-          <td class="cert-note">Agent Builder — the path below leads here</td>
+          <td class="cert-note">Agent Builder · the path below leads here</td>
         </tr>
         <tr>
           <td class="cert-code">NCA-GENM</td>
@@ -1603,7 +1683,7 @@ footer a:hover { color: #fff; }
         </tr>
       </tbody>
     </table>
-    <p class="lb-note">Prices as listed on nvidia.com, June 2026. Exams are proctored; professional tiers expect 1–2 years of hands-on experience — which the paths above generate by design.</p>
+    <p class="lb-note">Prices as listed on nvidia.com, June 2026. Exams are proctored; professional tiers expect 1–2 years of hands-on experience, which the paths above generate by design.</p>
   </div>
 </section>
 
@@ -1611,7 +1691,7 @@ footer a:hover { color: #fff; }
 <div class="final-cta">
   <div class="wrap">
     <h2>Your first badge takes 30 minutes.<br>The Dragon takes years. <em style="color: var(--green-dim);">Good.</em></h2>
-    <p>Things worth being proud of take work. One API call to a frontier open model, one badge, your name on the board — the ladder starts wherever you're standing.</p>
+    <p>Things worth being proud of take work. One API call to a frontier open model, one badge, your name on the board. The ladder starts wherever you're standing.</p>
     <div class="hero-ctas">
       <a class="hex-btn primary" href="/path-agent-builder">Start the Agent Builder Path</a>
       <a class="hex-btn ghost" href="#paths">See all paths</a>
@@ -1625,7 +1705,7 @@ footer a:hover { color: #fff; }
     <div>
       <div class="foot-mark">nvidia.dev</div>
       <div>One home for the NVIDIA developer lifecycle: paths, badges, certs, ranks, champions, and the marketplace.</div>
-      <div class="foot-fine">CONCEPT MOCKUP — part of the NVIDIA developer-flywheel proposal.<br>Mechanics: /dev-flow · Strategy: /modern-dev-marketing · Program: /nvidia-certified-builder<br>People shown are stock photos; testimonials, offers &amp; events are illustrative.</div>
+      <div class="foot-fine">CONCEPT MOCKUP · part of the NVIDIA developer-flywheel proposal.<br>Mechanics: /dev-flow · Strategy: /modern-dev-marketing · Program: /nvidia-certified-builder<br>People shown are stock photos; testimonials, offers &amp; events are illustrative.</div>
     </div>
     <div>
       <h5>Climb</h5>
