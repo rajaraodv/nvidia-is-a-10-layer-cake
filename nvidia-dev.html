@@ -649,6 +649,44 @@ tr.lb-gap td { text-align: center; font-family: var(--mono); color: var(--ink4);
   .rp-cols { grid-template-columns: 1fr; }
 }
 
+
+/* ── outcomes accordion (master-detail) ── */
+#outcomes input[type="radio"] { position: absolute; opacity: 0; pointer-events: none; }
+.ox-grid { display: grid; grid-template-columns: 330px 1fr; border: 1.5px solid var(--ink); background: #fff; }
+.ox-left { border-right: 1.5px solid var(--ink); display: flex; flex-direction: column; }
+.oxi { display: flex; gap: 14px; align-items: flex-start; padding: 17px 18px; border-bottom: 1px solid var(--rule); cursor: pointer; flex: 1; }
+.oxi:last-child { border-bottom: none; }
+.oxi .num { font-family: var(--serif); font-size: 22px; font-weight: 600; color: var(--green-dim); line-height: 1.1; }
+.oxi-txt b { display: block; font-size: 14.5px; font-weight: 800; line-height: 1.25; }
+.oxi-txt > span { font-size: 11.5px; color: var(--ink3); line-height: 1.4; display: block; margin-top: 3px; }
+.oxi .chev { margin-left: auto; font-family: var(--mono); color: var(--ink4); font-weight: 800; align-self: center; }
+.oxi:hover { background: var(--green-bg); }
+#r1:checked ~ .ox-grid label[for="r1"], #r2:checked ~ .ox-grid label[for="r2"], #r3:checked ~ .ox-grid label[for="r3"],
+#r4:checked ~ .ox-grid label[for="r4"], #r5:checked ~ .ox-grid label[for="r5"], #r6:checked ~ .ox-grid label[for="r6"] { background: var(--green); }
+#r1:checked ~ .ox-grid label[for="r1"] .num, #r2:checked ~ .ox-grid label[for="r2"] .num, #r3:checked ~ .ox-grid label[for="r3"] .num,
+#r4:checked ~ .ox-grid label[for="r4"] .num, #r5:checked ~ .ox-grid label[for="r5"] .num, #r6:checked ~ .ox-grid label[for="r6"] .num { color: var(--green-deep); }
+#r1:checked ~ .ox-grid label[for="r1"] .oxi-txt > span, #r2:checked ~ .ox-grid label[for="r2"] .oxi-txt > span, #r3:checked ~ .ox-grid label[for="r3"] .oxi-txt > span,
+#r4:checked ~ .ox-grid label[for="r4"] .oxi-txt > span, #r5:checked ~ .ox-grid label[for="r5"] .oxi-txt > span, #r6:checked ~ .ox-grid label[for="r6"] .oxi-txt > span { color: rgba(14,14,14,0.72); }
+#r1:checked ~ .ox-grid label[for="r1"] .chev, #r2:checked ~ .ox-grid label[for="r2"] .chev, #r3:checked ~ .ox-grid label[for="r3"] .chev,
+#r4:checked ~ .ox-grid label[for="r4"] .chev, #r5:checked ~ .ox-grid label[for="r5"] .chev, #r6:checked ~ .ox-grid label[for="r6"] .chev { color: var(--ink); }
+.ox-right { padding: 24px 28px 24px; min-width: 0; }
+.oxp { display: none; }
+#r1:checked ~ .ox-grid .p-r1, #r2:checked ~ .ox-grid .p-r2, #r3:checked ~ .ox-grid .p-r3,
+#r4:checked ~ .ox-grid .p-r4, #r5:checked ~ .ox-grid .p-r5, #r6:checked ~ .ox-grid .p-r6 { display: block; }
+.oxp-top { display: grid; grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr); gap: 24px; align-items: start; margin: 16px 0 20px; }
+.life-label { font-family: var(--mono); font-size: 8.5px; font-weight: 800; letter-spacing: 0.16em; color: var(--ink4); margin-bottom: 9px; }
+.oxp-reqs { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 14px; }
+.oxp .art-session2 { background: var(--ink); color: #fff; border: none; }
+.oxp .art-receipts2 { border: 1px dashed var(--rule-strong); padding: 13px 15px; background: var(--bg-soft); }
+.oxp .art-event2 { border: 1.5px solid var(--ink); padding: 13px 15px; border-left: 8px solid var(--green); }
+.oxp .rp-cols { margin-top: 0; }
+
+@media (max-width: 880px) {
+  .ox-grid { grid-template-columns: 1fr; }
+  .ox-left { border-right: none; border-bottom: 1.5px solid var(--ink); }
+  .oxp-top { grid-template-columns: 1fr; }
+}
+
 /* ── final cta ── */
 .final-cta { text-align: center; padding: 88px 0; }
 .final-cta h2 { font-family: var(--serif); font-size: 42px; font-weight: 600; letter-spacing: -0.015em; margin-bottom: 14px; }
@@ -934,7 +972,7 @@ footer a:hover { color: #fff; }
   <div class="wrap">
     <div class="sec-kicker">Start with the ending</div>
     <h2 class="sec-title">Choose your outcome. There are six.</h2>
-    <p class="sec-lede">Every outcome has a <b>requirement stack</b>: free badges you earn by doing, superbadges that verify real work, and official proctored certifications where it counts. The lifecycle map below lights up the route for whichever one you pick.</p>
+    <p class="sec-lede">Pick one on the left; the right side shows the <b>artifact you walk away with</b>, the route through the lifecycle, and the exact requirement stack: free badges, superbadges, and the proctored certifications that count (+5,000 cores each).</p>
 
     <div class="cred-legend">
       <div class="cl-item"><svg viewBox="0 0 64 64"><use href="#hex"/></svg><div><b>Badges</b><span>free · do the task, pass the quiz</span><i>+100–300 cores</i></div></div>
@@ -943,193 +981,172 @@ footer a:hover { color: #fff; }
       <div class="cl-item"><svg viewBox="0 0 24 24" style="padding:6px;" color="#4f7a00"><use href="#g-people"/></svg><div><b>Workshops</b><span>instructor-led · same curriculum, one guided day</span><i>+1,000 cores</i></div></div>
     </div>
 
-    <div class="o4-grid">
-
-      <!-- 01 · master the cake -->
-      <div class="o4 c2">
-        <div class="o4-head2">
-          <span class="o4-num spine">01</span>
-          <h3>Master the 10-Layer Cake.</h3>
-        </div>
-        <div class="o4-art">
-          <div class="art-cake">
-            <svg viewBox="0 0 170 100" class="cake-art"><rect x="10" y="87" width="150" height="8" fill="#344e00" stroke="#0e0e0e" stroke-width="1"/><rect x="14" y="77" width="141" height="8" fill="#3f5f00" stroke="#0e0e0e" stroke-width="1"/><rect x="19" y="67" width="132" height="8" fill="#4a7000" stroke="#0e0e0e" stroke-width="1"/><rect x="24" y="57" width="123" height="8" fill="#558200" stroke="#0e0e0e" stroke-width="1"/><rect x="28" y="47" width="114" height="8" fill="#609400" stroke="#0e0e0e" stroke-width="1"/><rect x="32" y="37" width="105" height="8" fill="#6ba600" stroke="#0e0e0e" stroke-width="1"/><rect x="37" y="27" width="96" height="8" fill="#76b900" stroke="#0e0e0e" stroke-width="1"/><rect x="42" y="17" width="87" height="8" fill="#fff" stroke="#a4a299" stroke-width="1.2" stroke-dasharray="3 2"/><rect x="46" y="7" width="78" height="8" fill="#fff" stroke="#a4a299" stroke-width="1.2" stroke-dasharray="3 2"/><rect x="50" y="-3" width="69" height="8" fill="#fff" stroke="#a4a299" stroke-width="1.2" stroke-dasharray="3 2"/></svg>
-            <div class="ak-meta"><b>7 / 10 layers</b> · each = hands-on task + quiz · finish all ten for the <b>Cake Master superbadge</b></div>
-          </div>
-        </div>
-        <div class="o4-reqs"><span class="rq free">10 LAYER BADGES</span><span class="rq free">CAKE SUPERBADGE</span><span class="rq none">0 PAID CERTS</span></div>
-        <a class="o4-link" href="#routes">FREE ALL THE WAY · SEE THE ROUTE ↓</a>
+    <input type="radio" name="route" id="r1" checked><input type="radio" name="route" id="r2"><input type="radio" name="route" id="r3"><input type="radio" name="route" id="r4"><input type="radio" name="route" id="r5"><input type="radio" name="route" id="r6">
+    <div class="ox-grid">
+      <div class="ox-left">
+        <label class="oxi" for="r1">
+          <span class="num">01</span>
+          <span class="oxi-txt"><b>Master the 10-Layer Cake.</b><span>Learn the entire stack by doing. Pay nothing, ever.</span></span>
+          <span class="chev">→</span>
+        </label>
+        <label class="oxi" for="r2">
+          <span class="num">02</span>
+          <span class="oxi-txt"><b>Get hired.</b><span>Certs + verified work. Offers come to you.</span></span>
+          <span class="chev">→</span>
+        </label>
+        <label class="oxi" for="r3">
+          <span class="num">03</span>
+          <span class="oxi-txt"><b>Get promoted.</b><span>Public receipts make the case for you.</span></span>
+          <span class="chev">→</span>
+        </label>
+        <label class="oxi" for="r4">
+          <span class="num">04</span>
+          <span class="oxi-txt"><b>Present at GTC.</b><span>From the audience to the program.</span></span>
+          <span class="chev">→</span>
+        </label>
+        <label class="oxi" for="r5">
+          <span class="num">05</span>
+          <span class="oxi-txt"><b>Lead your community.</b><span>A funded user group with your name on the door.</span></span>
+          <span class="chev">→</span>
+        </label>
+        <label class="oxi" for="r6">
+          <span class="num">06</span>
+          <span class="oxi-txt"><b>Found your firm.</b><span>Consultancy, training center, or startup.</span></span>
+          <span class="chev">→</span>
+        </label>
       </div>
-
-      <!-- 02 · get hired -->
-      <div class="o4 c1">
-        <div class="o4-photo">
-          <img src="https://images.unsplash.com/photo-1521791136064-7986c2920216?w=640&h=300&fit=crop&auto=format" alt="The handshake">
-          <div class="o4-num onphoto">02</div>
-        </div>
-        <div class="o4-band"><h3>Get hired.</h3><span class="band-sub">STAGE 05 · HIRE</span></div>
-        <div class="o4-art">
-          <div class="art-offer">
-            <div class="ao-co">SERIES B · AGENTIC AI · REMOTE</div>
-            <div class="ao-role">Forward-Deployed AI Engineer</div>
-            <div class="ao-comp">$280K–$340K <span>+ EQUITY</span></div>
-          </div>
-        </div>
-        <div class="o4-reqs"><span class="rq free">PATH BADGES</span><span class="rq free">1 SUPERBADGE</span><span class="rq paid">NCA-GENL + NCP-AAI</span></div>
-        <a class="o4-link" href="#routes">ROUTE: BADGES → CERTS → MARKETPLACE ↓</a>
-      </div>
-
-      <!-- 03 · get promoted -->
-      <div class="o4 c2b">
-        <div class="o4-head2">
-          <span class="o4-num spine">03</span>
-          <h3>Get promoted.</h3>
-        </div>
-        <div class="o4-art">
-          <div>
-            <div class="ar-title">Your profile, the night before the review:</div>
-            <div class="ar-row">✓ 38 shipped projects, publicly verified</div>
-            <div class="ar-row">✓ NCP-AAI · proctored, official</div>
-            <div class="ar-quote2">
-              <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=300&h=300&fit=crop&crop=faces&auto=format" alt="">
-              <span>"It made not promoting me embarrassing." · <b>Carlos R.</b></span>
+      <div class="ox-right">
+        <div class="oxp p-r1">
+          <div class="rp-tagline">Eat the whole thing, layer by layer</div>
+          <div class="oxp-top">
+            <div class="art-cake">
+              <svg viewBox="0 0 170 100" class="cake-art"><rect x="10" y="87" width="150" height="8" fill="#344e00" stroke="#0e0e0e" stroke-width="1"/><rect x="14" y="77" width="141" height="8" fill="#3f5f00" stroke="#0e0e0e" stroke-width="1"/><rect x="19" y="67" width="132" height="8" fill="#4a7000" stroke="#0e0e0e" stroke-width="1"/><rect x="24" y="57" width="123" height="8" fill="#558200" stroke="#0e0e0e" stroke-width="1"/><rect x="28" y="47" width="114" height="8" fill="#609400" stroke="#0e0e0e" stroke-width="1"/><rect x="32" y="37" width="105" height="8" fill="#6ba600" stroke="#0e0e0e" stroke-width="1"/><rect x="37" y="27" width="96" height="8" fill="#76b900" stroke="#0e0e0e" stroke-width="1"/><rect x="42" y="17" width="87" height="8" fill="#fff" stroke="#a4a299" stroke-width="1.2" stroke-dasharray="3 2"/><rect x="46" y="7" width="78" height="8" fill="#fff" stroke="#a4a299" stroke-width="1.2" stroke-dasharray="3 2"/><rect x="50" y="-3" width="69" height="8" fill="#fff" stroke="#a4a299" stroke-width="1.2" stroke-dasharray="3 2"/></svg>
+              <div class="ak-meta"><b>7 / 10 layers</b> · each = hands-on task + quiz · all ten unlock the <b>Cake Master superbadge</b></div>
+            </div>
+            <div>
+              <div class="life-label">YOUR ROUTE THROUGH THE LIFECYCLE</div>
+              <div class="life-strip"><span class="ls on">Discover</span><i>→</i><span class="ls on">Learn</span><i>→</i><span class="ls on">Build</span><i>→</i><span class="ls">Certify</span><i>→</i><span class="ls">Hire</span><i>→</i><span class="ls">Champion</span><i>→</i><span class="ls">Multiply</span></div>
+              <div class="oxp-reqs"><span class="rq free">10 LAYER BADGES</span><span class="rq free">CAKE SUPERBADGE</span><span class="rq none">NO CERT REQUIRED · EVER</span></div>
             </div>
           </div>
-        </div>
-        <div class="o4-reqs"><span class="rq free">PROJECT BADGES</span><span class="rq paid">1 ROLE-MATCHED NCP CERT</span></div>
-        <a class="o4-link" href="#routes">ROUTE: SHIP → CERTIFY → RECEIPTS ↓</a>
-      </div>
-
-      <!-- 04 · present at GTC -->
-      <div class="o4 c3">
-        <div class="o4-photo">
-          <img src="https://images.unsplash.com/photo-1505373877841-8d25f7d46678?w=640&h=300&fit=crop&auto=format" alt="GTC stage">
-          <div class="o4-num onphoto">04</div>
-          <div class="w2-live">&#9679; LIVE · GTC</div>
-        </div>
-        <div class="c3-head"><h3>Present at GTC.</h3></div>
-        <div class="o4-art">
-          <div class="art-session2">
-            <div class="as-code">GTC 2027 · SESSION DL4321 · HALL 3</div>
-            <div class="as-title">"From zero to production agents"</div>
-            <div class="as-speaker">SPEAKER: <b>YOU</b> · RECORDED FOREVER</div>
+          <div class="rp-cols">
+            <div class="rp-col"><div class="rc-head free">FREE · BADGES &amp; SUPERBADGES</div><ul><li>10 layer badges · each is a hands-on task + quiz (100/50/25 cores by attempt)</li><li>Cake Master superbadge · a capstone touching every layer, auto-verified</li></ul></div>
+            <div class="rp-col"><div class="rc-head paid">PAID · PROCTORED CERTIFICATIONS</div><ul><li>None required. Ever.</li><li>Optional: NCA-GENL ($125) if you want the gold stamp · +5,000 cores</li></ul></div>
+            <div class="rp-col"><div class="rc-head then">THEN</div><ul><li>Nothing to apply for. Keep building; rank follows the work.</li></ul></div>
           </div>
+          <div class="rp-boost">Workshops compress any layer into one guided, instructor-led day (+1,000 cores).</div>
         </div>
-        <div class="o4-reqs dark"><span class="rq free">3 COMMUNITY BADGES</span><span class="rq rank">OWL RANK</span><span class="rq apply">APPLY · SPEAKER TRACK</span></div>
-        <a class="o4-link" href="#routes">ROUTE: CERTIFY → RANK → THE STAGE ↓</a>
-      </div>
-
-      <!-- 05 · lead your community -->
-      <div class="o4 c5">
-        <div class="c5-split">
-          <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=500&h=620&fit=crop&auto=format" alt="City user group">
-          <div class="c5-body">
-            <span class="o4-num spine">05</span>
-            <h3>Lead your community.</h3>
-            <div class="c5-event">
+        <div class="oxp p-r2">
+          <div class="rp-tagline">Badges prove it, certs make it official, the marketplace sells it</div>
+          <div class="oxp-top">
+            <div class="art-offer">
+              <div class="ao-co">SERIES B · AGENTIC AI · REMOTE</div>
+              <div class="ao-role">Forward-Deployed AI Engineer</div>
+              <div class="ao-comp">$280K–$340K <span>+ EQUITY</span></div>
+              <div class="ao-reqs"><span>NCP-AAI</span><span>Production Agent superbadge</span></div>
+            </div>
+            <div>
+              <div class="life-label">YOUR ROUTE THROUGH THE LIFECYCLE</div>
+              <div class="life-strip"><span class="ls">Discover</span><i>→</i><span class="ls on">Learn</span><i>→</i><span class="ls on">Build</span><i>→</i><span class="ls on">Certify</span><i>→</i><span class="ls on">Hire</span><i>→</i><span class="ls">Champion</span><i>→</i><span class="ls">Multiply</span></div>
+              <div class="oxp-reqs"><span class="rq free">PATH BADGES</span><span class="rq free">1 SUPERBADGE</span><span class="rq paid">NCA-GENL + NCP-AAI</span></div>
+            </div>
+          </div>
+          <div class="rp-cols">
+            <div class="rp-col"><div class="rc-head free">FREE · BADGES &amp; SUPERBADGES</div><ul><li>Path badges through Units 1–3</li><li>Production Agent superbadge · your live endpoint, auto-verified</li></ul></div>
+            <div class="rp-col"><div class="rc-head paid">PAID · PROCTORED CERTIFICATIONS</div><ul><li>NCA-GENL ($125, proctored) → NCP-AAI ($200, proctored, 120 min)</li><li>Each cert: +5,000 cores · the single biggest rank jump</li></ul></div>
+            <div class="rp-col"><div class="rc-head then">THEN</div><ul><li>List on the certified marketplace at Falcon rank. Offers come to you.</li></ul></div>
+          </div>
+          <div class="rp-boost">Cert-prep workshops run monthly in 150 cities. Same curriculum, one day, proctored.</div>
+        </div>
+        <div class="oxp p-r3">
+          <div class="rp-tagline">Ship publicly, certify officially, walk in with receipts</div>
+          <div class="oxp-top">
+            <div class="art-receipts2">
+              <div class="ar-title">Your profile, the night before the review:</div>
+              <div class="ar-row">✓ 38 shipped projects, publicly verified</div>
+              <div class="ar-row">✓ NCP-AAI · proctored, official</div>
+              <div class="ar-quote2"><img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=300&h=300&fit=crop&crop=faces&auto=format" alt=""><span>"It made not promoting me embarrassing." · <b>Carlos R.</b></span></div>
+            </div>
+            <div>
+              <div class="life-label">YOUR ROUTE THROUGH THE LIFECYCLE</div>
+              <div class="life-strip"><span class="ls">Discover</span><i>→</i><span class="ls on">Learn</span><i>→</i><span class="ls on">Build</span><i>→</i><span class="ls on">Certify</span><i>→</i><span class="ls">Hire</span><i>→</i><span class="ls">Champion</span><i>→</i><span class="ls">Multiply</span></div>
+              <div class="oxp-reqs"><span class="rq free">PROJECT BADGES</span><span class="rq paid">1 ROLE-MATCHED NCP CERT</span></div>
+            </div>
+          </div>
+          <div class="rp-cols">
+            <div class="rp-col"><div class="rc-head free">FREE · BADGES &amp; SUPERBADGES</div><ul><li>Shipped-project badges · every one publicly verified on your profile</li></ul></div>
+            <div class="rp-col"><div class="rc-head paid">PAID · PROCTORED CERTIFICATIONS</div><ul><li>One role-matched professional cert: NCP-AAI (agents) · NCP-AIO (infra) · NCP-ADS (data)</li></ul></div>
+            <div class="rp-col"><div class="rc-head then">THEN</div><ul><li>No application. Send your profile link before the review.</li></ul></div>
+          </div>
+          <div class="rp-boost">Team workshops count: your whole org can climb together, proctored on-site.</div>
+        </div>
+        <div class="oxp p-r4">
+          <div class="rp-tagline">The stage is a rank perk, and rank is earned</div>
+          <div class="oxp-top">
+            <div class="art-session2">
+              <div class="as-code">GTC 2027 · SESSION DL4321 · HALL 3</div>
+              <div class="as-title">"From zero to production agents"</div>
+              <div class="as-speaker">SPEAKER: <b>YOU</b> · RECORDED FOREVER · NAME IN THE PROGRAM</div>
+            </div>
+            <div>
+              <div class="life-label">YOUR ROUTE THROUGH THE LIFECYCLE</div>
+              <div class="life-strip"><span class="ls">Discover</span><i>→</i><span class="ls">Learn</span><i>→</i><span class="ls">Build</span><i>→</i><span class="ls on">Certify</span><i>→</i><span class="ls on">Hire</span><i>→</i><span class="ls on">Champion</span><i>→</i><span class="ls">Multiply</span></div>
+              <div class="oxp-reqs"><span class="rq free">3 COMMUNITY BADGES</span><span class="rq rank">OWL RANK</span><span class="rq apply">APPLY · SPEAKER TRACK</span></div>
+            </div>
+          </div>
+          <div class="rp-cols">
+            <div class="rp-col"><div class="rc-head free">FREE · BADGES &amp; SUPERBADGES</div><ul><li>3 community badges · First Talk and friends, earned at city groups</li></ul></div>
+            <div class="rp-col"><div class="rc-head paid">PAID · PROCTORED CERTIFICATIONS</div><ul><li>1 professional cert · required for Owl rank (30,000 cores · 50 badges · 1 cert)</li></ul></div>
+            <div class="rp-col"><div class="rc-head then">THEN</div><ul><li>Apply to the Champion speaker track at Owl rank. Champions get reserved GTC slots; everyone else enters the open CFP.</li></ul></div>
+          </div>
+          <div class="rp-boost">City-group talks are the farm league: +1,000 cores each, and hosts attest you showed up.</div>
+        </div>
+        <div class="oxp p-r5">
+          <div class="rp-tagline">Champion is a real certification: live, proctored, applied for</div>
+          <div class="oxp-top">
+            <div class="art-event2">
               <div class="ce-date">SEPT 12 · YOUR CITY</div>
               <div class="ce-name">Nemotron User Group #1</div>
-              <div class="ce-meta">HOST: <b>YOU</b> · VENUE FUNDED · 80 SEATS</div>
+              <div class="ce-meta">HOST: <b>YOU</b> · VENUE FUNDED · SWAG KIT SHIPPED · 80 SEATS</div>
+            </div>
+            <div>
+              <div class="life-label">YOUR ROUTE THROUGH THE LIFECYCLE</div>
+              <div class="life-strip"><span class="ls">Discover</span><i>→</i><span class="ls">Learn</span><i>→</i><span class="ls">Build</span><i>→</i><span class="ls on">Certify</span><i>→</i><span class="ls">Hire</span><i>→</i><span class="ls on">Champion</span><i>→</i><span class="ls on">Multiply</span></div>
+              <div class="oxp-reqs"><span class="rq free">HOST + MENTOR BADGES</span><span class="rq paid">1 NCP CERT</span><span class="rq apply">APPLY · CHAMPION (PROCTORED)</span></div>
             </div>
           </div>
-        </div>
-        <div class="o4-reqs"><span class="rq free">GROUP HOST + MENTOR BADGES</span><span class="rq paid">1 NCP CERT</span><span class="rq apply">APPLY · CHAMPION (PROCTORED)</span></div>
-        <a class="o4-link" href="#routes">ROUTE: SERVE → APPLY → CHAMPION ↓</a>
-      </div>
-
-      <!-- 06 · found your firm -->
-      <div class="o4 c6">
-        <div class="o4-head2">
-          <span class="o4-num gold">06</span>
-          <h3>Found your firm.</h3>
-        </div>
-        <div class="o4-art">
-          <div class="art-plaque2">
-            <svg viewBox="0 0 80 80"><use href="#rosette-plain"/></svg>
-            <div class="ap-mid">
-              <div class="ap-title">AUTHORIZED TRAINING CENTER</div>
-              <div class="ap-lic">License № ATC-2027-091</div>
-              <div class="ap-line">Official curriculum · revenue share · your name on the door</div>
-            </div>
-            <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=300&h=300&fit=crop&crop=faces&auto=format" alt="">
+          <div class="rp-cols">
+            <div class="rp-col"><div class="rc-head free">FREE · BADGES &amp; SUPERBADGES</div><ul><li>Group Host + Mentor ×10 badges · service is the prerequisite, not popularity</li></ul></div>
+            <div class="rp-col"><div class="rc-head paid">PAID · PROCTORED CERTIFICATIONS</div><ul><li>1 professional cert (Owl prereq) · then the Champion certification itself: a live, proctored defense in front of examiners</li></ul></div>
+            <div class="rp-col"><div class="rc-head then">THEN</div><ul><li>Apply annually · 300 selected worldwide · pass the Champion certification → funded user group, hackathon kit, direct product line.</li></ul></div>
           </div>
+          <div class="rp-boost">Champions earn cores forever: +1,500 per hosted event, +500 per mentee to Fox rank.</div>
         </div>
-        <div class="o4-reqs"><span class="rq paid">3+ CERTIFIED ENGINEERS</span><span class="rq apply">APPLY · PARTNER TIER OR ATC LICENSE</span></div>
-        <a class="o4-link gold" href="#routes">ROUTE: CERTIFY THE TEAM → LICENSE ↓</a>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-<!-- ═══════════ ROUTES ═══════════ -->
-<section class="soft" id="routes">
-  <div class="wrap">
-    <div class="sec-kicker">Connect the dots</div>
-    <h2 class="sec-title">Pick an outcome. Watch the lifecycle light up.</h2>
-    <p class="sec-lede">Same seven stages for everyone; a different route through them for each outcome. Free badges get you moving, proctored certifications make it official (and pay <b>+5,000 cores</b> each), and the big ones end with an application.</p>
-    <input type="radio" name="route" id="r1" checked><input type="radio" name="route" id="r2"><input type="radio" name="route" id="r3"><input type="radio" name="route" id="r4"><input type="radio" name="route" id="r5"><input type="radio" name="route" id="r6">
-    <div class="route-tabs"><label for="r1">01 · Master the Cake</label><label for="r2">02 · Get hired</label><label for="r3">03 · Get promoted</label><label for="r4">04 · Present at GTC</label><label for="r5">05 · Lead your community</label><label for="r6">06 · Found your firm</label></div>
-    <div class="route-panels">
-      <div class="rp r1">
-        <div class="rp-tagline">Eat the whole thing, layer by layer</div>
-        <div class="life-strip"><span class="ls on"><b>01</b>Discover</span><i>→</i><span class="ls on"><b>02</b>Learn</span><i>→</i><span class="ls on"><b>03</b>Build</span><i>→</i><span class="ls"><b>04</b>Certify</span><i>→</i><span class="ls"><b>05</b>Hire</span><i>→</i><span class="ls"><b>06</b>Champion</span><i>→</i><span class="ls"><b>07</b>Multiply</span></div>
-        <div class="rp-cols">
-          <div class="rp-col"><div class="rc-head free">FREE · BADGES &amp; SUPERBADGES</div><ul><li>10 layer badges · each is a hands-on task + quiz (100/50/25 cores by attempt)</li><li>Cake Master superbadge · a capstone touching every layer, auto-verified</li></ul></div>
-          <div class="rp-col"><div class="rc-head paid">PAID · PROCTORED CERTIFICATIONS</div><ul><li>None required. Ever.</li><li>Optional: NCA-GENL ($125) if you want the gold stamp · +5,000 cores</li></ul></div>
-          <div class="rp-col"><div class="rc-head then">THEN</div><ul><li>Nothing to apply for. Keep building; rank follows the work.</li></ul></div>
+        <div class="oxp p-r6">
+          <div class="rp-tagline">Certify the team, license the business</div>
+          <div class="oxp-top">
+            <div class="art-plaque2">
+              <svg viewBox="0 0 80 80"><use href="#rosette-plain"/></svg>
+              <div class="ap-mid">
+                <div class="ap-title">AUTHORIZED TRAINING CENTER</div>
+                <div class="ap-lic">License № ATC-2027-091</div>
+                <div class="ap-line">Official curriculum · revenue share · your name on the door</div>
+              </div>
+              <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=300&h=300&fit=crop&crop=faces&auto=format" alt="">
+            </div>
+            <div>
+              <div class="life-label">YOUR ROUTE THROUGH THE LIFECYCLE</div>
+              <div class="life-strip"><span class="ls">Discover</span><i>→</i><span class="ls">Learn</span><i>→</i><span class="ls">Build</span><i>→</i><span class="ls on">Certify</span><i>→</i><span class="ls">Hire</span><i>→</i><span class="ls">Champion</span><i>→</i><span class="ls on">Multiply</span></div>
+              <div class="oxp-reqs"><span class="rq paid">3+ CERTIFIED ENGINEERS</span><span class="rq apply">APPLY · PARTNER TIER OR ATC LICENSE</span></div>
+            </div>
+          </div>
+          <div class="rp-cols">
+            <div class="rp-col"><div class="rc-head free">FREE · BADGES &amp; SUPERBADGES</div><ul><li>Superbadges across the team · proof you ship, not just study</li></ul></div>
+            <div class="rp-col"><div class="rc-head paid">PAID · PROCTORED CERTIFICATIONS</div><ul><li>3+ engineers holding NCP certs · consultancy tier requirement</li><li>Training center: Champion certification + curriculum exam</li></ul></div>
+            <div class="rp-col"><div class="rc-head then">THEN</div><ul><li>Apply: Certified Consultancy tier (referral pipeline) or Authorized Training Center license (revenue share). Startups: NVIDIA Inception is open today, no requirements.</li></ul></div>
+          </div>
+          <div class="rp-boost">Every certified hire your firm makes climbs the same board. Your company page shows its collective cores.</div>
         </div>
-        <div class="rp-boost">Workshops compress any layer into one guided, instructor-led day (+1,000 cores).</div>
-      </div>
-      <div class="rp r2">
-        <div class="rp-tagline">Badges prove it, certs make it official, the marketplace sells it</div>
-        <div class="life-strip"><span class="ls"><b>01</b>Discover</span><i>→</i><span class="ls on"><b>02</b>Learn</span><i>→</i><span class="ls on"><b>03</b>Build</span><i>→</i><span class="ls on"><b>04</b>Certify</span><i>→</i><span class="ls on"><b>05</b>Hire</span><i>→</i><span class="ls"><b>06</b>Champion</span><i>→</i><span class="ls"><b>07</b>Multiply</span></div>
-        <div class="rp-cols">
-          <div class="rp-col"><div class="rc-head free">FREE · BADGES &amp; SUPERBADGES</div><ul><li>Path badges through Units 1–3</li><li>Production Agent superbadge · your live endpoint, auto-verified</li></ul></div>
-          <div class="rp-col"><div class="rc-head paid">PAID · PROCTORED CERTIFICATIONS</div><ul><li>NCA-GENL ($125, proctored) → NCP-AAI ($200, proctored, 120 min)</li><li>Each cert: +5,000 cores · the single biggest rank jump</li></ul></div>
-          <div class="rp-col"><div class="rc-head then">THEN</div><ul><li>List on the certified marketplace at Falcon rank. Offers come to you.</li></ul></div>
-        </div>
-        <div class="rp-boost">Cert-prep workshops run monthly in 150 cities. Same curriculum, one day, proctored.</div>
-      </div>
-      <div class="rp r3">
-        <div class="rp-tagline">Ship publicly, certify officially, walk in with receipts</div>
-        <div class="life-strip"><span class="ls"><b>01</b>Discover</span><i>→</i><span class="ls on"><b>02</b>Learn</span><i>→</i><span class="ls on"><b>03</b>Build</span><i>→</i><span class="ls on"><b>04</b>Certify</span><i>→</i><span class="ls"><b>05</b>Hire</span><i>→</i><span class="ls"><b>06</b>Champion</span><i>→</i><span class="ls"><b>07</b>Multiply</span></div>
-        <div class="rp-cols">
-          <div class="rp-col"><div class="rc-head free">FREE · BADGES &amp; SUPERBADGES</div><ul><li>Shipped-project badges · every one publicly verified on your profile</li></ul></div>
-          <div class="rp-col"><div class="rc-head paid">PAID · PROCTORED CERTIFICATIONS</div><ul><li>One role-matched professional cert: NCP-AAI (agents) · NCP-AIO (infra) · NCP-ADS (data)</li></ul></div>
-          <div class="rp-col"><div class="rc-head then">THEN</div><ul><li>No application. Send your profile link before the review.</li></ul></div>
-        </div>
-        <div class="rp-boost">Team workshops count: your whole org can climb together, proctored on-site.</div>
-      </div>
-      <div class="rp r4">
-        <div class="rp-tagline">The stage is a rank perk, and rank is earned</div>
-        <div class="life-strip"><span class="ls"><b>01</b>Discover</span><i>→</i><span class="ls"><b>02</b>Learn</span><i>→</i><span class="ls"><b>03</b>Build</span><i>→</i><span class="ls on"><b>04</b>Certify</span><i>→</i><span class="ls on"><b>05</b>Hire</span><i>→</i><span class="ls on"><b>06</b>Champion</span><i>→</i><span class="ls"><b>07</b>Multiply</span></div>
-        <div class="rp-cols">
-          <div class="rp-col"><div class="rc-head free">FREE · BADGES &amp; SUPERBADGES</div><ul><li>3 community badges · First Talk and friends, earned at city groups</li></ul></div>
-          <div class="rp-col"><div class="rc-head paid">PAID · PROCTORED CERTIFICATIONS</div><ul><li>1 professional cert · required for Owl rank (30,000 cores · 50 badges · 1 cert)</li></ul></div>
-          <div class="rp-col"><div class="rc-head then">THEN</div><ul><li>Apply to the Champion speaker track at Owl rank. Champions get reserved GTC slots; everyone else enters the open CFP.</li></ul></div>
-        </div>
-        <div class="rp-boost">City-group talks are the farm league: +1,000 cores each, and hosts attest you showed up.</div>
-      </div>
-      <div class="rp r5">
-        <div class="rp-tagline">Champion is a real certification: live, proctored, applied for</div>
-        <div class="life-strip"><span class="ls"><b>01</b>Discover</span><i>→</i><span class="ls"><b>02</b>Learn</span><i>→</i><span class="ls"><b>03</b>Build</span><i>→</i><span class="ls on"><b>04</b>Certify</span><i>→</i><span class="ls"><b>05</b>Hire</span><i>→</i><span class="ls on"><b>06</b>Champion</span><i>→</i><span class="ls on"><b>07</b>Multiply</span></div>
-        <div class="rp-cols">
-          <div class="rp-col"><div class="rc-head free">FREE · BADGES &amp; SUPERBADGES</div><ul><li>Group Host + Mentor ×10 badges · service is the prerequisite, not popularity</li></ul></div>
-          <div class="rp-col"><div class="rc-head paid">PAID · PROCTORED CERTIFICATIONS</div><ul><li>1 professional cert (Owl prereq) · then the Champion certification itself: a live, proctored defense in front of examiners</li></ul></div>
-          <div class="rp-col"><div class="rc-head then">THEN</div><ul><li>Apply annually · 300 selected worldwide · pass the Champion certification → funded user group, hackathon kit, direct product line.</li></ul></div>
-        </div>
-        <div class="rp-boost">Champions earn cores forever: +1,500 per hosted event, +500 per mentee to Fox rank.</div>
-      </div>
-      <div class="rp r6">
-        <div class="rp-tagline">Certify the team, license the business</div>
-        <div class="life-strip"><span class="ls"><b>01</b>Discover</span><i>→</i><span class="ls"><b>02</b>Learn</span><i>→</i><span class="ls"><b>03</b>Build</span><i>→</i><span class="ls on"><b>04</b>Certify</span><i>→</i><span class="ls"><b>05</b>Hire</span><i>→</i><span class="ls"><b>06</b>Champion</span><i>→</i><span class="ls on"><b>07</b>Multiply</span></div>
-        <div class="rp-cols">
-          <div class="rp-col"><div class="rc-head free">FREE · BADGES &amp; SUPERBADGES</div><ul><li>Superbadges across the team · proof you ship, not just study</li></ul></div>
-          <div class="rp-col"><div class="rc-head paid">PAID · PROCTORED CERTIFICATIONS</div><ul><li>3+ engineers holding NCP certs · consultancy tier requirement</li><li>Training center: Champion certification + curriculum exam</li></ul></div>
-          <div class="rp-col"><div class="rc-head then">THEN</div><ul><li>Apply: Certified Consultancy tier (referral pipeline) or Authorized Training Center license (revenue share). Startups: NVIDIA Inception is open today, no requirements.</li></ul></div>
-        </div>
-        <div class="rp-boost">Every certified hire your firm makes climbs the same board. Your company page shows its collective cores.</div>
       </div>
     </div>
   </div>
