@@ -808,6 +808,41 @@ tr.lb-gap td { text-align: center; font-family: var(--mono); color: var(--ink4);
   .lp-left { border-right: none; border-bottom: 1.5px solid var(--ink); }
 }
 
+
+/* ── milestone map ── */
+.ms-rail { position: relative; display: grid; grid-template-columns: repeat(6, 1fr); gap: 16px; margin-bottom: -2px; }
+.ms-rail::before { content: ""; position: absolute; left: 8%; right: 8%; top: 6px; border-top: 2.5px solid var(--ink); }
+.ms-rail::after { content: "▶"; position: absolute; right: 6.2%; top: -1px; font-size: 11px; color: var(--ink); }
+.ms-cell { display: flex; justify-content: center; }
+.ms-dot { width: 14px; height: 14px; border-radius: 50%; background: var(--green); border: 2.5px solid var(--ink); position: relative; z-index: 1; }
+.ms-dot.end { background: var(--gold); }
+.ms-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 16px; padding-top: 18px; }
+.ms { border: 1.5px solid var(--ink); background: #fff; padding: 14px 14px 0; display: flex; flex-direction: column; position: relative; }
+.ms::before { content: ""; position: absolute; top: -18px; left: 50%; width: 2px; height: 18px; background: var(--rule-strong); }
+.ms-stage { font-family: var(--mono); font-size: 7px; font-weight: 800; letter-spacing: 0.12em; color: var(--green-dim); margin-bottom: 8px; }
+.ms-num { font-family: var(--serif); font-size: 26px; font-weight: 600; color: var(--green-dim); line-height: 1; }
+.ms h3 { font-family: var(--serif); font-size: 16.5px; font-weight: 600; font-style: italic; letter-spacing: -0.01em; line-height: 1.15; margin: 4px 0 10px; }
+.ms-art { display: flex; align-items: center; min-height: 58px; margin-bottom: 8px; }
+.ms-cake { width: 100%; max-width: 110px; margin: 0 auto 8px; display: block; }
+.ms-stamp { display: inline-block; border: 3px double var(--green-dim); color: var(--green-dim); font-family: var(--mono); font-size: 14px; font-weight: 800; letter-spacing: 0.2em; padding: 4px 12px 4px 14px; transform: rotate(-8deg); margin: 0 auto; }
+.ms-rows { font-family: var(--mono); font-size: 9px; line-height: 1.9; color: var(--ink2); }
+.ms-dark { background: var(--ink); color: #9adf2e; font-family: var(--mono); font-size: 8.5px; font-weight: 700; letter-spacing: 0.08em; line-height: 1.8; padding: 9px 11px; width: 100%; }
+.ms-dark b { color: #fff; }
+.ms-event { border: 1.5px solid var(--ink); border-left: 6px solid var(--green); font-family: var(--mono); font-size: 8.5px; letter-spacing: 0.06em; line-height: 1.8; padding: 8px 10px; color: var(--ink2); width: 100%; }
+.ms-event b { color: var(--ink); }
+.ms-gold { display: flex; gap: 8px; align-items: center; border: 1px solid var(--gold); background: var(--gold-bg); padding: 7px 9px; font-family: var(--mono); font-size: 8.5px; font-weight: 800; letter-spacing: 0.08em; color: #8a6914; line-height: 1.6; width: 100%; }
+.ms-gold svg { width: 30px; height: 30px; flex-shrink: 0; }
+.ms-sub { font-size: 10.5px; color: var(--ink3); line-height: 1.45; margin-bottom: 12px; }
+.ms-link { display: block; margin: auto -14px 0; padding: 9px 14px; border-top: 1px solid var(--rule); font-family: var(--mono); font-size: 8px; font-weight: 800; color: var(--green-deep); text-decoration: none; letter-spacing: 0.08em; }
+.ms-link:hover { background: var(--green-bg); }
+.ms-note { margin-top: 18px; font-size: 13px; font-style: italic; color: var(--ink3); }
+
+@media (max-width: 880px) {
+  .ms-rail { display: none; }
+  .ms-grid { grid-template-columns: 1fr 1fr; padding-top: 0; }
+  .ms::before { display: none; }
+}
+
 /* ── final cta ── */
 .final-cta { text-align: center; padding: 88px 0; }
 .final-cta h2 { font-family: var(--serif); font-size: 42px; font-weight: 600; letter-spacing: -0.015em; margin-bottom: 14px; }
@@ -1004,7 +1039,7 @@ footer a:hover { color: #fff; }
       <div class="signup-trust">FREE FOREVER · NO CREDIT CARD · FIRST BADGE IN 30 MIN</div>
       <div class="hero-ctas" style="margin-top: 22px; margin-bottom: 22px;">
         <a class="hex-btn ghost" href="#paths">Explore the learning paths ↓</a>
-        <a class="hex-btn ghost" href="#ranks">Ranks &amp; perks ↓</a>
+        <a class="hex-btn ghost" href="#outcomes">Where every path leads ↓</a>
       </div>
       <p class="hero-lore">Everyone starts a Gecko. Fifty a year become Dragons. <b>→ SEE THE RANKS</b></p>
       <div class="hero-social">
@@ -1088,128 +1123,10 @@ footer a:hover { color: #fff; }
   </div>
 </div>
 
-<!-- ═══════════ OUTCOMES ═══════════ -->
-<section id="outcomes">
-  <div class="wrap">
-    <div class="sec-kicker">Depth 01 · start with the ending</div>
-    <h2 class="sec-title">Choose your outcome. There are six.</h2>
-    <p class="sec-lede">Pick one on the left. The right side shows the <b>three things you need</b> and what happens then; click through for the learning path that gets you there.</p>
-    <input type="radio" name="route" id="r1" checked><input type="radio" name="route" id="r2"><input type="radio" name="route" id="r3"><input type="radio" name="route" id="r4"><input type="radio" name="route" id="r5"><input type="radio" name="route" id="r6">
-    <div class="ox-grid">
-      <div class="ox-left">
-        <label class="oxi" for="r1">
-          <span class="num">01</span>
-          <span class="oxi-txt"><b>Master the 10-Layer Cake.</b><span>Learn the entire stack by doing. Pay nothing, ever.</span></span>
-          <span class="chev">→</span>
-        </label>
-        <label class="oxi" for="r2">
-          <span class="num">02</span>
-          <span class="oxi-txt"><b>Get hired.</b><span>Certs + verified work. Offers come to you.</span></span>
-          <span class="chev">→</span>
-        </label>
-        <label class="oxi" for="r3">
-          <span class="num">03</span>
-          <span class="oxi-txt"><b>Get promoted.</b><span>Public receipts make the case for you.</span></span>
-          <span class="chev">→</span>
-        </label>
-        <label class="oxi" for="r4">
-          <span class="num">04</span>
-          <span class="oxi-txt"><b>Present at GTC.</b><span>From the audience to the program.</span></span>
-          <span class="chev">→</span>
-        </label>
-        <label class="oxi" for="r5">
-          <span class="num">05</span>
-          <span class="oxi-txt"><b>Lead your community.</b><span>A funded user group with your name on the door.</span></span>
-          <span class="chev">→</span>
-        </label>
-        <label class="oxi" for="r6">
-          <span class="num">06</span>
-          <span class="oxi-txt"><b>Found your firm.</b><span>Consultancy, training center, or startup.</span></span>
-          <span class="chev">→</span>
-        </label>
-      </div>
-      <div class="ox-right">
-        <div class="oxp p-r1">
-          <a class="oxp-stretch" href="#paths" aria-label="Go deeper"></a>
-          <span class="oxp-hint">CLICK ANYWHERE TO GO DEEPER ↓</span>
-          <div class="rp-tagline">Eat the whole thing, layer by layer</div>
-          <div class="need-label">YOU NEED THREE THINGS</div>
-          <div class="needs"><div class="need"><span class="nd-num free">1</span><div class="nd-txt"><b>10 layer badges</b><span>free · one hands-on task + one quiz per layer</span></div></div><div class="need"><span class="nd-num free">2</span><div class="nd-txt"><b>The Cake Master superbadge</b><span>free · a capstone touching every layer, auto-verified</span></div></div><div class="need"><span class="nd-num none">3</span><div class="nd-txt"><b>Nothing else</b><span>no exam, no fee, ever · certs stay optional</span></div></div></div>
-          <div class="then-row"><span class="tr-label">THEN</span><span>Rank follows the work. The whole plan below is $0.</span></div>
-          <div class="oxp-foot">
-            <div class="life-strip small"><span class="ls on">Discover</span><i>→</i><span class="ls on">Learn</span><i>→</i><span class="ls on">Build</span><i>→</i><span class="ls">Certify</span><i>→</i><span class="ls">Hire</span><i>→</i><span class="ls">Champion</span><i>→</i><span class="ls">Multiply</span></div>
-            <a class="hex-btn primary small" href="#paths">Open the Explorer path ↓</a>
-          </div>
-        </div>
-        <div class="oxp p-r2">
-          <a class="oxp-stretch" href="#paths" aria-label="Go deeper"></a>
-          <span class="oxp-hint">CLICK ANYWHERE TO GO DEEPER ↓</span>
-          <div class="rp-tagline">Badges prove it, certs make it official, the marketplace sells it</div>
-          <div class="need-label">YOU NEED THREE THINGS</div>
-          <div class="needs"><div class="need"><span class="nd-num free">1</span><div class="nd-txt"><b>Path badges</b><span>free · two agentic courses with GPU labs included</span></div></div><div class="need"><span class="nd-num free">2</span><div class="nd-txt"><b>The Production Agent superbadge</b><span>free · your live endpoint, auto-verified</span></div></div><div class="need"><span class="nd-num paid">3</span><div class="nd-txt"><b>Two certifications</b><span>paid · proctored · NCA-GENL ($125) → NCP-AAI ($200)</span></div></div></div>
-          <div class="then-row"><span class="tr-label">THEN</span><span>You're listed on the certified marketplace at Falcon rank. Offers come to you.</span></div>
-          <div class="oxp-foot">
-            <div class="life-strip small"><span class="ls">Discover</span><i>→</i><span class="ls on">Learn</span><i>→</i><span class="ls on">Build</span><i>→</i><span class="ls on">Certify</span><i>→</i><span class="ls on">Hire</span><i>→</i><span class="ls">Champion</span><i>→</i><span class="ls">Multiply</span></div>
-            <a class="hex-btn primary small" href="#paths">Open the career paths ↓</a>
-          </div>
-        </div>
-        <div class="oxp p-r3">
-          <a class="oxp-stretch" href="#paths" aria-label="Go deeper"></a>
-          <span class="oxp-hint">CLICK ANYWHERE TO GO DEEPER ↓</span>
-          <div class="rp-tagline">Ship publicly, certify officially, walk in with receipts</div>
-          <div class="need-label">YOU NEED THREE THINGS</div>
-          <div class="needs"><div class="need"><span class="nd-num free">1</span><div class="nd-txt"><b>Shipped-project badges</b><span>free · every project publicly verified on your profile</span></div></div><div class="need"><span class="nd-num paid">2</span><div class="nd-txt"><b>One role-matched cert</b><span>paid · proctored · NCP-AAI, NCP-AIO, or NCP-ADS</span></div></div><div class="need"><span class="nd-num free">3</span><div class="nd-txt"><b>Your public profile</b><span>automatic · rank, badges, certs, all on one link</span></div></div></div>
-          <div class="then-row"><span class="tr-label">THEN</span><span>Send the profile link before your review. The case makes itself.</span></div>
-          <div class="oxp-foot">
-            <div class="life-strip small"><span class="ls">Discover</span><i>→</i><span class="ls on">Learn</span><i>→</i><span class="ls on">Build</span><i>→</i><span class="ls on">Certify</span><i>→</i><span class="ls">Hire</span><i>→</i><span class="ls">Champion</span><i>→</i><span class="ls">Multiply</span></div>
-            <a class="hex-btn primary small" href="#paths">Open the career paths ↓</a>
-          </div>
-        </div>
-        <div class="oxp p-r4">
-          <a class="oxp-stretch" href="#champions" aria-label="Go deeper"></a>
-          <span class="oxp-hint">CLICK ANYWHERE TO GO DEEPER ↓</span>
-          <div class="rp-tagline">The stage is a rank perk, and rank is earned</div>
-          <div class="need-label">YOU NEED THREE THINGS</div>
-          <div class="needs"><div class="need"><span class="nd-num free">1</span><div class="nd-txt"><b>3 community badges</b><span>free · talks at your city's group, host-attested</span></div></div><div class="need"><span class="nd-num rank">2</span><div class="nd-txt"><b>Owl rank</b><span>30,000 cores · 50 badges · 1 professional cert</span></div></div><div class="need"><span class="nd-num apply">3</span><div class="nd-txt"><b>One application</b><span>Champion speaker track · or the open GTC CFP</span></div></div></div>
-          <div class="then-row"><span class="tr-label">THEN</span><span>Your session code, your name in the program, recorded forever.</span></div>
-          <div class="oxp-foot">
-            <div class="life-strip small"><span class="ls">Discover</span><i>→</i><span class="ls">Learn</span><i>→</i><span class="ls">Build</span><i>→</i><span class="ls on">Certify</span><i>→</i><span class="ls on">Hire</span><i>→</i><span class="ls on">Champion</span><i>→</i><span class="ls">Multiply</span></div>
-            <a class="hex-btn primary small" href="#champions">See the Champion track ↓</a>
-          </div>
-        </div>
-        <div class="oxp p-r5">
-          <a class="oxp-stretch" href="#champions" aria-label="Go deeper"></a>
-          <span class="oxp-hint">CLICK ANYWHERE TO GO DEEPER ↓</span>
-          <div class="rp-tagline">Champion is a real certification: live, proctored, applied for</div>
-          <div class="need-label">YOU NEED THREE THINGS</div>
-          <div class="needs"><div class="need"><span class="nd-num free">1</span><div class="nd-txt"><b>Host + Mentor badges</b><span>free · service first: run events, mentor builders</span></div></div><div class="need"><span class="nd-num paid">2</span><div class="nd-txt"><b>One professional cert</b><span>paid · proctored · the Owl-rank prerequisite</span></div></div><div class="need"><span class="nd-num apply">3</span><div class="nd-txt"><b>The Champion certification</b><span>apply annually · 300 selected · live proctored defense</span></div></div></div>
-          <div class="then-row"><span class="tr-label">THEN</span><span>NVIDIA funds your group: venue, swag, speakers. You lead it.</span></div>
-          <div class="oxp-foot">
-            <div class="life-strip small"><span class="ls">Discover</span><i>→</i><span class="ls">Learn</span><i>→</i><span class="ls">Build</span><i>→</i><span class="ls on">Certify</span><i>→</i><span class="ls">Hire</span><i>→</i><span class="ls on">Champion</span><i>→</i><span class="ls on">Multiply</span></div>
-            <a class="hex-btn primary small" href="#champions">See the Champion track ↓</a>
-          </div>
-        </div>
-        <div class="oxp p-r6">
-          <a class="oxp-stretch" href="#champions" aria-label="Go deeper"></a>
-          <span class="oxp-hint">CLICK ANYWHERE TO GO DEEPER ↓</span>
-          <div class="rp-tagline">Certify the team, license the business</div>
-          <div class="need-label">YOU NEED THREE THINGS</div>
-          <div class="needs"><div class="need"><span class="nd-num paid">1</span><div class="nd-txt"><b>3+ certified engineers</b><span>paid certs across your team · the consultancy bar</span></div></div><div class="need"><span class="nd-num apply">2</span><div class="nd-txt"><b>One application</b><span>Certified Consultancy tier · or the ATC license (Champion)</span></div></div><div class="need"><span class="nd-num free">3</span><div class="nd-txt"><b>The startup shortcut</b><span>NVIDIA Inception is open today, zero requirements</span></div></div></div>
-          <div class="then-row"><span class="tr-label">THEN</span><span>Referral pipeline, revenue share, and a company page on the board.</span></div>
-          <div class="oxp-foot">
-            <div class="life-strip small"><span class="ls">Discover</span><i>→</i><span class="ls">Learn</span><i>→</i><span class="ls">Build</span><i>→</i><span class="ls on">Certify</span><i>→</i><span class="ls">Hire</span><i>→</i><span class="ls">Champion</span><i>→</i><span class="ls on">Multiply</span></div>
-            <a class="hex-btn primary small" href="#champions">See the partner tier ↓</a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
 <!-- ═══════════ LEARNING PATHS ═══════════ -->
 <section class="soft" id="paths">
   <div class="wrap">
-    <div class="sec-kicker">Depth 02 · the learning paths</div>
+    <div class="sec-kicker">Depth 01 · what kind of builder are you?</div>
     <h2 class="sec-title">Six paths. Named like jobs, backed by real certifications.</h2>
     <p class="sec-lede">Pick a path, then walk its steps on the left: courses, hands-on labs, a superbadge, and <b>real NVIDIA certifications that exist today</b>. Click any step and the right side shows exactly what it is, what it costs, and where to start.</p>
     <input type="radio" name="lp" id="lp1" checked><input type="radio" name="lp" id="lp2"><input type="radio" name="lp" id="lp3"><input type="radio" name="lp" id="lp4"><input type="radio" name="lp" id="lp5"><input type="radio" name="lp" id="lp6">
@@ -1840,7 +1757,92 @@ footer a:hover { color: #fff; }
         </div>
       </div>
     </div>
-    <div class="go-deeper">Done with the steps? Keep going down: <a href="#ranks">the levels you climb</a> · <a href="#certs">all eleven official certifications</a> · <a href="#leaderboard">the people already there</a></div>
+    <div class="go-deeper">Done with the steps? Next: <a href="#outcomes">where every path leads</a> · <a href="#ranks">the levels you climb</a> · <a href="#certs">all eleven official certifications</a></div>
+  </div>
+</section>
+
+<!-- ═══════════ OUTCOMES ═══════════ -->
+<section id="outcomes">
+  <div class="wrap">
+    <div class="sec-kicker">Depth 02 · where every path leads</div>
+    <h2 class="sec-title">Every path passes the same six destinations.</h2>
+    <p class="sec-lede">You don't pick one. You <b>collect them</b>, roughly in this order, as you move through the lifecycle. The map is identical for every path above; only the courses change.</p>
+
+    <div class="ms-rail" aria-hidden="true">
+      <div class="ms-cell"><span class="ms-dot"></span></div>
+      <div class="ms-cell"><span class="ms-dot"></span></div>
+      <div class="ms-cell"><span class="ms-dot"></span></div>
+      <div class="ms-cell"><span class="ms-dot"></span></div>
+      <div class="ms-cell"><span class="ms-dot"></span></div>
+      <div class="ms-cell"><span class="ms-dot end"></span></div>
+    </div>
+
+    <div class="ms-grid">
+
+      <div class="ms">
+        <div class="ms-stage">STAGES · LEARN + BUILD</div>
+        <div class="ms-num">01</div>
+        <h3>Master the stack.</h3>
+        <svg viewBox="0 0 170 100" class="ms-cake"><rect x="10" y="87" width="150" height="8" fill="#344e00" stroke="#0e0e0e" stroke-width="1"/><rect x="14" y="77" width="141" height="8" fill="#3f5f00" stroke="#0e0e0e" stroke-width="1"/><rect x="19" y="67" width="132" height="8" fill="#4a7000" stroke="#0e0e0e" stroke-width="1"/><rect x="24" y="57" width="123" height="8" fill="#558200" stroke="#0e0e0e" stroke-width="1"/><rect x="28" y="47" width="114" height="8" fill="#609400" stroke="#0e0e0e" stroke-width="1"/><rect x="32" y="37" width="105" height="8" fill="#6ba600" stroke="#0e0e0e" stroke-width="1"/><rect x="37" y="27" width="96" height="8" fill="#76b900" stroke="#0e0e0e" stroke-width="1"/><rect x="42" y="17" width="87" height="8" fill="#fff" stroke="#a4a299" stroke-width="1.2" stroke-dasharray="3 2"/><rect x="46" y="7" width="78" height="8" fill="#fff" stroke="#a4a299" stroke-width="1.2" stroke-dasharray="3 2"/><rect x="50" y="-3" width="69" height="8" fill="#fff" stroke="#a4a299" stroke-width="1.2" stroke-dasharray="3 2"/></svg>
+        <div class="ms-sub">10 layers, all free · the Explorer path or any other</div>
+        <a class="ms-link" href="#paths">VIA ANY PATH ↑</a>
+      </div>
+
+      <div class="ms">
+        <div class="ms-stage">STAGES · CERTIFY + HIRE</div>
+        <div class="ms-num">02</div>
+        <h3>Get hired.</h3>
+        <div class="ms-art"><span class="ms-stamp">HIRED</span></div>
+        <div class="ms-sub">certs + superbadge → marketplace · offers come to you</div>
+        <a class="ms-link" href="#offers">SEE THIS MONTH'S OFFERS ↓</a>
+      </div>
+
+      <div class="ms">
+        <div class="ms-stage">STAGES · CERTIFY + HIRE</div>
+        <div class="ms-num">03</div>
+        <h3>Get promoted.</h3>
+        <div class="ms-art">
+          <div class="ms-rows">✓ 38 verified projects<br>✓ NCP cert · proctored<br>✓ all of it public</div>
+        </div>
+        <div class="ms-sub">receipts no review can ignore</div>
+        <a class="ms-link" href="#leaderboard">YOUR PROFILE, PUBLIC ↓</a>
+      </div>
+
+      <div class="ms">
+        <div class="ms-stage">STAGE · CHAMPION</div>
+        <div class="ms-num">04</div>
+        <h3>Present at GTC.</h3>
+        <div class="ms-art">
+          <div class="ms-dark">GTC · SESSION DL4321<br><b>SPEAKER: YOU</b></div>
+        </div>
+        <div class="ms-sub">the speaker track is a Wolf-rank perk</div>
+        <a class="ms-link" href="#champions">THE CHAMPION TRACK ↓</a>
+      </div>
+
+      <div class="ms">
+        <div class="ms-stage">STAGE · CHAMPION</div>
+        <div class="ms-num">05</div>
+        <h3>Lead your community.</h3>
+        <div class="ms-art">
+          <div class="ms-event"><b>SEPT 12</b> · YOUR CITY<br>HOST: YOU · VENUE FUNDED</div>
+        </div>
+        <div class="ms-sub">Champion is a real certification: live, proctored</div>
+        <a class="ms-link" href="#events">THIS MONTH'S EVENTS ↓</a>
+      </div>
+
+      <div class="ms">
+        <div class="ms-stage">STAGE · MULTIPLY</div>
+        <div class="ms-num">06</div>
+        <h3>Found your firm.</h3>
+        <div class="ms-art">
+          <div class="ms-gold"><svg viewBox="0 0 80 80"><use href="#rosette-plain"/></svg><span>ATC LICENSE<br>№ 2027-091</span></div>
+        </div>
+        <div class="ms-sub">consultancy tier · training center · or Inception today</div>
+        <a class="ms-link" href="#champions">HOW WOLVES EARN ↓</a>
+      </div>
+
+    </div>
+    <div class="ms-note">All six are open to every path. Most builders collect three or more; the order above is the usual one, not a rule.</div>
   </div>
 </section>
 
