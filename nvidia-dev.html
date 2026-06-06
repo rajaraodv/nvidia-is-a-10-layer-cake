@@ -743,35 +743,41 @@ tr.lb-gap td { text-align: center; font-family: var(--mono); color: var(--ink4);
 .go-deeper a:hover { text-decoration: underline; }
 
 
-/* ── learning paths ── */
+/* ── learning paths (tracks) ── */
 #paths input[type="radio"] { position: absolute; opacity: 0; pointer-events: none; }
 .lp-tabs { display: flex; flex-wrap: wrap; gap: 8px; }
-.lp-tabs label { font-family: var(--mono); font-size: 10.5px; font-weight: 800; letter-spacing: 0.05em; border: 1.5px solid var(--ink); background: #fff; color: var(--ink2); padding: 10px 16px; cursor: pointer; }
+.lp-tabs label { font-family: var(--mono); font-size: 11.5px; font-weight: 800; letter-spacing: 0.05em; border: 1.5px solid var(--ink); background: #fff; color: var(--ink2); padding: 11px 20px; cursor: pointer; }
 .lp-tabs label:hover { background: var(--green-bg); }
-#lp1:checked ~ .lp-tabs label[for="lp1"], #lp2:checked ~ .lp-tabs label[for="lp2"], #lp3:checked ~ .lp-tabs label[for="lp3"], #lp4:checked ~ .lp-tabs label[for="lp4"], #lp5:checked ~ .lp-tabs label[for="lp5"], #lp6:checked ~ .lp-tabs label[for="lp6"] { background: var(--green); color: var(--ink); }
+#t1:checked ~ .lp-tabs label[for="t1"], #t2:checked ~ .lp-tabs label[for="t2"], #t3:checked ~ .lp-tabs label[for="t3"], #t4:checked ~ .lp-tabs label[for="t4"], #t5:checked ~ .lp-tabs label[for="t5"] { background: var(--green); color: var(--ink); }
 .lp-bodies { border: 1.5px solid var(--ink); background: #fff; }
 .lp-body { display: none; }
-#lp1:checked ~ .lp-bodies .b-lp1, #lp2:checked ~ .lp-bodies .b-lp2, #lp3:checked ~ .lp-bodies .b-lp3, #lp4:checked ~ .lp-bodies .b-lp4, #lp5:checked ~ .lp-bodies .b-lp5, #lp6:checked ~ .lp-bodies .b-lp6 { display: block; }
+#t1:checked ~ .lp-bodies .b-t1, #t2:checked ~ .lp-bodies .b-t2, #t3:checked ~ .lp-bodies .b-t3, #t4:checked ~ .lp-bodies .b-t4, #t5:checked ~ .lp-bodies .b-t5 { display: block; }
 .lp-sub { font-family: var(--mono); font-size: 10px; font-weight: 800; letter-spacing: 0.12em; color: var(--green-dim); text-transform: uppercase; padding: 14px 22px; border-bottom: 1.5px solid var(--ink); background: var(--bg-soft); }
-.lp-grid { display: grid; grid-template-columns: 360px 1fr; }
+.role-tabs { display: flex; flex-wrap: wrap; gap: 6px; padding: 12px 22px; border-bottom: 1.5px solid var(--ink); background: #fff; }
+.role-tabs label { font-family: var(--mono); font-size: 9.5px; font-weight: 800; letter-spacing: 0.05em; border: 1px solid var(--rule-strong); background: var(--bg-soft); color: var(--ink2); padding: 7px 13px; cursor: pointer; }
+.role-tabs label:hover { border-color: var(--green); }
+#cr1:checked ~ .role-tabs label[for="cr1"], #cr2:checked ~ .role-tabs label[for="cr2"], #cr3:checked ~ .role-tabs label[for="cr3"], #cr4:checked ~ .role-tabs label[for="cr4"], #cr5:checked ~ .role-tabs label[for="cr5"] { background: var(--ink); color: #9adf2e; border-color: var(--ink); }
+.role-body { display: none; }
+#cr1:checked ~ .role-bodies .rb-cr1, #cr2:checked ~ .role-bodies .rb-cr2, #cr3:checked ~ .role-bodies .rb-cr3, #cr4:checked ~ .role-bodies .rb-cr4, #cr5:checked ~ .role-bodies .rb-cr5 { display: block; }
+.role-sub { font-family: var(--mono); font-size: 9px; font-weight: 800; letter-spacing: 0.1em; color: var(--ink3); padding: 10px 22px 0; }
+.lp-grid { display: grid; grid-template-columns: 380px 1fr; }
 .lp-left { border-right: 1.5px solid var(--ink); display: flex; flex-direction: column; }
-.lps { display: flex; gap: 12px; align-items: center; padding: 13px 16px; border-bottom: 1px solid var(--rule); cursor: pointer; }
+.lps { display: flex; gap: 11px; align-items: center; padding: 10px 16px; border-bottom: 1px solid var(--rule); cursor: pointer; }
 .lps:last-child { border-bottom: none; }
 .lps:hover { background: var(--green-bg); }
-.lps-num { font-family: var(--serif); font-size: 18px; font-weight: 600; color: var(--green-dim); width: 20px; flex-shrink: 0; }
+.lps-num { font-family: var(--serif); font-size: 16px; font-weight: 600; color: var(--green-dim); width: 20px; flex-shrink: 0; }
 .lps-txt { min-width: 0; }
-.lps-txt b { display: block; font-size: 13px; font-weight: 800; line-height: 1.25; }
-.lps-txt span { font-size: 10.5px; color: var(--ink3); display: block; margin-top: 1px; }
+.lps-txt b { display: block; font-size: 12.5px; font-weight: 800; line-height: 1.25; }
+.lps-txt span { font-size: 10px; color: var(--ink3); display: block; margin-top: 1px; }
 .lps-kind { margin-left: auto; font-family: var(--mono); font-size: 7.5px; font-weight: 800; letter-spacing: 0.1em; padding: 3px 7px; white-space: nowrap; flex-shrink: 0; }
 .lps-kind.course, .lps-kind.lab { border: 1px solid var(--green); background: var(--green-bg); color: var(--green-deep); }
 .lps-kind.super { border: 1px solid var(--green-dim); background: #fff; color: var(--green-deep); }
 .lps-kind.cert { border: 1px solid var(--gold); background: var(--gold-bg); color: #8a6914; }
 .lps-kind.outcome { border: 1px solid var(--ink); background: var(--ink); color: #9adf2e; }
-#lp1s1:checked ~ .lp-grid .lp-left label[for="lp1s1"], #lp1s2:checked ~ .lp-grid .lp-left label[for="lp1s2"], #lp1s3:checked ~ .lp-grid .lp-left label[for="lp1s3"], #lp1s4:checked ~ .lp-grid .lp-left label[for="lp1s4"], #lp1s5:checked ~ .lp-grid .lp-left label[for="lp1s5"], #lp1s6:checked ~ .lp-grid .lp-left label[for="lp1s6"], #lp1s7:checked ~ .lp-grid .lp-left label[for="lp1s7"], #lp2s1:checked ~ .lp-grid .lp-left label[for="lp2s1"], #lp2s2:checked ~ .lp-grid .lp-left label[for="lp2s2"], #lp2s3:checked ~ .lp-grid .lp-left label[for="lp2s3"], #lp2s4:checked ~ .lp-grid .lp-left label[for="lp2s4"], #lp2s5:checked ~ .lp-grid .lp-left label[for="lp2s5"], #lp2s6:checked ~ .lp-grid .lp-left label[for="lp2s6"], #lp3s1:checked ~ .lp-grid .lp-left label[for="lp3s1"], #lp3s2:checked ~ .lp-grid .lp-left label[for="lp3s2"], #lp3s3:checked ~ .lp-grid .lp-left label[for="lp3s3"], #lp3s4:checked ~ .lp-grid .lp-left label[for="lp3s4"], #lp3s5:checked ~ .lp-grid .lp-left label[for="lp3s5"], #lp3s6:checked ~ .lp-grid .lp-left label[for="lp3s6"], #lp4s1:checked ~ .lp-grid .lp-left label[for="lp4s1"], #lp4s2:checked ~ .lp-grid .lp-left label[for="lp4s2"], #lp4s3:checked ~ .lp-grid .lp-left label[for="lp4s3"], #lp4s4:checked ~ .lp-grid .lp-left label[for="lp4s4"], #lp4s5:checked ~ .lp-grid .lp-left label[for="lp4s5"], #lp4s6:checked ~ .lp-grid .lp-left label[for="lp4s6"], #lp5s1:checked ~ .lp-grid .lp-left label[for="lp5s1"], #lp5s2:checked ~ .lp-grid .lp-left label[for="lp5s2"], #lp5s3:checked ~ .lp-grid .lp-left label[for="lp5s3"], #lp5s4:checked ~ .lp-grid .lp-left label[for="lp5s4"], #lp5s5:checked ~ .lp-grid .lp-left label[for="lp5s5"], #lp6s1:checked ~ .lp-grid .lp-left label[for="lp6s1"], #lp6s2:checked ~ .lp-grid .lp-left label[for="lp6s2"], #lp6s3:checked ~ .lp-grid .lp-left label[for="lp6s3"], #lp6s4:checked ~ .lp-grid .lp-left label[for="lp6s4"], #lp6s5:checked ~ .lp-grid .lp-left label[for="lp6s5"], #lp6s6:checked ~ .lp-grid .lp-left label[for="lp6s6"] { background: var(--green); }
-
+#cr1s1:checked ~ .lp-grid .lp-left label[for="cr1s1"], #cr1s2:checked ~ .lp-grid .lp-left label[for="cr1s2"], #cr1s3:checked ~ .lp-grid .lp-left label[for="cr1s3"], #cr1s4:checked ~ .lp-grid .lp-left label[for="cr1s4"], #cr1s5:checked ~ .lp-grid .lp-left label[for="cr1s5"], #cr1s6:checked ~ .lp-grid .lp-left label[for="cr1s6"], #cr1s7:checked ~ .lp-grid .lp-left label[for="cr1s7"], #cr2s1:checked ~ .lp-grid .lp-left label[for="cr2s1"], #cr2s2:checked ~ .lp-grid .lp-left label[for="cr2s2"], #cr2s3:checked ~ .lp-grid .lp-left label[for="cr2s3"], #cr2s4:checked ~ .lp-grid .lp-left label[for="cr2s4"], #cr2s5:checked ~ .lp-grid .lp-left label[for="cr2s5"], #cr2s6:checked ~ .lp-grid .lp-left label[for="cr2s6"], #cr3s1:checked ~ .lp-grid .lp-left label[for="cr3s1"], #cr3s2:checked ~ .lp-grid .lp-left label[for="cr3s2"], #cr3s3:checked ~ .lp-grid .lp-left label[for="cr3s3"], #cr3s4:checked ~ .lp-grid .lp-left label[for="cr3s4"], #cr3s5:checked ~ .lp-grid .lp-left label[for="cr3s5"], #cr3s6:checked ~ .lp-grid .lp-left label[for="cr3s6"], #cr4s1:checked ~ .lp-grid .lp-left label[for="cr4s1"], #cr4s2:checked ~ .lp-grid .lp-left label[for="cr4s2"], #cr4s3:checked ~ .lp-grid .lp-left label[for="cr4s3"], #cr4s4:checked ~ .lp-grid .lp-left label[for="cr4s4"], #cr4s5:checked ~ .lp-grid .lp-left label[for="cr4s5"], #cr4s6:checked ~ .lp-grid .lp-left label[for="cr4s6"], #cr5s1:checked ~ .lp-grid .lp-left label[for="cr5s1"], #cr5s2:checked ~ .lp-grid .lp-left label[for="cr5s2"], #cr5s3:checked ~ .lp-grid .lp-left label[for="cr5s3"], #cr5s4:checked ~ .lp-grid .lp-left label[for="cr5s4"], #cr5s5:checked ~ .lp-grid .lp-left label[for="cr5s5"], #t1s1:checked ~ .lp-grid .lp-left label[for="t1s1"], #t1s2:checked ~ .lp-grid .lp-left label[for="t1s2"], #t1s3:checked ~ .lp-grid .lp-left label[for="t1s3"], #t1s4:checked ~ .lp-grid .lp-left label[for="t1s4"], #t1s5:checked ~ .lp-grid .lp-left label[for="t1s5"], #t1s6:checked ~ .lp-grid .lp-left label[for="t1s6"], #t1s7:checked ~ .lp-grid .lp-left label[for="t1s7"], #t1s8:checked ~ .lp-grid .lp-left label[for="t1s8"], #t1s9:checked ~ .lp-grid .lp-left label[for="t1s9"], #t1s10:checked ~ .lp-grid .lp-left label[for="t1s10"], #t1s11:checked ~ .lp-grid .lp-left label[for="t1s11"], #t1s12:checked ~ .lp-grid .lp-left label[for="t1s12"], #t3s1:checked ~ .lp-grid .lp-left label[for="t3s1"], #t3s2:checked ~ .lp-grid .lp-left label[for="t3s2"], #t3s3:checked ~ .lp-grid .lp-left label[for="t3s3"], #t3s4:checked ~ .lp-grid .lp-left label[for="t3s4"], #t3s5:checked ~ .lp-grid .lp-left label[for="t3s5"], #t3s6:checked ~ .lp-grid .lp-left label[for="t3s6"], #t3s7:checked ~ .lp-grid .lp-left label[for="t3s7"], #t4s1:checked ~ .lp-grid .lp-left label[for="t4s1"], #t4s2:checked ~ .lp-grid .lp-left label[for="t4s2"], #t4s3:checked ~ .lp-grid .lp-left label[for="t4s3"], #t4s4:checked ~ .lp-grid .lp-left label[for="t4s4"], #t4s5:checked ~ .lp-grid .lp-left label[for="t4s5"], #t4s6:checked ~ .lp-grid .lp-left label[for="t4s6"], #t5s1:checked ~ .lp-grid .lp-left label[for="t5s1"], #t5s2:checked ~ .lp-grid .lp-left label[for="t5s2"], #t5s3:checked ~ .lp-grid .lp-left label[for="t5s3"], #t5s4:checked ~ .lp-grid .lp-left label[for="t5s4"] { background: var(--green); }
 .lp-right { padding: 22px 26px; min-width: 0; background: var(--bg-soft); }
 .lpd { display: none; }
-#lp1s1:checked ~ .lp-grid .lp-right .d-lp1s1, #lp1s2:checked ~ .lp-grid .lp-right .d-lp1s2, #lp1s3:checked ~ .lp-grid .lp-right .d-lp1s3, #lp1s4:checked ~ .lp-grid .lp-right .d-lp1s4, #lp1s5:checked ~ .lp-grid .lp-right .d-lp1s5, #lp1s6:checked ~ .lp-grid .lp-right .d-lp1s6, #lp1s7:checked ~ .lp-grid .lp-right .d-lp1s7, #lp2s1:checked ~ .lp-grid .lp-right .d-lp2s1, #lp2s2:checked ~ .lp-grid .lp-right .d-lp2s2, #lp2s3:checked ~ .lp-grid .lp-right .d-lp2s3, #lp2s4:checked ~ .lp-grid .lp-right .d-lp2s4, #lp2s5:checked ~ .lp-grid .lp-right .d-lp2s5, #lp2s6:checked ~ .lp-grid .lp-right .d-lp2s6, #lp3s1:checked ~ .lp-grid .lp-right .d-lp3s1, #lp3s2:checked ~ .lp-grid .lp-right .d-lp3s2, #lp3s3:checked ~ .lp-grid .lp-right .d-lp3s3, #lp3s4:checked ~ .lp-grid .lp-right .d-lp3s4, #lp3s5:checked ~ .lp-grid .lp-right .d-lp3s5, #lp3s6:checked ~ .lp-grid .lp-right .d-lp3s6, #lp4s1:checked ~ .lp-grid .lp-right .d-lp4s1, #lp4s2:checked ~ .lp-grid .lp-right .d-lp4s2, #lp4s3:checked ~ .lp-grid .lp-right .d-lp4s3, #lp4s4:checked ~ .lp-grid .lp-right .d-lp4s4, #lp4s5:checked ~ .lp-grid .lp-right .d-lp4s5, #lp4s6:checked ~ .lp-grid .lp-right .d-lp4s6, #lp5s1:checked ~ .lp-grid .lp-right .d-lp5s1, #lp5s2:checked ~ .lp-grid .lp-right .d-lp5s2, #lp5s3:checked ~ .lp-grid .lp-right .d-lp5s3, #lp5s4:checked ~ .lp-grid .lp-right .d-lp5s4, #lp5s5:checked ~ .lp-grid .lp-right .d-lp5s5, #lp6s1:checked ~ .lp-grid .lp-right .d-lp6s1, #lp6s2:checked ~ .lp-grid .lp-right .d-lp6s2, #lp6s3:checked ~ .lp-grid .lp-right .d-lp6s3, #lp6s4:checked ~ .lp-grid .lp-right .d-lp6s4, #lp6s5:checked ~ .lp-grid .lp-right .d-lp6s5, #lp6s6:checked ~ .lp-grid .lp-right .d-lp6s6 { display: block; }
+#cr1s1:checked ~ .lp-grid .lp-right .d-cr1s1, #cr1s2:checked ~ .lp-grid .lp-right .d-cr1s2, #cr1s3:checked ~ .lp-grid .lp-right .d-cr1s3, #cr1s4:checked ~ .lp-grid .lp-right .d-cr1s4, #cr1s5:checked ~ .lp-grid .lp-right .d-cr1s5, #cr1s6:checked ~ .lp-grid .lp-right .d-cr1s6, #cr1s7:checked ~ .lp-grid .lp-right .d-cr1s7, #cr2s1:checked ~ .lp-grid .lp-right .d-cr2s1, #cr2s2:checked ~ .lp-grid .lp-right .d-cr2s2, #cr2s3:checked ~ .lp-grid .lp-right .d-cr2s3, #cr2s4:checked ~ .lp-grid .lp-right .d-cr2s4, #cr2s5:checked ~ .lp-grid .lp-right .d-cr2s5, #cr2s6:checked ~ .lp-grid .lp-right .d-cr2s6, #cr3s1:checked ~ .lp-grid .lp-right .d-cr3s1, #cr3s2:checked ~ .lp-grid .lp-right .d-cr3s2, #cr3s3:checked ~ .lp-grid .lp-right .d-cr3s3, #cr3s4:checked ~ .lp-grid .lp-right .d-cr3s4, #cr3s5:checked ~ .lp-grid .lp-right .d-cr3s5, #cr3s6:checked ~ .lp-grid .lp-right .d-cr3s6, #cr4s1:checked ~ .lp-grid .lp-right .d-cr4s1, #cr4s2:checked ~ .lp-grid .lp-right .d-cr4s2, #cr4s3:checked ~ .lp-grid .lp-right .d-cr4s3, #cr4s4:checked ~ .lp-grid .lp-right .d-cr4s4, #cr4s5:checked ~ .lp-grid .lp-right .d-cr4s5, #cr4s6:checked ~ .lp-grid .lp-right .d-cr4s6, #cr5s1:checked ~ .lp-grid .lp-right .d-cr5s1, #cr5s2:checked ~ .lp-grid .lp-right .d-cr5s2, #cr5s3:checked ~ .lp-grid .lp-right .d-cr5s3, #cr5s4:checked ~ .lp-grid .lp-right .d-cr5s4, #cr5s5:checked ~ .lp-grid .lp-right .d-cr5s5, #t1s1:checked ~ .lp-grid .lp-right .d-t1s1, #t1s2:checked ~ .lp-grid .lp-right .d-t1s2, #t1s3:checked ~ .lp-grid .lp-right .d-t1s3, #t1s4:checked ~ .lp-grid .lp-right .d-t1s4, #t1s5:checked ~ .lp-grid .lp-right .d-t1s5, #t1s6:checked ~ .lp-grid .lp-right .d-t1s6, #t1s7:checked ~ .lp-grid .lp-right .d-t1s7, #t1s8:checked ~ .lp-grid .lp-right .d-t1s8, #t1s9:checked ~ .lp-grid .lp-right .d-t1s9, #t1s10:checked ~ .lp-grid .lp-right .d-t1s10, #t1s11:checked ~ .lp-grid .lp-right .d-t1s11, #t1s12:checked ~ .lp-grid .lp-right .d-t1s12, #t3s1:checked ~ .lp-grid .lp-right .d-t3s1, #t3s2:checked ~ .lp-grid .lp-right .d-t3s2, #t3s3:checked ~ .lp-grid .lp-right .d-t3s3, #t3s4:checked ~ .lp-grid .lp-right .d-t3s4, #t3s5:checked ~ .lp-grid .lp-right .d-t3s5, #t3s6:checked ~ .lp-grid .lp-right .d-t3s6, #t3s7:checked ~ .lp-grid .lp-right .d-t3s7, #t4s1:checked ~ .lp-grid .lp-right .d-t4s1, #t4s2:checked ~ .lp-grid .lp-right .d-t4s2, #t4s3:checked ~ .lp-grid .lp-right .d-t4s3, #t4s4:checked ~ .lp-grid .lp-right .d-t4s4, #t4s5:checked ~ .lp-grid .lp-right .d-t4s5, #t4s6:checked ~ .lp-grid .lp-right .d-t4s6, #t5s1:checked ~ .lp-grid .lp-right .d-t5s1, #t5s2:checked ~ .lp-grid .lp-right .d-t5s2, #t5s3:checked ~ .lp-grid .lp-right .d-t5s3, #t5s4:checked ~ .lp-grid .lp-right .d-t5s4 { display: block; }
 .sd-card { background: #fff; border: 1.5px solid var(--ink); padding: 20px 24px; }
 .sd-kicker { font-family: var(--mono); font-size: 9px; font-weight: 800; letter-spacing: 0.16em; color: var(--green-dim); margin-bottom: 8px; }
 .sd-card h4 { font-family: var(--serif); font-size: 23px; font-weight: 600; letter-spacing: -0.01em; line-height: 1.2; margin-bottom: 12px; }
@@ -786,7 +792,6 @@ tr.lb-gap td { text-align: center; font-family: var(--mono); color: var(--ink4);
 .sd-specs .spec { font-size: 12.5px; color: var(--ink2); padding-left: 20px; position: relative; }
 .sd-specs .spec::before { content: "▢"; position: absolute; left: 0; color: var(--green-dim); font-weight: 800; }
 .sd-body { font-size: 13.5px; color: var(--ink2); line-height: 1.6; margin-bottom: 14px; max-width: 480px; }
-/* mini certificate */
 .certmini { position: relative; border: 2.5px solid var(--ink); outline: 1px solid var(--gold); outline-offset: 5px; background: #fffdf6; padding: 26px 30px 30px; margin: 6px 6px 0; max-width: 470px; }
 .certmini .corner { position: absolute; width: 13px; height: 13px; }
 .certmini .corner.tl { top: 6px; left: 6px; border-top: 2px solid var(--gold); border-left: 2px solid var(--gold); }
@@ -807,7 +812,6 @@ tr.lb-gap td { text-align: center; font-family: var(--mono); color: var(--ink4);
   .lp-grid { grid-template-columns: 1fr; }
   .lp-left { border-right: none; border-bottom: 1.5px solid var(--ink); }
 }
-
 
 /* ── milestone map ── */
 .ms-rail { position: relative; display: grid; grid-template-columns: repeat(6, 1fr); gap: 16px; margin-bottom: -2px; }
@@ -1126,624 +1130,179 @@ footer a:hover { color: #fff; }
 <!-- ═══════════ LEARNING PATHS ═══════════ -->
 <section class="soft" id="paths">
   <div class="wrap">
-    <div class="sec-kicker">Depth 01 · what kind of builder are you?</div>
-    <h2 class="sec-title">Six paths. Named like jobs, backed by real certifications.</h2>
-    <p class="sec-lede">Pick a path, then walk its steps on the left: courses, hands-on labs, a superbadge, and <b>real NVIDIA certifications that exist today</b>. Click any step and the right side shows exactly what it is, what it costs, and where to start.</p>
-    <input type="radio" name="lp" id="lp1" checked><input type="radio" name="lp" id="lp2"><input type="radio" name="lp" id="lp3"><input type="radio" name="lp" id="lp4"><input type="radio" name="lp" id="lp5"><input type="radio" name="lp" id="lp6">
-    <div class="lp-tabs"><label for="lp1">Forward-Deployed AI Engineer</label><label for="lp2">ML Engineer</label><label for="lp3">AI Infrastructure Engineer</label><label for="lp4">Data Scientist</label><label for="lp5">Robotics / Sim Engineer</label><label for="lp6">The Explorer</label></div>
+    <div class="sec-kicker">Depth 01 · pick your track</div>
+    <h2 class="sec-title">What did you come here to do?</h2>
+    <p class="sec-lede">Five tracks: learn the layers, build a certified career, become a Champion, found your firm, or get hired right now. Every step is real, linked, and pays badges; the gold steps are <b>official proctored certifications</b>.</p>
+    <input type="radio" name="trk" id="t1" checked><input type="radio" name="trk" id="t2"><input type="radio" name="trk" id="t3"><input type="radio" name="trk" id="t4"><input type="radio" name="trk" id="t5">
+    <div class="lp-tabs"><label for="t1">The 10 Layers</label><label for="t2">Certified Career</label><label for="t3">Champion</label><label for="t4">Founder</label><label for="t5">Get Hired</label></div>
     <div class="lp-bodies">
-      <div class="lp-body b-lp1">
-        <div class="lp-sub">+800% postings · $220K–$700K top comp · the flagship path</div>
-        <input type="radio" name="lp1s" id="lp1s1" checked><input type="radio" name="lp1s" id="lp1s2"><input type="radio" name="lp1s" id="lp1s3"><input type="radio" name="lp1s" id="lp1s4"><input type="radio" name="lp1s" id="lp1s5"><input type="radio" name="lp1s" id="lp1s6"><input type="radio" name="lp1s" id="lp1s7">
+      <div class="lp-body b-t1">
+        <div class="lp-sub">NVIDIA, EXPLAINED AS A 10-LAYER CAKE · TOP DOWN · ALL FREE</div>
+<input type="radio" name="t1" id="t1s1" checked><input type="radio" name="t1" id="t1s2"><input type="radio" name="t1" id="t1s3"><input type="radio" name="t1" id="t1s4"><input type="radio" name="t1" id="t1s5"><input type="radio" name="t1" id="t1s6"><input type="radio" name="t1" id="t1s7"><input type="radio" name="t1" id="t1s8"><input type="radio" name="t1" id="t1s9"><input type="radio" name="t1" id="t1s10"><input type="radio" name="t1" id="t1s11"><input type="radio" name="t1" id="t1s12">
         <div class="lp-grid">
           <div class="lp-left">
-          <label class="lps" for="lp1s1">
-            <span class="lps-num">1</span>
-            <span class="lps-txt"><b>Foundations, free</b><span>what agents are + your first API call</span></span>
-            <span class="lps-kind course">COURSE</span>
-          </label>
-          <label class="lps" for="lp1s2">
-            <span class="lps-num">2</span>
-            <span class="lps-txt"><b>Building RAG Agents</b><span>DLI course · 8 hrs · GPU lab included</span></span>
-            <span class="lps-kind course">COURSE</span>
-          </label>
-          <label class="lps" for="lp1s3">
-            <span class="lps-num">3</span>
-            <span class="lps-txt"><b>Building Agentic Apps</b><span>DLI course · 8 hrs · production patterns</span></span>
-            <span class="lps-kind course">COURSE</span>
-          </label>
-          <label class="lps" for="lp1s4">
-            <span class="lps-num">4</span>
-            <span class="lps-txt"><b>The superbadge</b><span>Production Agent · live, auto-verified</span></span>
-            <span class="lps-kind super">SUPERBADGE</span>
-          </label>
-          <label class="lps" for="lp1s5">
-            <span class="lps-num">5</span>
-            <span class="lps-txt"><b>Certification: NCA-GENL</b><span>$125 · proctored · the foundation</span></span>
-            <span class="lps-kind cert">CERT · PAID</span>
-          </label>
-          <label class="lps" for="lp1s6">
-            <span class="lps-num">6</span>
-            <span class="lps-txt"><b>Certification: NCP-AAI</b><span>$200 · proctored · the flagship</span></span>
-            <span class="lps-kind cert">CERT · PAID</span>
-          </label>
-          <label class="lps" for="lp1s7">
-            <span class="lps-num">7</span>
-            <span class="lps-txt"><b>The payoff</b><span>marketplace listing · offers come to you</span></span>
-            <span class="lps-kind outcome">PAYOFF</span>
-          </label>
+            <label class="lps" for="t1s1">
+              <span class="lps-num">1</span>
+              <span class="lps-txt"><b>The cake, explained</b><span>why NVIDIA is a 10-layer cake</span></span>
+              <span class="lps-kind lab">START</span>
+            </label>
+            <label class="lps" for="t1s2">
+              <span class="lps-num">2</span>
+              <span class="lps-txt"><b>Layer 10 · Programs & Community</b><span>Developer Program · DLI · NGC · forums</span></span>
+              <span class="lps-kind lab">FREE</span>
+            </label>
+            <label class="lps" for="t1s3">
+              <span class="lps-num">3</span>
+              <span class="lps-txt"><b>Layer 9 · Applications & Verticals</b><span>Omniverse · Isaac · Clara · GeForce NOW</span></span>
+              <span class="lps-kind lab">FREE</span>
+            </label>
+            <label class="lps" for="t1s4">
+              <span class="lps-num">4</span>
+              <span class="lps-txt"><b>Layer 8 · Cloud Inference APIs</b><span>build.nvidia.com · DGX Cloud · Brev</span></span>
+              <span class="lps-kind lab">FREE</span>
+            </label>
+            <label class="lps" for="t1s5">
+              <span class="lps-num">5</span>
+              <span class="lps-txt"><b>Layer 7 · Inference & Serving</b><span>NIM · Triton · vLLM · TensorRT-LLM</span></span>
+              <span class="lps-kind lab">FREE</span>
+            </label>
+            <label class="lps" for="t1s6">
+              <span class="lps-num">6</span>
+              <span class="lps-txt"><b>Layer 6 · Models</b><span>Nemotron 3 · Cosmos · GR00T</span></span>
+              <span class="lps-kind lab">FREE</span>
+            </label>
+            <label class="lps" for="t1s7">
+              <span class="lps-num">7</span>
+              <span class="lps-txt"><b>Layer 5 · Training & Fine-tuning</b><span>NeMo · Megatron-LM · BioNeMo</span></span>
+              <span class="lps-kind lab">FREE</span>
+            </label>
+            <label class="lps" for="t1s8">
+              <span class="lps-num">8</span>
+              <span class="lps-txt"><b>Layer 4 · ML Frameworks</b><span>PyTorch+CUDA · TensorRT · RAPIDS</span></span>
+              <span class="lps-kind lab">FREE</span>
+            </label>
+            <label class="lps" for="t1s9">
+              <span class="lps-num">9</span>
+              <span class="lps-txt"><b>Layer 3 · CUDA</b><span>CUDA Toolkit · CUTLASS · Nsight</span></span>
+              <span class="lps-kind lab">FREE</span>
+            </label>
+            <label class="lps" for="t1s10">
+              <span class="lps-num">10</span>
+              <span class="lps-txt"><b>Layer 2 · System Software</b><span>drivers · Container Toolkit · GPU Operator</span></span>
+              <span class="lps-kind lab">FREE</span>
+            </label>
+            <label class="lps" for="t1s11">
+              <span class="lps-num">11</span>
+              <span class="lps-txt"><b>Layer 1 · GPUs & Silicon</b><span>H100 · GB300 NVL72 · Jetson · DGX</span></span>
+              <span class="lps-kind lab">FREE</span>
+            </label>
+            <label class="lps" for="t1s12">
+              <span class="lps-num">12</span>
+              <span class="lps-txt"><b>★ Cake Master</b><span>all ten layers · the capstone</span></span>
+              <span class="lps-kind super">SUPERBADGE</span>
+            </label>
           </div>
           <div class="lp-right">
-          <div class="lpd d-lp1s1">
+            <div class="lpd d-t1s1">
             <div class="sd-card">
-              <div class="sd-kicker">FREE · ~2 HRS · DLI + BUILD.NVIDIA.COM</div>
-              <h4>Agentic AI Explained, then your first Nemotron call</h4>
-              <ul class="sd-bullets"><li>What agents actually are, and why most demos die in production</li><li>Create your free build.nvidia.com account, no credit card, and make one real API call to Nemotron 3 Nano</li></ul>
-              <div class="sd-earn">EARN · First Token · +200 cores</div>
-              <div class="sd-links"><a class="lk" href="https://learn.nvidia.com/courses/course-detail?course_id=course-v1:DLI+S-FX-39+V1">Agentic AI Explained ↗</a><a class="lk" href="https://build.nvidia.com">build.nvidia.com ↗</a></div>
+              <div class="sd-kicker">THE MAP · TOP DOWN</div>
+              <h4>NVIDIA is best explained as a 10-layer cake</h4>
+              <svg viewBox="0 0 170 100" class="cake-art" style="max-width:200px;display:block;margin:0 0 14px;"><rect x="10" y="87" width="150" height="8" fill="#344e00" stroke="#0e0e0e" stroke-width="1"/><rect x="14" y="77" width="141" height="8" fill="#3f5f00" stroke="#0e0e0e" stroke-width="1"/><rect x="19" y="67" width="132" height="8" fill="#4a7000" stroke="#0e0e0e" stroke-width="1"/><rect x="24" y="57" width="123" height="8" fill="#558200" stroke="#0e0e0e" stroke-width="1"/><rect x="28" y="47" width="114" height="8" fill="#609400" stroke="#0e0e0e" stroke-width="1"/><rect x="32" y="37" width="105" height="8" fill="#6ba600" stroke="#0e0e0e" stroke-width="1"/><rect x="37" y="27" width="96" height="8" fill="#76b900" stroke="#0e0e0e" stroke-width="1"/><rect x="42" y="17" width="87" height="8" fill="#81c40e" stroke="#0e0e0e" stroke-width="1"/><rect x="46" y="7" width="78" height="8" fill="#8ccf1c" stroke="#0e0e0e" stroke-width="1"/><rect x="50" y="-3" width="69" height="8" fill="#97da2a" stroke="#0e0e0e" stroke-width="1"/></svg>
+              <p class="sd-body">Silicon at the bottom, community at the top, and everything in between is a layer you can learn with your hands. Walk it top-down below; every layer pays a badge, and all ten unlock the Cake Master superbadge. Total cost: $0.</p>
+              <div class="sd-links"><a class="lk" href="https://nvidia-is-a-10-layer-cake.vercel.app/">The full 10-Layer Cake map ↗</a></div>
             </div>
-          </div>
-          <div class="lpd d-lp1s2">
+            </div>
+            <div class="lpd d-t1s2">
             <div class="sd-card">
-              <div class="sd-kicker">DLI COURSE · 8 HRS · FREE GPU LAB INCLUDED</div>
-              <h4>Building RAG Agents with LLMs</h4>
-              <ul class="sd-bullets"><li>Retrieval, tools, and memory wired together properly</li><li>A working RAG agent in the included cloud GPU lab, yours when you leave</li></ul>
-              <div class="sd-earn">EARN · RAG Apprentice · +500 cores</div>
-              <div class="sd-links"><a class="lk" href="https://learn.nvidia.com/courses/course-detail?course_id=course-v1:DLI+C-FX-15+V1">Start on learn.nvidia.com ↗</a></div>
+              <div class="sd-kicker">LAYER 10 · THE TOP OF THE CAKE</div>
+              <h4>Where builders gather</h4>
+              <ul class="sd-bullets"><li>The portals and people: Developer Program, DLI courses, NGC, GTC, forums, Discord</li><li>Do: join the program free, claim your public profile</li></ul>
+              <div class="sd-earn">EARN · Layer 10 badge · +100</div>
+              <div class="sd-links"><a class="lk" href="https://developer.nvidia.com/developer-program">Developer Program ↗</a><a class="lk" href="https://learn.nvidia.com">learn.nvidia.com ↗</a></div>
             </div>
-          </div>
-          <div class="lpd d-lp1s3">
+            </div>
+            <div class="lpd d-t1s3">
             <div class="sd-card">
-              <div class="sd-kicker">DLI COURSE · 8 HRS · $90</div>
-              <h4>Building Agentic AI Applications with LLMs</h4>
-              <ul class="sd-bullets"><li>Multi-agent orchestration, evaluation, observability, guardrails</li><li>The exact domains the NCP-AAI exam tests, learned by building</li></ul>
-              <div class="sd-earn">EARN · Agent Smith · +500 cores</div>
-              <div class="sd-links"><a class="lk" href="https://learn.nvidia.com/courses/course-detail?course_id=course-v1:DLI+C-FX-25+V1">Start on learn.nvidia.com ↗</a></div>
+              <div class="sd-kicker">LAYER 9</div>
+              <h4>What gets built on top</h4>
+              <ul class="sd-bullets"><li>Domain platforms: robotics, 3D worlds, healthcare, gaming, blueprints</li><li>Do: run an Isaac robot sim, or build one Omniverse scene</li></ul>
+              <div class="sd-earn">EARN · Layer 9 badge · +250</div>
+              <div class="sd-links"><a class="lk" href="https://developer.nvidia.com/isaac">Isaac ↗</a><a class="lk" href="https://developer.nvidia.com/omniverse">Omniverse ↗</a></div>
             </div>
-          </div>
-          <div class="lpd d-lp1s4">
-            <div class="sd-card super">
-              <div class="sd-shield"><svg viewBox="0 0 80 92"><use href="#shield"/></svg></div>
-              <div class="sd-kicker">SUPERBADGE · FREE · AUTO-VERIFIED · UNLIMITED RESUBMISSIONS</div>
-              <h4>The Production Agent superbadge</h4>
-              <div class="sd-specs"><div class="spec">A working agent solving a provided real-world brief</div><div class="spec">Served from a NIM endpoint you deployed yourself</div><div class="spec">Eval suite ≥ 85% on the hidden test set · p95 latency under target</div><div class="spec">Guardrails pass prompt-injection and tool-abuse probes</div><div class="spec">Public repo + a write-up another builder can follow</div></div>
-              <div class="sd-earn">EARN · PRODUCTION AGENT · +2,000 cores · unlocks the exams</div>
-              <div class="sd-links"><a class="lk" href="/path-agent-builder">Full spec on the Agent Builder Path ↗</a></div>
             </div>
-          </div>
-          <div class="lpd d-lp1s5">
-            <div class="certmini">
-              <div class="corner tl"></div><div class="corner tr"></div><div class="corner bl"></div><div class="corner br"></div>
-              <div class="cm-head">NVIDIA DEVELOPER CERTIFICATION PROGRAM</div>
-              <div class="cm-title">Generative AI LLMs</div>
-              <div class="cm-sub">NVIDIA-Certified Associate · NCA-GENL</div>
-              <div class="cm-reserved"><span>RESERVED FOR</span><i>You.</i></div>
-              <div class="cm-facts">$125 · PROCTORED ONLINE · +5,000 CORES</div>
-              <svg class="cm-seal" viewBox="0 0 80 112"><use href="#rosette"/><text x="40" y="43" text-anchor="middle" font-family="ui-monospace, Menlo, monospace" font-size="9.5" font-weight="800" fill="#8a6914">NCA</text><text x="40" y="54" text-anchor="middle" font-family="ui-monospace, Menlo, monospace" font-size="9.5" font-weight="800" fill="#8a6914">GENL</text></svg>
-            </div>
-            <div class="sd-certfoot">
-              <span class="sd-earn" style="margin:0;">A REAL EXAM, LIVE TODAY</span>
-              <a class="lk" href="https://www.nvidia.com/en-us/learn/certification/generative-ai-llm-associate/">Exam details on nvidia.com ↗</a>
-            </div>
-          </div>
-          <div class="lpd d-lp1s6">
-            <div class="certmini">
-              <div class="corner tl"></div><div class="corner tr"></div><div class="corner bl"></div><div class="corner br"></div>
-              <div class="cm-head">NVIDIA DEVELOPER CERTIFICATION PROGRAM</div>
-              <div class="cm-title">Agentic AI <span class="cert-tag">FLAGSHIP</span></div>
-              <div class="cm-sub">NVIDIA-Certified Professional · NCP-AAI</div>
-              <div class="cm-reserved"><span>RESERVED FOR</span><i>You.</i></div>
-              <div class="cm-facts">$200 · 120 MIN · 60–70 QUESTIONS · VALID 2 YEARS · +5,000 CORES</div>
-              <svg class="cm-seal" viewBox="0 0 80 112"><use href="#rosette"/><text x="40" y="43" text-anchor="middle" font-family="ui-monospace, Menlo, monospace" font-size="9.5" font-weight="800" fill="#8a6914">NCP</text><text x="40" y="54" text-anchor="middle" font-family="ui-monospace, Menlo, monospace" font-size="9.5" font-weight="800" fill="#8a6914">AAI</text></svg>
-            </div>
-            <div class="sd-certfoot">
-              <span class="sd-earn" style="margin:0;">A REAL EXAM, LIVE TODAY</span>
-              <a class="lk" href="https://www.nvidia.com/en-us/learn/certification/agentic-ai-professional/">Exam details on nvidia.com ↗</a>
-            </div>
-          </div>
-          <div class="lpd d-lp1s7">
-            <div class="sd-card outcome">
-              <div class="sd-kicker">THE PAYOFF</div>
-              <h4>Listed on the certified marketplace</h4>
-              <p class="sd-body">At Falcon rank with both certs and the superbadge, recruiters can find you and test your live endpoint before the first call.</p>
-              <div class="sd-earn">OFFERS COME TO YOU</div>
-              <div class="sd-links"><a class="lk" href="#offers">See this month's offers ↓</a></div>
-            </div>
-          </div>
-          </div>
-        </div>
-      </div>
-      <div class="lp-body b-lp2">
-        <div class="lp-sub">median $187.5K total comp · LinkedIn's fastest-growing title</div>
-        <input type="radio" name="lp2s" id="lp2s1" checked><input type="radio" name="lp2s" id="lp2s2"><input type="radio" name="lp2s" id="lp2s3"><input type="radio" name="lp2s" id="lp2s4"><input type="radio" name="lp2s" id="lp2s5"><input type="radio" name="lp2s" id="lp2s6">
-        <div class="lp-grid">
-          <div class="lp-left">
-          <label class="lps" for="lp2s1">
-            <span class="lps-num">1</span>
-            <span class="lps-txt"><b>Foundations, free</b><span>deep learning fundamentals, hands-on</span></span>
-            <span class="lps-kind course">COURSE</span>
-          </label>
-          <label class="lps" for="lp2s2">
-            <span class="lps-num">2</span>
-            <span class="lps-txt"><b>Fine-tune with NeMo</b><span>your checkpoint, a real dataset</span></span>
-            <span class="lps-kind lab">HANDS-ON</span>
-          </label>
-          <label class="lps" for="lp2s3">
-            <span class="lps-num">3</span>
-            <span class="lps-txt"><b>The superbadge</b><span>Model Builder · checkpoint + eval card</span></span>
-            <span class="lps-kind super">SUPERBADGE</span>
-          </label>
-          <label class="lps" for="lp2s4">
-            <span class="lps-num">4</span>
-            <span class="lps-txt"><b>Certification: NCA-GENL</b><span>$125 · proctored · shared foundation</span></span>
-            <span class="lps-kind cert">CERT · PAID</span>
-          </label>
-          <label class="lps" for="lp2s5">
-            <span class="lps-num">5</span>
-            <span class="lps-txt"><b>Certification: NCP-GENL</b><span>$200 · proctored · professional</span></span>
-            <span class="lps-kind cert">CERT · PAID</span>
-          </label>
-          <label class="lps" for="lp2s6">
-            <span class="lps-num">6</span>
-            <span class="lps-txt"><b>The payoff</b><span>your model card, cited and found</span></span>
-            <span class="lps-kind outcome">PAYOFF</span>
-          </label>
-          </div>
-          <div class="lp-right">
-          <div class="lpd d-lp2s1">
+            <div class="lpd d-t1s4">
             <div class="sd-card">
-              <div class="sd-kicker">DLI SELF-PACED · FREE TIER AVAILABLE</div>
-              <h4>Deep Learning fundamentals</h4>
-              <ul class="sd-bullets"><li>Training, loss, optimization, the real intuitions</li><li>Self-paced with cloud GPU access during the course</li></ul>
-              <div class="sd-earn">EARN · Gradient Descent-er · +300 cores</div>
-              <div class="sd-links"><a class="lk" href="https://www.nvidia.com/en-us/training/self-paced-courses/">Self-paced catalog ↗</a></div>
+              <div class="sd-kicker">LAYER 8</div>
+              <h4>Frontier models, one HTTPS call away</h4>
+              <ul class="sd-bullets"><li>Hosted endpoints for 100+ models, free key, no credit card</li><li>Do: get your nvapi key and call Nemotron 3 Nano once</li></ul>
+              <div class="sd-earn">EARN · Layer 8 badge · +200</div>
+              <div class="sd-links"><a class="lk" href="https://build.nvidia.com">build.nvidia.com ↗</a><a class="lk" href="https://developer.nvidia.com/brev">Brev ↗</a></div>
             </div>
-          </div>
-          <div class="lpd d-lp2s2">
+            </div>
+            <div class="lpd d-t1s5">
             <div class="sd-card">
-              <div class="sd-kicker">HANDS-ON · NEMO FRAMEWORK</div>
-              <h4>Fine-tune a model with NeMo</h4>
-              <ul class="sd-bullets"><li>Curate a dataset with NeMo Curator, fine-tune a small model</li><li>Evaluate before/after honestly, publish the recipe</li></ul>
-              <div class="sd-earn">EARN · Model Tuner · +500 cores</div>
-              <div class="sd-links"><a class="lk" href="https://developer.nvidia.com/nemo">developer.nvidia.com/nemo ↗</a></div>
+              <div class="sd-kicker">LAYER 7</div>
+              <h4>Your own inference, on your own boxes</h4>
+              <ul class="sd-bullets"><li>Self-hosted serving: NIM microservices, Triton, the open-source stack</li><li>Do: run a NIM locally with the free dev license (up to 16 GPUs)</li></ul>
+              <div class="sd-earn">EARN · Layer 7 badge · +300</div>
+              <div class="sd-links"><a class="lk" href="https://developer.nvidia.com/developer-program">Developer Program ↗</a><a class="lk" href="https://docs.nvidia.com">docs.nvidia.com ↗</a></div>
             </div>
-          </div>
-          <div class="lpd d-lp2s3">
-            <div class="sd-card super">
-              <div class="sd-shield"><svg viewBox="0 0 80 92"><use href="#shield"/></svg></div>
-              <div class="sd-kicker">SUPERBADGE · FREE · AUTO-VERIFIED · UNLIMITED RESUBMISSIONS</div>
-              <h4>The Model Builder superbadge</h4>
-              <div class="sd-specs"><div class="spec">A fine-tuned checkpoint published on Hugging Face under your name</div><div class="spec">An honest eval card: benchmarks, regressions, limitations</div><div class="spec">A training recipe another builder can reproduce</div></div>
-              <div class="sd-earn">EARN · MODEL BUILDER · +2,000 cores</div>
-              <div class="sd-links"><a class="lk" href="https://huggingface.co/nvidia">huggingface.co/nvidia ↗</a></div>
             </div>
-          </div>
-          <div class="lpd d-lp2s4">
-            <div class="certmini">
-              <div class="corner tl"></div><div class="corner tr"></div><div class="corner bl"></div><div class="corner br"></div>
-              <div class="cm-head">NVIDIA DEVELOPER CERTIFICATION PROGRAM</div>
-              <div class="cm-title">Generative AI LLMs</div>
-              <div class="cm-sub">NVIDIA-Certified Associate · NCA-GENL</div>
-              <div class="cm-reserved"><span>RESERVED FOR</span><i>You.</i></div>
-              <div class="cm-facts">$125 · PROCTORED ONLINE · +5,000 CORES</div>
-              <svg class="cm-seal" viewBox="0 0 80 112"><use href="#rosette"/><text x="40" y="43" text-anchor="middle" font-family="ui-monospace, Menlo, monospace" font-size="9.5" font-weight="800" fill="#8a6914">NCA</text><text x="40" y="54" text-anchor="middle" font-family="ui-monospace, Menlo, monospace" font-size="9.5" font-weight="800" fill="#8a6914">GENL</text></svg>
-            </div>
-            <div class="sd-certfoot">
-              <span class="sd-earn" style="margin:0;">A REAL EXAM, LIVE TODAY</span>
-              <a class="lk" href="https://www.nvidia.com/en-us/learn/certification/generative-ai-llm-associate/">Exam details on nvidia.com ↗</a>
-            </div>
-          </div>
-          <div class="lpd d-lp2s5">
-            <div class="certmini">
-              <div class="corner tl"></div><div class="corner tr"></div><div class="corner bl"></div><div class="corner br"></div>
-              <div class="cm-head">NVIDIA DEVELOPER CERTIFICATION PROGRAM</div>
-              <div class="cm-title">Generative AI LLMs</div>
-              <div class="cm-sub">NVIDIA-Certified Professional · NCP-GENL</div>
-              <div class="cm-reserved"><span>RESERVED FOR</span><i>You.</i></div>
-              <div class="cm-facts">$200 · PROCTORED · +5,000 CORES</div>
-              <svg class="cm-seal" viewBox="0 0 80 112"><use href="#rosette"/><text x="40" y="43" text-anchor="middle" font-family="ui-monospace, Menlo, monospace" font-size="9.5" font-weight="800" fill="#8a6914">NCP</text><text x="40" y="54" text-anchor="middle" font-family="ui-monospace, Menlo, monospace" font-size="9.5" font-weight="800" fill="#8a6914">GENL</text></svg>
-            </div>
-            <div class="sd-certfoot">
-              <span class="sd-earn" style="margin:0;">A REAL EXAM, LIVE TODAY</span>
-              <a class="lk" href="https://www.nvidia.com/en-us/learn/certification/generative-ai-llm-professional/">Exam details on nvidia.com ↗</a>
-            </div>
-          </div>
-          <div class="lpd d-lp2s6">
-            <div class="sd-card outcome">
-              <div class="sd-kicker">THE PAYOFF</div>
-              <h4>A model card people actually use</h4>
-              <p class="sd-body">Your checkpoints and recipes circulate on Hugging Face inside the NVIDIA ecosystem. Citations and downloads compound; so does your rank.</p>
-              <div class="sd-earn">RESEARCH ROLE · CITATIONS · RANK</div>
-              <div class="sd-links"><a class="lk" href="https://huggingface.co/nvidia">huggingface.co/nvidia ↗</a></div>
-            </div>
-          </div>
-          </div>
-        </div>
-      </div>
-      <div class="lp-body b-lp3">
-        <div class="lp-sub">every GPU cluster on earth needs one · lab-based exams</div>
-        <input type="radio" name="lp3s" id="lp3s1" checked><input type="radio" name="lp3s" id="lp3s2"><input type="radio" name="lp3s" id="lp3s3"><input type="radio" name="lp3s" id="lp3s4"><input type="radio" name="lp3s" id="lp3s5"><input type="radio" name="lp3s" id="lp3s6">
-        <div class="lp-grid">
-          <div class="lp-left">
-          <label class="lps" for="lp3s1">
-            <span class="lps-num">1</span>
-            <span class="lps-txt"><b>Foundations</b><span>AI in the data center</span></span>
-            <span class="lps-kind course">COURSE</span>
-          </label>
-          <label class="lps" for="lp3s2">
-            <span class="lps-num">2</span>
-            <span class="lps-txt"><b>LaunchPad lab, free</b><span>deploy NIM on Kubernetes, hosted</span></span>
-            <span class="lps-kind lab">HANDS-ON</span>
-          </label>
-          <label class="lps" for="lp3s3">
-            <span class="lps-num">3</span>
-            <span class="lps-txt"><b>The superbadge</b><span>Fleet Operator · verified cluster ops</span></span>
-            <span class="lps-kind super">SUPERBADGE</span>
-          </label>
-          <label class="lps" for="lp3s4">
-            <span class="lps-num">4</span>
-            <span class="lps-txt"><b>Certification: NCA-AIIO</b><span>$125 · proctored · associate</span></span>
-            <span class="lps-kind cert">CERT · PAID</span>
-          </label>
-          <label class="lps" for="lp3s5">
-            <span class="lps-num">5</span>
-            <span class="lps-txt"><b>Certification: NCP-AIO</b><span>$500 · live lab exam · professional</span></span>
-            <span class="lps-kind cert">CERT · PAID</span>
-          </label>
-          <label class="lps" for="lp3s6">
-            <span class="lps-num">6</span>
-            <span class="lps-txt"><b>The payoff</b><span>the infra expert in the room</span></span>
-            <span class="lps-kind outcome">PAYOFF</span>
-          </label>
-          </div>
-          <div class="lp-right">
-          <div class="lpd d-lp3s1">
+            <div class="lpd d-t1s6">
             <div class="sd-card">
-              <div class="sd-kicker">NCA-AIIO PREP · SELF-PACED</div>
-              <h4>AI Infrastructure & Operations fundamentals</h4>
-              <ul class="sd-bullets"><li>GPUs, networking, schedulers: how AI factories actually run</li><li>The exact scope of the NCA-AIIO associate exam</li></ul>
-              <div class="sd-earn">EARN · Rack Aware · +300 cores</div>
-              <div class="sd-links"><a class="lk" href="https://www.nvidia.com/en-us/learn/certification/ai-infrastructure-operations-associate/">Certification overview ↗</a></div>
+              <div class="sd-kicker">LAYER 6</div>
+              <h4>The open models themselves</h4>
+              <ul class="sd-bullets"><li>Nemotron 3 Nano/Super/Ultra, world models, robot foundation models</li><li>Do: read one model card properly on Hugging Face; know what you're calling</li></ul>
+              <div class="sd-earn">EARN · Layer 6 badge · +100</div>
+              <div class="sd-links"><a class="lk" href="https://developer.nvidia.com/nemotron">developer.nvidia.com/nemotron ↗</a><a class="lk" href="https://huggingface.co/nvidia">huggingface.co/nvidia ↗</a></div>
             </div>
-          </div>
-          <div class="lpd d-lp3s2">
+            </div>
+            <div class="lpd d-t1s7">
             <div class="sd-card">
-              <div class="sd-kicker">FREE HOSTED LAB · ~2 WEEKS ACCESS</div>
-              <h4>LaunchPad: NIM on Kubernetes</h4>
-              <ul class="sd-bullets"><li>A real cluster, provisioned for you, free</li><li>GPU Operator, monitoring, autoscaling, the production playbook</li></ul>
-              <div class="sd-earn">EARN · Fleet Hand · +400 cores</div>
-              <div class="sd-links"><a class="lk" href="https://launchpad.nvidia.com/">launchpad.nvidia.com ↗</a></div>
+              <div class="sd-kicker">LAYER 5</div>
+              <h4>Where models are made</h4>
+              <ul class="sd-bullets"><li>The frameworks that train and tune at every scale</li><li>Do: one small NeMo fine-tune on a real dataset</li></ul>
+              <div class="sd-earn">EARN · Layer 5 badge · +300</div>
+              <div class="sd-links"><a class="lk" href="https://developer.nvidia.com/nemo">NeMo ↗</a></div>
             </div>
-          </div>
-          <div class="lpd d-lp3s3">
-            <div class="sd-card super">
-              <div class="sd-shield"><svg viewBox="0 0 80 92"><use href="#shield"/></svg></div>
-              <div class="sd-kicker">SUPERBADGE · FREE · AUTO-VERIFIED · UNLIMITED RESUBMISSIONS</div>
-              <h4>The Fleet Operator superbadge</h4>
-              <div class="sd-specs"><div class="spec">GPU Operator + DCGM monitoring on a test cluster</div><div class="spec">An autoscaling NIM deployment surviving a load test</div><div class="spec">Runbook published: failure modes and recoveries</div></div>
-              <div class="sd-earn">EARN · FLEET OPERATOR · +2,000 cores</div>
-              <div class="sd-links"><a class="lk" href="https://docs.nvidia.com">docs.nvidia.com ↗</a></div>
             </div>
-          </div>
-          <div class="lpd d-lp3s4">
-            <div class="certmini">
-              <div class="corner tl"></div><div class="corner tr"></div><div class="corner bl"></div><div class="corner br"></div>
-              <div class="cm-head">NVIDIA DEVELOPER CERTIFICATION PROGRAM</div>
-              <div class="cm-title">AI Infrastructure & Operations</div>
-              <div class="cm-sub">NVIDIA-Certified Associate · NCA-AIIO</div>
-              <div class="cm-reserved"><span>RESERVED FOR</span><i>You.</i></div>
-              <div class="cm-facts">$125 · PROCTORED ONLINE · +5,000 CORES</div>
-              <svg class="cm-seal" viewBox="0 0 80 112"><use href="#rosette"/><text x="40" y="43" text-anchor="middle" font-family="ui-monospace, Menlo, monospace" font-size="9.5" font-weight="800" fill="#8a6914">NCA</text><text x="40" y="54" text-anchor="middle" font-family="ui-monospace, Menlo, monospace" font-size="9.5" font-weight="800" fill="#8a6914">AIIO</text></svg>
-            </div>
-            <div class="sd-certfoot">
-              <span class="sd-earn" style="margin:0;">A REAL EXAM, LIVE TODAY</span>
-              <a class="lk" href="https://www.nvidia.com/en-us/learn/certification/ai-infrastructure-operations-associate/">Exam details on nvidia.com ↗</a>
-            </div>
-          </div>
-          <div class="lpd d-lp3s5">
-            <div class="certmini">
-              <div class="corner tl"></div><div class="corner tr"></div><div class="corner bl"></div><div class="corner br"></div>
-              <div class="cm-head">NVIDIA DEVELOPER CERTIFICATION PROGRAM</div>
-              <div class="cm-title">AI Operations <span class="cert-tag">FLAGSHIP</span></div>
-              <div class="cm-sub">NVIDIA-Certified Professional · NCP-AIO</div>
-              <div class="cm-reserved"><span>RESERVED FOR</span><i>You.</i></div>
-              <div class="cm-facts">$500 · 30 QUESTIONS + 3 LIVE LAB EXERCISES · +5,000 CORES</div>
-              <svg class="cm-seal" viewBox="0 0 80 112"><use href="#rosette"/><text x="40" y="43" text-anchor="middle" font-family="ui-monospace, Menlo, monospace" font-size="9.5" font-weight="800" fill="#8a6914">NCP</text><text x="40" y="54" text-anchor="middle" font-family="ui-monospace, Menlo, monospace" font-size="9.5" font-weight="800" fill="#8a6914">AIO</text></svg>
-            </div>
-            <div class="sd-certfoot">
-              <span class="sd-earn" style="margin:0;">A REAL EXAM, LIVE TODAY</span>
-              <a class="lk" href="https://www.nvidia.com/en-us/learn/certification/ai-operations-professional/">Exam details on nvidia.com ↗</a>
-            </div>
-          </div>
-          <div class="lpd d-lp3s6">
-            <div class="sd-card outcome">
-              <div class="sd-kicker">THE PAYOFF</div>
-              <h4>The person they call when the cluster matters</h4>
-              <p class="sd-body">Certified on lab-based exams nobody can fake. Cloud-architect roles, platform teams, and an Authorized Training Center waiting at Wolf rank.</p>
-              <div class="sd-earn">PLATFORM ROLE · ATC ELIGIBLE</div>
-              <div class="sd-links"><a class="lk" href="#offers">See this month's offers ↓</a></div>
-            </div>
-          </div>
-          </div>
-        </div>
-      </div>
-      <div class="lp-body b-lp4">
-        <div class="lp-sub">your pipeline, 50× faster · Kaggle-grade proof</div>
-        <input type="radio" name="lp4s" id="lp4s1" checked><input type="radio" name="lp4s" id="lp4s2"><input type="radio" name="lp4s" id="lp4s3"><input type="radio" name="lp4s" id="lp4s4"><input type="radio" name="lp4s" id="lp4s5"><input type="radio" name="lp4s" id="lp4s6">
-        <div class="lp-grid">
-          <div class="lp-left">
-          <label class="lps" for="lp4s1">
-            <span class="lps-num">1</span>
-            <span class="lps-txt"><b>Foundations</b><span>accelerated data science, hands-on</span></span>
-            <span class="lps-kind course">COURSE</span>
-          </label>
-          <label class="lps" for="lp4s2">
-            <span class="lps-num">2</span>
-            <span class="lps-txt"><b>Port your pipeline</b><span>your own data, benchmarked</span></span>
-            <span class="lps-kind lab">HANDS-ON</span>
-          </label>
-          <label class="lps" for="lp4s3">
-            <span class="lps-num">3</span>
-            <span class="lps-txt"><b>The superbadge</b><span>Benchmark Slayer · published numbers</span></span>
-            <span class="lps-kind super">SUPERBADGE</span>
-          </label>
-          <label class="lps" for="lp4s4">
-            <span class="lps-num">4</span>
-            <span class="lps-txt"><b>Certification: NCA-ADS</b><span>$125 · proctored · associate</span></span>
-            <span class="lps-kind cert">CERT · PAID</span>
-          </label>
-          <label class="lps" for="lp4s5">
-            <span class="lps-num">5</span>
-            <span class="lps-txt"><b>Certification: NCP-ADS</b><span>$200 · proctored · professional</span></span>
-            <span class="lps-kind cert">CERT · PAID</span>
-          </label>
-          <label class="lps" for="lp4s6">
-            <span class="lps-num">6</span>
-            <span class="lps-txt"><b>The payoff</b><span>the data scientist, not a data scientist</span></span>
-            <span class="lps-kind outcome">PAYOFF</span>
-          </label>
-          </div>
-          <div class="lp-right">
-          <div class="lpd d-lp4s1">
+            <div class="lpd d-t1s8">
             <div class="sd-card">
-              <div class="sd-kicker">DLI COURSE · RAPIDS / cuDF</div>
-              <h4>Accelerated Data Science</h4>
-              <ul class="sd-bullets"><li>pandas-to-cuDF: same API, GPU speed</li><li>Feature engineering and ML pipelines at 50×</li></ul>
-              <div class="sd-earn">EARN · Frame Mover · +300 cores</div>
-              <div class="sd-links"><a class="lk" href="https://learn.nvidia.com">learn.nvidia.com ↗</a><a class="lk" href="https://developer.nvidia.com/rapids">developer.nvidia.com/rapids ↗</a></div>
+              <div class="sd-kicker">LAYER 4</div>
+              <h4>The frameworks you already use, accelerated</h4>
+              <ul class="sd-bullets"><li>PyTorch and JAX on CUDA, TensorRT for speed, RAPIDS for dataframes</li><li>Do: port one pandas pipeline to cuDF and benchmark it</li></ul>
+              <div class="sd-earn">EARN · Layer 4 badge · +200</div>
+              <div class="sd-links"><a class="lk" href="https://developer.nvidia.com/rapids">RAPIDS ↗</a><a class="lk" href="https://developer.nvidia.com/tensorrt">TensorRT ↗</a></div>
             </div>
-          </div>
-          <div class="lpd d-lp4s2">
+            </div>
+            <div class="lpd d-t1s9">
             <div class="sd-card">
-              <div class="sd-kicker">HANDS-ON · YOUR OWN PIPELINE</div>
-              <h4>Port one of your real pipelines to cuDF</h4>
-              <ul class="sd-bullets"><li>Take the slowest pipeline you actually own</li><li>Port it, benchmark it honestly, publish the before/after</li></ul>
-              <div class="sd-earn">EARN · 50× Club · +500 cores</div>
-              <div class="sd-links"><a class="lk" href="https://developer.nvidia.com/rapids">developer.nvidia.com/rapids ↗</a></div>
+              <div class="sd-kicker">LAYER 3</div>
+              <h4>The compute platform underneath</h4>
+              <ul class="sd-bullets"><li>The language of the GPU: kernels, libraries, profilers</li><li>Do: write your first kernel in the DLI accelerated-computing course</li></ul>
+              <div class="sd-earn">EARN · Layer 3 badge · +300</div>
+              <div class="sd-links"><a class="lk" href="https://developer.nvidia.com/cuda-toolkit">CUDA Toolkit ↗</a><a class="lk" href="https://learn.nvidia.com">learn.nvidia.com ↗</a></div>
             </div>
-          </div>
-          <div class="lpd d-lp4s3">
-            <div class="sd-card super">
-              <div class="sd-shield"><svg viewBox="0 0 80 92"><use href="#shield"/></svg></div>
-              <div class="sd-kicker">SUPERBADGE · FREE · AUTO-VERIFIED · UNLIMITED RESUBMISSIONS</div>
-              <h4>The Benchmark Slayer superbadge</h4>
-              <div class="sd-specs"><div class="spec">A public before/after benchmark on a real workload</div><div class="spec">Reproducible: code, data recipe, hardware notes</div><div class="spec">A write-up your team lead can read in five minutes</div></div>
-              <div class="sd-earn">EARN · BENCHMARK SLAYER · +2,000 cores</div>
-              <div class="sd-links"><a class="lk" href="https://github.com/NVIDIA/GenerativeAIExamples">Cookbook examples ↗</a></div>
             </div>
-          </div>
-          <div class="lpd d-lp4s4">
-            <div class="certmini">
-              <div class="corner tl"></div><div class="corner tr"></div><div class="corner bl"></div><div class="corner br"></div>
-              <div class="cm-head">NVIDIA DEVELOPER CERTIFICATION PROGRAM</div>
-              <div class="cm-title">Accelerated Data Science</div>
-              <div class="cm-sub">NVIDIA-Certified Associate · NCA-ADS</div>
-              <div class="cm-reserved"><span>RESERVED FOR</span><i>You.</i></div>
-              <div class="cm-facts">$125 · PROCTORED ONLINE · +5,000 CORES</div>
-              <svg class="cm-seal" viewBox="0 0 80 112"><use href="#rosette"/><text x="40" y="43" text-anchor="middle" font-family="ui-monospace, Menlo, monospace" font-size="9.5" font-weight="800" fill="#8a6914">NCA</text><text x="40" y="54" text-anchor="middle" font-family="ui-monospace, Menlo, monospace" font-size="9.5" font-weight="800" fill="#8a6914">ADS</text></svg>
-            </div>
-            <div class="sd-certfoot">
-              <span class="sd-earn" style="margin:0;">A REAL EXAM, LIVE TODAY</span>
-              <a class="lk" href="https://www.nvidia.com/en-us/learn/certification/accelerated-data-science-associate/">Exam details on nvidia.com ↗</a>
-            </div>
-          </div>
-          <div class="lpd d-lp4s5">
-            <div class="certmini">
-              <div class="corner tl"></div><div class="corner tr"></div><div class="corner bl"></div><div class="corner br"></div>
-              <div class="cm-head">NVIDIA DEVELOPER CERTIFICATION PROGRAM</div>
-              <div class="cm-title">Accelerated Data Science</div>
-              <div class="cm-sub">NVIDIA-Certified Professional · NCP-ADS</div>
-              <div class="cm-reserved"><span>RESERVED FOR</span><i>You.</i></div>
-              <div class="cm-facts">$200 · PROCTORED · +5,000 CORES</div>
-              <svg class="cm-seal" viewBox="0 0 80 112"><use href="#rosette"/><text x="40" y="43" text-anchor="middle" font-family="ui-monospace, Menlo, monospace" font-size="9.5" font-weight="800" fill="#8a6914">NCP</text><text x="40" y="54" text-anchor="middle" font-family="ui-monospace, Menlo, monospace" font-size="9.5" font-weight="800" fill="#8a6914">ADS</text></svg>
-            </div>
-            <div class="sd-certfoot">
-              <span class="sd-earn" style="margin:0;">A REAL EXAM, LIVE TODAY</span>
-              <a class="lk" href="https://www.nvidia.com/en-us/learn/certification/accelerated-data-science-professional/">Exam details on nvidia.com ↗</a>
-            </div>
-          </div>
-          <div class="lpd d-lp4s6">
-            <div class="sd-card outcome">
-              <div class="sd-kicker">THE PAYOFF</div>
-              <h4>Your org's data stack moves to GPUs</h4>
-              <p class="sd-body">Kaggle medals follow the speed. You become the internal advocate who converts the next team, and the promotion case writes itself.</p>
-              <div class="sd-earn">PROMOTED · KAGGLE-GRADE PROOF</div>
-              <div class="sd-links"><a class="lk" href="#leaderboard">The Builder 100 ↓</a></div>
-            </div>
-          </div>
-          </div>
-        </div>
-      </div>
-      <div class="lp-body b-lp5">
-        <div class="lp-sub">the physical-AI decade · sim-to-real, for real</div>
-        <input type="radio" name="lp5s" id="lp5s1" checked><input type="radio" name="lp5s" id="lp5s2"><input type="radio" name="lp5s" id="lp5s3"><input type="radio" name="lp5s" id="lp5s4"><input type="radio" name="lp5s" id="lp5s5">
-        <div class="lp-grid">
-          <div class="lp-left">
-          <label class="lps" for="lp5s1">
-            <span class="lps-num">1</span>
-            <span class="lps-txt"><b>Foundations</b><span>Isaac Sim, your first robot</span></span>
-            <span class="lps-kind course">COURSE</span>
-          </label>
-          <label class="lps" for="lp5s2">
-            <span class="lps-num">2</span>
-            <span class="lps-txt"><b>Train a policy</b><span>Isaac Lab, reinforcement learning</span></span>
-            <span class="lps-kind lab">HANDS-ON</span>
-          </label>
-          <label class="lps" for="lp5s3">
-            <span class="lps-num">3</span>
-            <span class="lps-txt"><b>The superbadge</b><span>Sim-to-Real · runs outside the simulator</span></span>
-            <span class="lps-kind super">SUPERBADGE</span>
-          </label>
-          <label class="lps" for="lp5s4">
-            <span class="lps-num">4</span>
-            <span class="lps-txt"><b>Certification: NCP-OUSD</b><span>$200 · proctored · OpenUSD</span></span>
-            <span class="lps-kind cert">CERT · PAID</span>
-          </label>
-          <label class="lps" for="lp5s5">
-            <span class="lps-num">5</span>
-            <span class="lps-txt"><b>The payoff</b><span>robot ships · Inception</span></span>
-            <span class="lps-kind outcome">PAYOFF</span>
-          </label>
-          </div>
-          <div class="lp-right">
-          <div class="lpd d-lp5s1">
+            <div class="lpd d-t1s10">
             <div class="sd-card">
-              <div class="sd-kicker">FREE · ISAAC SIM</div>
-              <h4>Isaac Sim fundamentals</h4>
-              <ul class="sd-bullets"><li>Photorealistic robot simulation on Omniverse</li><li>Your first robot moving in a world that obeys physics</li></ul>
-              <div class="sd-earn">EARN · Sim Walker · +300 cores</div>
-              <div class="sd-links"><a class="lk" href="https://developer.nvidia.com/isaac">developer.nvidia.com/isaac ↗</a></div>
+              <div class="sd-kicker">LAYER 2</div>
+              <h4>What makes a GPU a server</h4>
+              <ul class="sd-bullets"><li>Drivers, containers, Kubernetes operators, fleet telemetry</li><li>Do: pull a GPU container from NGC and run it</li></ul>
+              <div class="sd-earn">EARN · Layer 2 badge · +150</div>
+              <div class="sd-links"><a class="lk" href="https://catalog.ngc.nvidia.com">catalog.ngc.nvidia.com ↗</a><a class="lk" href="https://docs.nvidia.com">docs.nvidia.com ↗</a></div>
             </div>
-          </div>
-          <div class="lpd d-lp5s2">
+            </div>
+            <div class="lpd d-t1s11">
             <div class="sd-card">
-              <div class="sd-kicker">HANDS-ON · ISAAC LAB</div>
-              <h4>Train a policy in Isaac Lab</h4>
-              <ul class="sd-bullets"><li>A manipulation or locomotion task, trained end-to-end</li><li>Honest evaluation: where the sim lies to you</li></ul>
-              <div class="sd-earn">EARN · Policy Wonk · +500 cores</div>
-              <div class="sd-links"><a class="lk" href="https://developer.nvidia.com/isaac">developer.nvidia.com/isaac ↗</a></div>
+              <div class="sd-kicker">LAYER 1 · THE BOTTOM OF THE CAKE</div>
+              <h4>The silicon itself</h4>
+              <ul class="sd-bullets"><li>The chips everything above stands on, from data center to palm-sized Jetson</li><li>Do: watch one GPU-architecture talk from the source</li></ul>
+              <div class="sd-earn">EARN · Layer 1 badge · +100</div>
+              <div class="sd-links"><a class="lk" href="https://www.nvidia.com/en-us/on-demand/">GTC On-Demand ↗</a><a class="lk" href="https://www.nvidia.com/en-us/data-center/">Data center platform ↗</a></div>
             </div>
-          </div>
-          <div class="lpd d-lp5s3">
-            <div class="sd-card super">
-              <div class="sd-shield"><svg viewBox="0 0 80 92"><use href="#shield"/></svg></div>
-              <div class="sd-kicker">SUPERBADGE · FREE · AUTO-VERIFIED · UNLIMITED RESUBMISSIONS</div>
-              <h4>The Sim-to-Real superbadge</h4>
-              <div class="sd-specs"><div class="spec">Your policy deployed to a Jetson, on real hardware</div><div class="spec">Video proof: the robot doing the task outside the sim</div><div class="spec">Gap analysis: what broke crossing the reality line</div></div>
-              <div class="sd-earn">EARN · SIM-TO-REAL · +2,000 cores</div>
-              <div class="sd-links"><a class="lk" href="https://developer.nvidia.com/embedded-computing">Jetson ↗</a></div>
             </div>
-          </div>
-          <div class="lpd d-lp5s4">
-            <div class="certmini">
-              <div class="corner tl"></div><div class="corner tr"></div><div class="corner bl"></div><div class="corner br"></div>
-              <div class="cm-head">NVIDIA DEVELOPER CERTIFICATION PROGRAM</div>
-              <div class="cm-title">OpenUSD Development</div>
-              <div class="cm-sub">NVIDIA-Certified Professional · NCP-OUSD</div>
-              <div class="cm-reserved"><span>RESERVED FOR</span><i>You.</i></div>
-              <div class="cm-facts">$200 · PROCTORED · +5,000 CORES</div>
-              <svg class="cm-seal" viewBox="0 0 80 112"><use href="#rosette"/><text x="40" y="43" text-anchor="middle" font-family="ui-monospace, Menlo, monospace" font-size="9.5" font-weight="800" fill="#8a6914">NCP</text><text x="40" y="54" text-anchor="middle" font-family="ui-monospace, Menlo, monospace" font-size="9.5" font-weight="800" fill="#8a6914">OUSD</text></svg>
-            </div>
-            <div class="sd-certfoot">
-              <span class="sd-earn" style="margin:0;">A REAL EXAM, LIVE TODAY</span>
-              <a class="lk" href="https://www.nvidia.com/en-us/learn/certification/openusd-development-professional/">Exam details on nvidia.com ↗</a>
-            </div>
-          </div>
-          <div class="lpd d-lp5s5">
-            <div class="sd-card outcome">
-              <div class="sd-kicker">THE PAYOFF</div>
-              <h4>A robot that works, and a company if you want one</h4>
-              <p class="sd-body">Sim-to-real is the rarest proof in robotics. Inception startups, GTC robotics talks, and the Figure/1X-tier hiring pipeline all start here.</p>
-              <div class="sd-earn">ROBOT SHIPS · INCEPTION MEMBER</div>
-              <div class="sd-links"><a class="lk" href="https://nvidia.com/inception">nvidia.com/inception ↗</a></div>
-            </div>
-          </div>
-          </div>
-        </div>
-      </div>
-      <div class="lp-body b-lp6">
-        <div class="lp-sub">the whole 10-layer cake · $0 · no exams, ever</div>
-        <input type="radio" name="lp6s" id="lp6s1" checked><input type="radio" name="lp6s" id="lp6s2"><input type="radio" name="lp6s" id="lp6s3"><input type="radio" name="lp6s" id="lp6s4"><input type="radio" name="lp6s" id="lp6s5"><input type="radio" name="lp6s" id="lp6s6">
-        <div class="lp-grid">
-          <div class="lp-left">
-          <label class="lps" for="lp6s1">
-            <span class="lps-num">1</span>
-            <span class="lps-txt"><b>Layers 1–2</b><span>silicon & system software</span></span>
-            <span class="lps-kind lab">HANDS-ON</span>
-          </label>
-          <label class="lps" for="lp6s2">
-            <span class="lps-num">2</span>
-            <span class="lps-txt"><b>Layers 3–4</b><span>CUDA & frameworks</span></span>
-            <span class="lps-kind lab">HANDS-ON</span>
-          </label>
-          <label class="lps" for="lp6s3">
-            <span class="lps-num">3</span>
-            <span class="lps-txt"><b>Layers 5–6</b><span>training & models</span></span>
-            <span class="lps-kind lab">HANDS-ON</span>
-          </label>
-          <label class="lps" for="lp6s4">
-            <span class="lps-num">4</span>
-            <span class="lps-txt"><b>Layers 7–8</b><span>serving & cloud</span></span>
-            <span class="lps-kind lab">HANDS-ON</span>
-          </label>
-          <label class="lps" for="lp6s5">
-            <span class="lps-num">5</span>
-            <span class="lps-txt"><b>Layers 9–10</b><span>verticals & community</span></span>
-            <span class="lps-kind lab">HANDS-ON</span>
-          </label>
-          <label class="lps" for="lp6s6">
-            <span class="lps-num">6</span>
-            <span class="lps-txt"><b>The capstone</b><span>Cake Master · all ten layers</span></span>
-            <span class="lps-kind super">SUPERBADGE</span>
-          </label>
-          </div>
-          <div class="lp-right">
-          <div class="lpd d-lp6s1">
-            <div class="sd-card">
-              <div class="sd-kicker">FREE · LAYERS 1–2</div>
-              <h4>See the silicon, run a container</h4>
-              <ul class="sd-bullets"><li>GPU architecture in 30 minutes from GTC On-Demand</li><li>Pull your first GPU container from NGC and run it</li></ul>
-              <div class="sd-earn">EARN · Layer 1 + 2 badges · +250 cores</div>
-              <div class="sd-links"><a class="lk" href="https://www.nvidia.com/en-us/on-demand/">GTC On-Demand ↗</a><a class="lk" href="https://catalog.ngc.nvidia.com">catalog.ngc.nvidia.com ↗</a></div>
-            </div>
-          </div>
-          <div class="lpd d-lp6s2">
-            <div class="sd-card">
-              <div class="sd-kicker">FREE TIER · LAYERS 3–4</div>
-              <h4>Write a kernel, accelerate a dataframe</h4>
-              <ul class="sd-bullets"><li>Fundamentals of Accelerated Computing (DLI, GPU lab included)</li><li>Port a pandas pipeline to RAPIDS cuDF, watch it fly</li></ul>
-              <div class="sd-earn">EARN · Layer 3 + 4 badges · +500 cores</div>
-              <div class="sd-links"><a class="lk" href="https://learn.nvidia.com">learn.nvidia.com ↗</a><a class="lk" href="https://developer.nvidia.com/rapids">RAPIDS ↗</a></div>
-            </div>
-          </div>
-          <div class="lpd d-lp6s3">
-            <div class="sd-card">
-              <div class="sd-kicker">FREE · LAYERS 5–6</div>
-              <h4>Fine-tune small, call a frontier model</h4>
-              <ul class="sd-bullets"><li>A small NeMo fine-tune on a real dataset</li><li>One API call to Nemotron 3 Nano: free key, no card</li></ul>
-              <div class="sd-earn">EARN · Layer 5 + 6 badges · +400 cores</div>
-              <div class="sd-links"><a class="lk" href="https://developer.nvidia.com/nemo">NeMo ↗</a><a class="lk" href="https://build.nvidia.com">build.nvidia.com ↗</a></div>
-            </div>
-          </div>
-          <div class="lpd d-lp6s4">
-            <div class="sd-card">
-              <div class="sd-kicker">FREE DEV LICENSE · LAYERS 7–8</div>
-              <h4>Serve a NIM, ship a tiny app</h4>
-              <ul class="sd-bullets"><li>A NIM microservice running locally, free up to 16 GPUs</li><li>A small app on free build.nvidia.com credits</li></ul>
-              <div class="sd-earn">EARN · Layer 7 + 8 badges · +500 cores</div>
-              <div class="sd-links"><a class="lk" href="https://developer.nvidia.com/developer-program">Developer Program ↗</a><a class="lk" href="https://developer.nvidia.com/brev">Brev ↗</a></div>
-            </div>
-          </div>
-          <div class="lpd d-lp6s5">
-            <div class="sd-card">
-              <div class="sd-kicker">FREE · LAYERS 9–10</div>
-              <h4>Pick a vertical, join the people</h4>
-              <ul class="sd-bullets"><li>Simulate a robot in Isaac or build a scene in Omniverse</li><li>Developer Program, forums, Discord: claim your public profile</li></ul>
-              <div class="sd-earn">EARN · Layer 9 + 10 badges · +350 cores</div>
-              <div class="sd-links"><a class="lk" href="https://developer.nvidia.com/isaac">Isaac ↗</a><a class="lk" href="https://forums.developer.nvidia.com">Forums ↗</a></div>
-            </div>
-          </div>
-          <div class="lpd d-lp6s6">
+            <div class="lpd d-t1s12">
             <div class="sd-card super">
               <div class="sd-shield"><svg viewBox="0 0 80 92"><use href="#shield"/></svg></div>
               <div class="sd-kicker">SUPERBADGE · FREE · AUTO-VERIFIED · UNLIMITED RESUBMISSIONS</div>
@@ -1752,12 +1311,834 @@ footer a:hover { color: #fff; }
               <div class="sd-earn">EARN · CAKE MASTER · +2,000 cores · still $0 total</div>
               <div class="sd-links"><a class="lk" href="/path-agent-builder">The Agent Builder Path ↗</a></div>
             </div>
+            </div>
           </div>
+        </div>
+      </div>
+      <div class="lp-body b-t2">
+        <div class="lp-sub">LEARN → CERTIFY → GET HIRED · PICK YOUR ROLE</div>
+<input type="radio" name="crole" id="cr1" checked><input type="radio" name="crole" id="cr2"><input type="radio" name="crole" id="cr3"><input type="radio" name="crole" id="cr4"><input type="radio" name="crole" id="cr5">
+        <div class="role-tabs"><label for="cr1">Fwd-Deployed AI Engineer</label><label for="cr2">ML Engineer</label><label for="cr3">AI Infrastructure Engineer</label><label for="cr4">Data Scientist</label><label for="cr5">Robotics / Sim Engineer</label></div>
+        <div class="role-bodies">
+        <div class="role-body rb-cr1">
+          <div class="role-sub">+800% postings · $220K–$700K top comp</div>
+        <input type="radio" name="cr1" id="cr1s1" checked><input type="radio" name="cr1" id="cr1s2"><input type="radio" name="cr1" id="cr1s3"><input type="radio" name="cr1" id="cr1s4"><input type="radio" name="cr1" id="cr1s5"><input type="radio" name="cr1" id="cr1s6"><input type="radio" name="cr1" id="cr1s7">
+        <div class="lp-grid">
+          <div class="lp-left">
+            <label class="lps" for="cr1s1">
+              <span class="lps-num">1</span>
+              <span class="lps-txt"><b>Foundations, free</b><span>what agents are + your first API call</span></span>
+              <span class="lps-kind course">COURSE</span>
+            </label>
+            <label class="lps" for="cr1s2">
+              <span class="lps-num">2</span>
+              <span class="lps-txt"><b>Building RAG Agents</b><span>DLI · 8 hrs · GPU lab included</span></span>
+              <span class="lps-kind course">COURSE</span>
+            </label>
+            <label class="lps" for="cr1s3">
+              <span class="lps-num">3</span>
+              <span class="lps-txt"><b>Building Agentic Apps</b><span>DLI · 8 hrs · production patterns</span></span>
+              <span class="lps-kind course">COURSE</span>
+            </label>
+            <label class="lps" for="cr1s4">
+              <span class="lps-num">4</span>
+              <span class="lps-txt"><b>The superbadge</b><span>Production Agent · live, auto-verified</span></span>
+              <span class="lps-kind super">SUPERBADGE</span>
+            </label>
+            <label class="lps" for="cr1s5">
+              <span class="lps-num">5</span>
+              <span class="lps-txt"><b>Certification: NCA-GENL</b><span>$125 · proctored</span></span>
+              <span class="lps-kind cert">CERT · PAID</span>
+            </label>
+            <label class="lps" for="cr1s6">
+              <span class="lps-num">6</span>
+              <span class="lps-txt"><b>Certification: NCP-AAI</b><span>$200 · proctored · the flagship</span></span>
+              <span class="lps-kind cert">CERT · PAID</span>
+            </label>
+            <label class="lps" for="cr1s7">
+              <span class="lps-num">7</span>
+              <span class="lps-txt"><b>The payoff</b><span>marketplace listing · offers come to you</span></span>
+              <span class="lps-kind outcome">PAYOFF</span>
+            </label>
+          </div>
+          <div class="lp-right">
+            <div class="lpd d-cr1s1">
+            <div class="sd-card">
+              <div class="sd-kicker">FREE · ~2 HRS · DLI + BUILD.NVIDIA.COM</div>
+              <h4>Agentic AI Explained, then your first Nemotron call</h4>
+              <ul class="sd-bullets"><li>What agents actually are, and why most demos die in production</li><li>Free build.nvidia.com account, no credit card, one real API call</li></ul>
+              <div class="sd-earn">EARN · First Token · +200 cores</div>
+              <div class="sd-links"><a class="lk" href="https://learn.nvidia.com/courses/course-detail?course_id=course-v1:DLI+S-FX-39+V1">Agentic AI Explained ↗</a><a class="lk" href="https://build.nvidia.com">build.nvidia.com ↗</a></div>
+            </div>
+            </div>
+            <div class="lpd d-cr1s2">
+            <div class="sd-card">
+              <div class="sd-kicker">DLI COURSE · 8 HRS · FREE GPU LAB</div>
+              <h4>Building RAG Agents with LLMs</h4>
+              <ul class="sd-bullets"><li>Retrieval, tools, and memory wired together properly</li><li>A working RAG agent in the included cloud GPU lab</li></ul>
+              <div class="sd-earn">EARN · RAG Apprentice · +500 cores</div>
+              <div class="sd-links"><a class="lk" href="https://learn.nvidia.com/courses/course-detail?course_id=course-v1:DLI+C-FX-15+V1">Start on learn.nvidia.com ↗</a></div>
+            </div>
+            </div>
+            <div class="lpd d-cr1s3">
+            <div class="sd-card">
+              <div class="sd-kicker">DLI COURSE · 8 HRS · $90</div>
+              <h4>Building Agentic AI Applications with LLMs</h4>
+              <ul class="sd-bullets"><li>Multi-agent orchestration, evals, observability, guardrails</li><li>The exact NCP-AAI exam domains, learned by building</li></ul>
+              <div class="sd-earn">EARN · Agent Smith · +500 cores</div>
+              <div class="sd-links"><a class="lk" href="https://learn.nvidia.com/courses/course-detail?course_id=course-v1:DLI+C-FX-25+V1">Start on learn.nvidia.com ↗</a></div>
+            </div>
+            </div>
+            <div class="lpd d-cr1s4">
+            <div class="sd-card super">
+              <div class="sd-shield"><svg viewBox="0 0 80 92"><use href="#shield"/></svg></div>
+              <div class="sd-kicker">SUPERBADGE · FREE · AUTO-VERIFIED · UNLIMITED RESUBMISSIONS</div>
+              <h4>The Production Agent superbadge</h4>
+              <div class="sd-specs"><div class="spec">A working agent solving a provided real-world brief</div><div class="spec">Served from a NIM endpoint you deployed yourself</div><div class="spec">Evals ≥ 85% · p95 under target · guardrails pass</div><div class="spec">Public repo + write-up</div></div>
+              <div class="sd-earn">EARN · PRODUCTION AGENT · +2,000 cores · unlocks the exams</div>
+              <div class="sd-links"><a class="lk" href="/path-agent-builder">Full spec ↗</a></div>
+            </div>
+            </div>
+            <div class="lpd d-cr1s5">
+            <div class="certmini">
+              <div class="corner tl"></div><div class="corner tr"></div><div class="corner bl"></div><div class="corner br"></div>
+              <div class="cm-head">NVIDIA DEVELOPER CERTIFICATION PROGRAM</div>
+              <div class="cm-title">Generative AI LLMs</div>
+              <div class="cm-sub">NVIDIA-Certified Associate · NCA-GENL</div>
+              <div class="cm-reserved"><span>RESERVED FOR</span><i>You.</i></div>
+              <div class="cm-facts">$125 · PROCTORED ONLINE · +5,000 CORES</div>
+              <svg class="cm-seal" viewBox="0 0 80 112"><use href="#rosette"/><text x="40" y="43" text-anchor="middle" font-family="ui-monospace, Menlo, monospace" font-size="9" font-weight="800" fill="#8a6914">NCA</text><text x="40" y="54" text-anchor="middle" font-family="ui-monospace, Menlo, monospace" font-size="9" font-weight="800" fill="#8a6914">GENL</text></svg>
+            </div>
+            <div class="sd-certfoot">
+              <span class="sd-earn" style="margin:0;">A REAL EXAM, LIVE TODAY</span>
+              <a class="lk" href="https://www.nvidia.com/en-us/learn/certification/generative-ai-llm-associate/">Exam details on nvidia.com ↗</a>
+            </div>
+            </div>
+            <div class="lpd d-cr1s6">
+            <div class="certmini">
+              <div class="corner tl"></div><div class="corner tr"></div><div class="corner bl"></div><div class="corner br"></div>
+              <div class="cm-head">NVIDIA DEVELOPER CERTIFICATION PROGRAM</div>
+              <div class="cm-title">Agentic AI <span class="cert-tag">FLAGSHIP</span></div>
+              <div class="cm-sub">NVIDIA-Certified Professional · NCP-AAI</div>
+              <div class="cm-reserved"><span>RESERVED FOR</span><i>You.</i></div>
+              <div class="cm-facts">$200 · 120 MIN · 60–70 QUESTIONS · VALID 2 YEARS · +5,000 CORES</div>
+              <svg class="cm-seal" viewBox="0 0 80 112"><use href="#rosette"/><text x="40" y="43" text-anchor="middle" font-family="ui-monospace, Menlo, monospace" font-size="9" font-weight="800" fill="#8a6914">NCP</text><text x="40" y="54" text-anchor="middle" font-family="ui-monospace, Menlo, monospace" font-size="9" font-weight="800" fill="#8a6914">AAI</text></svg>
+            </div>
+            <div class="sd-certfoot">
+              <span class="sd-earn" style="margin:0;">A REAL EXAM, LIVE TODAY</span>
+              <a class="lk" href="https://www.nvidia.com/en-us/learn/certification/agentic-ai-professional/">Exam details on nvidia.com ↗</a>
+            </div>
+            </div>
+            <div class="lpd d-cr1s7">
+            <div class="sd-card outcome">
+              <div class="sd-kicker">THE PAYOFF</div>
+              <h4>Listed on the certified marketplace</h4>
+              <p class="sd-body">At Falcon rank with both certs and the superbadge, recruiters find you and test your live endpoint before the first call.</p>
+              <div class="sd-earn">OFFERS COME TO YOU</div>
+              <div class="sd-links"><a class="lk" href="#offers">This month's offers ↓</a><a class="lk" href="#paths">The Get Hired track</a></div>
+            </div>
+            </div>
+          </div>
+        </div>
+        </div>
+        <div class="role-body rb-cr2">
+          <div class="role-sub">median $187.5K · fastest-growing title</div>
+        <input type="radio" name="cr2" id="cr2s1" checked><input type="radio" name="cr2" id="cr2s2"><input type="radio" name="cr2" id="cr2s3"><input type="radio" name="cr2" id="cr2s4"><input type="radio" name="cr2" id="cr2s5"><input type="radio" name="cr2" id="cr2s6">
+        <div class="lp-grid">
+          <div class="lp-left">
+            <label class="lps" for="cr2s1">
+              <span class="lps-num">1</span>
+              <span class="lps-txt"><b>Foundations, free</b><span>deep learning fundamentals</span></span>
+              <span class="lps-kind course">COURSE</span>
+            </label>
+            <label class="lps" for="cr2s2">
+              <span class="lps-num">2</span>
+              <span class="lps-txt"><b>Fine-tune with NeMo</b><span>your checkpoint, real dataset</span></span>
+              <span class="lps-kind lab">HANDS-ON</span>
+            </label>
+            <label class="lps" for="cr2s3">
+              <span class="lps-num">3</span>
+              <span class="lps-txt"><b>The superbadge</b><span>Model Builder · checkpoint + eval card</span></span>
+              <span class="lps-kind super">SUPERBADGE</span>
+            </label>
+            <label class="lps" for="cr2s4">
+              <span class="lps-num">4</span>
+              <span class="lps-txt"><b>Certification: NCA-GENL</b><span>$125 · proctored</span></span>
+              <span class="lps-kind cert">CERT · PAID</span>
+            </label>
+            <label class="lps" for="cr2s5">
+              <span class="lps-num">5</span>
+              <span class="lps-txt"><b>Certification: NCP-GENL</b><span>$200 · proctored</span></span>
+              <span class="lps-kind cert">CERT · PAID</span>
+            </label>
+            <label class="lps" for="cr2s6">
+              <span class="lps-num">6</span>
+              <span class="lps-txt"><b>The payoff</b><span>your model card, cited</span></span>
+              <span class="lps-kind outcome">PAYOFF</span>
+            </label>
+          </div>
+          <div class="lp-right">
+            <div class="lpd d-cr2s1">
+            <div class="sd-card">
+              <div class="sd-kicker">DLI SELF-PACED · FREE TIER</div>
+              <h4>Deep Learning fundamentals</h4>
+              <ul class="sd-bullets"><li>Training, loss, optimization, the real intuitions</li><li>Cloud GPU access included while you learn</li></ul>
+              <div class="sd-earn">EARN · Gradient Descent-er · +300 cores</div>
+              <div class="sd-links"><a class="lk" href="https://www.nvidia.com/en-us/training/self-paced-courses/">Self-paced catalog ↗</a></div>
+            </div>
+            </div>
+            <div class="lpd d-cr2s2">
+            <div class="sd-card">
+              <div class="sd-kicker">HANDS-ON · NEMO</div>
+              <h4>Fine-tune a model with NeMo</h4>
+              <ul class="sd-bullets"><li>Curate with NeMo Curator, tune a small model</li><li>Evaluate honestly, publish the recipe</li></ul>
+              <div class="sd-earn">EARN · Model Tuner · +500 cores</div>
+              <div class="sd-links"><a class="lk" href="https://developer.nvidia.com/nemo">NeMo ↗</a></div>
+            </div>
+            </div>
+            <div class="lpd d-cr2s3">
+            <div class="sd-card super">
+              <div class="sd-shield"><svg viewBox="0 0 80 92"><use href="#shield"/></svg></div>
+              <div class="sd-kicker">SUPERBADGE · FREE · AUTO-VERIFIED · UNLIMITED RESUBMISSIONS</div>
+              <h4>The Model Builder superbadge</h4>
+              <div class="sd-specs"><div class="spec">A fine-tuned checkpoint on Hugging Face under your name</div><div class="spec">An honest eval card: benchmarks, regressions, limits</div><div class="spec">A recipe another builder can reproduce</div></div>
+              <div class="sd-earn">EARN · MODEL BUILDER · +2,000 cores</div>
+              <div class="sd-links"><a class="lk" href="https://huggingface.co/nvidia">huggingface.co/nvidia ↗</a></div>
+            </div>
+            </div>
+            <div class="lpd d-cr2s4">
+            <div class="certmini">
+              <div class="corner tl"></div><div class="corner tr"></div><div class="corner bl"></div><div class="corner br"></div>
+              <div class="cm-head">NVIDIA DEVELOPER CERTIFICATION PROGRAM</div>
+              <div class="cm-title">Generative AI LLMs</div>
+              <div class="cm-sub">NVIDIA-Certified Associate · NCA-GENL</div>
+              <div class="cm-reserved"><span>RESERVED FOR</span><i>You.</i></div>
+              <div class="cm-facts">$125 · PROCTORED ONLINE · +5,000 CORES</div>
+              <svg class="cm-seal" viewBox="0 0 80 112"><use href="#rosette"/><text x="40" y="43" text-anchor="middle" font-family="ui-monospace, Menlo, monospace" font-size="9" font-weight="800" fill="#8a6914">NCA</text><text x="40" y="54" text-anchor="middle" font-family="ui-monospace, Menlo, monospace" font-size="9" font-weight="800" fill="#8a6914">GENL</text></svg>
+            </div>
+            <div class="sd-certfoot">
+              <span class="sd-earn" style="margin:0;">A REAL EXAM, LIVE TODAY</span>
+              <a class="lk" href="https://www.nvidia.com/en-us/learn/certification/generative-ai-llm-associate/">Exam details on nvidia.com ↗</a>
+            </div>
+            </div>
+            <div class="lpd d-cr2s5">
+            <div class="certmini">
+              <div class="corner tl"></div><div class="corner tr"></div><div class="corner bl"></div><div class="corner br"></div>
+              <div class="cm-head">NVIDIA DEVELOPER CERTIFICATION PROGRAM</div>
+              <div class="cm-title">Generative AI LLMs</div>
+              <div class="cm-sub">NVIDIA-Certified Professional · NCP-GENL</div>
+              <div class="cm-reserved"><span>RESERVED FOR</span><i>You.</i></div>
+              <div class="cm-facts">$200 · PROCTORED · +5,000 CORES</div>
+              <svg class="cm-seal" viewBox="0 0 80 112"><use href="#rosette"/><text x="40" y="43" text-anchor="middle" font-family="ui-monospace, Menlo, monospace" font-size="9" font-weight="800" fill="#8a6914">NCP</text><text x="40" y="54" text-anchor="middle" font-family="ui-monospace, Menlo, monospace" font-size="9" font-weight="800" fill="#8a6914">GENL</text></svg>
+            </div>
+            <div class="sd-certfoot">
+              <span class="sd-earn" style="margin:0;">A REAL EXAM, LIVE TODAY</span>
+              <a class="lk" href="https://www.nvidia.com/en-us/learn/certification/generative-ai-llm-professional/">Exam details on nvidia.com ↗</a>
+            </div>
+            </div>
+            <div class="lpd d-cr2s6">
+            <div class="sd-card outcome">
+              <div class="sd-kicker">THE PAYOFF</div>
+              <h4>A model card people actually use</h4>
+              <p class="sd-body">Your checkpoints circulate inside the NVIDIA ecosystem. Citations and downloads compound; so does your rank.</p>
+              <div class="sd-earn">RESEARCH ROLE · CITATIONS · RANK</div>
+              <div class="sd-links"><a class="lk" href="https://huggingface.co/nvidia">huggingface.co/nvidia ↗</a></div>
+            </div>
+            </div>
+          </div>
+        </div>
+        </div>
+        <div class="role-body rb-cr3">
+          <div class="role-sub">every GPU cluster needs one · lab-based exams</div>
+        <input type="radio" name="cr3" id="cr3s1" checked><input type="radio" name="cr3" id="cr3s2"><input type="radio" name="cr3" id="cr3s3"><input type="radio" name="cr3" id="cr3s4"><input type="radio" name="cr3" id="cr3s5"><input type="radio" name="cr3" id="cr3s6">
+        <div class="lp-grid">
+          <div class="lp-left">
+            <label class="lps" for="cr3s1">
+              <span class="lps-num">1</span>
+              <span class="lps-txt"><b>Foundations</b><span>AI in the data center</span></span>
+              <span class="lps-kind course">COURSE</span>
+            </label>
+            <label class="lps" for="cr3s2">
+              <span class="lps-num">2</span>
+              <span class="lps-txt"><b>LaunchPad lab, free</b><span>NIM on Kubernetes, hosted</span></span>
+              <span class="lps-kind lab">HANDS-ON</span>
+            </label>
+            <label class="lps" for="cr3s3">
+              <span class="lps-num">3</span>
+              <span class="lps-txt"><b>The superbadge</b><span>Fleet Operator · verified ops</span></span>
+              <span class="lps-kind super">SUPERBADGE</span>
+            </label>
+            <label class="lps" for="cr3s4">
+              <span class="lps-num">4</span>
+              <span class="lps-txt"><b>Certification: NCA-AIIO</b><span>$125 · proctored</span></span>
+              <span class="lps-kind cert">CERT · PAID</span>
+            </label>
+            <label class="lps" for="cr3s5">
+              <span class="lps-num">5</span>
+              <span class="lps-txt"><b>Certification: NCP-AIO</b><span>$500 · live lab exam</span></span>
+              <span class="lps-kind cert">CERT · PAID</span>
+            </label>
+            <label class="lps" for="cr3s6">
+              <span class="lps-num">6</span>
+              <span class="lps-txt"><b>The payoff</b><span>the infra expert in the room</span></span>
+              <span class="lps-kind outcome">PAYOFF</span>
+            </label>
+          </div>
+          <div class="lp-right">
+            <div class="lpd d-cr3s1">
+            <div class="sd-card">
+              <div class="sd-kicker">NCA-AIIO PREP · SELF-PACED</div>
+              <h4>AI Infrastructure & Operations fundamentals</h4>
+              <ul class="sd-bullets"><li>GPUs, networking, schedulers: how AI factories run</li><li>The exact NCA-AIIO associate scope</li></ul>
+              <div class="sd-earn">EARN · Rack Aware · +300 cores</div>
+              <div class="sd-links"><a class="lk" href="https://www.nvidia.com/en-us/learn/certification/ai-infrastructure-operations-associate/">Certification overview ↗</a></div>
+            </div>
+            </div>
+            <div class="lpd d-cr3s2">
+            <div class="sd-card">
+              <div class="sd-kicker">FREE HOSTED LAB · ~2 WEEKS</div>
+              <h4>LaunchPad: NIM on Kubernetes</h4>
+              <ul class="sd-bullets"><li>A real cluster, provisioned for you, free</li><li>GPU Operator, monitoring, autoscaling</li></ul>
+              <div class="sd-earn">EARN · Fleet Hand · +400 cores</div>
+              <div class="sd-links"><a class="lk" href="https://launchpad.nvidia.com/">launchpad.nvidia.com ↗</a></div>
+            </div>
+            </div>
+            <div class="lpd d-cr3s3">
+            <div class="sd-card super">
+              <div class="sd-shield"><svg viewBox="0 0 80 92"><use href="#shield"/></svg></div>
+              <div class="sd-kicker">SUPERBADGE · FREE · AUTO-VERIFIED · UNLIMITED RESUBMISSIONS</div>
+              <h4>The Fleet Operator superbadge</h4>
+              <div class="sd-specs"><div class="spec">GPU Operator + DCGM on a test cluster</div><div class="spec">An autoscaling NIM surviving a load test</div><div class="spec">Runbook: failure modes and recoveries</div></div>
+              <div class="sd-earn">EARN · FLEET OPERATOR · +2,000 cores</div>
+              <div class="sd-links"><a class="lk" href="https://docs.nvidia.com">docs.nvidia.com ↗</a></div>
+            </div>
+            </div>
+            <div class="lpd d-cr3s4">
+            <div class="certmini">
+              <div class="corner tl"></div><div class="corner tr"></div><div class="corner bl"></div><div class="corner br"></div>
+              <div class="cm-head">NVIDIA DEVELOPER CERTIFICATION PROGRAM</div>
+              <div class="cm-title">AI Infrastructure & Operations</div>
+              <div class="cm-sub">NVIDIA-Certified Associate · NCA-AIIO</div>
+              <div class="cm-reserved"><span>RESERVED FOR</span><i>You.</i></div>
+              <div class="cm-facts">$125 · PROCTORED ONLINE · +5,000 CORES</div>
+              <svg class="cm-seal" viewBox="0 0 80 112"><use href="#rosette"/><text x="40" y="43" text-anchor="middle" font-family="ui-monospace, Menlo, monospace" font-size="9" font-weight="800" fill="#8a6914">NCA</text><text x="40" y="54" text-anchor="middle" font-family="ui-monospace, Menlo, monospace" font-size="9" font-weight="800" fill="#8a6914">AIIO</text></svg>
+            </div>
+            <div class="sd-certfoot">
+              <span class="sd-earn" style="margin:0;">A REAL EXAM, LIVE TODAY</span>
+              <a class="lk" href="https://www.nvidia.com/en-us/learn/certification/ai-infrastructure-operations-associate/">Exam details on nvidia.com ↗</a>
+            </div>
+            </div>
+            <div class="lpd d-cr3s5">
+            <div class="certmini">
+              <div class="corner tl"></div><div class="corner tr"></div><div class="corner bl"></div><div class="corner br"></div>
+              <div class="cm-head">NVIDIA DEVELOPER CERTIFICATION PROGRAM</div>
+              <div class="cm-title">AI Operations <span class="cert-tag">FLAGSHIP</span></div>
+              <div class="cm-sub">NVIDIA-Certified Professional · NCP-AIO</div>
+              <div class="cm-reserved"><span>RESERVED FOR</span><i>You.</i></div>
+              <div class="cm-facts">$500 · 30 QUESTIONS + 3 LIVE LAB EXERCISES · +5,000 CORES</div>
+              <svg class="cm-seal" viewBox="0 0 80 112"><use href="#rosette"/><text x="40" y="43" text-anchor="middle" font-family="ui-monospace, Menlo, monospace" font-size="9" font-weight="800" fill="#8a6914">NCP</text><text x="40" y="54" text-anchor="middle" font-family="ui-monospace, Menlo, monospace" font-size="9" font-weight="800" fill="#8a6914">AIO</text></svg>
+            </div>
+            <div class="sd-certfoot">
+              <span class="sd-earn" style="margin:0;">A REAL EXAM, LIVE TODAY</span>
+              <a class="lk" href="https://www.nvidia.com/en-us/learn/certification/ai-operations-professional/">Exam details on nvidia.com ↗</a>
+            </div>
+            </div>
+            <div class="lpd d-cr3s6">
+            <div class="sd-card outcome">
+              <div class="sd-kicker">THE PAYOFF</div>
+              <h4>The person they call when the cluster matters</h4>
+              <p class="sd-body">Certified on lab-based exams nobody can fake. Platform roles now; an Authorized Training Center at Wolf rank.</p>
+              <div class="sd-earn">PLATFORM ROLE · ATC ELIGIBLE</div>
+              <div class="sd-links"><a class="lk" href="#offers">This month's offers ↓</a></div>
+            </div>
+            </div>
+          </div>
+        </div>
+        </div>
+        <div class="role-body rb-cr4">
+          <div class="role-sub">your pipeline, 50× faster</div>
+        <input type="radio" name="cr4" id="cr4s1" checked><input type="radio" name="cr4" id="cr4s2"><input type="radio" name="cr4" id="cr4s3"><input type="radio" name="cr4" id="cr4s4"><input type="radio" name="cr4" id="cr4s5"><input type="radio" name="cr4" id="cr4s6">
+        <div class="lp-grid">
+          <div class="lp-left">
+            <label class="lps" for="cr4s1">
+              <span class="lps-num">1</span>
+              <span class="lps-txt"><b>Foundations</b><span>accelerated data science</span></span>
+              <span class="lps-kind course">COURSE</span>
+            </label>
+            <label class="lps" for="cr4s2">
+              <span class="lps-num">2</span>
+              <span class="lps-txt"><b>Port your pipeline</b><span>your own data, benchmarked</span></span>
+              <span class="lps-kind lab">HANDS-ON</span>
+            </label>
+            <label class="lps" for="cr4s3">
+              <span class="lps-num">3</span>
+              <span class="lps-txt"><b>The superbadge</b><span>Benchmark Slayer · published numbers</span></span>
+              <span class="lps-kind super">SUPERBADGE</span>
+            </label>
+            <label class="lps" for="cr4s4">
+              <span class="lps-num">4</span>
+              <span class="lps-txt"><b>Certification: NCA-ADS</b><span>$125 · proctored</span></span>
+              <span class="lps-kind cert">CERT · PAID</span>
+            </label>
+            <label class="lps" for="cr4s5">
+              <span class="lps-num">5</span>
+              <span class="lps-txt"><b>Certification: NCP-ADS</b><span>$200 · proctored</span></span>
+              <span class="lps-kind cert">CERT · PAID</span>
+            </label>
+            <label class="lps" for="cr4s6">
+              <span class="lps-num">6</span>
+              <span class="lps-txt"><b>The payoff</b><span>the data scientist, not a data scientist</span></span>
+              <span class="lps-kind outcome">PAYOFF</span>
+            </label>
+          </div>
+          <div class="lp-right">
+            <div class="lpd d-cr4s1">
+            <div class="sd-card">
+              <div class="sd-kicker">DLI COURSE · RAPIDS / cuDF</div>
+              <h4>Accelerated Data Science</h4>
+              <ul class="sd-bullets"><li>pandas-to-cuDF: same API, GPU speed</li><li>Feature engineering and ML pipelines at 50×</li></ul>
+              <div class="sd-earn">EARN · Frame Mover · +300 cores</div>
+              <div class="sd-links"><a class="lk" href="https://learn.nvidia.com">learn.nvidia.com ↗</a><a class="lk" href="https://developer.nvidia.com/rapids">RAPIDS ↗</a></div>
+            </div>
+            </div>
+            <div class="lpd d-cr4s2">
+            <div class="sd-card">
+              <div class="sd-kicker">HANDS-ON · YOUR PIPELINE</div>
+              <h4>Port one of your real pipelines to cuDF</h4>
+              <ul class="sd-bullets"><li>The slowest pipeline you actually own</li><li>Benchmark honestly, publish before/after</li></ul>
+              <div class="sd-earn">EARN · 50× Club · +500 cores</div>
+              <div class="sd-links"><a class="lk" href="https://developer.nvidia.com/rapids">RAPIDS ↗</a></div>
+            </div>
+            </div>
+            <div class="lpd d-cr4s3">
+            <div class="sd-card super">
+              <div class="sd-shield"><svg viewBox="0 0 80 92"><use href="#shield"/></svg></div>
+              <div class="sd-kicker">SUPERBADGE · FREE · AUTO-VERIFIED · UNLIMITED RESUBMISSIONS</div>
+              <h4>The Benchmark Slayer superbadge</h4>
+              <div class="sd-specs"><div class="spec">A public before/after on a real workload</div><div class="spec">Reproducible: code, data recipe, hardware notes</div><div class="spec">A write-up your team lead reads in five minutes</div></div>
+              <div class="sd-earn">EARN · BENCHMARK SLAYER · +2,000 cores</div>
+              <div class="sd-links"><a class="lk" href="https://github.com/NVIDIA/GenerativeAIExamples">Cookbook ↗</a></div>
+            </div>
+            </div>
+            <div class="lpd d-cr4s4">
+            <div class="certmini">
+              <div class="corner tl"></div><div class="corner tr"></div><div class="corner bl"></div><div class="corner br"></div>
+              <div class="cm-head">NVIDIA DEVELOPER CERTIFICATION PROGRAM</div>
+              <div class="cm-title">Accelerated Data Science</div>
+              <div class="cm-sub">NVIDIA-Certified Associate · NCA-ADS</div>
+              <div class="cm-reserved"><span>RESERVED FOR</span><i>You.</i></div>
+              <div class="cm-facts">$125 · PROCTORED ONLINE · +5,000 CORES</div>
+              <svg class="cm-seal" viewBox="0 0 80 112"><use href="#rosette"/><text x="40" y="43" text-anchor="middle" font-family="ui-monospace, Menlo, monospace" font-size="9" font-weight="800" fill="#8a6914">NCA</text><text x="40" y="54" text-anchor="middle" font-family="ui-monospace, Menlo, monospace" font-size="9" font-weight="800" fill="#8a6914">ADS</text></svg>
+            </div>
+            <div class="sd-certfoot">
+              <span class="sd-earn" style="margin:0;">A REAL EXAM, LIVE TODAY</span>
+              <a class="lk" href="https://www.nvidia.com/en-us/learn/certification/accelerated-data-science-associate/">Exam details on nvidia.com ↗</a>
+            </div>
+            </div>
+            <div class="lpd d-cr4s5">
+            <div class="certmini">
+              <div class="corner tl"></div><div class="corner tr"></div><div class="corner bl"></div><div class="corner br"></div>
+              <div class="cm-head">NVIDIA DEVELOPER CERTIFICATION PROGRAM</div>
+              <div class="cm-title">Accelerated Data Science</div>
+              <div class="cm-sub">NVIDIA-Certified Professional · NCP-ADS</div>
+              <div class="cm-reserved"><span>RESERVED FOR</span><i>You.</i></div>
+              <div class="cm-facts">$200 · PROCTORED · +5,000 CORES</div>
+              <svg class="cm-seal" viewBox="0 0 80 112"><use href="#rosette"/><text x="40" y="43" text-anchor="middle" font-family="ui-monospace, Menlo, monospace" font-size="9" font-weight="800" fill="#8a6914">NCP</text><text x="40" y="54" text-anchor="middle" font-family="ui-monospace, Menlo, monospace" font-size="9" font-weight="800" fill="#8a6914">ADS</text></svg>
+            </div>
+            <div class="sd-certfoot">
+              <span class="sd-earn" style="margin:0;">A REAL EXAM, LIVE TODAY</span>
+              <a class="lk" href="https://www.nvidia.com/en-us/learn/certification/accelerated-data-science-professional/">Exam details on nvidia.com ↗</a>
+            </div>
+            </div>
+            <div class="lpd d-cr4s6">
+            <div class="sd-card outcome">
+              <div class="sd-kicker">THE PAYOFF</div>
+              <h4>Your org's data stack moves to GPUs</h4>
+              <p class="sd-body">Kaggle medals follow the speed. You become the internal advocate, and the promotion case writes itself.</p>
+              <div class="sd-earn">PROMOTED · KAGGLE-GRADE PROOF</div>
+              <div class="sd-links"><a class="lk" href="#leaderboard">The Builder 100 ↓</a></div>
+            </div>
+            </div>
+          </div>
+        </div>
+        </div>
+        <div class="role-body rb-cr5">
+          <div class="role-sub">the physical-AI decade</div>
+        <input type="radio" name="cr5" id="cr5s1" checked><input type="radio" name="cr5" id="cr5s2"><input type="radio" name="cr5" id="cr5s3"><input type="radio" name="cr5" id="cr5s4"><input type="radio" name="cr5" id="cr5s5">
+        <div class="lp-grid">
+          <div class="lp-left">
+            <label class="lps" for="cr5s1">
+              <span class="lps-num">1</span>
+              <span class="lps-txt"><b>Foundations</b><span>Isaac Sim, your first robot</span></span>
+              <span class="lps-kind course">COURSE</span>
+            </label>
+            <label class="lps" for="cr5s2">
+              <span class="lps-num">2</span>
+              <span class="lps-txt"><b>Train a policy</b><span>Isaac Lab, RL</span></span>
+              <span class="lps-kind lab">HANDS-ON</span>
+            </label>
+            <label class="lps" for="cr5s3">
+              <span class="lps-num">3</span>
+              <span class="lps-txt"><b>The superbadge</b><span>Sim-to-Real · outside the simulator</span></span>
+              <span class="lps-kind super">SUPERBADGE</span>
+            </label>
+            <label class="lps" for="cr5s4">
+              <span class="lps-num">4</span>
+              <span class="lps-txt"><b>Certification: NCP-OUSD</b><span>$200 · proctored</span></span>
+              <span class="lps-kind cert">CERT · PAID</span>
+            </label>
+            <label class="lps" for="cr5s5">
+              <span class="lps-num">5</span>
+              <span class="lps-txt"><b>The payoff</b><span>robot ships · Inception</span></span>
+              <span class="lps-kind outcome">PAYOFF</span>
+            </label>
+          </div>
+          <div class="lp-right">
+            <div class="lpd d-cr5s1">
+            <div class="sd-card">
+              <div class="sd-kicker">FREE · ISAAC SIM</div>
+              <h4>Isaac Sim fundamentals</h4>
+              <ul class="sd-bullets"><li>Photorealistic robot simulation on Omniverse</li><li>Your first robot moving under real physics</li></ul>
+              <div class="sd-earn">EARN · Sim Walker · +300 cores</div>
+              <div class="sd-links"><a class="lk" href="https://developer.nvidia.com/isaac">Isaac ↗</a></div>
+            </div>
+            </div>
+            <div class="lpd d-cr5s2">
+            <div class="sd-card">
+              <div class="sd-kicker">HANDS-ON · ISAAC LAB</div>
+              <h4>Train a policy in Isaac Lab</h4>
+              <ul class="sd-bullets"><li>A manipulation or locomotion task end-to-end</li><li>Honest eval: where the sim lies to you</li></ul>
+              <div class="sd-earn">EARN · Policy Wonk · +500 cores</div>
+              <div class="sd-links"><a class="lk" href="https://developer.nvidia.com/isaac">Isaac ↗</a></div>
+            </div>
+            </div>
+            <div class="lpd d-cr5s3">
+            <div class="sd-card super">
+              <div class="sd-shield"><svg viewBox="0 0 80 92"><use href="#shield"/></svg></div>
+              <div class="sd-kicker">SUPERBADGE · FREE · AUTO-VERIFIED · UNLIMITED RESUBMISSIONS</div>
+              <h4>The Sim-to-Real superbadge</h4>
+              <div class="sd-specs"><div class="spec">Your policy on a Jetson, on real hardware</div><div class="spec">Video proof outside the sim</div><div class="spec">Gap analysis: what broke crossing reality</div></div>
+              <div class="sd-earn">EARN · SIM-TO-REAL · +2,000 cores</div>
+              <div class="sd-links"><a class="lk" href="https://developer.nvidia.com/embedded-computing">Jetson ↗</a></div>
+            </div>
+            </div>
+            <div class="lpd d-cr5s4">
+            <div class="certmini">
+              <div class="corner tl"></div><div class="corner tr"></div><div class="corner bl"></div><div class="corner br"></div>
+              <div class="cm-head">NVIDIA DEVELOPER CERTIFICATION PROGRAM</div>
+              <div class="cm-title">OpenUSD Development</div>
+              <div class="cm-sub">NVIDIA-Certified Professional · NCP-OUSD</div>
+              <div class="cm-reserved"><span>RESERVED FOR</span><i>You.</i></div>
+              <div class="cm-facts">$200 · PROCTORED · +5,000 CORES</div>
+              <svg class="cm-seal" viewBox="0 0 80 112"><use href="#rosette"/><text x="40" y="43" text-anchor="middle" font-family="ui-monospace, Menlo, monospace" font-size="9" font-weight="800" fill="#8a6914">NCP</text><text x="40" y="54" text-anchor="middle" font-family="ui-monospace, Menlo, monospace" font-size="9" font-weight="800" fill="#8a6914">OUSD</text></svg>
+            </div>
+            <div class="sd-certfoot">
+              <span class="sd-earn" style="margin:0;">A REAL EXAM, LIVE TODAY</span>
+              <a class="lk" href="https://www.nvidia.com/en-us/learn/certification/openusd-development-professional/">Exam details on nvidia.com ↗</a>
+            </div>
+            </div>
+            <div class="lpd d-cr5s5">
+            <div class="sd-card outcome">
+              <div class="sd-kicker">THE PAYOFF</div>
+              <h4>A robot that works, and a company if you want one</h4>
+              <p class="sd-body">Sim-to-real is the rarest proof in robotics. Inception startups and the GTC robotics track start here.</p>
+              <div class="sd-earn">ROBOT SHIPS · INCEPTION MEMBER</div>
+              <div class="sd-links"><a class="lk" href="https://nvidia.com/inception">nvidia.com/inception ↗</a></div>
+            </div>
+            </div>
+          </div>
+        </div>
+        </div>
+        </div>
+      </div>
+      <div class="lp-body b-t3">
+        <div class="lp-sub">COMMUNITY IS A CAREER · 300 SELECTED A YEAR · LIVE PROCTORED CREDENTIAL</div>
+<input type="radio" name="t3" id="t3s1" checked><input type="radio" name="t3" id="t3s2"><input type="radio" name="t3" id="t3s3"><input type="radio" name="t3" id="t3s4"><input type="radio" name="t3" id="t3s5"><input type="radio" name="t3" id="t3s6"><input type="radio" name="t3" id="t3s7">
+        <div class="lp-grid">
+          <div class="lp-left">
+            <label class="lps" for="t3s1">
+              <span class="lps-num">1</span>
+              <span class="lps-txt"><b>Show up</b><span>your city's group, this month</span></span>
+              <span class="lps-kind lab">FREE</span>
+            </label>
+            <label class="lps" for="t3s2">
+              <span class="lps-num">2</span>
+              <span class="lps-txt"><b>First Talk</b><span>slides + demo kit provided</span></span>
+              <span class="lps-kind lab">FREE</span>
+            </label>
+            <label class="lps" for="t3s3">
+              <span class="lps-num">3</span>
+              <span class="lps-txt"><b>Host + Mentor</b><span>service is the prerequisite</span></span>
+              <span class="lps-kind lab">FREE</span>
+            </label>
+            <label class="lps" for="t3s4">
+              <span class="lps-num">4</span>
+              <span class="lps-txt"><b>One NCP cert</b><span>the Owl-rank prerequisite</span></span>
+              <span class="lps-kind cert">CERT · PAID</span>
+            </label>
+            <label class="lps" for="t3s5">
+              <span class="lps-num">5</span>
+              <span class="lps-txt"><b>Apply</b><span>annual class of 300</span></span>
+              <span class="lps-kind outcome">APPLY</span>
+            </label>
+            <label class="lps" for="t3s6">
+              <span class="lps-num">6</span>
+              <span class="lps-txt"><b>Champion certification</b><span>live · proctored · defended</span></span>
+              <span class="lps-kind cert">DEFENSE</span>
+            </label>
+            <label class="lps" for="t3s7">
+              <span class="lps-num">7</span>
+              <span class="lps-txt"><b>The payoff</b><span>your city runs through you</span></span>
+              <span class="lps-kind outcome">PAYOFF</span>
+            </label>
+          </div>
+          <div class="lp-right">
+            <div class="lpd d-t3s1">
+            <div class="sd-card">
+              <div class="sd-kicker">FREE · STAGE 01 OF THE TRACK</div>
+              <h4>Be in the room</h4>
+              <ul class="sd-bullets"><li>Find your city's user group and attend, no badge required</li><li>No group in your city? That gap is your whole opportunity</li></ul>
+              <div class="sd-earn">EARN · in the room</div>
+              <div class="sd-links"><a class="lk" href="#events">This month's events ↓</a></div>
+            </div>
+            </div>
+            <div class="lpd d-t3s2">
+            <div class="sd-card">
+              <div class="sd-kicker">COMMUNITY BADGE</div>
+              <h4>Give your first talk</h4>
+              <ul class="sd-bullets"><li>The host attests you showed up and delivered</li><li>The farm league for the GTC stage</li></ul>
+              <div class="sd-earn">EARN · First Talk · +1,000 cores</div>
+              <div class="sd-links"><a class="lk" href="#events">Events ↓</a></div>
+            </div>
+            </div>
+            <div class="lpd d-t3s3">
+            <div class="sd-card">
+              <div class="sd-kicker">COMMUNITY BADGES</div>
+              <h4>Group Host + Mentor ×10</h4>
+              <ul class="sd-bullets"><li>Run events; mentor ten builders to Fox rank</li><li>Both badges are host- and mentee-attested</li></ul>
+              <div class="sd-earn">EARN · +6,500 cores over time</div>
+              <div class="sd-links"><a class="lk" href="#events">Events ↓</a></div>
+            </div>
+            </div>
+            <div class="lpd d-t3s4">
+            <div class="certmini">
+              <div class="corner tl"></div><div class="corner tr"></div><div class="corner bl"></div><div class="corner br"></div>
+              <div class="cm-head">NVIDIA DEVELOPER CERTIFICATION PROGRAM</div>
+              <div class="cm-title">Any professional certification</div>
+              <div class="cm-sub">NVIDIA-Certified Professional · NCP-AAI</div>
+              <div class="cm-reserved"><span>RESERVED FOR</span><i>You.</i></div>
+              <div class="cm-facts">FROM $200 · PROCTORED · +5,000 CORES · REQUIRED FOR OWL RANK</div>
+              <svg class="cm-seal" viewBox="0 0 80 112"><use href="#rosette"/><text x="40" y="43" text-anchor="middle" font-family="ui-monospace, Menlo, monospace" font-size="9" font-weight="800" fill="#8a6914">NCP</text><text x="40" y="54" text-anchor="middle" font-family="ui-monospace, Menlo, monospace" font-size="9" font-weight="800" fill="#8a6914">AAI</text></svg>
+            </div>
+            <div class="sd-certfoot">
+              <span class="sd-earn" style="margin:0;">A REAL EXAM, LIVE TODAY</span>
+              <a class="lk" href="https://www.nvidia.com/en-us/learn/certification/">Exam details on nvidia.com ↗</a>
+            </div>
+            </div>
+            <div class="lpd d-t3s5">
+            <div class="sd-card">
+              <div class="sd-kicker">APPLICATION · ANNUAL</div>
+              <h4>Apply to the Champion class</h4>
+              <ul class="sd-bullets"><li>300 selected worldwide each year</li><li>Owl rank + real community impact required</li></ul>
+              <div class="sd-earn">EARN · application in</div>
+              <div class="sd-links"><a class="lk" href="#champions">Champions ↓</a></div>
+            </div>
+            </div>
+            <div class="lpd d-t3s6">
+            <div class="certmini">
+              <div class="corner tl"></div><div class="corner tr"></div><div class="corner bl"></div><div class="corner br"></div>
+              <div class="cm-head">NVIDIA DEVELOPER CERTIFICATION PROGRAM</div>
+              <div class="cm-title">NVIDIA Champion <span class="cert-tag">FLAGSHIP</span></div>
+              <div class="cm-sub">Program credential · proposed · NVIDIA-CHAMP</div>
+              <div class="cm-reserved"><span>RESERVED FOR</span><i>You.</i></div>
+              <div class="cm-facts">LIVE PROCTORED DEFENSE · IN FRONT OF EXAMINERS · ANNUAL</div>
+              <svg class="cm-seal" viewBox="0 0 80 112"><use href="#rosette"/><text x="40" y="43" text-anchor="middle" font-family="ui-monospace, Menlo, monospace" font-size="9" font-weight="800" fill="#8a6914">NVIDIA</text><text x="40" y="54" text-anchor="middle" font-family="ui-monospace, Menlo, monospace" font-size="9" font-weight="800" fill="#8a6914">CHAMP</text></svg>
+            </div>
+            <div class="sd-certfoot">
+              <span class="sd-earn" style="margin:0;">THE CREDENTIAL BEHIND THE TITLE</span>
+              <a class="lk" href="#champions">How the defense works ↓</a>
+            </div>
+            </div>
+            <div class="lpd d-t3s7">
+            <div class="sd-card outcome">
+              <div class="sd-kicker">THE PAYOFF</div>
+              <h4>A funded user group with your name on the door</h4>
+              <p class="sd-body">Venue budget, swag, speakers, hackathon kit, a GTC speaker slot, and a direct line to product teams. Champions earn cores forever: +1,500 per event, +500 per mentee.</p>
+              <div class="sd-earn">WOLF RANK · NETWORK EFFECT, EMBODIED</div>
+              <div class="sd-links"><a class="lk" href="#champions">What Champions get ↓</a></div>
+            </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="lp-body b-t4">
+        <div class="lp-sub">PRODUCT OR SERVICES · INCEPTION, CONSULTANCY TIER, ATC LICENSE</div>
+<input type="radio" name="t4" id="t4s1" checked><input type="radio" name="t4" id="t4s2"><input type="radio" name="t4" id="t4s3"><input type="radio" name="t4" id="t4s4"><input type="radio" name="t4" id="t4s5"><input type="radio" name="t4" id="t4s6">
+        <div class="lp-grid">
+          <div class="lp-left">
+            <label class="lps" for="t4s1">
+              <span class="lps-num">1</span>
+              <span class="lps-txt"><b>Startup? Inception</b><span>open today · zero requirements</span></span>
+              <span class="lps-kind lab">STARTUP</span>
+            </label>
+            <label class="lps" for="t4s2">
+              <span class="lps-num">2</span>
+              <span class="lps-txt"><b>Build the product</b><span>credits + preferred pricing</span></span>
+              <span class="lps-kind lab">STARTUP</span>
+            </label>
+            <label class="lps" for="t4s3">
+              <span class="lps-num">3</span>
+              <span class="lps-txt"><b>Certify the team</b><span>the services bar</span></span>
+              <span class="lps-kind lab">SERVICES</span>
+            </label>
+            <label class="lps" for="t4s4">
+              <span class="lps-num">4</span>
+              <span class="lps-txt"><b>Partner tier</b><span>referrals + co-marketing</span></span>
+              <span class="lps-kind outcome">APPLY</span>
+            </label>
+            <label class="lps" for="t4s5">
+              <span class="lps-num">5</span>
+              <span class="lps-txt"><b>The ATC license</b><span>teach officially, keep revenue</span></span>
+              <span class="lps-kind cert">LICENSE</span>
+            </label>
+            <label class="lps" for="t4s6">
+              <span class="lps-num">6</span>
+              <span class="lps-txt"><b>The payoff</b><span>your firm on the board</span></span>
+              <span class="lps-kind outcome">PAYOFF</span>
+            </label>
+          </div>
+          <div class="lp-right">
+            <div class="lpd d-t4s1">
+            <div class="sd-card">
+              <div class="sd-kicker">STARTUP LANE · FREE</div>
+              <h4>Join NVIDIA Inception</h4>
+              <ul class="sd-bullets"><li>DLI credits, preferred pricing, VC exposure, no equity taken</li><li>NVIDIA also invests in ecosystem startups; Inception is the front door</li></ul>
+              <div class="sd-earn">EARN · member, day one</div>
+              <div class="sd-links"><a class="lk" href="https://nvidia.com/inception">nvidia.com/inception ↗</a></div>
+            </div>
+            </div>
+            <div class="lpd d-t4s2">
+            <div class="sd-card">
+              <div class="sd-kicker">STARTUP LANE</div>
+              <h4>Build on the stack, cheaper</h4>
+              <ul class="sd-bullets"><li>Free API credits on build.nvidia.com, GPU sandboxes on Brev</li><li>Superbadges prove the product ships, not just pitches</li></ul>
+              <div class="sd-earn">EARN · product superbadges</div>
+              <div class="sd-links"><a class="lk" href="https://build.nvidia.com">build.nvidia.com ↗</a><a class="lk" href="https://developer.nvidia.com/brev">Brev ↗</a></div>
+            </div>
+            </div>
+            <div class="lpd d-t4s3">
+            <div class="sd-card">
+              <div class="sd-kicker">SERVICES LANE</div>
+              <h4>Get 3+ engineers NCP-certified</h4>
+              <ul class="sd-bullets"><li>The consultancy tier requires certified engineers</li><li>Team workshops count: climb together, proctored on-site</li></ul>
+              <div class="sd-earn">EARN · team gold stamps</div>
+              <div class="sd-links"><a class="lk" href="https://www.nvidia.com/en-us/learn/certification/">Certifications ↗</a></div>
+            </div>
+            </div>
+            <div class="lpd d-t4s4">
+            <div class="sd-card">
+              <div class="sd-kicker">SERVICES LANE · APPLICATION</div>
+              <h4>Apply: Certified Consultancy tier</h4>
+              <ul class="sd-bullets"><li>Referral pipeline from the marketplace</li><li>Co-marketing dollars, joint deals</li></ul>
+              <div class="sd-earn">EARN · listed partner</div>
+              <div class="sd-links"><a class="lk" href="#champions">How Wolves earn ↓</a></div>
+            </div>
+            </div>
+            <div class="lpd d-t4s5">
+            <div class="certmini">
+              <div class="corner tl"></div><div class="corner tr"></div><div class="corner bl"></div><div class="corner br"></div>
+              <div class="cm-head">NVIDIA DEVELOPER CERTIFICATION PROGRAM</div>
+              <div class="cm-title">Authorized Training Center</div>
+              <div class="cm-sub">License · requires a Champion on the team · ATC-2027</div>
+              <div class="cm-reserved"><span>RESERVED FOR</span><i>You.</i></div>
+              <div class="cm-facts">OFFICIAL CURRICULUM · REVENUE SHARE · YOUR NAME ON THE DOOR</div>
+              <svg class="cm-seal" viewBox="0 0 80 112"><use href="#rosette"/><text x="40" y="43" text-anchor="middle" font-family="ui-monospace, Menlo, monospace" font-size="9" font-weight="800" fill="#8a6914">ATC</text><text x="40" y="54" text-anchor="middle" font-family="ui-monospace, Menlo, monospace" font-size="9" font-weight="800" fill="#8a6914">2027</text></svg>
+            </div>
+            <div class="sd-certfoot">
+              <span class="sd-earn" style="margin:0;">EDUCATION AS A BUSINESS</span>
+              <a class="lk" href="#champions">How licensing works ↓</a>
+            </div>
+            </div>
+            <div class="lpd d-t4s6">
+            <div class="sd-card outcome">
+              <div class="sd-kicker">THE PAYOFF</div>
+              <h4>A business built on the badge</h4>
+              <p class="sd-body">Product or services, the ecosystem routes work to you: referrals, revenue share, and a company page aggregating your team's cores.</p>
+              <div class="sd-earn">COLLECTIVE RANK · A FIRM WITH A FLYWHEEL</div>
+              <div class="sd-links"><a class="lk" href="#leaderboard">The Builder 100 ↓</a></div>
+            </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="lp-body b-t5">
+        <div class="lp-sub">ALREADY CERTIFIED? THE MARKET IS WAITING · BOTH SIDES OF IT</div>
+<input type="radio" name="t5" id="t5s1" checked><input type="radio" name="t5" id="t5s2"><input type="radio" name="t5" id="t5s3"><input type="radio" name="t5" id="t5s4">
+        <div class="lp-grid">
+          <div class="lp-left">
+            <label class="lps" for="t5s1">
+              <span class="lps-num">1</span>
+              <span class="lps-txt"><b>Already certified?</b><span>verify + claim your profile</span></span>
+              <span class="lps-kind lab">FREE</span>
+            </label>
+            <label class="lps" for="t5s2">
+              <span class="lps-num">2</span>
+              <span class="lps-txt"><b>Get listed</b><span>the certified marketplace</span></span>
+              <span class="lps-kind lab">FREE</span>
+            </label>
+            <label class="lps" for="t5s3">
+              <span class="lps-num">3</span>
+              <span class="lps-txt"><b>Offers come to you</b><span>posted against your credentials</span></span>
+              <span class="lps-kind outcome">PAYOFF</span>
+            </label>
+            <label class="lps" for="t5s4">
+              <span class="lps-num">4</span>
+              <span class="lps-txt"><b>For companies</b><span>hire against proof</span></span>
+              <span class="lps-kind outcome">EMPLOYERS</span>
+            </label>
+          </div>
+          <div class="lp-right">
+            <div class="lpd d-t5s1">
+            <div class="sd-card">
+              <div class="sd-kicker">FOR CERTIFIED BUILDERS</div>
+              <h4>Bring your credentials in</h4>
+              <ul class="sd-bullets"><li>Verify your NVIDIA certs against the registry</li><li>Claim the public profile: rank, badges, certs, one URL</li></ul>
+              <div class="sd-earn">EARN · verified profile</div>
+              <div class="sd-links"><a class="lk" href="https://www.nvidia.com/en-us/learn/certification/">Certifications ↗</a></div>
+            </div>
+            </div>
+            <div class="lpd d-t5s2">
+            <div class="sd-card">
+              <div class="sd-kicker">FALCON RANK+</div>
+              <h4>List on the marketplace</h4>
+              <ul class="sd-bullets"><li>Recruiters search by rank, cert, and superbadge</li><li>They can test your live endpoints before the first call</li></ul>
+              <div class="sd-earn">EARN · listed · searchable</div>
+              <div class="sd-links"><a class="lk" href="#ranks">The ranks ↓</a></div>
+            </div>
+            </div>
+            <div class="lpd d-t5s3">
+            <div class="sd-card outcome">
+              <div class="sd-kicker">THE PAYOFF</div>
+              <h4>Stop applying. Qualify.</h4>
+              <p class="sd-body">Companies post against requirements you already hold. When your profile matches, the offer comes to you, with the comp on it.</p>
+              <div class="sd-earn">MEDIAN SEARCH-TO-OFFER: 19 DAYS</div>
+              <div class="sd-links"><a class="lk" href="#offers">This month's offers ↓</a></div>
+            </div>
+            </div>
+            <div class="lpd d-t5s4">
+            <div class="sd-card">
+              <div class="sd-kicker">EMPLOYERS</div>
+              <h4>Post a role against ranks and certs</h4>
+              <ul class="sd-bullets"><li>Require NCP-AAI + a superbadge instead of keyword soup</li><li>Test a candidate's live endpoint before the first interview</li></ul>
+              <div class="sd-earn">EARN · 4,000+ companies already here</div>
+              <div class="sd-links"><a class="lk" href="#offers">This month's offers ↓</a></div>
+            </div>
+            </div>
           </div>
         </div>
       </div>
     </div>
-    <div class="go-deeper">Done with the steps? Next: <a href="#outcomes">where every path leads</a> · <a href="#ranks">the levels you climb</a> · <a href="#certs">all eleven official certifications</a></div>
+    <div class="go-deeper">Done with the steps? Next: <a href="#outcomes">where every track leads</a> · <a href="#ranks">the levels you climb</a> · <a href="#certs">all eleven official certifications</a></div>
   </div>
 </section>
 
@@ -1766,7 +2147,7 @@ footer a:hover { color: #fff; }
   <div class="wrap">
     <div class="sec-kicker">Depth 02 · where every path leads</div>
     <h2 class="sec-title">Every path passes the same six destinations.</h2>
-    <p class="sec-lede">You don't pick one. You <b>collect them</b>, roughly in this order, as you move through the lifecycle. The map is identical for every path above; only the courses change.</p>
+    <p class="sec-lede">You don't pick one. You <b>collect them</b>, roughly in this order, as you move through the lifecycle. The map is identical for every track above; only the steps change.</p>
 
     <div class="ms-rail" aria-hidden="true">
       <div class="ms-cell"><span class="ms-dot"></span></div>
@@ -1785,7 +2166,7 @@ footer a:hover { color: #fff; }
         <h3>Master the stack.</h3>
         <svg viewBox="0 0 170 100" class="ms-cake"><rect x="10" y="87" width="150" height="8" fill="#344e00" stroke="#0e0e0e" stroke-width="1"/><rect x="14" y="77" width="141" height="8" fill="#3f5f00" stroke="#0e0e0e" stroke-width="1"/><rect x="19" y="67" width="132" height="8" fill="#4a7000" stroke="#0e0e0e" stroke-width="1"/><rect x="24" y="57" width="123" height="8" fill="#558200" stroke="#0e0e0e" stroke-width="1"/><rect x="28" y="47" width="114" height="8" fill="#609400" stroke="#0e0e0e" stroke-width="1"/><rect x="32" y="37" width="105" height="8" fill="#6ba600" stroke="#0e0e0e" stroke-width="1"/><rect x="37" y="27" width="96" height="8" fill="#76b900" stroke="#0e0e0e" stroke-width="1"/><rect x="42" y="17" width="87" height="8" fill="#fff" stroke="#a4a299" stroke-width="1.2" stroke-dasharray="3 2"/><rect x="46" y="7" width="78" height="8" fill="#fff" stroke="#a4a299" stroke-width="1.2" stroke-dasharray="3 2"/><rect x="50" y="-3" width="69" height="8" fill="#fff" stroke="#a4a299" stroke-width="1.2" stroke-dasharray="3 2"/></svg>
         <div class="ms-sub">10 layers, all free · the Explorer path or any other</div>
-        <a class="ms-link" href="#paths">VIA ANY PATH ↑</a>
+        <a class="ms-link" href="#paths">VIA THE 10 LAYERS TRACK ↑</a>
       </div>
 
       <div class="ms">
