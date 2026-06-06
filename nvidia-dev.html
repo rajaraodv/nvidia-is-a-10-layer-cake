@@ -337,7 +337,7 @@ tr.lb-gap td { text-align: center; font-family: var(--mono); color: var(--ink4);
 .b100-you a { margin-left: auto; font-family: var(--mono); font-size: 11px; font-weight: 800; color: var(--green-deep); text-decoration: none; letter-spacing: 0.06em; }
 
 /* ── certificates ── */
-.cert-gallery { display: grid; grid-template-columns: 1fr 1fr; gap: 26px; margin-bottom: 34px; }
+.cert-gallery { display: grid; grid-template-columns: 1fr; max-width: 600px; gap: 26px; margin-bottom: 34px; }
 .certificate { position: relative; border: 2.5px solid var(--ink); outline: 1px solid var(--gold); outline-offset: 6px; background: #fffdf6; padding: 34px 36px 70px; margin: 7px; }
 .certificate .corner { position: absolute; width: 16px; height: 16px; }
 .certificate .corner.tl { top: 7px; left: 7px; border-top: 2px solid var(--gold); border-left: 2px solid var(--gold); }
@@ -907,6 +907,23 @@ tr.lb-gap td { text-align: center; font-family: var(--mono); color: var(--ink4);
   .mk-grid { grid-template-columns: 1fr 1fr; }
   .rank-grid { grid-template-columns: 1fr; }
   .rankcard { flex-direction: column; }
+}
+
+
+/* ── merged people board ── */
+.mk-grid.three { grid-template-columns: repeat(3, 1fr); }
+.mk-pos { position: absolute; top: 6px; left: 14px; font-family: var(--serif); font-size: 46px; font-weight: 600; color: #fff; text-shadow: 0 2px 14px rgba(0,0,0,0.55); line-height: 1; }
+.mk-photo.podium .mk-pos { color: #f2d98c; }
+.mk-flag { position: absolute; top: 12px; right: 10px; font-family: var(--mono); font-size: 8px; font-weight: 800; letter-spacing: 0.1em; padding: 4px 9px; background: var(--gold-bg); color: #8a6914; border: 1px solid var(--gold); }
+/* ── badge legend ── */
+.badge-legend { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-bottom: 26px; }
+.bl-item { display: flex; gap: 12px; align-items: center; border: 1px solid var(--rule-strong); background: #fff; padding: 11px 14px; }
+.bl-item svg { width: 44px; height: 52px; flex-shrink: 0; }
+.bl-item span { font-size: 11.5px; color: var(--ink3); line-height: 1.4; }
+.bl-item b { display: block; font-size: 12.5px; color: var(--ink); }
+@media (max-width: 880px) {
+  .mk-grid.three { grid-template-columns: 1fr 1fr; }
+  .badge-legend { grid-template-columns: 1fr 1fr; }
 }
 
 /* ── final cta ── */
@@ -1988,7 +2005,7 @@ footer a:hover { color: #fff; }
               <h4>Apply to the Champion class</h4>
               <ul class="sd-bullets"><li>300 selected worldwide each year</li><li>Owl rank + real community impact required</li></ul>
               <div class="sd-earn">EARN · application in</div>
-              <div class="sd-links"><a class="lk" href="#champions">Champions ↓</a></div>
+              <div class="sd-links"><a class="lk" href="#paths">Champions ↓</a></div>
             </div>
             </div>
             <div class="lpd d-t3s6">
@@ -2003,7 +2020,7 @@ footer a:hover { color: #fff; }
             </div>
             <div class="sd-certfoot">
               <span class="sd-earn" style="margin:0;">THE CREDENTIAL BEHIND THE TITLE</span>
-              <a class="lk" href="#champions">How the defense works ↓</a>
+              <a class="lk" href="#paths">How the defense works ↓</a>
             </div>
             </div>
             <div class="lpd d-t3s7">
@@ -2012,7 +2029,7 @@ footer a:hover { color: #fff; }
               <h4>A funded user group with your name on the door</h4>
               <p class="sd-body">Venue budget, swag, speakers, hackathon kit, a GTC speaker slot, and a direct line to product teams. Champions earn cores forever: +1,500 per event, +500 per mentee.</p>
               <div class="sd-earn">WOLF RANK · NETWORK EFFECT, EMBODIED</div>
-              <div class="sd-links"><a class="lk" href="#champions">What Champions get ↓</a></div>
+              <div class="sd-links"><a class="lk" href="#paths">What Champions get ↓</a></div>
             </div>
             </div>
           </div>
@@ -2088,7 +2105,7 @@ footer a:hover { color: #fff; }
               <h4>Apply: Certified Consultancy tier</h4>
               <ul class="sd-bullets"><li>Referral pipeline from the marketplace</li><li>Co-marketing dollars, joint deals</li></ul>
               <div class="sd-earn">EARN · listed partner</div>
-              <div class="sd-links"><a class="lk" href="#champions">How Wolves earn ↓</a></div>
+              <div class="sd-links"><a class="lk" href="#paths">How Wolves earn ↓</a></div>
             </div>
             </div>
             <div class="lpd d-t4s5">
@@ -2103,7 +2120,7 @@ footer a:hover { color: #fff; }
             </div>
             <div class="sd-certfoot">
               <span class="sd-earn" style="margin:0;">EDUCATION AS A BUSINESS</span>
-              <a class="lk" href="#champions">How licensing works ↓</a>
+              <a class="lk" href="#paths">How licensing works ↓</a>
             </div>
             </div>
             <div class="lpd d-t4s6">
@@ -2189,156 +2206,10 @@ footer a:hover { color: #fff; }
   </div>
 </section>
 
-<!-- ═══════════ JOB OFFERS ═══════════ -->
-<section class="soft" id="offers">
-  <div class="wrap">
-    <div class="sec-kicker">Depth 02 · the marketplace</div>
-    <h2 class="sec-title">Certified builders. Hire them.</h2>
-    <p class="sec-lede">This is what the marketplace is: <b>people who proved it</b>, listed and available. Every card carries proctored certifications, a live superbadge you can test, and a public rank. Filter, click, hire.</p>
-    <div class="mk-filters">
-      <span class="mk-f on">All</span><span class="mk-f">NCP-AAI</span><span class="mk-f">NCP-AIO</span><span class="mk-f">NCP-ADS</span><span class="mk-f">Owl rank+</span><span class="mk-f">Available now</span><span class="mk-f">Remote</span>
-    </div>
-    <div class="mk-grid">
-      <div class="mk-card">
-        <div class="mk-photo">
-          <img src="https://images.unsplash.com/photo-1531123897727-8f129e1688ce?w=640&h=640&fit=crop&crop=faces&auto=format" alt="Amara Okafor">
-          <div class="mk-status now">&#9679; AVAILABLE NOW</div>
-          <div class="mk-rank">OWL</div>
-        </div>
-        <div class="mk-body">
-          <div class="mk-name">Amara Okafor</div>
-          <div class="mk-role">Forward-Deployed AI Engineer</div>
-          <div class="mk-loc">LAGOS · NG</div>
-          <div class="mk-stamps"><span class="stampchip"><svg viewBox="0 0 80 80"><use href="#rosette-plain"/></svg>NCP-AAI</span><span class="stampchip"><svg viewBox="0 0 80 80"><use href="#rosette-plain"/></svg>NCA-GENL</span></div>
-          <div class="mk-sb">Production Agent ✓</div>
-          <div class="mk-cores">215,860 <span>CORES</span></div>
-        </div>
-        <a class="mk-hire" href="#leaderboard">VIEW PROFILE · REQUEST INTRO →</a>
-      </div>
-      <div class="mk-card">
-        <div class="mk-photo">
-          <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=640&h=640&fit=crop&crop=faces&auto=format" alt="Kenji Watanabe">
-          <div class="mk-status open">&#9679; OPEN TO OFFERS</div>
-          <div class="mk-rank">WOLF</div>
-        </div>
-        <div class="mk-body">
-          <div class="mk-name">Kenji Watanabe</div>
-          <div class="mk-role">CUDA / Performance Engineer</div>
-          <div class="mk-loc">TOKYO · JP</div>
-          <div class="mk-stamps"><span class="stampchip"><svg viewBox="0 0 80 80"><use href="#rosette-plain"/></svg>NCP-AII</span><span class="stampchip"><svg viewBox="0 0 80 80"><use href="#rosette-plain"/></svg>NCA-AIIO</span></div>
-          <div class="mk-sb">Kernel Surgeon ✓</div>
-          <div class="mk-cores">204,310 <span>CORES</span></div>
-        </div>
-        <a class="mk-hire" href="#leaderboard">VIEW PROFILE · REQUEST INTRO →</a>
-      </div>
-      <div class="mk-card">
-        <div class="mk-photo">
-          <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=640&h=640&fit=crop&crop=faces&auto=format" alt="Lena Hoffmann">
-          <div class="mk-status now">&#9679; AVAILABLE NOW</div>
-          <div class="mk-rank">OWL</div>
-        </div>
-        <div class="mk-body">
-          <div class="mk-name">Lena Hoffmann</div>
-          <div class="mk-role">AI Platform Architect</div>
-          <div class="mk-loc">MUNICH · DE</div>
-          <div class="mk-stamps"><span class="stampchip"><svg viewBox="0 0 80 80"><use href="#rosette-plain"/></svg>NCP-AIO</span></div>
-          <div class="mk-sb">Fleet Operator ✓</div>
-          <div class="mk-cores">187,925 <span>CORES</span></div>
-        </div>
-        <a class="mk-hire" href="#leaderboard">VIEW PROFILE · REQUEST INTRO →</a>
-      </div>
-      <div class="mk-card">
-        <div class="mk-photo">
-          <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=640&h=640&fit=crop&crop=faces&auto=format" alt="Minji Park">
-          <div class="mk-status now">&#9679; AVAILABLE NOW</div>
-          <div class="mk-rank">OWL</div>
-        </div>
-        <div class="mk-body">
-          <div class="mk-name">Minji Park</div>
-          <div class="mk-role">Agentic AI Engineer</div>
-          <div class="mk-loc">SEOUL · KR</div>
-          <div class="mk-stamps"><span class="stampchip"><svg viewBox="0 0 80 80"><use href="#rosette-plain"/></svg>NCP-AAI</span><span class="stampchip"><svg viewBox="0 0 80 80"><use href="#rosette-plain"/></svg>NCA-GENL</span></div>
-          <div class="mk-sb">Production Agent ✓</div>
-          <div class="mk-cores">171,480 <span>CORES</span></div>
-        </div>
-        <a class="mk-hire" href="#leaderboard">VIEW PROFILE · REQUEST INTRO →</a>
-      </div>
-      <div class="mk-card">
-        <div class="mk-photo">
-          <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=640&h=640&fit=crop&crop=faces&auto=format" alt="Zofia Nowak">
-          <div class="mk-status open">&#9679; OPEN TO OFFERS</div>
-          <div class="mk-rank">OWL</div>
-        </div>
-        <div class="mk-body">
-          <div class="mk-name">Zofia Nowak</div>
-          <div class="mk-role">Robotics / Sim Engineer</div>
-          <div class="mk-loc">WARSAW · PL</div>
-          <div class="mk-stamps"><span class="stampchip"><svg viewBox="0 0 80 80"><use href="#rosette-plain"/></svg>NCP-OUSD</span></div>
-          <div class="mk-sb">Sim-to-Real ✓</div>
-          <div class="mk-cores">152,615 <span>CORES</span></div>
-        </div>
-        <a class="mk-hire" href="#leaderboard">VIEW PROFILE · REQUEST INTRO →</a>
-      </div>
-      <div class="mk-card">
-        <div class="mk-photo">
-          <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=640&h=640&fit=crop&crop=faces&auto=format" alt="Linh Tran">
-          <div class="mk-status now">&#9679; AVAILABLE NOW</div>
-          <div class="mk-rank">OWL</div>
-        </div>
-        <div class="mk-body">
-          <div class="mk-name">Linh Tran</div>
-          <div class="mk-role">Agentic Systems Engineer</div>
-          <div class="mk-loc">HANOI · VN</div>
-          <div class="mk-stamps"><span class="stampchip"><svg viewBox="0 0 80 80"><use href="#rosette-plain"/></svg>NCP-AAI</span></div>
-          <div class="mk-sb">Production Agent ✓</div>
-          <div class="mk-cores">148,200 <span>CORES</span></div>
-        </div>
-        <a class="mk-hire" href="#leaderboard">VIEW PROFILE · REQUEST INTRO →</a>
-      </div>
-      <div class="mk-card">
-        <div class="mk-photo">
-          <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=640&h=640&fit=crop&crop=faces&auto=format" alt="Sam Whitfield">
-          <div class="mk-status now">&#9679; AVAILABLE NOW</div>
-          <div class="mk-rank">OWL</div>
-        </div>
-        <div class="mk-body">
-          <div class="mk-name">Sam Whitfield</div>
-          <div class="mk-role">Graphics / Game AI Engineer</div>
-          <div class="mk-loc">AUSTIN · US</div>
-          <div class="mk-stamps"><span class="stampchip"><svg viewBox="0 0 80 80"><use href="#rosette-plain"/></svg>NCA-GENM</span></div>
-          <div class="mk-sb">RTX integrations ✓</div>
-          <div class="mk-cores">139,775 <span>CORES</span></div>
-        </div>
-        <a class="mk-hire" href="#leaderboard">VIEW PROFILE · REQUEST INTRO →</a>
-      </div>
-      <div class="mk-card">
-        <div class="mk-photo">
-          <img src="https://images.unsplash.com/photo-1599566150163-29194dcaad36?w=640&h=640&fit=crop&crop=faces&auto=format" alt="Tomás Ferreira">
-          <div class="mk-status now">&#9679; AVAILABLE NOW</div>
-          <div class="mk-rank">FALCON</div>
-        </div>
-        <div class="mk-body">
-          <div class="mk-name">Tomás Ferreira</div>
-          <div class="mk-role">Accelerated Data Scientist</div>
-          <div class="mk-loc">LISBON · PT</div>
-          <div class="mk-stamps"><span class="stampchip"><svg viewBox="0 0 80 80"><use href="#rosette-plain"/></svg>NCP-ADS</span></div>
-          <div class="mk-sb">Benchmark Slayer ✓</div>
-          <div class="mk-cores">96,310 <span>CORES</span></div>
-        </div>
-        <a class="mk-hire" href="#leaderboard">VIEW PROFILE · REQUEST INTRO →</a>
-      </div>
-    </div>
-    <div class="mk-more">
-      <a class="hex-btn ghost" href="#leaderboard">Show 2,387 more certified builders ↓</a>
-    </div>
-    <div class="mk-employer">HIRING? Post a role against ranks, certs, and superbadges. <b>4,000+ companies already do.</b> Median search-to-offer: 19 days.</div>
-  </div>
-</section>
-
 <!-- ═══════════ RANKS (ANIMALS) ═══════════ -->
 <section class="soft" id="ranks">
   <div class="wrap">
-    <div class="sec-kicker">Depth 03 · the levels you climb</div>
+    <div class="sec-kicker">Depth 02 · the game</div>
     <h2 class="sec-title">Six animals. One ladder. Real perks at every rung.</h2>
     <p class="rank-lore">Everyone starts a <b>Gecko</b>. Fifty a year become <b>Dragons</b>.</p>
     <p class="sec-lede" style="margin-bottom:24px;">Every rung is earned in the <a href="#paths" style="color:var(--green-deep);font-weight:800;">tracks above</a>: courses and layers pay badges, superbadges and certifications pay big, and the ranks unlock the real world.</p>
@@ -2360,6 +2231,12 @@ footer a:hover { color: #fff; }
         <div class="cores-cell"><div class="cc-act">Mentor a new builder</div><div class="cc-pts">+500/builder</div></div>
       </div>
     </div>
+    <div class="badge-legend">
+      <div class="bl-item"><svg viewBox="0 0 80 100"><use href="#medal"/></svg><span><b>Medals</b> course &amp; layer badges</span></div>
+      <div class="bl-item"><svg viewBox="0 0 80 92"><use href="#shield"/></svg><span><b>Shields</b> superbadges · verified work</span></div>
+      <div class="bl-item"><svg viewBox="0 0 80 80"><use href="#rosette-plain"/></svg><span><b>Gold stamps</b> official certifications</span></div>
+      <div class="bl-item"><svg viewBox="0 0 64 64"><use href="#hex"/><g transform="translate(15,14) scale(0.55)"><use href="#a-wolf" width="64" height="64"/></g></svg><span><b>Animals</b> your rank · the sum of it all</span></div>
+    </div>
     <div class="rank-grid">
       <div class="rankcard ">
         <svg class="rc-animal" viewBox="0 0 64 64"><use href="#hex"/><g transform="translate(15,14) scale(0.55)"><use href="#a-gecko" width="64" height="64"/></g></svg>
@@ -2378,7 +2255,7 @@ footer a:hover { color: #fff; }
           <div class="rc-tier">RANK 02 · CLEVER ENOUGH TO BUILD</div>
           <div class="rc-req">2,500 CORES · 10 BADGES</div>
           <div class="rc-perks">20 free GPU hours (Brev) · 25% off your first cert exam · swag drop · project in the weekly digest</div>
-          <div class="rc-earn"><span class="rc-earn-label">EARN IT IN THE TRACKS ↑</span><div class="rc-chips"><a class="lk" href="#paths">Explore · five layers ≈ +1,150</a><a class="lk" href="#paths">Career · two DLI courses ≈ +1,000</a><a class="lk" href="#paths">Champion · First Talk +1,000</a></div></div>
+          <div class="rc-earn"><span class="rc-earn-label">EARN IT IN THE TRACKS ↑</span><div class="rc-chips"><a class="lk" href="#paths">Explore · five layers</a><a class="lk" href="#paths">Career · two DLI courses</a><a class="lk" href="#paths">Champion track · First Talk</a></div></div>
         </div>
       </div>
       <div class="rankcard ">
@@ -2388,7 +2265,7 @@ footer a:hover { color: #fff; }
           <div class="rc-tier">RANK 03 · FASTEST THING IN THE SKY</div>
           <div class="rc-req">10,000 CORES · 25 BADGES · 1 SUPERBADGE</div>
           <div class="rc-perks">Marketplace listing (recruiters can find you) · job board · early-access SDKs · GTC discount</div>
-          <div class="rc-earn"><span class="rc-earn-label">EARN IT IN THE TRACKS ↑</span><div class="rc-chips"><a class="lk" href="#paths">Career · the superbadge step +2,000</a><a class="lk" href="#paths">Explore · all ten layers ≈ +2,000</a></div></div>
+          <div class="rc-earn"><span class="rc-earn-label">EARN IT IN THE TRACKS ↑</span><div class="rc-chips"><a class="lk" href="#paths">Career · the superbadge step</a><a class="lk" href="#paths">Explore · all ten layers</a></div></div>
         </div>
       </div>
       <div class="rankcard ">
@@ -2398,7 +2275,7 @@ footer a:hover { color: #fff; }
           <div class="rc-tier">RANK 04 · SEES THE WHOLE SYSTEM</div>
           <div class="rc-req">30,000 CORES · 50 BADGES · 1 OFFICIAL CERT</div>
           <div class="rc-perks">GTC ticket included · speaker fast-track · roadmap briefings · hackathon-host kit · Champion eligibility</div>
-          <div class="rc-earn"><span class="rc-earn-label">EARN IT IN THE TRACKS ↑</span><div class="rc-chips"><a class="lk" href="#paths">Career · any gold cert step +5,000</a><a class="lk" href="#offers">Get Hired · listed at Owl looks better</a></div></div>
+          <div class="rc-earn"><span class="rc-earn-label">EARN IT IN THE TRACKS ↑</span><div class="rc-chips"><a class="lk" href="#paths">Career · any gold certification step</a><a class="lk" href="#offers">Get Hired · listed at Owl looks better</a></div></div>
         </div>
       </div>
       <div class="rankcard champion">
@@ -2433,93 +2310,6 @@ footer a:hover { color: #fff; }
   </div>
 </section>
 
-<!-- ═══════════ BADGES ═══════════ -->
-<section>
-  <div class="wrap">
-    <div class="sec-kicker">Depth 03 · what you collect</div>
-    <h2 class="sec-title">Proof you can hold</h2>
-    <p class="sec-lede">Medals for modules. Shields for verified deployed work. Gold stamps for official certifications. Every badge below is earned at a specific step of the <a href="#paths" style="color:var(--green-deep);font-weight:800;">tracks above</a>, pays cores, and moves you up the animal ladder. <b>Collect a family, unlock the next animal.</b></p>
-    <div class="badge-rows">
-      <div class="badge-row">
-        <div class="badge-row-label"><div class="brl-name">Module medals</div><div class="brl-sub">finish a unit · stars = tier</div></div>
-        <div class="badge-set">
-          <div class="badge2">
-            <svg class="art" viewBox="0 0 80 100"><use href="#medal"/><g transform="translate(29,44)" color="#4f7a00"><use href="#g-spark" width="22" height="22"/></g><polygon points="40.0,69.6 41.1,72.5 44.2,72.6 41.7,74.6 42.6,77.6 40.0,75.8 37.4,77.6 38.3,74.6 35.8,72.6 38.9,72.5" fill="#c8a04a"/></svg>
-            <div class="b-name">First Token</div><div class="b-pts">+100</div><div class="b-from">CAREER · FOUNDATIONS, FREE</div>
-          </div>
-          <div class="badge2">
-            <svg class="art" viewBox="0 0 80 100"><use href="#medal"/><g transform="translate(29,44)" color="#4f7a00"><use href="#g-book" width="22" height="22"/></g><polygon points="40.0,69.6 41.1,72.5 44.2,72.6 41.7,74.6 42.6,77.6 40.0,75.8 37.4,77.6 38.3,74.6 35.8,72.6 38.9,72.5" fill="#c8a04a"/></svg>
-            <div class="b-name">RAG Apprentice</div><div class="b-pts">+250</div><div class="b-from">CAREER · RAG AGENTS COURSE</div>
-          </div>
-          <div class="badge2">
-            <svg class="art" viewBox="0 0 80 100"><use href="#medal"/><g transform="translate(29,44)" color="#4f7a00"><use href="#g-wrench" width="22" height="22"/></g><polygon points="33.0,69.6 34.1,72.5 37.2,72.6 34.7,74.6 35.6,77.6 33.0,75.8 30.4,77.6 31.3,74.6 28.8,72.6 31.9,72.5" fill="#c8a04a"/><polygon points="47.0,69.6 48.1,72.5 51.2,72.6 48.7,74.6 49.6,77.6 47.0,75.8 44.4,77.6 45.3,74.6 42.8,72.6 45.9,72.5" fill="#c8a04a"/></svg>
-            <div class="b-name">Tool Caller</div><div class="b-pts">+250</div><div class="b-from">CAREER · AGENTIC APPS COURSE</div>
-          </div>
-          <div class="badge2">
-            <svg class="art" viewBox="0 0 80 100"><use href="#medal"/><g transform="translate(29,44)" color="#4f7a00"><use href="#g-gauge" width="22" height="22"/></g><polygon points="33.0,69.6 34.1,72.5 37.2,72.6 34.7,74.6 35.6,77.6 33.0,75.8 30.4,77.6 31.3,74.6 28.8,72.6 31.9,72.5" fill="#c8a04a"/><polygon points="47.0,69.6 48.1,72.5 51.2,72.6 48.7,74.6 49.6,77.6 47.0,75.8 44.4,77.6 45.3,74.6 42.8,72.6 45.9,72.5" fill="#c8a04a"/></svg>
-            <div class="b-name">Eval Runner</div><div class="b-pts">+300</div><div class="b-from">CAREER · AGENTIC APPS COURSE</div>
-          </div>
-          <div class="badge2">
-            <svg class="art" viewBox="0 0 80 100"><use href="#medal"/><g transform="translate(29,44)" color="#4f7a00"><use href="#g-server" width="22" height="22"/></g><polygon points="27.0,69.6 28.1,72.5 31.2,72.6 28.7,74.6 29.6,77.6 27.0,75.8 24.4,77.6 25.3,74.6 22.8,72.6 25.9,72.5" fill="#c8a04a"/><polygon points="40.0,69.6 41.1,72.5 44.2,72.6 41.7,74.6 42.6,77.6 40.0,75.8 37.4,77.6 38.3,74.6 35.8,72.6 38.9,72.5" fill="#c8a04a"/><polygon points="53.0,69.6 54.1,72.5 57.2,72.6 54.7,74.6 55.6,77.6 53.0,75.8 50.4,77.6 51.3,74.6 48.8,72.6 51.9,72.5" fill="#c8a04a"/></svg>
-            <div class="b-name">NIM Operator</div><div class="b-pts">+300</div><div class="b-from">EXPLORE · LAYER 7</div>
-          </div>
-        </div>
-      </div>
-      <div class="badge-row">
-        <div class="badge-row-label"><div class="brl-name">Superbadge shields</div><div class="brl-sub">auto-verified deployed work</div></div>
-        <div class="badge-set">
-          <div class="badge2 shield">
-            <svg class="art" viewBox="0 0 80 92"><use href="#shield"/><g transform="translate(28,30)" color="#344e00"><use href="#g-shield" width="24" height="24"/></g><polygon points="40.0,59.0 41.2,62.4 44.8,62.5 41.9,64.6 42.9,68.0 40.0,66.0 37.1,68.0 38.1,64.6 35.2,62.5 38.8,62.4" fill="#76b900"/></svg>
-            <div class="b-name">Production Agent</div><div class="b-pts">+2,000</div><div class="b-from">CAREER · THE SUPERBADGE STEP</div>
-          </div>
-          <div class="badge2 shield">
-            <svg class="art" viewBox="0 0 80 92"><use href="#shield"/><g transform="translate(28,30)" color="#344e00"><use href="#i-robot" width="24" height="24"/></g><polygon points="40.0,59.0 41.2,62.4 44.8,62.5 41.9,64.6 42.9,68.0 40.0,66.0 37.1,68.0 38.1,64.6 35.2,62.5 38.8,62.4" fill="#76b900"/></svg>
-            <div class="b-name">Sim-to-Real</div><div class="b-pts">+2,000</div><div class="b-from">CAREER · ROBOTICS ROLE</div>
-          </div>
-          <div class="badge2 shield">
-            <svg class="art" viewBox="0 0 80 92"><use href="#shield"/><g transform="translate(28,30)" color="#344e00"><use href="#g-spark" width="24" height="24"/></g><polygon points="40.0,59.0 41.2,62.4 44.8,62.5 41.9,64.6 42.9,68.0 40.0,66.0 37.1,68.0 38.1,64.6 35.2,62.5 38.8,62.4" fill="#76b900"/></svg>
-            <div class="b-name">Kernel Surgeon</div><div class="b-pts">+2,000</div><div class="b-from">EXPLORE · LAYER 3 · CUDA</div>
-          </div>
-        </div>
-      </div>
-      <div class="badge-row">
-        <div class="badge-row-label"><div class="brl-name">Certification stamps</div><div class="brl-sub">official · proctored · gold</div></div>
-        <div class="badge-set">
-          <div class="badge2">
-            <svg class="art" viewBox="0 0 80 112"><use href="#rosette"/><text x="40" y="43" text-anchor="middle" font-family="ui-monospace, Menlo, monospace" font-size="11" font-weight="800" fill="#8a6914">NCA</text><text x="40" y="55" text-anchor="middle" font-family="ui-monospace, Menlo, monospace" font-size="11" font-weight="800" fill="#8a6914">GENL</text></svg>
-            <div class="b-name">Generative AI LLMs</div><div class="b-pts">+5,000</div>
-          </div>
-          <div class="badge2">
-            <svg class="art" viewBox="0 0 80 112"><use href="#rosette"/><text x="40" y="43" text-anchor="middle" font-family="ui-monospace, Menlo, monospace" font-size="11" font-weight="800" fill="#8a6914">NCP</text><text x="40" y="55" text-anchor="middle" font-family="ui-monospace, Menlo, monospace" font-size="11" font-weight="800" fill="#8a6914">AAI</text></svg>
-            <div class="b-name">Agentic AI</div><div class="b-pts">+5,000</div>
-          </div>
-          <div class="badge2">
-            <svg class="art" viewBox="0 0 80 112"><use href="#rosette"/><text x="40" y="43" text-anchor="middle" font-family="ui-monospace, Menlo, monospace" font-size="11" font-weight="800" fill="#8a6914">NCP</text><text x="40" y="55" text-anchor="middle" font-family="ui-monospace, Menlo, monospace" font-size="11" font-weight="800" fill="#8a6914">AIO</text></svg>
-            <div class="b-name">AI Operations</div><div class="b-pts">+5,000</div>
-          </div>
-        </div>
-      </div>
-      <div class="badge-row">
-        <div class="badge-row-label"><div class="brl-name">Community medals</div><div class="brl-sub">multiply the ecosystem</div></div>
-        <div class="badge-set">
-          <div class="badge2">
-            <svg class="art" viewBox="0 0 80 100"><use href="#medal"/><g transform="translate(29,44)" color="#4f7a00"><use href="#g-mic" width="22" height="22"/></g><polygon points="40.0,69.6 41.1,72.5 44.2,72.6 41.7,74.6 42.6,77.6 40.0,75.8 37.4,77.6 38.3,74.6 35.8,72.6 38.9,72.5" fill="#c8a04a"/></svg>
-            <div class="b-name">First Talk</div><div class="b-pts">+1,000</div><div class="b-from">CHAMPION TRACK · STEP 2</div>
-          </div>
-          <div class="badge2">
-            <svg class="art" viewBox="0 0 80 100"><use href="#medal"/><g transform="translate(29,44)" color="#4f7a00"><use href="#g-people" width="22" height="22"/></g><polygon points="33.0,69.6 34.1,72.5 37.2,72.6 34.7,74.6 35.6,77.6 33.0,75.8 30.4,77.6 31.3,74.6 28.8,72.6 31.9,72.5" fill="#c8a04a"/><polygon points="47.0,69.6 48.1,72.5 51.2,72.6 48.7,74.6 49.6,77.6 47.0,75.8 44.4,77.6 45.3,74.6 42.8,72.6 45.9,72.5" fill="#c8a04a"/></svg>
-            <div class="b-name">Group Host</div><div class="b-pts">+1,500</div><div class="b-from">CHAMPION TRACK · STEP 3</div>
-          </div>
-          <div class="badge2">
-            <svg class="art" viewBox="0 0 80 100"><use href="#medal"/><g transform="translate(29,44)" color="#4f7a00"><use href="#g-flag" width="22" height="22"/></g><polygon points="27.0,69.6 28.1,72.5 31.2,72.6 28.7,74.6 29.6,77.6 27.0,75.8 24.4,77.6 25.3,74.6 22.8,72.6 25.9,72.5" fill="#c8a04a"/><polygon points="40.0,69.6 41.1,72.5 44.2,72.6 41.7,74.6 42.6,77.6 40.0,75.8 37.4,77.6 38.3,74.6 35.8,72.6 38.9,72.5" fill="#c8a04a"/><polygon points="53.0,69.6 54.1,72.5 57.2,72.6 54.7,74.6 55.6,77.6 53.0,75.8 50.4,77.6 51.3,74.6 48.8,72.6 51.9,72.5" fill="#c8a04a"/></svg>
-            <div class="b-name">Mentor ×10</div><div class="b-pts">+5,000</div><div class="b-from">CHAMPION TRACK · STEP 3</div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
 <!-- ═══════════ CERTIFICATIONS ═══════════ -->
 <section class="soft" id="certs">
   <div class="wrap">
@@ -2544,103 +2334,86 @@ footer a:hover { color: #fff; }
         <div class="cert-sig"><div class="sig">Jensen Huang</div><div class="sig-rule">Founder &amp; CEO · NVIDIA</div></div>
         <svg class="cert-seal" viewBox="0 0 80 112"><use href="#rosette"/><text x="40" y="43" text-anchor="middle" font-family="ui-monospace, Menlo, monospace" font-size="10" font-weight="800" fill="#8a6914">NCP</text><text x="40" y="54" text-anchor="middle" font-family="ui-monospace, Menlo, monospace" font-size="10" font-weight="800" fill="#8a6914">AAI</text></svg>
       </div>
-      <div class="certificate">
-        <div class="corner tl"></div><div class="corner tr"></div><div class="corner bl"></div><div class="corner br"></div>
-        <div class="cert-head">NVIDIA Developer Certification Program</div>
-        <div class="cert-title">Generative AI LLMs</div>
-        <div class="cert-sub">NVIDIA-Certified Associate · NCA-GENL</div>
-        <div class="cert-awardee">
-          <img src="https://images.unsplash.com/photo-1531123897727-8f129e1688ce?w=400&h=400&fit=crop&crop=faces&auto=format" alt="">
-          <div>
-            <div class="a-label">Awarded to</div>
-            <div class="a-name">Amara Okafor</div>
-          </div>
-        </div>
-        <div class="cert-line">for demonstrated proficiency across large language models, prompt engineering, and the NVIDIA inference stack. The first credential on the climb from Gecko to Dragon.</div>
-        <div class="cert-verify">VERIFY · nvidia.dev/cert/NCAGENL-25-88112 · ISSUED NOVEMBER 2025 · RENEWED ON CHAIN OF WORK</div>
-        <div class="cert-sig"><div class="sig">Jensen Huang</div><div class="sig-rule">Founder &amp; CEO · NVIDIA</div></div>
-        <svg class="cert-seal" viewBox="0 0 80 112"><use href="#rosette"/><text x="40" y="43" text-anchor="middle" font-family="ui-monospace, Menlo, monospace" font-size="10" font-weight="800" fill="#8a6914">NCA</text><text x="40" y="54" text-anchor="middle" font-family="ui-monospace, Menlo, monospace" font-size="10" font-weight="800" fill="#8a6914">GENL</text></svg>
       </div>
-    </div>
-    <table class="cert-table">
-      <thead><tr><th>Code</th><th>Certification</th><th>Level</th><th>Exam</th><th>Feeds which path</th></tr></thead>
+        <table class="cert-table">
+      <thead><tr><th>Code</th><th>Certification</th><th>Level</th><th>Exam</th><th>Feeds which role</th></tr></thead>
       <tbody>
         <tr>
           <td class="cert-code">NCA-GENL</td>
           <td class="cert-name"><a href="https://www.nvidia.com/en-us/learn/certification/generative-ai-llm-associate/">Generative AI LLMs</a></td>
           <td class="cert-lvl">Associate</td>
           <td class="cert-note">$125</td>
-          <td class="cert-note">Agent Builder · Model Builder · Learner</td>
+          <td class="cert-note">Career · FDE + ML Engineer · Explore</td>
         </tr>
         <tr>
           <td class="cert-code">NCP-AAI</td>
           <td class="cert-name"><a href="https://www.nvidia.com/en-us/learn/certification/agentic-ai-professional/">Agentic AI</a> <span class="cert-tag">FLAGSHIP</span></td>
           <td class="cert-lvl">Professional</td>
           <td class="cert-note">$200 · 120 min</td>
-          <td class="cert-note">Agent Builder · the path below leads here</td>
+          <td class="cert-note">Career · Fwd-Deployed AI Engineer · the flagship</td>
         </tr>
         <tr>
           <td class="cert-code">NCA-GENM</td>
           <td class="cert-name"><a href="https://www.nvidia.com/en-us/learn/certification/generative-ai-multimodal-associate/">Generative AI Multimodal</a></td>
           <td class="cert-lvl">Associate</td>
           <td class="cert-note">$125</td>
-          <td class="cert-note">Agent Builder · Creator</td>
+          <td class="cert-note">Career · multimodal + creative roles</td>
         </tr>
         <tr>
           <td class="cert-code">NCP-GENL</td>
           <td class="cert-name"><a href="https://www.nvidia.com/en-us/learn/certification/generative-ai-llm-professional/">Generative AI LLMs</a></td>
           <td class="cert-lvl">Professional</td>
           <td class="cert-note">$200</td>
-          <td class="cert-note">Model Builder / Researcher</td>
+          <td class="cert-note">Career · ML Engineer</td>
         </tr>
         <tr>
           <td class="cert-code">NCA-ADS</td>
           <td class="cert-name"><a href="https://www.nvidia.com/en-us/learn/certification/accelerated-data-science-associate/">Accelerated Data Science</a></td>
           <td class="cert-lvl">Associate</td>
           <td class="cert-note">$125</td>
-          <td class="cert-note">Data Science</td>
+          <td class="cert-note">Career · Data Scientist</td>
         </tr>
         <tr>
           <td class="cert-code">NCP-ADS</td>
           <td class="cert-name"><a href="https://www.nvidia.com/en-us/learn/certification/accelerated-data-science-professional/">Accelerated Data Science</a></td>
           <td class="cert-lvl">Professional</td>
           <td class="cert-note">$200</td>
-          <td class="cert-note">Data Science</td>
+          <td class="cert-note">Career · Data Scientist</td>
         </tr>
         <tr>
           <td class="cert-code">NCA-AIIO</td>
           <td class="cert-name"><a href="https://www.nvidia.com/en-us/learn/certification/ai-infrastructure-operations-associate/">AI Infrastructure &amp; Operations</a></td>
           <td class="cert-lvl">Associate</td>
           <td class="cert-note">$125</td>
-          <td class="cert-note">Infrastructure · Performance</td>
+          <td class="cert-note">Career · AI Infrastructure Engineer</td>
         </tr>
         <tr>
           <td class="cert-code">NCP-AII</td>
           <td class="cert-name"><a href="https://www.nvidia.com/en-us/learn/certification/ai-infrastructure-professional/">AI Infrastructure</a></td>
           <td class="cert-lvl">Professional</td>
           <td class="cert-note">$400</td>
-          <td class="cert-note">Infrastructure</td>
+          <td class="cert-note">Career · AI Infrastructure Engineer</td>
         </tr>
         <tr>
           <td class="cert-code">NCP-AIO</td>
           <td class="cert-name"><a href="https://www.nvidia.com/en-us/learn/certification/ai-operations-professional/">AI Operations</a></td>
           <td class="cert-lvl">Professional</td>
           <td class="cert-note">$500 · hands-on labs</td>
-          <td class="cert-note">Infrastructure</td>
+          <td class="cert-note">Career · AI Infrastructure Engineer</td>
         </tr>
         <tr>
           <td class="cert-code">NCP-AIN</td>
           <td class="cert-name"><a href="https://www.nvidia.com/en-us/learn/certification/ai-networking-professional/">AI Networking</a></td>
           <td class="cert-lvl">Professional</td>
           <td class="cert-note">$400</td>
-          <td class="cert-note">Infrastructure</td>
+          <td class="cert-note">Career · AI Infrastructure Engineer</td>
         </tr>
         <tr>
           <td class="cert-code">NCP-OUSD</td>
           <td class="cert-name"><a href="https://www.nvidia.com/en-us/learn/certification/openusd-development-professional/">OpenUSD Development</a></td>
           <td class="cert-lvl">Professional</td>
           <td class="cert-note">$200</td>
-          <td class="cert-note">Robotics · Creator</td>
+          <td class="cert-note">Career · Robotics / Sim Engineer</td>
         </tr>
       </tbody>
     </table>
@@ -2650,170 +2423,187 @@ footer a:hover { color: #fff; }
 
 <!-- ═══════════ LEADERBOARD ═══════════ -->
 <section class="soft" id="leaderboard">
+  <span id="offers"></span>
   <div class="wrap">
-    <div class="sec-kicker">Depth 04 · the people · the Builder 100</div>
-    <h2 class="sec-title">The hundred faces the industry watches</h2>
-    <p class="sec-lede">Updated continuously, like a Forbes list that anyone can climb. Rank, certifications, and verified work, with a face and a name. Proctored certifications weigh heaviest (+5,000 cores each); the annual top 50 become Dragons. <b>Your city's hundred is one click away.</b></p>
-    <div class="b100-grid">
-      <div class="b100-card podium">
-        <div class="b100-photo">
-          <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=640&h=680&fit=crop&crop=faces&auto=format" alt="Priya Sharma">
-          <div class="b100-num">01</div>
-          <div class="b100-rank">WOLF</div>
+    <div class="sec-kicker">Depth 04 · the people</div>
+    <h2 class="sec-title">The Builder 100. Ranked, certified, hireable.</h2>
+    <p class="sec-lede">One board, both jobs: the public ladder the industry reads, and the marketplace where you hire from it. Every card carries proctored certifications, a live superbadge you can test, and a rank earned in the tracks above. <b>Wolves wear the Champion flag.</b></p>
+    <div class="mk-filters">
+      <span class="mk-f on">Top 100</span><span class="mk-f">NCP-AAI</span><span class="mk-f">NCP-AIO</span><span class="mk-f">Wolves only</span><span class="mk-f">Available now</span><span class="mk-f">My city</span>
+    </div>
+    <div class="mk-grid three">
+      <div class="mk-card">
+        <div class="mk-photo podium">
+          <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=640&h=640&fit=crop&crop=faces&auto=format" alt="Priya Sharma">
+          <div class="mk-pos">01</div>
+          <div class="mk-flag">★ CHAMPION</div>
+          <div class="mk-status open">&#9679; OPEN TO ADVISORY</div>
+          <div class="mk-rank">WOLF</div>
         </div>
-        <div class="b100-body">
-          <div class="b100-name">Priya Sharma</div>
-          <div class="b100-title">Founder · Certified AI Consultancy + Training Center</div>
-          <div class="b100-loc">BENGALURU · IN</div>
-          <div class="b100-stamps"><span class="stampchip"><svg viewBox="0 0 80 80"><use href="#rosette-plain"/></svg>NCP-AAI</span><span class="stampchip"><svg viewBox="0 0 80 80"><use href="#rosette-plain"/></svg>NCA-GENL</span><span class="stampchip"><svg viewBox="0 0 80 80"><use href="#rosette-plain"/></svg>NCP-AIO</span></div>
-          <div class="b100-foot">
-            <span class="b100-badges">214 badges</span>
-            <span class="b100-cores">286,400 <span>CORES</span></span>
-          </div>
+        <div class="mk-body">
+          <div class="mk-name">Priya Sharma</div>
+          <div class="mk-role">Founder · Certified AI Consultancy + ATC</div>
+          <div class="mk-loc">BENGALURU · IN</div>
+          <div class="mk-stamps"><span class="stampchip"><svg viewBox="0 0 80 80"><use href="#rosette-plain"/></svg>NCP-AAI</span><span class="stampchip"><svg viewBox="0 0 80 80"><use href="#rosette-plain"/></svg>NCA-GENL</span><span class="stampchip"><svg viewBox="0 0 80 80"><use href="#rosette-plain"/></svg>NCP-AIO</span></div>
+          <div class="mk-sb">Production Agent ✓</div>
+          <div class="mk-cores">286,400 <span>CORES</span></div>
         </div>
+        <a class="mk-hire" href="#offers">VIEW PROFILE · REQUEST INTRO →</a>
       </div>
-      <div class="b100-card podium">
-        <div class="b100-photo">
-          <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=640&h=680&fit=crop&crop=faces&auto=format" alt="Diego Almeida">
-          <div class="b100-num">02</div>
-          <div class="b100-rank">WOLF</div>
+      <div class="mk-card">
+        <div class="mk-photo podium">
+          <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=640&h=640&fit=crop&crop=faces&auto=format" alt="Diego Almeida">
+          <div class="mk-pos">02</div>
+          <div class="mk-flag">★ CHAMPION</div>
+          <div class="mk-status open">&#9679; OPEN TO ADVISORY</div>
+          <div class="mk-rank">WOLF</div>
         </div>
-        <div class="b100-body">
-          <div class="b100-name">Diego Almeida</div>
-          <div class="b100-title">Robotics Lead · Inception startup founder</div>
-          <div class="b100-loc">SÃO PAULO · BR</div>
-          <div class="b100-stamps"><span class="stampchip"><svg viewBox="0 0 80 80"><use href="#rosette-plain"/></svg>NCP-OUSD</span><span class="stampchip"><svg viewBox="0 0 80 80"><use href="#rosette-plain"/></svg>NCA-GENL</span></div>
-          <div class="b100-foot">
-            <span class="b100-badges">198 badges</span>
-            <span class="b100-cores">251,090 <span>CORES</span></span>
-          </div>
+        <div class="mk-body">
+          <div class="mk-name">Diego Almeida</div>
+          <div class="mk-role">Robotics Lead · Inception founder</div>
+          <div class="mk-loc">SÃO PAULO · BR</div>
+          <div class="mk-stamps"><span class="stampchip"><svg viewBox="0 0 80 80"><use href="#rosette-plain"/></svg>NCP-OUSD</span><span class="stampchip"><svg viewBox="0 0 80 80"><use href="#rosette-plain"/></svg>NCA-GENL</span></div>
+          <div class="mk-sb">Sim-to-Real ✓</div>
+          <div class="mk-cores">251,090 <span>CORES</span></div>
         </div>
+        <a class="mk-hire" href="#offers">VIEW PROFILE · REQUEST INTRO →</a>
       </div>
-      <div class="b100-card podium">
-        <div class="b100-photo">
-          <img src="https://images.unsplash.com/photo-1531123897727-8f129e1688ce?w=640&h=680&fit=crop&crop=faces&auto=format" alt="Amara Okafor">
-          <div class="b100-num">03</div>
-          <div class="b100-rank">OWL</div>
+      <div class="mk-card">
+        <div class="mk-photo podium">
+          <img src="https://images.unsplash.com/photo-1531123897727-8f129e1688ce?w=640&h=640&fit=crop&crop=faces&auto=format" alt="Amara Okafor">
+          <div class="mk-pos">03</div>
+          
+          <div class="mk-status now">&#9679; AVAILABLE NOW</div>
+          <div class="mk-rank">OWL</div>
         </div>
-        <div class="b100-body">
-          <div class="b100-name">Amara Okafor</div>
-          <div class="b100-title">Forward-Deployed AI Engineer · first Owl in W. Africa</div>
-          <div class="b100-loc">LAGOS · NG</div>
-          <div class="b100-stamps"><span class="stampchip"><svg viewBox="0 0 80 80"><use href="#rosette-plain"/></svg>NCP-AAI</span><span class="stampchip"><svg viewBox="0 0 80 80"><use href="#rosette-plain"/></svg>NCA-GENL</span></div>
-          <div class="b100-foot">
-            <span class="b100-badges">171 badges</span>
-            <span class="b100-cores">215,860 <span>CORES</span></span>
-          </div>
+        <div class="mk-body">
+          <div class="mk-name">Amara Okafor</div>
+          <div class="mk-role">Forward-Deployed AI Engineer</div>
+          <div class="mk-loc">LAGOS · NG</div>
+          <div class="mk-stamps"><span class="stampchip"><svg viewBox="0 0 80 80"><use href="#rosette-plain"/></svg>NCP-AAI</span><span class="stampchip"><svg viewBox="0 0 80 80"><use href="#rosette-plain"/></svg>NCA-GENL</span></div>
+          <div class="mk-sb">Production Agent ✓</div>
+          <div class="mk-cores">215,860 <span>CORES</span></div>
         </div>
+        <a class="mk-hire" href="#offers">VIEW PROFILE · REQUEST INTRO →</a>
       </div>
-      <div class="b100-card">
-        <div class="b100-photo">
-          <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=640&h=680&fit=crop&crop=faces&auto=format" alt="Kenji Watanabe">
-          <div class="b100-num">04</div>
-          <div class="b100-rank">WOLF</div>
+      <div class="mk-card">
+        <div class="mk-photo">
+          <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=640&h=640&fit=crop&crop=faces&auto=format" alt="Kenji Watanabe">
+          <div class="mk-pos">04</div>
+          <div class="mk-flag">★ CHAMPION</div>
+          <div class="mk-status open">&#9679; OPEN TO OFFERS</div>
+          <div class="mk-rank">WOLF</div>
         </div>
-        <div class="b100-body">
-          <div class="b100-name">Kenji Watanabe</div>
-          <div class="b100-title">CUDA Performance Engineer · quant fund</div>
-          <div class="b100-loc">TOKYO · JP</div>
-          <div class="b100-stamps"><span class="stampchip"><svg viewBox="0 0 80 80"><use href="#rosette-plain"/></svg>NCP-AII</span><span class="stampchip"><svg viewBox="0 0 80 80"><use href="#rosette-plain"/></svg>NCA-AIIO</span></div>
-          <div class="b100-foot">
-            <span class="b100-badges">166 badges</span>
-            <span class="b100-cores">204,310 <span>CORES</span></span>
-          </div>
+        <div class="mk-body">
+          <div class="mk-name">Kenji Watanabe</div>
+          <div class="mk-role">CUDA / Performance Engineer</div>
+          <div class="mk-loc">TOKYO · JP</div>
+          <div class="mk-stamps"><span class="stampchip"><svg viewBox="0 0 80 80"><use href="#rosette-plain"/></svg>NCP-AII</span><span class="stampchip"><svg viewBox="0 0 80 80"><use href="#rosette-plain"/></svg>NCA-AIIO</span></div>
+          <div class="mk-sb">Kernel Surgeon ✓</div>
+          <div class="mk-cores">204,310 <span>CORES</span></div>
         </div>
+        <a class="mk-hire" href="#offers">VIEW PROFILE · REQUEST INTRO →</a>
       </div>
-      <div class="b100-card">
-        <div class="b100-photo">
-          <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=640&h=680&fit=crop&crop=faces&auto=format" alt="Lena Hoffmann">
-          <div class="b100-num">05</div>
-          <div class="b100-rank">OWL</div>
+      <div class="mk-card">
+        <div class="mk-photo">
+          <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=640&h=640&fit=crop&crop=faces&auto=format" alt="Lena Hoffmann">
+          <div class="mk-pos">05</div>
+          
+          <div class="mk-status now">&#9679; AVAILABLE NOW</div>
+          <div class="mk-rank">OWL</div>
         </div>
-        <div class="b100-body">
-          <div class="b100-name">Lena Hoffmann</div>
-          <div class="b100-title">AI Platform Architect · global health platform</div>
-          <div class="b100-loc">MUNICH · DE</div>
-          <div class="b100-stamps"><span class="stampchip"><svg viewBox="0 0 80 80"><use href="#rosette-plain"/></svg>NCP-AIO</span></div>
-          <div class="b100-foot">
-            <span class="b100-badges">159 badges</span>
-            <span class="b100-cores">187,925 <span>CORES</span></span>
-          </div>
+        <div class="mk-body">
+          <div class="mk-name">Lena Hoffmann</div>
+          <div class="mk-role">AI Platform Architect</div>
+          <div class="mk-loc">MUNICH · DE</div>
+          <div class="mk-stamps"><span class="stampchip"><svg viewBox="0 0 80 80"><use href="#rosette-plain"/></svg>NCP-AIO</span></div>
+          <div class="mk-sb">Fleet Operator ✓</div>
+          <div class="mk-cores">187,925 <span>CORES</span></div>
         </div>
+        <a class="mk-hire" href="#offers">VIEW PROFILE · REQUEST INTRO →</a>
       </div>
-      <div class="b100-card">
-        <div class="b100-photo">
-          <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=640&h=680&fit=crop&crop=faces&auto=format" alt="Minji Park">
-          <div class="b100-num">06</div>
-          <div class="b100-rank">OWL</div>
+      <div class="mk-card">
+        <div class="mk-photo">
+          <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=640&h=640&fit=crop&crop=faces&auto=format" alt="Minji Park">
+          <div class="mk-pos">06</div>
+          
+          <div class="mk-status now">&#9679; AVAILABLE NOW</div>
+          <div class="mk-rank">OWL</div>
         </div>
-        <div class="b100-body">
-          <div class="b100-name">Minji Park</div>
-          <div class="b100-title">AI Engineer · Series B agent startup</div>
-          <div class="b100-loc">SEOUL · KR</div>
-          <div class="b100-stamps"><span class="stampchip"><svg viewBox="0 0 80 80"><use href="#rosette-plain"/></svg>NCP-AAI</span></div>
-          <div class="b100-foot">
-            <span class="b100-badges">147 badges</span>
-            <span class="b100-cores">171,480 <span>CORES</span></span>
-          </div>
+        <div class="mk-body">
+          <div class="mk-name">Minji Park</div>
+          <div class="mk-role">Agentic AI Engineer</div>
+          <div class="mk-loc">SEOUL · KR</div>
+          <div class="mk-stamps"><span class="stampchip"><svg viewBox="0 0 80 80"><use href="#rosette-plain"/></svg>NCP-AAI</span><span class="stampchip"><svg viewBox="0 0 80 80"><use href="#rosette-plain"/></svg>NCA-GENL</span></div>
+          <div class="mk-sb">Production Agent ✓</div>
+          <div class="mk-cores">171,480 <span>CORES</span></div>
         </div>
+        <a class="mk-hire" href="#offers">VIEW PROFILE · REQUEST INTRO →</a>
       </div>
-      <div class="b100-card">
-        <div class="b100-photo">
-          <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=640&h=680&fit=crop&crop=faces&auto=format" alt="Carlos Reyes">
-          <div class="b100-num">07</div>
-          <div class="b100-rank">WOLF</div>
+      <div class="mk-card">
+        <div class="mk-photo">
+          <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=640&h=640&fit=crop&crop=faces&auto=format" alt="Carlos Reyes">
+          <div class="mk-pos">07</div>
+          <div class="mk-flag">★ CHAMPION</div>
+          <div class="mk-status open">&#9679; OPEN TO ADVISORY</div>
+          <div class="mk-rank">WOLF</div>
         </div>
-        <div class="b100-body">
-          <div class="b100-name">Carlos Reyes</div>
-          <div class="b100-title">Head of Data Platform · promoted twice in a year</div>
-          <div class="b100-loc">CDMX · MX</div>
-          <div class="b100-stamps"><span class="stampchip"><svg viewBox="0 0 80 80"><use href="#rosette-plain"/></svg>NCP-ADS</span></div>
-          <div class="b100-foot">
-            <span class="b100-badges">139 badges</span>
-            <span class="b100-cores">165,030 <span>CORES</span></span>
-          </div>
+        <div class="mk-body">
+          <div class="mk-name">Carlos Reyes</div>
+          <div class="mk-role">Head of Data Platform</div>
+          <div class="mk-loc">CDMX · MX</div>
+          <div class="mk-stamps"><span class="stampchip"><svg viewBox="0 0 80 80"><use href="#rosette-plain"/></svg>NCP-ADS</span></div>
+          <div class="mk-sb">Benchmark Slayer ✓</div>
+          <div class="mk-cores">165,030 <span>CORES</span></div>
         </div>
+        <a class="mk-hire" href="#offers">VIEW PROFILE · REQUEST INTRO →</a>
       </div>
-      <div class="b100-card">
-        <div class="b100-photo">
-          <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=640&h=680&fit=crop&crop=faces&auto=format" alt="Zofia Nowak">
-          <div class="b100-num">08</div>
-          <div class="b100-rank">OWL</div>
+      <div class="mk-card">
+        <div class="mk-photo">
+          <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=640&h=640&fit=crop&crop=faces&auto=format" alt="Zofia Nowak">
+          <div class="mk-pos">08</div>
+          
+          <div class="mk-status open">&#9679; OPEN TO OFFERS</div>
+          <div class="mk-rank">OWL</div>
         </div>
-        <div class="b100-body">
-          <div class="b100-name">Zofia Nowak</div>
-          <div class="b100-title">Robotics Engineer · Isaac sim-to-real specialist</div>
-          <div class="b100-loc">WARSAW · PL</div>
-          <div class="b100-stamps"><span class="stampchip"><svg viewBox="0 0 80 80"><use href="#rosette-plain"/></svg>NCP-OUSD</span></div>
-          <div class="b100-foot">
-            <span class="b100-badges">131 badges</span>
-            <span class="b100-cores">152,615 <span>CORES</span></span>
-          </div>
+        <div class="mk-body">
+          <div class="mk-name">Zofia Nowak</div>
+          <div class="mk-role">Robotics / Sim Engineer</div>
+          <div class="mk-loc">WARSAW · PL</div>
+          <div class="mk-stamps"><span class="stampchip"><svg viewBox="0 0 80 80"><use href="#rosette-plain"/></svg>NCP-OUSD</span></div>
+          <div class="mk-sb">Sim-to-Real ✓</div>
+          <div class="mk-cores">152,615 <span>CORES</span></div>
         </div>
+        <a class="mk-hire" href="#offers">VIEW PROFILE · REQUEST INTRO →</a>
       </div>
-      <div class="b100-card">
-        <div class="b100-photo">
-          <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=640&h=680&fit=crop&crop=faces&auto=format" alt="Linh Tran">
-          <div class="b100-num">09</div>
-          <div class="b100-rank">OWL</div>
+      <div class="mk-card">
+        <div class="mk-photo">
+          <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=640&h=640&fit=crop&crop=faces&auto=format" alt="Linh Tran">
+          <div class="mk-pos">09</div>
+          
+          <div class="mk-status now">&#9679; AVAILABLE NOW</div>
+          <div class="mk-rank">OWL</div>
         </div>
-        <div class="b100-body">
-          <div class="b100-name">Linh Tran</div>
-          <div class="b100-title">Agentic Systems Engineer · runs Hanoi user group</div>
-          <div class="b100-loc">HANOI · VN</div>
-          <div class="b100-stamps"><span class="stampchip"><svg viewBox="0 0 80 80"><use href="#rosette-plain"/></svg>NCP-AAI</span></div>
-          <div class="b100-foot">
-            <span class="b100-badges">126 badges</span>
-            <span class="b100-cores">148,200 <span>CORES</span></span>
-          </div>
+        <div class="mk-body">
+          <div class="mk-name">Linh Tran</div>
+          <div class="mk-role">Agentic Systems Engineer</div>
+          <div class="mk-loc">HANOI · VN</div>
+          <div class="mk-stamps"><span class="stampchip"><svg viewBox="0 0 80 80"><use href="#rosette-plain"/></svg>NCP-AAI</span></div>
+          <div class="mk-sb">Production Agent ✓</div>
+          <div class="mk-cores">148,200 <span>CORES</span></div>
         </div>
+        <a class="mk-hire" href="#offers">VIEW PROFILE · REQUEST INTRO →</a>
       </div>
     </div>
     <div class="b100-you">
       <span class="y-pos">#4,217</span>
-      <span class="y-txt"><b>You</b> · Gecko · 3 badges · 1,250 cores. <b>1,250 more to Fox rank.</b> Finish "Agentic Foundations" and you jump ~1,900 places this week.</span>
-      <a href="/path-agent-builder">CLIMB →</a>
+      <span class="y-txt"><b>You</b> · Gecko · 3 badges · 1,250 cores. <b>1,250 more to Fox rank.</b> Finish two more steps in any track and you jump ~1,900 places this week.</span>
+      <a href="#paths">CLIMB →</a>
     </div>
+    <div class="mk-more">
+      <a class="hex-btn ghost" href="#leaderboard">Show the rest of the 100 ↓</a>
+    </div>
+    <div class="mk-employer">HIRING? Post a role against ranks, certs, and superbadges. <b>4,000+ companies already do.</b> Median search-to-offer: 19 days.</div>
   </div>
 </section>
 
@@ -2877,135 +2667,7 @@ footer a:hover { color: #fff; }
         </div>
       </div>
     </div>
-    <div class="event-more">No event in your city? That's not a gap. That's <b>your opening</b>. Champions get the venue budget, the swag, and the speaker network to start one. <a href="#ranks" style="color: var(--green-deep); font-weight: 800;">See the Wolf rank →</a></div>
-  </div>
-</section>
-
-<!-- ═══════════ CHAMPIONS ═══════════ -->
-<section class="soft" id="champions">
-  <div class="wrap">
-    <div class="sec-kicker">Depth 04 · the people · NVIDIA Champions</div>
-    <h2 class="sec-title">300 people who run the ecosystem</h2>
-    <p class="sec-lede">Selected once a year from Owl-rank builders with real community impact. Wolves aren't an award. They're an operating layer: they run the city groups, train the cohorts, judge the hackathons, and feed product teams the truth.</p>
-    <div class="champ-unlocks2">
-      <div class="champ-unlock"><div class="cu-n">01</div><div class="cu-body"><b>Run a funded city user group</b><span>Venue budget, swag, demo content, guest speakers. NVIDIA supplies, you lead.</span></div></div>
-      <div class="champ-unlock"><div class="cu-n">02</div><div class="cu-body"><b>License an Authorized Training Center</b><span>Teach official curriculum, keep a revenue share. Education as a business, not a hobby.</span></div></div>
-      <div class="champ-unlock"><div class="cu-n">03</div><div class="cu-body"><b>List a Certified Consultancy</b><span>Agencies with certified engineers get the partner tier: referrals, co-marketing, joint deals.</span></div></div>
-      <div class="champ-unlock"><div class="cu-n">04</div><div class="cu-body"><b>Host funded hackathons</b><span>The hackathon-in-a-box kit: GPU credits for every team, judge network, prize pool.</span></div></div>
-      <div class="champ-unlock"><div class="cu-n">05</div><div class="cu-body"><b>Speak at GTC</b><span>Reserved Champion track. Your build story, mainstage-adjacent, recorded forever.</span></div></div>
-      <div class="champ-unlock"><div class="cu-n">06</div><div class="cu-body"><b>Direct product-team line</b><span>Quarterly roadmap sessions. Wolves' bug reports and feature asks skip the queue.</span></div></div>
-    </div>
-    <div class="champ-people2">
-      <div class="champ2">
-        <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=600&h=480&fit=crop&crop=faces&auto=format" alt="Priya Sharma">
-        <div class="c2-body">
-          <div class="c2-name">Priya Sharma</div>
-          <div class="c2-meta">BENGALURU · WOLF</div>
-          <div class="c2-deed">Runs the 2,400-member Bengaluru Nemotron User Group. Her training center certified <b>312 builders</b> last year. 9 are now Wolves themselves.</div>
-        </div>
-      </div>
-      <div class="champ2">
-        <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=600&h=480&fit=crop&crop=faces&auto=format" alt="Diego Almeida">
-        <div class="c2-body">
-          <div class="c2-name">Diego Almeida</div>
-          <div class="c2-meta">SÃO PAULO · WOLF</div>
-          <div class="c2-deed">Founded a 6-person certified consultancy after his sim-to-real superbadge. Now runs Brazil's largest robotics hackathon. <b>3 Inception startups</b> came out of it.</div>
-        </div>
-      </div>
-      <div class="champ2">
-        <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=600&h=480&fit=crop&crop=faces&auto=format" alt="Carlos Reyes">
-        <div class="c2-body">
-          <div class="c2-name">Carlos Reyes</div>
-          <div class="c2-meta">CDMX · WOLF</div>
-          <div class="c2-deed">His "pandas to cuDF in a weekend" workshop has run in <b>11 cities</b>. Mentored 40 builders to Fox rank. That's <b>+20,000 cores</b> from mentoring alone.</div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ═══════════ NETWORK EFFECT ═══════════ -->
-<section id="network">
-  <div class="wrap">
-    <div class="sec-kicker">Depth 05 · why it all works</div>
-    <h2 class="sec-title">The point is the network effect</h2>
-    <div class="net-quote">Every other system asks: <i>how do we teach developers?</i> This one asks: <i>how does every developer we finish become the reason three more start?</i></div>
-    <div class="net-flow">
-      <svg viewBox="0 0 1040 210" xmlns="http://www.w3.org/2000/svg" font-family="-apple-system, sans-serif">
-        <defs>
-          <marker id="n-arrow" markerWidth="10" markerHeight="10" refX="7" refY="3" orient="auto">
-            <path d="M 0 0 L 0 6 L 8 3 Z" fill="#4f7a00"/>
-          </marker>
-          <clipPath id="clip-a"><circle cx="0" cy="0" r="30"/></clipPath>
-          <!-- TAU-style badge frames -->
-    <symbol id="star5" viewBox="-5 -5 10 10"><polygon points="0.0,-4.6 1.1,-1.5 4.4,-1.4 1.8,0.6 2.7,3.7 0.0,1.9 -2.7,3.7 -1.8,0.6 -4.4,-1.4 -1.1,-1.5" fill="currentColor"/></symbol>
-    <symbol id="medal" viewBox="0 0 80 100">
-      <polygon points="24,0 36,0 44,32 30,34" fill="#f1f6e2" stroke="#0e0e0e" stroke-width="2" stroke-linejoin="round"/>
-      <polygon points="56,0 44,0 36,32 50,34" fill="#dcebbe" stroke="#0e0e0e" stroke-width="2" stroke-linejoin="round"/>
-      <circle cx="40" cy="60" r="28" fill="#fff" stroke="#0e0e0e" stroke-width="2.5"/>
-      <circle cx="40" cy="60" r="22.5" fill="none" stroke="#76b900" stroke-width="1.4" stroke-dasharray="3 2.6"/>
-    </symbol>
-    <symbol id="shield" viewBox="0 0 80 92">
-      <path d="M40 3 L73 13 V44 C73 64 59 79 40 89 C21 79 7 64 7 44 V13 Z" fill="#f1f6e2" stroke="#0e0e0e" stroke-width="2.5" stroke-linejoin="round"/>
-      <path d="M40 11 L65 19 V44 C65 60 54 72 40 80 C26 72 15 60 15 44 V19 Z" fill="#fff" stroke="#76b900" stroke-width="1.5" stroke-linejoin="round"/>
-      <path d="M15 26 L40 18 L65 26" fill="none" stroke="#76b900" stroke-width="1.2"/>
-    </symbol>
-    <symbol id="rosette" viewBox="0 0 80 112">
-      <polygon points="31,72 23,104 35,95 40,78" fill="#fbf6ea" stroke="#c8a04a" stroke-width="2" stroke-linejoin="round"/>
-      <polygon points="49,72 57,104 45,95 40,78" fill="#f3e6c3" stroke="#c8a04a" stroke-width="2" stroke-linejoin="round"/>
-      <polygon points="40.0,15.0 45.6,21.6 53.5,18.1 55.6,26.5 64.2,26.7 62.5,35.2 70.2,39.1 65.0,46.0 70.2,52.9 62.5,56.8 64.2,65.3 55.6,65.5 53.5,73.9 45.6,70.4 40.0,77.0 34.4,70.4 26.5,73.9 24.4,65.5 15.8,65.3 17.5,56.8 9.8,52.9 15.0,46.0 9.8,39.1 17.5,35.2 15.8,26.7 24.4,26.5 26.5,18.1 34.4,21.6" fill="#edd9a3" stroke="#8a6914" stroke-width="2" stroke-linejoin="round"/>
-      <circle cx="40" cy="46" r="17.5" fill="#fbf6ea" stroke="#8a6914" stroke-width="1.5"/>
-      <circle cx="40" cy="46" r="14" fill="none" stroke="#8a6914" stroke-width="0.8" stroke-dasharray="2.5 2"/>
-    </symbol>
-    <symbol id="rosette-plain" viewBox="0 0 80 80">
-      <polygon points="40.0,9.0 45.6,15.6 53.5,12.1 55.6,20.5 64.2,20.7 62.5,29.2 70.2,33.1 65.0,40.0 70.2,46.9 62.5,50.8 64.2,59.3 55.6,59.5 53.5,67.9 45.6,64.4 40.0,71.0 34.4,64.4 26.5,67.9 24.4,59.5 15.8,59.3 17.5,50.8 9.8,46.9 15.0,40.0 9.8,33.1 17.5,29.2 15.8,20.7 24.4,20.5 26.5,12.1 34.4,15.6" fill="#edd9a3" stroke="#8a6914" stroke-width="2" stroke-linejoin="round"/>
-      <circle cx="40" cy="40" r="17.5" fill="#fbf6ea" stroke="#8a6914" stroke-width="1.5"/>
-      <circle cx="40" cy="40" r="14" fill="none" stroke="#8a6914" stroke-width="0.8" stroke-dasharray="2.5 2"/>
-    </symbol>
-  </defs>
-        <g transform="translate(70, 105)">
-          <circle r="32" fill="none" stroke="#0e0e0e" stroke-width="2"/>
-          <image href="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=400&h=400&fit=crop&crop=faces&auto=format" x="-30" y="-30" width="60" height="60" clip-path="url(#clip-a)"/>
-          <text y="50" text-anchor="middle" font-size="12" font-weight="800" fill="#0e0e0e">1 builder</text>
-          <text y="65" text-anchor="middle" font-size="10" fill="#777">finishes the loop</text>
-        </g>
-        <path d="M 115 105 L 175 105" stroke="#4f7a00" stroke-width="2" marker-end="url(#n-arrow)"/>
-        <g transform="translate(190, 30)">
-          <rect width="190" height="150" fill="#fff" stroke="#0e0e0e" stroke-width="1.5"/>
-          <text x="14" y="24" font-size="11" font-weight="800" fill="#4f7a00" font-family="ui-monospace, Menlo, monospace" letter-spacing="1">SHIPS BEHIND THEM</text>
-          <text x="14" y="48" font-size="12" fill="#383838">public repo + build blog</text>
-          <text x="14" y="70" font-size="12" fill="#383838">testimonial + profile</text>
-          <text x="14" y="92" font-size="12" fill="#383838">meetup talks</text>
-          <text x="14" y="114" font-size="12" fill="#383838">mentored builders</text>
-          <text x="14" y="136" font-size="12" fill="#383838">courses · cohorts · agency</text>
-        </g>
-        <path d="M 395 105 L 455 105" stroke="#4f7a00" stroke-width="2" marker-end="url(#n-arrow)"/>
-        <g transform="translate(470, 30)">
-          <rect width="220" height="150" fill="#f1f6e2" stroke="#76b900" stroke-width="1.5"/>
-          <text x="14" y="24" font-size="11" font-weight="800" fill="#4f7a00" font-family="ui-monospace, Menlo, monospace" letter-spacing="1">BECOMES ARRIVAL CHANNELS</text>
-          <text x="14" y="48" font-size="12" fill="#383838">GitHub stars → new visitors</text>
-          <text x="14" y="70" font-size="12" fill="#383838">blog → Google + ChatGPT answers</text>
-          <text x="14" y="92" font-size="12" fill="#383838">talks → city pipelines</text>
-          <text x="14" y="114" font-size="12" fill="#383838">mentees → their networks</text>
-          <text x="14" y="136" font-size="12" fill="#383838">cohorts → 30–300 devs / yr</text>
-        </g>
-        <path d="M 705 105 L 765 105" stroke="#4f7a00" stroke-width="2" marker-end="url(#n-arrow)"/>
-        <g transform="translate(840, 105)">
-          <g transform="translate(-40,0)"><circle r="26" fill="#f1f6e2" stroke="#0e0e0e" stroke-width="2"/><circle cy="-7" r="8" fill="none" stroke="#0e0e0e" stroke-width="1.8"/><path d="M-14 18 c2-9 7-13 14-13 s12 4 14 13" fill="none" stroke="#0e0e0e" stroke-width="1.8"/></g>
-          <g transform="translate(0,0)"><circle r="26" fill="#f1f6e2" stroke="#0e0e0e" stroke-width="2"/><circle cy="-7" r="8" fill="none" stroke="#0e0e0e" stroke-width="1.8"/><path d="M-14 18 c2-9 7-13 14-13 s12 4 14 13" fill="none" stroke="#0e0e0e" stroke-width="1.8"/></g>
-          <g transform="translate(40,0)"><circle r="26" fill="#f1f6e2" stroke="#0e0e0e" stroke-width="2"/><circle cy="-7" r="8" fill="none" stroke="#0e0e0e" stroke-width="1.8"/><path d="M-14 18 c2-9 7-13 14-13 s12 4 14 13" fill="none" stroke="#0e0e0e" stroke-width="1.8"/></g>
-          <text y="50" text-anchor="middle" font-size="12" font-weight="800" fill="#0e0e0e">3+ builders enter</text>
-          <text y="65" text-anchor="middle" font-size="10" fill="#777">each repeats the loop</text>
-        </g>
-        <path d="M 840 60 Q 840 -14 470 -14 Q 70 -14 70 52" transform="translate(0, 20)" stroke="#a4a299" stroke-width="1.5" stroke-dasharray="5 5" fill="none" marker-end="url(#n-arrow)"/>
-      </svg>
-      <div class="net-cap">funnels consume developers · flywheels compound them</div>
-    </div>
-    <div class="net-stats">
-      <div class="net-stat"><div class="ns-num">1 → 3+</div><div class="ns-label">Target reproduction rate: every finished builder recruits at least three more through their public output.</div></div>
-      <div class="net-stat"><div class="ns-num">300 × 150</div><div class="ns-label">Wolves × cities: each funded user group is a permanent local arrival channel no ad budget can buy.</div></div>
-      <div class="net-stat"><div class="ns-num">0 → 3M</div><div class="ns-label">Trailhead's Trailblazer count in six years on this exact pattern, with 1 in 3 learners landing a new job. NVIDIA starts with 6M registered devs.</div></div>
-    </div>
+    <div class="event-more">No event in your city? That's not a gap. That's <b>your opening</b>. Champions get the venue budget, the swag, and the speaker network to start one. <a href="#ranks" style="color: var(--green-deep); font-weight: 800;">See the Champion track →</a></div>
   </div>
 </section>
 
@@ -3039,9 +2701,9 @@ footer a:hover { color: #fff; }
     <div>
       <h5>Compete</h5>
       <a href="#leaderboard">Global leaderboard</a>
-      <a href="#champions">Champions</a>
+      <a href="#paths">Champion track</a>
       <a href="#events">Events</a>
-      <a href="#network">The flywheel</a>
+      <a href="/dev-flow">The flywheel (strategy)</a>
     </div>
     <div>
       <h5>Today's NVIDIA</h5>
