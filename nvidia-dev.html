@@ -94,6 +94,10 @@ nav { border-bottom: 1px solid var(--rule); background: rgba(255,255,255,0.96); 
 .win-line { font-size: 14px; font-weight: 700; line-height: 1.35; }
 .win-sub { font-size: 11.5px; color: var(--ink3); margin-top: 1px; }
 
+/* ── hero stats row ── */
+.hero-stats { margin-top: 46px; border-top: 1.5px solid var(--ink); border-bottom: 1px solid var(--rule); display: flex; flex-wrap: wrap; gap: 8px 38px; padding: 13px 2px; font-size: 12px; color: var(--ink3); }
+.hero-stats b { font-family: var(--serif); font-size: 17px; font-weight: 600; color: var(--ink); margin-right: 4px; }
+
 /* ── ticker ── */
 .ticker { background: var(--ink); overflow: hidden; border-top: 3px solid var(--green); }
 .ticker-track { display: inline-flex; white-space: nowrap; animation: tick 46s linear infinite; }
@@ -726,7 +730,7 @@ footer a:hover { color: #fff; }
           <img src="https://images.unsplash.com/photo-1599566150163-29194dcaad36?w=400&h=400&fit=crop&crop=faces&auto=format" alt="">
           <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=400&h=400&fit=crop&crop=faces&auto=format" alt="">
         </div>
-        <div class="hero-social-txt"><b>312 joined certified this week</b> · 41 hired this month · 150 city groups</div>
+        <div class="hero-social-txt"><b>Join 6M+ NVIDIA developers</b> · 312 certified this week · 41 hired this month</div>
       </div>
     </div>
     <div class="wins2">
@@ -762,6 +766,15 @@ footer a:hover { color: #fff; }
       </div>
     </div>
   </div>
+  <div class="wrap">
+    <div class="hero-stats">
+      <span><b>6M+</b> NVIDIA developers</span>
+      <span><b>1.3M</b> unfilled US AI jobs</span>
+      <span><b>$187.5K</b> median AI-engineer comp</span>
+      <span><b>+800%</b> FDE posting growth</span>
+      <span><b>11</b> official certifications</span>
+    </div>
+  </div>
 </header>
 
 <!-- ═══════════ LIVE TICKER ═══════════ -->
@@ -790,26 +803,95 @@ footer a:hover { color: #fff; }
   </div>
 </div>
 
-<!-- ═══════════ STAT STRIP ═══════════ -->
-<section style="padding: 56px 0 0;">
+<!-- ═══════════ OUTCOMES ═══════════ -->
+<section id="outcomes">
   <div class="wrap">
-    <div class="stat-strip">
-      <div class="stat-cell">
-        <div class="stat-num">1.3M</div>
-        <div class="stat-label">unfilled AI jobs in the US alone. Half will stay unfilled through 2027 (Bain)</div>
+    <div class="sec-kicker">Start with the ending</div>
+    <h2 class="sec-title">Choose your outcome. There are six.</h2>
+    <p class="sec-lede">One ladder, six destinations. Each card shows the <b>actual artifact</b> you walk away with and links to the exact place it happens. Most builders leave with more than one.</p>
+    <div class="o3-grid">
+
+      <div class="o3" style="--acc: #1e5fa3;">
+        <div class="o3-head"><div class="o3-tag">STAGE 05 · HIRE</div><h3>Get hired.</h3></div>
+        <div class="o3-art">
+          <div class="art-offer">
+            <div class="ao-co">SERIES B · AGENTIC AI · REMOTE</div>
+            <div class="ao-role">Forward-Deployed AI Engineer</div>
+            <div class="ao-comp">$280K–$340K <span>+ EQUITY</span></div>
+            <div class="ao-reqs"><span>NCP-AAI</span><span>Production Agent superbadge</span></div>
+          </div>
+        </div>
+        <a class="o3-link" href="#offers">OFFERS COME TO YOU · SEE THIS MONTH'S ↓</a>
       </div>
-      <div class="stat-cell">
-        <div class="stat-num">$187.5K</div>
-        <div class="stat-label">median total comp, AI/ML engineer (AxialSearch, 10,133 job descriptions)</div>
+
+      <div class="o3" style="--acc: #a07000;">
+        <div class="o3-head"><div class="o3-tag">EVERY UNIT · YOUR PROFILE</div><h3>Get promoted.</h3></div>
+        <div class="o3-art">
+          <div class="art-receipts">
+            <div class="ar-title">Your profile, the night before the review:</div>
+            <div class="ar-row">✓ 38 shipped projects, publicly verified</div>
+            <div class="ar-row">✓ NCP-AAI · proctored, official</div>
+            <div class="ar-row">✓ Fox → Owl in one quarter, on the record</div>
+            <div class="ar-quote">"It made not promoting me embarrassing." · Carlos R.</div>
+          </div>
+        </div>
+        <a class="o3-link" href="/path-agent-builder">RECEIPTS ARE BUILT UNIT BY UNIT · START YOURS →</a>
       </div>
-      <div class="stat-cell">
-        <div class="stat-num">+800%</div>
-        <div class="stat-label">YoY growth in Forward-Deployed Engineer postings. The fastest-growing title in tech</div>
+
+      <div class="o3" style="--acc: #7a3eb0;">
+        <div class="o3-head"><div class="o3-tag">WOLF RANK PERK</div><h3>Take the stage.</h3></div>
+        <div class="o3-art">
+          <div class="art-session">
+            <div class="as-code">GTC 2027 · SESSION DL4321 · HALL 3</div>
+            <div class="as-title">"From zero to production agents"</div>
+            <div class="as-speaker">SPEAKER: <b>YOU</b> · RECORDED FOREVER · NAME IN THE PROGRAM</div>
+          </div>
+        </div>
+        <a class="o3-link" href="#champions">300 CHAMPION TALKS A YEAR · MEET THE WOLVES ↓</a>
       </div>
-      <div class="stat-cell">
-        <div class="stat-num">11</div>
-        <div class="stat-label">official NVIDIA certifications, live today. This is the guided road to them</div>
+
+      <div class="o3" style="--acc: #b34141;">
+        <div class="o3-head"><div class="o3-tag">ALWAYS ON · PUBLIC</div><h3>Get on the board.</h3></div>
+        <div class="o3-art">
+          <div class="art-board">
+            <div class="ab-row"><span class="ab-pos">01</span><span class="ab-name">Priya Sharma</span><span class="ab-cores">286,400</span></div>
+            <div class="ab-row"><span class="ab-pos">02</span><span class="ab-name">Diego Almeida</span><span class="ab-cores">251,090</span></div>
+            <div class="ab-row"><span class="ab-pos">03</span><span class="ab-name">Amara Okafor</span><span class="ab-cores">215,860</span></div>
+            <div class="ab-row you"><span class="ab-pos">4,217</span><span class="ab-name">You, climbing</span><span class="ab-cores">1,250</span></div>
+          </div>
+        </div>
+        <a class="o3-link" href="#leaderboard">A LADDER THE INDUSTRY READS · SEE THE BUILDER 100 ↓</a>
       </div>
+
+      <div class="o3" style="--acc: #00857a;">
+        <div class="o3-head"><div class="o3-tag">CHAMPION UNLOCK</div><h3>Run your city.</h3></div>
+        <div class="o3-art">
+          <div class="art-event">
+            <div class="ae-date"><span class="d">12</span><span class="m">SEPT</span></div>
+            <div class="ae-body">
+              <div class="ae-name">Nemotron User Group · Your City #1</div>
+              <div class="ae-meta">HOST: <b>YOU</b> · VENUE FUNDED · SWAG KIT SHIPPED · 80 SEATS</div>
+            </div>
+          </div>
+        </div>
+        <a class="o3-link" href="#events">150 FUNDED CITY GROUPS · SEE THIS MONTH'S EVENTS ↓</a>
+      </div>
+
+      <div class="o3" style="--acc: #4f7a00;">
+        <div class="o3-head"><div class="o3-tag">THE TOP OF THE LADDER</div><h3>Own the firm.</h3></div>
+        <div class="o3-art">
+          <div class="art-plaque">
+            <svg viewBox="0 0 80 80"><use href="#rosette-plain"/></svg>
+            <div>
+              <div class="ap-title">AUTHORIZED TRAINING CENTER</div>
+              <div class="ap-lic">License № ATC-2027-091</div>
+              <div class="ap-line">Official curriculum · revenue share · your name on the door</div>
+            </div>
+          </div>
+        </div>
+        <a class="o3-link" href="#champions">CONSULTANCIES + TRAINING CENTERS · HOW WOLVES EARN ↓</a>
+      </div>
+
     </div>
   </div>
 </section>
@@ -973,99 +1055,6 @@ footer a:hover { color: #fff; }
   </div>
 </section>
 
-
-<!-- ═══════════ OUTCOMES ═══════════ -->
-<section id="outcomes">
-  <div class="wrap">
-    <div class="sec-kicker">Why climb</div>
-    <h2 class="sec-title">What winning looks like</h2>
-    <p class="sec-lede">Six finish lines, one ladder. Each card shows the <b>actual artifact</b> you walk away with, and links to the exact place on this page where it happens.</p>
-    <div class="o3-grid">
-
-      <div class="o3" style="--acc: #1e5fa3;">
-        <div class="o3-head"><div class="o3-tag">STAGE 05 · HIRE</div><h3>Get hired.</h3></div>
-        <div class="o3-art">
-          <div class="art-offer">
-            <div class="ao-co">SERIES B · AGENTIC AI · REMOTE</div>
-            <div class="ao-role">Forward-Deployed AI Engineer</div>
-            <div class="ao-comp">$280K–$340K <span>+ EQUITY</span></div>
-            <div class="ao-reqs"><span>NCP-AAI</span><span>Production Agent superbadge</span></div>
-          </div>
-        </div>
-        <a class="o3-link" href="#offers">OFFERS COME TO YOU · SEE THIS MONTH'S ↓</a>
-      </div>
-
-      <div class="o3" style="--acc: #a07000;">
-        <div class="o3-head"><div class="o3-tag">EVERY UNIT · YOUR PROFILE</div><h3>Get promoted.</h3></div>
-        <div class="o3-art">
-          <div class="art-receipts">
-            <div class="ar-title">Your profile, the night before the review:</div>
-            <div class="ar-row">✓ 38 shipped projects, publicly verified</div>
-            <div class="ar-row">✓ NCP-AAI · proctored, official</div>
-            <div class="ar-row">✓ Fox → Owl in one quarter, on the record</div>
-            <div class="ar-quote">"It made not promoting me embarrassing." · Carlos R.</div>
-          </div>
-        </div>
-        <a class="o3-link" href="/path-agent-builder">RECEIPTS ARE BUILT UNIT BY UNIT · START YOURS →</a>
-      </div>
-
-      <div class="o3" style="--acc: #7a3eb0;">
-        <div class="o3-head"><div class="o3-tag">WOLF RANK PERK</div><h3>Take the stage.</h3></div>
-        <div class="o3-art">
-          <div class="art-session">
-            <div class="as-code">GTC 2027 · SESSION DL4321 · HALL 3</div>
-            <div class="as-title">"From zero to production agents"</div>
-            <div class="as-speaker">SPEAKER: <b>YOU</b> · RECORDED FOREVER · NAME IN THE PROGRAM</div>
-          </div>
-        </div>
-        <a class="o3-link" href="#champions">300 CHAMPION TALKS A YEAR · MEET THE WOLVES ↓</a>
-      </div>
-
-      <div class="o3" style="--acc: #b34141;">
-        <div class="o3-head"><div class="o3-tag">ALWAYS ON · PUBLIC</div><h3>Get on the board.</h3></div>
-        <div class="o3-art">
-          <div class="art-board">
-            <div class="ab-row"><span class="ab-pos">01</span><span class="ab-name">Priya Sharma</span><span class="ab-cores">286,400</span></div>
-            <div class="ab-row"><span class="ab-pos">02</span><span class="ab-name">Diego Almeida</span><span class="ab-cores">251,090</span></div>
-            <div class="ab-row"><span class="ab-pos">03</span><span class="ab-name">Amara Okafor</span><span class="ab-cores">215,860</span></div>
-            <div class="ab-row you"><span class="ab-pos">4,217</span><span class="ab-name">You, climbing</span><span class="ab-cores">1,250</span></div>
-          </div>
-        </div>
-        <a class="o3-link" href="#leaderboard">A LADDER THE INDUSTRY READS · SEE THE BUILDER 100 ↓</a>
-      </div>
-
-      <div class="o3" style="--acc: #00857a;">
-        <div class="o3-head"><div class="o3-tag">CHAMPION UNLOCK</div><h3>Run your city.</h3></div>
-        <div class="o3-art">
-          <div class="art-event">
-            <div class="ae-date"><span class="d">12</span><span class="m">SEPT</span></div>
-            <div class="ae-body">
-              <div class="ae-name">Nemotron User Group · Your City #1</div>
-              <div class="ae-meta">HOST: <b>YOU</b> · VENUE FUNDED · SWAG KIT SHIPPED · 80 SEATS</div>
-            </div>
-          </div>
-        </div>
-        <a class="o3-link" href="#events">150 FUNDED CITY GROUPS · SEE THIS MONTH'S EVENTS ↓</a>
-      </div>
-
-      <div class="o3" style="--acc: #4f7a00;">
-        <div class="o3-head"><div class="o3-tag">THE TOP OF THE LADDER</div><h3>Own the firm.</h3></div>
-        <div class="o3-art">
-          <div class="art-plaque">
-            <svg viewBox="0 0 80 80"><use href="#rosette-plain"/></svg>
-            <div>
-              <div class="ap-title">AUTHORIZED TRAINING CENTER</div>
-              <div class="ap-lic">License № ATC-2027-091</div>
-              <div class="ap-line">Official curriculum · revenue share · your name on the door</div>
-            </div>
-          </div>
-        </div>
-        <a class="o3-link" href="#champions">CONSULTANCIES + TRAINING CENTERS · HOW WOLVES EARN ↓</a>
-      </div>
-
-    </div>
-  </div>
-</section>
 
 <!-- ═══════════ JOB OFFERS ═══════════ -->
 <section class="soft" id="offers">
