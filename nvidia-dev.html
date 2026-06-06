@@ -180,7 +180,7 @@ nav { border-bottom: 1px solid var(--rule); background: rgba(255,255,255,0.96); 
 .cores-table { display: grid; grid-template-columns: repeat(4, 1fr); }
 .cores-cell { padding: 14px 18px; border-left: 1px solid var(--rule); }
 .cores-cell .cc-act { font-size: 12.5px; font-weight: 700; }
-.cores-cell .cc-pts { font-family: var(--mono); font-size: 11.5px; color: var(--green-dim); font-weight: 700; margin-top: 2px; }
+.cores-cell .cc-pts { font-family: var(--mono); font-size: 15px; color: var(--green-dim); font-weight: 700; margin-top: 2px; }
 
 /* ── ranks (animals) ── */
 .rank-lore { font-family: var(--serif); font-size: 26px; font-weight: 600; font-style: italic; letter-spacing: -0.01em; margin-bottom: 36px; color: var(--ink); }
@@ -305,11 +305,11 @@ tr.lb-gap td { text-align: center; font-family: var(--mono); color: var(--ink4);
 
 
 /* ── TAU-style badges ── */
-.badge2 { display: flex; flex-direction: column; align-items: center; gap: 7px; width: 104px; }
-.badge2 svg.art { width: 84px; height: 105px; }
-.badge2.shield svg.art { width: 84px; height: 96px; }
-.badge2 .b-name { font-family: var(--mono); font-size: 9.5px; font-weight: 800; letter-spacing: 0.04em; text-align: center; color: var(--ink); line-height: 1.4; }
-.badge2 .b-pts { font-family: var(--mono); font-size: 9px; color: var(--green-dim); font-weight: 700; }
+.badge2 { display: flex; flex-direction: column; align-items: center; gap: 9px; width: 190px; }
+.badge2 svg.art { width: 160px; height: 200px; }
+.badge2.shield svg.art { width: 160px; height: 184px; }
+.badge2 .b-name { font-family: var(--mono); font-size: 12px; font-weight: 800; letter-spacing: 0.04em; text-align: center; color: var(--ink); line-height: 1.4; }
+.badge2 .b-pts { font-family: var(--mono); font-size: 11px; color: var(--green-dim); font-weight: 700; }
 
 /* ── Builder 100 ── */
 .b100-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
@@ -857,6 +857,58 @@ tr.lb-gap td { text-align: center; font-family: var(--mono); color: var(--ink4);
 .sdg-chips .lk { font-size: 9.5px; padding: 4px 9px; }
 .sdg-all { border-top: 1px solid var(--rule); padding-top: 12px; }
 
+
+/* ── marketplace ── */
+.mk-filters { display: flex; flex-wrap: wrap; gap: 7px; margin-bottom: 22px; }
+.mk-f { font-family: var(--mono); font-size: 10px; font-weight: 800; letter-spacing: 0.06em; border: 1px solid var(--rule-strong); background: #fff; color: var(--ink2); padding: 6px 14px; cursor: pointer; }
+.mk-f.on { background: var(--ink); color: #9adf2e; border-color: var(--ink); }
+.mk-f:hover { border-color: var(--green); }
+.mk-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+.mk-card { border: 1.5px solid var(--ink); background: #fff; display: flex; flex-direction: column; }
+.mk-photo { position: relative; border-bottom: 1.5px solid var(--ink); }
+.mk-photo img { width: 100%; aspect-ratio: 1 / 0.9; object-fit: cover; display: block; }
+.mk-status { position: absolute; top: 10px; left: 10px; font-family: var(--mono); font-size: 8px; font-weight: 800; letter-spacing: 0.1em; padding: 4px 9px; background: rgba(14,14,14,0.85); }
+.mk-status.now { color: #9adf2e; }
+.mk-status.open { color: #f2d98c; }
+.mk-rank { position: absolute; bottom: 10px; right: 10px; font-family: var(--mono); font-size: 8.5px; font-weight: 800; letter-spacing: 0.12em; padding: 3px 9px; background: var(--green); color: var(--ink); }
+.mk-body { padding: 13px 15px 12px; flex: 1; display: flex; flex-direction: column; }
+.mk-name { font-family: var(--serif); font-size: 19px; font-weight: 600; letter-spacing: -0.01em; line-height: 1.1; }
+.mk-role { font-size: 12px; font-weight: 700; color: var(--ink2); margin-top: 3px; }
+.mk-loc { font-family: var(--mono); font-size: 8.5px; letter-spacing: 0.12em; color: var(--ink4); margin-top: 3px; }
+.mk-stamps { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 10px; }
+.mk-sb { font-family: var(--mono); font-size: 9px; font-weight: 700; color: var(--green-deep); margin-top: 7px; }
+.mk-cores { font-family: var(--mono); font-size: 12px; font-weight: 800; color: var(--green-dim); margin-top: 9px; padding-top: 9px; border-top: 1px solid var(--rule); }
+.mk-cores span { font-size: 8px; color: var(--ink4); }
+.mk-hire { display: block; padding: 11px 15px; border-top: 1.5px solid var(--ink); background: var(--green); color: var(--ink); font-family: var(--mono); font-size: 8.5px; font-weight: 800; letter-spacing: 0.08em; text-decoration: none; }
+.mk-hire:hover { background: #8ccf1c; }
+.mk-more { text-align: center; margin-top: 24px; }
+.mk-employer { margin-top: 18px; border-left: 4px solid var(--green); background: var(--green-bg); padding: 12px 16px; font-size: 13px; color: var(--ink2); }
+.mk-employer b { font-weight: 800; }
+
+/* ── big rank cards ── */
+.rank-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+.rankcard { border: 1.5px solid var(--ink); background: #fff; display: flex; gap: 20px; padding: 22px 24px; }
+.rankcard.champion { background: var(--green-bg); }
+.rankcard.apex { background: var(--gold-bg); }
+.rc-animal { width: 150px; height: 150px; flex-shrink: 0; }
+.rc-body { display: flex; flex-direction: column; min-width: 0; flex: 1; }
+.rc-name { font-family: var(--serif); font-size: 38px; font-weight: 600; letter-spacing: -0.015em; line-height: 1; }
+.rankcard.apex .rc-name { color: var(--green-deep); }
+.rc-tier { font-family: var(--mono); font-size: 8.5px; font-weight: 800; letter-spacing: 0.14em; color: var(--ink4); margin: 5px 0 9px; }
+.rc-req { font-family: var(--mono); font-size: 11px; font-weight: 800; letter-spacing: 0.04em; color: var(--green-deep); margin-bottom: 8px; }
+.rc-perks { font-size: 12.5px; color: var(--ink2); line-height: 1.55; }
+.rc-earn { margin-top: auto; border-top: 1px solid var(--rule); padding-top: 10px; }
+.rc-earn-label { font-family: var(--mono); font-size: 7.5px; font-weight: 800; letter-spacing: 0.16em; color: var(--ink4); display: block; margin-bottom: 6px; }
+.rc-chips { display: flex; flex-wrap: wrap; gap: 5px; }
+.rc-chips .lk { font-size: 9px; padding: 3px 8px; }
+.b-from { font-family: var(--mono); font-size: 8px; font-weight: 700; letter-spacing: 0.08em; color: var(--ink4); text-align: center; }
+
+@media (max-width: 880px) {
+  .mk-grid { grid-template-columns: 1fr 1fr; }
+  .rank-grid { grid-template-columns: 1fr; }
+  .rankcard { flex-direction: column; }
+}
+
 /* ── final cta ── */
 .final-cta { text-align: center; padding: 88px 0; }
 .final-cta h2 { font-family: var(--serif); font-size: 42px; font-weight: 600; letter-spacing: -0.015em; margin-bottom: 14px; }
@@ -1053,7 +1105,7 @@ footer a:hover { color: #fff; }
       <div class="signup-trust">FREE FOREVER · NO CREDIT CARD · FIRST BADGE IN 30 MIN</div>
       <div class="hero-ctas" style="margin-top: 22px; margin-bottom: 22px;">
         <a class="hex-btn ghost" href="#paths">Explore the learning paths ↓</a>
-        <a class="hex-btn ghost" href="#outcomes">Where every path leads ↓</a>
+        <a class="hex-btn ghost" href="#ranks">The game: ranks &amp; badges ↓</a>
       </div>
       <p class="hero-lore">Everyone starts a Gecko. Fifty a year become Dragons. <b>→ SEE THE RANKS</b></p>
       <div class="hero-social">
@@ -1430,7 +1482,7 @@ footer a:hover { color: #fff; }
               <h4>Listed on the certified marketplace</h4>
               <p class="sd-body">At Falcon rank with both certs and the superbadge, recruiters find you and test your live endpoint before the first call.</p>
               <div class="sd-earn">OFFERS COME TO YOU</div>
-              <div class="sd-links"><a class="lk" href="#offers">This month's offers ↓</a><a class="lk" href="#paths">The Get Hired track</a></div>
+              <div class="sd-links"><a class="lk" href="#offers">The marketplace ↓</a><a class="lk" href="#paths">The Get Hired track</a></div>
             </div>
             </div>
           </div>
@@ -1644,7 +1696,7 @@ footer a:hover { color: #fff; }
               <h4>The person they call when the cluster matters</h4>
               <p class="sd-body">Certified on lab-based exams nobody can fake. Platform roles now; an Authorized Training Center at Wolf rank.</p>
               <div class="sd-earn">PLATFORM ROLE · ATC ELIGIBLE</div>
-              <div class="sd-links"><a class="lk" href="#offers">This month's offers ↓</a></div>
+              <div class="sd-links"><a class="lk" href="#offers">The marketplace ↓</a></div>
             </div>
             </div>
           </div>
@@ -2117,7 +2169,7 @@ footer a:hover { color: #fff; }
               <h4>Stop applying. Qualify.</h4>
               <p class="sd-body">Companies post against requirements you already hold. When your profile matches, the offer comes to you, with the comp on it.</p>
               <div class="sd-earn">MEDIAN SEARCH-TO-OFFER: 19 DAYS</div>
-              <div class="sd-links"><a class="lk" href="#offers">This month's offers ↓</a></div>
+              <div class="sd-links"><a class="lk" href="#offers">The marketplace ↓</a></div>
             </div>
             </div>
             <div class="lpd d-t5s4">
@@ -2126,194 +2178,160 @@ footer a:hover { color: #fff; }
               <h4>Post a role against ranks and certs</h4>
               <ul class="sd-bullets"><li>Require NCP-AAI + a superbadge instead of keyword soup</li><li>Test a candidate's live endpoint before the first interview</li></ul>
               <div class="sd-earn">EARN · 4,000+ companies already here</div>
-              <div class="sd-links"><a class="lk" href="#offers">This month's offers ↓</a></div>
+              <div class="sd-links"><a class="lk" href="#offers">The marketplace ↓</a></div>
             </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-    <div class="go-deeper">Done with the steps? Next: <a href="#outcomes">where every track leads</a> · <a href="#ranks">the levels you climb</a> · <a href="#certs">all eleven official certifications</a></div>
-  </div>
-</section>
-
-<!-- ═══════════ OUTCOMES ═══════════ -->
-<section id="outcomes">
-  <div class="wrap">
-    <div class="sec-kicker">Depth 02 · where every path leads</div>
-    <h2 class="sec-title">Every path passes the same six destinations.</h2>
-    <p class="sec-lede">You don't pick one. You <b>collect them</b>, roughly in this order, as you move through the lifecycle. The map is identical for every track above; only the steps change.</p>
-
-    <div class="ms-rail" aria-hidden="true">
-      <div class="ms-cell"><span class="ms-dot"></span></div>
-      <div class="ms-cell"><span class="ms-dot"></span></div>
-      <div class="ms-cell"><span class="ms-dot"></span></div>
-      <div class="ms-cell"><span class="ms-dot"></span></div>
-      <div class="ms-cell"><span class="ms-dot"></span></div>
-      <div class="ms-cell"><span class="ms-dot end"></span></div>
-    </div>
-
-    <div class="ms-grid">
-
-      <div class="ms">
-        <div class="ms-stage">STAGES · LEARN + BUILD</div>
-        <div class="ms-num">01</div>
-        <h3>Master the stack.</h3>
-        <svg viewBox="0 0 170 100" class="ms-cake"><rect x="10" y="87" width="150" height="8" fill="#344e00" stroke="#0e0e0e" stroke-width="1"/><rect x="14" y="77" width="141" height="8" fill="#3f5f00" stroke="#0e0e0e" stroke-width="1"/><rect x="19" y="67" width="132" height="8" fill="#4a7000" stroke="#0e0e0e" stroke-width="1"/><rect x="24" y="57" width="123" height="8" fill="#558200" stroke="#0e0e0e" stroke-width="1"/><rect x="28" y="47" width="114" height="8" fill="#609400" stroke="#0e0e0e" stroke-width="1"/><rect x="32" y="37" width="105" height="8" fill="#6ba600" stroke="#0e0e0e" stroke-width="1"/><rect x="37" y="27" width="96" height="8" fill="#76b900" stroke="#0e0e0e" stroke-width="1"/><rect x="42" y="17" width="87" height="8" fill="#fff" stroke="#a4a299" stroke-width="1.2" stroke-dasharray="3 2"/><rect x="46" y="7" width="78" height="8" fill="#fff" stroke="#a4a299" stroke-width="1.2" stroke-dasharray="3 2"/><rect x="50" y="-3" width="69" height="8" fill="#fff" stroke="#a4a299" stroke-width="1.2" stroke-dasharray="3 2"/></svg>
-        <div class="ms-sub">10 layers, all free · the Explorer path or any other</div>
-        <a class="ms-link" href="#paths">VIA THE EXPLORE TRACK ↑</a>
-      </div>
-
-      <div class="ms">
-        <div class="ms-stage">STAGES · CERTIFY + HIRE</div>
-        <div class="ms-num">02</div>
-        <h3>Get hired.</h3>
-        <div class="ms-art"><span class="ms-stamp">HIRED</span></div>
-        <div class="ms-sub">certs + superbadge → marketplace · offers come to you</div>
-        <a class="ms-link" href="#offers">SEE THIS MONTH'S OFFERS ↓</a>
-      </div>
-
-      <div class="ms">
-        <div class="ms-stage">STAGES · CERTIFY + HIRE</div>
-        <div class="ms-num">03</div>
-        <h3>Get promoted.</h3>
-        <div class="ms-art">
-          <div class="ms-rows">✓ 38 verified projects<br>✓ NCP cert · proctored<br>✓ all of it public</div>
-        </div>
-        <div class="ms-sub">receipts no review can ignore</div>
-        <a class="ms-link" href="#leaderboard">YOUR PROFILE, PUBLIC ↓</a>
-      </div>
-
-      <div class="ms">
-        <div class="ms-stage">STAGE · CHAMPION</div>
-        <div class="ms-num">04</div>
-        <h3>Present at GTC.</h3>
-        <div class="ms-art">
-          <div class="ms-dark">GTC · SESSION DL4321<br><b>SPEAKER: YOU</b></div>
-        </div>
-        <div class="ms-sub">the speaker track is a Wolf-rank perk</div>
-        <a class="ms-link" href="#champions">THE CHAMPION TRACK ↓</a>
-      </div>
-
-      <div class="ms">
-        <div class="ms-stage">STAGE · CHAMPION</div>
-        <div class="ms-num">05</div>
-        <h3>Lead your community.</h3>
-        <div class="ms-art">
-          <div class="ms-event"><b>SEPT 12</b> · YOUR CITY<br>HOST: YOU · VENUE FUNDED</div>
-        </div>
-        <div class="ms-sub">Champion is a real certification: live, proctored</div>
-        <a class="ms-link" href="#events">THIS MONTH'S EVENTS ↓</a>
-      </div>
-
-      <div class="ms">
-        <div class="ms-stage">STAGE · MULTIPLY</div>
-        <div class="ms-num">06</div>
-        <h3>Found your firm.</h3>
-        <div class="ms-art">
-          <div class="ms-gold"><svg viewBox="0 0 80 80"><use href="#rosette-plain"/></svg><span>ATC LICENSE<br>№ 2027-091</span></div>
-        </div>
-        <div class="ms-sub">consultancy tier · training center · or Inception today</div>
-        <a class="ms-link" href="#champions">HOW WOLVES EARN ↓</a>
-      </div>
-
-    </div>
-    <div class="ms-note">All six are open to every path. Most builders collect three or more; the order above is the usual one, not a rule.</div>
-  </div>
-</section>
-
-<!-- ═══════════ SOCIAL PROOF ═══════════ -->
-<section class="soft">
-  <div class="wrap">
-    <div class="sec-kicker">Who's already here</div>
-    <h2 class="sec-title">6M builders. 4,000+ companies. One ladder.</h2>
-    <div class="logo-wall">
-      <span class="lw lw1">SIEMENS</span>
-      <span class="lw lw2">BOSCH</span>
-      <span class="lw lw3">shopify</span>
-      <span class="lw lw4">ServiceNow</span>
-      <span class="lw lw5">SAMSUNG</span>
-      <span class="lw lw6">J.P.Morgan</span>
-      <span class="lw lw7">AIRBUS</span>
-      <span class="lw lw8">Infosys</span>
-      <span class="lw lw9">grab</span>
-      <span class="lw-note">+ 4,000 more with builders on the board</span>
-    </div>
-    <div class="sp-quotes">
-      <div class="spq">
-        <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=300&h=300&fit=crop&crop=faces&auto=format" alt="">
-        <blockquote>"The cert paid for itself in one salary negotiation."</blockquote>
-        <div class="spq-who"><b>Sam Whitfield</b> · Game Dev · Austin</div>
-      </div>
-      <div class="spq">
-        <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=300&h=300&fit=crop&crop=faces&auto=format" alt="">
-        <blockquote>"I learned Isaac at the Warsaw user group. Now I teach it there."</blockquote>
-        <div class="spq-who"><b>Zofia Nowak</b> · Robotics Eng · Warsaw</div>
-      </div>
-      <div class="spq">
-        <img src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=300&h=300&fit=crop&crop=faces&auto=format" alt="">
-        <blockquote>"Our whole data team went Gecko to Fox in a quarter. Pipeline's 40x faster."</blockquote>
-        <div class="spq-who"><b>Anika Rao</b> · Eng Manager · Toronto</div>
-      </div>
-      <div class="spq">
-        <img src="https://images.unsplash.com/photo-1599566150163-29194dcaad36?w=300&h=300&fit=crop&crop=faces&auto=format" alt="">
-        <blockquote>"First learning platform that got me a raise instead of a subscription."</blockquote>
-        <div class="spq-who"><b>Tomás Ferreira</b> · Platform Eng · Lisbon</div>
-      </div>
-    </div>
+    <div class="go-deeper">Done with the steps? Next: <a href="#offers">the marketplace: hire the certified</a> · <a href="#ranks">the game: ranks &amp; badges</a> · <a href="#certs">all eleven official certifications</a></div>
   </div>
 </section>
 
 <!-- ═══════════ JOB OFFERS ═══════════ -->
 <section class="soft" id="offers">
   <div class="wrap">
-    <div class="sec-kicker">Proof, not promises</div>
-    <h2 class="sec-title">Offers sent through the marketplace this month</h2>
-    <p class="sec-lede">Companies post against <b>ranks, certs, and superbadges</b>, not keyword soup. When your profile qualifies, the offer comes to you.</p>
-    <div class="offer-grid">
-      <div class="offer-card">
-        <div class="offer-stamp">SENT 4 DAYS AGO</div>
-        <div class="offer-top">
-          <div class="offer-co">Series B · Agentic AI · SF / Remote</div>
-          <div class="offer-role">Forward-Deployed AI Engineer</div>
-          <div class="offer-comp">$280K–$340K <span>+ EQUITY</span></div>
+    <div class="sec-kicker">Depth 02 · the marketplace</div>
+    <h2 class="sec-title">Certified builders. Hire them.</h2>
+    <p class="sec-lede">This is what the marketplace is: <b>people who proved it</b>, listed and available. Every card carries proctored certifications, a live superbadge you can test, and a public rank. Filter, click, hire.</p>
+    <div class="mk-filters">
+      <span class="mk-f on">All</span><span class="mk-f">NCP-AAI</span><span class="mk-f">NCP-AIO</span><span class="mk-f">NCP-ADS</span><span class="mk-f">Owl rank+</span><span class="mk-f">Available now</span><span class="mk-f">Remote</span>
+    </div>
+    <div class="mk-grid">
+      <div class="mk-card">
+        <div class="mk-photo">
+          <img src="https://images.unsplash.com/photo-1531123897727-8f129e1688ce?w=640&h=640&fit=crop&crop=faces&auto=format" alt="Amara Okafor">
+          <div class="mk-status now">&#9679; AVAILABLE NOW</div>
+          <div class="mk-rank">OWL</div>
         </div>
-        <div class="offer-reqs">
-          <span class="req-chip">NCP-AAI</span>
-          <span class="req-chip">Production Agent superbadge</span>
-          <span class="req-chip have">Falcon rank+</span>
+        <div class="mk-body">
+          <div class="mk-name">Amara Okafor</div>
+          <div class="mk-role">Forward-Deployed AI Engineer</div>
+          <div class="mk-loc">LAGOS · NG</div>
+          <div class="mk-stamps"><span class="stampchip"><svg viewBox="0 0 80 80"><use href="#rosette-plain"/></svg>NCP-AAI</span><span class="stampchip"><svg viewBox="0 0 80 80"><use href="#rosette-plain"/></svg>NCA-GENL</span></div>
+          <div class="mk-sb">Production Agent ✓</div>
+          <div class="mk-cores">215,860 <span>CORES</span></div>
         </div>
-        <div class="offer-foot"><span>via certified marketplace</span><b>4 builders qualify</b></div>
+        <a class="mk-hire" href="#leaderboard">VIEW PROFILE · REQUEST INTRO →</a>
       </div>
-      <div class="offer-card">
-        <div class="offer-stamp">SENT THIS WEEK</div>
-        <div class="offer-top">
-          <div class="offer-co">Global health platform · Munich</div>
-          <div class="offer-role">AI Platform Engineer</div>
-          <div class="offer-comp">€175K–€210K <span>+ BONUS</span></div>
+      <div class="mk-card">
+        <div class="mk-photo">
+          <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=640&h=640&fit=crop&crop=faces&auto=format" alt="Kenji Watanabe">
+          <div class="mk-status open">&#9679; OPEN TO OFFERS</div>
+          <div class="mk-rank">WOLF</div>
         </div>
-        <div class="offer-reqs">
-          <span class="req-chip">NCP-AIO</span>
-          <span class="req-chip">NCA-AIIO</span>
-          <span class="req-chip have">Owl rank preferred</span>
+        <div class="mk-body">
+          <div class="mk-name">Kenji Watanabe</div>
+          <div class="mk-role">CUDA / Performance Engineer</div>
+          <div class="mk-loc">TOKYO · JP</div>
+          <div class="mk-stamps"><span class="stampchip"><svg viewBox="0 0 80 80"><use href="#rosette-plain"/></svg>NCP-AII</span><span class="stampchip"><svg viewBox="0 0 80 80"><use href="#rosette-plain"/></svg>NCA-AIIO</span></div>
+          <div class="mk-sb">Kernel Surgeon ✓</div>
+          <div class="mk-cores">204,310 <span>CORES</span></div>
         </div>
-        <div class="offer-foot"><span>via certified marketplace</span><b>7 builders qualify</b></div>
+        <a class="mk-hire" href="#leaderboard">VIEW PROFILE · REQUEST INTRO →</a>
       </div>
-      <div class="offer-card">
-        <div class="offer-stamp">CLOSING SOON</div>
-        <div class="offer-top">
-          <div class="offer-co">Robotics scale-up · Tokyo / hybrid</div>
-          <div class="offer-role">Agentic Systems Lead</div>
-          <div class="offer-comp">¥28M–¥34M <span>+ EQUITY</span></div>
+      <div class="mk-card">
+        <div class="mk-photo">
+          <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=640&h=640&fit=crop&crop=faces&auto=format" alt="Lena Hoffmann">
+          <div class="mk-status now">&#9679; AVAILABLE NOW</div>
+          <div class="mk-rank">OWL</div>
         </div>
-        <div class="offer-reqs">
-          <span class="req-chip">NCP-AAI</span>
-          <span class="req-chip">Sim-to-Real superbadge</span>
-          <span class="req-chip have">Wolf network referral</span>
+        <div class="mk-body">
+          <div class="mk-name">Lena Hoffmann</div>
+          <div class="mk-role">AI Platform Architect</div>
+          <div class="mk-loc">MUNICH · DE</div>
+          <div class="mk-stamps"><span class="stampchip"><svg viewBox="0 0 80 80"><use href="#rosette-plain"/></svg>NCP-AIO</span></div>
+          <div class="mk-sb">Fleet Operator ✓</div>
+          <div class="mk-cores">187,925 <span>CORES</span></div>
         </div>
-        <div class="offer-foot"><span>via certified marketplace</span><b>2 builders qualify</b></div>
+        <a class="mk-hire" href="#leaderboard">VIEW PROFILE · REQUEST INTRO →</a>
+      </div>
+      <div class="mk-card">
+        <div class="mk-photo">
+          <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=640&h=640&fit=crop&crop=faces&auto=format" alt="Minji Park">
+          <div class="mk-status now">&#9679; AVAILABLE NOW</div>
+          <div class="mk-rank">OWL</div>
+        </div>
+        <div class="mk-body">
+          <div class="mk-name">Minji Park</div>
+          <div class="mk-role">Agentic AI Engineer</div>
+          <div class="mk-loc">SEOUL · KR</div>
+          <div class="mk-stamps"><span class="stampchip"><svg viewBox="0 0 80 80"><use href="#rosette-plain"/></svg>NCP-AAI</span><span class="stampchip"><svg viewBox="0 0 80 80"><use href="#rosette-plain"/></svg>NCA-GENL</span></div>
+          <div class="mk-sb">Production Agent ✓</div>
+          <div class="mk-cores">171,480 <span>CORES</span></div>
+        </div>
+        <a class="mk-hire" href="#leaderboard">VIEW PROFILE · REQUEST INTRO →</a>
+      </div>
+      <div class="mk-card">
+        <div class="mk-photo">
+          <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=640&h=640&fit=crop&crop=faces&auto=format" alt="Zofia Nowak">
+          <div class="mk-status open">&#9679; OPEN TO OFFERS</div>
+          <div class="mk-rank">OWL</div>
+        </div>
+        <div class="mk-body">
+          <div class="mk-name">Zofia Nowak</div>
+          <div class="mk-role">Robotics / Sim Engineer</div>
+          <div class="mk-loc">WARSAW · PL</div>
+          <div class="mk-stamps"><span class="stampchip"><svg viewBox="0 0 80 80"><use href="#rosette-plain"/></svg>NCP-OUSD</span></div>
+          <div class="mk-sb">Sim-to-Real ✓</div>
+          <div class="mk-cores">152,615 <span>CORES</span></div>
+        </div>
+        <a class="mk-hire" href="#leaderboard">VIEW PROFILE · REQUEST INTRO →</a>
+      </div>
+      <div class="mk-card">
+        <div class="mk-photo">
+          <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=640&h=640&fit=crop&crop=faces&auto=format" alt="Linh Tran">
+          <div class="mk-status now">&#9679; AVAILABLE NOW</div>
+          <div class="mk-rank">OWL</div>
+        </div>
+        <div class="mk-body">
+          <div class="mk-name">Linh Tran</div>
+          <div class="mk-role">Agentic Systems Engineer</div>
+          <div class="mk-loc">HANOI · VN</div>
+          <div class="mk-stamps"><span class="stampchip"><svg viewBox="0 0 80 80"><use href="#rosette-plain"/></svg>NCP-AAI</span></div>
+          <div class="mk-sb">Production Agent ✓</div>
+          <div class="mk-cores">148,200 <span>CORES</span></div>
+        </div>
+        <a class="mk-hire" href="#leaderboard">VIEW PROFILE · REQUEST INTRO →</a>
+      </div>
+      <div class="mk-card">
+        <div class="mk-photo">
+          <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=640&h=640&fit=crop&crop=faces&auto=format" alt="Sam Whitfield">
+          <div class="mk-status now">&#9679; AVAILABLE NOW</div>
+          <div class="mk-rank">OWL</div>
+        </div>
+        <div class="mk-body">
+          <div class="mk-name">Sam Whitfield</div>
+          <div class="mk-role">Graphics / Game AI Engineer</div>
+          <div class="mk-loc">AUSTIN · US</div>
+          <div class="mk-stamps"><span class="stampchip"><svg viewBox="0 0 80 80"><use href="#rosette-plain"/></svg>NCA-GENM</span></div>
+          <div class="mk-sb">RTX integrations ✓</div>
+          <div class="mk-cores">139,775 <span>CORES</span></div>
+        </div>
+        <a class="mk-hire" href="#leaderboard">VIEW PROFILE · REQUEST INTRO →</a>
+      </div>
+      <div class="mk-card">
+        <div class="mk-photo">
+          <img src="https://images.unsplash.com/photo-1599566150163-29194dcaad36?w=640&h=640&fit=crop&crop=faces&auto=format" alt="Tomás Ferreira">
+          <div class="mk-status now">&#9679; AVAILABLE NOW</div>
+          <div class="mk-rank">FALCON</div>
+        </div>
+        <div class="mk-body">
+          <div class="mk-name">Tomás Ferreira</div>
+          <div class="mk-role">Accelerated Data Scientist</div>
+          <div class="mk-loc">LISBON · PT</div>
+          <div class="mk-stamps"><span class="stampchip"><svg viewBox="0 0 80 80"><use href="#rosette-plain"/></svg>NCP-ADS</span></div>
+          <div class="mk-sb">Benchmark Slayer ✓</div>
+          <div class="mk-cores">96,310 <span>CORES</span></div>
+        </div>
+        <a class="mk-hire" href="#leaderboard">VIEW PROFILE · REQUEST INTRO →</a>
       </div>
     </div>
+    <div class="mk-more">
+      <a class="hex-btn ghost" href="#leaderboard">Show 2,387 more certified builders ↓</a>
+    </div>
+    <div class="mk-employer">HIRING? Post a role against ranks, certs, and superbadges. <b>4,000+ companies already do.</b> Median search-to-offer: 19 days.</div>
   </div>
 </section>
 
@@ -2323,6 +2341,7 @@ footer a:hover { color: #fff; }
     <div class="sec-kicker">Depth 03 · the levels you climb</div>
     <h2 class="sec-title">Six animals. One ladder. Real perks at every rung.</h2>
     <p class="rank-lore">Everyone starts a <b>Gecko</b>. Fifty a year become <b>Dragons</b>.</p>
+    <p class="sec-lede" style="margin-bottom:24px;">Every rung is earned in the <a href="#paths" style="color:var(--green-deep);font-weight:800;">tracks above</a>: courses and layers pay badges, superbadges and certifications pay big, and the ranks unlock the real world.</p>
 
     <div class="need-label" style="margin: 0 0 10px;">HOW YOU EARN CORES</div>
     <div class="cores-bar" style="margin: 0 0 30px;">
@@ -2341,54 +2360,66 @@ footer a:hover { color: #fff; }
         <div class="cores-cell"><div class="cc-act">Mentor a new builder</div><div class="cc-pts">+500/builder</div></div>
       </div>
     </div>
-    <div class="ladder">
-      <div class="rung">
-        <div class="rung-id">
-          <svg viewBox="0 0 64 64"><use href="#hex"/><g transform="translate(15,14) scale(0.55)"><use href="#a-gecko" width="64" height="64"/></g></svg>
-          <div><div class="rung-name">Gecko</div><div class="rung-tier">Rank 01 · small, quick, climbs anything</div></div>
+    <div class="rank-grid">
+      <div class="rankcard ">
+        <svg class="rc-animal" viewBox="0 0 64 64"><use href="#hex"/><g transform="translate(15,14) scale(0.55)"><use href="#a-gecko" width="64" height="64"/></g></svg>
+        <div class="rc-body">
+          <div class="rc-name">Gecko</div>
+          <div class="rc-tier">RANK 01 · EVERYONE STARTS HERE</div>
+          <div class="rc-req">JOIN FREE · EARN YOUR FIRST BADGE</div>
+          <div class="rc-perks">Public builder profile · Discord role · starter GPU minutes on build.nvidia.com</div>
+          <div class="rc-earn"><span class="rc-earn-label">EARN IT IN THE TRACKS ↑</span><div class="rc-chips"><a class="lk" href="#paths">Explore · Layer 10, ten minutes</a><a class="lk" href="#paths">Career · Foundations, free</a></div></div>
         </div>
-        <div class="rung-req">join free · earn <b>first badge</b></div>
-        <div class="rung-perks">Public builder profile · Discord role · path picker + starter GPU minutes on build.nvidia.com</div>
       </div>
-      <div class="rung">
-        <div class="rung-id">
-          <svg viewBox="0 0 64 64"><use href="#hex"/><g transform="translate(15,14) scale(0.55)"><use href="#a-fox" width="64" height="64"/></g></svg>
-          <div><div class="rung-name">Fox</div><div class="rung-tier">Rank 02 · clever enough to build</div></div>
+      <div class="rankcard ">
+        <svg class="rc-animal" viewBox="0 0 64 64"><use href="#hex"/><g transform="translate(15,14) scale(0.55)"><use href="#a-fox" width="64" height="64"/></g></svg>
+        <div class="rc-body">
+          <div class="rc-name">Fox</div>
+          <div class="rc-tier">RANK 02 · CLEVER ENOUGH TO BUILD</div>
+          <div class="rc-req">2,500 CORES · 10 BADGES</div>
+          <div class="rc-perks">20 free GPU hours (Brev) · 25% off your first cert exam · swag drop · project in the weekly digest</div>
+          <div class="rc-earn"><span class="rc-earn-label">EARN IT IN THE TRACKS ↑</span><div class="rc-chips"><a class="lk" href="#paths">Explore · five layers ≈ +1,150</a><a class="lk" href="#paths">Career · two DLI courses ≈ +1,000</a><a class="lk" href="#paths">Champion · First Talk +1,000</a></div></div>
         </div>
-        <div class="rung-req"><b>2,500</b> cores · <b>10</b> badges</div>
-        <div class="rung-perks"><b>20 free GPU hours</b> (Brev) · 25% off first cert exam · swag drop · project showcased in the weekly digest</div>
       </div>
-      <div class="rung">
-        <div class="rung-id">
-          <svg viewBox="0 0 64 64"><use href="#hex"/><g transform="translate(15,14) scale(0.55)"><use href="#a-falcon" width="64" height="64"/></g></svg>
-          <div><div class="rung-name">Falcon</div><div class="rung-tier">Rank 03 · fastest thing in the sky</div></div>
+      <div class="rankcard ">
+        <svg class="rc-animal" viewBox="0 0 64 64"><use href="#hex"/><g transform="translate(15,14) scale(0.55)"><use href="#a-falcon" width="64" height="64"/></g></svg>
+        <div class="rc-body">
+          <div class="rc-name">Falcon</div>
+          <div class="rc-tier">RANK 03 · FASTEST THING IN THE SKY</div>
+          <div class="rc-req">10,000 CORES · 25 BADGES · 1 SUPERBADGE</div>
+          <div class="rc-perks">Marketplace listing (recruiters can find you) · job board · early-access SDKs · GTC discount</div>
+          <div class="rc-earn"><span class="rc-earn-label">EARN IT IN THE TRACKS ↑</span><div class="rc-chips"><a class="lk" href="#paths">Career · the superbadge step +2,000</a><a class="lk" href="#paths">Explore · all ten layers ≈ +2,000</a></div></div>
         </div>
-        <div class="rung-req"><b>10,000</b> cores · <b>25</b> badges · <b>1</b> superbadge</div>
-        <div class="rung-perks"><b>Marketplace listing</b> (recruiters can find you) · job board access · early access to beta SDKs · GTC ticket discount</div>
       </div>
-      <div class="rung">
-        <div class="rung-id">
-          <svg viewBox="0 0 64 64"><use href="#hex-green"/><g transform="translate(15,14) scale(0.55)"><use href="#a-owl" width="64" height="64"/></g></svg>
-          <div><div class="rung-name">Owl</div><div class="rung-tier">Rank 04 · sees the whole system</div></div>
+      <div class="rankcard ">
+        <svg class="rc-animal" viewBox="0 0 64 64"><use href="#hex-green"/><g transform="translate(15,14) scale(0.55)"><use href="#a-owl" width="64" height="64"/></g></svg>
+        <div class="rc-body">
+          <div class="rc-name">Owl</div>
+          <div class="rc-tier">RANK 04 · SEES THE WHOLE SYSTEM</div>
+          <div class="rc-req">30,000 CORES · 50 BADGES · 1 OFFICIAL CERT</div>
+          <div class="rc-perks">GTC ticket included · speaker fast-track · roadmap briefings · hackathon-host kit · Champion eligibility</div>
+          <div class="rc-earn"><span class="rc-earn-label">EARN IT IN THE TRACKS ↑</span><div class="rc-chips"><a class="lk" href="#paths">Career · any gold cert step +5,000</a><a class="lk" href="#offers">Get Hired · listed at Owl looks better</a></div></div>
         </div>
-        <div class="rung-req"><b>30,000</b> cores · <b>50</b> badges · <b>1 official cert</b></div>
-        <div class="rung-perks"><b>GTC ticket included</b> · speaker fast-track · product roadmap briefings · hackathon-host kit · Champion nomination eligibility</div>
       </div>
-      <div class="rung champion">
-        <div class="rung-id">
-          <svg viewBox="0 0 64 64"><use href="#hex-green"/><g transform="translate(15,14) scale(0.55)"><use href="#a-wolf" width="64" height="64"/></g></svg>
-          <div><div class="rung-name">Wolf</div><div class="rung-tier">Rank 05 · leads the pack · selected</div></div>
+      <div class="rankcard champion">
+        <svg class="rc-animal" viewBox="0 0 64 64"><use href="#hex-green"/><g transform="translate(15,14) scale(0.55)"><use href="#a-wolf" width="64" height="64"/></g></svg>
+        <div class="rc-body">
+          <div class="rc-name">Wolf</div>
+          <div class="rc-tier">RANK 05 · LEADS THE PACK · SELECTED</div>
+          <div class="rc-req">CHAMPION TRACK, COMPLETED · 300/YEAR · LIVE PROCTORED DEFENSE</div>
+          <div class="rc-perks">Funded city user group · GTC speaker slot · Authorized Training Center license · Certified Consultancy tier · direct product line</div>
+          <div class="rc-earn"><span class="rc-earn-label">EARN IT IN THE TRACKS ↑</span><div class="rc-chips"><a class="lk" href="#paths">The Champion track, steps 1–7</a></div></div>
         </div>
-        <div class="rung-req">selected annually · <b>300 worldwide</b> · Owl+ with community impact · passes the <b>Champion certification</b> (live, proctored). This is the <b>NVIDIA Champions</b> class</div>
-        <div class="rung-perks"><b>Direct line to product teams</b> · GTC speaker slot · funded city user group · Authorized Training Center license · Certified Consultancy tier · annual Champion Summit</div>
       </div>
-      <div class="rung apex">
-        <div class="rung-id">
-          <svg viewBox="0 0 64 64"><use href="#hex-gold"/><g transform="translate(15,14) scale(0.55)"><use href="#a-dragon" width="64" height="64"/></g></svg>
-          <div><div class="rung-name">Dragon</div><div class="rung-tier">Rank 06 · top 50 / year · by invitation</div></div>
+      <div class="rankcard apex">
+        <svg class="rc-animal" viewBox="0 0 64 64"><use href="#hex-gold"/><g transform="translate(15,14) scale(0.55)"><use href="#a-dragon" width="64" height="64"/></g></svg>
+        <div class="rc-body">
+          <div class="rc-name">Dragon</div>
+          <div class="rc-tier">RANK 06 · TOP 50 OF THE YEAR · BY INVITATION</div>
+          <div class="rc-req">EVERYTHING, RELENTLESSLY · THE BOARD DECIDES</div>
+          <div class="rc-perks">Dinner with Jensen at GTC · keynote seating · lifetime DLI access · a signed DGX Spark · the Hall of Dragons</div>
+          <div class="rc-earn"><span class="rc-earn-label">EARN IT IN THE TRACKS ↑</span><div class="rc-chips"><a class="lk" href="#leaderboard">The Builder 100 decides</a></div></div>
         </div>
-        <div class="rung-req">top <b>50</b> of the annual global leaderboard · by invitation</div>
-        <div class="rung-perks"><span class="jensen">Dinner with Jensen at GTC.</span> Keynote seating · lifetime DLI access · a signed DGX Spark · permanent place in the Hall of Dragons</div>
       </div>
     </div>
 
@@ -2407,30 +2438,30 @@ footer a:hover { color: #fff; }
   <div class="wrap">
     <div class="sec-kicker">Depth 03 · what you collect</div>
     <h2 class="sec-title">Proof you can hold</h2>
-    <p class="sec-lede">Medals for modules. Shields for verified deployed work. Gold stamps for official certifications. All public on your profile, all verifiable by anyone, including the LLMs recruiters now ask about you. <b>Collect a family, unlock the next animal.</b></p>
+    <p class="sec-lede">Medals for modules. Shields for verified deployed work. Gold stamps for official certifications. Every badge below is earned at a specific step of the <a href="#paths" style="color:var(--green-deep);font-weight:800;">tracks above</a>, pays cores, and moves you up the animal ladder. <b>Collect a family, unlock the next animal.</b></p>
     <div class="badge-rows">
       <div class="badge-row">
         <div class="badge-row-label"><div class="brl-name">Module medals</div><div class="brl-sub">finish a unit · stars = tier</div></div>
         <div class="badge-set">
           <div class="badge2">
             <svg class="art" viewBox="0 0 80 100"><use href="#medal"/><g transform="translate(29,44)" color="#4f7a00"><use href="#g-spark" width="22" height="22"/></g><polygon points="40.0,69.6 41.1,72.5 44.2,72.6 41.7,74.6 42.6,77.6 40.0,75.8 37.4,77.6 38.3,74.6 35.8,72.6 38.9,72.5" fill="#c8a04a"/></svg>
-            <div class="b-name">First Token</div><div class="b-pts">+100</div>
+            <div class="b-name">First Token</div><div class="b-pts">+100</div><div class="b-from">CAREER · FOUNDATIONS, FREE</div>
           </div>
           <div class="badge2">
             <svg class="art" viewBox="0 0 80 100"><use href="#medal"/><g transform="translate(29,44)" color="#4f7a00"><use href="#g-book" width="22" height="22"/></g><polygon points="40.0,69.6 41.1,72.5 44.2,72.6 41.7,74.6 42.6,77.6 40.0,75.8 37.4,77.6 38.3,74.6 35.8,72.6 38.9,72.5" fill="#c8a04a"/></svg>
-            <div class="b-name">RAG Apprentice</div><div class="b-pts">+250</div>
+            <div class="b-name">RAG Apprentice</div><div class="b-pts">+250</div><div class="b-from">CAREER · RAG AGENTS COURSE</div>
           </div>
           <div class="badge2">
             <svg class="art" viewBox="0 0 80 100"><use href="#medal"/><g transform="translate(29,44)" color="#4f7a00"><use href="#g-wrench" width="22" height="22"/></g><polygon points="33.0,69.6 34.1,72.5 37.2,72.6 34.7,74.6 35.6,77.6 33.0,75.8 30.4,77.6 31.3,74.6 28.8,72.6 31.9,72.5" fill="#c8a04a"/><polygon points="47.0,69.6 48.1,72.5 51.2,72.6 48.7,74.6 49.6,77.6 47.0,75.8 44.4,77.6 45.3,74.6 42.8,72.6 45.9,72.5" fill="#c8a04a"/></svg>
-            <div class="b-name">Tool Caller</div><div class="b-pts">+250</div>
+            <div class="b-name">Tool Caller</div><div class="b-pts">+250</div><div class="b-from">CAREER · AGENTIC APPS COURSE</div>
           </div>
           <div class="badge2">
             <svg class="art" viewBox="0 0 80 100"><use href="#medal"/><g transform="translate(29,44)" color="#4f7a00"><use href="#g-gauge" width="22" height="22"/></g><polygon points="33.0,69.6 34.1,72.5 37.2,72.6 34.7,74.6 35.6,77.6 33.0,75.8 30.4,77.6 31.3,74.6 28.8,72.6 31.9,72.5" fill="#c8a04a"/><polygon points="47.0,69.6 48.1,72.5 51.2,72.6 48.7,74.6 49.6,77.6 47.0,75.8 44.4,77.6 45.3,74.6 42.8,72.6 45.9,72.5" fill="#c8a04a"/></svg>
-            <div class="b-name">Eval Runner</div><div class="b-pts">+300</div>
+            <div class="b-name">Eval Runner</div><div class="b-pts">+300</div><div class="b-from">CAREER · AGENTIC APPS COURSE</div>
           </div>
           <div class="badge2">
             <svg class="art" viewBox="0 0 80 100"><use href="#medal"/><g transform="translate(29,44)" color="#4f7a00"><use href="#g-server" width="22" height="22"/></g><polygon points="27.0,69.6 28.1,72.5 31.2,72.6 28.7,74.6 29.6,77.6 27.0,75.8 24.4,77.6 25.3,74.6 22.8,72.6 25.9,72.5" fill="#c8a04a"/><polygon points="40.0,69.6 41.1,72.5 44.2,72.6 41.7,74.6 42.6,77.6 40.0,75.8 37.4,77.6 38.3,74.6 35.8,72.6 38.9,72.5" fill="#c8a04a"/><polygon points="53.0,69.6 54.1,72.5 57.2,72.6 54.7,74.6 55.6,77.6 53.0,75.8 50.4,77.6 51.3,74.6 48.8,72.6 51.9,72.5" fill="#c8a04a"/></svg>
-            <div class="b-name">NIM Operator</div><div class="b-pts">+300</div>
+            <div class="b-name">NIM Operator</div><div class="b-pts">+300</div><div class="b-from">EXPLORE · LAYER 7</div>
           </div>
         </div>
       </div>
@@ -2439,15 +2470,15 @@ footer a:hover { color: #fff; }
         <div class="badge-set">
           <div class="badge2 shield">
             <svg class="art" viewBox="0 0 80 92"><use href="#shield"/><g transform="translate(28,30)" color="#344e00"><use href="#g-shield" width="24" height="24"/></g><polygon points="40.0,59.0 41.2,62.4 44.8,62.5 41.9,64.6 42.9,68.0 40.0,66.0 37.1,68.0 38.1,64.6 35.2,62.5 38.8,62.4" fill="#76b900"/></svg>
-            <div class="b-name">Production Agent</div><div class="b-pts">+2,000</div>
+            <div class="b-name">Production Agent</div><div class="b-pts">+2,000</div><div class="b-from">CAREER · THE SUPERBADGE STEP</div>
           </div>
           <div class="badge2 shield">
             <svg class="art" viewBox="0 0 80 92"><use href="#shield"/><g transform="translate(28,30)" color="#344e00"><use href="#i-robot" width="24" height="24"/></g><polygon points="40.0,59.0 41.2,62.4 44.8,62.5 41.9,64.6 42.9,68.0 40.0,66.0 37.1,68.0 38.1,64.6 35.2,62.5 38.8,62.4" fill="#76b900"/></svg>
-            <div class="b-name">Sim-to-Real</div><div class="b-pts">+2,000</div>
+            <div class="b-name">Sim-to-Real</div><div class="b-pts">+2,000</div><div class="b-from">CAREER · ROBOTICS ROLE</div>
           </div>
           <div class="badge2 shield">
             <svg class="art" viewBox="0 0 80 92"><use href="#shield"/><g transform="translate(28,30)" color="#344e00"><use href="#g-spark" width="24" height="24"/></g><polygon points="40.0,59.0 41.2,62.4 44.8,62.5 41.9,64.6 42.9,68.0 40.0,66.0 37.1,68.0 38.1,64.6 35.2,62.5 38.8,62.4" fill="#76b900"/></svg>
-            <div class="b-name">Kernel Surgeon</div><div class="b-pts">+2,000</div>
+            <div class="b-name">Kernel Surgeon</div><div class="b-pts">+2,000</div><div class="b-from">EXPLORE · LAYER 3 · CUDA</div>
           </div>
         </div>
       </div>
@@ -2473,15 +2504,15 @@ footer a:hover { color: #fff; }
         <div class="badge-set">
           <div class="badge2">
             <svg class="art" viewBox="0 0 80 100"><use href="#medal"/><g transform="translate(29,44)" color="#4f7a00"><use href="#g-mic" width="22" height="22"/></g><polygon points="40.0,69.6 41.1,72.5 44.2,72.6 41.7,74.6 42.6,77.6 40.0,75.8 37.4,77.6 38.3,74.6 35.8,72.6 38.9,72.5" fill="#c8a04a"/></svg>
-            <div class="b-name">First Talk</div><div class="b-pts">+1,000</div>
+            <div class="b-name">First Talk</div><div class="b-pts">+1,000</div><div class="b-from">CHAMPION TRACK · STEP 2</div>
           </div>
           <div class="badge2">
             <svg class="art" viewBox="0 0 80 100"><use href="#medal"/><g transform="translate(29,44)" color="#4f7a00"><use href="#g-people" width="22" height="22"/></g><polygon points="33.0,69.6 34.1,72.5 37.2,72.6 34.7,74.6 35.6,77.6 33.0,75.8 30.4,77.6 31.3,74.6 28.8,72.6 31.9,72.5" fill="#c8a04a"/><polygon points="47.0,69.6 48.1,72.5 51.2,72.6 48.7,74.6 49.6,77.6 47.0,75.8 44.4,77.6 45.3,74.6 42.8,72.6 45.9,72.5" fill="#c8a04a"/></svg>
-            <div class="b-name">Group Host</div><div class="b-pts">+1,500</div>
+            <div class="b-name">Group Host</div><div class="b-pts">+1,500</div><div class="b-from">CHAMPION TRACK · STEP 3</div>
           </div>
           <div class="badge2">
             <svg class="art" viewBox="0 0 80 100"><use href="#medal"/><g transform="translate(29,44)" color="#4f7a00"><use href="#g-flag" width="22" height="22"/></g><polygon points="27.0,69.6 28.1,72.5 31.2,72.6 28.7,74.6 29.6,77.6 27.0,75.8 24.4,77.6 25.3,74.6 22.8,72.6 25.9,72.5" fill="#c8a04a"/><polygon points="40.0,69.6 41.1,72.5 44.2,72.6 41.7,74.6 42.6,77.6 40.0,75.8 37.4,77.6 38.3,74.6 35.8,72.6 38.9,72.5" fill="#c8a04a"/><polygon points="53.0,69.6 54.1,72.5 57.2,72.6 54.7,74.6 55.6,77.6 53.0,75.8 50.4,77.6 51.3,74.6 48.8,72.6 51.9,72.5" fill="#c8a04a"/></svg>
-            <div class="b-name">Mentor ×10</div><div class="b-pts">+5,000</div>
+            <div class="b-name">Mentor ×10</div><div class="b-pts">+5,000</div><div class="b-from">CHAMPION TRACK · STEP 3</div>
           </div>
         </div>
       </div>
