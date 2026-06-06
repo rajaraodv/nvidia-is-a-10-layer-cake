@@ -366,15 +366,31 @@ tr.lb-gap td { text-align: center; font-family: var(--mono); color: var(--ink4);
 
 
 /* ── hero scene cards ── */
-.wins2 { display: flex; flex-direction: column; gap: 16px; }
-.win2 { border: 1.5px solid var(--ink); background: #fff; overflow: hidden; box-shadow: 5px 5px 0 var(--green-bg), 5px 5px 0 1px var(--rule-strong); }
+.wins2 { display: flex; flex-direction: column; gap: 18px; }
+.win2 { border: 1.5px solid var(--ink); background: #fff; }
 .win2:nth-child(1) { transform: rotate(-1.2deg); }
 .win2:nth-child(2) { transform: rotate(0.9deg) translateX(14px); }
 .win2:nth-child(3) { transform: rotate(-0.8deg); }
-.win2 img { width: 100%; height: 138px; object-fit: cover; display: block; border-bottom: 1.5px solid var(--ink); }
-.w2-cap { display: flex; align-items: baseline; gap: 10px; padding: 9px 14px 10px; }
-.w2-tag { font-family: var(--mono); font-size: 9px; font-weight: 800; letter-spacing: 0.14em; color: var(--green-dim); white-space: nowrap; }
-.w2-line { font-size: 12.5px; font-weight: 700; line-height: 1.35; }
+.w2-photo { position: relative; border-bottom: 1.5px solid var(--ink); }
+.w2-photo img { width: 100%; height: 118px; object-fit: cover; display: block; }
+.w2-cap { padding: 10px 16px 12px; position: relative; }
+.w2-big { font-family: var(--serif); font-size: 25px; font-weight: 600; font-style: italic; letter-spacing: -0.01em; line-height: 1.05; }
+.w2-line { font-size: 11.5px; color: var(--ink2); margin-top: 4px; line-height: 1.45; }
+/* certificate variant: gold frame + hanging seal */
+.win2.v-cert { background: #fffdf6; outline: 1px solid var(--gold); outline-offset: 4px; box-shadow: 5px 5px 0 var(--gold-bg), 5px 5px 0 1px var(--gold); }
+.win2.v-cert .w2-big { color: #8a6914; }
+.win2.v-cert .w2-cap { padding-right: 84px; }
+.w2-seal { position: absolute; right: 12px; bottom: -58px; width: 62px; height: 87px; z-index: 3; filter: drop-shadow(0 2px 4px rgba(138,105,20,0.3)); }
+/* offer-letter variant: rubber stamp */
+.win2.v-hired { box-shadow: 5px 5px 0 var(--green-bg), 5px 5px 0 1px var(--rule-strong); }
+.win2.v-hired .w2-big { color: var(--green-dim); }
+.w2-stamp { position: absolute; top: 14px; right: 12px; transform: rotate(-11deg); border: 3px double var(--green-dim); color: var(--green-dim); font-family: var(--mono); font-size: 17px; font-weight: 800; letter-spacing: 0.22em; padding: 4px 14px 4px 16px; background: rgba(255,255,255,0.88); }
+/* keynote variant: dark slide */
+.win2.v-stage { background: var(--ink); border-color: var(--ink); box-shadow: 5px 5px 0 #d8d6d0, 5px 5px 0 1px var(--ink); }
+.win2.v-stage .w2-big { color: #fff; }
+.win2.v-stage .w2-line { color: #b9b7b0; }
+.win2.v-stage .w2-photo { border-bottom-color: #3a3a3a; }
+.w2-live { position: absolute; top: 12px; left: 12px; background: #c83232; color: #fff; font-family: var(--mono); font-size: 9px; font-weight: 800; letter-spacing: 0.14em; padding: 4px 10px; }
 
 /* ── outcomes v2 ── */
 .out2-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
@@ -625,17 +641,35 @@ footer a:hover { color: #fff; }
       </div>
     </div>
     <div class="wins2">
-      <div class="win2">
-        <img src="https://images.unsplash.com/photo-1541339907198-e08756dedf3f?w=640&h=420&fit=crop&auto=format" alt="Certificate day">
-        <div class="w2-cap"><span class="w2-tag">CERTIFIED</span><span class="w2-line">Cohort 7, certificate day. 312 new NCP-AAI holders, Bengaluru.</span></div>
+      <div class="win2 v-cert">
+        <div class="w2-photo">
+          <img src="https://images.unsplash.com/photo-1541339907198-e08756dedf3f?w=640&h=380&fit=crop&auto=format" alt="Certificate day">
+          <svg class="w2-seal" viewBox="0 0 80 112"><use href="#rosette"/><text x="40" y="43" text-anchor="middle" font-family="ui-monospace, Menlo, monospace" font-size="10" font-weight="800" fill="#8a6914">NCP</text><text x="40" y="54" text-anchor="middle" font-family="ui-monospace, Menlo, monospace" font-size="10" font-weight="800" fill="#8a6914">AAI</text></svg>
+        </div>
+        <div class="w2-cap">
+          <div class="w2-big">Certified.</div>
+          <div class="w2-line">Certificate day in Bengaluru. 312 new NCP-AAI professionals, gold seal and all.</div>
+        </div>
       </div>
-      <div class="win2">
-        <img src="https://images.unsplash.com/photo-1521791136064-7986c2920216?w=640&h=420&fit=crop&auto=format" alt="Signing the offer">
-        <div class="w2-cap"><span class="w2-tag">HIRED</span><span class="w2-line">Minji signs with a Series B agent startup. Week eleven.</span></div>
+      <div class="win2 v-hired">
+        <div class="w2-photo">
+          <img src="https://images.unsplash.com/photo-1521791136064-7986c2920216?w=640&h=380&fit=crop&auto=format" alt="Signing the offer">
+          <div class="w2-stamp">HIRED</div>
+        </div>
+        <div class="w2-cap">
+          <div class="w2-big">Hired.</div>
+          <div class="w2-line">Minji signs with a Series B agent startup. Week eleven. The recruiter found her profile.</div>
+        </div>
       </div>
-      <div class="win2">
-        <img src="https://images.unsplash.com/photo-1505373877841-8d25f7d46678?w=640&h=420&fit=crop&auto=format" alt="On the GTC stage">
-        <div class="w2-cap"><span class="w2-tag">GTC STAGE</span><span class="w2-line">Diego's sim-to-real talk. From first badge to this in 14 months.</span></div>
+      <div class="win2 v-stage">
+        <div class="w2-photo">
+          <img src="https://images.unsplash.com/photo-1505373877841-8d25f7d46678?w=640&h=380&fit=crop&auto=format" alt="On the GTC stage">
+          <div class="w2-live">&#9679; LIVE &middot; GTC</div>
+        </div>
+        <div class="w2-cap">
+          <div class="w2-big">On the stage.</div>
+          <div class="w2-line">Diego's sim-to-real talk. First badge to keynote in 14 months.</div>
+        </div>
       </div>
     </div>
   </div>
