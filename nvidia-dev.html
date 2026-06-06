@@ -523,6 +523,71 @@ tr.lb-gap td { text-align: center; font-family: var(--mono); color: var(--ink4);
   .sp-quotes { grid-template-columns: 1fr 1fr; }
 }
 
+
+/* ── outcomes v4: NVIDIA palette, six constructions ── */
+.o4-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+.o4 { border: 1.5px solid var(--ink); background: #fff; display: flex; flex-direction: column; position: relative; transition: transform 0.15s ease, box-shadow 0.15s ease; }
+.o4:hover { transform: translateY(-4px); box-shadow: 0 10px 24px rgba(14,14,14,0.10); }
+.o4 h3 { font-family: var(--serif); font-size: 26px; font-weight: 600; font-style: italic; letter-spacing: -0.01em; line-height: 1; }
+.o4-num { font-family: var(--serif); font-weight: 600; line-height: 1; }
+.o4-num.onphoto { position: absolute; top: 8px; left: 14px; font-size: 46px; color: #fff; text-shadow: 0 2px 14px rgba(0,0,0,0.6); }
+.o4-num.spine { font-size: 42px; color: var(--green); }
+.o4-num.inband { font-size: 30px; color: rgba(14,14,14,0.45); }
+.o4-num.gold { font-size: 42px; color: var(--gold); }
+.o4-photo { position: relative; border-bottom: 1.5px solid var(--ink); }
+.o4-photo img { width: 100%; height: 116px; object-fit: cover; display: block; }
+.o4-band { background: var(--green); color: var(--ink); padding: 11px 18px 13px; border-bottom: 1.5px solid var(--ink); display: flex; justify-content: space-between; align-items: baseline; gap: 10px; }
+.o4-band.top { border-bottom: 1.5px solid var(--ink); }
+.o4-band .band-sub { font-family: var(--mono); font-size: 8.5px; font-weight: 800; letter-spacing: 0.16em; color: rgba(14,14,14,0.6); white-space: nowrap; }
+.o4-art { padding: 16px; flex: 1; display: flex; align-items: stretch; }
+.o4-art > div { width: 100%; }
+.o4-link { display: block; padding: 12px 18px; border-top: 1.5px solid var(--ink); font-family: var(--mono); font-size: 9.5px; font-weight: 800; color: var(--green-deep); text-decoration: none; letter-spacing: 0.08em; margin-top: auto; }
+.o4-link:hover { background: var(--green-bg); }
+.o4-link.gold { color: #8a6914; }
+.o4-link.gold:hover { background: var(--gold-bg); }
+/* 02: paper ledger */
+.o4.c2 { background: var(--bg-soft); border-left: 8px solid var(--green); }
+.o4-head2 { display: flex; align-items: baseline; gap: 14px; padding: 18px 18px 0; }
+.ar-quote2 { display: flex; gap: 10px; align-items: center; margin-top: 12px; font-size: 12px; font-style: italic; color: var(--green-deep); }
+.ar-quote2 img { width: 36px; height: 36px; border-radius: 50%; object-fit: cover; border: 2px solid var(--green); flex-shrink: 0; }
+.ar-quote2 b { font-weight: 800; }
+/* 03: dark keynote */
+.o4.c3 { background: var(--ink); border-color: var(--ink); color: #fff; }
+.o4.c3 .o4-photo { border-bottom-color: #3a3a3a; }
+.o4.c3 .o4-photo img { filter: brightness(0.92); }
+.c3-head { padding: 14px 18px 0; }
+.c3-head h3 { color: #fff; }
+.art-session2 { border: 1px solid #3a3a3a; padding: 13px 15px; }
+.art-session2 .as-code { font-family: var(--mono); font-size: 8.5px; font-weight: 800; letter-spacing: 0.16em; color: #9adf2e; margin-bottom: 7px; }
+.art-session2 .as-title { font-family: var(--serif); font-size: 18px; font-weight: 600; font-style: italic; line-height: 1.2; margin-bottom: 8px; }
+.art-session2 .as-speaker { font-family: var(--mono); font-size: 9px; letter-spacing: 0.1em; color: #b9b7b0; }
+.art-session2 .as-speaker b { color: #9adf2e; }
+.o4.c3 .o4-link { color: #9adf2e; border-top-color: #3a3a3a; }
+.o4.c3 .o4-link:hover { background: #1c1c1c; }
+/* 04: board with faces */
+.ab-row img { width: 26px; height: 26px; border-radius: 50%; object-fit: cover; border: 1.5px solid var(--green); }
+/* 05: split photo */
+.c5-split { display: flex; flex: 1; min-height: 0; }
+.c5-split > img { width: 42%; object-fit: cover; border-right: 1.5px solid var(--ink); }
+.c5-body { padding: 16px 16px 14px; display: flex; flex-direction: column; gap: 8px; }
+.c5-body .o4-num { font-size: 34px; }
+.c5-event { border-top: 1.5px solid var(--ink); padding-top: 10px; margin-top: 4px; }
+.ce-date { font-family: var(--mono); font-size: 8.5px; font-weight: 800; letter-spacing: 0.14em; color: var(--green-dim); margin-bottom: 4px; }
+.ce-name { font-family: var(--serif); font-size: 16.5px; font-weight: 600; line-height: 1.2; margin-bottom: 6px; }
+.ce-meta { font-family: var(--mono); font-size: 8.5px; letter-spacing: 0.06em; color: var(--ink3); line-height: 1.8; }
+.ce-meta b { color: var(--green-deep); }
+/* 06: gold certificate paper */
+.o4.c6 { background: #fffdf6; outline: 1px solid var(--gold); outline-offset: 4px; margin: 5px; }
+.o4.c6 h3 { color: #8a6914; }
+.art-plaque2 { display: flex; gap: 12px; align-items: center; border: 1px solid var(--gold); background: var(--gold-bg); padding: 13px 14px; }
+.art-plaque2 svg { width: 50px; height: 50px; flex-shrink: 0; }
+.art-plaque2 .ap-mid { flex: 1; }
+.art-plaque2 img { width: 44px; height: 44px; border-radius: 50%; object-fit: cover; border: 2px solid var(--gold); flex-shrink: 0; }
+
+@media (max-width: 880px) {
+  .o4-grid { grid-template-columns: 1fr; }
+}
+
 /* ── final cta ── */
 .final-cta { text-align: center; padding: 88px 0; }
 .final-cta h2 { font-family: var(--serif); font-size: 42px; font-weight: 600; letter-spacing: -0.015em; margin-bottom: 14px; }
@@ -809,11 +874,16 @@ footer a:hover { color: #fff; }
     <div class="sec-kicker">Start with the ending</div>
     <h2 class="sec-title">Choose your outcome. There are six.</h2>
     <p class="sec-lede">One ladder, six destinations. Each card shows the <b>actual artifact</b> you walk away with and links to the exact place it happens. Most builders leave with more than one.</p>
-    <div class="o3-grid">
+    <div class="o4-grid">
 
-      <div class="o3" style="--acc: #1e5fa3;">
-        <div class="o3-head"><div class="o3-tag">STAGE 05 · HIRE</div><h3>Get hired.</h3></div>
-        <div class="o3-art">
+      <!-- 01 · photo-top + green band -->
+      <div class="o4 c1">
+        <div class="o4-photo">
+          <img src="https://images.unsplash.com/photo-1521791136064-7986c2920216?w=640&h=300&fit=crop&auto=format" alt="The handshake">
+          <div class="o4-num onphoto">01</div>
+        </div>
+        <div class="o4-band"><h3>Get hired.</h3><span class="band-sub">STAGE 05 · HIRE</span></div>
+        <div class="o4-art">
           <div class="art-offer">
             <div class="ao-co">SERIES B · AGENTIC AI · REMOTE</div>
             <div class="ao-role">Forward-Deployed AI Engineer</div>
@@ -821,75 +891,97 @@ footer a:hover { color: #fff; }
             <div class="ao-reqs"><span>NCP-AAI</span><span>Production Agent superbadge</span></div>
           </div>
         </div>
-        <a class="o3-link" href="#offers">OFFERS COME TO YOU · SEE THIS MONTH'S ↓</a>
+        <a class="o4-link" href="#offers">OFFERS COME TO YOU · SEE THIS MONTH'S ↓</a>
       </div>
 
-      <div class="o3" style="--acc: #a07000;">
-        <div class="o3-head"><div class="o3-tag">EVERY UNIT · YOUR PROFILE</div><h3>Get promoted.</h3></div>
-        <div class="o3-art">
-          <div class="art-receipts">
+      <!-- 02 · paper ledger, thick green spine -->
+      <div class="o4 c2">
+        <div class="o4-head2">
+          <span class="o4-num spine">02</span>
+          <h3>Get promoted.</h3>
+        </div>
+        <div class="o4-art">
+          <div>
             <div class="ar-title">Your profile, the night before the review:</div>
             <div class="ar-row">✓ 38 shipped projects, publicly verified</div>
             <div class="ar-row">✓ NCP-AAI · proctored, official</div>
             <div class="ar-row">✓ Fox → Owl in one quarter, on the record</div>
-            <div class="ar-quote">"It made not promoting me embarrassing." · Carlos R.</div>
+            <div class="ar-quote2">
+              <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=300&h=300&fit=crop&crop=faces&auto=format" alt="">
+              <span>"It made not promoting me embarrassing." · <b>Carlos R., promoted twice</b></span>
+            </div>
           </div>
         </div>
-        <a class="o3-link" href="/path-agent-builder">RECEIPTS ARE BUILT UNIT BY UNIT · START YOURS →</a>
+        <a class="o4-link" href="/path-agent-builder">RECEIPTS ARE BUILT UNIT BY UNIT · START YOURS →</a>
       </div>
 
-      <div class="o3" style="--acc: #7a3eb0;">
-        <div class="o3-head"><div class="o3-tag">WOLF RANK PERK</div><h3>Take the stage.</h3></div>
-        <div class="o3-art">
-          <div class="art-session">
+      <!-- 03 · dark keynote slide -->
+      <div class="o4 c3">
+        <div class="o4-photo">
+          <img src="https://images.unsplash.com/photo-1505373877841-8d25f7d46678?w=640&h=300&fit=crop&auto=format" alt="GTC stage">
+          <div class="o4-num onphoto">03</div>
+          <div class="w2-live">&#9679; LIVE · GTC</div>
+        </div>
+        <div class="c3-head"><h3>Take the stage.</h3></div>
+        <div class="o4-art">
+          <div class="art-session2">
             <div class="as-code">GTC 2027 · SESSION DL4321 · HALL 3</div>
             <div class="as-title">"From zero to production agents"</div>
             <div class="as-speaker">SPEAKER: <b>YOU</b> · RECORDED FOREVER · NAME IN THE PROGRAM</div>
           </div>
         </div>
-        <a class="o3-link" href="#champions">300 CHAMPION TALKS A YEAR · MEET THE WOLVES ↓</a>
+        <a class="o4-link" href="#champions">300 CHAMPION TALKS A YEAR · MEET THE WOLVES ↓</a>
       </div>
 
-      <div class="o3" style="--acc: #b34141;">
-        <div class="o3-head"><div class="o3-tag">ALWAYS ON · PUBLIC</div><h3>Get on the board.</h3></div>
-        <div class="o3-art">
+      <!-- 04 · green band board with faces -->
+      <div class="o4 c4">
+        <div class="o4-band top"><h3>Get on the board.</h3><span class="o4-num inband">04</span></div>
+        <div class="o4-art">
           <div class="art-board">
-            <div class="ab-row"><span class="ab-pos">01</span><span class="ab-name">Priya Sharma</span><span class="ab-cores">286,400</span></div>
-            <div class="ab-row"><span class="ab-pos">02</span><span class="ab-name">Diego Almeida</span><span class="ab-cores">251,090</span></div>
-            <div class="ab-row"><span class="ab-pos">03</span><span class="ab-name">Amara Okafor</span><span class="ab-cores">215,860</span></div>
+            <div class="ab-row"><span class="ab-pos">01</span><img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=200&h=200&fit=crop&crop=faces&auto=format" alt=""><span class="ab-name">Priya Sharma</span><span class="ab-cores">286,400</span></div>
+            <div class="ab-row"><span class="ab-pos">02</span><img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=200&h=200&fit=crop&crop=faces&auto=format" alt=""><span class="ab-name">Diego Almeida</span><span class="ab-cores">251,090</span></div>
+            <div class="ab-row"><span class="ab-pos">03</span><img src="https://images.unsplash.com/photo-1531123897727-8f129e1688ce?w=200&h=200&fit=crop&crop=faces&auto=format" alt=""><span class="ab-name">Amara Okafor</span><span class="ab-cores">215,860</span></div>
             <div class="ab-row you"><span class="ab-pos">4,217</span><span class="ab-name">You, climbing</span><span class="ab-cores">1,250</span></div>
           </div>
         </div>
-        <a class="o3-link" href="#leaderboard">A LADDER THE INDUSTRY READS · SEE THE BUILDER 100 ↓</a>
+        <a class="o4-link" href="#leaderboard">A LADDER THE INDUSTRY READS · SEE THE BUILDER 100 ↓</a>
       </div>
 
-      <div class="o3" style="--acc: #00857a;">
-        <div class="o3-head"><div class="o3-tag">CHAMPION UNLOCK</div><h3>Run your city.</h3></div>
-        <div class="o3-art">
-          <div class="art-event">
-            <div class="ae-date"><span class="d">12</span><span class="m">SEPT</span></div>
-            <div class="ae-body">
-              <div class="ae-name">Nemotron User Group · Your City #1</div>
-              <div class="ae-meta">HOST: <b>YOU</b> · VENUE FUNDED · SWAG KIT SHIPPED · 80 SEATS</div>
+      <!-- 05 · split photo left -->
+      <div class="o4 c5">
+        <div class="c5-split">
+          <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=500&h=620&fit=crop&auto=format" alt="City user group">
+          <div class="c5-body">
+            <span class="o4-num spine">05</span>
+            <h3>Run your city.</h3>
+            <div class="c5-event">
+              <div class="ce-date">SEPT 12 · YOUR CITY</div>
+              <div class="ce-name">Nemotron User Group #1</div>
+              <div class="ce-meta">HOST: <b>YOU</b><br>VENUE FUNDED · SWAG KIT SHIPPED · 80 SEATS</div>
             </div>
           </div>
         </div>
-        <a class="o3-link" href="#events">150 FUNDED CITY GROUPS · SEE THIS MONTH'S EVENTS ↓</a>
+        <a class="o4-link" href="#events">150 FUNDED CITY GROUPS · SEE THIS MONTH'S ↓</a>
       </div>
 
-      <div class="o3" style="--acc: #4f7a00;">
-        <div class="o3-head"><div class="o3-tag">THE TOP OF THE LADDER</div><h3>Own the firm.</h3></div>
-        <div class="o3-art">
-          <div class="art-plaque">
+      <!-- 06 · gold certificate paper -->
+      <div class="o4 c6">
+        <div class="o4-head2">
+          <span class="o4-num gold">06</span>
+          <h3>Own the firm.</h3>
+        </div>
+        <div class="o4-art">
+          <div class="art-plaque2">
             <svg viewBox="0 0 80 80"><use href="#rosette-plain"/></svg>
-            <div>
+            <div class="ap-mid">
               <div class="ap-title">AUTHORIZED TRAINING CENTER</div>
               <div class="ap-lic">License № ATC-2027-091</div>
               <div class="ap-line">Official curriculum · revenue share · your name on the door</div>
             </div>
+            <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=300&h=300&fit=crop&crop=faces&auto=format" alt="">
           </div>
         </div>
-        <a class="o3-link" href="#champions">CONSULTANCIES + TRAINING CENTERS · HOW WOLVES EARN ↓</a>
+        <a class="o4-link gold" href="#champions">CONSULTANCIES + TRAINING CENTERS · HOW WOLVES EARN ↓</a>
       </div>
 
     </div>
