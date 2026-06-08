@@ -369,6 +369,25 @@ tr.lb-gap td { text-align: center; font-family: var(--mono); color: var(--ink4);
 }
 
 
+
+/* ── try-now doors ── */
+.trynow { margin-top: 18px; }
+.trynow-lead { font-size: 12.5px; color: var(--ink3); margin-bottom: 10px; }
+.trynow-lead b { color: var(--ink); font-weight: 700; }
+.trynow-doors { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.tnd { display: grid; grid-template-rows: auto 1fr auto; gap: 8px; text-decoration: none; border: 1.5px solid var(--rule-strong); background: #fff; padding: 13px 15px 11px; transition: border-color .12s, background .12s; }
+.tnd:hover { border-color: var(--green); background: var(--green-bg); }
+.tnd.hot { border-color: var(--ink); }
+.tnd.hot:hover { background: var(--green-bg); border-color: var(--green-dim); }
+.tnd-ico { color: var(--green-dim); line-height: 0; }
+.tnd-ico svg { width: 17px; height: 17px; display: block; }
+.tnd.hot .tnd-ico { color: var(--green); }
+.tnd-txt b { display: block; font-family: var(--serif); font-size: 15px; font-weight: 600; color: var(--ink); line-height: 1.15; margin-bottom: 4px; }
+.tnd-txt span { font-size: 11px; color: var(--ink3); line-height: 1.45; }
+.tnd-host { font-family: var(--mono); font-size: 9px; font-weight: 800; letter-spacing: 0.1em; color: var(--ink4); margin-top: 4px; }
+.tnd:hover .tnd-host { color: var(--green-deep); }
+@media (max-width: 880px) { .trynow-doors { grid-template-columns: 1fr; } }
+
 /* ── hero scene cards ── */
 .wins2 { display: flex; flex-direction: column; gap: 18px; }
 .win2 { border: 1.5px solid var(--ink); background: #fff; }
@@ -1119,7 +1138,28 @@ footer a:hover { color: #fff; }
         <input type="email" placeholder="you@buildsomething.dev" aria-label="Email">
         <button class="hex-btn primary" type="submit">Join free</button>
       </form>
-      <div class="signup-trust">FREE FOREVER · NO CREDIT CARD · FIRST BADGE IN 30 MIN</div>
+      <div class="signup-trust">FREE FOREVER &middot; NO CREDIT CARD &middot; FIRST BADGE IN 30 MIN</div>
+      <div class="trynow">
+        <div class="trynow-lead">Not ready to sign up? <b>Touch a GPU in the next minute.</b></div>
+        <div class="trynow-doors">
+          <a class="tnd" href="https://build.nvidia.com">
+            <span class="tnd-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M6 4l14 8-14 8z"/></svg></span>
+            <span class="tnd-txt">
+              <b>Try a model in your browser</b>
+              <span>Nemotron, Llama, FLUX. No install, no signup. Just a prompt.</span>
+            </span>
+            <span class="tnd-host">build.nvidia.com &#8599;</span>
+          </a>
+          <a class="tnd hot" href="https://brev.nvidia.com">
+            <span class="tnd-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4 14h6l-1 8 9-12h-6z"/></svg></span>
+            <span class="tnd-txt">
+              <b>Spin up a GPU in 60 seconds</b>
+              <span>Pick a Launchable, get a running box on AWS, GCP, Azure or OCI.</span>
+            </span>
+            <span class="tnd-host">Brev &middot; NVIDIA &#8599;</span>
+          </a>
+        </div>
+      </div>
       <div class="hero-ctas" style="margin-top: 22px; margin-bottom: 22px;">
         <a class="hex-btn ghost" href="#paths">Explore the learning paths ↓</a>
         <a class="hex-btn ghost" href="#ranks">The game: ranks &amp; badges ↓</a>
