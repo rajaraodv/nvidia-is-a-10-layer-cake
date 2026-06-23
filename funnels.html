@@ -6,7 +6,7 @@
 <title>NVIDIA Developer Journeys — overview + fine-grained per-persona journeys</title>
 <style>
   :root{
-    --green:#76b900;--ink:#141414;--paper:#fff;--line:#e7e7e2;--muted:#6b6b66;
+    --green:#76b900;--ink:#141414;--paper:#fff;--line:#e7e7e2;--muted:#2f2f2a;
     --serif:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,"Times New Roman",serif;
     --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
   }
@@ -15,12 +15,12 @@
   body{display:flex;flex-direction:column;overflow:hidden;}
   header{flex:0 0 auto;border-bottom:1px solid var(--line);padding:12px 22px 11px;}
   .titlerow{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;}
-  h1{font-family:var(--serif);font-weight:600;font-size:23px;margin:0;letter-spacing:-.01em;}
+  h1{font-family:var(--serif);font-weight:600;font-size:46px;margin:0;letter-spacing:-.01em;}
   h1 .accent{color:var(--green);}
-  .sub{font-size:12.5px;color:var(--muted);max-width:680px;}
-  #backBtn{display:none;border:1px solid var(--line);background:#fff;border-radius:7px;padding:5px 12px;font-size:12.5px;font-weight:600;cursor:pointer;font-family:var(--sans);color:#333;}
+  .sub{font-size:25px;color:var(--muted);max-width:980px;}
+  #backBtn{display:none;border:1px solid var(--line);background:#fff;border-radius:7px;padding:6px 14px;font-size:22px;font-weight:600;cursor:pointer;font-family:var(--sans);color:#1f1f1f;}
   #backBtn:hover{background:#f4f4f0;}
-  .crumb{font-size:12.5px;color:var(--muted);}
+  .crumb{font-size:25px;color:var(--muted);}
   .crumb b{color:var(--ink);}
 
   .stage{position:relative;flex:1 1 auto;overflow:hidden;background:#fcfcfa;cursor:grab;}
@@ -31,25 +31,25 @@
   .zoom button{width:38px;height:38px;border:1px solid var(--line);background:#fff;border-radius:9px;font-size:19px;cursor:pointer;color:var(--ink);box-shadow:0 1px 3px rgba(0,0,0,.06);font-family:var(--sans);}
   .zoom button:hover{background:#f4f4f0;}
   .zoom button.fit{font-size:11px;font-weight:600;}
-  .hint{position:absolute;left:16px;bottom:16px;font-size:11px;color:#9a9a93;background:rgba(255,255,255,.85);border:1px solid var(--line);border-radius:7px;padding:5px 9px;z-index:5;}
+  .hint{position:absolute;left:16px;bottom:16px;font-size:20px;color:#2f2f2a;background:rgba(255,255,255,.9);border:1px solid var(--line);border-radius:7px;padding:6px 11px;z-index:5;}
 
   text{font-family:var(--sans);}
-  .nodeName{font-size:12px;fill:var(--ink);font-weight:600;}
-  .nodeSub{font-size:10px;fill:var(--muted);}
-  .nodeBadge{font-size:11px;font-weight:700;}
-  .pName{font-size:13px;font-weight:700;cursor:pointer;}
-  .pIntent{font-size:10px;cursor:pointer;}
-  .stageHdr{font-size:11px;fill:#b3b3aa;letter-spacing:.12em;font-weight:700;text-transform:uppercase;}
-  .stageHdrHub{fill:#7a9b3a;}
-  .portalName{font-size:12.5px;fill:#2c4010;font-weight:700;}
+  .nodeName{font-size:24px;fill:var(--ink);font-weight:600;}
+  .nodeSub{font-size:20px;fill:var(--muted);}
+  .nodeBadge{font-size:22px;font-weight:700;}
+  .pName{font-size:26px;font-weight:700;cursor:pointer;}
+  .pIntent{font-size:20px;cursor:pointer;}
+  .stageHdr{font-size:28px;fill:#1f1f1f;letter-spacing:.1em;font-weight:700;text-transform:uppercase;}
+  .stageHdrHub{fill:#4f6f12;}
+  .portalName{font-size:25px;fill:#2c4010;font-weight:700;}
   /* focus view */
-  .fTitle{font-family:var(--serif);font-size:21px;font-weight:600;}
-  .fIntent{font-size:13px;fill:var(--muted);}
-  .fPhase{font-size:10px;letter-spacing:.1em;font-weight:700;text-transform:uppercase;}
-  .fStep{font-size:13px;font-weight:600;fill:var(--ink);}
-  .fDetail{font-size:11.5px;fill:#55554f;}
-  .fFric{font-size:11px;fill:#9a5a00;font-weight:600;}
-  .fHint{font-size:11.5px;fill:#9a9a8f;font-style:italic;}
+  .fTitle{font-family:var(--serif);font-size:42px;font-weight:600;}
+  .fIntent{font-size:26px;fill:var(--muted);}
+  .fPhase{font-size:20px;letter-spacing:.1em;font-weight:700;text-transform:uppercase;}
+  .fStep{font-size:26px;font-weight:600;fill:var(--ink);}
+  .fDetail{font-size:23px;fill:#33332e;}
+  .fFric{font-size:22px;fill:#9a5a00;font-weight:600;}
+  .fHint{font-size:23px;fill:#33332e;font-style:italic;}
 </style>
 </head>
 <body>
@@ -286,7 +286,7 @@ function setWorld(w,h){WORLD_W=w;WORLD_H=h;svg.setAttribute('viewBox',`0 0 ${WOR
    ================================================================= */
 function buildOverview(){
   clearAll();
-  const COLX={0:240,1:430,2:760,3:1240}, xP=52, OY=150, ROW=58, MINGAP=54;
+  const COLX={0:360,1:650,2:1110,3:1850}, xP=58, OY=224, ROW=90, MINGAP=86;
   const yLane=o=>OY+o*ROW;
 
   // --- channels (col1) positioned by mean of personas using them ---
@@ -298,22 +298,22 @@ function buildOverview(){
   // --- portal directory (col2): fixed grouped vertical order ---
   const portalY={}; const primaryCount={};
   PERSONAS.forEach(p=>primaryCount[PRIMARY[p.id]]=(primaryCount[PRIMARY[p.id]]||0)+1);
-  let yc=OY-8; const groupHdrs=[];
-  L10GROUPS.forEach(g=>{ groupHdrs.push({cat:g.cat,y:yc}); yc+=26; g.portals.forEach(([id])=>{ portalY[id]=yc; yc+=40; }); yc+=6; });
+  let yc=OY-10; const groupHdrs=[];
+  L10GROUPS.forEach(g=>{ groupHdrs.push({cat:g.cat,y:yc}); yc+=42; g.portals.forEach(([id])=>{ portalY[id]=yc; yc+=62; }); yc+=12; });
   const directoryBottom=yc;
 
   // goals (col3) by persona order
   const goalY={}; PERSONAS.forEach(p=>goalY[p.id]=yLane(p.order));
 
-  setWorld(1560, Math.max(directoryBottom, yLane(10))+70);
+  setWorld(2240, Math.max(directoryBottom, yLane(10))+90);
 
   // headers
-  function hdr(x,t,cls){el('text',{x:x,y:84,class:'stageHdr '+(cls||''),'text-anchor':'middle'},gA).textContent=t;}
-  hdr(xP+44,'The persona');hdr(COLX[1],'1 · Looking');hdr(COLX[2],'2 · NVIDIA front door — full Layer-10 portal directory','stageHdrHub');hdr(COLX[3],'3 · Goal');
-  el('line',{x1:0,y1:98,x2:WORLD_W,y2:98,stroke:'#eee','stroke-width':1},gA);
+  function hdr(x,t,cls){el('text',{x:x,y:120,class:'stageHdr '+(cls||''),'text-anchor':'middle'},gA).textContent=t;}
+  hdr(xP+90,'The persona');hdr(COLX[1],'1 · Looking');hdr(COLX[2],'2 · NVIDIA front door (Layer 10)','stageHdrHub');hdr(COLX[3],'3 · Goal');
+  el('line',{x1:0,y1:150,x2:WORLD_W,y2:150,stroke:'#eee','stroke-width':1},gA);
 
-  // category headers + faint group brackets in the directory
-  groupHdrs.forEach(h=>{ el('text',{x:COLX[2],y:h.y+4,class:'fPhase',fill:'#a9a99c','text-anchor':'middle'},gA).textContent=h.cat.toUpperCase(); });
+  // category headers in the directory
+  groupHdrs.forEach(h=>{ el('text',{x:COLX[2],y:h.y+4,class:'fPhase',fill:'#1f1f1f','text-anchor':'middle'},gA).textContent=h.cat.toUpperCase(); });
 
   const linkEls=[]; // {el, p, kind}
   function link(g,x1,y1,x2,y2,color,w,op,bow){ const c1=bow?x1+bow:(x1+x2)/2, c2=bow?x2+bow:(x1+x2)/2;
@@ -321,51 +321,51 @@ function buildOverview(){
 
   // SECONDARY links first (faint, behind): primary portal -> each secondary portal
   PERSONAS.forEach(p=>{ const pr=PRIMARY[p.id], px=COLX[2], py=portalY[pr];
-    SECONDARY[p.id].forEach(sec=>{ const e=link(gB,px,py,px,portalY[sec],P[p.id].color,1.4,0.12,-70); linkEls.push({el:e,p:p.id,kind:'sec'}); });
+    SECONDARY[p.id].forEach(sec=>{ const e=link(gB,px,py,px,portalY[sec],P[p.id].color,2,0.12,-150); linkEls.push({el:e,p:p.id,kind:'sec'}); });
   });
   // MAIN links: origin -> channels -> primary portal -> goal
   PERSONAS.forEach(p=>{
     const chans=[...new Set(J[p.id].steps.filter(s=>s.ch).map(s=>s.ch))];
     const oy=yLane(p.order), pr=PRIMARY[p.id];
     chans.forEach(c=>{
-      linkEls.push({el:link(gB,COLX[0],oy,COLX[1],chY[c],P[p.id].color,2.6,0.4),p:p.id,kind:'main'});
-      linkEls.push({el:link(gB,COLX[1],chY[c],COLX[2],portalY[pr],P[p.id].color,2.6,0.4),p:p.id,kind:'main'});
+      linkEls.push({el:link(gB,COLX[0],oy,COLX[1],chY[c],P[p.id].color,3.6,0.4),p:p.id,kind:'main'});
+      linkEls.push({el:link(gB,COLX[1],chY[c],COLX[2],portalY[pr],P[p.id].color,3.6,0.4),p:p.id,kind:'main'});
     });
-    linkEls.push({el:link(gB,COLX[2],portalY[pr],COLX[3],goalY[p.id],P[p.id].color,2.6,0.4),p:p.id,kind:'main'});
+    linkEls.push({el:link(gB,COLX[2],portalY[pr],COLX[3],goalY[p.id],P[p.id].color,3.6,0.4),p:p.id,kind:'main'});
   });
 
   // channel nodes
-  Object.keys(CH).forEach(k=>{const big=chMembers[k].length,r=big>1?8+Math.min(big,6):7;const g=el('g',{},gC);
-    el('circle',{cx:COLX[1],cy:chY[k],r:r,fill:'#fff',stroke:'#222','stroke-width':3},g);
-    if(big>=3)el('text',{x:COLX[1],y:chY[k]+4,class:'nodeBadge','text-anchor':'middle',fill:'#222'},g).textContent=big;
-    el('text',{x:COLX[1],y:chY[k]-r-7,class:'nodeName','text-anchor':'middle'},g).textContent=CH[k].name;
-    el('text',{x:COLX[1],y:chY[k]-r-7+13,class:'nodeSub','text-anchor':'middle'},g).textContent=CH[k].sub;});
+  Object.keys(CH).forEach(k=>{const big=chMembers[k].length,r=big>1?12+Math.min(big,6):10;const g=el('g',{},gC);
+    el('circle',{cx:COLX[1],cy:chY[k],r:r,fill:'#fff',stroke:'#222','stroke-width':3.5},g);
+    if(big>=3)el('text',{x:COLX[1],y:chY[k]+8,class:'nodeBadge','text-anchor':'middle',fill:'#222'},g).textContent=big;
+    el('text',{x:COLX[1],y:chY[k]-r-32,class:'nodeName','text-anchor':'middle'},g).textContent=CH[k].name;
+    el('text',{x:COLX[1],y:chY[k]-r-10,class:'nodeSub','text-anchor':'middle'},g).textContent=CH[k].sub;});
 
   // portal nodes (directory)
   L10GROUPS.forEach(g=>g.portals.forEach(([id,nm])=>{
     const y=portalY[id], pc=primaryCount[id]||0, gnode=el('g',{},gC);
-    const r = pc>0 ? 8+Math.min(pc,6) : 6;
-    el('circle',{cx:COLX[2],cy:y,r:r,fill:'#fff',stroke:pc>0?'#2c4010':'#b4b4a8','stroke-width':pc>0?3.4:2.4},gnode);
-    if(pc>=2)el('text',{x:COLX[2],y:y+4,class:'nodeBadge','text-anchor':'middle',fill:'#2c4010'},gnode).textContent=pc;
-    el('text',{x:COLX[2]+r+8,y:y+4,class:pc>0?'portalName':'nodeName','text-anchor':'start',fill:pc>0?'#2c4010':'#7a7a70'},gnode).textContent=nm;
+    const r = pc>0 ? 12+Math.min(pc,6) : 9;
+    el('circle',{cx:COLX[2],cy:y,r:r,fill:'#fff',stroke:pc>0?'#2c4010':'#3a3a34','stroke-width':pc>0?4:3},gnode);
+    if(pc>=2)el('text',{x:COLX[2],y:y+8,class:'nodeBadge','text-anchor':'middle',fill:'#2c4010'},gnode).textContent=pc;
+    el('text',{x:COLX[2]+r+12,y:y+8,class:pc>0?'portalName':'nodeName','text-anchor':'start',fill:pc>0?'#2c4010':'#2a2a2a'},gnode).textContent=nm;
   }));
 
   // goal nodes
   PERSONAS.forEach(p=>{const y=goalY[p.id],g=el('g',{},gC);
-    el('circle',{cx:COLX[3],cy:y,r:7,fill:'#fff',stroke:P[p.id].color,'stroke-width':4},g);
-    el('text',{x:COLX[3]+15,y:y+4,class:'nodeName','text-anchor':'start'},g).textContent=J[p.id].goal;});
+    el('circle',{cx:COLX[3],cy:y,r:11,fill:'#fff',stroke:P[p.id].color,'stroke-width':5},g);
+    el('text',{x:COLX[3]+22,y:y+8,class:'nodeName','text-anchor':'start'},g).textContent=J[p.id].goal;});
 
   // persona labels (click = focus; hover = emphasize that persona's whole web)
   PERSONAS.forEach(p=>{const y=yLane(p.order);
     const g=el('g',{style:'cursor:pointer'},gD); g.addEventListener('click',ev=>{ev.stopPropagation();focusOn(p.id);});
-    el('rect',{x:0,y:y-15,width:COLX[1]-40,height:30,fill:'transparent'},g);
-    el('circle',{cx:COLX[0],cy:y,r:4,fill:P[p.id].color},g);
-    el('text',{x:xP,y:y-3,class:'pName',fill:p.color},g).textContent=p.name;
-    el('text',{x:xP,y:y+11,class:'pIntent',fill:'#8a8a83'},g).textContent='L'+p.layer+' · '+p.intent;
+    el('rect',{x:0,y:y-28,width:COLX[1]-60,height:56,fill:'transparent'},g);
+    el('circle',{cx:COLX[0],cy:y,r:6,fill:P[p.id].color},g);
+    el('text',{x:xP,y:y-6,class:'pName',fill:p.color},g).textContent=p.name;
+    el('text',{x:xP,y:y+20,class:'pIntent',fill:'#2f2f2a'},g).textContent='L'+p.layer+' · '+p.intent;
     g.addEventListener('mouseenter',()=>linkEls.forEach(l=>l.el.setAttribute('opacity', l.p===p.id?(l.kind==='sec'?0.7:0.95):0.04)));
     g.addEventListener('mouseleave',()=>linkEls.forEach(l=>l.el.setAttribute('opacity', l.kind==='sec'?0.12:0.4)));
   });
-  resetView();
+  initView(1.35);
 }
 
 /* =================================================================
@@ -375,14 +375,14 @@ function buildFocus(pid){
   clearAll();
   const p=P[pid], j=J[pid], col=p.color;
   const steps=j.steps;
-  const X0=170, STEP=215, yC=360, R=11;
-  const W = X0 + steps.length*STEP + 120;
-  setWorld(Math.max(W,1200), 720);
+  const X0=150, STEP=236, yC=440, R=14;
+  const W = X0 + steps.length*STEP + 180;
+  setWorld(Math.max(W,1500), 980);
 
   // title block
-  el('text',{x:60,y:120,class:'fTitle',fill:col},gA).textContent=p.name;
-  el('text',{x:60,y:146,class:'fIntent'},gA).textContent='Layer '+p.layer+' · '+p.intent;
-  el('text',{x:60,y:170,class:'fHint'},gA).textContent='One journey, step by step: how they arrive, what they do, and where it snags.';
+  el('text',{x:70,y:150,class:'fTitle',fill:col},gA).textContent=p.name;
+  el('text',{x:70,y:196,class:'fIntent'},gA).textContent='Layer '+p.layer+' · '+p.intent;
+  el('text',{x:70,y:232,class:'fHint'},gA).textContent='One journey, step by step: how they arrive, what they do, and where it snags.';
 
   // center spine
   const xAt=i=>X0+i*STEP;
@@ -398,56 +398,55 @@ function buildFocus(pid){
   steps.forEach((s,i)=>{
     const x=xAt(i);
     if(s.branch){
-      const offs=s.branch.map((_,k)=>(k-(s.branch.length-1)/2)*92);
+      const offs=s.branch.map((_,k)=>(k-(s.branch.length-1)/2)*140);
       // incoming from prev center to each branch
-      if(i>0) offs.forEach(o=>seg(xAt(i-1),yC,x,yC+o,col,3.4,0.85));
+      if(i>0) offs.forEach(o=>seg(xAt(i-1),yC,x,yC+o,col,4,0.85));
       // outgoing from each branch to next center
-      if(i<steps.length-1) offs.forEach(o=>seg(x,yC+o,xAt(i+1),yC,col,3.4,0.85));
+      if(i<steps.length-1) offs.forEach(o=>seg(x,yC+o,xAt(i+1),yC,col,4,0.85));
       s.branch.forEach((b,k)=>{
         const by=yC+offs[k];
-        el('circle',{cx:x,cy:by,r:8,fill:'#fff',stroke:col,'stroke-width':3.5},gC);
-        block(gC,x,by-18,wrap(b.title,20),'fStep','middle',13);
-        block(gC,x,by+20,wrap(b.detail,26),'fDetail','middle',12);
+        el('circle',{cx:x,cy:by,r:11,fill:'#fff',stroke:col,'stroke-width':4},gC);
+        block(gC,x,by-30,wrap(b.title,14),'fStep','middle',26);
+        block(gC,x,by+42,wrap(b.detail,17),'fDetail','middle',24);
       });
       // phase tag
-      el('text',{x:x,y:yC-150,class:'fPhase',fill:'#b3b3aa','text-anchor':'middle'},gC).textContent=s.phase;
+      el('text',{x:x,y:yC-200,class:'fPhase',fill:'#3a3a34','text-anchor':'middle'},gC).textContent=s.phase;
       return;
     }
     // straight connector from prev (if prev not branch, else already drawn)
-    if(i>0 && !steps[i-1].branch) seg(xAt(i-1),yC,x,yC,col,5,0.9);
+    if(i>0 && !steps[i-1].branch) seg(xAt(i-1),yC,x,yC,col,6,0.9);
     // node
     const goal=s.goal, fr=s.friction, portal=s.portal;
-    if(goal){ const w=Math.max(wrap(s.title,16).join('').length*7+30,120);
-      el('rect',{x:x-12,y:yC-16,width:w,height:32,rx:16,fill:'#161616'},gC);
-      el('text',{x:x-12+w/2,y:yC+4,'text-anchor':'middle',fill:'#fff',style:'font-size:12.5px;font-weight:600'},gC).textContent=s.title;
+    if(goal){ const w=Math.max(wrap(s.title,16).join('').length*14+44,220);
+      el('rect',{x:x-14,y:yC-24,width:w,height:48,rx:24,fill:'#161616'},gC);
+      el('text',{x:x-14+w/2,y:yC+9,'text-anchor':'middle',fill:'#fff',style:'font-size:25px;font-weight:600'},gC).textContent=s.title;
     } else {
-      el('circle',{cx:x,cy:yC,r:R,fill:'#fff',stroke:fr?'#c98a2a':(portal?'#2c4010':col),'stroke-width':fr?4:4},gC);
-      if(portal) el('circle',{cx:x,cy:yC,r:4,fill:'#2c4010'},gC);
-      if(fr) el('text',{x:x,y:yC+4.5,'text-anchor':'middle',style:'font-size:13px;font-weight:800;fill:#c98a2a'},gC).textContent='!';
+      el('circle',{cx:x,cy:yC,r:R,fill:'#fff',stroke:fr?'#c98a2a':(portal?'#2c4010':col),'stroke-width':5},gC);
+      if(portal) el('circle',{cx:x,cy:yC,r:6,fill:'#2c4010'},gC);
+      if(fr) el('text',{x:x,y:yC+9,'text-anchor':'middle',style:'font-size:26px;font-weight:800;fill:#c98a2a'},gC).textContent='!';
     }
     // phase tag above
-    el('text',{x:x,y:yC-78,class:'fPhase',fill:portal?'#7a9b3a':'#b3b3aa','text-anchor':'middle'},gC).textContent=s.phase;
-    // title above, detail below (alternate up/down to reduce crowding? keep title above, detail below)
+    el('text',{x:x,y:yC-122,class:'fPhase',fill:portal?'#4f6f12':'#3a3a34','text-anchor':'middle'},gC).textContent=s.phase;
+    // title above, detail below
     if(!goal){
-      block(gC,x,yC-58,wrap(s.title,22),fr?'fFric':'fStep','middle',13.5);
-      block(gC,x,yC+30,wrap(s.detail,30),'fDetail','middle',12.5);
+      block(gC,x,yC-86,wrap(s.title,14),fr?'fFric':'fStep','middle',27);
+      block(gC,x,yC+50,wrap(s.detail,17),'fDetail','middle',25);
     }
   });
 
   // Portals-touched strip (Layer 10) — which NVIDIA portals appear on THIS journey
-  const stripY=620;
-  el('text',{x:60,y:stripY,style:'font-size:11px;letter-spacing:.08em;font-weight:700;fill:#9a9a8f'},gD).textContent='NVIDIA PORTALS ON THIS JOURNEY  (LAYER 10)';
-  let cx=60, cy=stripY+24; const maxX=WORLD_W-80;
+  const stripY=820;
+  el('text',{x:70,y:stripY,style:'font-size:22px;letter-spacing:.08em;font-weight:700;fill:#1f1f1f'},gD).textContent='NVIDIA PORTALS ON THIS JOURNEY  (LAYER 10)';
+  let cx=70, cy=stripY+46; const maxX=WORLD_W-100;
   portalsOf(pid).forEach((id,i)=>{
-    const nm=PORTAL_NAME[id]||id, primary=(i===0), w=nm.length*6.6+22;
-    if(cx+w>maxX){cx=60;cy+=34;}
+    const nm=PORTAL_NAME[id]||id, primary=(i===0), w=nm.length*13+30;
+    if(cx+w>maxX){cx=70;cy+=58;}
     const g=el('g',{},gD);
-    el('rect',{x:cx,y:cy-15,width:w,height:26,rx:13,fill:primary?'#f1f7e6':'#fff',stroke:primary?'#76b900':'#ddddd4','stroke-width':primary?1.6:1.2},g);
-    el('text',{x:cx+11,y:cy+3,style:`font-size:11.5px;font-weight:${primary?700:500};fill:${primary?'#2c4010':'#55554f'}`},g).textContent=nm;
-    el('text',{x:cx+11,y:cy+3,style:'font-size:11.5px;fill:transparent'},g); // spacing guard
-    cx+=w+8;
+    el('rect',{x:cx,y:cy-28,width:w,height:48,rx:24,fill:primary?'#f1f7e6':'#fff',stroke:primary?'#76b900':'#9a9a8f','stroke-width':primary?2:1.4},g);
+    el('text',{x:cx+16,y:cy+2,style:`font-size:23px;font-weight:${primary?700:500};fill:${primary?'#2c4010':'#2a2a2a'}`},g).textContent=nm;
+    cx+=w+12;
   });
-  el('text',{x:60,y:cy+30,class:'fHint'},gD).textContent='Primary front door highlighted in green · the rest are also touched (docs, code, community, partner programs).';
+  el('text',{x:70,y:cy+48,class:'fHint'},gD).textContent='Primary front door highlighted in green · the rest are also touched (docs, code, community, partner programs).';
 
   resetView();
 }
@@ -483,6 +482,7 @@ function bs(){const r=svg.getBoundingClientRect();return Math.min(r.width/WORLD_
 function c2w(cx,cy){const r=svg.getBoundingClientRect(),s=bs();const px=(r.width-WORLD_W*s)/2,py=(r.height-WORLD_H*s)/2;const vx=(cx-r.left-px)/s,vy=(cy-r.top-py)/s;return{x:(vx-tx)/scale,y:(vy-ty)/scale,vx,vy};}
 function zoomAt(cx,cy,f){const q=c2w(cx,cy);const ns=Math.max(0.6,Math.min(8,scale*f));tx=q.vx-ns*q.x;ty=q.vy-ns*q.y;scale=ns;apply();}
 function resetView(){scale=1;tx=0;ty=0;apply();}
+function initView(s){scale=s;tx=0;ty=0;apply();}
 function cz(f){const r=svg.getBoundingClientRect();zoomAt(r.left+r.width/2,r.top+r.height/2,f);}
 document.getElementById('zin').onclick=()=>cz(1.3);
 document.getElementById('zout').onclick=()=>cz(0.77);
