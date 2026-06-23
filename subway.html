@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<title>NVIDIA Developer Subway Map — How every kind of developer rides the 10-layer cake</title>
+<style>
+  :root{
+    --green:#76b900;
+    --ink:#111;
+    --paper:#ffffff;
+    --line:#e7e7e2;
+    --muted:#6b6b66;
+    --serif: "Iowan Old Style","Palatino Linotype",Palatino,Georgia,"Times New Roman",serif;
+    --sans: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;height:100%;background:var(--paper);color:var(--ink);font-family:var(--sans);}
+  body{display:flex;flex-direction:column;overflow:hidden;}
+
+  /* ---------- header ---------- */
+  header{flex:0 0 auto;border-bottom:1px solid var(--line);padding:14px 22px 12px;}
+  .titlerow{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;}
+  h1{font-family:var(--serif);font-weight:600;font-size:25px;margin:0;letter-spacing:-.01em;}
+  h1 .accent{color:var(--green);}
+  .sub{font-size:13px;color:var(--muted);max-width:none;}
+  .funnel{display:flex;align-items:center;gap:8px;margin-top:10px;font-size:11.5px;color:var(--muted);flex-wrap:wrap;}
+  .funnel b{color:var(--ink);font-weight:600;}
+  .funnel .seg{display:inline-flex;align-items:center;gap:7px;background:#f6f6f3;border:1px solid var(--line);border-radius:20px;padding:3px 11px;}
+  .funnel .arrow{color:#bbb;font-size:13px;}
+
+  /* ---------- legend ---------- */
+  .legend{display:flex;gap:7px;flex-wrap:wrap;margin-top:11px;align-items:center;}
+  .chip{display:inline-flex;align-items:center;gap:7px;border:1px solid var(--line);border-radius:20px;padding:4px 11px 4px 8px;
+        font-size:12px;cursor:pointer;user-select:none;background:#fff;transition:opacity .15s, background .15s, border-color .15s;}
+  .chip .dot{width:13px;height:13px;border-radius:50%;flex:0 0 auto;}
+  .chip .nm{font-weight:600;}
+  .chip .ct{color:var(--muted);font-size:11px;}
+  .chip.dim{opacity:.32;}
+  .chip:hover{background:#fafaf7;}
+  .legend .reset{margin-left:4px;color:var(--muted);font-size:11.5px;text-decoration:underline;cursor:pointer;border:none;background:none;}
+
+  /* ---------- stage ---------- */
+  .stage{position:relative;flex:1 1 auto;overflow:hidden;background:
+      linear-gradient(0deg,#fcfcfa,#fcfcfa);cursor:grab;}
+  .stage.grabbing{cursor:grabbing;}
+  svg{display:block;width:100%;height:100%;touch-action:none;}
+
+  /* ---------- zoom controls ---------- */
+  .zoom{position:absolute;right:16px;bottom:16px;display:flex;flex-direction:column;gap:6px;z-index:5;}
+  .zoom button{width:38px;height:38px;border:1px solid var(--line);background:#fff;border-radius:9px;font-size:19px;
+     cursor:pointer;color:var(--ink);box-shadow:0 1px 3px rgba(0,0,0,.06);font-family:var(--sans);}
+  .zoom button:hover{background:#f4f4f0;}
+  .zoom button.fit{font-size:11px;font-weight:600;}
+
+  .hint{position:absolute;left:16px;bottom:16px;font-size:11px;color:#9a9a93;background:rgba(255,255,255,.85);
+        border:1px solid var(--line);border-radius:7px;padding:5px 9px;z-index:5;}
+
+  /* ---------- detail panel ---------- */
+  .panel{position:absolute;top:14px;right:16px;width:312px;max-width:calc(100% - 32px);background:#fff;border:1px solid var(--line);
+         border-radius:12px;box-shadow:0 8px 30px rgba(0,0,0,.10);padding:16px 17px 17px;z-index:6;display:none;}
+  .panel.open{display:block;}
+  .panel .close{position:absolute;top:9px;right:11px;border:none;background:none;font-size:18px;color:#aaa;cursor:pointer;line-height:1;}
+  .panel .kicker{font-size:10.5px;letter-spacing:.09em;text-transform:uppercase;color:var(--muted);font-weight:600;}
+  .panel h3{font-family:var(--serif);font-weight:600;font-size:19px;margin:5px 0 2px;letter-spacing:-.01em;padding-right:14px;}
+  .panel .layerlab{font-size:11.5px;color:var(--muted);margin-bottom:9px;}
+  .panel .lines{display:flex;flex-wrap:wrap;gap:5px;margin:0 0 11px;}
+  .panel .lines .lc{display:inline-flex;align-items:center;gap:5px;font-size:11px;border:1px solid var(--line);border-radius:14px;padding:2px 8px 2px 6px;}
+  .panel .lines .lc .d{width:9px;height:9px;border-radius:50%;}
+  .panel .body{font-size:12.5px;line-height:1.5;color:#2a2a28;}
+  .panel .frict{margin-top:10px;font-size:11.5px;line-height:1.45;color:#8a5a00;background:#fff8ec;border:1px solid #f0e2c4;border-radius:8px;padding:8px 10px;}
+  .panel .frict b{color:#7a4f00;}
+  .panel .interchange{margin-top:10px;font-size:11.5px;line-height:1.45;color:#2c5a16;background:#f3f8ea;border:1px solid #d8e7bf;border-radius:8px;padding:8px 10px;}
+
+  /* svg text defaults */
+  text{font-family:var(--sans);}
+  .stationLabel{font-size:12.5px;fill:var(--ink);font-weight:600;}
+  .stationSub{font-size:10.5px;fill:var(--muted);}
+  .layerName{font-family:var(--serif);font-size:13.5px;fill:#33332f;}
+  .layerNum{font-family:var(--serif);font-size:13.5px;fill:#bdbdb5;font-weight:600;}
+  .zoneLabel{font-size:11px;fill:#a8a8a0;letter-spacing:.12em;font-weight:700;text-transform:uppercase;}
+  .pillText{font-size:12px;font-weight:600;}
+  @media (max-width:720px){
+    h1{font-size:20px;}
+    .panel{width:270px;}
+    .sub{display:none;}
+  }
+</style>
+</head>
+<body>
+<header>
+  <div class="titlerow">
+    <h1>The NVIDIA Developer <span class="accent">Subway Map</span></h1>
+    <div class="sub">Six kinds of developer, one network. Where they board, the surfaces they ride, and where they get off — across all 10 layers of the cake.</div>
+  </div>
+  <div class="funnel">
+    <span class="seg"><b>1 · Acquisition</b> — where they board</span>
+    <span class="arrow">→</span>
+    <span class="seg"><b>2 · Activation</b> — your 10-layer map</span>
+    <span class="arrow">→</span>
+    <span class="seg"><b>3 · Product surfaces</b> — the NVIDIA stack</span>
+    <span class="arrow">→</span>
+    <span class="seg"><b>4 · Outcome</b> — where they get off</span>
+  </div>
+  <div class="legend" id="legend"></div>
+</header>
+
+<div class="stage" id="stage">
+  <svg id="svg" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
+    <g id="viewport">
+      <g id="gBands"></g>
+      <g id="gZones"></g>
+      <g id="gLines"></g>
+      <g id="gStations"></g>
+      <g id="gLabels"></g>
+    </g>
+  </svg>
+  <div class="zoom">
+    <button id="zin" title="Zoom in">+</button>
+    <button id="zout" title="Zoom out">−</button>
+    <button id="zfit" class="fit" title="Fit to screen">FIT</button>
+  </div>
+  <div class="hint">Drag to pan · scroll / pinch to zoom · click any station</div>
+
+  <div class="panel" id="panel">
+    <button class="close" id="panelClose">×</button>
+    <div class="kicker" id="pKicker">Station</div>
+    <h3 id="pName">—</h3>
+    <div class="layerlab" id="pLayer"></div>
+    <div class="lines" id="pLines"></div>
+    <div class="body" id="pBody"></div>
+    <div class="interchange" id="pInter" style="display:none"></div>
+    <div class="frict" id="pFrict" style="display:none"></div>
+  </div>
+</div>
+
+<script>
+/* ============================================================================
+   DATA MODEL
+   - LAYERS: the 10-layer cake (row 0 = top portal layer ... row 9 = silicon)
+   - STATIONS: real NVIDIA surfaces, positioned by (col = funnel progress, row = layer)
+   - LINES: 6 developer personas, each an ordered ride through the stations
+   Grounded in the journey data (arriveFrom / steps / goTo / friction) from index.html
+   ============================================================================ */
+
+const LAYERS = [
+  {id:'10', name:'Programs, Portals & Community', row:0},
+  {id:'09', name:'Applications & Verticals',      row:1},
+  {id:'08', name:'Cloud Inference APIs',          row:2},
+  {id:'07', name:'Self-hosted Inference & Serving',row:3},
+  {id:'06', name:'Models',                        row:4},
+  {id:'05', name:'AI Training & Fine-tuning',     row:5},
+  {id:'04', name:'ML Frameworks & Runtime',       row:6},
+  {id:'03', name:'Compute Platform (CUDA)',       row:7},
+  {id:'02', name:'System Software',               row:8},
+  {id:'01', name:'GPUs / Silicon',                row:9},
+];
+
+// kind: origin | hub | asset | outcome
+const STATIONS = {
+  // ----- origins (acquisition channels), col 0 -----
+  'o-app':     {kind:'origin', col:0,   row:2,   label:'Google · ChatGPT “use NVIDIA”'},
+  'o-research':{kind:'origin', col:0,   row:5,   label:'arXiv · Hugging Face · GTC'},
+  'o-data':    {kind:'origin', col:0,   row:6.3, label:'Google “speed up pandas”'},
+  'o-robot':   {kind:'origin', col:0,   row:1,   label:'GTC robotics · partner intro'},
+  'o-ent':     {kind:'origin', col:0,   row:3.3, label:'Vendor eval · NVIDIA sales'},
+  'o-student': {kind:'origin', col:0,   row:0,   label:'YouTube · university · Reddit'},
+
+  // ----- activation hub, col 2 -----
+  'hub':       {kind:'hub', col:2, row:4.5, label:'Your 10-Layer Cake Map',
+    detail:'The activation surface. Whatever channel a developer arrives from, they land here to orient before diving into the stack. One map routes all six segments — making it the single highest-leverage growth surface in the whole network.'},
+
+  // ----- asset stations -----
+  'build':   {kind:'asset', col:4,    row:2, label:'build.nvidia.com', sub:'hosted API catalog · free tier',
+    detail:'NVIDIA-hosted API catalog. Zero setup, free tier (~40 req/min). For most developers this is the very first NVIDIA touch — the front door of the whole ecosystem.',
+    friction:'Free tier 40 RPM stalls agentic / multi-call loops — the moment that pushes devs toward self-hosting (NIM) or a cloud (Bedrock).'},
+  'nemotron':{kind:'asset', col:6,    row:4, label:'Nemotron 3', sub:'open LLM family · 1M context',
+    detail:'NVIDIA’s open LLM family (Nano: 30B MoE / 3.2B active, 1M-token context). Tried in the playground, then promoted to a hosted API or self-host.'},
+  'nim':     {kind:'asset', col:8,    row:3, label:'NIM', sub:'model-as-a-container',
+    detail:'Pull a model as a container, get an OpenAI-compatible endpoint in one command. LLM NIMs are free under a community license.',
+    friction:'License model is inconsistent: LLM NIMs run under community license, but speech / specialized NIMs require an NVAIE entitlement — an entitlement check that silently fails without a license.'},
+  'aie':     {kind:'asset', col:12.2, row:0, label:'NVIDIA AI Enterprise', sub:'production license & support',
+    detail:'The production license, support and SLA layer (~$1,000 / GPU / yr). Where serious deployments — and NVIDIA’s recurring revenue — actually land.'},
+
+  'nemo':    {kind:'asset', col:7.6,  row:5, label:'NeMo Framework', sub:'train & fine-tune LLMs',
+    detail:'End-to-end framework to train and fine-tune LLMs at scale. The researcher’s main workbench above the silicon.'},
+  'megatron':{kind:'asset', col:9.1,  row:5, label:'Megatron-LM', sub:'model parallelism',
+    detail:'Large-scale tensor / pipeline parallelism for frontier-scale training runs.'},
+  'pytorch': {kind:'asset', col:10.6, row:6, label:'PyTorch + CUDA', sub:'the framework devs live in',
+    detail:'The framework researchers actually live in, GPU-accelerated through CUDA underneath.'},
+  'dgx':     {kind:'asset', col:12.7, row:9, label:'DGX / H100', sub:'the training silicon',
+    detail:'The DGX systems and H100/H200/B200 GPUs that physically run the training job.'},
+
+  'rapids':  {kind:'asset', col:5,    row:6, label:'RAPIDS (cuDF)', sub:'GPU pandas / Spark',
+    detail:'GPU-accelerated dataframes — a largely drop-in speedup for pandas / Spark workloads. The data scientist’s gateway drug into CUDA.'},
+  'cuda':    {kind:'asset', col:8,    row:7, label:'CUDA Toolkit', sub:'the compute platform',
+    detail:'The compute platform under everything. Where serious GPU programming — and real performance — begins.'},
+  'local':   {kind:'asset', col:9.8,  row:9, label:'RTX / DGX Spark', sub:'local GPU',
+    detail:'Local GPUs (RTX, DGX Spark) for development and small-scale production without a data center.'},
+
+  'isaac':   {kind:'asset', col:4.4,  row:1, label:'Isaac · Omniverse', sub:'robotics sim & 3D worlds',
+    detail:'Robotics simulation and 3D world-building. Where physical-AI teams design and test before touching hardware.'},
+  'groot':   {kind:'asset', col:7.0,  row:4, label:'GR00T · Cosmos', sub:'physical-AI world models',
+    detail:'Foundation / world models for physical AI and humanoid robots.'},
+  'isaaclab':{kind:'asset', col:9.6,  row:5, label:'Isaac Lab', sub:'RL training for robots',
+    detail:'Reinforcement-learning environment for training robot policies in simulation.'},
+  'jetson':  {kind:'asset', col:11.9, row:9, label:'Jetson', sub:'the edge module',
+    detail:'The Jetson edge module the finished robot actually ships and runs on.'},
+
+  'triton':  {kind:'asset', col:5,    row:3, label:'Triton', sub:'inference server',
+    detail:'Triton Inference Server — the high-performance serving engine that sits underneath NIM.'},
+  'gpuop':   {kind:'asset', col:9.6,  row:8, label:'GPU Operator', sub:'+ Container Toolkit',
+    detail:'GPU Operator and Container Toolkit make GPUs discoverable and schedulable inside Kubernetes — the unglamorous layer that makes scale possible.'},
+  'superpod':{kind:'asset', col:11.2, row:9, label:'DGX SuperPOD', sub:'cluster-scale silicon',
+    detail:'Data-center-scale clustered DGX silicon for large fleets.'},
+
+  'dli':     {kind:'asset', col:3.6,  row:0, label:'DLI · Learn', sub:'courses & hands-on labs',
+    detail:'Deep Learning Institute courses and hands-on labs — the learner’s on-ramp into the whole stack.'},
+  'cert':    {kind:'asset', col:11,   row:0, label:'Certification', sub:'proof of skill',
+    detail:'A credential that proves skill — the job-ready exit, and a hook back into NVIDIA’s ecosystem for life.'},
+
+  // ----- outcomes (termini), right edge -----
+  'out-app':     {kind:'outcome', col:13.6, row:1,   label:'App in production'},
+  'out-research':{kind:'outcome', col:13.8, row:7.4, label:'Model trained & published'},
+  'out-data':    {kind:'outcome', col:12.4, row:8,   label:'10× faster pipeline'},
+  'out-robot':   {kind:'outcome', col:13.2, row:6,   label:'Robot in the field'},
+  'out-ent':     {kind:'outcome', col:13.8, row:2.4, label:'Inference platform at scale'},
+  'out-student': {kind:'outcome', col:12.6, row:0,   label:'Certified · job-ready'},
+};
+
+const LINES = [
+  {id:'app',     name:'App Builder',        count:'ships features fast',   color:'#76b900',
+   stations:['o-app','hub','build','nemotron','nim','aie','out-app']},
+  {id:'research',name:'AI Researcher',      count:'trains & fine-tunes',   color:'#0071c5',
+   stations:['o-research','hub','nemotron','nemo','megatron','pytorch','dgx','out-research']},
+  {id:'data',    name:'Data Scientist',     count:'accelerates analytics', color:'#7d4ca8',
+   stations:['o-data','hub','rapids','cuda','local','out-data']},
+  {id:'robot',   name:'Robotics / Physical AI', count:'builds robots',     color:'#ee7d11',
+   stations:['o-robot','hub','isaac','groot','isaaclab','jetson','out-robot']},
+  {id:'ent',     name:'Enterprise / MLOps', count:'deploys at scale',      color:'#009ca6',
+   stations:['o-ent','hub','triton','nim','gpuop','superpod','aie','out-ent']},
+  {id:'student', name:'Student / Learner',  count:'learns & gets certified',color:'#c0398b',
+   stations:['o-student','hub','dli','build','cuda','cert','out-student']},
+];
+
+/* ============================================================================
+   GEOMETRY
+   ============================================================================ */
+const COL_W = 132, ROW_H = 72, OX = 238, OY = 78;
+const X = c => OX + c*COL_W;
+const Y = r => OY + r*ROW_H;
+const WORLD_W = X(14.4), WORLD_H = Y(9.8);
+
+// which lines pass through each station
+const linesAt = {};
+LINES.forEach(L=>L.stations.forEach(s=>{(linesAt[s]||(linesAt[s]=[])).push(L.id);}));
+
+const SVGNS='http://www.w3.org/2000/svg';
+function el(tag,attrs,parent){const e=document.createElementNS(SVGNS,tag);for(const k in attrs)e.setAttribute(k,attrs[k]);if(parent)parent.appendChild(e);return e;}
+
+/* ---- octolinear router: returns a metro-style path string A→B (horiz/45°) ---- */
+function legPoints(a,b){
+  const x1=X(a.col),y1=Y(a.row),x2=X(b.col),y2=Y(b.row);
+  const dx=x2-x1, dy=y2-y1, adx=Math.abs(dx), ady=Math.abs(dy);
+  const pts=[[x1,y1]];
+  if(adx>=ady){ // horizontal then 45°
+    const knee=x2 - Math.sign(dx)*ady;
+    if(Math.abs(knee-x1)>0.5) pts.push([knee,y1]);
+  }else{ // vertical then 45°
+    const knee=y2 - Math.sign(dy)*adx;
+    if(Math.abs(knee-y1)>0.5) pts.push([x1,knee]);
+  }
+  pts.push([x2,y2]);
+  return pts;
+}
+function linePath(L){
+  let all=[];
+  for(let i=0;i<L.stations.length-1;i++){
+    const a=STATIONS[L.stations[i]], b=STATIONS[L.stations[i+1]];
+    const seg=legPoints(a,b);
+    if(i>0) seg.shift(); // avoid dup join
+    all=all.concat(seg);
+  }
+  return all.map((p,i)=>(i?'L':'M')+p[0].toFixed(1)+' '+p[1].toFixed(1)).join(' ');
+}
+
+/* ============================================================================
+   RENDER
+   ============================================================================ */
+const gBands=document.getElementById('gBands');
+const gZones=document.getElementById('gZones');
+const gLines=document.getElementById('gLines');
+const gStations=document.getElementById('gStations');
+const gLabels=document.getElementById('gLabels');
+
+// layer bands
+LAYERS.forEach((L,i)=>{
+  const y=Y(L.row);
+  el('rect',{x:0,y:y-ROW_H/2,width:WORLD_W,height:ROW_H,fill:(i%2?'#f7f7f3':'#fcfcf9')},gBands);
+  el('text',{x:14,y:y-4,class:'layerNum'},gBands).textContent=L.id;
+  el('text',{x:14,y:y+12,class:'layerName'},gBands).textContent=L.name;
+});
+// faint divider after layer name gutter
+el('line',{x1:X(-0.05),y1:0,x2:X(-0.05),y2:WORLD_H,stroke:'#ececdf','stroke-width':1},gBands);
+
+// zone labels (acquisition / activation / surfaces / outcome)
+function zone(x,txt){el('text',{x:x,y:34,class:'zoneLabel','text-anchor':'middle'},gZones).textContent=txt;}
+zone(X(0),'Acquisition');
+zone(X(2),'Activation');
+zone(X(7.5),'NVIDIA product surfaces');
+zone(X(13.2),'Outcome');
+// soft vertical separators between zones
+[ -0.05, 1.0, 3.0, 12.6 ].forEach(c=>{
+  if(c<0) return;
+  el('line',{x1:X(c),y1:46,x2:X(c),y2:WORLD_H-10,stroke:'#eee',['stroke-dasharray']:'2 6','stroke-width':1},gZones);
+});
+
+// lines (draw thick colored tracks)
+const linePathEls={};
+LINES.forEach(L=>{
+  const p=el('path',{d:linePath(L),fill:'none',stroke:L.color,'stroke-width':6,'stroke-linejoin':'round','stroke-linecap':'round','opacity':0.92,'data-line':L.id},gLines);
+  linePathEls[L.id]=p;
+});
+
+// stations
+const LABEL_BELOW = new Set(['nim','cuda','rapids','isaaclab','gpuop','triton','groot','nemo','superpod','dgx']);
+const stationEls={};
+for(const id in STATIONS){
+  const s=STATIONS[id];
+  const x=X(s.col), y=Y(s.row);
+  const lns=linesAt[id]||[];
+  const g=el('g',{class:'station','data-id':id,style:'cursor:pointer'},gStations);
+
+  if(s.kind==='origin'||s.kind==='outcome'){
+    // pill terminus
+    const isOut=s.kind==='outcome';
+    const txt=s.label;
+    const w=Math.min(textW(txt,12)+24, 230);
+    const px = isOut ? x-6 : x-6;
+    const anchorLeft = !isOut; // origins grow right, outcomes grow left
+    const rx=anchorLeft? x-6 : x+6-w;
+    el('rect',{x:rx,y:y-15,width:w,height:30,rx:15,
+      fill: isOut?'#111':'#fff', stroke: isOut?'#111':'#cfcfc6','stroke-width':1.4},g);
+    el('text',{x:rx+w/2,y:y+4,class:'pillText','text-anchor':'middle',fill:isOut?'#fff':'#333'},g).textContent=txt;
+    // little colored stub of the line(s)
+    lns.forEach((lid,k)=>{
+      const c=LINES.find(L=>L.id===lid).color;
+      el('circle',{cx: anchorLeft? rx-2 : rx+w+2, cy:y-9+k*9, r:4, fill:c},g);
+    });
+  } else if(s.kind==='hub'){
+    // big diamond interchange
+    const R=22;
+    el('path',{d:`M ${x} ${y-R} L ${x+R} ${y} L ${x} ${y+R} L ${x-R} ${y} Z`,fill:'#fff',stroke:'#111','stroke-width':3},g);
+    el('circle',{cx:x,cy:y,r:6.5,fill:'#76b900'},g);
+    el('text',{x:x,y:y-R-9,class:'stationLabel','text-anchor':'middle',style:'font-family:var(--serif);font-size:14px'},gLabels).textContent=s.label;
+    el('text',{x:x,y:y-R-25,class:'stationSub','text-anchor':'middle'},gLabels).textContent='YOUR TOOL · every line transfers here';
+  } else {
+    // asset station: interchange (>1 line) = white w/ thick ring; single = colored dot
+    const inter = lns.length>1;
+    if(inter){
+      el('circle',{cx:x,cy:y,r:11,fill:'#fff',stroke:'#111','stroke-width':3},g);
+      el('circle',{cx:x,cy:y,r:4,fill:'#111'},g);
+    }else{
+      const c=lns.length?LINES.find(L=>L.id===lns[0]).color:'#999';
+      el('circle',{cx:x,cy:y,r:8.5,fill:'#fff',stroke:c,'stroke-width':4},g);
+    }
+    // labels (placed by helper to reduce collisions)
+    placeAssetLabel(id,s,x,y);
+  }
+  stationEls[id]=g;
+}
+
+function placeAssetLabel(id,s,x,y){
+  const below = LABEL_BELOW.has(id);
+  const baseY = below ? y+25 : y-19;
+  el('text',{x:x,y:baseY,class:'stationLabel','text-anchor':'middle'},gLabels).textContent=s.label;
+  if(s.sub){
+    el('text',{x:x,y:baseY+13,class:'stationSub','text-anchor':'middle'},gLabels).textContent=s.sub;
+  }
+}
+
+// rough text width estimate (no DOM measure needed at build time)
+function textW(str,fs){return str.length*fs*0.56;}
+
+/* ============================================================================
+   LEGEND
+   ============================================================================ */
+const legend=document.getElementById('legend');
+let activeLine=null; // highlight filter
+LINES.forEach(L=>{
+  const c=document.createElement('div');
+  c.className='chip';c.dataset.line=L.id;
+  c.innerHTML=`<span class="dot" style="background:${L.color}"></span><span class="nm">${L.name}</span><span class="ct">${L.count}</span>`;
+  c.addEventListener('click',()=>toggleLine(L.id));
+  legend.appendChild(c);
+});
+const reset=document.createElement('button');
+reset.className='reset';reset.textContent='show all';
+reset.addEventListener('click',()=>setActive(null));
+legend.appendChild(reset);
+
+function toggleLine(id){ setActive(activeLine===id?null:id); }
+function setActive(id){
+  activeLine=id;
+  LINES.forEach(L=>{
+    const on = (id===null||id===L.id);
+    linePathEls[L.id].setAttribute('opacity', on?0.95:0.12);
+    linePathEls[L.id].setAttribute('stroke-width', (id===L.id)?8:6);
+  });
+  // dim stations not on the active line
+  for(const sid in stationEls){
+    const on = id===null || (linesAt[sid]||[]).includes(id);
+    stationEls[sid].style.opacity = on?1:0.18;
+  }
+  document.querySelectorAll('.chip').forEach(ch=>{
+    ch.classList.toggle('dim', id!==null && ch.dataset.line!==id);
+  });
+}
+
+/* ============================================================================
+   DETAIL PANEL
+   ============================================================================ */
+const panel=document.getElementById('panel');
+function openStation(id){
+  const s=STATIONS[id]; if(!s) return;
+  const lns=linesAt[id]||[];
+  document.getElementById('pName').textContent = (s.label||'').replace(/“|”/g,'"');
+  const kick = s.kind==='origin'?'Acquisition channel': s.kind==='outcome'?'Outcome': s.kind==='hub'?'Activation surface':'Product surface';
+  document.getElementById('pKicker').textContent=kick;
+  // layer label
+  let layerTxt='';
+  if(s.kind==='asset'){const L=LAYERS.find(l=>l.row===Math.round(s.row));layerTxt=L?('Layer '+L.id+' · '+L.name):'';}
+  else if(s.kind==='hub') layerTxt='Sits in front of all 10 layers';
+  else if(s.kind==='origin') layerTxt='Outside the stack — before first touch';
+  else layerTxt='The job done';
+  document.getElementById('pLayer').textContent=layerTxt;
+  // lines through
+  const pl=document.getElementById('pLines');pl.innerHTML='';
+  lns.forEach(lid=>{const L=LINES.find(x=>x.id===lid);
+    const e=document.createElement('span');e.className='lc';
+    e.innerHTML=`<span class="d" style="background:${L.color}"></span>${L.name}`;pl.appendChild(e);});
+  // body
+  document.getElementById('pBody').textContent = s.detail || (s.kind==='origin'?'Where this segment first hears about NVIDIA. The map’s job is to capture this attention and route it into the stack.':'The end state this developer was after.');
+  // interchange note
+  const inter=document.getElementById('pInter');
+  if(lns.length>1 && s.kind!=='origin' && s.kind!=='outcome'){
+    inter.style.display='block';
+    inter.innerHTML=`<b>Interchange — ${lns.length} segments converge here.</b> Shared surfaces like this are the highest-leverage places to invest: one improvement pays off across multiple developer journeys.`;
+  } else inter.style.display='none';
+  // friction
+  const fr=document.getElementById('pFrict');
+  if(s.friction){fr.style.display='block';fr.innerHTML=`<b>Known friction:</b> ${s.friction}`;}
+  else fr.style.display='none';
+  panel.classList.add('open');
+}
+document.getElementById('panelClose').addEventListener('click',()=>panel.classList.remove('open'));
+gStations.addEventListener('click',e=>{
+  const g=e.target.closest('.station');if(!g)return;
+  openStation(g.dataset.id);
+  e.stopPropagation();
+});
+
+/* ============================================================================
+   PAN + ZOOM
+   ============================================================================ */
+const stage=document.getElementById('stage');
+const svg=document.getElementById('svg');
+const vp=document.getElementById('viewport');
+// the svg viewBox auto-fits the whole world; #viewport transform layers pan/zoom on top (in world units)
+svg.setAttribute('viewBox',`0 0 ${WORLD_W} ${WORLD_H}`);
+let scale=1, tx=0, ty=0;
+function apply(){vp.setAttribute('transform',`translate(${tx} ${ty}) scale(${scale})`);}
+function baseScale(){const r=svg.getBoundingClientRect();return Math.min(r.width/WORLD_W, r.height/WORLD_H);}
+// map a client (screen) point into world coordinates, undoing viewBox fit + current transform
+function clientToWorld(cx,cy){
+  const r=svg.getBoundingClientRect(), bs=baseScale();
+  const padX=(r.width-WORLD_W*bs)/2, padY=(r.height-WORLD_H*bs)/2;
+  const vbx=(cx-r.left-padX)/bs, vby=(cy-r.top-padY)/bs;
+  return {x:(vbx-tx)/scale, y:(vby-ty)/scale, vbx, vby};
+}
+function zoomAt(cx,cy,factor){
+  const p=clientToWorld(cx,cy);
+  const ns=Math.max(0.85,Math.min(8,scale*factor));
+  tx=p.vbx-ns*p.x; ty=p.vby-ns*p.y; scale=ns; apply();
+}
+function resetView(){scale=1;tx=0;ty=0;apply();}
+function centerZoom(f){const r=svg.getBoundingClientRect();zoomAt(r.left+r.width/2,r.top+r.height/2,f);}
+document.getElementById('zin').onclick=()=>centerZoom(1.3);
+document.getElementById('zout').onclick=()=>centerZoom(0.77);
+document.getElementById('zfit').onclick=resetView;
+
+stage.addEventListener('wheel',e=>{
+  e.preventDefault();
+  zoomAt(e.clientX,e.clientY,e.deltaY<0?1.12:0.893);
+},{passive:false});
+
+// pointer drag pan (+ pinch)
+let dragging=false,lx=0,ly=0,moved=0;
+const pointers=new Map();let pinchDist=0;
+stage.addEventListener('pointerdown',e=>{
+  pointers.set(e.pointerId,{x:e.clientX,y:e.clientY});
+  if(pointers.size===1){dragging=true;moved=0;lx=e.clientX;ly=e.clientY;stage.classList.add('grabbing');stage.setPointerCapture(e.pointerId);}
+  else if(pointers.size===2){dragging=false;pinchDist=twoDist();}
+});
+stage.addEventListener('pointermove',e=>{
+  if(pointers.has(e.pointerId))pointers.set(e.pointerId,{x:e.clientX,y:e.clientY});
+  if(pointers.size===2){
+    const d=twoDist();const r=stage.getBoundingClientRect();const c=twoCenter();
+    if(pinchDist) zoomAt(c.x-r.left,c.y-r.top,d/pinchDist);
+    pinchDist=d;return;
+  }
+  if(dragging){const bs=baseScale();const dx=e.clientX-lx,dy=e.clientY-ly;tx+=dx/bs;ty+=dy/bs;moved+=Math.abs(dx)+Math.abs(dy);lx=e.clientX;ly=e.clientY;apply();}
+});
+function endPtr(e){pointers.delete(e.pointerId);if(pointers.size<2)pinchDist=0;if(pointers.size===0){dragging=false;stage.classList.remove('grabbing');}}
+stage.addEventListener('pointerup',endPtr);
+stage.addEventListener('pointercancel',endPtr);
+function twoDist(){const p=[...pointers.values()];return Math.hypot(p[0].x-p[1].x,p[0].y-p[1].y);}
+function twoCenter(){const p=[...pointers.values()];return {x:(p[0].x+p[1].x)/2,y:(p[0].y+p[1].y)/2};}
+
+// click empty space closes panel + clears highlight
+stage.addEventListener('click',e=>{
+  if(moved>4)return;
+  if(e.target.closest('.station'))return;
+  panel.classList.remove('open');
+});
+
+apply(); // viewBox handles the initial fit; identity transform shows the whole map
+</script>
+</body>
+</html>
