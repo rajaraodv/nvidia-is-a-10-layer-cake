@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<title>NVIDIA Developer Journeys — real paths per persona, from looking to goal</title>
+<title>NVIDIA Developer Journeys — overview + fine-grained per-persona journeys</title>
 <style>
   :root{
     --green:#76b900;--ink:#141414;--paper:#fff;--line:#e7e7e2;--muted:#6b6b66;
@@ -13,13 +13,15 @@
   *{box-sizing:border-box;}
   html,body{margin:0;height:100%;background:var(--paper);color:var(--ink);font-family:var(--sans);}
   body{display:flex;flex-direction:column;overflow:hidden;}
-  header{flex:0 0 auto;border-bottom:1px solid var(--line);padding:13px 22px 11px;}
-  .titlerow{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;}
-  h1{font-family:var(--serif);font-weight:600;font-size:24px;margin:0;letter-spacing:-.01em;}
+  header{flex:0 0 auto;border-bottom:1px solid var(--line);padding:12px 22px 11px;}
+  .titlerow{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;}
+  h1{font-family:var(--serif);font-weight:600;font-size:23px;margin:0;letter-spacing:-.01em;}
   h1 .accent{color:var(--green);}
-  .sub{font-size:13px;color:var(--muted);max-width:760px;}
-  .insight{margin-top:9px;font-size:12px;color:#3f5c14;background:#f1f7e6;border:1px solid #d7e8b6;border-radius:8px;padding:6px 11px;display:inline-block;}
-  .insight b{color:#2c4010;}
+  .sub{font-size:12.5px;color:var(--muted);max-width:680px;}
+  #backBtn{display:none;border:1px solid var(--line);background:#fff;border-radius:7px;padding:5px 12px;font-size:12.5px;font-weight:600;cursor:pointer;font-family:var(--sans);color:#333;}
+  #backBtn:hover{background:#f4f4f0;}
+  .crumb{font-size:12.5px;color:var(--muted);}
+  .crumb b{color:var(--ink);}
 
   .stage{position:relative;flex:1 1 auto;overflow:hidden;background:#fcfcfa;cursor:grab;}
   .stage.grabbing{cursor:grabbing;}
@@ -31,52 +33,38 @@
   .zoom button.fit{font-size:11px;font-weight:600;}
   .hint{position:absolute;left:16px;bottom:16px;font-size:11px;color:#9a9a93;background:rgba(255,255,255,.85);border:1px solid var(--line);border-radius:7px;padding:5px 9px;z-index:5;}
 
-  .panel{position:absolute;top:14px;right:16px;width:330px;max-width:calc(100% - 32px);background:#fff;border:1px solid var(--line);border-radius:12px;box-shadow:0 8px 30px rgba(0,0,0,.10);padding:16px 17px 17px;z-index:6;display:none;max-height:calc(100% - 28px);overflow:auto;}
-  .panel.open{display:block;}
-  .panel .close{position:absolute;top:9px;right:11px;border:none;background:none;font-size:18px;color:#aaa;cursor:pointer;line-height:1;}
-  .panel .kicker{font-size:10.5px;letter-spacing:.09em;text-transform:uppercase;font-weight:600;}
-  .panel h3{font-family:var(--serif);font-weight:600;font-size:19px;margin:5px 0 3px;letter-spacing:-.01em;padding-right:14px;}
-  .panel .meta{font-size:11.5px;color:var(--muted);margin-bottom:9px;line-height:1.5;}
-  .panel .body{font-size:12.5px;line-height:1.5;color:#2a2a28;}
-  .panel .conv{display:flex;flex-wrap:wrap;gap:5px;margin:9px 0 2px;}
-  .panel .conv .c{display:inline-flex;align-items:center;gap:5px;font-size:11px;border:1px solid var(--line);border-radius:14px;padding:2px 8px 2px 6px;}
-  .panel .conv .c .d{width:9px;height:9px;border-radius:50%;}
-  .panel .note{margin-top:11px;font-size:11.5px;line-height:1.45;color:#2c5a16;background:#f3f8ea;border:1px solid #d8e7bf;border-radius:8px;padding:8px 10px;}
-  .panel .note b{color:#21450f;}
-  .stagecard{margin-top:9px;border:1px solid var(--line);border-radius:9px;padding:8px 10px;}
-  .stagecard .sname{font-size:11px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:#555;}
-  .stagecard .leak{font-size:11.5px;color:#8a4a00;margin-top:2px;}
-  .stagecard .play{font-size:11.5px;color:#1f5fa8;margin-top:2px;}
-  .stagecard .leak b,.stagecard .play b{font-weight:600;}
-
   text{font-family:var(--sans);}
   .nodeName{font-size:12px;fill:var(--ink);font-weight:600;}
   .nodeSub{font-size:10px;fill:var(--muted);}
   .nodeBadge{font-size:11px;font-weight:700;}
-  .pName{font-size:12.5px;font-weight:700;cursor:pointer;}
+  .pName{font-size:13px;font-weight:700;cursor:pointer;}
   .pIntent{font-size:10px;cursor:pointer;}
   .stageHdr{font-size:11px;fill:#b3b3aa;letter-spacing:.12em;font-weight:700;text-transform:uppercase;}
   .stageHdrHub{fill:#7a9b3a;}
   .portalName{font-size:12.5px;fill:#2c4010;font-weight:700;}
-  @media (max-width:720px){ h1{font-size:19px;} .sub{display:none;} .panel{width:280px;} }
+  /* focus view */
+  .fTitle{font-family:var(--serif);font-size:21px;font-weight:600;}
+  .fIntent{font-size:13px;fill:var(--muted);}
+  .fPhase{font-size:10px;letter-spacing:.1em;font-weight:700;text-transform:uppercase;}
+  .fStep{font-size:13px;font-weight:600;fill:var(--ink);}
+  .fDetail{font-size:11.5px;fill:#55554f;}
+  .fFric{font-size:11px;fill:#9a5a00;font-weight:600;}
+  .fHint{font-size:11.5px;fill:#9a9a8f;font-style:italic;}
 </style>
 </head>
 <body>
 <header>
   <div class="titlerow">
-    <h1>NVIDIA Developer <span class="accent">Journeys</span></h1>
-    <div class="sub">A real path for each persona — from <b>looking</b>, to the <b>NVIDIA portal</b> they land on, to how they <b>try it</b>, to their <b>goal</b>. Shared touchpoints merge; click a persona to isolate one journey.</div>
+    <button id="backBtn">← All personas</button>
+    <h1 id="h1">NVIDIA Developer <span class="accent">Journeys</span></h1>
+    <div class="sub" id="subline">Overview of every persona. <b>Click a persona</b> to open its full, step-by-step journey on its own.</div>
   </div>
-  <div class="insight">Whatever the layer, almost everyone <b>starts at Google or YouTube</b> — and most builder journeys land on <b>developer.nvidia.com</b> or <b>build.nvidia.com</b>. Those are the real front doors to instrument.</div>
 </header>
 
 <div class="stage" id="stage">
   <svg id="svg" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
     <g id="viewport">
-      <g id="gHdr"></g>
-      <g id="gLinks"></g>
-      <g id="gNodes"></g>
-      <g id="gP"></g>
+      <g id="gA"></g><g id="gB"></g><g id="gC"></g><g id="gD"></g>
     </g>
   </svg>
   <div class="zoom">
@@ -84,278 +72,361 @@
     <button id="zout" title="Zoom out">−</button>
     <button id="zfit" class="fit" title="Fit to screen">FIT</button>
   </div>
-  <div class="hint">Click a persona (left) to isolate their journey · click a portal/touchpoint to see who converges</div>
-
-  <div class="panel" id="panel">
-    <button class="close" id="panelClose">×</button>
-    <div class="kicker" id="pKicker">—</div>
-    <h3 id="pName">—</h3>
-    <div class="meta" id="pMeta"></div>
-    <div class="body" id="pBody"></div>
-    <div class="conv" id="pConv"></div>
-    <div id="pStages"></div>
-    <div class="note" id="pNote" style="display:none"></div>
-  </div>
+  <div class="hint" id="hint">Click a persona to open its journey · drag to pan · scroll to zoom</div>
 </div>
 
 <script>
 /* ============================================================================
-   REAL developer journeys. NO "10-layer map" step (that's our tool, not theirs).
-   Columns are real stages:
-     0 origin (persona lane)  1 Looking  2 NVIDIA front door (real portals)
-     3 Try / use it           4 Goal
-   Edges define each persona's path; shared nodes become junctions automatically.
+   ONE fine-grained dataset drives both views.
+   - Overview: channels -> NVIDIA portal -> goal (the convergence picture)
+   - Focus (click a persona): ONLY that journey, step by step, with branches
+     and friction. All other journeys are removed.
    ============================================================================ */
 const PERSONAS = [
-  {id:'app',     name:'AI App Builder',        intent:'use a model (e.g. Nemotron)', layer:'08', color:'#76b900', order:0},
-  {id:'applied', name:'Applied AI Engineer',   intent:'pick & fine-tune a model',    layer:'06', color:'#7d4ca8', order:1},
-  {id:'data',    name:'Data Scientist',        intent:'accelerate data & analytics', layer:'04', color:'#0e8a8a', order:2},
-  {id:'researcher',name:'AI Researcher',       intent:'train a model from scratch',  layer:'05', color:'#0071c5', order:3},
-  {id:'hpc',     name:'CUDA / HPC Developer',  intent:'hand-optimize GPU compute',   layer:'03', color:'#3b4ea0', order:4},
-  {id:'game',    name:'Game / Graphics Dev',   intent:'ship a game with DLSS/RTX',   layer:'04', color:'#c0398b', order:5},
-  {id:'robotics',name:'Robotics / Physical-AI',intent:'build & deploy a robot',      layer:'09', color:'#e2553a', order:6},
-  {id:'mlops',   name:'MLOps / Platform Eng',  intent:'self-host & operate inference',layer:'07',color:'#ee7d11', order:7},
-  {id:'student', name:'Student / Learner',     intent:'learn & get certified',       layer:'10', color:'#c79a00', order:8},
-  {id:'laptop',  name:'Laptop / GPU Buyer',    intent:'buy an NVIDIA laptop or GPU', layer:'01', color:'#5b6b7b', order:9},
-  {id:'dc',      name:'Datacenter Buyer',      intent:'buy a DGX SuperPOD',          layer:'01', color:'#39424d', order:10},
+  {id:'app',     name:'AI App Builder',        intent:'use a model (e.g. Nemotron) in an app', layer:'08', color:'#76b900', order:0},
+  {id:'applied', name:'Applied AI Engineer',   intent:'pick & fine-tune the right model',      layer:'06', color:'#7d4ca8', order:1},
+  {id:'data',    name:'Data Scientist',        intent:'accelerate data & analytics',           layer:'04', color:'#0e8a8a', order:2},
+  {id:'researcher',name:'AI Researcher',       intent:'train a model from scratch',            layer:'05', color:'#0071c5', order:3},
+  {id:'hpc',     name:'CUDA / HPC Developer',  intent:'hand-optimize GPU compute',             layer:'03', color:'#3b4ea0', order:4},
+  {id:'game',    name:'Game / Graphics Dev',   intent:'ship a game with DLSS / RTX',           layer:'04', color:'#c0398b', order:5},
+  {id:'robotics',name:'Robotics / Physical-AI',intent:'build & deploy a robot',                layer:'09', color:'#e2553a', order:6},
+  {id:'mlops',   name:'MLOps / Platform Eng',  intent:'self-host & operate inference',         layer:'07', color:'#ee7d11', order:7},
+  {id:'student', name:'Student / Learner',     intent:'learn & get certified',                 layer:'10', color:'#c79a00', order:8},
+  {id:'laptop',  name:'Laptop / GPU Buyer',    intent:'buy an NVIDIA laptop or GPU',           layer:'01', color:'#5b6b7b', order:9},
+  {id:'dc',      name:'Datacenter Buyer',      intent:'buy a DGX SuperPOD',                    layer:'01', color:'#39424d', order:10},
 ];
-const P = Object.fromEntries(PERSONAS.map(p=>[p.id,p]));
+const P=Object.fromEntries(PERSONAS.map(p=>[p.id,p]));
 
-// col: 1 Looking · 2 front door · 3 try · 4 goal
-const NODES = [
-  // Looking (shared channels — the same start regardless of layer)
-  {id:'google',  col:1, name:'Google search', sub:'“open-source LLM”'},
-  {id:'chatgpt', col:1, name:'ChatGPT / LLM',  sub:'“which model?”'},
-  {id:'yt',      col:1, name:'YouTube',        sub:'tutorials · reviews'},
-  {id:'social',  col:1, name:'X · Reddit',     sub:'social · ads'},
-  {id:'arxiv',   col:1, name:'arXiv · HF',     sub:'papers · weights'},
-  {id:'community',col:1,name:'Forums · Discord',sub:'peers'},
-  {id:'gtc',     col:1, name:'GTC · sales',    sub:'events · field'},
-  // NVIDIA front door (REAL portals)
-  {id:'build',     col:2, name:'build.nvidia.com',     sub:'try models & APIs', portal:1,
-    play:'The hosted try-it portal. Free, in-browser, OpenAI-compatible. The real first touch for model & app builders — the place to capture the lead and instrument activation.'},
-  {id:'developer', col:2, name:'developer.nvidia.com', sub:'SDKs · CUDA · docs', portal:1,
-    play:'The downloads + docs hub where almost every hands-on builder (data, research, HPC, graphics, robotics) actually lands. The single biggest real convergence point — highest-leverage portal to optimize.'},
-  {id:'ngc',       col:2, name:'NGC catalog',          sub:'containers · models', portal:1,
-    play:'Where platform teams pull NIMs, containers and Helm charts. The doorway from "tried it" to "running it in our cluster."'},
-  {id:'market',    col:2, name:'nvidia.com · retail',  sub:'buy hardware', portal:1,
-    play:'The purchase path — from GeForce/RTX at retail to DGX via sales. Different motion entirely (commerce, not docs), but a real front door for the hardware buyers.'},
-  {id:'dli',       col:2, name:'learn.nvidia.com',     sub:'DLI courses', portal:1,
-    play:'The Deep Learning Institute — courses, labs and certification. The learner’s front door, and the top of the talent lifecycle.'},
-  // Try / use it
-  {id:'playground',col:3, name:'Live playground', sub:'in-browser'},
-  {id:'hosted',    col:3, name:'Hosted API',     sub:'cloud endpoint'},
-  {id:'selfhost',  col:3, name:'Self-host (NIM)', sub:'spin up your own',
-    play:'Where a free-tier user becomes a self-hosting team — and the on-ramp to a paid license. The key PLG→platform hand-off.'},
-  {id:'download',  col:3, name:'Download SDK',    sub:'run locally'},
-  {id:'buy',       col:3, name:'Configure & buy', sub:'checkout / quote'},
-  {id:'hwlab',     col:3, name:'LaunchPad eval',  sub:'hands-on lab'},
-  {id:'course',    col:3, name:'Take a course',   sub:'guided labs'},
-  // Goal
-  {id:'g_app',  col:4, name:'App in production', sub:'goal'},
-  {id:'g_tuned',col:4, name:'Tuned model shipped', sub:'goal'},
-  {id:'g_data', col:4, name:'10× faster pipeline', sub:'goal'},
-  {id:'g_pub',  col:4, name:'Model published', sub:'goal'},
-  {id:'g_accel',col:4, name:'Accelerated app', sub:'goal'},
-  {id:'g_game', col:4, name:'Game ships w/ DLSS', sub:'goal'},
-  {id:'g_robot',col:4, name:'Robot deployed', sub:'goal'},
-  {id:'g_infra',col:4, name:'Inference at scale', sub:'goal'},
-  {id:'g_cert', col:4, name:'Certified · hired', sub:'goal'},
-  {id:'g_rig',  col:4, name:'Rig bought & running', sub:'goal'},
-  {id:'g_dc',   col:4, name:'Datacenter live', sub:'goal'},
-];
+const CH={ google:{name:'Google search',sub:'“open-source LLM”'}, chatgpt:{name:'ChatGPT / LLM',sub:'“which model?”'},
+  yt:{name:'YouTube',sub:'tutorials · reviews'}, social:{name:'X · Reddit',sub:'social · ads'},
+  arxiv:{name:'arXiv · HF',sub:'papers · weights'}, community:{name:'Forums · Discord',sub:'peers'}, gtc:{name:'GTC · sales',sub:'events · field'} };
+const PORTAL={ build:{name:'build.nvidia.com',sub:'try models & APIs'}, developer:{name:'developer.nvidia.com',sub:'SDKs · CUDA · docs'},
+  ngc:{name:'NGC catalog',sub:'containers · models'}, market:{name:'nvidia.com · retail',sub:'buy hardware'}, dli:{name:'learn.nvidia.com',sub:'DLI courses'} };
 
-// edges: [from, to, persona].  Origin->channel hops are auto-generated.
-const EDGES = [
-  // App Builder — the Nemotron journey, with 3 ways to try
-  ['chatgpt','build','app'],['google','build','app'],
-  ['build','playground','app'],['build','hosted','app'],['build','selfhost','app'],
-  ['playground','g_app','app'],['hosted','g_app','app'],['selfhost','g_app','app'],
-  // Applied AI
-  ['arxiv','build','applied'],['google','build','applied'],
-  ['build','hosted','applied'],['build','selfhost','applied'],
-  ['hosted','g_tuned','applied'],['selfhost','g_tuned','applied'],
-  // Data Scientist
-  ['google','developer','data'],['yt','developer','data'],
-  ['developer','download','data'],['download','g_data','data'],
-  // Researcher
-  ['arxiv','developer','researcher'],['developer','download','researcher'],['download','g_pub','researcher'],
-  // HPC
-  ['google','developer','hpc'],['community','developer','hpc'],
-  ['developer','download','hpc'],['download','g_accel','hpc'],
-  // Game
-  ['yt','developer','game'],['community','developer','game'],
-  ['developer','download','game'],['download','g_game','game'],
-  // Robotics
-  ['gtc','developer','robotics'],['yt','developer','robotics'],
-  ['developer','download','robotics'],['download','g_robot','robotics'],
-  // MLOps
-  ['gtc','ngc','mlops'],['google','ngc','mlops'],['ngc','selfhost','mlops'],['selfhost','g_infra','mlops'],
-  // Student
-  ['yt','dli','student'],['social','dli','student'],['dli','course','student'],['course','g_cert','student'],
-  // Laptop / GPU buyer
-  ['yt','market','laptop'],['google','market','laptop'],['social','market','laptop'],
-  ['market','buy','laptop'],['buy','g_rig','laptop'],
-  // Datacenter buyer
-  ['gtc','market','dc'],['market','hwlab','dc'],['hwlab','g_dc','dc'],
-];
+/* fine-grained journeys. step: {phase,title,detail, ch?/portal?/goal?/friction?, branch?[{title,detail}]} */
+const J = {
+ app:{portal:'build', goal:'App in production', steps:[
+   {phase:'Trigger', title:'Needs an LLM for a feature', detail:'A product needs summarize / chat / extract. Build vs buy a model.'},
+   {phase:'Looking', title:'Googles “best open-source LLM”', detail:'Compares cost, license, context length.', ch:'google'},
+   {phase:'Looking', title:'Asks ChatGPT which model to use', detail:'Gets pointed toward open models incl. Nemotron.', ch:'chatgpt'},
+   {phase:'Discover', title:'Sees Nemotron on X / a benchmark', detail:'1M context, open weights, runs on NVIDIA.'},
+   {phase:'Land', title:'Lands on build.nvidia.com', detail:'Free, in-browser, OpenAI-compatible API.', portal:true},
+   {phase:'Try', title:'Three ways to try it', branch:[
+       {title:'Live playground', detail:'Paste a prompt, see it work — zero setup.'},
+       {title:'Hosted API key', detail:'Call it from code on the free tier.'},
+       {title:'Self-host with NIM', detail:'Spin up your own container, OpenAI-compatible.'}]},
+   {phase:'Build', title:'Wires the model into the app', detail:'Swaps the endpoint, ships a prototype.'},
+   {phase:'Hurdle', title:'Hits the free-tier 40 RPM wall', detail:'Agentic loops throttle → must pick a path forward.', friction:true},
+   {phase:'Decide', title:'Hosted cloud · self-host · license', detail:'Production = AWS Bedrock, NIM, or AI Enterprise.'},
+   {phase:'Goal', title:'App in production', detail:'Feature ships, running on Nemotron.', goal:true} ]},
 
-// priority personas get stage-by-stage funnel (leak + play)
-const FUNNEL = {
-  app:{summary:'The Nemotron journey: looking → build.nvidia.com → three ways to try → app in prod.', stages:[
-    {s:'Looking', leak:'Lost among generic “LLM API” results.', play:'Own “open-source / cheap LLM” on Google + in ChatGPT answers so Nemotron surfaces.'},
-    {s:'Front door', leak:'Setup friction kills the first session.', play:'Keep build.nvidia.com 1-click; capture email on first call.'},
-    {s:'Try', leak:'Free-tier limit stalls a real prototype.', play:'Make the throttle a trigger: nudge to hosted API or self-host (NIM) at the moment it hits.'},
-    {s:'Goal', leak:'Wiring the model into the app is a cliff.', play:'Copy-paste app snippets + one-command NIM → production.'} ]},
-  mlops:{summary:'Adopt-and-operate — lands the org-wide license.', stages:[
-    {s:'Looking', leak:'Found via procurement, not love.', play:'Reference architectures + “NIM on your k8s” content.'},
-    {s:'Front door', leak:'NGC pull → eval bogs down in infra.', play:'GPU Operator quick-start; sandbox cluster.'},
-    {s:'Try', leak:'Hard to prove parity with current stack.', play:'Benchmarks + Triton migration guides.'},
-    {s:'Goal', leak:'Seat expansion stalls.', play:'Land-and-expand: per-GPU license + usage dashboards.'} ]},
-  laptop:{summary:'Consumer/prosumer commerce motion — fast, retail-led.', stages:[
-    {s:'Looking', leak:'Competes with every laptop review on YouTube.', play:'Creator partnerships + “best GPU for AI/dev” content & comparisons.'},
-    {s:'Front door', leak:'Confusing RTX/GeForce/workstation SKUs.', play:'A “which GPU for your workload” picker on nvidia.com.'},
-    {s:'Try', leak:'Can’t try before buying.', play:'Cloud GPU credits + clear specs/benchmarks at the workload level.'},
-    {s:'Goal', leak:'No follow-on after purchase.', play:'Onboard buyers into developer.nvidia.com — turn a buyer into a builder.'} ]},
-  dc:{summary:'Sales/partner-led, high-ACV, long cycle.', stages:[
-    {s:'Looking', leak:'Only reachable via field/events.', play:'ABM on top accounts; GTC as the pipeline engine.'},
-    {s:'Front door', leak:'Eval needs scarce loaner hardware.', play:'LaunchPad labs + cloud credits to shortcut eval.'},
-    {s:'Try', leak:'TCO vs cloud is the whole debate.', play:'TCO calculators + SuperPOD reference deployments.'},
-    {s:'Goal', leak:'Capex approval cycle.', play:'Financing + phased rollout tied to a funded workload.'} ]},
+ applied:{portal:'build', goal:'Tuned model shipped', steps:[
+   {phase:'Trigger', title:'Off-the-shelf quality/cost not enough', detail:'Needs a model tuned to the domain.'},
+   {phase:'Looking', title:'Reads model leaderboards on HF', detail:'Shortlists candidates by quality vs size.', ch:'arxiv'},
+   {phase:'Looking', title:'Googles “fine-tune LLM domain”', detail:'Looks for a tuning recipe.', ch:'google'},
+   {phase:'Discover', title:'Finds Nemotron / Llama-Nemotron', detail:'Tuned open base models from NVIDIA.'},
+   {phase:'Land', title:'build.nvidia.com to benchmark', detail:'Side-by-side compare before committing.', portal:true},
+   {phase:'Try', title:'Evaluate candidates', branch:[
+       {title:'Compare in playground', detail:'Same prompts across models.'},
+       {title:'Hosted API for eval set', detail:'Batch-score on real data.'}]},
+   {phase:'Build', title:'Fine-tunes with NeMo (LoRA)', detail:'Customizes the base model to the task.'},
+   {phase:'Hurdle', title:'Needs GPUs for the tuning run', detail:'Local card too small → cloud or DGX.', friction:true},
+   {phase:'Goal', title:'Tuned model shipped', detail:'Domain model in production.', goal:true} ]},
+
+ data:{portal:'developer', goal:'10× faster pipeline', steps:[
+   {phase:'Trigger', title:'Pandas / Spark job too slow', detail:'Hours-long ETL blocking the team.'},
+   {phase:'Looking', title:'Googles “speed up pandas”', detail:'Finds GPU dataframe options.', ch:'google'},
+   {phase:'Looking', title:'Sees a RAPIDS talk on YouTube', detail:'Drop-in cuDF speedups.', ch:'yt'},
+   {phase:'Discover', title:'Learns about GPU dataframes', detail:'cuDF / cuML mirror the pandas API.'},
+   {phase:'Land', title:'developer.nvidia.com', detail:'Docs + install for RAPIDS.', portal:true},
+   {phase:'Try', title:'Installs RAPIDS / cuDF', detail:'conda / pip / container.'},
+   {phase:'Build', title:'Swaps pandas → cuDF', detail:'Same code, GPU under it.'},
+   {phase:'Hurdle', title:'No local GPU to run it', detail:'Needs a cloud GPU or workstation.', friction:true},
+   {phase:'Goal', title:'10× faster pipeline', detail:'ETL drops from hours to minutes.', goal:true} ]},
+
+ researcher:{portal:'developer', goal:'Model trained & published', steps:[
+   {phase:'Trigger', title:'Wants to train a new model', detail:'New architecture / dataset to prove out.'},
+   {phase:'Looking', title:'Reads arXiv, grabs weights on HF', detail:'Surveys prior art + baselines.', ch:'arxiv'},
+   {phase:'Discover', title:'Sees NeMo / Megatron referenced', detail:'Standard tooling for scale training.'},
+   {phase:'Land', title:'developer.nvidia.com / NGC', detail:'Pulls the NeMo container.', portal:true},
+   {phase:'Try', title:'Runs a small training job', detail:'Validates the recipe on a few GPUs.'},
+   {phase:'Build', title:'Scales with Megatron on DGX', detail:'Tensor / pipeline parallelism.'},
+   {phase:'Hurdle', title:'Multi-GPU cluster cost & setup', detail:'Needs DGX / cloud capacity + budget.', friction:true},
+   {phase:'Goal', title:'Model trained & published', detail:'Weights + paper released.', goal:true} ]},
+
+ hpc:{portal:'developer', goal:'Accelerated app shipped', steps:[
+   {phase:'Trigger', title:'A compute kernel is the bottleneck', detail:'CPU code too slow for the workload.'},
+   {phase:'Looking', title:'Googles + reads HPC forums', detail:'GPU offload is the path.', ch:'google'},
+   {phase:'Looking', title:'Peers point to CUDA', detail:'Community confirms the approach.', ch:'community'},
+   {phase:'Discover', title:'CUDA is the platform', detail:'Plus cuBLAS / CUTLASS for math.'},
+   {phase:'Land', title:'developer.nvidia.com (CUDA docs)', detail:'Toolkit + samples + docs.', portal:true},
+   {phase:'Try', title:'Installs the CUDA Toolkit', detail:'Compiles a first kernel.'},
+   {phase:'Build', title:'Writes kernels; uses cuBLAS', detail:'Offloads the hot path to GPU.'},
+   {phase:'Hurdle', title:'Profiling to find the bottleneck', detail:'Nsight to chase the last %.', friction:true},
+   {phase:'Goal', title:'Accelerated app shipped', detail:'Order-of-magnitude speedup.', goal:true} ]},
+
+ game:{portal:'developer', goal:'Game ships with DLSS', steps:[
+   {phase:'Trigger', title:'Frame rate too low at high res', detail:'Need more FPS without losing fidelity.'},
+   {phase:'Looking', title:'GDC talks + gamedev forums', detail:'How studios add DLSS.', ch:'community'},
+   {phase:'Looking', title:'YouTube DLSS demos', detail:'Sees the before/after.', ch:'yt'},
+   {phase:'Discover', title:'DLSS reconstructs frames', detail:'Render low, upscale with AI.'},
+   {phase:'Land', title:'developer.nvidia.com (RTX SDK)', detail:'Streamline + DLSS SDK downloads.', portal:true},
+   {phase:'Try', title:'Downloads Streamline + DLSS', detail:'One plugin layer for the engine.'},
+   {phase:'Build', title:'Integrates into the engine', detail:'Hooks DLSS / Reflex into the pipeline.'},
+   {phase:'Hurdle', title:'Engine integration & cert', detail:'Validation + per-engine quirks.', friction:true},
+   {phase:'Goal', title:'Game ships with DLSS', detail:'Higher FPS at launch.', goal:true} ]},
+
+ robotics:{portal:'developer', goal:'Robot deployed', steps:[
+   {phase:'Trigger', title:'Train a robot policy safely', detail:'Can’t train on real hardware first.'},
+   {phase:'Looking', title:'GTC robotics keynote', detail:'Sees Isaac / GR00T demos.', ch:'gtc'},
+   {phase:'Looking', title:'Partner / SI intro', detail:'Guided into the platform.', ch:'yt'},
+   {phase:'Discover', title:'Isaac + Omniverse for sim', detail:'Photoreal sim + RL training.'},
+   {phase:'Land', title:'developer.nvidia.com (Isaac)', detail:'SDKs + Omniverse downloads.', portal:true},
+   {phase:'Try', title:'Simulates in Omniverse', detail:'Builds the scene + sensors.'},
+   {phase:'Build', title:'Trains in Isaac Lab → Jetson', detail:'RL policy, deploy to the edge module.'},
+   {phase:'Hurdle', title:'Sim-to-real gap', detail:'Policy must transfer to hardware.', friction:true},
+   {phase:'Goal', title:'Robot deployed', detail:'Running in the field.', goal:true} ]},
+
+ mlops:{portal:'ngc', goal:'Inference at scale', steps:[
+   {phase:'Trigger', title:'Serve models org-wide', detail:'Many teams need reliable inference.'},
+   {phase:'Looking', title:'Vendor eval + ref architectures', detail:'Compares serving stacks.', ch:'gtc'},
+   {phase:'Looking', title:'Googles “NIM on kubernetes”', detail:'Looks for a standard.', ch:'google'},
+   {phase:'Discover', title:'NIM / Triton standardize serving', detail:'Containerized, OpenAI-compatible.'},
+   {phase:'Land', title:'NGC catalog', detail:'Pulls NIM / Helm charts.', portal:true},
+   {phase:'Try', title:'Runs a NIM container', detail:'OpenAI-compatible endpoint up.'},
+   {phase:'Build', title:'Deploys on k8s (GPU Operator)', detail:'Schedulable GPUs, autoscale.'},
+   {phase:'Hurdle', title:'Licensing: community vs NVAIE', detail:'Speech / specialized NIMs need entitlement.', friction:true},
+   {phase:'Goal', title:'Inference at scale', detail:'Org-wide platform, AI Enterprise.', goal:true} ]},
+
+ student:{portal:'dli', goal:'Certified · hired', steps:[
+   {phase:'Trigger', title:'Wants AI skills / a job', detail:'Breaking into AI engineering.'},
+   {phase:'Looking', title:'YouTube tutorials', detail:'Free first exposure.', ch:'yt'},
+   {phase:'Looking', title:'Reddit / Discord advice', detail:'What’s worth learning.', ch:'social'},
+   {phase:'Discover', title:'Finds DLI courses', detail:'Hands-on, GPU included.'},
+   {phase:'Land', title:'learn.nvidia.com', detail:'Course catalog + labs.', portal:true},
+   {phase:'Try', title:'Takes a hands-on course', detail:'Real GPU, guided project.'},
+   {phase:'Build', title:'Builds a portfolio project', detail:'Something to show employers.'},
+   {phase:'Hurdle', title:'Is it credible to employers?', detail:'Needs a recognized signal.', friction:true},
+   {phase:'Goal', title:'Certified · hired', detail:'Credential tied to real roles.', goal:true} ]},
+
+ laptop:{portal:'market', goal:'Rig bought & running', steps:[
+   {phase:'Trigger', title:'Machine can’t run local AI / games', detail:'Wants a GPU for dev / play.'},
+   {phase:'Looking', title:'YouTube GPU reviews', detail:'Benchmarks + comparisons.', ch:'yt'},
+   {phase:'Looking', title:'Reddit build advice + Google', detail:'Which card / laptop for the budget.', ch:'google'},
+   {phase:'Looking', title:'Sees deals on social / ads', detail:'Price + availability.', ch:'social'},
+   {phase:'Discover', title:'Picks an RTX GPU / laptop', detail:'Matches workload to a SKU.'},
+   {phase:'Land', title:'nvidia.com / a retailer', detail:'Specs, where to buy.', portal:true},
+   {phase:'Try', title:'Compares SKUs & specs', detail:'VRAM, wattage, price.'},
+   {phase:'Hurdle', title:'Confusing SKU lineup', detail:'RTX vs GeForce vs workstation.', friction:true},
+   {phase:'Build', title:'Buys & installs drivers', detail:'Sets up CUDA / Studio drivers.'},
+   {phase:'Goal', title:'Rig bought & running', detail:'Local AI / gaming rig live.', goal:true} ]},
+
+ dc:{portal:'market', goal:'Datacenter live', steps:[
+   {phase:'Trigger', title:'Need large training/inference capacity', detail:'Scaling beyond a few GPUs.'},
+   {phase:'Looking', title:'GTC + NVIDIA sales', detail:'Field engagement begins.', ch:'gtc'},
+   {phase:'Discover', title:'DGX SuperPOD = turnkey cluster', detail:'Pre-engineered at data-center scale.'},
+   {phase:'Land', title:'NVIDIA sales / nvidia.com', detail:'Configuration + quote.', portal:true},
+   {phase:'Try', title:'LaunchPad hands-on eval', detail:'Test the stack before buying.'},
+   {phase:'Build', title:'Procures SuperPOD + networking', detail:'Quantum / Spectrum fabric.'},
+   {phase:'Hurdle', title:'TCO vs cloud · capex approval', detail:'Long procurement cycle.', friction:true},
+   {phase:'Goal', title:'Datacenter live', detail:'Cluster behaving as one machine.', goal:true} ]},
 };
 
-/* auto-generate origin hops (persona lane → its discover channels) */
-PERSONAS.forEach(p=>{
-  const mine=EDGES.filter(e=>e[2]===p.id);
-  const froms=new Set(mine.map(e=>e[0])), tos=new Set(mine.map(e=>e[1]));
-  [...froms].filter(f=>!tos.has(f)).forEach(ch=>EDGES.push(['o_'+p.id, ch, p.id]));
-  NODES.push({id:'o_'+p.id, col:0, origin:1, _p:p.id});
-});
-const NODE=Object.fromEntries(NODES.map(n=>[n.id,n]));
-// membership = personas touching a node
-NODES.forEach(n=>n.m=[]);
-EDGES.forEach(e=>{ [e[0],e[1]].forEach(id=>{ const n=NODE[id]; if(n && !n.m.includes(e[2])) n.m.push(e[2]); }); });
-
-/* geometry */
-const COLX={0:248,1:470,2:790,3:1130,4:1450};
-const xP=58, OY=150, ROW=58, MINGAP=54;
-const yLane=o=>OY+o*ROW;
-const WORLD_W=1840, WORLD_H=OY+10*ROW+80;
-NODES.forEach(n=>{ n.x=COLX[n.col]; n.y = n.origin? yLane(P[n._p].order) : n.m.reduce((s,id)=>s+yLane(P[id].order),0)/n.m.length; });
-[1,2,3,4].forEach(c=>{ const col=NODES.filter(n=>n.col===c).sort((a,b)=>a.y-b.y);
-  for(let i=1;i<col.length;i++) if(col[i].y<col[i-1].y+MINGAP) col[i].y=col[i-1].y+MINGAP; });
-
+/* ---------- svg helpers ---------- */
 const SVGNS='http://www.w3.org/2000/svg';
 function el(t,a,p){const e=document.createElementNS(SVGNS,t);for(const k in a)e.setAttribute(k,a[k]);if(p)p.appendChild(e);return e;}
-const gHdr=document.getElementById('gHdr'),gLinks=document.getElementById('gLinks'),gNodes=document.getElementById('gNodes'),gP=document.getElementById('gP');
+const svg=document.getElementById('svg'),vp=document.getElementById('viewport');
+const gA=document.getElementById('gA'),gB=document.getElementById('gB'),gC=document.getElementById('gC'),gD=document.getElementById('gD');
+function clearAll(){[gA,gB,gC,gD].forEach(g=>{while(g.firstChild)g.removeChild(g.firstChild);});}
+function wrap(s,max){const w=s.split(' ');const L=[];let c='';w.forEach(x=>{if((c+' '+x).trim().length>max){if(c)L.push(c);c=x;}else c=(c+' '+x).trim();});if(c)L.push(c);return L;}
+function block(parent,x,y,lines,cls,anchor,lh){lines.forEach((ln,i)=>{el('text',{x:x,y:y+i*(lh||13),class:cls,'text-anchor':anchor||'middle'},parent).textContent=ln;});}
 
-/* stage headers */
-function hdr(x,t,cls){const e=el('text',{x:x,y:84,class:'stageHdr '+(cls||''),'text-anchor':'middle'},gHdr);e.textContent=t;}
-hdr(xP+44,'The persona'); hdr(COLX[1],'1 · Looking'); hdr(COLX[2],'2 · NVIDIA front door','stageHdrHub');
-hdr(COLX[3],'3 · Try / use it'); hdr(COLX[4],'4 · Goal');
-el('line',{x1:0,y1:98,x2:WORLD_W,y2:98,stroke:'#eee','stroke-width':1},gHdr);
+let WORLD_W=1840,WORLD_H=720;
+function setWorld(w,h){WORLD_W=w;WORLD_H=h;svg.setAttribute('viewBox',`0 0 ${WORLD_W} ${WORLD_H}`);}
 
-/* links */
-const linkEls=[];
-EDGES.forEach(e=>{
-  const a=NODE[e[0]], b=NODE[e[1]], col=P[e[2]].color;
-  const mx=(a.x+b.x)/2;
-  const p=el('path',{d:`M ${a.x} ${a.y} C ${mx} ${a.y} ${mx} ${b.y} ${b.x} ${b.y}`,fill:'none',stroke:col,'stroke-width':3.2,opacity:0.5,'stroke-linecap':'round','data-p':e[2]},gLinks);
-  linkEls.push({el:p,p:e[2]});
-});
+/* =================================================================
+   OVERVIEW
+   ================================================================= */
+function buildOverview(){
+  clearAll();
+  const COLX={0:248,1:470,2:800,3:1170}, xP=56, OY=150, ROW=58, MINGAP=54;
+  const yLane=o=>OY+o*ROW;
+  setWorld(1560, OY+10*ROW+70);
 
-/* nodes */
-const nodeEls={};
-NODES.forEach(n=>{
-  if(n.origin){ // small lane start dot
-    const g=el('g',{class:'onode'},gNodes); nodeEls[n.id]=g;
-    el('circle',{cx:n.x,cy:n.y,r:4,fill:P[n._p].color},g); return;
-  }
-  const big=n.m.length, x=n.x, y=n.y, isPortal=n.portal;
-  const r = big>1 ? 8+Math.min(big,6) : 7;
-  const g=el('g',{class:'node','data-id':n.id,style:'cursor:pointer'},gNodes); nodeEls[n.id]=g;
-  if(big>1){
-    el('circle',{cx:x,cy:y,r:r,fill:'#fff',stroke:isPortal?'#2c4010':'#222','stroke-width':isPortal?3.5:3},g);
-    if(big>=3) el('text',{x:x,y:y+4,class:'nodeBadge','text-anchor':'middle',fill:isPortal?'#2c4010':'#222'},g).textContent=big;
-  }else{
-    el('circle',{cx:x,cy:y,r:r,fill:'#fff',stroke:n.m.length?P[n.m[0]].color:'#999','stroke-width':4},g);
-  }
-  if(n.col===4){ // goal labels to the right
-    el('text',{x:x+r+9,y:y-1,class:'nodeName','text-anchor':'start'},g).textContent=n.name;
-    el('text',{x:x+r+9,y:y+12,class:'nodeSub','text-anchor':'start'},g).textContent=n.sub;
-  }else{
-    el('text',{x:x,y:y-r-7,class:isPortal?'portalName':'nodeName','text-anchor':'middle'},g).textContent=n.name;
-    el('text',{x:x,y:y-r-7+13,class:'nodeSub','text-anchor':'middle'},g).textContent=n.sub;
-  }
-});
+  // nodes: origins, channels, portals, goals
+  const nodes=[]; const byId={};
+  function add(n){nodes.push(n);byId[n.id]=n;return n;}
+  PERSONAS.forEach(p=>add({id:'o_'+p.id,col:0,origin:1,p:p.id,m:[p.id]}));
+  Object.keys(CH).forEach(k=>add({id:'ch_'+k,col:1,name:CH[k].name,sub:CH[k].sub,m:[]}));
+  Object.keys(PORTAL).forEach(k=>add({id:'pt_'+k,col:2,name:PORTAL[k].name,sub:PORTAL[k].sub,portal:1,m:[]}));
+  PERSONAS.forEach(p=>add({id:'g_'+p.id,col:3,name:J[p.id].goal,sub:'goal',m:[p.id]}));
 
-/* persona labels (left) */
-PERSONAS.forEach(p=>{
-  const y=yLane(p.order);
-  el('text',{x:xP,y:y-3,class:'pName',fill:p.color,'data-p':p.id},gP).textContent=p.name;
-  el('text',{x:xP,y:y+11,class:'pIntent',fill:'#8a8a83','data-p':p.id},gP).textContent='L'+p.layer+' · '+p.intent;
-});
+  // edges from journeys: origin->channels, channels->portal, portal->goal
+  const edges=[];
+  PERSONAS.forEach(p=>{
+    const j=J[p.id]; const chans=[...new Set(j.steps.filter(s=>s.ch).map(s=>s.ch))];
+    chans.forEach(c=>{edges.push(['o_'+p.id,'ch_'+c,p.id]); edges.push(['ch_'+c,'pt_'+j.portal,p.id]);});
+    edges.push(['pt_'+j.portal,'g_'+p.id,p.id]);
+  });
+  edges.forEach(e=>[e[0],e[1]].forEach(id=>{const n=byId[id];if(n&&!n.m.includes(e[2]))n.m.push(e[2]);}));
 
-/* ===================== interaction ===================== */
-function setHL(set){
-  linkEls.forEach(l=>{l.el.setAttribute('opacity',!set?0.5:(set.has(l.p)?0.97:0.05));l.el.setAttribute('stroke-width',set&&set.has(l.p)?4.6:3.2);});
-  NODES.forEach(n=>{const on=!set||(n.origin?set.has(n._p):n.m.some(m=>set.has(m)));nodeEls[n.id].style.opacity=on?1:0.16;});
-  document.querySelectorAll('.pName,.pIntent').forEach(t=>{t.style.opacity=!set||set.has(t.getAttribute('data-p'))?1:0.28;});
+  // positions
+  nodes.forEach(n=>{n.x=COLX[n.col];n.y=n.origin?yLane(P[n.p].order):n.m.reduce((s,id)=>s+yLane(P[id].order),0)/Math.max(n.m.length,1);});
+  [1,2,3].forEach(c=>{const col=nodes.filter(n=>n.col===c).sort((a,b)=>a.y-b.y);for(let i=1;i<col.length;i++)if(col[i].y<col[i-1].y+MINGAP)col[i].y=col[i-1].y+MINGAP;});
+
+  // headers
+  function hdr(x,t,cls){el('text',{x:x,y:84,class:'stageHdr '+(cls||''),'text-anchor':'middle'},gA).textContent=t;}
+  hdr(xP+44,'The persona');hdr(COLX[1],'1 · Looking');hdr(COLX[2],'2 · NVIDIA front door','stageHdrHub');hdr(COLX[3],'3 · Goal');
+  el('line',{x1:0,y1:98,x2:WORLD_W,y2:98,stroke:'#eee','stroke-width':1},gA);
+
+  // links
+  const linkEls=[];
+  edges.forEach(e=>{const a=byId[e[0]],b=byId[e[1]],mx=(a.x+b.x)/2;
+    const pe=el('path',{d:`M ${a.x} ${a.y} C ${mx} ${a.y} ${mx} ${b.y} ${b.x} ${b.y}`,fill:'none',stroke:P[e[2]].color,'stroke-width':3,opacity:0.45,'stroke-linecap':'round'},gB);
+    linkEls.push({el:pe,p:e[2]});});
+
+  // nodes
+  nodes.forEach(n=>{
+    if(n.origin){el('circle',{cx:n.x,cy:n.y,r:4,fill:P[n.p].color},gC);return;}
+    const big=n.m.length,r=big>1?8+Math.min(big,6):7,isP=n.portal;
+    const g=el('g',{},gC);
+    if(big>1){el('circle',{cx:n.x,cy:n.y,r:r,fill:'#fff',stroke:isP?'#2c4010':'#222','stroke-width':isP?3.5:3},g);
+      if(big>=3)el('text',{x:n.x,y:n.y+4,class:'nodeBadge','text-anchor':'middle',fill:isP?'#2c4010':'#222'},g).textContent=big;}
+    else el('circle',{cx:n.x,cy:n.y,r:r,fill:'#fff',stroke:n.m.length?P[n.m[0]].color:'#999','stroke-width':4},g);
+    if(n.col===3){el('text',{x:n.x+r+9,y:n.y-1,class:'nodeName','text-anchor':'start'},g).textContent=n.name;
+      el('text',{x:n.x+r+9,y:n.y+12,class:'nodeSub','text-anchor':'start'},g).textContent=n.sub;}
+    else{el('text',{x:n.x,y:n.y-r-7,class:isP?'portalName':'nodeName','text-anchor':'middle'},g).textContent=n.name;
+      el('text',{x:n.x,y:n.y-r-7+13,class:'nodeSub','text-anchor':'middle'},g).textContent=n.sub;}
+  });
+
+  // persona labels (clickable)
+  PERSONAS.forEach(p=>{const y=yLane(p.order);
+    const g=el('g',{style:'cursor:pointer'},gD); g.addEventListener('click',ev=>{ev.stopPropagation();focusOn(p.id);});
+    el('rect',{x:0,y:y-15,width:COLX[1]-30,height:30,fill:'transparent'},g); // hit area
+    el('text',{x:xP,y:y-3,class:'pName',fill:p.color},g).textContent=p.name;
+    el('text',{x:xP,y:y+11,class:'pIntent',fill:'#8a8a83'},g).textContent='L'+p.layer+' · '+p.intent;
+    // hover emphasis
+    g.addEventListener('mouseenter',()=>linkEls.forEach(l=>l.el.setAttribute('opacity',l.p===p.id?0.95:0.08)));
+    g.addEventListener('mouseleave',()=>linkEls.forEach(l=>l.el.setAttribute('opacity',0.45)));
+  });
+  resetView();
 }
-const panel=document.getElementById('panel'),$=id=>document.getElementById(id);
-function clr(){$('pConv').innerHTML='';$('pStages').innerHTML='';$('pNote').style.display='none';}
-function nodesOf(pid){return NODES.filter(n=>!n.origin&&n.m.includes(pid)).sort((a,b)=>a.col-b.col||a.y-b.y);}
-function openP(pid){
-  const p=P[pid]; setHL(new Set([pid])); clr();
-  $('pKicker').textContent='Persona · journey'; $('pKicker').style.color=p.color;
-  $('pName').textContent=p.name;
-  $('pMeta').innerHTML='Layer '+p.layer+' · wants to '+p.intent+'<br>'+nodesOf(pid).map(n=>n.name).join(' → ');
-  const f=FUNNEL[pid];
-  if(f){ $('pBody').textContent=f.summary;
-    f.stages.forEach(st=>{const c=document.createElement('div');c.className='stagecard';
-      c.innerHTML=`<div class="sname">${st.s}</div><div class="leak"><b>Leak:</b> ${st.leak}</div><div class="play"><b>Play:</b> ${st.play}</div>`;$('pStages').appendChild(c);});
-  }else{
-    $('pBody').textContent='Looking → NVIDIA front door → try / use it → goal. (Deep funnel detail — leaks + plays — is mapped for the priority personas: App Builder, MLOps, Laptop Buyer, Datacenter Buyer.)';
-    const j=nodesOf(pid).filter(n=>n.m.length>1);
-    if(j.length){$('pNote').style.display='block';$('pNote').innerHTML='<b>Shared touchpoints on this journey:</b> '+j.map(n=>n.name).join(', ')+'.';}
-  }
-  panel.classList.add('open');
-}
-function openN(id){
-  const n=NODE[id]; if(n.origin)return; setHL(new Set(n.m)); clr();
-  const j=n.m.length>1;
-  $('pKicker').textContent=j?(n.m.length+' journeys converge here'):'Touchpoint'; $('pKicker').style.color=j?'#2c4010':'#999';
-  $('pName').textContent=n.name; $('pMeta').textContent='Stage '+n.col+' · '+n.sub;
-  $('pBody').textContent=n.play||(j?'A shared touchpoint where journeys converge, then diverge.':'A step on one persona’s journey.');
-  n.m.forEach(mid=>{const e=document.createElement('span');e.className='c';e.innerHTML=`<span class="d" style="background:${P[mid].color}"></span>${P[mid].name}`;$('pConv').appendChild(e);});
-  if(j){$('pNote').style.display='block';$('pNote').innerHTML='<b>Why it matters:</b> a shared touchpoint is leverage — one improvement here compounds across every journey that passes through it.';}
-  panel.classList.add('open');
-}
-$('panelClose').addEventListener('click',()=>{panel.classList.remove('open');setHL(null);});
-gP.addEventListener('click',e=>{const t=e.target.closest('[data-p]');if(t){openP(t.getAttribute('data-p'));e.stopPropagation();}});
-gNodes.addEventListener('click',e=>{const t=e.target.closest('.node');if(t){openN(t.getAttribute('data-id'));e.stopPropagation();}});
 
-/* ===================== pan + zoom ===================== */
-const stage=document.getElementById('stage'),svg=document.getElementById('svg'),vp=document.getElementById('viewport');
-svg.setAttribute('viewBox',`0 0 ${WORLD_W} ${WORLD_H}`);
+/* =================================================================
+   FOCUS — only one persona's journey, fine-grained
+   ================================================================= */
+function buildFocus(pid){
+  clearAll();
+  const p=P[pid], j=J[pid], col=p.color;
+  const steps=j.steps;
+  const X0=170, STEP=215, yC=360, R=11;
+  const W = X0 + steps.length*STEP + 120;
+  setWorld(Math.max(W,1200), 720);
+
+  // title block
+  el('text',{x:60,y:120,class:'fTitle',fill:col},gA).textContent=p.name;
+  el('text',{x:60,y:146,class:'fIntent'},gA).textContent='Layer '+p.layer+' · '+p.intent;
+  el('text',{x:60,y:170,class:'fHint'},gA).textContent='One journey, step by step: how they arrive, what they do, and where it snags.';
+
+  // center spine
+  const xAt=i=>X0+i*STEP;
+  // draw connectors first
+  for(let i=0;i<steps.length-1;i++){
+    const s=steps[i], n=steps[i+1];
+    const x1=xAt(i), x2=xAt(i+1);
+    if(s.branch){ /* handled when drawing branch node (its outgoing) */ }
+  }
+  // we draw segment-by-segment, accounting for branches
+  function seg(x1,y1,x2,y2,color,w,op){const mx=(x1+x2)/2;el('path',{d:`M ${x1} ${y1} C ${mx} ${y1} ${mx} ${y2} ${x2} ${y2}`,fill:'none',stroke:color||col,'stroke-width':w||5,opacity:op==null?0.9:op,'stroke-linecap':'round'},gB);}
+
+  steps.forEach((s,i)=>{
+    const x=xAt(i);
+    if(s.branch){
+      const offs=s.branch.map((_,k)=>(k-(s.branch.length-1)/2)*92);
+      // incoming from prev center to each branch
+      if(i>0) offs.forEach(o=>seg(xAt(i-1),yC,x,yC+o,col,3.4,0.85));
+      // outgoing from each branch to next center
+      if(i<steps.length-1) offs.forEach(o=>seg(x,yC+o,xAt(i+1),yC,col,3.4,0.85));
+      s.branch.forEach((b,k)=>{
+        const by=yC+offs[k];
+        el('circle',{cx:x,cy:by,r:8,fill:'#fff',stroke:col,'stroke-width':3.5},gC);
+        block(gC,x,by-18,wrap(b.title,20),'fStep','middle',13);
+        block(gC,x,by+20,wrap(b.detail,26),'fDetail','middle',12);
+      });
+      // phase tag
+      el('text',{x:x,y:yC-150,class:'fPhase',fill:'#b3b3aa','text-anchor':'middle'},gC).textContent=s.phase;
+      return;
+    }
+    // straight connector from prev (if prev not branch, else already drawn)
+    if(i>0 && !steps[i-1].branch) seg(xAt(i-1),yC,x,yC,col,5,0.9);
+    // node
+    const goal=s.goal, fr=s.friction, portal=s.portal;
+    if(goal){ const w=Math.max(wrap(s.title,16).join('').length*7+30,120);
+      el('rect',{x:x-12,y:yC-16,width:w,height:32,rx:16,fill:'#161616'},gC);
+      el('text',{x:x-12+w/2,y:yC+4,'text-anchor':'middle',fill:'#fff',style:'font-size:12.5px;font-weight:600'},gC).textContent=s.title;
+    } else {
+      el('circle',{cx:x,cy:yC,r:R,fill:'#fff',stroke:fr?'#c98a2a':(portal?'#2c4010':col),'stroke-width':fr?4:4},gC);
+      if(portal) el('circle',{cx:x,cy:yC,r:4,fill:'#2c4010'},gC);
+      if(fr) el('text',{x:x,y:yC+4.5,'text-anchor':'middle',style:'font-size:13px;font-weight:800;fill:#c98a2a'},gC).textContent='!';
+    }
+    // phase tag above
+    el('text',{x:x,y:yC-78,class:'fPhase',fill:portal?'#7a9b3a':'#b3b3aa','text-anchor':'middle'},gC).textContent=s.phase;
+    // title above, detail below (alternate up/down to reduce crowding? keep title above, detail below)
+    if(!goal){
+      block(gC,x,yC-58,wrap(s.title,22),fr?'fFric':'fStep','middle',13.5);
+      block(gC,x,yC+30,wrap(s.detail,30),'fDetail','middle',12.5);
+    }
+  });
+  resetView();
+}
+
+/* =================================================================
+   mode control
+   ================================================================= */
+const backBtn=document.getElementById('backBtn'), subline=document.getElementById('subline'),
+      h1=document.getElementById('h1'), hint=document.getElementById('hint');
+function showOverview(){
+  backBtn.style.display='none';
+  h1.innerHTML='NVIDIA Developer <span class="accent">Journeys</span>';
+  subline.style.display='';
+  hint.textContent='Click a persona to open its journey · drag to pan · scroll to zoom';
+  buildOverview();
+}
+function focusOn(pid){
+  backBtn.style.display='';
+  subline.style.display='none';
+  h1.innerHTML='';
+  hint.textContent='Single journey · ← All personas to go back · drag / scroll to explore';
+  buildFocus(pid);
+}
+backBtn.addEventListener('click',()=>{ if(location.hash){location.hash='';} else showOverview(); });
+
+/* =================================================================
+   pan + zoom
+   ================================================================= */
+const stage=document.getElementById('stage');
 let scale=1,tx=0,ty=0;
 function apply(){vp.setAttribute('transform',`translate(${tx} ${ty}) scale(${scale})`);}
 function bs(){const r=svg.getBoundingClientRect();return Math.min(r.width/WORLD_W,r.height/WORLD_H);}
 function c2w(cx,cy){const r=svg.getBoundingClientRect(),s=bs();const px=(r.width-WORLD_W*s)/2,py=(r.height-WORLD_H*s)/2;const vx=(cx-r.left-px)/s,vy=(cy-r.top-py)/s;return{x:(vx-tx)/scale,y:(vy-ty)/scale,vx,vy};}
-function zoomAt(cx,cy,f){const p=c2w(cx,cy);const ns=Math.max(0.85,Math.min(8,scale*f));tx=p.vx-ns*p.x;ty=p.vy-ns*p.y;scale=ns;apply();}
+function zoomAt(cx,cy,f){const q=c2w(cx,cy);const ns=Math.max(0.6,Math.min(8,scale*f));tx=q.vx-ns*q.x;ty=q.vy-ns*q.y;scale=ns;apply();}
 function resetView(){scale=1;tx=0;ty=0;apply();}
 function cz(f){const r=svg.getBoundingClientRect();zoomAt(r.left+r.width/2,r.top+r.height/2,f);}
-$('zin').onclick=()=>cz(1.3);$('zout').onclick=()=>cz(0.77);$('zfit').onclick=resetView;
+document.getElementById('zin').onclick=()=>cz(1.3);
+document.getElementById('zout').onclick=()=>cz(0.77);
+document.getElementById('zfit').onclick=resetView;
 stage.addEventListener('wheel',e=>{e.preventDefault();zoomAt(e.clientX,e.clientY,e.deltaY<0?1.12:0.893);},{passive:false});
 let drag=false,lx=0,ly=0,moved=0;const ptrs=new Map();let pinch=0;
 stage.addEventListener('pointerdown',e=>{ptrs.set(e.pointerId,{x:e.clientX,y:e.clientY});if(ptrs.size===1){drag=true;moved=0;lx=e.clientX;ly=e.clientY;stage.classList.add('grabbing');stage.setPointerCapture(e.pointerId);}else if(ptrs.size===2){drag=false;pinch=td();}});
 stage.addEventListener('pointermove',e=>{if(ptrs.has(e.pointerId))ptrs.set(e.pointerId,{x:e.clientX,y:e.clientY});if(ptrs.size===2){const d=td(),c=tc();if(pinch)zoomAt(c.x,c.y,d/pinch);pinch=d;return;}if(drag){const s=bs();const dx=e.clientX-lx,dy=e.clientY-ly;tx+=dx/s;ty+=dy/s;moved+=Math.abs(dx)+Math.abs(dy);lx=e.clientX;ly=e.clientY;apply();}});
 function ep(e){ptrs.delete(e.pointerId);if(ptrs.size<2)pinch=0;if(ptrs.size===0){drag=false;stage.classList.remove('grabbing');}}
 stage.addEventListener('pointerup',ep);stage.addEventListener('pointercancel',ep);
-function td(){const p=[...ptrs.values()];return Math.hypot(p[0].x-p[1].x,p[0].y-p[1].y);}
-function tc(){const p=[...ptrs.values()];return{x:(p[0].x+p[1].x)/2,y:(p[0].y+p[1].y)/2};}
-stage.addEventListener('click',e=>{if(moved>4)return;if(e.target.closest('.node')||e.target.closest('[data-p]'))return;panel.classList.remove('open');setHL(null);});
-apply();
+function td(){const a=[...ptrs.values()];return Math.hypot(a[0].x-a[1].x,a[0].y-a[1].y);}
+function tc(){const a=[...ptrs.values()];return{x:(a[0].x+a[1].x)/2,y:(a[0].y+a[1].y)/2};}
+
+function applyHash(){const id=location.hash.replace('#','');if(id&&P[id])focusOn(id);else showOverview();}
+window.addEventListener('hashchange',applyHash);
+applyHash();
 </script>
 </body>
 </html>
