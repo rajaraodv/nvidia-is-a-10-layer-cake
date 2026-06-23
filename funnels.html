@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<title>NVIDIA Developer Funnels — where journeys merge, and where to grow them</title>
+<style>
+  :root{
+    --green:#76b900;--ink:#141414;--paper:#fff;--line:#e7e7e2;--muted:#6b6b66;
+    --serif:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,"Times New Roman",serif;
+    --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;height:100%;background:var(--paper);color:var(--ink);font-family:var(--sans);}
+  body{display:flex;flex-direction:column;overflow:hidden;}
+  header{flex:0 0 auto;border-bottom:1px solid var(--line);padding:13px 22px 11px;}
+  .titlerow{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;}
+  h1{font-family:var(--serif);font-weight:600;font-size:24px;margin:0;letter-spacing:-.01em;}
+  h1 .accent{color:var(--green);}
+  .sub{font-size:13px;color:var(--muted);}
+  .insight{margin-top:9px;font-size:12px;color:#3f5c14;background:#f1f7e6;border:1px solid #d7e8b6;border-radius:8px;padding:6px 11px;display:inline-block;}
+  .insight b{color:#2c4010;}
+
+  .stage{position:relative;flex:1 1 auto;overflow:hidden;background:#fcfcfa;cursor:grab;}
+  .stage.grabbing{cursor:grabbing;}
+  svg{display:block;width:100%;height:100%;touch-action:none;}
+
+  .zoom{position:absolute;right:16px;bottom:16px;display:flex;flex-direction:column;gap:6px;z-index:5;}
+  .zoom button{width:38px;height:38px;border:1px solid var(--line);background:#fff;border-radius:9px;font-size:19px;cursor:pointer;color:var(--ink);box-shadow:0 1px 3px rgba(0,0,0,.06);font-family:var(--sans);}
+  .zoom button:hover{background:#f4f4f0;}
+  .zoom button.fit{font-size:11px;font-weight:600;}
+  .hint{position:absolute;left:16px;bottom:16px;font-size:11px;color:#9a9a93;background:rgba(255,255,255,.85);border:1px solid var(--line);border-radius:7px;padding:5px 9px;z-index:5;}
+
+  .panel{position:absolute;top:14px;right:16px;width:330px;max-width:calc(100% - 32px);background:#fff;border:1px solid var(--line);border-radius:12px;box-shadow:0 8px 30px rgba(0,0,0,.10);padding:16px 17px 17px;z-index:6;display:none;max-height:calc(100% - 28px);overflow:auto;}
+  .panel.open{display:block;}
+  .panel .close{position:absolute;top:9px;right:11px;border:none;background:none;font-size:18px;color:#aaa;cursor:pointer;line-height:1;}
+  .panel .kicker{font-size:10.5px;letter-spacing:.09em;text-transform:uppercase;font-weight:600;}
+  .panel h3{font-family:var(--serif);font-weight:600;font-size:19px;margin:5px 0 3px;letter-spacing:-.01em;padding-right:14px;}
+  .panel .meta{font-size:11.5px;color:var(--muted);margin-bottom:10px;}
+  .panel .body{font-size:12.5px;line-height:1.5;color:#2a2a28;}
+  .panel .conv{display:flex;flex-wrap:wrap;gap:5px;margin:9px 0 2px;}
+  .panel .conv .c{display:inline-flex;align-items:center;gap:5px;font-size:11px;border:1px solid var(--line);border-radius:14px;padding:2px 8px 2px 6px;}
+  .panel .conv .c .d{width:9px;height:9px;border-radius:50%;}
+  .panel .note{margin-top:11px;font-size:11.5px;line-height:1.45;color:#2c5a16;background:#f3f8ea;border:1px solid #d8e7bf;border-radius:8px;padding:8px 10px;}
+  .panel .note b{color:#21450f;}
+  .stagecard{margin-top:9px;border:1px solid var(--line);border-radius:9px;padding:8px 10px;}
+  .stagecard .sname{font-size:11px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:#555;}
+  .stagecard .leak{font-size:11.5px;color:#8a4a00;margin-top:2px;}
+  .stagecard .play{font-size:11.5px;color:#1f5fa8;margin-top:2px;}
+  .stagecard .leak b,.stagecard .play b{font-weight:600;}
+
+  text{font-family:var(--sans);}
+  .nodeName{font-size:12px;fill:var(--ink);font-weight:600;}
+  .nodeSub{font-size:10px;fill:var(--muted);}
+  .nodeBadge{font-size:11px;fill:#fff;font-weight:700;}
+  .icpLabel{font-size:12.5px;font-weight:700;cursor:pointer;}
+  .stageHdr{font-size:11px;fill:#b3b3aa;letter-spacing:.13em;font-weight:700;text-transform:uppercase;}
+  .stageHdrHub{fill:#7a9b3a;}
+  .doorName{font-family:var(--serif);font-size:14px;fill:#2c4010;font-weight:600;}
+  @media (max-width:720px){ h1{font-size:19px;} .sub{display:none;} .panel{width:280px;} }
+</style>
+</head>
+<body>
+<header>
+  <div class="titlerow">
+    <h1>NVIDIA Developer <span class="accent">Funnels</span></h1>
+    <div class="sub">Every ICP flows left→right through the funnel. Where journeys hit the same touchpoint they <b>merge into a junction</b>, then split. Fat junctions = highest-leverage growth surfaces.</div>
+  </div>
+  <div class="insight">The spine almost everything converges on: <b>Your 10-layer map → build.nvidia.com → NVIDIA AI Enterprise.</b> That's where a dollar of growth investment moves the most journeys.</div>
+</header>
+
+<div class="stage" id="stage">
+  <svg id="svg" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
+    <g id="viewport">
+      <g id="gHdr"></g>
+      <g id="gLinks"></g>
+      <g id="gNodes"></g>
+      <g id="gIcp"></g>
+    </g>
+  </svg>
+  <div class="zoom">
+    <button id="zin" title="Zoom in">+</button>
+    <button id="zout" title="Zoom out">−</button>
+    <button id="zfit" class="fit" title="Fit to screen">FIT</button>
+  </div>
+  <div class="hint">Click an ICP (left) to isolate its journey · click a junction to see who merges & the play</div>
+
+  <div class="panel" id="panel">
+    <button class="close" id="panelClose">×</button>
+    <div class="kicker" id="pKicker">—</div>
+    <h3 id="pName">—</h3>
+    <div class="meta" id="pMeta"></div>
+    <div class="body" id="pBody"></div>
+    <div class="conv" id="pConv"></div>
+    <div id="pStages"></div>
+    <div class="note" id="pNote" style="display:none"></div>
+  </div>
+</div>
+
+<script>
+/* ============================================================================
+   FUNNEL JUNCTION MAP
+   X = funnel stage (Discover -> Front door -> Activate -> Adopt -> Convert)
+   Nodes = touchpoints. Where multiple ICPs share a touchpoint the lines MERGE
+   (a junction) and then diverge. Node Y is auto-placed at the mean of its
+   members' lanes, then de-overlapped per column.
+   ============================================================================ */
+const ICPS = [
+  {id:'student',  name:'Student / Learner',        color:'#c79a00', order:0},
+  {id:'app',      name:'AI App Builder',           color:'#76b900', order:1},
+  {id:'applied',  name:'Applied AI Engineer',      color:'#7d4ca8', order:2},
+  {id:'data',     name:'Data Scientist',           color:'#0e8a8a', order:3},
+  {id:'hpc',      name:'CUDA / HPC Developer',      color:'#3b4ea0', order:4},
+  {id:'researcher',name:'AI Researcher',           color:'#0071c5', order:5},
+  {id:'game',     name:'Game / Graphics Dev',      color:'#c0398b', order:6},
+  {id:'mlops',    name:'MLOps / Platform Eng',     color:'#ee7d11', order:7},
+  {id:'driver',   name:'GPU Driver / Systems',     color:'#8a6d3b', order:8},
+  {id:'robotics', name:'Robotics / Physical-AI',   color:'#e2553a', order:9},
+  {id:'buyer',    name:'Hardware Buyer / DC',      color:'#5b6b7b', order:10},
+];
+const ICP = Object.fromEntries(ICPS.map(i=>[i.id,i]));
+
+// col: 1 Discover · 2 Front door · 3 Activate · 4 Adopt · 5 Convert
+const NODES = [
+  // Discover
+  {id:'d_search', col:1, m:['app','applied','data'], name:'Search · ChatGPT', sub:'“best LLM API”'},
+  {id:'d_comm',   col:1, m:['student'],              name:'YouTube · community', sub:'tutorials'},
+  {id:'d_arxiv',  col:1, m:['researcher'],           name:'arXiv · Hugging Face', sub:'papers & weights'},
+  {id:'d_docs',   col:1, m:['hpc','driver'],         name:'Dev docs · forums', sub:'reference'},
+  {id:'d_gdc',    col:1, m:['game'],                 name:'GDC · gamedev', sub:'engine talks'},
+  {id:'d_sales',  col:1, m:['mlops','robotics','buyer'], name:'GTC · sales · partner', sub:'field & events'},
+  // Front door (mega junction)
+  {id:'door',     col:2, m:['student','app','applied','data','hpc','researcher','game','mlops','driver','robotics','buyer'],
+                  name:'Your 10-Layer Map', sub:'the shared front door',
+                  play:'The one surface every single ICP crosses. Highest-leverage place in the entire ecosystem: one orientation layer that routes 11 segments. Today this is scattered across dozens of NVIDIA properties — unifying it is the flagship growth bet.'},
+  // Activate
+  {id:'a_build',  col:3, m:['student','app','applied','data'], name:'build.nvidia.com', sub:'try it free',
+                  play:'The universal activation surface for software builders. Free, zero-setup, OpenAI-compatible. The single best place to instrument activation metrics and trigger the next step.'},
+  {id:'a_nemo',   col:3, m:['researcher'],           name:'NeMo Framework', sub:'start training'},
+  {id:'a_cuda',   col:3, m:['hpc'],                  name:'CUDA Toolkit', sub:'first kernels'},
+  {id:'a_rtx',    col:3, m:['game'],                 name:'RTX · DLSS SDK', sub:'add to engine'},
+  {id:'a_isaac',  col:3, m:['robotics'],             name:'Isaac · Omniverse', sub:'simulate'},
+  {id:'a_driver', col:3, m:['driver','mlops'],       name:'Driver · Container Toolkit', sub:'GPUs visible'},
+  {id:'a_hw',     col:3, m:['buyer'],                name:'DGX / GPU eval', sub:'benchmark'},
+  // Adopt
+  {id:'ad_nim',   col:4, m:['app','mlops'],          name:'NIM', sub:'self-host',
+                  play:'Where the free-API user becomes a self-hosting team. The hand-off from PLG to platform — and the doorway to a paid license.'},
+  {id:'ad_models',col:4, m:['applied'],              name:'Nemotron / models', sub:'select & tune'},
+  {id:'ad_rapids',col:4, m:['data'],                 name:'RAPIDS', sub:'accelerate'},
+  {id:'ad_hpc',   col:4, m:['hpc'],                  name:'cuBLAS · Nsight', sub:'optimize'},
+  {id:'ad_meg',   col:4, m:['researcher'],           name:'Megatron · DGX', sub:'scale up'},
+  {id:'ad_intg',  col:4, m:['game'],                 name:'DLSS integrate', sub:'ship-ready'},
+  {id:'ad_lab',   col:4, m:['robotics'],             name:'Isaac Lab', sub:'train policy'},
+  {id:'ad_gpuop', col:4, m:['driver'],               name:'GPU Operator · MIG', sub:'operate'},
+  {id:'ad_pod',   col:4, m:['buyer'],                name:'DGX SuperPOD', sub:'cluster'},
+  // Convert (outcome + monetization)
+  {id:'c_aie',    col:5, m:['app','applied','mlops','robotics'], name:'NVIDIA AI Enterprise', sub:'license · revenue',
+                  play:'The revenue gate. Four very different journeys converge on the same paid license. Pricing, packaging and the trial→paid trigger here disproportionately drive monetization.'},
+  {id:'c_cert',   col:5, m:['student'],              name:'Certified · hired', sub:'outcome'},
+  {id:'c_accel',  col:5, m:['hpc','data'],           name:'Accelerated app', sub:'outcome'},
+  {id:'c_pub',    col:5, m:['researcher'],           name:'Model published', sub:'outcome'},
+  {id:'c_game',   col:5, m:['game'],                 name:'Game ships w/ DLSS', sub:'outcome'},
+  {id:'c_fleet',  col:5, m:['driver'],               name:'Stable GPU fleet', sub:'outcome'},
+  {id:'c_hw',     col:5, m:['buyer'],                name:'Datacenter live', sub:'outcome'},
+];
+const NODE = Object.fromEntries(NODES.map(n=>[n.id,n]));
+
+// per-ICP path = nodes containing it, ordered by col
+const PATH={};
+ICPS.forEach(i=>{ PATH[i.id]=NODES.filter(n=>n.m.includes(i.id)).sort((a,b)=>a.col-b.col).map(n=>n.id); });
+
+// priority ICPs get a stage-by-stage funnel (leak + play); others get a summary
+const FUNNEL = {
+  app:{summary:'Self-serve PLG — the flagship motion.', stages:[
+    {s:'Discover', leak:'Buried under generic “LLM API” results.', play:'SEO + LLM-answer presence so “best LLM API” surfaces build.nvidia.com.'},
+    {s:'Try', leak:'Setup friction kills first session.', play:'Keep the in-browser playground 1-click; capture the email at first call.'},
+    {s:'Activate', leak:'Free-tier 40 RPM wall stalls real prototypes.', play:'Treat the wall as a trigger: in-product nudge to NIM / cloud at the moment of throttling.'},
+    {s:'Adopt', leak:'Self-host setup (driver, GPU) is a cliff.', play:'One-command NIM + a “works on your laptop” path.'},
+    {s:'Convert', leak:'License value unclear vs free.', play:'Usage-based on-ramp to AI Enterprise; show the SLA/scale story.'} ]},
+  mlops:{summary:'Adopt-and-operate — lands the org-wide license.', stages:[
+    {s:'Discover', leak:'Found via procurement, not love.', play:'Reference architectures + “NIM on your k8s” content for platform teams.'},
+    {s:'Try', leak:'Eval bogs down in infra setup.', play:'GPU Operator quick-start; a sandbox cluster.'},
+    {s:'Activate', leak:'Hard to prove parity with their current stack.', play:'Benchmarks + Triton migration guides.'},
+    {s:'Adopt', leak:'Standardizing across teams is political.', play:'NIM as the shared internal standard; golden paths.'},
+    {s:'Convert', leak:'Seat expansion stalls.', play:'Land-and-expand: per-GPU AI Enterprise, usage dashboards to the buyer.'} ]},
+  buyer:{summary:'Sales/partner-led — high ACV, long cycle.', stages:[
+    {s:'Discover', leak:'Only reachable via field/events.', play:'ABM on top accounts; GTC as the pipeline engine.'},
+    {s:'Try', leak:'Eval needs scarce loaner hardware.', play:'Cloud GPU credits + LaunchPad hands-on labs to shortcut eval.'},
+    {s:'Activate', leak:'TCO vs cloud is the whole debate.', play:'TCO calculators; SuperPOD reference deployments.'},
+    {s:'Adopt', leak:'Networking/integration complexity.', play:'Turnkey SuperPOD + partner SIs.'},
+    {s:'Convert', leak:'Capex approval cycle.', play:'Financing + phased rollouts; tie to a funded workload.'} ]},
+  student:{summary:'Lifecycle seed — today’s learner is tomorrow’s buyer.', stages:[
+    {s:'Discover', leak:'Competes with free YouTube/Coursera.', play:'Distribute DLI snippets where learners already are.'},
+    {s:'Try', leak:'No GPU of their own.', play:'Free cloud GPU + build.nvidia.com playground.'},
+    {s:'Activate', leak:'Drops off after one tutorial.', play:'Guided project tracks tied to real job titles.'},
+    {s:'Adopt', leak:'Unclear it leads to a job.', play:'Certification mapped to hiring partners.'},
+    {s:'Convert', leak:'Leaves the ecosystem after certifying.', play:'Graduate → App Builder hand-off; alumni → enterprise champions.'} ]},
+};
+
+/* ---------------- geometry ---------------- */
+const COLX = {1:340, 2:610, 3:880, 4:1170, 5:1470};
+const xICP = 60;
+const OY=150, ROW=56, MINGAP=52;
+const yLane = o => OY + o*ROW;
+const WORLD_W = 1830, WORLD_H = OY + 10*ROW + 70;
+
+// place nodes: mean of member lanes, then de-overlap within each column
+NODES.forEach(n=>{ n.x=COLX[n.col]; n.y=n.m.reduce((s,id)=>s+yLane(ICP[id].order),0)/n.m.length; });
+[1,2,3,4,5].forEach(c=>{
+  const col=NODES.filter(n=>n.col===c).sort((a,b)=>a.y-b.y);
+  for(let i=1;i<col.length;i++) if(col[i].y < col[i-1].y+MINGAP) col[i].y = col[i-1].y+MINGAP;
+});
+
+const SVGNS='http://www.w3.org/2000/svg';
+function el(t,a,p){const e=document.createElementNS(SVGNS,t);for(const k in a)e.setAttribute(k,a[k]);if(p)p.appendChild(e);return e;}
+
+const gHdr=document.getElementById('gHdr'),gLinks=document.getElementById('gLinks'),
+      gNodes=document.getElementById('gNodes'),gIcp=document.getElementById('gIcp');
+
+/* stage headers */
+function hdr(x,t,cls){const e=el('text',{x:x,y:84,class:'stageHdr '+(cls||''),'text-anchor':'middle'},gHdr);e.textContent=t;}
+hdr(xICP+40,'The ICP'); hdr(COLX[1],'1 · Discover'); hdr(COLX[2],'2 · Front door','stageHdrHub');
+hdr(COLX[3],'3 · Activate'); hdr(COLX[4],'4 · Adopt'); hdr(COLX[5],'5 · Convert');
+el('line',{x1:0,y1:98,x2:WORLD_W,y2:98,stroke:'#eee','stroke-width':1},gHdr);
+
+/* links (per ICP, between consecutive path nodes) */
+const linkEls=[]; // {el, icp}
+ICPS.forEach(i=>{
+  const path=PATH[i.id];
+  // start stub from ICP label to first node
+  let prev={x:xICP+ICP[i.id].name.length*6.3+14, y:yLane(i.order)};
+  prev={x:xICP+150, y:yLane(i.order)};
+  [...path].forEach(nid=>{
+    const n=NODE[nid];
+    const mx=(prev.x+n.x)/2;
+    const d=`M ${prev.x} ${prev.y} C ${mx} ${prev.y} ${mx} ${n.y} ${n.x} ${n.y}`;
+    const p=el('path',{d:d,fill:'none',stroke:i.color,'stroke-width':3.4,'opacity':0.5,'stroke-linecap':'round','data-icp':i.id},gLinks);
+    linkEls.push({el:p,icp:i.id});
+    prev={x:n.x,y:n.y};
+  });
+});
+
+/* nodes */
+const nodeEls={};
+NODES.forEach(n=>{
+  const big=n.m.length, x=n.x, y=n.y;
+  const isDoor=n.id==='door';
+  const r = isDoor?20 : big>1 ? 9+big : 7;
+  const g=el('g',{class:'node','data-id':n.id,style:'cursor:pointer'},gNodes);
+  nodeEls[n.id]=g;
+  if(big>1){
+    el('circle',{cx:x,cy:y,r:r,fill:'#fff',stroke:isDoor?'#2c4010':'#222','stroke-width':isDoor?4:3},g);
+    if(isDoor) el('circle',{cx:x,cy:y,r:7,fill:'#76b900'},g);
+    else if(big>=3) el('text',{x:x,y:y+4,class:'nodeBadge','text-anchor':'middle',fill:'#222',style:'fill:#222'},g).textContent=big;
+  }else{
+    el('circle',{cx:x,cy:y,r:r,fill:'#fff',stroke:ICP[n.m[0]].color,'stroke-width':4},g);
+  }
+  // labels — left of node for convert column (so they don't run off), else above
+  const labelAbove = n.col!==5;
+  if(labelAbove){
+    el('text',{x:x,y:y-r-7,class:isDoor?'doorName':'nodeName','text-anchor':'middle'},g).textContent=n.name;
+    el('text',{x:x,y:y-r-7+13,class:'nodeSub','text-anchor':'middle'},g).textContent=n.sub;
+  }else{
+    el('text',{x:x+r+9,y:y-1,class:'nodeName','text-anchor':'start'},g).textContent=n.name;
+    el('text',{x:x+r+9,y:y+12,class:'nodeSub','text-anchor':'start'},g).textContent=n.sub;
+  }
+});
+
+/* ICP labels (left) */
+ICPS.forEach(i=>{
+  el('text',{x:xICP,y:yLane(i.order)+4,class:'icpLabel',fill:i.color,'data-icp':i.id},gIcp).textContent=i.name;
+});
+
+/* ============================ interaction ============================ */
+function setHL(icpSet){ // null = all
+  linkEls.forEach(l=>{ l.el.setAttribute('opacity', !icpSet?0.5:(icpSet.has(l.icp)?0.95:0.06)); l.el.setAttribute('stroke-width', icpSet&&icpSet.has(l.icp)?5:3.4); });
+  NODES.forEach(n=>{ const on=!icpSet||n.m.some(m=>icpSet.has(m)); nodeEls[n.id].style.opacity=on?1:0.18; });
+  document.querySelectorAll('.icpLabel').forEach(t=>{ t.style.opacity = !icpSet||icpSet.has(t.getAttribute('data-icp'))?1:0.3; });
+}
+
+const panel=document.getElementById('panel');
+const $=id=>document.getElementById(id);
+function clearPanelExtras(){ $('pConv').innerHTML=''; $('pStages').innerHTML=''; $('pNote').style.display='none'; }
+
+function openIcp(id){
+  const i=ICP[id]; setHL(new Set([id]));
+  clearPanelExtras();
+  $('pKicker').textContent='ICP · journey'; $('pKicker').style.color=i.color;
+  $('pName').textContent=i.name;
+  $('pMeta').textContent = PATH[id].map(nid=>NODE[nid].name).join('  →  ');
+  const f=FUNNEL[id];
+  if(f){
+    $('pBody').textContent=f.summary;
+    f.stages.forEach(st=>{
+      const c=document.createElement('div');c.className='stagecard';
+      c.innerHTML=`<div class="sname">${st.s}</div><div class="leak"><b>Leak:</b> ${st.leak}</div><div class="play"><b>Play:</b> ${st.play}</div>`;
+      $('pStages').appendChild(c);
+    });
+  }else{
+    $('pBody').textContent='Funnel: Discover → Front door → Activate → Adopt → Convert. (Deep funnel detail is mapped for the priority segments — App Builder, MLOps, Hardware Buyer, Student — click those to compare.)';
+    $('pNote').style.display='block';
+    $('pNote').innerHTML='<b>Shared junctions on this path:</b> '+PATH[id].filter(nid=>NODE[nid].m.length>1).map(nid=>NODE[nid].name).join(', ')+'.';
+  }
+  panel.classList.add('open');
+}
+function openNode(id){
+  const n=NODE[id]; setHL(new Set(n.m));
+  clearPanelExtras();
+  const j=n.m.length>1;
+  $('pKicker').textContent = j?(n.m.length+' journeys merge here'):'Touchpoint';
+  $('pKicker').style.color = j?'#2c4010':'#999';
+  $('pName').textContent=n.name;
+  $('pMeta').textContent='Funnel stage '+n.col+' · '+n.sub;
+  $('pBody').textContent = n.play || (j?'A junction where multiple journeys share this touchpoint before diverging.':'A step on a single ICP’s journey.');
+  const conv=$('pConv');
+  n.m.forEach(mid=>{const e=document.createElement('span');e.className='c';e.innerHTML=`<span class="d" style="background:${ICP[mid].color}"></span>${ICP[mid].name}`;conv.appendChild(e);});
+  if(j){ $('pNote').style.display='block';
+    $('pNote').innerHTML='<b>Why it matters for growth:</b> a junction is shared infrastructure — one improvement here compounds across every journey that passes through it. The more lines, the higher the leverage.'; }
+  panel.classList.add('open');
+}
+$('panelClose').addEventListener('click',()=>{panel.classList.remove('open');setHL(null);});
+gIcp.addEventListener('click',e=>{const t=e.target.closest('.icpLabel');if(t){openIcp(t.getAttribute('data-icp'));e.stopPropagation();}});
+gNodes.addEventListener('click',e=>{const t=e.target.closest('.node');if(t){openNode(t.getAttribute('data-id'));e.stopPropagation();}});
+
+/* ============================ pan + zoom ============================ */
+const stage=document.getElementById('stage'),svg=document.getElementById('svg'),vp=document.getElementById('viewport');
+svg.setAttribute('viewBox',`0 0 ${WORLD_W} ${WORLD_H}`);
+let scale=1,tx=0,ty=0;
+function apply(){vp.setAttribute('transform',`translate(${tx} ${ty}) scale(${scale})`);}
+function baseScale(){const r=svg.getBoundingClientRect();return Math.min(r.width/WORLD_W,r.height/WORLD_H);}
+function c2w(cx,cy){const r=svg.getBoundingClientRect(),bs=baseScale();const px=(r.width-WORLD_W*bs)/2,py=(r.height-WORLD_H*bs)/2;const vx=(cx-r.left-px)/bs,vy=(cy-r.top-py)/bs;return{x:(vx-tx)/scale,y:(vy-ty)/scale,vx,vy};}
+function zoomAt(cx,cy,f){const p=c2w(cx,cy);const ns=Math.max(0.85,Math.min(8,scale*f));tx=p.vx-ns*p.x;ty=p.vy-ns*p.y;scale=ns;apply();}
+function resetView(){scale=1;tx=0;ty=0;apply();}
+function cz(f){const r=svg.getBoundingClientRect();zoomAt(r.left+r.width/2,r.top+r.height/2,f);}
+$('zin').onclick=()=>cz(1.3);$('zout').onclick=()=>cz(0.77);$('zfit').onclick=resetView;
+stage.addEventListener('wheel',e=>{e.preventDefault();zoomAt(e.clientX,e.clientY,e.deltaY<0?1.12:0.893);},{passive:false});
+let dragging=false,lx=0,ly=0,moved=0;const ptrs=new Map();let pinch=0;
+stage.addEventListener('pointerdown',e=>{ptrs.set(e.pointerId,{x:e.clientX,y:e.clientY});if(ptrs.size===1){dragging=true;moved=0;lx=e.clientX;ly=e.clientY;stage.classList.add('grabbing');stage.setPointerCapture(e.pointerId);}else if(ptrs.size===2){dragging=false;pinch=td();}});
+stage.addEventListener('pointermove',e=>{if(ptrs.has(e.pointerId))ptrs.set(e.pointerId,{x:e.clientX,y:e.clientY});if(ptrs.size===2){const d=td(),c=tc();if(pinch)zoomAt(c.x,c.y,d/pinch);pinch=d;return;}if(dragging){const bs=baseScale();const dx=e.clientX-lx,dy=e.clientY-ly;tx+=dx/bs;ty+=dy/bs;moved+=Math.abs(dx)+Math.abs(dy);lx=e.clientX;ly=e.clientY;apply();}});
+function ep(e){ptrs.delete(e.pointerId);if(ptrs.size<2)pinch=0;if(ptrs.size===0){dragging=false;stage.classList.remove('grabbing');}}
+stage.addEventListener('pointerup',ep);stage.addEventListener('pointercancel',ep);
+function td(){const p=[...ptrs.values()];return Math.hypot(p[0].x-p[1].x,p[0].y-p[1].y);}
+function tc(){const p=[...ptrs.values()];return{x:(p[0].x+p[1].x)/2,y:(p[0].y+p[1].y)/2};}
+stage.addEventListener('click',e=>{if(moved>4)return;if(e.target.closest('.node')||e.target.closest('.icpLabel'))return;panel.classList.remove('open');setHL(null);});
+apply();
+</script>
+</body>
+</html>
