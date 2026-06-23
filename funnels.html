@@ -100,8 +100,45 @@ const P=Object.fromEntries(PERSONAS.map(p=>[p.id,p]));
 const CH={ google:{name:'Google search',sub:'“open-source LLM”'}, chatgpt:{name:'ChatGPT / LLM',sub:'“which model?”'},
   yt:{name:'YouTube',sub:'tutorials · reviews'}, social:{name:'X · Reddit',sub:'social · ads'},
   arxiv:{name:'arXiv · HF',sub:'papers · weights'}, community:{name:'Forums · Discord',sub:'peers'}, gtc:{name:'GTC · sales',sub:'events · field'} };
-const PORTAL={ build:{name:'build.nvidia.com',sub:'try models & APIs'}, developer:{name:'developer.nvidia.com',sub:'SDKs · CUDA · docs'},
-  ngc:{name:'NGC catalog',sub:'containers · models'}, market:{name:'nvidia.com · retail',sub:'buy hardware'}, dli:{name:'learn.nvidia.com',sub:'DLI courses'} };
+
+/* The FULL Layer-10 portal directory (Programs, Portals & Community) from the 10-layer cake,
+   grouped by its five sub-groups (+ build.nvidia.com and retail as the other real front doors). */
+const L10GROUPS = [
+  {cat:'Discover & Read', portals:[
+    ['developer','developer.nvidia.com'],['docs','docs.nvidia.com'],['blog','Technical Blog'],
+    ['gtc','GTC Conference'],['ondemand','NVIDIA On-Demand'],['research','NVIDIA Research']]},
+  {cat:'Learn & Certify', portals:[
+    ['learn','learn.nvidia.com (DLI)'],['launchpad','NVIDIA LaunchPad'],['cert','NVIDIA Certification']]},
+  {cat:'Build with Tools', portals:[
+    ['build','build.nvidia.com'],['github','GitHub · NVIDIA'],['hf','Hugging Face'],
+    ['ngc','NGC catalog'],['workbench','AI Workbench']]},
+  {cat:'Connect & Ask', portals:[
+    ['devprog','Developer Program'],['discord','Discord'],['forums','Developer Forums']]},
+  {cat:'Partner & Fund', portals:[
+    ['aie','NVIDIA AI Enterprise'],['inception','Inception (startups)'],
+    ['exemplar','Exemplar Cloud'],['coalition','Nemotron Coalition']]},
+  {cat:'Shop & Buy', portals:[
+    ['retail','nvidia.com · retail']]},
+];
+const PORTAL_NAME={}; L10GROUPS.forEach(g=>g.portals.forEach(([id,n])=>PORTAL_NAME[id]=n));
+const PORTAL_CAT={}; L10GROUPS.forEach(g=>g.portals.forEach(([id])=>PORTAL_CAT[id]=g.cat));
+
+// each persona's PRIMARY landing portal + the other Layer-10 portals they touch on the journey
+const PRIMARY={ app:'build', applied:'build', data:'developer', researcher:'developer', hpc:'developer',
+  game:'developer', robotics:'developer', mlops:'ngc', student:'learn', laptop:'retail', dc:'retail' };
+const SECONDARY={
+  app:['blog','github','devprog','discord','aie','inception','coalition','docs'],
+  applied:['hf','github','workbench','aie','coalition','blog'],
+  data:['docs','ngc','workbench','github'],
+  researcher:['github','hf','ngc','research','ondemand'],
+  hpc:['docs','github','forums'],
+  game:['docs','forums','discord'],
+  robotics:['github','gtc','aie'],
+  mlops:['docs','gtc','launchpad','exemplar','aie'],
+  student:['ondemand','cert','discord','devprog'],
+  laptop:['docs'],
+  dc:['gtc','launchpad','exemplar'] };
+function portalsOf(pid){return [PRIMARY[pid], ...SECONDARY[pid]];}
 
 /* fine-grained journeys. step: {phase,title,detail, ch?/portal?/goal?/friction?, branch?[{title,detail}]} */
 const J = {
@@ -249,65 +286,84 @@ function setWorld(w,h){WORLD_W=w;WORLD_H=h;svg.setAttribute('viewBox',`0 0 ${WOR
    ================================================================= */
 function buildOverview(){
   clearAll();
-  const COLX={0:248,1:470,2:800,3:1170}, xP=56, OY=150, ROW=58, MINGAP=54;
+  const COLX={0:240,1:430,2:760,3:1240}, xP=52, OY=150, ROW=58, MINGAP=54;
   const yLane=o=>OY+o*ROW;
-  setWorld(1560, OY+10*ROW+70);
 
-  // nodes: origins, channels, portals, goals
-  const nodes=[]; const byId={};
-  function add(n){nodes.push(n);byId[n.id]=n;return n;}
-  PERSONAS.forEach(p=>add({id:'o_'+p.id,col:0,origin:1,p:p.id,m:[p.id]}));
-  Object.keys(CH).forEach(k=>add({id:'ch_'+k,col:1,name:CH[k].name,sub:CH[k].sub,m:[]}));
-  Object.keys(PORTAL).forEach(k=>add({id:'pt_'+k,col:2,name:PORTAL[k].name,sub:PORTAL[k].sub,portal:1,m:[]}));
-  PERSONAS.forEach(p=>add({id:'g_'+p.id,col:3,name:J[p.id].goal,sub:'goal',m:[p.id]}));
+  // --- channels (col1) positioned by mean of personas using them ---
+  const chMembers={}; Object.keys(CH).forEach(k=>chMembers[k]=[]);
+  PERSONAS.forEach(p=>[...new Set(J[p.id].steps.filter(s=>s.ch).map(s=>s.ch))].forEach(c=>chMembers[c].push(p.id)));
+  const chY={}; Object.keys(CH).forEach(k=>chY[k]=chMembers[k].length?chMembers[k].reduce((s,id)=>s+yLane(P[id].order),0)/chMembers[k].length:OY);
+  (function(){const arr=Object.keys(CH).sort((a,b)=>chY[a]-chY[b]);for(let i=1;i<arr.length;i++)if(chY[arr[i]]<chY[arr[i-1]]+MINGAP)chY[arr[i]]=chY[arr[i-1]]+MINGAP;})();
 
-  // edges from journeys: origin->channels, channels->portal, portal->goal
-  const edges=[];
-  PERSONAS.forEach(p=>{
-    const j=J[p.id]; const chans=[...new Set(j.steps.filter(s=>s.ch).map(s=>s.ch))];
-    chans.forEach(c=>{edges.push(['o_'+p.id,'ch_'+c,p.id]); edges.push(['ch_'+c,'pt_'+j.portal,p.id]);});
-    edges.push(['pt_'+j.portal,'g_'+p.id,p.id]);
-  });
-  edges.forEach(e=>[e[0],e[1]].forEach(id=>{const n=byId[id];if(n&&!n.m.includes(e[2]))n.m.push(e[2]);}));
+  // --- portal directory (col2): fixed grouped vertical order ---
+  const portalY={}; const primaryCount={};
+  PERSONAS.forEach(p=>primaryCount[PRIMARY[p.id]]=(primaryCount[PRIMARY[p.id]]||0)+1);
+  let yc=OY-8; const groupHdrs=[];
+  L10GROUPS.forEach(g=>{ groupHdrs.push({cat:g.cat,y:yc}); yc+=26; g.portals.forEach(([id])=>{ portalY[id]=yc; yc+=40; }); yc+=6; });
+  const directoryBottom=yc;
 
-  // positions
-  nodes.forEach(n=>{n.x=COLX[n.col];n.y=n.origin?yLane(P[n.p].order):n.m.reduce((s,id)=>s+yLane(P[id].order),0)/Math.max(n.m.length,1);});
-  [1,2,3].forEach(c=>{const col=nodes.filter(n=>n.col===c).sort((a,b)=>a.y-b.y);for(let i=1;i<col.length;i++)if(col[i].y<col[i-1].y+MINGAP)col[i].y=col[i-1].y+MINGAP;});
+  // goals (col3) by persona order
+  const goalY={}; PERSONAS.forEach(p=>goalY[p.id]=yLane(p.order));
+
+  setWorld(1560, Math.max(directoryBottom, yLane(10))+70);
 
   // headers
   function hdr(x,t,cls){el('text',{x:x,y:84,class:'stageHdr '+(cls||''),'text-anchor':'middle'},gA).textContent=t;}
-  hdr(xP+44,'The persona');hdr(COLX[1],'1 · Looking');hdr(COLX[2],'2 · NVIDIA front door','stageHdrHub');hdr(COLX[3],'3 · Goal');
+  hdr(xP+44,'The persona');hdr(COLX[1],'1 · Looking');hdr(COLX[2],'2 · NVIDIA front door — full Layer-10 portal directory','stageHdrHub');hdr(COLX[3],'3 · Goal');
   el('line',{x1:0,y1:98,x2:WORLD_W,y2:98,stroke:'#eee','stroke-width':1},gA);
 
-  // links
-  const linkEls=[];
-  edges.forEach(e=>{const a=byId[e[0]],b=byId[e[1]],mx=(a.x+b.x)/2;
-    const pe=el('path',{d:`M ${a.x} ${a.y} C ${mx} ${a.y} ${mx} ${b.y} ${b.x} ${b.y}`,fill:'none',stroke:P[e[2]].color,'stroke-width':3,opacity:0.45,'stroke-linecap':'round'},gB);
-    linkEls.push({el:pe,p:e[2]});});
+  // category headers + faint group brackets in the directory
+  groupHdrs.forEach(h=>{ el('text',{x:COLX[2],y:h.y+4,class:'fPhase',fill:'#a9a99c','text-anchor':'middle'},gA).textContent=h.cat.toUpperCase(); });
 
-  // nodes
-  nodes.forEach(n=>{
-    if(n.origin){el('circle',{cx:n.x,cy:n.y,r:4,fill:P[n.p].color},gC);return;}
-    const big=n.m.length,r=big>1?8+Math.min(big,6):7,isP=n.portal;
-    const g=el('g',{},gC);
-    if(big>1){el('circle',{cx:n.x,cy:n.y,r:r,fill:'#fff',stroke:isP?'#2c4010':'#222','stroke-width':isP?3.5:3},g);
-      if(big>=3)el('text',{x:n.x,y:n.y+4,class:'nodeBadge','text-anchor':'middle',fill:isP?'#2c4010':'#222'},g).textContent=big;}
-    else el('circle',{cx:n.x,cy:n.y,r:r,fill:'#fff',stroke:n.m.length?P[n.m[0]].color:'#999','stroke-width':4},g);
-    if(n.col===3){el('text',{x:n.x+r+9,y:n.y-1,class:'nodeName','text-anchor':'start'},g).textContent=n.name;
-      el('text',{x:n.x+r+9,y:n.y+12,class:'nodeSub','text-anchor':'start'},g).textContent=n.sub;}
-    else{el('text',{x:n.x,y:n.y-r-7,class:isP?'portalName':'nodeName','text-anchor':'middle'},g).textContent=n.name;
-      el('text',{x:n.x,y:n.y-r-7+13,class:'nodeSub','text-anchor':'middle'},g).textContent=n.sub;}
+  const linkEls=[]; // {el, p, kind}
+  function link(g,x1,y1,x2,y2,color,w,op,bow){ const c1=bow?x1+bow:(x1+x2)/2, c2=bow?x2+bow:(x1+x2)/2;
+    return el('path',{d:`M ${x1} ${y1} C ${c1} ${y1} ${c2} ${y2} ${x2} ${y2}`,fill:'none',stroke:color,'stroke-width':w,opacity:op,'stroke-linecap':'round'},g); }
+
+  // SECONDARY links first (faint, behind): primary portal -> each secondary portal
+  PERSONAS.forEach(p=>{ const pr=PRIMARY[p.id], px=COLX[2], py=portalY[pr];
+    SECONDARY[p.id].forEach(sec=>{ const e=link(gB,px,py,px,portalY[sec],P[p.id].color,1.4,0.12,-70); linkEls.push({el:e,p:p.id,kind:'sec'}); });
+  });
+  // MAIN links: origin -> channels -> primary portal -> goal
+  PERSONAS.forEach(p=>{
+    const chans=[...new Set(J[p.id].steps.filter(s=>s.ch).map(s=>s.ch))];
+    const oy=yLane(p.order), pr=PRIMARY[p.id];
+    chans.forEach(c=>{
+      linkEls.push({el:link(gB,COLX[0],oy,COLX[1],chY[c],P[p.id].color,2.6,0.4),p:p.id,kind:'main'});
+      linkEls.push({el:link(gB,COLX[1],chY[c],COLX[2],portalY[pr],P[p.id].color,2.6,0.4),p:p.id,kind:'main'});
+    });
+    linkEls.push({el:link(gB,COLX[2],portalY[pr],COLX[3],goalY[p.id],P[p.id].color,2.6,0.4),p:p.id,kind:'main'});
   });
 
-  // persona labels (clickable)
+  // channel nodes
+  Object.keys(CH).forEach(k=>{const big=chMembers[k].length,r=big>1?8+Math.min(big,6):7;const g=el('g',{},gC);
+    el('circle',{cx:COLX[1],cy:chY[k],r:r,fill:'#fff',stroke:'#222','stroke-width':3},g);
+    if(big>=3)el('text',{x:COLX[1],y:chY[k]+4,class:'nodeBadge','text-anchor':'middle',fill:'#222'},g).textContent=big;
+    el('text',{x:COLX[1],y:chY[k]-r-7,class:'nodeName','text-anchor':'middle'},g).textContent=CH[k].name;
+    el('text',{x:COLX[1],y:chY[k]-r-7+13,class:'nodeSub','text-anchor':'middle'},g).textContent=CH[k].sub;});
+
+  // portal nodes (directory)
+  L10GROUPS.forEach(g=>g.portals.forEach(([id,nm])=>{
+    const y=portalY[id], pc=primaryCount[id]||0, gnode=el('g',{},gC);
+    const r = pc>0 ? 8+Math.min(pc,6) : 6;
+    el('circle',{cx:COLX[2],cy:y,r:r,fill:'#fff',stroke:pc>0?'#2c4010':'#b4b4a8','stroke-width':pc>0?3.4:2.4},gnode);
+    if(pc>=2)el('text',{x:COLX[2],y:y+4,class:'nodeBadge','text-anchor':'middle',fill:'#2c4010'},gnode).textContent=pc;
+    el('text',{x:COLX[2]+r+8,y:y+4,class:pc>0?'portalName':'nodeName','text-anchor':'start',fill:pc>0?'#2c4010':'#7a7a70'},gnode).textContent=nm;
+  }));
+
+  // goal nodes
+  PERSONAS.forEach(p=>{const y=goalY[p.id],g=el('g',{},gC);
+    el('circle',{cx:COLX[3],cy:y,r:7,fill:'#fff',stroke:P[p.id].color,'stroke-width':4},g);
+    el('text',{x:COLX[3]+15,y:y+4,class:'nodeName','text-anchor':'start'},g).textContent=J[p.id].goal;});
+
+  // persona labels (click = focus; hover = emphasize that persona's whole web)
   PERSONAS.forEach(p=>{const y=yLane(p.order);
     const g=el('g',{style:'cursor:pointer'},gD); g.addEventListener('click',ev=>{ev.stopPropagation();focusOn(p.id);});
-    el('rect',{x:0,y:y-15,width:COLX[1]-30,height:30,fill:'transparent'},g); // hit area
+    el('rect',{x:0,y:y-15,width:COLX[1]-40,height:30,fill:'transparent'},g);
+    el('circle',{cx:COLX[0],cy:y,r:4,fill:P[p.id].color},g);
     el('text',{x:xP,y:y-3,class:'pName',fill:p.color},g).textContent=p.name;
     el('text',{x:xP,y:y+11,class:'pIntent',fill:'#8a8a83'},g).textContent='L'+p.layer+' · '+p.intent;
-    // hover emphasis
-    g.addEventListener('mouseenter',()=>linkEls.forEach(l=>l.el.setAttribute('opacity',l.p===p.id?0.95:0.08)));
-    g.addEventListener('mouseleave',()=>linkEls.forEach(l=>l.el.setAttribute('opacity',0.45)));
+    g.addEventListener('mouseenter',()=>linkEls.forEach(l=>l.el.setAttribute('opacity', l.p===p.id?(l.kind==='sec'?0.7:0.95):0.04)));
+    g.addEventListener('mouseleave',()=>linkEls.forEach(l=>l.el.setAttribute('opacity', l.kind==='sec'?0.12:0.4)));
   });
   resetView();
 }
@@ -377,6 +433,22 @@ function buildFocus(pid){
       block(gC,x,yC+30,wrap(s.detail,30),'fDetail','middle',12.5);
     }
   });
+
+  // Portals-touched strip (Layer 10) — which NVIDIA portals appear on THIS journey
+  const stripY=620;
+  el('text',{x:60,y:stripY,style:'font-size:11px;letter-spacing:.08em;font-weight:700;fill:#9a9a8f'},gD).textContent='NVIDIA PORTALS ON THIS JOURNEY  (LAYER 10)';
+  let cx=60, cy=stripY+24; const maxX=WORLD_W-80;
+  portalsOf(pid).forEach((id,i)=>{
+    const nm=PORTAL_NAME[id]||id, primary=(i===0), w=nm.length*6.6+22;
+    if(cx+w>maxX){cx=60;cy+=34;}
+    const g=el('g',{},gD);
+    el('rect',{x:cx,y:cy-15,width:w,height:26,rx:13,fill:primary?'#f1f7e6':'#fff',stroke:primary?'#76b900':'#ddddd4','stroke-width':primary?1.6:1.2},g);
+    el('text',{x:cx+11,y:cy+3,style:`font-size:11.5px;font-weight:${primary?700:500};fill:${primary?'#2c4010':'#55554f'}`},g).textContent=nm;
+    el('text',{x:cx+11,y:cy+3,style:'font-size:11.5px;fill:transparent'},g); // spacing guard
+    cx+=w+8;
+  });
+  el('text',{x:60,y:cy+30,class:'fHint'},gD).textContent='Primary front door highlighted in green · the rest are also touched (docs, code, community, partner programs).';
+
   resetView();
 }
 
