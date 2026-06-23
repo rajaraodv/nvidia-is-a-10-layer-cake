@@ -98,8 +98,8 @@ const PERSONAS = [
 const P=Object.fromEntries(PERSONAS.map(p=>[p.id,p]));
 
 const CH={ google:{name:'Google search',sub:'“open-source LLM”'}, chatgpt:{name:'ChatGPT / LLM',sub:'“which model?”'},
-  yt:{name:'YouTube',sub:'tutorials · reviews'}, social:{name:'X · Reddit',sub:'social · ads'},
-  arxiv:{name:'arXiv · HF',sub:'papers · weights'}, community:{name:'Forums · Discord',sub:'peers'}, gtc:{name:'GTC · sales',sub:'events · field'} };
+  yt:{name:'YouTube',sub:'tutorials · reviews'}, social:{name:'X (Twitter)',sub:'model drops · demos'},
+  arxiv:{name:'arXiv · HF',sub:'papers · weights'}, community:{name:'Forums · Discord',sub:'peers'}, gtc:{name:'GTC',sub:'keynotes · demos'} };
 
 /* The FULL Layer-10 portal directory (Programs, Portals & Community) from the 10-layer cake,
    grouped by its five sub-groups (+ build.nvidia.com and retail as the other real front doors). */
@@ -146,7 +146,9 @@ const J = {
    {phase:'Trigger', title:'Needs an LLM for a feature', detail:'A product needs summarize / chat / extract. Build vs buy a model.'},
    {phase:'Looking', title:'Googles “best open-source LLM”', detail:'Compares cost, license, context length.', ch:'google'},
    {phase:'Looking', title:'Asks ChatGPT which model to use', detail:'Gets pointed toward open models incl. Nemotron.', ch:'chatgpt'},
-   {phase:'Discover', title:'Sees Nemotron on X / a benchmark', detail:'1M context, open weights, runs on NVIDIA.'},
+   {phase:'Looking', title:'Sees model drops on X', detail:'NVIDIA AI accounts post launches & demos on X / Twitter.', ch:'social'},
+   {phase:'Looking', title:'Catches a GTC keynote', detail:'New models get announced at GTC.', ch:'gtc'},
+   {phase:'Discover', title:'Zeroes in on Nemotron', detail:'Open weights, 1M context, runs on NVIDIA.'},
    {phase:'Land', title:'Lands on build.nvidia.com', detail:'Free, in-browser, OpenAI-compatible API.', portal:true},
    {phase:'Try', title:'Three ways to try it', branch:[
        {title:'Live playground', detail:'Paste a prompt, see it work — zero setup.'},
@@ -161,6 +163,8 @@ const J = {
    {phase:'Trigger', title:'Off-the-shelf quality/cost not enough', detail:'Needs a model tuned to the domain.'},
    {phase:'Looking', title:'Reads model leaderboards on HF', detail:'Shortlists candidates by quality vs size.', ch:'arxiv'},
    {phase:'Looking', title:'Googles “fine-tune LLM domain”', detail:'Looks for a tuning recipe.', ch:'google'},
+   {phase:'Looking', title:'Follows fine-tuning threads on X', detail:'Recipes & benchmarks shared on X / Twitter.', ch:'social'},
+   {phase:'Looking', title:'Sees a GTC fine-tuning talk', detail:'NeMo customization demos at GTC.', ch:'gtc'},
    {phase:'Discover', title:'Finds Nemotron / Llama-Nemotron', detail:'Tuned open base models from NVIDIA.'},
    {phase:'Land', title:'build.nvidia.com to benchmark', detail:'Side-by-side compare before committing.', portal:true},
    {phase:'Try', title:'Evaluate candidates', branch:[
@@ -174,6 +178,7 @@ const J = {
    {phase:'Trigger', title:'Pandas / Spark job too slow', detail:'Hours-long ETL blocking the team.'},
    {phase:'Looking', title:'Googles “speed up pandas”', detail:'Finds GPU dataframe options.', ch:'google'},
    {phase:'Looking', title:'Sees a RAPIDS talk on YouTube', detail:'Drop-in cuDF speedups.', ch:'yt'},
+   {phase:'Looking', title:'Sees RAPIDS demos on X', detail:'GPU data-science wins shared on X / Twitter.', ch:'social'},
    {phase:'Discover', title:'Learns about GPU dataframes', detail:'cuDF / cuML mirror the pandas API.'},
    {phase:'Land', title:'developer.nvidia.com', detail:'Docs + install for RAPIDS.', portal:true},
    {phase:'Try', title:'Installs RAPIDS / cuDF', detail:'conda / pip / container.'},
@@ -184,6 +189,8 @@ const J = {
  researcher:{portal:'developer', goal:'Model trained & published', steps:[
    {phase:'Trigger', title:'Wants to train a new model', detail:'New architecture / dataset to prove out.'},
    {phase:'Looking', title:'Reads arXiv, grabs weights on HF', detail:'Surveys prior art + baselines.', ch:'arxiv'},
+   {phase:'Looking', title:'Follows researchers on X', detail:'Results & weights break on X / Twitter first.', ch:'social'},
+   {phase:'Looking', title:'Watches GTC research talks', detail:'Deep technical sessions at GTC.', ch:'gtc'},
    {phase:'Discover', title:'Sees NeMo / Megatron referenced', detail:'Standard tooling for scale training.'},
    {phase:'Land', title:'developer.nvidia.com / NGC', detail:'Pulls the NeMo container.', portal:true},
    {phase:'Try', title:'Runs a small training job', detail:'Validates the recipe on a few GPUs.'},
